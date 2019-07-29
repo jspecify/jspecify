@@ -43,7 +43,7 @@ NullAway          | Uber
 Pivotal           | Spring
 PMD               |
 [SpotBugs](http://spotbugs.rtfd.io/)          | [SpotBugs Team](https://github.com/spotbugs/)
-                  | SonarSource
+SonarQube | SonarSource
                   | Square
 
 # Contact info
