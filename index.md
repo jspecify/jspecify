@@ -45,3 +45,7 @@ PMD               |
 SpotBugs          |
                   | SonarSource
                   | Square
+
+# Contact info
+
+Email the group at <well-defined-annotations@googlegroups.com>.
