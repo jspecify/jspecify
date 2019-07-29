@@ -42,7 +42,7 @@ Kotlin            | JetBrains
 NullAway          | Uber
 Pivotal           | Spring
 PMD               |
-SpotBugs          |
+[SpotBugs](http://spotbugs.rtfd.io/)          | [SpotBugs Team](https://github.com/spotbugs/)
                   | SonarSource
                   | Square
 
