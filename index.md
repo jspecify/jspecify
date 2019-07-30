@@ -27,24 +27,24 @@ full specifications, is what we are working to create.[^1]
 
 # Participants
 
-People from the following projects and organizations are collaborating on
-this project:
+People from the following projects and organizations are collaborating on this
+project:
 
-Project           | Organization
------------------ | ------------
-Android           | Google
-Checker Framework |
-Eclipse           |
-Error Prone       | Google
-Guava             | Google
-IntelliJ IDEA     | JetBrains
-Kotlin            | JetBrains
-NullAway          | Uber
-Pivotal           | Spring
-PMD               |
-[SpotBugs](http://spotbugs.rtfd.io/)          | [SpotBugs Team](https://github.com/spotbugs/)
-SonarQube | SonarSource
-                  | Square
+Project                                           | Organization
+------------------------------------------------- | ------------
+[Android](https://www.android.com)                | [Google](https://google.com)
+[Checker Framework](https://checkerframework.org) |
+[Eclipse IDE](https://www.eclipse.org/ide/)       | [Eclipse Foundation](https://www.eclipse.org/)
+[Error Prone](https://errorprone.info)            | [Google](https://google.com)
+[Guava](https://github.com/google/guava)          | [Google](https://google.com)
+[IntelliJ IDEA](https://www.jetbrains.com/idea/)  | [JetBrains](https://www.jetbrains.com/)
+[Kotlin](https://kotlinlang.org/)                 | [JetBrains](https://www.jetbrains.com/)
+[NullAway](https://github.com/uber/NullAway)      | [Uber](https://uber.com)
+[PMD](https://pmd.github.io/)                     |
+[Spring](https://pivotal.io/spring-app-framework) | [Pivotal](https://pivotal.io)
+[SonarQube](https://www.sonarqube.org/)           | [SonarSource](https://www.sonarsource.com/)
+[SpotBugs](http://spotbugs.rtfd.io/)              | [SpotBugs Team](https://github.com/spotbugs/)
+                                                  | [Square](https://squareup.com)
 
 # Contact info
 
