@@ -1,0 +1,24 @@
+name: Sphinx Document
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - run: |
+        docker build -t jspecify-sphinx docs
+        docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make gettext
+        docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx sphinx-intl update -p _build/locale -l ja
+        docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make html
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: document
+          path: _build/html
