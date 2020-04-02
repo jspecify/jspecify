@@ -14,8 +14,9 @@ jobs:
 
       - run: |
           docker build -t jspecify-sphinx docs
-          docker run --rm -v $GITHUB_WORKSPACE/docs:/docs jspecify-sphinx make html
-          docker run --rm -v $GITHUB_WORKSPACE/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" html
+          docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make html
+          docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" -e BUILDDIR="_build-ja" html
+          cp -R docs/_build-ja/html docs/_build/html/ja
 
       - uses: actions/upload-artifact@v1
         with:

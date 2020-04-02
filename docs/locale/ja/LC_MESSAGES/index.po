@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-04-01 13:18+0000\n"
+"POT-Creation-Date: 2020-04-02 00:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,170 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: ../../index.rst:9
+#: ../../index.rst:4
 msgid "Contents:"
 msgstr "コンテンツ"
 
-#: ../../index.rst:7
-msgid "Welcome to jspecify's documentation!"
+#: ../../index.rst:2
+msgid "CodeAnalysis: Standard Java annotations for static analysis"
+msgstr ""
+
+#: ../../index.rst:9
+msgid "Our Goal"
+msgstr ""
+
+#: ../../index.rst:11
+msgid ""
+"Java static analysis tools, such as Error Prone and those built into "
+"IDEs, have been very successful at enabling automated refactorings and "
+"bug prevention. Many of their most beneficial analyses require certain "
+"Java annotations (such as ``@Nullable`` or ``@Immutable``) to be present "
+"in the source or class file. Yet for the 15 years since Java annotations "
+"were introduced (five years for type-use annotations), users have never "
+"had a clear answer for which incarnation of these annotation classes they"
+" can safely adopt. Many such artifacts have been created, but there has "
+"never been a serious and successful effort to provide a single well-"
+"specified standard with industry consensus. The lack of this artifact has"
+" constrained the prevalence and overall value of static analysis "
+"technology throughout the industry. It has encouraged today's tools to "
+"accept a wide variety of annotations, treating them equivalently, which "
+"renders the annotation specifications meaningless (an API owner cannot "
+"know whether applying a particular annotation is correct without knowing "
+"which tool its users will be using to interpret them). Finally, it "
+"complicates interoperation between Java and other JVM languages, which "
+"sometimes expect additional API metadata (such as nullability) that the "
+"Java language can't express. This missing artifact, with full "
+"specifications, is what we are working to create. [1]_"
+msgstr ""
+
+#: ../../index.rst:13
+msgid ""
+"We have seen the xkcd comic. Please do not send us the xkcd comic. We "
+"know about the xkcd comic."
 msgstr ""
 
 #: ../../index.rst:16
-msgid "Indices and tables"
+msgid "Participants"
 msgstr ""
 
 #: ../../index.rst:18
+msgid ""
+"People from the following projects and organizations are collaborating on"
+" this project:"
+msgstr ""
+
+#: ../../index.rst:21
+msgid "Project"
+msgstr ""
+
+#: ../../index.rst:21
+msgid "Organization"
+msgstr ""
+
+#: ../../index.rst:23
+msgid "`Android <https://www.android.com>`_"
+msgstr ""
+
+#: ../../index.rst:23 ../../index.rst:29 ../../index.rst:31
+msgid "`Google <https://google.com>`_"
+msgstr ""
+
+#: ../../index.rst:25
+msgid "`Checker Framework <https://checkerframework.org>`_"
+msgstr ""
+
+#: ../../index.rst:27
+msgid "`Eclipse IDE <https://www.eclipse.org/ide/>`_"
+msgstr ""
+
+#: ../../index.rst:27
+msgid "`Eclipse Foundation <https://www.eclipse.org/>`_"
+msgstr ""
+
+#: ../../index.rst:29
+msgid "`Error Prone <https://errorprone.info>`_"
+msgstr ""
+
+#: ../../index.rst:31
+msgid "`Guava <https://github.com/google/guava>`_"
+msgstr ""
+
+#: ../../index.rst:33
+msgid "`IntelliJ IDEA <https://www.jetbrains.com/idea/>`_"
+msgstr ""
+
+#: ../../index.rst:33 ../../index.rst:35
+msgid "`JetBrains <https://www.jetbrains.com/>`_"
+msgstr ""
+
+#: ../../index.rst:35
+msgid "`Kotlin <https://kotlinlang.org/>`_"
+msgstr ""
+
+#: ../../index.rst:37
+msgid "`NullAway <https://github.com/uber/NullAway>`_"
+msgstr ""
+
+#: ../../index.rst:37
+msgid "`Uber <https://uber.com>`_"
+msgstr ""
+
+#: ../../index.rst:39
+msgid "`PMD <https://pmd.github.io/>`_"
+msgstr ""
+
+#: ../../index.rst:41
+msgid "`Spring <https://pivotal.io/spring-app-framework>`_"
+msgstr ""
+
+#: ../../index.rst:41
+msgid "`Pivotal <https://pivotal.io>`_"
+msgstr ""
+
+#: ../../index.rst:43
+msgid "`SonarQube <https://www.sonarqube.org/>`_"
+msgstr ""
+
+#: ../../index.rst:43
+msgid "`SonarSource <https://www.sonarsource.com/>`_"
+msgstr ""
+
+#: ../../index.rst:45
+msgid "`SpotBugs <http://spotbugs.rtfd.io/>`_"
+msgstr ""
+
+#: ../../index.rst:45
+msgid "`SpotBugs Team <https://github.com/spotbugs/>`_"
+msgstr ""
+
+#: ../../index.rst:47
+msgid "`Square <https://squareup.com>`_"
+msgstr ""
+
+#: ../../index.rst:51
+msgid "Contact Info"
+msgstr ""
+
+#: ../../index.rst:53
+msgid "Email the group at <jspecify-dev@googlegroups.com>."
+msgstr ""
+
+#: ../../index.rst:56
+msgid "Indices and tables"
+msgstr ""
+
+#: ../../index.rst:58
 msgid ":ref:`genindex`"
 msgstr ""
 
-#: ../../index.rst:19
+#: ../../index.rst:59
 msgid ":ref:`modindex`"
 msgstr ""
 
-#: ../../index.rst:20
+#: ../../index.rst:60
 msgid ":ref:`search`"
 msgstr ""
+
+#~ msgid "Welcome to jspecify's documentation!"
+#~ msgstr ""
+
