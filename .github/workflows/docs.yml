@@ -4,7 +4,8 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: [ master ]
+    paths:
+      - 'docs/**'
 
 jobs:
   build:
@@ -22,3 +23,10 @@ jobs:
         with:
           name: document
           path: docs/_build/html
+
+      - uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: docs/_build/html
+        if: github.event_name == 'push'
