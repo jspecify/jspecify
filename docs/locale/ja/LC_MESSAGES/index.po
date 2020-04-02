@@ -50,6 +50,9 @@ msgid ""
 "successful effort to provide a single well-specified standard with "
 "industry consensus."
 msgstr ""
+"Javaアノテーションが導入されてから15年経った（TYPE_USEアノテーションは5年）今でも、"
+"ユーザは未だに安全に利用できる明確な回答を持ち合わせていません。たくさんの成果物が作られましたが、"
+"いずれも良く定義され業界のコンセンサスを得た標準にはなれませんでした。"
 
 #: ../../index.rst:17
 msgid ""
@@ -61,6 +64,10 @@ msgid ""
 "annotation is correct without knowing which tool its users will be using "
 "to interpret them)."
 msgstr ""
+"標準となる成果物がないことが、業界における静的解析技術の普及と全体的な価値とを制限してきました。"
+"最近の静的解析ツールは多様なアノテーションを同等にサポートすることを求められ、結果として"
+"それぞれのアノテーションの仕様を無意味にしてしまいました（APIの作者はAPIユーザーがどの静的解析ツールを"
+"使ってAPIを解釈するかを知らなければ、そのアノテーションを適用することが正しいかどうか知ることができません）。"
 
 #: ../../index.rst:20
 msgid ""
@@ -68,36 +75,41 @@ msgid ""
 "languages, which sometimes expect additional API metadata (such as "
 "nullability) that the Java language can't express."
 msgstr ""
+"標準の欠落は、Javaと他のJVM言語との間の相互運用とを複雑にします。"
+"JVM言語がJava言語では表現できない追加のAPIメタデータ（null可能性など）を期待することがあるためです。"
 
 #: ../../index.rst:22
 msgid ""
 "This missing artifact, with full specifications, is what we are working "
 "to create. [1]_"
 msgstr ""
+"この失われた成果物を正式な仕様と共に作成することが、私達が成そうとしていることです。"
 
 #: ../../index.rst:24
 msgid ""
 "We have seen the xkcd comic. Please do not send us the xkcd comic. We "
 "know about the xkcd comic."
 msgstr ""
+"私達はxkcdを読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
 
 #: ../../index.rst:27
 msgid "Participants"
-msgstr ""
+msgstr "参加団体"
 
 #: ../../index.rst:29
 msgid ""
 "People from the following projects and organizations are collaborating on"
 " this project:"
 msgstr ""
+"以下に挙げるプロジェクトや組織がこのプロジェクトに協力しています:"
 
 #: ../../index.rst:32
 msgid "Project"
-msgstr ""
+msgstr "プロジェクト"
 
 #: ../../index.rst:32
 msgid "Organization"
-msgstr ""
+msgstr "組織"
 
 #: ../../index.rst:34
 msgid "`Android <https://www.android.com>`_"
@@ -181,55 +193,8 @@ msgstr ""
 
 #: ../../index.rst:62
 msgid "Contact Info"
-msgstr ""
+msgstr "連絡先"
 
 #: ../../index.rst:64
 msgid "Email the group at <jspecify-dev@googlegroups.com>."
-msgstr ""
-
-#: ../../index.rst:67
-msgid "Indices and tables"
-msgstr ""
-
-#: ../../index.rst:69
-msgid ":ref:`genindex`"
-msgstr ""
-
-#: ../../index.rst:70
-msgid ":ref:`modindex`"
-msgstr ""
-
-#: ../../index.rst:71
-msgid ":ref:`search`"
-msgstr ""
-
-#~ msgid ""
-#~ "Yet for the 15 years since Java"
-#~ " annotations were introduced (five years"
-#~ " for type-use annotations), users "
-#~ "have never had a clear answer for"
-#~ " which incarnation of these annotation "
-#~ "classes they can safely adopt. Many "
-#~ "such artifacts have been created, but"
-#~ " there has never been a serious "
-#~ "and successful effort to provide a "
-#~ "single well-specified standard with "
-#~ "industry consensus. The lack of this "
-#~ "artifact has constrained the prevalence "
-#~ "and overall value of static analysis "
-#~ "technology throughout the industry. It "
-#~ "has encouraged today's tools to accept"
-#~ " a wide variety of annotations, "
-#~ "treating them equivalently, which renders "
-#~ "the annotation specifications meaningless (an"
-#~ " API owner cannot know whether "
-#~ "applying a particular annotation is "
-#~ "correct without knowing which tool its"
-#~ " users will be using to interpret "
-#~ "them). Finally, it complicates interoperation"
-#~ " between Java and other JVM "
-#~ "languages, which sometimes expect additional"
-#~ " API metadata (such as nullability) "
-#~ "that the Java language can't express."
-#~ msgstr ""
-
+msgstr "jspecify-dev@googlegroups.com にメールを送ってください。"

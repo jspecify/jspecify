@@ -29,7 +29,7 @@ Participants
 People from the following projects and organizations are collaborating on this project:
 
 +----------------------------------------------------+-------------------------------------------------+
-| Project                                            | Organization                                    |
+|Project                                             |Organization                                     |
 +====================================================+=================================================+
 | `Android <https://www.android.com>`_               | `Google <https://google.com>`_                  |
 +----------------------------------------------------+-------------------------------------------------+
@@ -67,5 +67,4 @@ Indices and tables
 ------------------
 
 * :ref:`genindex`
-* :ref:`modindex`
 * :ref:`search`
