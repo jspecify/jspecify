@@ -35,8 +35,6 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------+-------------------------------------------------+
 | `Checker Framework <https://checkerframework.org>`_|                                                 |
 +----------------------------------------------------+-------------------------------------------------+
-| `Eclipse IDE <https://www.eclipse.org/ide/>`_      | `Eclipse Foundation <https://www.eclipse.org/>`_|
-+----------------------------------------------------+-------------------------------------------------+
 | `Error Prone <https://errorprone.info>`_           | `Google <https://google.com>`_                  |
 +----------------------------------------------------+-------------------------------------------------+
 | `Guava <https://github.com/google/guava>`_         | `Google <https://google.com>`_                  |
