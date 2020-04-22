@@ -1,0 +1,26 @@
+// run `./gradlew publishToMavenLocal` to install artifact to your Local Maven Repository
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            pom {
+                groupId = 'org.jspecify.experimentaldonotuse'
+                name = 'jspecify'
+                description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
+                url = 'https://jspecify.org/'
+                from components.java
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    url = 'https://github.com/jspecify/jspecify/'
+                }
+            }
+        }
+    }
+}
