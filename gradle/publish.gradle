@@ -24,3 +24,7 @@ publishing {
         }
     }
 }
+
+// compile module-info.java with Java9, and others with Java8
+// https://github.com/java9-modularity/gradle-modules-plugin#separate-compilation-of-module-infojava
+modularity.mixedJavaRelease 8
