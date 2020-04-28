@@ -66,8 +66,8 @@ Contact Info
 
 Email the group at <jspecify-dev@googlegroups.com>.
 
-Indices and tables
-------------------
+Indices and searches
+--------------------
 
 * :ref:`genindex`
 * :ref:`search`

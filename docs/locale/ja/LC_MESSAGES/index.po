@@ -192,8 +192,8 @@ msgid "Email the group at <jspecify-dev@googlegroups.com>."
 msgstr "jspecify-dev@googlegroups.com にメールを送ってください。"
 
 #: ../../index.rst:70
-msgid "Indices and tables"
-msgstr ""
+msgid "Indices and searches"
+msgstr "索引と検索"
 
 #: ../../index.rst:72
 msgid ":ref:`genindex`"
