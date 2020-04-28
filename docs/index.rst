@@ -23,6 +23,11 @@ This missing artifact, with full specifications, is what we are working to creat
 
 .. [1] We have seen the xkcd comic. Please do not send us the xkcd comic. We know about the xkcd comic.
 
+Talks about jspecify
+--------------------
+
+* `JVMLS19 overview presentation [jspecify: nullness] <https://docs.google.com/presentation/d/1zmblWc_S9LrmKq8VH8p_eb7H31rTYoNFVbutnXPyolM/edit?usp=sharing>`_
+
 Participants
 ------------
 
