@@ -4,7 +4,7 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             pom {
-                groupId = 'org.jspecify.experimentaldonotuse'
+                groupId = 'org.jspecify.annotations'
                 name = 'jspecify'
                 description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
                 url = 'https://jspecify.org/'

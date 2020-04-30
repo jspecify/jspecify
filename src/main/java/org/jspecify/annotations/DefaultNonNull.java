@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jspecify.experimentaldonotuse;
+package org.jspecify.annotations;
 
-import static java.lang.annotation.ElementType.TYPE_USE;
+import static java.lang.annotation.ElementType.PACKAGE;
+import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.CLASS;
 
 import java.lang.annotation.Documented;
@@ -23,6 +24,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 @Documented
-@Target(TYPE_USE)
+@Target({TYPE, PACKAGE})
 @Retention(CLASS)
-public @interface Nullable {}
+public @interface DefaultNonNull {}
