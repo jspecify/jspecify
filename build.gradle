@@ -24,4 +24,9 @@ dependencies {
 
 test { useJUnitPlatform() }
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 defaultTasks 'spotlessApply', 'build'
