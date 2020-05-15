@@ -1,5 +1,7 @@
 # Landing Pages
 
+The docs will rebuild automatically after a commit. If you want to test locally, read on:
+
 ## How to build
 
 To build this document, run the following commands:
