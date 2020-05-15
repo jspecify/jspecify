@@ -1,5 +1,7 @@
 # jspecify
 
+**This project is a placeholder.** We are using the issue tracker for some of our conversations, but the existing code in the repo does not reflect our current design decisions, and we have many decisions left to make.
+
 An artifact of well-named and well-specified annotations to power static
 analysis checks.
 
