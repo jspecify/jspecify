@@ -46,5 +46,5 @@ CommonMark (and similar flavors of Markdown, like
 that rewrites CommonMark to reStructuredText:
 
 ```sh
-pandoc --from=markdown --to=rst docs/foo.md --output=docs/foo.rst
+$ pandoc --from=markdown --to=rst docs/foo.md --output=docs/foo.rst
 ```
