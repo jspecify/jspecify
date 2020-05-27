@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'jspecify'
-copyright = '2020, jspecify'
+copyright = '2020, The jspecify Authors'
 author = 'jspecify'
 
 # The version info for the project you're documenting, acts as replacement for
