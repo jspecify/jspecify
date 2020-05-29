@@ -94,8 +94,8 @@ Null-aware context
 
 To determine whether a type usage appears in a null-aware context:
 
-Look for a ``@NullAware`` annotation on any of the containing scopes
-surrounding the type usage.
+Look for an ``@org.jspecify.annotations.NullAware`` annotation on any of
+the containing scopes surrounding the type usage.
 
 Class members are contained by classes, which may be contained by other
 class members or classes, and top-level classes are contained by
@@ -104,8 +104,9 @@ packages, which may be contained by modules.
    This concept of “containing scopes” is different from the concept of
    “containing types” described under `Containment <#containment>`__.
 
-If a ``@NullAware`` annotation exists on one of these scopes, then the
-type usage is in a null-aware context. Otherwise, it is not.
+If an ``@org.jspecify.annotations.NullAware`` annotation exists on one
+of these scopes, then the type usage is in a null-aware context.
+Otherwise, it is not.
 
 .. _augmented-type-of-usage:
 
@@ -126,8 +127,9 @@ for a type usage, this section covers only how to determine its
 To determine the additional nullness, apply the following rules in
 order. Once one condition is met, skip the remaining conditions.
 
--  If the type usage is annotated with ``@Nullable``, its additional
-   nullness is ``UNION_NULL``.
+-  If the type usage is annotated with
+   ``@org.jspecify.annotations.Nullable``, its additional nullness is
+   ``UNION_NULL``.
 -  If the type usage appears in a `null-aware
    context <#null-aware-context>`__, its additional nullness is
    ``NO_CHANGE``.
