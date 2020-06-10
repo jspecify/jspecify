@@ -53,11 +53,12 @@ components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvta
    which is written in terms of a “nullness” for each component, not an
    “additional nullness.” Still, the glossary’s concept of the
    “nullness” of a type is derivable from the type’s additional
-   nullness. Notably, the glossary’s “nullable” type is our `strict
-   mode <#strict-lenient>`__\ ’s `null-inclusive under every
+   nullness. Notably, the glossary’s “nullable” type is our `least
+   convenient world’s <#multiple-worlds>`__\ ’s `null-inclusive under
+   every
    parameterization <#null-inclusive-under-every-parameterization>`__,
-   and the glossary’s “non-nullable” type is our strict mode’s
-   `null-exclusive under every
+   and the glossary’s “non-nullable” type is our least convenient
+   world’s `null-exclusive under every
    parameterization <#null-exclusive-under-every-parameterization>`__.
 
 For our purposes, base types (and thus augmented types) include not just
@@ -321,47 +322,57 @@ the null type. This produces multiple null types:
 
       This may be relevant only in implementation code.
 
-.. _strict-lenient:
+.. _multiple-worlds:
 
-Strict mode and lenient mode
-----------------------------
+The least convenient world and the most convenient world
+--------------------------------------------------------
 
-Some of the rules in this spec come in 2 versions, 1 for “strict mode”
-and 1 for “lenient mode.”
+Some of the rules in this spec come in 2 versions, 1 for “the least
+convenient world” and 1 for “the most convenient world.”
 
-Tools may implement either or both of these modes.
+Tools may implement either or both versions of the rules.
 
    Our goal is to allow tools and their users to choose their desired
-   level of soundness in the presence of ``CODE_NOT_NULLNESS_AWARE``.
-   Strict mode usually assumes that types are incompatible unless it has
-   enough information to prove they are compatible; lenient mode assumes
-   that types are compatible unless it has enough information to prove
-   they are incompatible.
+   level of strictness in the presence of ``CODE_NOT_NULLNESS_AWARE``.
+   “The least convenient world” usually assumes that types are
+   incompatible unless it has enough information to prove they are
+   compatible; “the most convenient world” assumes that types are
+   compatible unless it has enough information to prove they are
+   incompatible.
 
-   If a tool implements both modes, it might let users choose which mode
-   to run in. Alternatively, it might run each check first in strict
-   mode and then, if the check fails, run it again in lenient mode,
-   reporting a warning if the the check passes only because of the
-   lenient interpretation.
+   Thus, strict tools may want to implement the least-convenient-world
+   version of rules, and lenient tools may wish to implement the
+   most-convenient-world version. Or a tool might implement both and let
+   users select which rules to apply.
 
-The main body of each section describes the strict-mode rule. If the
-lenient-mode rule differs, the differences are explained at the end.
+   Another possibility is for a tool to implements both versions and to
+   use that to distinguish between “errors” and “warnings.” Such a tool
+   might run each check first in the least convenient world and then, if
+   the check fails, run it again in the most convenient world. If the
+   check fails in both worlds, the tool would produce an error. If it
+   passes only because of the most convenient interpretation, the tool
+   would produce a warning.
 
-.. _propagating-lenient:
+The main body of each section describes the *least*-convenient-world
+rule. If the most-convenient-world rule differs, the differences are
+explained at the end.
 
-Propagating lenient mode
-~~~~~~~~~~~~~~~~~~~~~~~~
+.. _propagating-multiple-worlds:
+
+Propagating the most/least convenient world
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 When one rule in this spec refers to another, it refers to the rule for
-the same mode. For example, when the rules for
+the same “world.” For example, when the rules for
 `containment <#containment>`__ refer to the rules for
-`subtyping <#subtyping>`__, the lenient containment check applies the
-lenient subtyping check, and the strict containment check applies the
-strict subtyping check.
+`subtyping <#subtyping>`__, the most-convenient-world containment check
+applies the most-convenient-world subtyping check, and the
+least-convenient-world containment check applies the
+least-convenient-world subtyping check.
 
-This applies even if a rule says it is the same for both modes: It means
-“the same except that any other rules are applied in the corresponding
-mode.”
+This applies even if a rule says it is the same for both worlds: It
+means “the same except that any other rules are applied in the
+corresponding world.”
 
 Same type
 ---------
@@ -439,8 +450,8 @@ of the following conditions:
 -  It is an intersection type whose elements all are null-inclusive
    under every parameterization.
 
-**Lenient mode:** The rule is the same except that the requirement for
-``UNION_NULL`` is loosened to “``UNION_NULL`` or
+**Most convenient world:** The rule is the same except that the
+requirement for ``UNION_NULL`` is loosened to “``UNION_NULL`` or
 ``CODE_NOT_NULLNESS_AWARE``.”
 
 Null-exclusive under every parameterization
@@ -466,8 +477,8 @@ following hold:
    `nullness-subtype-establishing direct-supertype
    edges <#nullness-subtype-establishing-direct-supertype-edges>`__.
 
-**Lenient mode:** The rules are the same except that the requirement for
-``NO_CHANGE`` is loosened to “``NO_CHANGE`` or
+**Most convenient world:** The rules are the same except that the
+requirement for ``NO_CHANGE`` is loosened to “``NO_CHANGE`` or
 ``CODE_NOT_NULLNESS_AWARE``.”
 
 Nullness-subtype-establishing direct-supertype edges
@@ -492,8 +503,8 @@ Lower-bound rule:
    ``NO_CHANGE``: the type variable ``P``
 -  otherwise: no nodes
 
-**Lenient mode:** The rules are the same except that the requirements
-for ``NO_CHANGE`` are loosened to “``NO_CHANGE`` or
+**Most convenient world:** The rules are the same except that the
+requirements for ``NO_CHANGE`` are loosened to “``NO_CHANGE`` or
 ``CODE_NOT_NULLNESS_AWARE``.”
 
 Containment
@@ -519,8 +530,8 @@ We add to them as follows:
    the rule applies if and only if this spec defines the 2 types to be
    the `same type <#same-type>`__.
 
-**Lenient mode:** The rules are the same except that the requirement for
-``UNION_NULL`` is loosened to “``UNION_NULL`` or
+**Most convenient world:** The rules are the same except that the
+requirement for ``UNION_NULL`` is loosened to “``UNION_NULL`` or
 ``CODE_NOT_NULLNESS_AWARE``.”
 
 Capture conversion
