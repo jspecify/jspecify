@@ -26,7 +26,7 @@ This missing artifact, with full specifications, is what we are working to creat
 Talks about jspecify
 --------------------
 
-* `JVMLS19 overview presentation [jspecify: nullness] <https://docs.google.com/presentation/d/1zmblWc_S9LrmKq8VH8p_eb7H31rTYoNFVbutnXPyolM/edit?usp=sharing>`_
+* `JVMLS19 overview presentation [jspecify: nullness] <https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_
 
 Participants
 ------------
