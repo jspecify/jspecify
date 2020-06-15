@@ -88,10 +88,10 @@ msgstr "jspecifyに関するトーク"
 #: ../../index.rst:29
 msgid ""
 "`JVMLS19 overview presentation [jspecify: nullness] "
-"<https://docs.google.com/presentation/d/1zmblWc_S9LrmKq8VH8p_eb7H31rTYoNFVbutnXPyolM/edit?usp=sharing>`_"
+"<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
 msgstr ""
 "`JVMLS19 にて発表されたプロジェクト概要（英文） [jspecify: nullness] "
-"<https://docs.google.com/presentation/d/1zmblWc_S9LrmKq8VH8p_eb7H31rTYoNFVbutnXPyolM/edit?usp=sharing>`_"
+"<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
 
 #: ../../index.rst:32
 msgid "Participants"
