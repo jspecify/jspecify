@@ -345,7 +345,7 @@ Tools may implement either or both versions of the rules.
    most-convenient-world version. Or a tool might implement both and let
    users select which rules to apply.
 
-   Another possibility is for a tool to implements both versions and to
+   Another possibility is for a tool to implement both versions and to
    use that to distinguish between “errors” and “warnings.” Such a tool
    might run each check first in the least convenient world and then, if
    the check fails, run it again in the most convenient world. If the
