@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jspecify \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-02 02:40+0000\n"
+"POT-Creation-Date: 2020-04-28 23:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,9 +37,9 @@ msgid ""
 "Java annotations (such as ``@Nullable`` or ``@Immutable``) to be present "
 "in the source or class file."
 msgstr ""
-"Error ProneやIDE組み込みツールのようなJava静的解析ツールは、これまでリファクタリング自動化や"
-"バグの予防に活用されてきました。こうした利益をもたらす解析の多くは（``@Nullable`` や ``@Immutable`` のような）"
-"特定のJavaアノテーションがソースコードまたはクラスファイルに含まれることを前提にしています。"
+"Error "
+"ProneやIDE組み込みツールのようなJava静的解析ツールは、これまでリファクタリング自動化やバグの予防に活用されてきました。こうした利益をもたらす解析の多くは（``@Nullable``"
+" や ``@Immutable`` のような）特定のJavaアノテーションがソースコードまたはクラスファイルに含まれることを前提にしています。"
 
 #: ../../index.rst:14
 msgid ""
@@ -49,10 +49,7 @@ msgid ""
 "artifacts have been created, but there has never been a serious and "
 "successful effort to provide a single well-specified standard with "
 "industry consensus."
-msgstr ""
-"Javaアノテーションが導入されてから15年経った（TYPE_USEアノテーションは5年）今でも、"
-"ユーザは未だに安全に利用できる明確な回答を持ち合わせていません。たくさんの成果物が作られましたが、"
-"いずれも良く定義され業界のコンセンサスを得た標準にはなれませんでした。"
+msgstr "Javaアノテーションが導入されてから15年経った（TYPE_USEアノテーションは5年）今でも、ユーザは未だに安全に利用できる明確な回答を持ち合わせていません。たくさんの成果物が作られましたが、いずれも良く定義され業界のコンセンサスを得た標準にはなれませんでした。"
 
 #: ../../index.rst:17
 msgid ""
@@ -63,138 +60,145 @@ msgid ""
 "meaningless (an API owner cannot know whether applying a particular "
 "annotation is correct without knowing which tool its users will be using "
 "to interpret them)."
-msgstr ""
-"標準となる成果物がないことが、業界における静的解析技術の普及と全体的な価値とを制限してきました。"
-"最近の静的解析ツールは多様なアノテーションを同等にサポートすることを求められ、結果として"
-"それぞれのアノテーションの仕様を無意味にしてしまいました（APIの作者はAPIユーザーがどの静的解析ツールを"
-"使ってAPIを解釈するかを知らなければ、そのアノテーションを適用することが正しいかどうか知ることができません）。"
+msgstr "標準となる成果物がないことが、業界における静的解析技術の普及と全体的な価値とを制限してきました。最近の静的解析ツールは多様なアノテーションを同等にサポートすることを求められ、結果としてそれぞれのアノテーションの仕様を無意味にしてしまいました（APIの作者はAPIユーザーがどの静的解析ツールを使ってAPIを解釈するかを知らなければ、そのアノテーションを適用することが正しいかどうか知ることができません）。"
 
 #: ../../index.rst:20
 msgid ""
 "Finally, it complicates interoperation between Java and other JVM "
 "languages, which sometimes expect additional API metadata (such as "
 "nullability) that the Java language can't express."
-msgstr ""
-"標準の欠落は、Javaと他のJVM言語との間の相互運用とを複雑にします。"
-"JVM言語がJava言語では表現できない追加のAPIメタデータ（null可能性など）を期待することがあるためです。"
+msgstr "標準の欠落は、Javaと他のJVM言語との間の相互運用とを複雑にします。JVM言語がJava言語では表現できない追加のAPIメタデータ（null可能性など）を期待することがあるためです。"
 
 #: ../../index.rst:22
 msgid ""
 "This missing artifact, with full specifications, is what we are working "
 "to create. [1]_"
-msgstr ""
-"この失われた成果物を正式な仕様と共に作成することが、私達が成そうとしていることです。"
+msgstr "この失われた成果物を正式な仕様と共に作成することが、私達が成そうとしていることです。"
 
 #: ../../index.rst:24
 msgid ""
 "We have seen the xkcd comic. Please do not send us the xkcd comic. We "
 "know about the xkcd comic."
-msgstr ""
-"私達はxkcdを読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
+msgstr "私達はxkcdを読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
 
 #: ../../index.rst:27
-msgid "Participants"
-msgstr "参加団体"
+msgid "Talks about jspecify"
+msgstr "jspecifyに関するトーク"
 
 #: ../../index.rst:29
 msgid ""
-"People from the following projects and organizations are collaborating on"
-" this project:"
+"`JVMLS19 overview presentation [jspecify: nullness] "
+"<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
 msgstr ""
-"以下に挙げるプロジェクトや組織がこのプロジェクトに協力しています:"
+"`JVMLS19 にて発表されたプロジェクト概要（英文） [jspecify: nullness] "
+"<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
 
 #: ../../index.rst:32
+msgid "Participants"
+msgstr "参加団体"
+
+#: ../../index.rst:34
+msgid ""
+"People from the following projects and organizations are collaborating on"
+" this project:"
+msgstr "以下に挙げるプロジェクトや組織がこのプロジェクトに協力しています:"
+
+#: ../../index.rst:37
 msgid "Project"
 msgstr "プロジェクト"
 
-#: ../../index.rst:32
+#: ../../index.rst:37
 msgid "Organization"
 msgstr "組織"
 
-#: ../../index.rst:34
+#: ../../index.rst:39
 msgid "`Android <https://www.android.com>`_"
 msgstr ""
 
-#: ../../index.rst:34 ../../index.rst:40 ../../index.rst:42
+#: ../../index.rst:39 ../../index.rst:43 ../../index.rst:45
 msgid "`Google <https://google.com>`_"
 msgstr ""
 
-#: ../../index.rst:36
+#: ../../index.rst:41
 msgid "`Checker Framework <https://checkerframework.org>`_"
 msgstr ""
 
-#: ../../index.rst:38
-msgid "`Eclipse IDE <https://www.eclipse.org/ide/>`_"
-msgstr ""
-
-#: ../../index.rst:38
-msgid "`Eclipse Foundation <https://www.eclipse.org/>`_"
-msgstr ""
-
-#: ../../index.rst:40
+#: ../../index.rst:43
 msgid "`Error Prone <https://errorprone.info>`_"
 msgstr ""
 
-#: ../../index.rst:42
+#: ../../index.rst:45
 msgid "`Guava <https://github.com/google/guava>`_"
 msgstr ""
 
-#: ../../index.rst:44
+#: ../../index.rst:47
 msgid "`IntelliJ IDEA <https://www.jetbrains.com/idea/>`_"
 msgstr ""
 
-#: ../../index.rst:44 ../../index.rst:46
+#: ../../index.rst:47 ../../index.rst:49
 msgid "`JetBrains <https://www.jetbrains.com/>`_"
 msgstr ""
 
-#: ../../index.rst:46
+#: ../../index.rst:49
 msgid "`Kotlin <https://kotlinlang.org/>`_"
 msgstr ""
 
-#: ../../index.rst:48
+#: ../../index.rst:51
 msgid "`NullAway <https://github.com/uber/NullAway>`_"
 msgstr ""
 
-#: ../../index.rst:48
+#: ../../index.rst:51
 msgid "`Uber <https://uber.com>`_"
 msgstr ""
 
-#: ../../index.rst:50
+#: ../../index.rst:53
 msgid "`PMD <https://pmd.github.io/>`_"
 msgstr ""
 
-#: ../../index.rst:52
+#: ../../index.rst:55
 msgid "`Spring <https://pivotal.io/spring-app-framework>`_"
 msgstr ""
 
-#: ../../index.rst:52
+#: ../../index.rst:55
 msgid "`Pivotal <https://pivotal.io>`_"
 msgstr ""
 
-#: ../../index.rst:54
+#: ../../index.rst:57
 msgid "`SonarQube <https://www.sonarqube.org/>`_"
 msgstr ""
 
-#: ../../index.rst:54
+#: ../../index.rst:57
 msgid "`SonarSource <https://www.sonarsource.com/>`_"
 msgstr ""
 
-#: ../../index.rst:56
+#: ../../index.rst:59
 msgid "`SpotBugs <http://spotbugs.rtfd.io/>`_"
 msgstr ""
 
-#: ../../index.rst:56
+#: ../../index.rst:59
 msgid "`SpotBugs Team <https://github.com/spotbugs/>`_"
 msgstr ""
 
-#: ../../index.rst:58
+#: ../../index.rst:61
 msgid "`Square <https://squareup.com>`_"
 msgstr ""
 
-#: ../../index.rst:62
+#: ../../index.rst:65
 msgid "Contact Info"
 msgstr "連絡先"
 
-#: ../../index.rst:64
+#: ../../index.rst:67
 msgid "Email the group at <jspecify-dev@googlegroups.com>."
 msgstr "jspecify-dev@googlegroups.com にメールを送ってください。"
+
+#: ../../index.rst:70
+msgid "Indices and searches"
+msgstr "索引と検索"
+
+#: ../../index.rst:72
+msgid ":ref:`genindex`"
+msgstr ""
+
+#: ../../index.rst:73
+msgid ":ref:`search`"
+msgstr ""

@@ -23,6 +23,11 @@ This missing artifact, with full specifications, is what we are working to creat
 
 .. [1] We have seen the xkcd comic. Please do not send us the xkcd comic. We know about the xkcd comic.
 
+Talks about jspecify
+--------------------
+
+* `JVMLS19 overview presentation [jspecify: nullness] <https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_
+
 Participants
 ------------
 
@@ -61,8 +66,8 @@ Contact Info
 
 Email the group at <jspecify-dev@googlegroups.com>.
 
-Indices and tables
-------------------
+Indices and searches
+--------------------
 
 * :ref:`genindex`
 * :ref:`search`
