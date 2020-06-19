@@ -484,14 +484,15 @@ requirement for ``NO_CHANGE`` is loosened to “``NO_CHANGE`` or
 Nullness-subtype-establishing direct-supertype edges
 ----------------------------------------------------
 
-A type ``T`` has nullness-subtype-establishing direct-supertype edges to
-the union of the nodes computed by the following 2 rules:
+``T`` has nullness-subtype-establishing direct-supertype edges to the
+union of the nodes computed by the following 2 rules:
 
 Upper-bound rule:
 
--  if ``T`` is an intersection type: all the type’s elements whose
-   `additional nullness <#additional-nullness>`__ is ``NO_CHANGE``
--  if ``T`` is a type-variable usage: all the corresponding type
+-  if ``T`` is an augmented intersection type: all the intersection
+   type’s elements whose `additional nullness <#additional-nullness>`__
+   is ``NO_CHANGE``
+-  if ``T`` is an augmented type variable: all the corresponding type
    parameter’s upper bounds whose additional nullness is ``NO_CHANGE``
 -  otherwise: no nodes
 
