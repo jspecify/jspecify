@@ -429,7 +429,8 @@ are met:
 -  ``A`` is `null-exclusive under every
    parameterization <#null-exclusive-under-every-parameterization>`__.
 -  ``A`` has a `nullness-subtype-establishing
-   path <#nullness-subtype-establishing-path>`__ to ``F``.
+   path <#nullness-subtype-establishing-path>`__ to any type whose base
+   type is the same as the base type of ``F``.
 
 Nullness subtyping (and thus subtyping itself) is *not* transitive.
 
