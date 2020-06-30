@@ -434,12 +434,15 @@ are met:
 
 Nullness subtyping (and thus subtyping itself) is *not* transitive.
 
-(In fact, our nullness-delegating subtyping rules (and
-`containment <#containment>`__ rules) should *also* `not be
-transitive <https://groups.google.com/d/msg/jspecify-dev/yPnkx_GSb0Q/hLgS_431AQAJ>`__.
-Fortunately, we expect that implementations will naturally do “what we
-mean” instead of following the spec exactly, so we have not yet fixed
-the spec to be fully correct.)
+(Contrast this with our `nullness-delegating
+subtyping <#nullness-delegating-subtyping>`__ rules and
+`containment <#containment>`__ rules: Each of those is defined as a
+transitive closure. However, technically speaking, `there are cases in
+which those should not be transitive,
+either <https://groups.google.com/d/msg/jspecify-dev/yPnkx_GSb0Q/hLgS_431AQAJ>`__.
+Fortunately, this “mostly transitive” behavior is exactly the behavior
+that implementations are likely to produce naturally. Maybe someday we
+will find a way to specify this fully correctly.)
 
 Null-inclusive under every parameterization
 -------------------------------------------
