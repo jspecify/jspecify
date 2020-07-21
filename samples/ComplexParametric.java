@@ -34,6 +34,8 @@ class ComplexParametric {
     default void checkTUnionNull(Lib<@Nullable T> lib) {}
   }
 
+  // TODO(cpovirk): Make these abstract somewhere?
+
   static void checkNeverNull(Lib<? extends Object> lib) {}
 
   static <T> void checkUnspecNull(Lib<@NullnessUnspecified T> lib) {}
@@ -175,10 +177,14 @@ class ComplexParametric {
   }
 
   interface SuperUnspecUnspec<T extends @NullnessUnspecified Object & @NullnessUnspecified Foo>
-      extends SuperSuper<T> {}
+      extends SuperSuper<T> {
+    // TODO(cpovirk): Add method calls like in the other classes.
+  }
 
   interface SuperUnspecUnionNull<T extends @NullnessUnspecified Object & @Nullable Foo>
-      extends SuperSuper<T> {}
+      extends SuperSuper<T> {
+    // TODO(cpovirk): Add method calls like in the other classes.
+  }
 
   interface SuperUnionNullNever<T extends @Nullable Object & Foo> extends SuperSuper<T> {
     default void x() {
@@ -215,7 +221,9 @@ class ComplexParametric {
   }
 
   interface SuperUnionNullUnspec<T extends @Nullable Object & @NullnessUnspecified Foo>
-      extends SuperSuper<T> {}
+      extends SuperSuper<T> {
+    // TODO(cpovirk): Add method calls like in the other classes.
+  }
 
   interface SuperUnionNullUnionNull<T extends @Nullable Object & @Nullable Foo>
       extends SuperSuper<T> {
