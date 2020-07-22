@@ -6,8 +6,8 @@ plugins {
     id 'org.javamodularity.moduleplugin' version '1.7.0'
 }
 
-apply from: "$rootDir/gradle/format.gradle"
-apply from: "$rootDir/gradle/publish.gradle"
+apply from: "gradle/format.gradle"
+apply from: "gradle/publish.gradle"
 
 repositories { mavenCentral() }
 
