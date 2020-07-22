@@ -8,6 +8,5 @@ spotless {
         target '**/*.gradle'
         greclipse()
         indentWithSpaces()
-        paddedCell()
     }
 }
