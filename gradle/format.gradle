@@ -2,12 +2,11 @@ spotless {
     java {
         removeUnusedImports()
         googleJavaFormat()
-        licenseHeaderFile "$rootDir/gradle/license-header.java"
+        licenseHeaderFile "gradle/license-header.java"
     }
     groovyGradle {
         target '**/*.gradle'
         greclipse()
         indentWithSpaces()
-        paddedCell()
     }
 }

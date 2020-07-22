@@ -1,13 +1,13 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.diffplug.gradle.spotless' version '3.28.1'
-    id 'net.ltgt.errorprone' version '1.1.1'
-    id 'org.javamodularity.moduleplugin' version '1.6.0'
+    id 'com.diffplug.spotless' version '5.1.0'
+    id 'net.ltgt.errorprone' version '1.2.1'
+    id 'org.javamodularity.moduleplugin' version '1.7.0'
 }
 
-apply from: "$rootDir/gradle/format.gradle"
-apply from: "$rootDir/gradle/publish.gradle"
+apply from: "gradle/format.gradle"
+apply from: "gradle/publish.gradle"
 
 repositories { mavenCentral() }
 
