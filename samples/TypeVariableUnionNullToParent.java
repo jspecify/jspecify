@@ -16,37 +16,23 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class TypeVariableUnionNullToParent<
     Never1T,
     ChildOfNever1T extends Never1T,
-    UnspecChildOfNever1T extends @NullnessUnspecified Never1T,
     NullChildOfNever1T extends @Nullable Never1T,
     //
     Never2T extends Object,
     ChildOfNever2T extends Never2T,
-    UnspecChildOfNever2T extends @NullnessUnspecified Never2T,
     NullChildOfNever2T extends @Nullable Never2T,
-    //
-    UnspecT extends @NullnessUnspecified Object,
-    ChildOfUnspecT extends UnspecT,
-    UnspecChildOfUnspecT extends @NullnessUnspecified UnspecT,
-    NullChildOfUnspecT extends @Nullable UnspecT,
     //
     ParametricT extends @Nullable Object,
     ChildOfParametricT extends ParametricT,
-    UnspecChildOfParametricT extends @NullnessUnspecified ParametricT,
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
   Never1T x0(@Nullable ChildOfNever1T x) {
-    // MISMATCH
-    return x;
-  }
-
-  Never1T x1(@Nullable UnspecChildOfNever1T x) {
     // MISMATCH
     return x;
   }
@@ -61,37 +47,12 @@ class TypeVariableUnionNullToParent<
     return x;
   }
 
-  Never2T x4(@Nullable UnspecChildOfNever2T x) {
-    // MISMATCH
-    return x;
-  }
-
   Never2T x5(@Nullable NullChildOfNever2T x) {
     // MISMATCH
     return x;
   }
 
-  UnspecT x6(@Nullable ChildOfUnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
-  UnspecT x7(@Nullable UnspecChildOfUnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
-  UnspecT x8(@Nullable NullChildOfUnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
   ParametricT x9(@Nullable ChildOfParametricT x) {
-    // MISMATCH
-    return x;
-  }
-
-  ParametricT x10(@Nullable UnspecChildOfParametricT x) {
     // MISMATCH
     return x;
   }

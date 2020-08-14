@@ -16,28 +16,19 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class TypeVariableToSelf<
     Never1T,
     ChildOfNever1T extends Never1T,
-    UnspecChildOfNever1T extends @NullnessUnspecified Never1T,
     NullChildOfNever1T extends @Nullable Never1T,
     //
     Never2T extends Object,
     ChildOfNever2T extends Never2T,
-    UnspecChildOfNever2T extends @NullnessUnspecified Never2T,
     NullChildOfNever2T extends @Nullable Never2T,
-    //
-    UnspecT extends @NullnessUnspecified Object,
-    ChildOfUnspecT extends UnspecT,
-    UnspecChildOfUnspecT extends @NullnessUnspecified UnspecT,
-    NullChildOfUnspecT extends @Nullable UnspecT,
     //
     ParametricT extends @Nullable Object,
     ChildOfParametricT extends ParametricT,
-    UnspecChildOfParametricT extends @NullnessUnspecified ParametricT,
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
@@ -46,10 +37,6 @@ class TypeVariableToSelf<
   }
 
   ChildOfNever1T x1(ChildOfNever1T x) {
-    return x;
-  }
-
-  UnspecChildOfNever1T x2(UnspecChildOfNever1T x) {
     return x;
   }
 
@@ -65,27 +52,7 @@ class TypeVariableToSelf<
     return x;
   }
 
-  UnspecChildOfNever2T x6(UnspecChildOfNever2T x) {
-    return x;
-  }
-
   NullChildOfNever2T x7(NullChildOfNever2T x) {
-    return x;
-  }
-
-  UnspecT x8(UnspecT x) {
-    return x;
-  }
-
-  ChildOfUnspecT x9(ChildOfUnspecT x) {
-    return x;
-  }
-
-  UnspecChildOfUnspecT x10(UnspecChildOfUnspecT x) {
-    return x;
-  }
-
-  NullChildOfUnspecT x11(NullChildOfUnspecT x) {
     return x;
   }
 
@@ -94,10 +61,6 @@ class TypeVariableToSelf<
   }
 
   ChildOfParametricT x13(ChildOfParametricT x) {
-    return x;
-  }
-
-  UnspecChildOfParametricT x14(UnspecChildOfParametricT x) {
     return x;
   }
 

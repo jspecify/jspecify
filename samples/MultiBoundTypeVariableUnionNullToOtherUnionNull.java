@@ -16,7 +16,6 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class MultiBoundTypeVariableUnionNullToOtherUnionNull {
@@ -24,32 +23,11 @@ class MultiBoundTypeVariableUnionNullToOtherUnionNull {
     return x;
   }
 
-  <T extends Object & @NullnessUnspecified Lib> @Nullable Lib x1(@Nullable T x) {
-    return x;
-  }
-
   <T extends Object & @Nullable Lib> @Nullable Lib x2(@Nullable T x) {
     return x;
   }
 
-  <T extends @NullnessUnspecified Object & Lib> @Nullable Lib x3(@Nullable T x) {
-    return x;
-  }
-
-  <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> @Nullable Lib x4(
-      @Nullable T x) {
-    return x;
-  }
-
-  <T extends @NullnessUnspecified Object & @Nullable Lib> @Nullable Lib x5(@Nullable T x) {
-    return x;
-  }
-
   <T extends @Nullable Object & Lib> @Nullable Lib x6(@Nullable T x) {
-    return x;
-  }
-
-  <T extends @Nullable Object & @NullnessUnspecified Lib> @Nullable Lib x7(@Nullable T x) {
     return x;
   }
 

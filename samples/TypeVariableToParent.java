@@ -16,37 +16,22 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class TypeVariableToParent<
     Never1T,
     ChildOfNever1T extends Never1T,
-    UnspecChildOfNever1T extends @NullnessUnspecified Never1T,
     NullChildOfNever1T extends @Nullable Never1T,
     //
     Never2T extends Object,
     ChildOfNever2T extends Never2T,
-    UnspecChildOfNever2T extends @NullnessUnspecified Never2T,
     NullChildOfNever2T extends @Nullable Never2T,
-    //
-    UnspecT extends @NullnessUnspecified Object,
-    ChildOfUnspecT extends UnspecT,
-    UnspecChildOfUnspecT extends @NullnessUnspecified UnspecT,
-    NullChildOfUnspecT extends @Nullable UnspecT,
-    //
     ParametricT extends @Nullable Object,
     ChildOfParametricT extends ParametricT,
-    UnspecChildOfParametricT extends @NullnessUnspecified ParametricT,
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
   Never1T x0(ChildOfNever1T x) {
-    return x;
-  }
-
-  Never1T x1(UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
     return x;
   }
 
@@ -59,36 +44,12 @@ class TypeVariableToParent<
     return x;
   }
 
-  Never2T x4(UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
-    return x;
-  }
-
   Never2T x5(NullChildOfNever2T x) {
     // MISMATCH
     return x;
   }
 
-  UnspecT x6(ChildOfUnspecT x) {
-    return x;
-  }
-
-  UnspecT x7(UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
-    return x;
-  }
-
-  UnspecT x8(NullChildOfUnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
   ParametricT x9(ChildOfParametricT x) {
-    return x;
-  }
-
-  ParametricT x10(UnspecChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
     return x;
   }
 

@@ -16,16 +16,10 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class MultiBoundTypeVariableUnionNullToSelf {
   <T extends Object & Lib> T x0(@Nullable T x) {
-    // MISMATCH
-    return x;
-  }
-
-  <T extends Object & @NullnessUnspecified Lib> T x1(@Nullable T x) {
     // MISMATCH
     return x;
   }
@@ -35,27 +29,7 @@ class MultiBoundTypeVariableUnionNullToSelf {
     return x;
   }
 
-  <T extends @NullnessUnspecified Object & Lib> T x3(@Nullable T x) {
-    // MISMATCH
-    return x;
-  }
-
-  <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> T x4(@Nullable T x) {
-    // MISMATCH
-    return x;
-  }
-
-  <T extends @NullnessUnspecified Object & @Nullable Lib> T x5(@Nullable T x) {
-    // MISMATCH
-    return x;
-  }
-
   <T extends @Nullable Object & Lib> T x6(@Nullable T x) {
-    // MISMATCH
-    return x;
-  }
-
-  <T extends @Nullable Object & @NullnessUnspecified Lib> T x7(@Nullable T x) {
     // MISMATCH
     return x;
   }

@@ -16,16 +16,10 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class ClassToSelf {
   ClassToSelf x0(ClassToSelf x) {
-    return x;
-  }
-
-  ClassToSelf x1(@NullnessUnspecified ClassToSelf x) {
-    // NOT-ENOUGH-INFORMATION
     return x;
   }
 
@@ -34,30 +28,8 @@ class ClassToSelf {
     return x;
   }
 
-  @NullnessUnspecified
-  ClassToSelf x3(ClassToSelf x) {
-    return x;
-  }
-
-  @NullnessUnspecified
-  ClassToSelf x4(@NullnessUnspecified ClassToSelf x) {
-    // NOT-ENOUGH-INFORMATION
-    return x;
-  }
-
-  @NullnessUnspecified
-  ClassToSelf x5(@Nullable ClassToSelf x) {
-    // NOT-ENOUGH-INFORMATION
-    return x;
-  }
-
   @Nullable
   ClassToSelf x6(ClassToSelf x) {
-    return x;
-  }
-
-  @Nullable
-  ClassToSelf x7(@NullnessUnspecified ClassToSelf x) {
     return x;
   }
 

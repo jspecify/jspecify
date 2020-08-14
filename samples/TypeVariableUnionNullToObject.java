@@ -16,28 +16,19 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class TypeVariableUnionNullToObject<
     Never1T,
     ChildOfNever1T extends Never1T,
-    UnspecChildOfNever1T extends @NullnessUnspecified Never1T,
     NullChildOfNever1T extends @Nullable Never1T,
     //
     Never2T extends Object,
     ChildOfNever2T extends Never2T,
-    UnspecChildOfNever2T extends @NullnessUnspecified Never2T,
     NullChildOfNever2T extends @Nullable Never2T,
-    //
-    UnspecT extends @NullnessUnspecified Object,
-    ChildOfUnspecT extends UnspecT,
-    UnspecChildOfUnspecT extends @NullnessUnspecified UnspecT,
-    NullChildOfUnspecT extends @Nullable UnspecT,
     //
     ParametricT extends @Nullable Object,
     ChildOfParametricT extends ParametricT,
-    UnspecChildOfParametricT extends @NullnessUnspecified ParametricT,
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
@@ -47,11 +38,6 @@ class TypeVariableUnionNullToObject<
   }
 
   Object x1(@Nullable ChildOfNever1T x) {
-    // MISMATCH
-    return x;
-  }
-
-  Object x2(@Nullable UnspecChildOfNever1T x) {
     // MISMATCH
     return x;
   }
@@ -71,32 +57,7 @@ class TypeVariableUnionNullToObject<
     return x;
   }
 
-  Object x6(@Nullable UnspecChildOfNever2T x) {
-    // MISMATCH
-    return x;
-  }
-
   Object x7(@Nullable NullChildOfNever2T x) {
-    // MISMATCH
-    return x;
-  }
-
-  Object x8(@Nullable UnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
-  Object x9(@Nullable ChildOfUnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
-  Object x10(@Nullable UnspecChildOfUnspecT x) {
-    // MISMATCH
-    return x;
-  }
-
-  Object x11(@Nullable NullChildOfUnspecT x) {
     // MISMATCH
     return x;
   }
@@ -107,11 +68,6 @@ class TypeVariableUnionNullToObject<
   }
 
   Object x13(@Nullable ChildOfParametricT x) {
-    // MISMATCH
-    return x;
-  }
-
-  Object x14(@Nullable UnspecChildOfParametricT x) {
     // MISMATCH
     return x;
   }

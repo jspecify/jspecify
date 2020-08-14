@@ -16,30 +16,16 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class ContainmentExtends {
   void x() {
     new Check<Lib<? extends Foo>, Lib<? extends Foo>>();
 
-    // NOT-ENOUGH-INFORMATION
-    new Check<Lib<? extends Foo>, Lib<? extends @NullnessUnspecified Foo>>();
-
     // MISMATCH
     new Check<Lib<? extends Foo>, Lib<? extends @Nullable Foo>>();
 
-    new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends Foo>>();
-
-    // NOT-ENOUGH-INFORMATION
-    new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends @NullnessUnspecified Foo>>();
-
-    // NOT-ENOUGH-INFORMATION
-    new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends @Nullable Foo>>();
-
     new Check<Lib<? extends @Nullable Foo>, Lib<? extends Foo>>();
-
-    new Check<Lib<? extends @Nullable Foo>, Lib<? extends @NullnessUnspecified Foo>>();
 
     new Check<Lib<? extends @Nullable Foo>, Lib<? extends @Nullable Foo>>();
   }

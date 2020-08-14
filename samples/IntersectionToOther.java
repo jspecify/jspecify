@@ -16,15 +16,10 @@
 
 import org.jspecify.annotations.NullAware;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @NullAware
 class IntersectionToOther {
   Lib x0(ImplicitlyObjectBounded<? extends Lib> x) {
-    return x.get();
-  }
-
-  Lib x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
     return x.get();
   }
 
@@ -36,34 +31,11 @@ class IntersectionToOther {
     return x.get();
   }
 
-  Lib x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
-    return x.get();
-  }
-
   Lib x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
     return x.get();
   }
 
-  Lib x6(UnspecBounded<? extends Lib> x) {
-    return x.get();
-  }
-
-  Lib x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
-    return x.get();
-  }
-
-  Lib x8(UnspecBounded<? extends @Nullable Lib> x) {
-    // NOT-ENOUGH-INFORMATION
-    return x.get();
-  }
-
   Lib x9(NullableBounded<? extends Lib> x) {
-    return x.get();
-  }
-
-  Lib x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
     return x.get();
   }
 
@@ -77,10 +49,6 @@ class IntersectionToOther {
   }
 
   interface ExplicitlyObjectBounded<T extends Object> {
-    T get();
-  }
-
-  interface UnspecBounded<T extends @NullnessUnspecified Object> {
     T get();
   }
 
