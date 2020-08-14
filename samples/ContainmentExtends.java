@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 class ContainmentExtends {
   void x() {
     new Check<Lib<? extends Foo>, Lib<? extends Foo>>();

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 class MultiBoundTypeVariableUnionNullToSelf {
   <T extends Object & Lib> T x0(@Nullable T x) {
     // MISMATCH

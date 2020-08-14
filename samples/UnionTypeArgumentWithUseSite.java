@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 class UnionTypeArgumentWithUseSite {
   interface Super<T extends @Nullable Object> {
     void t(T t);

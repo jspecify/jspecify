@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 class SuperTypeVariableUnionNull {
   <T> void implicitlyObjectBounded(Lib<? super @Nullable T> lib, T t, @Nullable T tUnionNull) {
     lib.useT(t);

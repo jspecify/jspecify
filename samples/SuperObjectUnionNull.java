@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 class SuperObjectUnionNull {
   void foo(Lib<? super @Nullable Object> lib, Object t, @Nullable Object tUnionNull) {
     lib.useT(t);

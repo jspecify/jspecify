@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 abstract class IntersectionUnionNullToObject {
   Object x0(ImplicitlyObjectBounded<? extends Lib> x) {
     // MISMATCH

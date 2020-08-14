@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@NullAware
+@DefaultNonNull
 class MultiBoundTypeVariableUnionNullToObjectUnionNull {
   <T extends Object & Lib> @Nullable Object x0(@Nullable T x) {
     return x;
