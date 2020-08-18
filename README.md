@@ -1,4 +1,4 @@
-# jspecify 0.1
+# JSpecify 0.1
 
 (This README is for the 0.1 milestone. For the main project README, see
 [our GitHub landing page](https://github.com/jspecify/jspecify).)
