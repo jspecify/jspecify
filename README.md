@@ -10,9 +10,9 @@ milestone. But we've held off, waiting until we had "something a select few end
 users could view" or "something that gives a tool author enough information to
 implement a full set of semantics."
 
-A frequent question has been: Why not just take what we have, remove the
-references to especially unsettled questions (like the existence of
-`@NullnessUnspecified`), and tag that? So that's what this milestone is for.
+A frequent question has been: Why not just take what we have so far, remove all
+but the bare essentials (e.g., remove `@NullnessUnspecified`), and tag that? So
+that's what this milestone is for.
 
 This 0.1 milestone omits some of the work we've already completed, and we have
 much more work underway and yet to come. Everything remains **not set in
