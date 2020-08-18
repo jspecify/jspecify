@@ -37,5 +37,15 @@ interface CovariantReturns {
     Lib<? extends Object> makeExplicitlyObjectBounded();
   }
 
+  default void go(Subtype s) {
+    checkObject(s.makeObject());
+    checkLibOfObject(s.makeImplicitlyObjectBounded());
+    checkLibOfObject(s.makeExplicitlyObjectBounded());
+  }
+
+  void checkObject(Object o);
+
+  void checkLibOfObject(Lib<? extends Object> o);
+
   interface Lib<T extends @Nullable Object> {}
 }
