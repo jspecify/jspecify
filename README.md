@@ -1,16 +1,23 @@
-# jspecify
+# jspecify 0.1
 
-**This project is a placeholder.** We are using the issue tracker for some of our conversations, but the existing code in the repo does not reflect our current design decisions, and we have many decisions left to make.
+(This README is for the 0.1 milestone. For the main project README, see
+[our GitHub landing page](https://github.com/jspecify/jspecify).)
 
-An artifact of well-named and well-specified annotations to power static
-analysis checks.
+This milestone will be tagged around August 19, 2020.
 
-Our focus during 2018-2021 is annotations for nullness.
+To recognize the progress of the past two years, we've long wanted to declare a
+milestone. But we've held off, waiting until we had "something a select few end
+users could view" or "something that gives a tool author enough information to
+implement a full set of semantics."
 
-This is not an officially supported product of any of the participant
-organizations.
+A frequent question has been: Why not just take what we have, remove the
+references to especially unsettled questions (like the existence of
+`@NullnessUnspecified`), and tag that? So that's what this milestone is for.
 
-## How to build
+This 0.1 milestone omits some of the work we've already completed, and we have
+much more work underway and yet to come. Everything remains **not set in
+stone**, and we don't expect tool authors or library owners to adopt 0.1.
 
-Simply run `./gradlew` to build artifacts.
-Or run `./gradlew publishToMavenLocal` to install artifacts to your Local Maven Repository.
+Still, this milestone gives us something concrete. Plus, tool authors who want
+to compare their existing semantics against our sample inputs get an officially
+stamped commit to reference.
