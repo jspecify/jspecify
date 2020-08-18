@@ -3,8 +3,6 @@
 (This README is for the 0.1 milestone. For the main project README, see
 [our GitHub landing page](https://github.com/jspecify/jspecify).)
 
-This milestone will be tagged around August 19, 2020.
-
 To recognize the progress of the past two years, we've long wanted to declare a
 milestone. But we've held off, waiting until we had "something a select few end
 users could view" or "something that gives a tool author enough information to
