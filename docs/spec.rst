@@ -391,10 +391,10 @@ class’s declaration is fixed to either nullable or non-null (including
 type-variable uses, since their type parameters are considered
 implicitly bounded by non-null ``Object``).
 
--  Can the parameters to ``of()``\ ’s be null? no (from ``K`` and
+-  Can the parameters to ``of()``\ ’s be null? No, from ``K`` and
    ``V``\ ’s bounds, which are determined implicitly by
-   ``@DefaultNonNull``)
--  Can ``get()``\ ’s return ``null``? yes (from its explicit annotation)
+   ``@DefaultNonNull``.
+-  Can ``get()``\ ’s return ``null``? Yes, from its explicit annotation.
 -  It is a mismatch to refer to
    ``ImmutableMap<@Nullable String, Object>`` because
    ``@Nullable String`` is outside of ``K``\ ’s bounds.
@@ -403,19 +403,11 @@ To illustrate wildcards, consider a method return type
 ``ImmutableMap<? extends @Nullable String, ?>`` with no defaulting
 annotation in scope:
 
--  Can the method return a null map? That is unspecified (since no
-   defaulting annotation is in scope)
--  Can the map’s keys be null? no. This is because the wildcard’s
-   explicit bound, ``@Nullable String``, is intersected with the
-   wildcarded type parameter ``K``\ ’s bound, non-null ``Object``. In
-   other words, the explicit ``@Nullable`` here is ignored and might
-   justify a warning. That warning can be avoided by writing
-   ``? extends String`` without changing the resulting key type:
-   ``String``, being not explicitly annotated, has unspecified
-   nullability, but that’s still superseded by the wildcarded type
-   parameter’s bound, non-null ``Object``.
--  Can the map’s values be null? Also no, because the wildcard inherits
-   that bound from the bound of ``V`` in ``ImmutableMap``.
+-  Can the method return a null map? That is unspecified, since no
+   defaulting annotation is in scope.
+-  Can the map’s keys or values be null? No, because the wildcards
+   inherit that bound from the bounds of ``K`` and ``V`` in
+   ``ImmutableMap``.
 
 As another example, Guava’s ``Function`` would be declared as follows to
 allow functions that accept and/or return ``null``:
