@@ -350,8 +350,8 @@ and
 `superparameters <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.m2gxs1ddzqwp>`__
 may be defined by members of parameterized supertypes.
 
-Intended “meaning”
-~~~~~~~~~~~~~~~~~~
+Concerns around uninitialized objects
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The broad intention of nullability is that type usages specified as
 non-null should at runtime only represent non-null values. Since fields
