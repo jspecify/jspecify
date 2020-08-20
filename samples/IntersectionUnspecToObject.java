@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
-@NullAware
+@DefaultNonNull
 abstract class IntersectionUnspecToObject {
   Object x0(ImplicitlyObjectBounded<? extends Lib> x) {
     // NOT-ENOUGH-INFORMATION

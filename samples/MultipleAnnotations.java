@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
-@NullAware
+@DefaultNonNull
 class MultipleAnnotations {
   // PARADOX
   @Nullable @NullnessUnspecified Object x1;

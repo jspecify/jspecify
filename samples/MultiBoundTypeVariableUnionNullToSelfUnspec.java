@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.NullAware;
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
-@NullAware
+@DefaultNonNull
 class MultiBoundTypeVariableUnionNullToSelfUnspec {
   <T extends Object & Lib> @NullnessUnspecified T x0(@Nullable T x) {
     // NOT-ENOUGH-INFORMATION
