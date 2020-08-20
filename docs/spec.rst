@@ -207,8 +207,8 @@ Our nullability annotations produce the following apparent type
 hierarchy [`#80 <https://github.com/jspecify/jspecify/issues/80>`__]:
 
 | ``Foo`` (written in the context of ``@DefaultNonNull``)
-| ``<= Foo`` (written outside the context of ``@DefaultNonNull``)
-| ``<= @Nullable Foo``
+| ``⋖ Foo`` (written outside the context of ``@DefaultNonNull``)
+| ``⋖ @Nullable Foo``
 
 It can be useful to conceptualize these similarly to `3-valued
 logic <https://en.wikipedia.org/wiki/Three-valued_logic>`__
@@ -224,9 +224,9 @@ The above rules make ``@Nullable Object`` the top (least precise) type.
 examples of subtyping, with types written in the context of
 ``@DefaultNonNull``:
 
--  ``String <= Object <= @Nullable Object``
--  ``String <= @Nullable String <= @Nullable Object``
--  ``null <= @Nullable String <= @Nullable Object``
+-  ``String ⋖ Object ⋖ @Nullable Object``
+-  ``String ⋖ @Nullable String ⋖ @Nullable Object``
+-  ``null ⋖ @Nullable String ⋖ @Nullable Object``
 
 For a given set of types, we can define their **glb** (*greatest lower
 bound*) as a type from the given set that is at least as specific as all
