@@ -16,11 +16,14 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class UnionTypeArgumentWithUseSite {
   interface Super<T extends @Nullable Object> {
     void t(T t);
+
+    void tUnspec(@NullnessUnspecified T t);
 
     void tUnionNull(@Nullable T t);
   }
@@ -28,6 +31,23 @@ class UnionTypeArgumentWithUseSite {
   interface Sub extends Super<Object> {
     @Override
     void t(Object t);
+
+    @Override
+    // NOT-ENOUGH-INFORMATION
+    void tUnspec(@NullnessUnspecified Object t);
+
+    @Override
+    void tUnionNull(@Nullable Object t);
+  }
+
+  interface SubUnspec extends Super<@NullnessUnspecified Object> {
+    @Override
+    // NOT-ENOUGH-INFORMATION
+    void t(@NullnessUnspecified Object t);
+
+    @Override
+    // NOT-ENOUGH-INFORMATION
+    void tUnspec(@NullnessUnspecified Object t);
 
     @Override
     void tUnionNull(@Nullable Object t);
@@ -38,10 +58,31 @@ class UnionTypeArgumentWithUseSite {
     void t(@Nullable Object t);
 
     @Override
+    void tUnspec(@Nullable Object t);
+
+    @Override
     void tUnionNull(@Nullable Object t);
   }
 
   interface SubWeaker extends Super<Object> {
+    @Override
+    // NOT-ENOUGH-INFORMATION
+    void tUnspec(Object t);
+
+    @Override
+    // MISMATCH
+    void tUnionNull(Object t);
+  }
+
+  interface SubWeakerUnspec extends Super<@NullnessUnspecified Object> {
+    @Override
+    // NOT-ENOUGH-INFORMATION
+    void t(Object t);
+
+    @Override
+    // NOT-ENOUGH-INFORMATION
+    void tUnspec(Object t);
+
     @Override
     // MISMATCH
     void tUnionNull(Object t);
@@ -51,6 +92,10 @@ class UnionTypeArgumentWithUseSite {
     @Override
     // MISMATCH
     void t(Object t);
+
+    @Override
+    // MISMATCH
+    void tUnspec(Object t);
 
     @Override
     // MISMATCH

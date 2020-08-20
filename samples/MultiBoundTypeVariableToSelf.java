@@ -16,6 +16,7 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class MultiBoundTypeVariableToSelf {
@@ -23,11 +24,31 @@ class MultiBoundTypeVariableToSelf {
     return x;
   }
 
+  <T extends Object & @NullnessUnspecified Lib> T x1(T x) {
+    return x;
+  }
+
   <T extends Object & @Nullable Lib> T x2(T x) {
     return x;
   }
 
+  <T extends @NullnessUnspecified Object & Lib> T x3(T x) {
+    return x;
+  }
+
+  <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> T x4(T x) {
+    return x;
+  }
+
+  <T extends @NullnessUnspecified Object & @Nullable Lib> T x5(T x) {
+    return x;
+  }
+
   <T extends @Nullable Object & Lib> T x6(T x) {
+    return x;
+  }
+
+  <T extends @Nullable Object & @NullnessUnspecified Lib> T x7(T x) {
     return x;
   }
 

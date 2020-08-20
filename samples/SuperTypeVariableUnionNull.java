@@ -16,49 +16,114 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class SuperTypeVariableUnionNull {
-  <T> void implicitlyObjectBounded(Lib<? super @Nullable T> lib, T t, @Nullable T tUnionNull) {
+  <T> void implicitlyObjectBounded(
+      Lib<? super @Nullable T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
     lib.useT(t);
+
+    lib.useT(tUnspec);
 
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    lib.useTUnspec(tUnspec);
+
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
   <T extends Object> void explicitlyObjectBounded(
-      Lib<? super @Nullable T> lib, T t, @Nullable T tUnionNull) {
+      Lib<? super @Nullable T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
     lib.useT(t);
+
+    lib.useT(tUnspec);
 
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    lib.useTUnspec(tUnspec);
+
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
+
+    lib.useTUnionNull(tUnionNull);
+  }
+
+  <T extends @NullnessUnspecified Object> void unspecBounded(
+      Lib<? super @Nullable T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
+    lib.useT(t);
+
+    lib.useT(tUnspec);
+
+    lib.useT(tUnionNull);
+
+    //
+
+    lib.useTUnspec(t);
+
+    lib.useTUnspec(tUnspec);
+
+    lib.useTUnspec(tUnionNull);
+
+    //
+
+    lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
   <T extends @Nullable Object> void nullableBounded(
-      Lib<? super @Nullable T> lib, T t, @Nullable T tUnionNull) {
+      Lib<? super @Nullable T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
     lib.useT(t);
+
+    lib.useT(tUnspec);
 
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    lib.useTUnspec(tUnspec);
+
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
   interface Lib<T extends @Nullable Object> {
     void useT(T t);
+
+    void useTUnspec(@NullnessUnspecified T t);
 
     void useTUnionNull(@Nullable T t);
   }

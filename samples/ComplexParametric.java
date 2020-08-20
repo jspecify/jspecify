@@ -16,15 +16,20 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class ComplexParametric {
   interface SuperSuper<T extends @Nullable Object> {
     Lib<T> t();
 
+    Lib<@NullnessUnspecified T> tUnspec();
+
     Lib<@Nullable T> tUnionNull();
 
     default void checkT(Lib<T> lib) {}
+
+    default void checkTUnspec(Lib<@NullnessUnspecified T> lib) {}
 
     default void checkTUnionNull(Lib<@Nullable T> lib) {}
   }
@@ -33,17 +38,72 @@ class ComplexParametric {
 
   static void checkNeverNull(Lib<? extends Object> lib) {}
 
+  static <T> void checkUnspecNull(Lib<@NullnessUnspecified T> lib) {}
+
   interface SuperNeverNever<T extends Object & Foo> extends SuperSuper<T> {
     default void x() {
       checkNeverNull(t());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(t());
       checkT(t());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(t());
       // MISMATCH
       checkTUnionNull(t());
 
+      // NOT-ENOUGH-INFORMATION
+      checkNeverNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkT(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnionNull(tUnspec());
+
       // MISMATCH
       checkNeverNull(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      ComplexParametric.<T>checkUnspecNull(tUnionNull());
       // MISMATCH
       checkT(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnionNull());
+      checkTUnionNull(tUnionNull());
+    }
+  }
+
+  interface SuperNeverUnspec<T extends Object & @NullnessUnspecified Foo> extends SuperSuper<T> {
+    default void x() {
+      checkNeverNull(t());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(t());
+      checkT(t());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(t());
+      // MISMATCH
+      checkTUnionNull(t());
+
+      // NOT-ENOUGH-INFORMATION
+      checkNeverNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkT(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnionNull(tUnspec());
+
+      // MISMATCH
+      checkNeverNull(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      ComplexParametric.<T>checkUnspecNull(tUnionNull());
+      // MISMATCH
+      checkT(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnionNull());
       checkTUnionNull(tUnionNull());
     }
   }
@@ -51,31 +111,118 @@ class ComplexParametric {
   interface SuperNeverUnionNull<T extends Object & @Nullable Foo> extends SuperSuper<T> {
     default void x() {
       checkNeverNull(t());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(t());
       checkT(t());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(t());
       // MISMATCH
       checkTUnionNull(t());
 
+      // NOT-ENOUGH-INFORMATION
+      checkNeverNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkT(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnionNull(tUnspec());
+
       // MISMATCH
       checkNeverNull(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      ComplexParametric.<T>checkUnspecNull(tUnionNull());
       // MISMATCH
       checkT(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnionNull());
       checkTUnionNull(tUnionNull());
     }
+  }
+
+  interface SuperUnspecNever<T extends @NullnessUnspecified Object & Foo> extends SuperSuper<T> {
+    default void x() {
+      checkNeverNull(t());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(t());
+      checkT(t());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(t());
+      // MISMATCH
+      checkTUnionNull(t());
+
+      // NOT-ENOUGH-INFORMATION
+      checkNeverNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkT(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnionNull(tUnspec());
+
+      // MISMATCH
+      checkNeverNull(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      ComplexParametric.<T>checkUnspecNull(tUnionNull());
+      // MISMATCH
+      checkT(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnionNull());
+      checkTUnionNull(tUnionNull());
+    }
+  }
+
+  interface SuperUnspecUnspec<T extends @NullnessUnspecified Object & @NullnessUnspecified Foo>
+      extends SuperSuper<T> {
+    // TODO(cpovirk): Add method calls like in the other classes.
+  }
+
+  interface SuperUnspecUnionNull<T extends @NullnessUnspecified Object & @Nullable Foo>
+      extends SuperSuper<T> {
+    // TODO(cpovirk): Add method calls like in the other classes.
   }
 
   interface SuperUnionNullNever<T extends @Nullable Object & Foo> extends SuperSuper<T> {
     default void x() {
       checkNeverNull(t());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(t());
       checkT(t());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(t());
       // MISMATCH
       checkTUnionNull(t());
 
+      // NOT-ENOUGH-INFORMATION
+      checkNeverNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkT(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnionNull(tUnspec());
+
       // MISMATCH
       checkNeverNull(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      ComplexParametric.<T>checkUnspecNull(tUnionNull());
       // MISMATCH
       checkT(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnionNull());
       checkTUnionNull(tUnionNull());
     }
+  }
+
+  interface SuperUnionNullUnspec<T extends @Nullable Object & @NullnessUnspecified Foo>
+      extends SuperSuper<T> {
+    // TODO(cpovirk): Add method calls like in the other classes.
   }
 
   interface SuperUnionNullUnionNull<T extends @Nullable Object & @Nullable Foo>
@@ -83,14 +230,33 @@ class ComplexParametric {
     default void x() {
       // MISMATCH
       checkNeverNull(t());
+      // MISMATCH
+      checkUnspecNull(t());
       checkT(t());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(t());
       // MISMATCH
       checkTUnionNull(t());
 
       // MISMATCH
+      checkNeverNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkUnspecNull(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkT(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnspec());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnionNull(tUnspec());
+
+      // MISMATCH
       checkNeverNull(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      ComplexParametric.<T>checkUnspecNull(tUnionNull());
       // MISMATCH
       checkT(tUnionNull());
+      // NOT-ENOUGH-INFORMATION
+      checkTUnspec(tUnionNull());
       checkTUnionNull(tUnionNull());
     }
   }

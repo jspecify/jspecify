@@ -16,10 +16,16 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 abstract class IntersectionUnionNullToObject {
   Object x0(ImplicitlyObjectBounded<? extends Lib> x) {
+    // MISMATCH
+    return unionNull(x.get());
+  }
+
+  Object x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
     // MISMATCH
     return unionNull(x.get());
   }
@@ -34,12 +40,37 @@ abstract class IntersectionUnionNullToObject {
     return unionNull(x.get());
   }
 
+  Object x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
+    // MISMATCH
+    return unionNull(x.get());
+  }
+
   Object x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
     // MISMATCH
     return unionNull(x.get());
   }
 
+  Object x6(UnspecBounded<? extends Lib> x) {
+    // MISMATCH
+    return unionNull(x.get());
+  }
+
+  Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
+    // MISMATCH
+    return unionNull(x.get());
+  }
+
+  Object x8(UnspecBounded<? extends @Nullable Lib> x) {
+    // MISMATCH
+    return unionNull(x.get());
+  }
+
   Object x9(NullableBounded<? extends Lib> x) {
+    // MISMATCH
+    return unionNull(x.get());
+  }
+
+  Object x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
     // MISMATCH
     return unionNull(x.get());
   }
@@ -54,6 +85,10 @@ abstract class IntersectionUnionNullToObject {
   }
 
   interface ExplicitlyObjectBounded<T extends Object> {
+    T get();
+  }
+
+  interface UnspecBounded<T extends @NullnessUnspecified Object> {
     T get();
   }
 

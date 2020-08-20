@@ -16,24 +16,46 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class SuperObject {
-  void foo(Lib<? super Object> lib, Object t, @Nullable Object tUnionNull) {
+  void foo(
+      Lib<? super Object> lib,
+      Object t,
+      @NullnessUnspecified Object tUnspec,
+      @Nullable Object tUnionNull) {
     lib.useT(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useT(tUnspec);
 
     // MISMATCH
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnspec);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
   interface Lib<T extends @Nullable Object> {
     void useT(T t);
+
+    void useTUnspec(@NullnessUnspecified T t);
 
     void useTUnionNull(@Nullable T t);
   }

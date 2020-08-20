@@ -16,12 +16,16 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class ContainmentSuperVsExtends {
   void x() {
     // MISMATCH
     new Check<Lib<? extends Object>, Lib<? super Foo>>();
+
+    // NOT-ENOUGH-INFORMATION
+    new Check<Lib<? extends @NullnessUnspecified Object>, Lib<? super Foo>>();
 
     new Check<Lib<? extends @Nullable Object>, Lib<? super Foo>>();
 

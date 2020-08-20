@@ -16,10 +16,16 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class SameTypeObject {
   Lib<Object> x0(Lib<Object> x) {
+    return x;
+  }
+
+  Lib<Object> x1(Lib<@NullnessUnspecified Object> x) {
+    // NOT-ENOUGH-INFORMATION
     return x;
   }
 
@@ -28,8 +34,28 @@ class SameTypeObject {
     return x;
   }
 
+  Lib<@NullnessUnspecified Object> x3(Lib<Object> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
+  Lib<@NullnessUnspecified Object> x4(Lib<@NullnessUnspecified Object> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
+  Lib<@NullnessUnspecified Object> x5(Lib<@Nullable Object> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
   Lib<@Nullable Object> x6(Lib<Object> x) {
     // MISMATCH
+    return x;
+  }
+
+  Lib<@Nullable Object> x7(Lib<@NullnessUnspecified Object> x) {
+    // NOT-ENOUGH-INFORMATION
     return x;
   }
 

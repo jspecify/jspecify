@@ -16,10 +16,16 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class SameTypeTypeVariable<T extends @Nullable Object> {
   Lib<T> x0(Lib<T> x) {
+    return x;
+  }
+
+  Lib<T> x1(Lib<@NullnessUnspecified T> x) {
+    // NOT-ENOUGH-INFORMATION
     return x;
   }
 
@@ -28,8 +34,28 @@ class SameTypeTypeVariable<T extends @Nullable Object> {
     return x;
   }
 
+  Lib<@NullnessUnspecified T> x3(Lib<T> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
+  Lib<@NullnessUnspecified T> x4(Lib<@NullnessUnspecified T> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
+  Lib<@NullnessUnspecified T> x5(Lib<@Nullable T> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
   Lib<@Nullable T> x6(Lib<T> x) {
     // MISMATCH
+    return x;
+  }
+
+  Lib<@Nullable T> x7(Lib<@NullnessUnspecified T> x) {
+    // NOT-ENOUGH-INFORMATION
     return x;
   }
 

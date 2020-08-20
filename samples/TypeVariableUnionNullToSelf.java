@@ -16,19 +16,28 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class TypeVariableUnionNullToSelf<
     Never1T,
     ChildOfNever1T extends Never1T,
+    UnspecChildOfNever1T extends @NullnessUnspecified Never1T,
     NullChildOfNever1T extends @Nullable Never1T,
     //
     Never2T extends Object,
     ChildOfNever2T extends Never2T,
+    UnspecChildOfNever2T extends @NullnessUnspecified Never2T,
     NullChildOfNever2T extends @Nullable Never2T,
+    //
+    UnspecT extends @NullnessUnspecified Object,
+    ChildOfUnspecT extends UnspecT,
+    UnspecChildOfUnspecT extends @NullnessUnspecified UnspecT,
+    NullChildOfUnspecT extends @Nullable UnspecT,
     //
     ParametricT extends @Nullable Object,
     ChildOfParametricT extends ParametricT,
+    UnspecChildOfParametricT extends @NullnessUnspecified ParametricT,
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
@@ -38,6 +47,11 @@ class TypeVariableUnionNullToSelf<
   }
 
   ChildOfNever1T x1(@Nullable ChildOfNever1T x) {
+    // MISMATCH
+    return x;
+  }
+
+  UnspecChildOfNever1T x2(@Nullable UnspecChildOfNever1T x) {
     // MISMATCH
     return x;
   }
@@ -57,7 +71,32 @@ class TypeVariableUnionNullToSelf<
     return x;
   }
 
+  UnspecChildOfNever2T x6(@Nullable UnspecChildOfNever2T x) {
+    // MISMATCH
+    return x;
+  }
+
   NullChildOfNever2T x7(@Nullable NullChildOfNever2T x) {
+    // MISMATCH
+    return x;
+  }
+
+  UnspecT x8(@Nullable UnspecT x) {
+    // MISMATCH
+    return x;
+  }
+
+  ChildOfUnspecT x9(@Nullable ChildOfUnspecT x) {
+    // MISMATCH
+    return x;
+  }
+
+  UnspecChildOfUnspecT x10(@Nullable UnspecChildOfUnspecT x) {
+    // MISMATCH
+    return x;
+  }
+
+  NullChildOfUnspecT x11(@Nullable NullChildOfUnspecT x) {
     // MISMATCH
     return x;
   }
@@ -68,6 +107,11 @@ class TypeVariableUnionNullToSelf<
   }
 
   ChildOfParametricT x13(@Nullable ChildOfParametricT x) {
+    // MISMATCH
+    return x;
+  }
+
+  UnspecChildOfParametricT x14(@Nullable UnspecChildOfParametricT x) {
     // MISMATCH
     return x;
   }

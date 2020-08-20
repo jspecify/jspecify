@@ -16,51 +16,130 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class SuperTypeVariable {
-  <T> void implicitlyObjectBounded(Lib<? super T> lib, T t, @Nullable T tUnionNull) {
+  <T> void implicitlyObjectBounded(
+      Lib<? super T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
     lib.useT(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useT(tUnspec);
 
     // MISMATCH
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnspec);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
-  <T extends Object> void explicitlyObjectBounded(Lib<? super T> lib, T t, @Nullable T tUnionNull) {
+  <T extends Object> void explicitlyObjectBounded(
+      Lib<? super T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
     lib.useT(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useT(tUnspec);
 
     // MISMATCH
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnspec);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
+
+    lib.useTUnionNull(tUnionNull);
+  }
+
+  <T extends @NullnessUnspecified Object> void unspecBounded(
+      Lib<? super T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
+    lib.useT(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useT(tUnspec);
+
+    // MISMATCH
+    lib.useT(tUnionNull);
+
+    //
+
+    lib.useTUnspec(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnspec);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnionNull);
+
+    //
+
+    lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
   <T extends @Nullable Object> void nullableBounded(
-      Lib<? super T> lib, T t, @Nullable T tUnionNull) {
+      Lib<? super T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {
     lib.useT(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useT(tUnspec);
 
     // MISMATCH
     lib.useT(tUnionNull);
 
     //
 
+    lib.useTUnspec(t);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnspec);
+
+    // NOT-ENOUGH-INFORMATION
+    lib.useTUnspec(tUnionNull);
+
+    //
+
     lib.useTUnionNull(t);
+
+    lib.useTUnionNull(tUnspec);
 
     lib.useTUnionNull(tUnionNull);
   }
 
   interface Lib<T extends @Nullable Object> {
     void useT(T t);
+
+    void useTUnspec(@NullnessUnspecified T t);
 
     void useTUnionNull(@Nullable T t);
   }

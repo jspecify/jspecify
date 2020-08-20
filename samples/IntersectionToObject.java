@@ -16,10 +16,15 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class IntersectionToObject {
   Object x0(ImplicitlyObjectBounded<? extends Lib> x) {
+    return x.get();
+  }
+
+  Object x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
     return x.get();
   }
 
@@ -31,11 +36,34 @@ class IntersectionToObject {
     return x.get();
   }
 
+  Object x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
+    return x.get();
+  }
+
   Object x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
     return x.get();
   }
 
+  Object x6(UnspecBounded<? extends Lib> x) {
+    return x.get();
+  }
+
+  Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x.get();
+  }
+
+  Object x8(UnspecBounded<? extends @Nullable Lib> x) {
+    // NOT-ENOUGH-INFORMATION
+    return x.get();
+  }
+
   Object x9(NullableBounded<? extends Lib> x) {
+    return x.get();
+  }
+
+  Object x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
+    // NOT-ENOUGH-INFORMATION
     return x.get();
   }
 
@@ -49,6 +77,10 @@ class IntersectionToObject {
   }
 
   interface ExplicitlyObjectBounded<T extends Object> {
+    T get();
+  }
+
+  interface UnspecBounded<T extends @NullnessUnspecified Object> {
     T get();
   }
 

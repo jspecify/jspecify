@@ -16,16 +16,30 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class ContainmentSuper {
   void x() {
     new Check<Lib<? super Foo>, Lib<? super Foo>>();
 
+    new Check<Lib<? super Foo>, Lib<? super @NullnessUnspecified Foo>>();
+
     new Check<Lib<? super Foo>, Lib<? super @Nullable Foo>>();
+
+    // NOT-ENOUGH-INFORMATION
+    new Check<Lib<? super @NullnessUnspecified Foo>, Lib<? super Foo>>();
+
+    // NOT-ENOUGH-INFORMATION
+    new Check<Lib<? super @NullnessUnspecified Foo>, Lib<? super @NullnessUnspecified Foo>>();
+
+    new Check<Lib<? super @NullnessUnspecified Foo>, Lib<? super @Nullable Foo>>();
 
     // MISMATCH
     new Check<Lib<? super @Nullable Foo>, Lib<? super Foo>>();
+
+    // NOT-ENOUGH-INFORMATION
+    new Check<Lib<? super @Nullable Foo>, Lib<? super @NullnessUnspecified Foo>>();
 
     new Check<Lib<? super @Nullable Foo>, Lib<? super @Nullable Foo>>();
   }
