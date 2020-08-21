@@ -71,7 +71,9 @@ The package name will be ``org.jspecify.annotations``.
 
 We will release one canonical artifact, in which all annotations have
 runtime retention.
-[`#28 <https://github.com/jspecify/jspecify/issues/28>`__]
+[`#28 <https://github.com/jspecify/jspecify/issues/28>`__] None of the
+annotations defined in this document will be marked
+`repeatable <https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html>`__.
 
 The type-use annotations
 ------------------------
@@ -146,13 +148,6 @@ structurally legal, semantic violations are of course still possible.
       constructor (including via a member reference), or to an instance
       creation expression for a generic class.
 
--  Applying more than one of these annotations to the same `type
-   component <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5>`__
-   within the same type usage (since we currently define only
-   ``@Nullable``, this means applying ``@Nullable`` twice) is illegal.
-   [*debated*
-   `#100 <https://github.com/jspecify/jspecify/issues/100>`__]
-
 Tools are encouraged to treat an illegally placed annotation in Java
 source code as an error. In bytecode, illegally placed annotations may
 be best ignored.
@@ -188,12 +183,6 @@ Structural legality
       [`#43 <https://github.com/jspecify/jspecify/issues/43>`__], or
       field [`#50 <https://github.com/jspecify/jspecify/issues/50>`__].
       *debated*
-
--  Applying more than one of these annotations to the same scope (since
-   we currently define only ``@DefaultNonNull``, this means applying
-   ``@DefaultNonNull`` twice) is illegal. [*debated*
-   `#100 <https://github.com/jspecify/jspecify/issues/100>`__,
-   `#87 <https://github.com/jspecify/jspecify/issues/87>`__]
 
 Semantics
 ---------
