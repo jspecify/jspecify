@@ -15,28 +15,28 @@
  */
 
 import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 // PARADOX
-class IllegalLocations<@Nullable E> {
-  interface Lib<T extends @Nullable Object> {}
+class IllegalLocationsUnspec<@NullnessUnspecified E> {
+  interface Lib<T extends @NullnessUnspecified Object> {}
 
   // PARADOX
-  Lib<@Nullable ?> x1;
+  Lib<@NullnessUnspecified ?> x1;
 
   // PARADOX
-  Lib<@Nullable ? extends Object> x2;
+  Lib<@NullnessUnspecified ? extends Object> x2;
 
   // PARADOX
-  Lib<@Nullable ? super Object> x3;
+  Lib<@NullnessUnspecified ? super Object> x3;
 
   class Nested {}
 
-  @Nullable Nested x4;
+  @NullnessUnspecified Nested x4;
 
   // PARADOX
-  @Nullable IllegalLocations<?>.Nested x5;
+  @NullnessUnspecified IllegalLocationsUnspec<?>.Nested x5;
 
-  IllegalLocations<?>.@Nullable Nested x6;
+  IllegalLocationsUnspec<?>.@NullnessUnspecified Nested x6;
 }

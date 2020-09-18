@@ -14,12 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@DefaultNonNull
 // PARADOX
-class IllegalLocations<@Nullable E> {
+class NotNullAwareIllegalLocations<@Nullable E> {
   interface Lib<T extends @Nullable Object> {}
 
   // PARADOX
@@ -36,7 +34,7 @@ class IllegalLocations<@Nullable E> {
   @Nullable Nested x4;
 
   // PARADOX
-  @Nullable IllegalLocations<?>.Nested x5;
+  @Nullable NotNullAwareIllegalLocations<?>.Nested x5;
 
-  IllegalLocations<?>.@Nullable Nested x6;
+  NotNullAwareIllegalLocations<?>.@Nullable Nested x6;
 }
