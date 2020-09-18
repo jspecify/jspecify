@@ -21,50 +21,50 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class MultiBoundTypeVariableUnionNullToOtherUnspec {
   <T extends Object & Lib> @NullnessUnspecified Lib x0(@Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x1(@Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @Nullable Lib> @NullnessUnspecified Lib x2(@Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & Lib> @NullnessUnspecified Lib x3(@Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x4(
       @Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> @NullnessUnspecified Lib x5(
       @Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & Lib> @NullnessUnspecified Lib x6(@Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x7(
       @Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> @NullnessUnspecified Lib x8(@Nullable T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 

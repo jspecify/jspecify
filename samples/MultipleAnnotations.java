@@ -20,8 +20,8 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class MultipleAnnotations {
-  // PARADOX
+  // jspecify_nullness_paradox
   @Nullable @NullnessUnspecified Object x1;
-  // PARADOX
+  // jspecify_nullness_paradox
   @NullnessUnspecified @Nullable Object x2;
 }

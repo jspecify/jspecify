@@ -16,24 +16,24 @@
 
 import org.jspecify.annotations.Nullable;
 
-// PARADOX
+// jspecify_nullness_paradox
 class NotNullAwareIllegalLocations<@Nullable E> {
   interface Lib<T extends @Nullable Object> {}
 
-  // PARADOX
+  // jspecify_nullness_paradox
   Lib<@Nullable ?> x1;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   Lib<@Nullable ? extends Object> x2;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   Lib<@Nullable ? super Object> x3;
 
   class Nested {}
 
   @Nullable Nested x4;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   @Nullable NotNullAwareIllegalLocations<?>.Nested x5;
 
   NotNullAwareIllegalLocations<?>.@Nullable Nested x6;

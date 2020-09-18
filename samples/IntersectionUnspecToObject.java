@@ -21,62 +21,62 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 abstract class IntersectionUnspecToObject {
   Object x0(ImplicitlyObjectBounded<? extends Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x2(ImplicitlyObjectBounded<? extends @Nullable Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x3(ExplicitlyObjectBounded<? extends Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x6(UnspecBounded<? extends Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x8(UnspecBounded<? extends @Nullable Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x9(NullableBounded<? extends Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
   Object x11(NullableBounded<? extends @Nullable Lib> x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return unspec(x.get());
   }
 

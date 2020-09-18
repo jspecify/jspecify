@@ -23,7 +23,7 @@ class IllegalLocationsNotGenericWithNested {
 
   @Nullable Nested x4;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   @Nullable IllegalLocationsNotGenericWithNested.Nested x5;
 
   IllegalLocationsNotGenericWithNested.@Nullable Nested x6;

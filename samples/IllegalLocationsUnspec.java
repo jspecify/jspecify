@@ -18,24 +18,24 @@ import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-// PARADOX
+// jspecify_nullness_paradox
 class IllegalLocationsUnspec<@NullnessUnspecified E> {
   interface Lib<T extends @NullnessUnspecified Object> {}
 
-  // PARADOX
+  // jspecify_nullness_paradox
   Lib<@NullnessUnspecified ?> x1;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   Lib<@NullnessUnspecified ? extends Object> x2;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   Lib<@NullnessUnspecified ? super Object> x3;
 
   class Nested {}
 
   @NullnessUnspecified Nested x4;
 
-  // PARADOX
+  // jspecify_nullness_paradox
   @NullnessUnspecified IllegalLocationsUnspec<?>.Nested x5;
 
   IllegalLocationsUnspec<?>.@NullnessUnspecified Nested x6;

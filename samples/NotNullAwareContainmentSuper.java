@@ -19,30 +19,30 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 class NotNullAwareContainmentSuper {
   void x() {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     new Check<@Nullable Lib<? super Foo>, @Nullable Lib<? super Foo>>();
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     new Check<@Nullable Lib<? super Foo>, @Nullable Lib<? super @NullnessUnspecified Foo>>();
 
     new Check<@Nullable Lib<? super Foo>, @Nullable Lib<? super @Nullable Foo>>();
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     new Check<@Nullable Lib<? super @NullnessUnspecified Foo>, @Nullable Lib<? super Foo>>();
 
     new Check<
         @Nullable Lib<? super @NullnessUnspecified Foo>,
-        // NOT-ENOUGH-INFORMATION
+        // jspecify_nullness_not_enough_information
         @Nullable Lib<? super @NullnessUnspecified Foo>>();
 
     new Check<
         @Nullable Lib<? super @NullnessUnspecified Foo>, @Nullable Lib<? super @Nullable Foo>>();
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     new Check<@Nullable Lib<? super @Nullable Foo>, @Nullable Lib<? super Foo>>();
 
     new Check<
-        // NOT-ENOUGH-INFORMATION
+        // jspecify_nullness_not_enough_information
         @Nullable Lib<? super @Nullable Foo>, @Nullable Lib<? super @NullnessUnspecified Foo>>();
 
     new Check<@Nullable Lib<? super @Nullable Foo>, @Nullable Lib<? super @Nullable Foo>>();

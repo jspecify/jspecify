@@ -29,37 +29,37 @@ class TypeArgumentOfTypeVariableBound {
   }
 
   <S extends Supplier<Object>> Supplier<@NullnessUnspecified Object> x2(S s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s;
   }
 
   <S extends Supplier<Object>> Supplier<@Nullable Object> x3(S s) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return s;
   }
 
   <S extends Supplier<@NullnessUnspecified Object>> Supplier<Object> x4(S s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s;
   }
 
   <S extends Supplier<@NullnessUnspecified Object>> Supplier<@NullnessUnspecified Object> x5(S s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s;
   }
 
   <S extends Supplier<@NullnessUnspecified Object>> Supplier<@Nullable Object> x6(S s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s;
   }
 
   <S extends Supplier<@Nullable Object>> Supplier<Object> x7(S s) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return s;
   }
 
   <S extends Supplier<@Nullable Object>> Supplier<@NullnessUnspecified Object> x8(S s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s;
   }
 

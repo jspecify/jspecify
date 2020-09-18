@@ -29,38 +29,38 @@ class TypeArgumentOfWildcardBound {
   }
 
   Supplier<@NullnessUnspecified Object> x2(Supplier<? extends Supplier<Object>> s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s.get();
   }
 
   Supplier<@Nullable Object> x3(Supplier<? extends Supplier<Object>> s) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return s.get();
   }
 
   Supplier<Object> x4(Supplier<? extends Supplier<@NullnessUnspecified Object>> s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s.get();
   }
 
   Supplier<@NullnessUnspecified Object> x5(
       Supplier<? extends Supplier<@NullnessUnspecified Object>> s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s.get();
   }
 
   Supplier<@Nullable Object> x6(Supplier<? extends Supplier<@NullnessUnspecified Object>> s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s.get();
   }
 
   Supplier<Object> x7(Supplier<? extends Supplier<@Nullable Object>> s) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return s.get();
   }
 
   Supplier<@NullnessUnspecified Object> x8(Supplier<? extends Supplier<@Nullable Object>> s) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return s.get();
   }
 

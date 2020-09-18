@@ -30,13 +30,13 @@ class NotNullAwareUseOfWildcardAsTypeArgument {
   class Caller {
     @Nullable
     Lib<? extends Object> x0(Super s) {
-      // NOT-ENOUGH-INFORMATION
+      // jspecify_nullness_not_enough_information
       return s.get();
     }
 
     @Nullable
     Lib<? extends @NullnessUnspecified Object> x1(Super s) {
-      // NOT-ENOUGH-INFORMATION
+      // jspecify_nullness_not_enough_information
       return s.get();
     }
 

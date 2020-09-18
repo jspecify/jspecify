@@ -46,12 +46,12 @@ class TypeVariableToParent<
   }
 
   Never1T x1(UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Never1T x2(NullChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
@@ -60,12 +60,12 @@ class TypeVariableToParent<
   }
 
   Never2T x4(UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Never2T x5(NullChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
@@ -74,12 +74,12 @@ class TypeVariableToParent<
   }
 
   UnspecT x7(UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   UnspecT x8(NullChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
@@ -88,12 +88,12 @@ class TypeVariableToParent<
   }
 
   ParametricT x10(UnspecChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   ParametricT x11(NullChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 }

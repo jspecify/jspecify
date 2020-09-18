@@ -21,53 +21,53 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class MultiBoundTypeVariableUnspecToOtherUnspec {
   <T extends Object & Lib> @NullnessUnspecified Lib x0(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x1(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @Nullable Lib> @NullnessUnspecified Lib x2(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & Lib> @NullnessUnspecified Lib x3(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x4(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> @NullnessUnspecified Lib x5(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & Lib> @NullnessUnspecified Lib x6(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x7(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> @NullnessUnspecified Lib x8(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
