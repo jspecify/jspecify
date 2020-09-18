@@ -14,55 +14,59 @@
  * limitations under the License.
  */
 
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 class NotNullAwareClassToSelf {
-  NotNullAwareClassToSelf x0(NotNullAwareClassToSelf x) {
+  Lib x0(Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
-  NotNullAwareClassToSelf x1(@NullnessUnspecified NotNullAwareClassToSelf x) {
+  Lib x1(@NullnessUnspecified Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
-  NotNullAwareClassToSelf x2(@Nullable NotNullAwareClassToSelf x) {
-    // NOT-ENOUGH-INFORMATION
-    return x;
-  }
-
-  @NullnessUnspecified
-  NotNullAwareClassToSelf x3(NotNullAwareClassToSelf x) {
+  Lib x2(@Nullable Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
   @NullnessUnspecified
-  NotNullAwareClassToSelf x4(@NullnessUnspecified NotNullAwareClassToSelf x) {
+  Lib x3(Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
   @NullnessUnspecified
-  NotNullAwareClassToSelf x5(@Nullable NotNullAwareClassToSelf x) {
+  Lib x4(@NullnessUnspecified Lib x) {
+    // NOT-ENOUGH-INFORMATION
+    return x;
+  }
+
+  @NullnessUnspecified
+  Lib x5(@Nullable Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
   @Nullable
-  NotNullAwareClassToSelf x6(NotNullAwareClassToSelf x) {
+  Lib x6(Lib x) {
     return x;
   }
 
   @Nullable
-  NotNullAwareClassToSelf x7(@NullnessUnspecified NotNullAwareClassToSelf x) {
+  Lib x7(@NullnessUnspecified Lib x) {
     return x;
   }
 
   @Nullable
-  NotNullAwareClassToSelf x8(@Nullable NotNullAwareClassToSelf x) {
+  Lib x8(@Nullable Lib x) {
     return x;
   }
+
+  @DefaultNonNull
+  interface Lib {}
 }

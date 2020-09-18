@@ -20,49 +20,51 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class ClassToSelf {
-  ClassToSelf x0(ClassToSelf x) {
+  Lib x0(Lib x) {
     return x;
   }
 
-  ClassToSelf x1(@NullnessUnspecified ClassToSelf x) {
+  Lib x1(@NullnessUnspecified Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
-  ClassToSelf x2(@Nullable ClassToSelf x) {
+  Lib x2(@Nullable Lib x) {
     // MISMATCH
     return x;
   }
 
   @NullnessUnspecified
-  ClassToSelf x3(ClassToSelf x) {
+  Lib x3(Lib x) {
     return x;
   }
 
   @NullnessUnspecified
-  ClassToSelf x4(@NullnessUnspecified ClassToSelf x) {
+  Lib x4(@NullnessUnspecified Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
   @NullnessUnspecified
-  ClassToSelf x5(@Nullable ClassToSelf x) {
+  Lib x5(@Nullable Lib x) {
     // NOT-ENOUGH-INFORMATION
     return x;
   }
 
   @Nullable
-  ClassToSelf x6(ClassToSelf x) {
+  Lib x6(Lib x) {
     return x;
   }
 
   @Nullable
-  ClassToSelf x7(@NullnessUnspecified ClassToSelf x) {
+  Lib x7(@NullnessUnspecified Lib x) {
     return x;
   }
 
   @Nullable
-  ClassToSelf x8(@Nullable ClassToSelf x) {
+  Lib x8(@Nullable Lib x) {
     return x;
   }
+
+  interface Lib {}
 }
