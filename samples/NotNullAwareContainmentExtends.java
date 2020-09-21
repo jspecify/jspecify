@@ -20,39 +20,33 @@ import org.jspecify.annotations.NullnessUnspecified;
 class NotNullAwareContainmentExtends {
   void x() {
     // jspecify_nullness_not_enough_information
-    new Check<@Nullable Lib<? extends Foo>, @Nullable Lib<? extends Foo>>();
+    new Check<Lib<? extends Foo>, Lib<? extends Foo>>();
 
     // jspecify_nullness_not_enough_information
-    new Check<@Nullable Lib<? extends Foo>, @Nullable Lib<? extends @NullnessUnspecified Foo>>();
+    new Check<Lib<? extends Foo>, Lib<? extends @NullnessUnspecified Foo>>();
 
     // jspecify_nullness_not_enough_information
-    new Check<@Nullable Lib<? extends Foo>, @Nullable Lib<? extends @Nullable Foo>>();
+    new Check<Lib<? extends Foo>, Lib<? extends @Nullable Foo>>();
 
     // jspecify_nullness_not_enough_information
-    new Check<@Nullable Lib<? extends @NullnessUnspecified Foo>, @Nullable Lib<? extends Foo>>();
+    new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends Foo>>();
 
-    new Check<
-        @Nullable Lib<? extends @NullnessUnspecified Foo>,
-        // jspecify_nullness_not_enough_information
-        @Nullable Lib<? extends @NullnessUnspecified Foo>>();
+    // jspecify_nullness_not_enough_information
+    new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends @NullnessUnspecified Foo>>();
 
-    new Check<
-        @Nullable Lib<? extends @NullnessUnspecified Foo>,
-        // jspecify_nullness_not_enough_information
-        @Nullable Lib<? extends @Nullable Foo>>();
+    // jspecify_nullness_not_enough_information
+    new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends @Nullable Foo>>();
 
-    new Check<@Nullable Lib<? extends @Nullable Foo>, @Nullable Lib<? extends Foo>>();
+    new Check<Lib<? extends @Nullable Foo>, Lib<? extends Foo>>();
 
-    new Check<
-        @Nullable Lib<? extends @Nullable Foo>,
-        @Nullable Lib<? extends @NullnessUnspecified Foo>>();
+    new Check<Lib<? extends @Nullable Foo>, Lib<? extends @NullnessUnspecified Foo>>();
 
-    new Check<@Nullable Lib<? extends @Nullable Foo>, @Nullable Lib<? extends @Nullable Foo>>();
+    new Check<Lib<? extends @Nullable Foo>, Lib<? extends @Nullable Foo>>();
   }
 
   interface Lib<T extends @Nullable Object> {}
 
   interface Foo {}
 
-  static class Check<F extends @Nullable Object, A extends F> {}
+  static class Check<F extends @Nullable Object, A extends @Nullable F> {}
 }
