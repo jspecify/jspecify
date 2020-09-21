@@ -117,7 +117,7 @@ The difference between the "mismatch" and "not enough information" cases arises
 from
 [unspecified nullness](https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3).
 The rough idea is that a type with unspecified nullness means: "When this code
-is annotated for nullness, either the type should have `@Nullable` or it, or it
+is annotated for nullness, either the type should have `@Nullable` on it, or it
 shouldn't."
 
 -   In a "mismatch," the type check described above would fail no matter how the
