@@ -38,12 +38,12 @@ class MultiBoundTypeVariableToObjectUnspec {
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> @NullnessUnspecified Object x4(
       T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> @NullnessUnspecified Object x5(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
@@ -52,12 +52,12 @@ class MultiBoundTypeVariableToObjectUnspec {
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> @NullnessUnspecified Object x7(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> @NullnessUnspecified Object x8(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 

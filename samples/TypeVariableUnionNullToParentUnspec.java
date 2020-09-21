@@ -43,73 +43,73 @@ class TypeVariableUnionNullToParentUnspec<
     UnusedT> {
   @NullnessUnspecified
   Never1T x0(@Nullable ChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Never1T x1(@Nullable UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Never1T x2(@Nullable NullChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Never2T x3(@Nullable ChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Never2T x4(@Nullable UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Never2T x5(@Nullable NullChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   UnspecT x6(@Nullable ChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   UnspecT x7(@Nullable UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   UnspecT x8(@Nullable NullChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   ParametricT x9(@Nullable ChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   ParametricT x10(@Nullable UnspecChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   ParametricT x11(@Nullable NullChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 }

@@ -57,13 +57,13 @@ class IntersectionToOtherUnspec {
 
   @NullnessUnspecified
   Lib x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x.get();
   }
 
   @NullnessUnspecified
   Lib x8(UnspecBounded<? extends @Nullable Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x.get();
   }
 
@@ -74,13 +74,13 @@ class IntersectionToOtherUnspec {
 
   @NullnessUnspecified
   Lib x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x.get();
   }
 
   @NullnessUnspecified
   Lib x11(NullableBounded<? extends @Nullable Lib> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x.get();
   }
 

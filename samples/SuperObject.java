@@ -27,20 +27,20 @@ class SuperObject {
       @Nullable Object tUnionNull) {
     lib.useT(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnspec);
 
-    // MISMATCH
+    // jspecify_nullness_mismatch
     lib.useT(tUnionNull);
 
     //
 
     lib.useTUnspec(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnionNull);
 
     //

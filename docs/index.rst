@@ -1,10 +1,6 @@
 jspecify: Standard Java annotations for static analysis
 =======================================================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
 Our Goal
 --------
 
@@ -61,6 +57,12 @@ People from the following projects and organizations are collaborating on this p
 |                                                    | `Square <https://squareup.com>`_                |
 +----------------------------------------------------+-------------------------------------------------+
 
+.. toctree::
+   :maxdepth: 1
+   :caption: Contents
+
+   tsttcpw
+
 Contact Info
 ------------
 
@@ -71,3 +73,4 @@ Indices and searches
 
 * :ref:`genindex`
 * :ref:`search`
+

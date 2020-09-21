@@ -37,12 +37,12 @@ class MultiBoundTypeVariableToOther {
   }
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> Lib x4(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> Lib x5(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
@@ -51,12 +51,12 @@ class MultiBoundTypeVariableToOther {
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> Lib x7(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> Lib x8(T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
