@@ -20,7 +20,10 @@ import org.jspecify.annotations.Nullable;
 @DefaultNonNull
 class PrimitiveAnnotations {
   // jspecify_nullness_paradox
-  int x1;
+  @Nullable int x1;
   // jspecify_nullness_paradox
   @Nullable int[] x2;
+
+  int x3;
+  int[] x4;
 }
