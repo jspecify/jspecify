@@ -19,65 +19,44 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 class NotNullAwareUnboxing {
-  int x0(IntegerSupplier i) {
-    return SafeGets.get(i);
-  }
-
-  int x1(IntegerUnspecSupplier i) {
-    // jspecify_nullness_not_enough_information
-    return SafeGets.get(i);
-  }
-
-  int x2(IntegerUnionNullSupplier i) {
-    // jspecify_nullness_mismatch
-    return SafeGets.get(i);
-  }
-
-  long x3(IntegerSupplier i) {
-    return SafeGets.get(i);
-  }
-
-  long x4(IntegerUnspecSupplier i) {
-    // jspecify_nullness_not_enough_information
-    return SafeGets.get(i);
-  }
-
-  long x5(IntegerUnionNullSupplier i) {
-    // jspecify_nullness_mismatch
-    return SafeGets.get(i);
-  }
-
   @DefaultNonNull
-  interface IntegerSupplier {
-    Integer get();
-  }
+  interface Super {
+    Integer getInteger();
 
-  @DefaultNonNull
-  interface IntegerUnspecSupplier {
     @NullnessUnspecified
-    Integer get();
-  }
+    Integer getIntegerUnspec();
 
-  @DefaultNonNull
-  interface IntegerUnionNullSupplier {
     @Nullable
-    Integer get();
+    Integer getIntegerUnionNull();
   }
 
-  @DefaultNonNull
-  static class SafeGets {
-    // TODO(cpovirk): Avoid conditional logic, which checkers might not recognize.
-
-    static Integer get(@Nullable IntegerSupplier s) {
-      return s == null ? 0 : s.get();
+  abstract class Sub implements Super {
+    int x0() {
+      return getInteger();
     }
 
-    static @NullnessUnspecified Integer get(@Nullable IntegerUnspecSupplier s) {
-      return s == null ? 0 : s.get();
+    int x1() {
+      // jspecify_nullness_not_enough_information
+      return getIntegerUnspec();
     }
 
-    static @Nullable Integer get(@Nullable IntegerUnionNullSupplier s) {
-      return s == null ? 0 : s.get();
+    int x2() {
+      // jspecify_nullness_mismatch
+      return getIntegerUnionNull();
+    }
+
+    long x3() {
+      return getInteger();
+    }
+
+    long x4() {
+      // jspecify_nullness_not_enough_information
+      return getIntegerUnspec();
+    }
+
+    long x5() {
+      // jspecify_nullness_mismatch
+      return getIntegerUnionNull();
     }
   }
 }
