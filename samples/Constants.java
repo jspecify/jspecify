@@ -16,7 +16,7 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 
-class ConstantsNeverNull {
+class Constants {
   @DefaultNonNull
   class User {
     Object x0() {
