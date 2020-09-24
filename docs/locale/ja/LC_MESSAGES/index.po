@@ -22,8 +22,8 @@ msgid "Contents:"
 msgstr "コンテンツ:"
 
 #: ../../index.rst:2
-msgid "jspecify: Standard Java annotations for static analysis"
-msgstr "jspecify: 静的解析のための標準化されたJavaアノテーション"
+msgid "JSpecify: Standard Java annotations for static analysis"
+msgstr "JSpecify: 静的解析のための標準化されたJavaアノテーション"
 
 #: ../../index.rst:9
 msgid "Our Goal"
@@ -82,15 +82,15 @@ msgid ""
 msgstr "私達はxkcdを読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
 
 #: ../../index.rst:27
-msgid "Talks about jspecify"
-msgstr "jspecifyに関するトーク"
+msgid "Talks about JSpecify"
+msgstr "JSpecifyに関するトーク"
 
 #: ../../index.rst:29
 msgid ""
-"`JVMLS19 overview presentation [jspecify: nullness] "
+"`JVMLS19 overview presentation "
 "<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
 msgstr ""
-"`JVMLS19 にて発表されたプロジェクト概要（英文） [jspecify: nullness] "
+"`JVMLS19 にて発表されたプロジェクト概要（英文） "
 "<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
 
 #: ../../index.rst:32

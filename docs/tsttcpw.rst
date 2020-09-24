@@ -1,7 +1,7 @@
 The Simplest(?) Thing That Could Possibly Work for subtyping
 ============================================================
 
-**This is not “the jspecify spec.” This is an initial attempt to
+**This is not “the JSpecify spec.” This is an initial attempt to
 formally specify only a subset of the rules we’ll need for a subset of
 features we wish to cover. Additionally, it deviates from some of our
 current working decisions in an effort to remain simple.**
@@ -114,7 +114,7 @@ Otherwise, it is not.
 Augmented type of a type usage in code
 --------------------------------------
 
-For most type usages in source code or bytecode on which jspecify
+For most type usages in source code or bytecode on which JSpecify
 nullness annotations are structurally valid, this section defines how to
 determine their `augmented types <#augmented-type>`__. Note, however,
 that rules for specific cases below take precedence over the general
@@ -243,7 +243,7 @@ additional nullness is ``CODE_NOT_NULLNESS_AWARE``.
    In both cases, we specify a bound that does not exist in the source
    or bytecode, deviating from the JLS. Because the base type of the
    bound is ``Object``, this should produce no user-visible differences
-   except to tools that implement jspecify nullness analysis.
+   except to tools that implement JSpecify nullness analysis.
 
 Whenever a JLS rule refers specifically to ``<?>``, disregard it, and
 instead apply the rules for ``<? extends T>``, where ``T`` has a base
@@ -258,7 +258,7 @@ In source, an ``Object``-bounded type parameter can be writen in either
 of 2 ways:
 
 -  ``<T>``
--  ``<T extends Object>`` with no jspecify nullness type annotations on
+-  ``<T extends Object>`` with no JSpecify nullness type annotations on
    the bound
 
 See `JLS
@@ -266,7 +266,7 @@ See `JLS
 
 In bytecode, ``<T>`` and ``<T extends Object>`` are both represented as
 a type parameter with only a single upper bound, ``Object``, and no
-jspecify nullness type annotations on the bound.
+JSpecify nullness type annotations on the bound.
 
 If an ``Object``-bounded type parameter appears in a `null-aware
 context <#null-aware-context>`__, then its bound has a `base

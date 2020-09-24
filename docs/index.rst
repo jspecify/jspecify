@@ -1,4 +1,4 @@
-jspecify: Standard Java annotations for static analysis
+JSpecify: Standard Java annotations for static analysis
 =======================================================
 
 Our Goal
@@ -19,10 +19,10 @@ This missing artifact, with full specifications, is what we are working to creat
 
 .. [1] We have seen the xkcd comic. Please do not send us the xkcd comic. We know about the xkcd comic.
 
-Talks about jspecify
+Talks about JSpecify
 --------------------
 
-* `JVMLS19 overview presentation [jspecify: nullness] <https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_
+* `JVMLS19 overview presentation <https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_
 
 Participants
 ------------
