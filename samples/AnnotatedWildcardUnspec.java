@@ -19,13 +19,8 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-// jspecify_nullness_paradox
-class IllegalLocationsUnspec<@NullnessUnspecified E> {
+class AnnotatedWildcardUnspec {
   interface Lib<T extends @Nullable Object> {}
-
-  class Nested {
-    class DoublyNested {}
-  }
 
   // jspecify_nullness_paradox
   Lib<@NullnessUnspecified ?> x1;
@@ -36,26 +31,9 @@ class IllegalLocationsUnspec<@NullnessUnspecified E> {
   // jspecify_nullness_paradox
   Lib<@NullnessUnspecified ? super Object> x3;
 
-  @NullnessUnspecified Nested x4;
+  // jspecify_nullness_paradox
+  Lib<@NullnessUnspecified ? extends @Nullable Object> x4;
 
   // jspecify_nullness_paradox
-  @NullnessUnspecified IllegalLocationsUnspec<?>.Nested x5;
-
-  IllegalLocationsUnspec<?>.@NullnessUnspecified Nested x6;
-
-  // jspecify_nullness_paradox
-  @NullnessUnspecified IllegalLocationsUnspec<?>.Nested.DoublyNested x7;
-
-  // jspecify_nullness_paradox
-  IllegalLocationsUnspec<?>.@NullnessUnspecified Nested.DoublyNested x8;
-
-  IllegalLocationsUnspec<?>.Nested.@NullnessUnspecified DoublyNested x9;
-
-  // jspecify_nullness_paradox
-  Lib<@NullnessUnspecified IllegalLocationsUnspec<?>.Nested.DoublyNested> l1;
-
-  // jspecify_nullness_paradox
-  Lib<IllegalLocationsUnspec<?>.@NullnessUnspecified Nested.DoublyNested> l2;
-
-  Lib<IllegalLocationsUnspec<?>.Nested.DoublyNested> l3;
+  Lib<@NullnessUnspecified ? super @Nullable Object> x5;
 }

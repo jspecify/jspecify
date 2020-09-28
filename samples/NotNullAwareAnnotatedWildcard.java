@@ -14,17 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-@DefaultNonNull
-// jspecify_nullness_paradox
-class IllegalLocations<@Nullable E> {
+class NotNullAwareAnnotatedWildcard {
   interface Lib<T extends @Nullable Object> {}
-
-  class Nested {
-    class DoublyNested {}
-  }
 
   // jspecify_nullness_paradox
   Lib<@Nullable ?> x1;
@@ -35,26 +28,9 @@ class IllegalLocations<@Nullable E> {
   // jspecify_nullness_paradox
   Lib<@Nullable ? super Object> x3;
 
-  @Nullable Nested x4;
+  // jspecify_nullness_paradox
+  Lib<@Nullable ? extends @Nullable Object> x4;
 
   // jspecify_nullness_paradox
-  @Nullable IllegalLocations<?>.Nested x5;
-
-  IllegalLocations<?>.@Nullable Nested x6;
-
-  // jspecify_nullness_paradox
-  @Nullable IllegalLocations<?>.Nested.DoublyNested x7;
-
-  // jspecify_nullness_paradox
-  IllegalLocations<?>.@Nullable Nested.DoublyNested x8;
-
-  IllegalLocations<?>.Nested.@Nullable DoublyNested x9;
-
-  // jspecify_nullness_paradox
-  Lib<@Nullable IllegalLocations<?>.Nested.DoublyNested> l1;
-
-  // jspecify_nullness_paradox
-  Lib<IllegalLocations<?>.@Nullable Nested.DoublyNested> l2;
-
-  Lib<IllegalLocations<?>.Nested.DoublyNested> l3;
+  Lib<@Nullable ? super @Nullable Object> x5;
 }

@@ -14,27 +14,37 @@
  * limitations under the License.
  */
 
+import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
-// jspecify_nullness_paradox
-class NotNullAwareIllegalLocations<@Nullable E> {
+@DefaultNonNull
+class AnnotatedInnerOfNonParameterized {
   interface Lib<T extends @Nullable Object> {}
 
-  // jspecify_nullness_paradox
-  Lib<@Nullable ?> x1;
-
-  // jspecify_nullness_paradox
-  Lib<@Nullable ? extends Object> x2;
-
-  // jspecify_nullness_paradox
-  Lib<@Nullable ? super Object> x3;
-
-  class Nested {}
+  class Nested {
+    class DoublyNested {}
+  }
 
   @Nullable Nested x4;
 
   // jspecify_nullness_paradox
-  @Nullable NotNullAwareIllegalLocations<?>.Nested x5;
+  @Nullable AnnotatedInnerOfNonParameterized.Nested x5;
 
-  NotNullAwareIllegalLocations<?>.@Nullable Nested x6;
+  AnnotatedInnerOfNonParameterized.@Nullable Nested x6;
+
+  // jspecify_nullness_paradox
+  @Nullable AnnotatedInnerOfNonParameterized.Nested.DoublyNested x7;
+
+  // jspecify_nullness_paradox
+  AnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested x8;
+
+  AnnotatedInnerOfNonParameterized.Nested.@Nullable DoublyNested x9;
+
+  // jspecify_nullness_paradox
+  Lib<@Nullable AnnotatedInnerOfNonParameterized.Nested.DoublyNested> l1;
+
+  // jspecify_nullness_paradox
+  Lib<AnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested> l2;
+
+  Lib<AnnotatedInnerOfNonParameterized.Nested.DoublyNested> l3;
 }

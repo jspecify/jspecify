@@ -18,33 +18,13 @@ import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
 @DefaultNonNull
-class IllegalLocationsNotGenericWithNested {
-  interface Lib<T extends @Nullable Object> {}
-
-  class Nested {
-    class DoublyNested {}
-  }
-
-  @Nullable Nested x4;
+class AnnotatedTypeParameter {
+  // jspecify_nullness_paradox
+  interface Lib1<@Nullable T> {}
 
   // jspecify_nullness_paradox
-  @Nullable IllegalLocationsNotGenericWithNested.Nested x5;
-
-  IllegalLocationsNotGenericWithNested.@Nullable Nested x6;
+  interface Lib2<@Nullable T extends Object> {}
 
   // jspecify_nullness_paradox
-  @Nullable IllegalLocationsNotGenericWithNested.Nested.DoublyNested x7;
-
-  // jspecify_nullness_paradox
-  IllegalLocationsNotGenericWithNested.@Nullable Nested.DoublyNested x8;
-
-  IllegalLocationsNotGenericWithNested.Nested.@Nullable DoublyNested x9;
-
-  // jspecify_nullness_paradox
-  Lib<@Nullable IllegalLocationsNotGenericWithNested.Nested.DoublyNested> l1;
-
-  // jspecify_nullness_paradox
-  Lib<IllegalLocationsNotGenericWithNested.@Nullable Nested.DoublyNested> l2;
-
-  Lib<IllegalLocationsNotGenericWithNested.Nested.DoublyNested> l3;
+  interface Lib3<@Nullable T extends @Nullable Object> {}
 }

@@ -16,36 +16,35 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class IllegalLocationsNotGenericWithNestedUnspec {
+class AnnotatedInnerOfParameterized<T> {
   interface Lib<T extends @Nullable Object> {}
 
   class Nested {
     class DoublyNested {}
   }
 
-  @NullnessUnspecified Nested x4;
+  @Nullable Nested x4;
 
   // jspecify_nullness_paradox
-  @NullnessUnspecified IllegalLocationsNotGenericWithNestedUnspec.Nested x5;
+  @Nullable AnnotatedInnerOfParameterized<?>.Nested x5;
 
-  IllegalLocationsNotGenericWithNestedUnspec.@NullnessUnspecified Nested x6;
-
-  // jspecify_nullness_paradox
-  @NullnessUnspecified IllegalLocationsNotGenericWithNestedUnspec.Nested.DoublyNested x7;
+  AnnotatedInnerOfParameterized<?>.@Nullable Nested x6;
 
   // jspecify_nullness_paradox
-  IllegalLocationsNotGenericWithNestedUnspec.@NullnessUnspecified Nested.DoublyNested x8;
-
-  IllegalLocationsNotGenericWithNestedUnspec.Nested.@NullnessUnspecified DoublyNested x9;
+  @Nullable AnnotatedInnerOfParameterized<?>.Nested.DoublyNested x7;
 
   // jspecify_nullness_paradox
-  Lib<@NullnessUnspecified IllegalLocationsNotGenericWithNestedUnspec.Nested.DoublyNested> l1;
+  AnnotatedInnerOfParameterized<?>.@Nullable Nested.DoublyNested x8;
+
+  AnnotatedInnerOfParameterized<?>.Nested.@Nullable DoublyNested x9;
 
   // jspecify_nullness_paradox
-  Lib<IllegalLocationsNotGenericWithNestedUnspec.@NullnessUnspecified Nested.DoublyNested> l2;
+  Lib<@Nullable AnnotatedInnerOfParameterized<?>.Nested.DoublyNested> l1;
 
-  Lib<IllegalLocationsNotGenericWithNestedUnspec.Nested.DoublyNested> l3;
+  // jspecify_nullness_paradox
+  Lib<AnnotatedInnerOfParameterized<?>.@Nullable Nested.DoublyNested> l2;
+
+  Lib<AnnotatedInnerOfParameterized<?>.Nested.DoublyNested> l3;
 }

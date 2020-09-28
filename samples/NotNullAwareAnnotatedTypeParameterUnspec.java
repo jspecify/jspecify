@@ -15,14 +15,15 @@
  */
 
 import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
-class NotNullAwareIllegalLocationsNotGenericWithNested {
-  class Nested {}
-
-  @Nullable Nested x4;
+class NotNullAwareAnnotatedTypeParameterUnspec {
+  // jspecify_nullness_paradox
+  interface Lib1<@NullnessUnspecified T> {}
 
   // jspecify_nullness_paradox
-  @Nullable NotNullAwareIllegalLocationsNotGenericWithNested.Nested x5;
+  interface Lib2<@NullnessUnspecified T extends Object> {}
 
-  NotNullAwareIllegalLocationsNotGenericWithNested.@Nullable Nested x6;
+  // jspecify_nullness_paradox
+  interface Lib3<@NullnessUnspecified T extends @Nullable Object> {}
 }
