@@ -91,7 +91,7 @@ Sample inputs demonstrate 2 cases:
 1.  JSpecify annotations are applied in a way that is
     [structurally illegal](https://docs.google.com/document/d/15NND5nBxMkZ-Us6wz3Pfbt4ODIaWaJ6JDs4w6h9kUaY/edit#heading=h.ib00ltjpj1xa).
 
-    <!-- TODO: Are we happy with the term "illegal?" If so, use it in the comment text instead of "paradox?" -->
+    <!-- TODO: Are we happy with the term "illegal?" -->
 
 2.  The second case is more nuanced: Based on JSpecify annotations and rules,
     the code's types can all be augmented with nullness information. We could
@@ -110,9 +110,20 @@ cases above.
 
 A comment on a given line provides information about the following line.
 
-Such a comment contains one of 3 special sequences:
+Such a comment contains one of 5 special sequences. The first 3 cover case 1
+from above:
 
--   `jspecify_nullness_paradox`: for case 1 above
+-   `jspecify_multiple_annotations`: for cases like `@Nullable
+    @NullnessUnspecified Foo`
+
+-   `jspecify_unrecognized_location`: for cases like `class @Nullable Foo {}`,
+    in which JSpecify does not currently specify meaning for annotations on a
+    given location but we can imagine uses for them
+
+-   `jspecify_nullness_intrinsically_not_nullable`: for cases like `@Nullable
+    int i`
+
+The remaining 2 cover case 2:
 
 -   `jspecify_nullness_mismatch`: for certain instances of case 2
 
