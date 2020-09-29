@@ -121,7 +121,7 @@ from above:
     given location but we can imagine uses for them
 
 -   `jspecify_nullness_intrinsically_not_nullable`: for cases like `@Nullable
-    int i`
+    int`
 
 The remaining 2 cover case 2:
 
