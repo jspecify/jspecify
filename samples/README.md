@@ -27,7 +27,7 @@ of these files and their content.
 
 See
 [jspecify: test-data format: Directory structure](https://docs.google.com/document/d/1JVH2p61kReO8bW4AKnbkpybPYlUulVmyNrR1WRIEE_k/edit#bookmark=id.2t1r58i5a03s).
-TODO: Inline that here if Tagir can sign the CLA and contribute it.
+TODO(#134): Inline that here if Tagir can sign the CLA and contribute it.
 
 Additionally:
 
@@ -37,6 +37,9 @@ Fully qualified class names must be unique across all directories.
 
 TODO: Consider requiring that all individual-file samples be in the top-level
 directory.
+
+Each file must contain a single top-level class. TODO(#133): Consider relaxing
+this.
 
 TODO: Consider requiring a file's path to match its package and class:
 
@@ -54,7 +57,9 @@ Files must be UTF-8 encoded.
 
 Files must contain only printable ASCII characters and `\n`.
 
-Files must be compatible with Java 8.
+Files must be compatible with Java 8. TODO(#131): Decide how to label files that
+require a higher version so that we can allow them. (But still encourage
+sticking to Java 8 except for tests that specifically exercise newer features.)
 
 Files must compile without error using stock javac.
 
