@@ -113,7 +113,7 @@ A comment on a given line provides information about the following line.
 Such a comment contains one of 5 special sequences. The first 3 cover case 1
 from above:
 
--   `jspecify_multiple_annotations`: for cases like `@Nullable
+-   `jspecify_conflicting_annotations`: for cases like `@Nullable
     @NullnessUnspecified Foo`
 
 -   `jspecify_unrecognized_location`: for cases like `class @Nullable Foo {}`,
