@@ -6,6 +6,28 @@ formally specify only a subset of the rules we’ll need for a subset of
 features we wish to cover. Additionally, it deviates from some of our
 current working decisions in an effort to remain simple.**
 
+   .. rubric:: High-level overview
+      :name: high-level-overview
+
+   It may be that some people will use this doc to guide their
+   implementations in the near future. Please don’t hesitate to let
+   cpovirk know of any confusing bits.
+
+   I should probably preemptively clarify at least one thing. In this
+   doc, I have tried to distinguish explicitly between 3 “kinds of
+   nullability” of a given type usage. Each kind is derived (at least in
+   part) from the previous:
+
+   1. What annotation (if any) appears directly on that type usage?
+   2. What is the `additional nullness <#additional-nullness>`__ of that
+      type usage?
+   3. For that type usage…
+
+      -  Is it safe to assume that is not ``null``?
+      -  Is it safe to put a ``null`` into it?
+      -  neither (as in “parametric nullness”)
+      -  both (as in “unspecified nullness” in “lenient mode”)
+
 .. _concept-references:
 
 References to concepts defined by this spec
