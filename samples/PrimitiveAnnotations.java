@@ -19,9 +19,9 @@ import org.jspecify.annotations.Nullable;
 
 @DefaultNonNull
 class PrimitiveAnnotations {
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @Nullable int x1;
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @Nullable int[] x2;
 
   int x3;

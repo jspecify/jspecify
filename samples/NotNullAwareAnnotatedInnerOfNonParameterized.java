@@ -25,23 +25,23 @@ class NotNullAwareAnnotatedInnerOfNonParameterized {
 
   @Nullable Nested x4;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested x5;
 
   NotNullAwareAnnotatedInnerOfNonParameterized.@Nullable Nested x6;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested.DoublyNested x7;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   NotNullAwareAnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested x8;
 
   NotNullAwareAnnotatedInnerOfNonParameterized.Nested.@Nullable DoublyNested x9;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   Lib<@Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested.DoublyNested> l1;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   Lib<NotNullAwareAnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested> l2;
 
   Lib<NotNullAwareAnnotatedInnerOfNonParameterized.Nested.DoublyNested> l3;

@@ -27,23 +27,23 @@ class AnnotatedInnerOfParameterized<T> {
 
   @Nullable Nested x4;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @Nullable AnnotatedInnerOfParameterized<?>.Nested x5;
 
   AnnotatedInnerOfParameterized<?>.@Nullable Nested x6;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @Nullable AnnotatedInnerOfParameterized<?>.Nested.DoublyNested x7;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   AnnotatedInnerOfParameterized<?>.@Nullable Nested.DoublyNested x8;
 
   AnnotatedInnerOfParameterized<?>.Nested.@Nullable DoublyNested x9;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   Lib<@Nullable AnnotatedInnerOfParameterized<?>.Nested.DoublyNested> l1;
 
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   Lib<AnnotatedInnerOfParameterized<?>.@Nullable Nested.DoublyNested> l2;
 
   Lib<AnnotatedInnerOfParameterized<?>.Nested.DoublyNested> l3;
