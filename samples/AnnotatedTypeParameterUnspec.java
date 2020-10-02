@@ -20,12 +20,12 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class AnnotatedTypeParameterUnspec {
-  // jspecify_nullness_paradox
+  // jspecify_unrecognized_location
   interface Lib1<@NullnessUnspecified T> {}
 
-  // jspecify_nullness_paradox
+  // jspecify_unrecognized_location
   interface Lib2<@NullnessUnspecified T extends Object> {}
 
-  // jspecify_nullness_paradox
+  // jspecify_unrecognized_location
   interface Lib3<@NullnessUnspecified T extends @Nullable Object> {}
 }

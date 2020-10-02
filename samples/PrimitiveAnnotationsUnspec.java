@@ -19,9 +19,9 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class PrimitiveAnnotationsUnspec {
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @NullnessUnspecified int x1;
-  // jspecify_nullness_paradox
+  // jspecify_nullness_intrinsically_not_nullable
   @NullnessUnspecified int[] x2;
 
   int x3;
