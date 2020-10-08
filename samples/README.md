@@ -23,67 +23,6 @@ The hope is that samples like these may be useful to those who wish to discuss
 the spec or implement tools. To that end, we welcome comments on both the format
 of these files and their content.
 
-## Directory structure
-
-See
-[JSpecify: test-data format: Directory structure](https://docs.google.com/document/d/1JVH2p61kReO8bW4AKnbkpybPYlUulVmyNrR1WRIEE_k/edit#bookmark=id.2t1r58i5a03s).
-TODO(#134): Inline that here if Tagir can sign the CLA and contribute it.
-
-Additionally:
-
-Fully qualified class names must be unique across all directories.
-
-> This permits all files to be compiled in a single tool invocation.
-
-TODO: Consider requiring that all individual-file samples be in the top-level
-directory.
-
-Each file must contain a single top-level class. TODO(#133): Consider relaxing
-this.
-
-TODO: Consider requiring a file's path to match its package and class:
-
--   individual-file samples: `Foo.java` for `Foo`
-
--   full-directory samples: `sampleFoo/Foo.java` for `Foo`,
-    `sampleFoo/bar/Foo.java` for `bar.Foo`
-
--   We may need additional accommodations for JPMS support to demonstrate
-    module-level defaulting.
-
-## Restrictions
-
-Files must be UTF-8 encoded.
-
-Files must contain only printable ASCII characters and `\n`.
-
-Files must be compatible with Java 8. TODO(#131): Decide how to label files that
-require a higher version so that we can allow them. (But still encourage
-sticking to Java 8 except for tests that specifically exercise newer features.)
-
-Files must compile without error using stock javac.
-
-Files must not depend on any classes other than the JSpecify annotations. This
-includes the Java platform APIs. Exception: Files may use `java.lang.Object`,
-but they still must not use its methods.
-
-> For example, files may use `Object` as a bound, parameter, or return type.
-
-Files should avoid depending on the presence of absence of "smart" checker
-features, such as:
-
--   looking inside the body of a method to determine what parameters it
-    dereferences or what it returns
-
-    -   To that end, prefer abstract methods when practical.
-
--   flow-sensitive typing
-
-We also encourage writing files that demonstrate individual behaviors in
-isolation. For example, we encourage writing files to minimize how much they
-rely on type inference -- except, of course, for any files explicitly intended
-to demonstrate type inference.
-
 ## What sample inputs demonstrate
 
 Sample inputs demonstrate 2 cases:
@@ -151,7 +90,69 @@ TODO: Consider additional features:
     statements) rather than lines
 -   comments that apply only to a particular part of the line
 
+## Directory structure
+
+See
+[JSpecify: test-data format: Directory structure](https://docs.google.com/document/d/1JVH2p61kReO8bW4AKnbkpybPYlUulVmyNrR1WRIEE_k/edit#bookmark=id.2t1r58i5a03s).
+TODO(#134): Inline that here if Tagir can sign the CLA and contribute it.
+
+Additionally:
+
+Fully qualified class names must be unique across all directories.
+
+> This permits all files to be compiled in a single tool invocation.
+
+TODO: Consider requiring that all individual-file samples be in the top-level
+directory.
+
+Each file must contain a single top-level class. TODO(#133): Consider relaxing
+this.
+
+TODO: Consider requiring a file's path to match its package and class:
+
+-   individual-file samples: `Foo.java` for `Foo`
+
+-   full-directory samples: `sampleFoo/Foo.java` for `Foo`,
+    `sampleFoo/bar/Foo.java` for `bar.Foo`
+
+-   We may need additional accommodations for JPMS support to demonstrate
+    module-level defaulting.
+
+## Restrictions
+
+Files must be UTF-8 encoded.
+
+Files must contain only printable ASCII characters and `\n`.
+
+Files must be compatible with Java 8. TODO(#131): Decide how to label files that
+require a higher version so that we can allow them. (But still encourage
+sticking to Java 8 except for tests that specifically exercise newer features.)
+
+Files must compile without error using stock javac.
+
+Files must not depend on any classes other than the JSpecify annotations. This
+includes the Java platform APIs. Exception: Files may use `java.lang.Object`,
+but they still must not use its methods.
+
+> For example, files may use `Object` as a bound, parameter, or return type.
+
+Files should avoid depending on the presence of absence of "smart" checker
+features, such as:
+
+-   looking inside the body of a method to determine what parameters it
+    dereferences or what it returns
+
+    -   To that end, prefer abstract methods when practical.
+
+-   flow-sensitive typing
+
+We also encourage writing files that demonstrate individual behaviors in
+isolation. For example, we encourage writing files to minimize how much they
+rely on type inference -- except, of course, for any files explicitly intended
+to demonstrate type inference.
+
 ## More TODOs
 
 TODO: Consider how to map between samples and related GitHub issues (comments,
 filenames?).
+
