@@ -26,7 +26,7 @@ of these files and their content.
 ## Directory structure
 
 See
-[jspecify: test-data format: Directory structure](https://docs.google.com/document/d/1JVH2p61kReO8bW4AKnbkpybPYlUulVmyNrR1WRIEE_k/edit#bookmark=id.2t1r58i5a03s).
+[JSpecify: test-data format: Directory structure](https://docs.google.com/document/d/1JVH2p61kReO8bW4AKnbkpybPYlUulVmyNrR1WRIEE_k/edit#bookmark=id.2t1r58i5a03s).
 TODO(#134): Inline that here if Tagir can sign the CLA and contribute it.
 
 Additionally:
@@ -95,8 +95,7 @@ Sample inputs demonstrate 2 cases:
 
 2.  The second case is more nuanced: Based on JSpecify annotations and rules,
     the code's types can all be augmented with nullness information. We could
-    then apply normal JLS rules to those types. (For example, the value of a
-    `return` statement must be convertible to the method's return type.) We
+    then apply normal JLS rules to those types.  We
     could adapt those rules to use JSpecify rules for subtyping. Based on that,
     we could identify type checks that would fail. (For example, `return null`
     in a method that must return a non-nullable type.)
@@ -105,57 +104,43 @@ Sample inputs demonstrate 2 cases:
 
 ## Syntax
 
-We define a format for Java comments to identify code that demonstrates the
-cases above.
+A special comment on a given line provides information about the following line.
 
-A comment on a given line provides information about the following line.
-
-Such a comment contains one of 5 special sequences. The first 3 cover case 1
-from above:
+The first two indicate that JSpecify annotations are applied in a way that
+is [structurally
+illegal](https://docs.google.com/document/d/15NND5nBxMkZ-Us6wz3Pfbt4ODIaWaJ6JDs4w6h9kUaY/edit#heading=h.ib00ltjpj1xa):
 
 -   `jspecify_conflicting_annotations`: for cases like `@Nullable
     @NullnessUnspecified Foo`
 
--   `jspecify_unrecognized_location`: for cases like `class @Nullable Foo {}`,
-    in which JSpecify does not currently specify meaning for annotations on a
-    given location but we can imagine uses for them
-
 -   `jspecify_nullness_intrinsically_not_nullable`: for cases like `@Nullable
     int`
 
-The remaining 2 cover case 2:
+The third indicates a nullness violation:  an inconsistency between two
+annotations, or between annotations and source code.  You can think of
+these as expressing type rules, analogous to the normal JLS type rules.
+(For example, the value of a `return` statement must be convertible to the
+method's return type, and the receiver in a method call should not be
+`@Nullable`.)  All tools are likely (but not obligated!) to report an error
+at these locations.
 
--   `jspecify_nullness_mismatch`: for certain instances of case 2
+-   `jspecify_nullness_mismatch`
 
--   `jspecify_nullness_not_enough_information`: for certain instances of case 2
+Two further categories are optional:  they are relevant to some JSpecify
+checkers, but not all.
 
-The difference between the "mismatch" and "not enough information" cases arises
-from
-[unspecified nullness](https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3).
-The rough idea is that a type with unspecified nullness means: "When this code
-is annotated for nullness, either the type should have `@Nullable` on it, or it
-shouldn't."
+-   `jspecify_unrecognized_location`: for cases like `class @Nullable Foo {}`,
+    in which JSpecify neither forbids annotations nor currently specifies
+    meaning for such annotations.  Some checkers may process annotations in
+    these locations and give them a meaning.
 
--   In a "mismatch," the type check described above would fail no matter how the
-    unspecified types are eventually annotated. (This is trivially the case
-    whenever a failing type check involves no unspecified types.)
+-   `jspecify_nullness_not_enough_information`: for nullness violations that
+    involve [unspecified
+    nullness](https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3)
+    (the `@NullnessUnspecified` annotation).  A checker is permitted to
+    treat such annotations in any way it wishes, so a checker may issue
+    errors or warnings at all, some, or none of these locations.
 
--   In a "not enough information," there is at least one way that the
-    unspecified types could be annotated that would _fail_ the type checks, and
-    there is at least one way that the unspecified types could be annotated that
-    would _pass_ the type checks.
-
-Another way to look at it is how tools are likely (but not obligated!) to
-behave:
-
--   For "mismatch," all tools are likely to report an error. (This assumes that
-    a tool implements a given type check: For example, if a tool doesn't check
-    type arguments at all, then naturally it wouldn't report errors for them)
-
--   For "not enough information," tools might not report anything, or they might
-    report a warning, or they might report an error. We've sometimes spoken of
-    these different behaviors as the difference between a "strict mode" and a
-    "lenient mode."
 
 TODO: Consider additional features:
 
