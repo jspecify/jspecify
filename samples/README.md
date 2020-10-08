@@ -23,25 +23,9 @@ The hope is that samples like these may be useful to those who wish to discuss
 the spec or implement tools. To that end, we welcome comments on both the format
 of these files and their content.
 
-## What sample inputs demonstrate
-
-Sample inputs demonstrate 2 cases:
-
-1.  JSpecify annotations are applied in a way that is
-    [structurally illegal](https://docs.google.com/document/d/15NND5nBxMkZ-Us6wz3Pfbt4ODIaWaJ6JDs4w6h9kUaY/edit#heading=h.ib00ltjpj1xa).
-
-    <!-- TODO: Are we happy with the term "illegal?" -->
-
-2.  The second case is more nuanced: Based on JSpecify annotations and rules,
-    the code's types can all be augmented with nullness information. We could
-    then apply normal JLS rules to those types.  We
-    could adapt those rules to use JSpecify rules for subtyping. Based on that,
-    we could identify type checks that would fail. (For example, `return null`
-    in a method that must return a non-nullable type.)
-
-    <!-- TODO: Update links to point to the markup-format spec and glossary. -->
-
 ## Syntax
+
+<!-- TODO: Update links to point to the markup-format spec and glossary. -->
 
 A special comment on a given line provides information about the following line.
 
@@ -155,4 +139,3 @@ to demonstrate type inference.
 
 TODO: Consider how to map between samples and related GitHub issues (comments,
 filenames?).
-
