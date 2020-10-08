@@ -48,7 +48,7 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------+-------------------------------------------------+
 | `PMD <https://pmd.github.io/>`_                    |                                                 |
 +----------------------------------------------------+-------------------------------------------------+
-| `Spring <https://pivotal.io/spring-app-framework>`_| `Pivotal <https://pivotal.io>`_                 |
+| `Spring <https://spring.io/>`_                     | `VMware <https://www.vmware.com/>`_             |
 +----------------------------------------------------+-------------------------------------------------+
 | `SonarQube <https://www.sonarqube.org/>`_          | `SonarSource <https://www.sonarsource.com/>`_   |
 +----------------------------------------------------+-------------------------------------------------+
