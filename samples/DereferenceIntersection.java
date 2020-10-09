@@ -26,11 +26,13 @@ class DereferenceIntersection {
   }
 
   void x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
+    // jspecify_nullness_not_enough_information
     synchronized (x.get()) {
     }
   }
 
   void x2(ImplicitlyObjectBounded<? extends @Nullable Lib> x) {
+    // jspecify_nullness_mismatch
     synchronized (x.get()) {
     }
   }
@@ -41,11 +43,13 @@ class DereferenceIntersection {
   }
 
   void x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
+    // jspecify_nullness_not_enough_information
     synchronized (x.get()) {
     }
   }
 
   void x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
+    // jspecify_nullness_mismatch
     synchronized (x.get()) {
     }
   }
