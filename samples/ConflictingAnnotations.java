@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class MultipleAnnotations {
+class ConflictingAnnotations {
   // jspecify_conflicting_annotations
   @Nullable @NullnessUnspecified Object x1;
   // jspecify_conflicting_annotations
