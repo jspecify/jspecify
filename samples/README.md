@@ -27,9 +27,9 @@ of these files and their content.
 
 <!-- TODO: Update links to point to the markup-format spec and glossary. -->
 
-A special comment on a given line provides information about the following line.
+A special comment on a given line of a `.java` file provides information about the following line.
 
-The first two indicate that JSpecify annotations are applied in a way that
+The first two special comments indicate that JSpecify annotations are applied in a way that
 is [structurally
 illegal](https://docs.google.com/document/d/15NND5nBxMkZ-Us6wz3Pfbt4ODIaWaJ6JDs4w6h9kUaY/edit#heading=h.ib00ltjpj1xa):
 
@@ -49,8 +49,7 @@ at these locations.
 
 -   `jspecify_nullness_mismatch`
 
-Two further categories are optional:  they are relevant to some JSpecify
-checkers, but not all.
+Two further categories are relevant to some JSpecify checkers, but not all.
 
 -   `jspecify_unrecognized_location`: for cases like `class @Nullable Foo {}`,
     in which JSpecify neither forbids annotations nor currently specifies
