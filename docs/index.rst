@@ -19,6 +19,11 @@ This missing artifact, with full specifications, is what we are working to creat
 
 .. [1] We have seen the xkcd comic. Please do not send us the xkcd comic. We know about the xkcd comic.
 
+Activity
+--------
+
+The primary location for our day-to-day work is on GitHub: https://github.com/jspecify/jspecify
+
 Talks about JSpecify
 --------------------
 
