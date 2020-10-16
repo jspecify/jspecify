@@ -1,0 +1,2 @@
+// Project name is read-only in build scripts, and defaults to directory name.
+rootProject.name = "jspecify"
