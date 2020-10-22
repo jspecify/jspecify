@@ -15,6 +15,7 @@
  */
 
 import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
@@ -28,4 +29,11 @@ class PrimitiveAnnotationsUnspec {
   int[] x4;
 
   int @NullnessUnspecified [] x5;
+
+  // jspecify_nullness_intrinsically_not_nullable
+  Lib<@NullnessUnspecified int[]> x6;
+
+  Lib<int @NullnessUnspecified []> x7;
+
+  class Lib<T extends @Nullable Object> {}
 }

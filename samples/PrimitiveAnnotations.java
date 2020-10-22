@@ -28,4 +28,11 @@ class PrimitiveAnnotations {
   int[] x4;
 
   int @Nullable [] x5;
+
+  // jspecify_nullness_intrinsically_not_nullable
+  Lib<@Nullable int[]> x6;
+
+  Lib<int @Nullable []> x7;
+
+  class Lib<T extends @Nullable Object> {}
 }
