@@ -26,4 +26,6 @@ class PrimitiveAnnotationsUnspec {
 
   int x3;
   int[] x4;
+
+  int @NullnessUnspecified [] x5;
 }

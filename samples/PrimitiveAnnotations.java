@@ -26,4 +26,6 @@ class PrimitiveAnnotations {
 
   int x3;
   int[] x4;
+
+  int @Nullable [] x5;
 }
