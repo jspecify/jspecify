@@ -25,26 +25,24 @@ class AnnotatedInnerOfNonParameterized {
     class DoublyNested {}
   }
 
-  @Nullable Nested x4;
+  void foo(
+      @Nullable Nested x4,
 
-  // jspecify_nullness_intrinsically_not_nullable
-  @Nullable AnnotatedInnerOfNonParameterized.Nested x5;
+      // jspecify_nullness_intrinsically_not_nullable
+      @Nullable AnnotatedInnerOfNonParameterized.Nested x5,
+      AnnotatedInnerOfNonParameterized.@Nullable Nested x6,
 
-  AnnotatedInnerOfNonParameterized.@Nullable Nested x6;
+      // jspecify_nullness_intrinsically_not_nullable
+      @Nullable AnnotatedInnerOfNonParameterized.Nested.DoublyNested x7,
 
-  // jspecify_nullness_intrinsically_not_nullable
-  @Nullable AnnotatedInnerOfNonParameterized.Nested.DoublyNested x7;
+      // jspecify_nullness_intrinsically_not_nullable
+      AnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested x8,
+      AnnotatedInnerOfNonParameterized.Nested.@Nullable DoublyNested x9,
 
-  // jspecify_nullness_intrinsically_not_nullable
-  AnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested x8;
+      // jspecify_nullness_intrinsically_not_nullable
+      Lib<@Nullable AnnotatedInnerOfNonParameterized.Nested.DoublyNested> l1,
 
-  AnnotatedInnerOfNonParameterized.Nested.@Nullable DoublyNested x9;
-
-  // jspecify_nullness_intrinsically_not_nullable
-  Lib<@Nullable AnnotatedInnerOfNonParameterized.Nested.DoublyNested> l1;
-
-  // jspecify_nullness_intrinsically_not_nullable
-  Lib<AnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested> l2;
-
-  Lib<AnnotatedInnerOfNonParameterized.Nested.DoublyNested> l3;
+      // jspecify_nullness_intrinsically_not_nullable
+      Lib<AnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested> l2,
+      Lib<AnnotatedInnerOfNonParameterized.Nested.DoublyNested> l3) {}
 }

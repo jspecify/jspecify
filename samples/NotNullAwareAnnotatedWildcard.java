@@ -19,18 +19,19 @@ import org.jspecify.annotations.Nullable;
 class NotNullAwareAnnotatedWildcard {
   interface Lib<T extends @Nullable Object> {}
 
-  // jspecify_unrecognized_location
-  Lib<@Nullable ?> x1;
+  void foo(
+      // jspecify_unrecognized_location
+      Lib<@Nullable ?> x1,
 
-  // jspecify_unrecognized_location
-  Lib<@Nullable ? extends Object> x2;
+      // jspecify_unrecognized_location
+      Lib<@Nullable ? extends Object> x2,
 
-  // jspecify_unrecognized_location
-  Lib<@Nullable ? super Object> x3;
+      // jspecify_unrecognized_location
+      Lib<@Nullable ? super Object> x3,
 
-  // jspecify_unrecognized_location
-  Lib<@Nullable ? extends @Nullable Object> x4;
+      // jspecify_unrecognized_location
+      Lib<@Nullable ? extends @Nullable Object> x4,
 
-  // jspecify_unrecognized_location
-  Lib<@Nullable ? super @Nullable Object> x5;
+      // jspecify_unrecognized_location
+      Lib<@Nullable ? super @Nullable Object> x5) {}
 }
