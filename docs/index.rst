@@ -39,7 +39,7 @@ People from the following projects and organizations are collaborating on this p
 +==========================================================+=================================================+
 | `Android <https://www.android.com>`_                     | `Google <https://google.com>`_                  |
 +----------------------------------------------------------+-------------------------------------------------+
-| `Checker Framework <https://checkerframework.org>`_      |                                                 |
+| `Checker Framework <https://checkerframework.org>`_      | `Checker Framework Team <https://checkerframework.org>`_ |
 +----------------------------------------------------------+-------------------------------------------------+
 | `Error Prone <https://errorprone.info>`_                 | `Google <https://google.com>`_                  |
 +----------------------------------------------------------+-------------------------------------------------+
@@ -51,7 +51,7 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------------+-------------------------------------------------+
 | `NullAway <https://github.com/uber/NullAway>`_           | `Uber <https://uber.com>`_                      |
 +----------------------------------------------------------+-------------------------------------------------+
-| `PMD <https://pmd.github.io/>`_                          |                                                 |
+| `PMD <https://pmd.github.io/>`_                          | `PMD Team <https://pmd.github.io/>`_            |
 +----------------------------------------------------------+-------------------------------------------------+
 | `Spring <https://tanzu.vmware.com/spring-app-framework>`_| `VMware <https://www.vmware.com/>`_             |
 +----------------------------------------------------------+-------------------------------------------------+
