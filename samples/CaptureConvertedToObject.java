@@ -19,77 +19,57 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-abstract class IntersectionUnionNullToObjectUnspec {
-  @NullnessUnspecified
+class CaptureConvertedToObject {
   Object x0(ImplicitlyObjectBounded<? extends Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x2(ImplicitlyObjectBounded<? extends @Nullable Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x3(ExplicitlyObjectBounded<? extends Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x6(UnspecBounded<? extends Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
     // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x8(UnspecBounded<? extends @Nullable Lib> x) {
     // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x9(NullableBounded<? extends Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
     // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    return x.get();
   }
 
-  @NullnessUnspecified
   Object x11(NullableBounded<? extends @Nullable Lib> x) {
-    // jspecify_nullness_not_enough_information
-    return unionNull(x.get());
+    // jspecify_nullness_mismatch
+    return x.get();
   }
 
   interface ImplicitlyObjectBounded<T> {
@@ -109,6 +89,4 @@ abstract class IntersectionUnionNullToObjectUnspec {
   }
 
   interface Lib {}
-
-  abstract <T extends @Nullable Object> @Nullable T unionNull(T input);
 }
