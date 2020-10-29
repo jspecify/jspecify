@@ -18,6 +18,13 @@ import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
+/*
+ * Warning: I have probably gotten some things wrong in adding jspecify_* comments in this file.
+ * (Now, that may be the case for *any* file :) But it is particularly likely in this one.)
+ * Additionally, some checks would probably have different results under slightly different
+ * implementations of type inference and/or if we passed explicit type arguments. Fortunately, most
+ * of the checks here are for edge cases that are unlikely to arise in practice.
+ */
 @DefaultNonNull
 class ComplexParametric {
   interface SuperSuper<T extends @Nullable Object> {
