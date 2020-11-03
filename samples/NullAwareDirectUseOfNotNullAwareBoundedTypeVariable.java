@@ -17,7 +17,7 @@
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.NullnessUnspecified;
 
-interface NotNullAwareDirectUseOfTypeVariable {
+interface NullAwareDirectUseOfNotNullAwareBoundedTypeVariable {
   class UnspecBounded1<T> {
     @DefaultNonNull
     class Inner {
