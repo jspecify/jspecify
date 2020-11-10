@@ -21,11 +21,13 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 public class AnnotatedBoundsOfWildcard {
   public void superAsIs(
+      // jspecify_nullness_not_enough_information
       Test<? super Base, ? super @Nullable Base, ? super @NullnessUnspecified Base> a) {}
 
   public void superNotNull(Test<? super Base, ? super Base, ? super Base> a) {}
 
   public void superNullable(
+      // jspecify_nullness_not_enough_information
       Test<? super @Nullable Base, ? super @Nullable Base, ? super @Nullable Base> a) {}
 
   public void extendsAsIs(
@@ -55,13 +57,17 @@ class Test<T extends Object, E extends @Nullable Object, F extends @NullnessUnsp
 class Use {
   public void main(
       Test<Derived, Derived, Derived> aNotNullNotNullNotNull,
+      // jspecify_nullness_not_enough_information
       Test<Derived, Derived, @Nullable Derived> aNotNullNotNullNull,
       Test<Derived, @Nullable Derived, Derived> aNotNullNullNotNull,
+      // jspecify_nullness_not_enough_information
       Test<Derived, @Nullable Derived, @Nullable Derived> aNotNullNullNull,
       //
       Test<Object, Object, Object> aObjectNotNullNotNullNotNull,
+      // jspecify_nullness_not_enough_information
       Test<Object, Object, @Nullable Object> aObjectNotNullNotNullNull,
       Test<Object, @Nullable Object, Object> aObjectNotNullNullNotNull,
+      // jspecify_nullness_not_enough_information
       Test<Object, @Nullable Object, @Nullable Object> aObjectNotNullNullNull,
       //
       AnnotatedBoundsOfWildcard b) {
@@ -69,6 +75,7 @@ class Use {
     b.superAsIs(aObjectNotNullNotNullNotNull);
     // jspecify_nullness_mismatch
     b.superAsIs(aObjectNotNullNotNullNull);
+    // jspecify_nullness_not_enough_information
     b.superAsIs(aObjectNotNullNullNotNull);
     b.superAsIs(aObjectNotNullNullNull);
 
@@ -87,8 +94,10 @@ class Use {
     b.superNullable(aObjectNotNullNullNull);
 
     b.extendsAsIs(aNotNullNotNullNotNull);
+    // jspecify_nullness_not_enough_information
     b.extendsAsIs(aNotNullNotNullNull);
     b.extendsAsIs(aNotNullNullNotNull);
+    // jspecify_nullness_not_enough_information
     b.extendsAsIs(aNotNullNullNull);
 
     b.extendsNotNull(aNotNullNotNullNotNull);
@@ -105,8 +114,11 @@ class Use {
     b.extendsNullable(aNotNullNullNull);
 
     b.noBounds(aNotNullNotNullNotNull);
+    // jspecify_nullness_not_enough_information
     b.noBounds(aNotNullNotNullNull);
+    // jspecify_nullness_not_enough_information
     b.noBounds(aNotNullNullNotNull);
+    // jspecify_nullness_not_enough_information
     b.noBounds(aNotNullNullNull);
   }
 }

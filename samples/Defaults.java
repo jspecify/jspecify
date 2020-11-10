@@ -20,10 +20,12 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 public class Defaults {
+  // jspecify_nullness_mismatch
   public Foo defaultField = null;
   public @Nullable Foo field = null;
 
   public Foo everythingNotNullable(Foo x) {
+    // jspecify_nullness_mismatch
     return null;
   }
 
@@ -32,6 +34,7 @@ public class Defaults {
   }
 
   public @NullnessUnspecified Foo everythingUnknown(@NullnessUnspecified Foo x) {
+    // jspecify_nullness_not_enough_information
     return null;
   }
 
@@ -40,12 +43,14 @@ public class Defaults {
   }
 
   public Foo explicitlyNullnessUnspecified(@NullnessUnspecified Foo x) {
+    // jspecify_nullness_mismatch
     return null;
   }
 }
 
 class Foo {
   public Object foo() {
+    // jspecify_nullness_not_enough_information
     return null;
   }
 }
@@ -65,19 +70,24 @@ class Use {
     a.everythingNotNullable(null).foo();
     a.everythingNotNullable(x).foo();
 
+    // jspecify_nullness_mismatch
     a.everythingNullable(null).foo();
 
+    // jspecify_nullness_not_enough_information
     a.everythingUnknown(null).foo();
 
     // jspecify_nullness_mismatch
     a.mixed(null).foo();
+    // jspecify_nullness_mismatch
     a.mixed(x).foo();
 
     a.explicitlyNullnessUnspecified(x).foo();
+    // jspecify_nullness_not_enough_information
     a.explicitlyNullnessUnspecified(null).foo();
 
     a.defaultField.foo();
 
+    // jspecify_nullness_mismatch
     a.field.foo();
   }
 }

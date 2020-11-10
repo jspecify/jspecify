@@ -27,6 +27,7 @@ public class IgnoreAnnotations {
   }
 
   public Derived everythingNotNullable(Derived x) {
+    // jspecify_nullness_mismatch
     return null;
   }
 
@@ -35,6 +36,7 @@ public class IgnoreAnnotations {
   }
 
   public @NullnessUnspecified Derived everythingUnknown(@NullnessUnspecified Derived x) {
+    // jspecify_nullness_not_enough_information
     return null;
   }
 }
@@ -56,18 +58,22 @@ class Use {
     IgnoreAnnotations a = Instances.IGNORE_ANNOTATIONS;
     Derived x = Instances.DERIVED;
 
+    // jspecify_nullness_mismatch
     a.foo(x, null).foo();
     // jspecify_nullness_mismatch
     a.foo(null, x).foo();
 
+    // jspecify_nullness_mismatch
     a.field.foo();
 
     // jspecify_nullness_mismatch
     a.everythingNotNullable(null).foo();
     a.everythingNotNullable(x).foo();
 
+    // jspecify_nullness_mismatch
     a.everythingNullable(null).foo();
 
+    // jspecify_nullness_not_enough_information
     a.everythingUnknown(null).foo();
   }
 }

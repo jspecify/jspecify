@@ -30,6 +30,7 @@ class Test {}
 class Instances {
   static final NullnessUnspecifiedTypeParameter<Object> A1 =
       new NullnessUnspecifiedTypeParameter<>();
+  // jspecify_nullness_mismatch
   static final NullnessUnspecifiedTypeParameter<@Nullable Object> A2 =
       new NullnessUnspecifiedTypeParameter<>();
   static final Test X = new Test();
