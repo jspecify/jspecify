@@ -22,8 +22,7 @@ import org.jspecify.annotations.NullnessUnspecified;
 public class IgnoreAnnotations {
   public @Nullable Derived field = null;
 
-  @Nullable
-  public Derived foo(Derived x, @NullnessUnspecified Base y) {
+  public @Nullable Derived foo(Derived x, @NullnessUnspecified Base y) {
     return null;
   }
 
