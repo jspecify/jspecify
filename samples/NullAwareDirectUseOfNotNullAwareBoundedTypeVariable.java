@@ -15,26 +15,36 @@
  */
 
 import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
-@DefaultNonNull
-class AnnotatedWildcardUnspec {
-  interface Lib<T extends @Nullable Object> {}
+interface NullAwareDirectUseOfNotNullAwareBoundedTypeVariable {
+  class UnspecBounded1<T> {
+    @DefaultNonNull
+    class Inner {
+      Object x0(T t) {
+        // jspecify_nullness_not_enough_information
+        return t;
+      }
+    }
+  }
 
-  void foo(
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ?> x1,
+  class UnspecBounded2<T extends Object> {
+    @DefaultNonNull
+    class Inner {
+      Object x0(T t) {
+        // jspecify_nullness_not_enough_information
+        return t;
+      }
+    }
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
-
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
-
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
-
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+  class UnspecBounded3<T extends @NullnessUnspecified Object> {
+    @DefaultNonNull
+    class Inner {
+      Object x0(T t) {
+        // jspecify_nullness_not_enough_information
+        return t;
+      }
+    }
+  }
 }

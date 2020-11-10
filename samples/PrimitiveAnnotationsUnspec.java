@@ -15,15 +15,23 @@
  */
 
 import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class PrimitiveAnnotationsUnspec {
-  // jspecify_nullness_intrinsically_not_nullable
-  @NullnessUnspecified int x1;
-  // jspecify_nullness_intrinsically_not_nullable
-  @NullnessUnspecified int[] x2;
+  void foo(
+      // jspecify_nullness_intrinsically_not_nullable
+      @NullnessUnspecified int x1,
+      // jspecify_nullness_intrinsically_not_nullable
+      @NullnessUnspecified int[] x2,
+      int x3,
+      int[] x4,
+      int @NullnessUnspecified [] x5,
 
-  int x3;
-  int[] x4;
+      // jspecify_nullness_intrinsically_not_nullable
+      Lib<@NullnessUnspecified int[]> x6,
+      Lib<int @NullnessUnspecified []> x7) {}
+
+  class Lib<T extends @Nullable Object> {}
 }

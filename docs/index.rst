@@ -19,6 +19,11 @@ This missing artifact, with full specifications, is what we are working to creat
 
 .. [1] We have seen the xkcd comic. Please do not send us the xkcd comic. We know about the xkcd comic.
 
+Activity
+--------
+
+The primary location for our day-to-day work is on GitHub: https://github.com/jspecify/jspecify
+
 Talks about JSpecify
 --------------------
 
@@ -29,33 +34,33 @@ Participants
 
 People from the following projects and organizations are collaborating on this project:
 
-+----------------------------------------------------+-------------------------------------------------+
-|Project                                             |Organization                                     |
-+====================================================+=================================================+
-| `Android <https://www.android.com>`_               | `Google <https://google.com>`_                  |
-+----------------------------------------------------+-------------------------------------------------+
-| `Checker Framework <https://checkerframework.org>`_|                                                 |
-+----------------------------------------------------+-------------------------------------------------+
-| `Error Prone <https://errorprone.info>`_           | `Google <https://google.com>`_                  |
-+----------------------------------------------------+-------------------------------------------------+
-| `Guava <https://github.com/google/guava>`_         | `Google <https://google.com>`_                  |
-+----------------------------------------------------+-------------------------------------------------+
-| `IntelliJ IDEA <https://www.jetbrains.com/idea/>`_ | `JetBrains <https://www.jetbrains.com/>`_       |
-+----------------------------------------------------+-------------------------------------------------+
-| `Kotlin <https://kotlinlang.org/>`_                | `JetBrains <https://www.jetbrains.com/>`_       |
-+----------------------------------------------------+-------------------------------------------------+
-| `NullAway <https://github.com/uber/NullAway>`_     | `Uber <https://uber.com>`_                      |
-+----------------------------------------------------+-------------------------------------------------+
-| `PMD <https://pmd.github.io/>`_                    |                                                 |
-+----------------------------------------------------+-------------------------------------------------+
-| `Spring <https://pivotal.io/spring-app-framework>`_| `Pivotal <https://pivotal.io>`_                 |
-+----------------------------------------------------+-------------------------------------------------+
-| `SonarQube <https://www.sonarqube.org/>`_          | `SonarSource <https://www.sonarsource.com/>`_   |
-+----------------------------------------------------+-------------------------------------------------+
-| `SpotBugs <http://spotbugs.rtfd.io/>`_             | `SpotBugs Team <https://github.com/spotbugs/>`_ |
-+----------------------------------------------------+-------------------------------------------------+
-|                                                    | `Square <https://squareup.com>`_                |
-+----------------------------------------------------+-------------------------------------------------+
++----------------------------------------------------------+-------------------------------------------------+
+|Project                                                   |Organization                                     |
++==========================================================+=================================================+
+| `Android <https://www.android.com>`_                     | `Google <https://google.com>`_                  |
++----------------------------------------------------------+-------------------------------------------------+
+| `Checker Framework <https://checkerframework.org>`_      | `Checker Framework Team <https://checkerframework.org>`_ |
++----------------------------------------------------------+-------------------------------------------------+
+| `Error Prone <https://errorprone.info>`_                 | `Google <https://google.com>`_                  |
++----------------------------------------------------------+-------------------------------------------------+
+| `Guava <https://github.com/google/guava>`_               | `Google <https://google.com>`_                  |
++----------------------------------------------------------+-------------------------------------------------+
+| `IntelliJ IDEA <https://www.jetbrains.com/idea/>`_       | `JetBrains <https://www.jetbrains.com/>`_       |
++----------------------------------------------------------+-------------------------------------------------+
+| `Kotlin <https://kotlinlang.org/>`_                      | `JetBrains <https://www.jetbrains.com/>`_       |
++----------------------------------------------------------+-------------------------------------------------+
+| `NullAway <https://github.com/uber/NullAway>`_           | `Uber <https://uber.com>`_                      |
++----------------------------------------------------------+-------------------------------------------------+
+| `PMD <https://pmd.github.io/>`_                          | `PMD Team <https://pmd.github.io/>`_            |
++----------------------------------------------------------+-------------------------------------------------+
+| `Spring <https://tanzu.vmware.com/spring-app-framework>`_| `VMware <https://www.vmware.com/>`_             |
++----------------------------------------------------------+-------------------------------------------------+
+| `SonarQube <https://www.sonarqube.org/>`_                | `SonarSource <https://www.sonarsource.com/>`_   |
++----------------------------------------------------------+-------------------------------------------------+
+| `SpotBugs <http://spotbugs.rtfd.io/>`_                   | `SpotBugs Team <https://github.com/spotbugs/>`_ |
++----------------------------------------------------------+-------------------------------------------------+
+|                                                          | `Square <https://squareup.com>`_                |
++----------------------------------------------------------+-------------------------------------------------+
 
 .. toctree::
    :maxdepth: 1

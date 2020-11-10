@@ -14,23 +14,6 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
+package lib;
 
-@DefaultNonNull
-class PrimitiveAnnotations {
-  void foo(
-      // jspecify_nullness_intrinsically_not_nullable
-      @Nullable int x1,
-      // jspecify_nullness_intrinsically_not_nullable
-      @Nullable int[] x2,
-      int x3,
-      int[] x4,
-      int @Nullable [] x5,
-
-      // jspecify_nullness_intrinsically_not_nullable
-      Lib<@Nullable int[]> x6,
-      Lib<int @Nullable []> x7) {}
-
-  class Lib<T extends @Nullable Object> {}
-}
+public interface Interface {}

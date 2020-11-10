@@ -18,23 +18,34 @@ import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
-@DefaultNonNull
-class AnnotatedWildcardUnspec {
-  interface Lib<T extends @Nullable Object> {}
+abstract class NotNullAwareLocalVariable {
+  @DefaultNonNull
+  interface Super {
+    String string();
 
-  void foo(
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ?> x1,
+    @NullnessUnspecified
+    String stringUnspec();
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
+    @Nullable
+    String stringUnionNull();
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
+  abstract class Sub implements Super {
+    void go() {
+      String string = string();
+      String stringUnspec = stringUnspec();
+      String stringUnionNull = stringUnionNull();
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
+      synchronized (string) {
+      }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+      // jspecify_nullness_not_enough_information
+      synchronized (stringUnspec) {
+      }
+
+      // jspecify_nullness_mismatch
+      synchronized (stringUnionNull) {
+      }
+    }
+  }
 }

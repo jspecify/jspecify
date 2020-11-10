@@ -19,22 +19,30 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class AnnotatedWildcardUnspec {
-  interface Lib<T extends @Nullable Object> {}
+class InstanceOfCheck {
+  Object x0(Object o) {
+    if (o instanceof Object) {
+      return o;
+    } else {
+      return o;
+    }
+  }
 
-  void foo(
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ?> x1,
+  Object x1(@NullnessUnspecified Object o) {
+    if (o instanceof Object) {
+      return o;
+    } else {
+      // jspecify_nullness_not_enough_information
+      return o;
+    }
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
-
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
-
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
-
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+  Object x2(@Nullable Object o) {
+    if (o instanceof Object) {
+      return o;
+    } else {
+      // jspecify_nullness_mismatch
+      return o;
+    }
+  }
 }

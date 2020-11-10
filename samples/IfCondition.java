@@ -19,22 +19,30 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class AnnotatedWildcardUnspec {
-  interface Lib<T extends @Nullable Object> {}
+abstract class IfCondition {
+  abstract int i();
 
-  void foo(
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ?> x1,
+  abstract int j();
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
+  abstract boolean b();
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
+  abstract Boolean boxed();
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
+  abstract @NullnessUnspecified Boolean boxedUnspec();
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+  abstract @Nullable Boolean boxedUnionNull();
+
+  void go() {
+    if (i() == j()) {}
+
+    if (b()) {}
+
+    if (boxed()) {}
+
+    // jspecify_nullness_not_enough_information
+    if (boxedUnspec()) {}
+
+    // jspecify_nullness_mismatch
+    if (boxedUnionNull()) {}
+  }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The JSpecify Authors.
+ * Copyright 2020 The jspecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,25 +16,36 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class AnnotatedWildcardUnspec {
-  interface Lib<T extends @Nullable Object> {}
+class BoundedTypeVariableReturn {
+  Foo use(FooSupplier<?> supplier) {
+    return supplier.get();
+  }
 
-  void foo(
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ?> x1,
+  Foo use(NullableFooSupplier<?> supplier) {
+    // jspecify_nullness_mismatch
+    return supplier.get();
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
+  Lib<? extends Foo> use(LibOfNullableFooSupplier<?> supplier) {
+    // jspecify_nullness_mismatch
+    return supplier.get();
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
+  interface FooSupplier<F extends Foo> {
+    F get();
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
+  interface NullableFooSupplier<F extends @Nullable Foo> {
+    F get();
+  }
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+  interface LibOfNullableFooSupplier<F extends @Nullable Foo> {
+    Lib<F> get();
+  }
+
+  interface Foo {}
+
+  interface Lib<T> {}
 }

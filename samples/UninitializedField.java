@@ -19,22 +19,20 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class AnnotatedWildcardUnspec {
-  interface Lib<T extends @Nullable Object> {}
+class UninitializedField<T extends @Nullable Object> {
+  // jspecify_nullness_mismatch
+  Object object;
 
-  void foo(
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ?> x1,
+  // jspecify_nullness_not_enough_information
+  @NullnessUnspecified Object objectUnspec;
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
+  @Nullable Object objectUnionNull;
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
+  // jspecify_nullness_mismatch
+  T t;
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
+  // jspecify_nullness_not_enough_information
+  @NullnessUnspecified T tUnspec;
 
-      // jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+  @Nullable T tUnionNull;
 }
