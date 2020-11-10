@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.*;
+import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.annotations.Nullable;
 
 @DefaultNonNull
 public class NullnessUnspecifiedTypeParameter<T> {

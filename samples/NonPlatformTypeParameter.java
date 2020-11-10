@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.*;
+import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.annotations.Nullable;
 
 public class NonPlatformTypeParameter<T extends @Nullable Object> {
   public void foo(T t) {}

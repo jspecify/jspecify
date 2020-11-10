@@ -14,7 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.*;
+import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.annotations.Nullable;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 public class AnnotatedBoundsOfWildcard {
