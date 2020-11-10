@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 public class Defaults {
   public Foo defaultField = null;
-  @Nullable public Foo field = null;
+  public @Nullable Foo field = null;
 
   public Foo everythingNotNullable(Foo x) {
     return null;

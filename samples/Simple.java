@@ -20,7 +20,7 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 public class Simple {
-  @Nullable public Derived field = null;
+  public @Nullable Derived field = null;
 
   @Nullable
   public Derived foo(Derived x, @NullnessUnspecified Base y) {
