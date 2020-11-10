@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package wildcardswithdefault;
+
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;

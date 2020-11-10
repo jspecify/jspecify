@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+package nonplatformtypeparameter;
+
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 

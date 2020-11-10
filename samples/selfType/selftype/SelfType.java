@@ -14,41 +14,60 @@
  * limitations under the License.
  */
 
+package selftype;
+
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-public class Simple {
-  public @Nullable Derived field = null;
-
-  public @Nullable Derived foo(Derived x, @NullnessUnspecified Base y) {
-    return null;
-  }
-
-  public Derived bar() {
-    // jspecify_nullness_mismatch
-    return null;
-  }
+public class SelfType<T extends SelfType<T>> {
+  public void foo(T t) {}
 }
 
-class Base {}
-
-class Derived extends Base {
-  void foo() {}
-}
+class B extends SelfType<B> {}
 
 @DefaultNonNull
-class Use {
-  public static void main(Simple a, Derived x) {
-    // jspecify_nullness_mismatch
-    a.foo(x, null).foo();
-    // jspecify_nullness_mismatch
-    a.foo(null, x).foo();
+class C<E extends C<E>> extends SelfType<E> {}
 
-    a.bar().foo();
+class AK extends SelfType<AK> {}
+
+class AKN extends SelfType<@Nullable AK> {}
+
+class BK extends B {}
+
+class CK extends C<CK> {}
+
+@DefaultNonNull
+abstract class Super extends C<@Nullable CK> {
+  abstract AK ak();
+
+  abstract AKN akn();
+
+  abstract BK bk();
+
+  abstract CK ck();
+
+  abstract CKN ckn();
+}
+
+abstract class CKN extends Super {
+  public void main() {
+    ak().foo(ak());
+    // jspecify_nullness_mismatch
+    ak().foo(null);
 
     // jspecify_nullness_mismatch
-    a.field.foo();
+    akn().foo(null);
+
+    bk().foo(bk());
+    // jspecify_nullness_mismatch
+    bk().foo(null);
+
+    ck().foo(ck());
+    // jspecify_nullness_mismatch
+    ck().foo(null);
+
+    // jspecify_nullness_mismatch
+    ckn().foo(null);
   }
 }

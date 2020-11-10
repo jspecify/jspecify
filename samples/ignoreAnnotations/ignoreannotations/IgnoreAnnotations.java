@@ -14,57 +14,59 @@
  * limitations under the License.
  */
 
+package ignoreannotations;
+
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-public class Defaults {
-  // jspecify_nullness_mismatch
-  public Foo defaultField = null;
-  public @Nullable Foo field = null;
+public class IgnoreAnnotations {
+  public @Nullable Derived field = null;
 
-  public Foo everythingNotNullable(Foo x) {
+  public @Nullable Derived foo(Derived x, @NullnessUnspecified Base y) {
+    return null;
+  }
+
+  public Derived everythingNotNullable(Derived x) {
     // jspecify_nullness_mismatch
     return null;
   }
 
-  public @Nullable Foo everythingNullable(@Nullable Foo x) {
+  public @Nullable Derived everythingNullable(@Nullable Derived x) {
     return null;
   }
 
-  public @NullnessUnspecified Foo everythingUnknown(@NullnessUnspecified Foo x) {
-    // jspecify_nullness_not_enough_information
-    return null;
-  }
-
-  public @Nullable Foo mixed(Foo x) {
-    return null;
-  }
-
-  public Foo explicitlyNullnessUnspecified(@NullnessUnspecified Foo x) {
-    // jspecify_nullness_mismatch
-    return null;
-  }
-}
-
-class Foo {
-  public Object foo() {
+  public @NullnessUnspecified Derived everythingUnknown(@NullnessUnspecified Derived x) {
     // jspecify_nullness_not_enough_information
     return null;
   }
 }
+
+class Base {
+  void foo() {}
+}
+
+class Derived extends Base {}
 
 @DefaultNonNull
 class Instances {
-  static final Defaults DEFAULTS = new Defaults();
-  static final Foo FOO = new Foo();
+  static final IgnoreAnnotations IGNORE_ANNOTATIONS = new IgnoreAnnotations();
+  static final Derived DERIVED = new Derived();
 }
 
 class Use {
   static void main() {
-    Defaults a = Instances.DEFAULTS;
-    Foo x = Instances.FOO;
+    IgnoreAnnotations a = Instances.IGNORE_ANNOTATIONS;
+    Derived x = Instances.DERIVED;
+
+    // jspecify_nullness_mismatch
+    a.foo(x, null).foo();
+    // jspecify_nullness_mismatch
+    a.foo(null, x).foo();
+
+    // jspecify_nullness_mismatch
+    a.field.foo();
 
     // jspecify_nullness_mismatch
     a.everythingNotNullable(null).foo();
@@ -75,19 +77,5 @@ class Use {
 
     // jspecify_nullness_not_enough_information
     a.everythingUnknown(null).foo();
-
-    // jspecify_nullness_mismatch
-    a.mixed(null).foo();
-    // jspecify_nullness_mismatch
-    a.mixed(x).foo();
-
-    a.explicitlyNullnessUnspecified(x).foo();
-    // jspecify_nullness_not_enough_information
-    a.explicitlyNullnessUnspecified(null).foo();
-
-    a.defaultField.foo();
-
-    // jspecify_nullness_mismatch
-    a.field.foo();
   }
 }

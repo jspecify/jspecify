@@ -14,66 +14,43 @@
  * limitations under the License.
  */
 
+package simple;
+
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-public class IgnoreAnnotations {
+public class Simple {
   public @Nullable Derived field = null;
 
   public @Nullable Derived foo(Derived x, @NullnessUnspecified Base y) {
     return null;
   }
 
-  public Derived everythingNotNullable(Derived x) {
+  public Derived bar() {
     // jspecify_nullness_mismatch
     return null;
   }
-
-  public @Nullable Derived everythingNullable(@Nullable Derived x) {
-    return null;
-  }
-
-  public @NullnessUnspecified Derived everythingUnknown(@NullnessUnspecified Derived x) {
-    // jspecify_nullness_not_enough_information
-    return null;
-  }
 }
 
-class Base {
+class Base {}
+
+class Derived extends Base {
   void foo() {}
 }
 
-class Derived extends Base {}
-
 @DefaultNonNull
-class Instances {
-  static final IgnoreAnnotations IGNORE_ANNOTATIONS = new IgnoreAnnotations();
-  static final Derived DERIVED = new Derived();
-}
-
 class Use {
-  static void main() {
-    IgnoreAnnotations a = Instances.IGNORE_ANNOTATIONS;
-    Derived x = Instances.DERIVED;
-
+  public static void main(Simple a, Derived x) {
     // jspecify_nullness_mismatch
     a.foo(x, null).foo();
     // jspecify_nullness_mismatch
     a.foo(null, x).foo();
 
+    a.bar().foo();
+
     // jspecify_nullness_mismatch
     a.field.foo();
-
-    // jspecify_nullness_mismatch
-    a.everythingNotNullable(null).foo();
-    a.everythingNotNullable(x).foo();
-
-    // jspecify_nullness_mismatch
-    a.everythingNullable(null).foo();
-
-    // jspecify_nullness_not_enough_information
-    a.everythingUnknown(null).foo();
   }
 }
