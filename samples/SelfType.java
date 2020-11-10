@@ -35,24 +35,37 @@ class BK extends B {}
 
 class CK extends C<CK> {}
 
-class CKN extends C<@Nullable CK> {
-  public void main(AK ak, AKN akn, BK bk, CK ck, CKN ckn) {
-    ak.foo(ak);
+@DefaultNonNull
+abstract class Super extends C<@Nullable CK> {
+  abstract AK ak();
+
+  abstract AKN akn();
+
+  abstract BK bk();
+
+  abstract CK ck();
+
+  abstract CKN ckn();
+}
+
+abstract class CKN extends Super {
+  public void main() {
+    ak().foo(ak());
     // jspecify_nullness_mismatch
-    ak.foo(null);
+    ak().foo(null);
 
     // jspecify_nullness_mismatch
-    akn.foo(null);
+    akn().foo(null);
 
-    bk.foo(bk);
+    bk().foo(bk());
     // jspecify_nullness_mismatch
-    bk.foo(null);
+    bk().foo(null);
 
-    ck.foo(ck);
+    ck().foo(ck());
     // jspecify_nullness_mismatch
-    ck.foo(null);
+    ck().foo(null);
 
     // jspecify_nullness_mismatch
-    ckn.foo(null);
+    ckn().foo(null);
   }
 }

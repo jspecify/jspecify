@@ -46,8 +46,17 @@ class Base {
 
 class Derived extends Base {}
 
+@DefaultNonNull
+class Instances {
+  static final IgnoreAnnotations IGNORE_ANNOTATIONS = new IgnoreAnnotations();
+  static final Derived DERIVED = new Derived();
+}
+
 class Use {
-  static void main(IgnoreAnnotations a, Derived x) {
+  static void main() {
+    IgnoreAnnotations a = Instances.IGNORE_ANNOTATIONS;
+    Derived x = Instances.DERIVED;
+
     a.foo(x, null).foo();
     // jspecify_nullness_mismatch
     a.foo(null, x).foo();

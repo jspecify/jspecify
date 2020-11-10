@@ -50,8 +50,17 @@ class Foo {
   }
 }
 
+@DefaultNonNull
+class Instances {
+  static final Defaults DEFAULTS = new Defaults();
+  static final Foo FOO = new Foo();
+}
+
 class Use {
-  static void main(Defaults a, Foo x) {
+  static void main() {
+    Defaults a = Instances.DEFAULTS;
+    Foo x = Instances.FOO;
+
     // jspecify_nullness_mismatch
     a.everythingNotNullable(null).foo();
     a.everythingNotNullable(x).foo();

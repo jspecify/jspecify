@@ -26,29 +26,35 @@ public class NullnessUnspecifiedTypeParameter<T> {
 
 class Test {}
 
-class Use {
-  void main(
-      NullnessUnspecifiedTypeParameter<Object> a1,
-      NullnessUnspecifiedTypeParameter<@Nullable Object> a2,
-      Test x) {
+@DefaultNonNull
+class Instances {
+  static final NullnessUnspecifiedTypeParameter<Object> A1 =
+      new NullnessUnspecifiedTypeParameter<>();
+  static final NullnessUnspecifiedTypeParameter<@Nullable Object> A2 =
+      new NullnessUnspecifiedTypeParameter<>();
+  static final Test X = new Test();
+}
+
+class Use extends Instances {
+  void main() {
     // jspecify_nullness_mismatch
-    a1.foo(null);
-    a1.foo(1);
+    A1.foo(null);
+    A1.foo(1);
 
     // jspecify_nullness_mismatch
-    a2.foo(null);
-    a2.foo(1);
+    A2.foo(null);
+    A2.foo(1);
 
     // jspecify_nullness_mismatch
-    a1.bar(null, null);
+    A1.bar(null, null);
     // jspecify_nullness_mismatch
-    a1.bar(x, null);
-    a1.bar(x, 1);
+    A1.bar(X, null);
+    A1.bar(X, 1);
 
     // jspecify_nullness_mismatch
-    a2.bar(null, null);
+    A2.bar(null, null);
     // jspecify_nullness_mismatch
-    a2.bar(x, null);
-    a2.bar(x, 1);
+    A2.bar(X, null);
+    A2.bar(X, 1);
   }
 }
