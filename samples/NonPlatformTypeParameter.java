@@ -31,15 +31,19 @@ class Use {
       NonPlatformTypeParameter<@Nullable Object> a1, NonPlatformTypeParameter<Test> a2, T x) {
     a1.foo(null);
     a1.<@Nullable Test>bar(null);
-    // jspecify_nullness_mismatch
-    a1.<T>bar(null);
+    /*
+     * TODO(cpovirk): In similar existing JSpecify samples, we mark the following line as
+     * not-enough-information. However, similar existing Kotlin samples treat it as a mismatch. We
+     * need to resolve how defaulting works on type-variable usages.
+     */
+    // a1.<T>bar(null);
     a1.<T>bar(x);
 
-    // jspecify_nullness_mismatch
-    a2.foo(null);
+    // TODO(cpovirk): See the TODO above.
+    // a2.foo(null);
     a2.<@Nullable Test>bar(null);
-    // jspecify_nullness_mismatch
-    a2.<T>bar(null);
+    // TODO(cpovirk): See the TODO above.
+    // a2.<T>bar(null);
     a2.<T>bar(x);
   }
 }
