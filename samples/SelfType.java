@@ -24,7 +24,7 @@ public class SelfType<T extends SelfType<T>> {
 
 class B extends SelfType<B> {}
 
-@DefaultNotNull
+@DefaultNonNull
 class C<E extends C<E>> extends SelfType<E> {}
 
 class AK extends SelfType<AK> {}
