@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-class Overrides {
+class OverrideReturns {
   interface Super {
     Object makeObject();
 
