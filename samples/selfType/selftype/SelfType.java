@@ -24,20 +24,25 @@ public class SelfType<T extends SelfType<T>> {
   public void foo(T t) {}
 }
 
+// jspecify_nullness_not_enough_information
 class B extends SelfType<B> {}
 
 @DefaultNonNull
 class C<E extends C<E>> extends SelfType<E> {}
 
+// jspecify_nullness_not_enough_information
 class AK extends SelfType<AK> {}
 
+// jspecify_nullness_mismatch
 class AKN extends SelfType<@Nullable AK> {}
 
 class BK extends B {}
 
+// jspecify_nullness_not_enough_information
 class CK extends C<CK> {}
 
 @DefaultNonNull
+// jspecify_nullness_mismatch
 abstract class Super extends C<@Nullable CK> {
   abstract AK ak();
 
