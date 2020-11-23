@@ -21,6 +21,10 @@ import org.jspecify.annotations.NullnessUnspecified;
 /*
  * For the moment, we don't require support for parameter contravariance:
  * https://github.com/jspecify/jspecify/issues/49
+ *
+ * (If we change that, we should revise our samples README to explain that this is a case in which
+ * we deviate from JLS rules:
+ * https://github.com/jspecify/jspecify/blob/e55eb43f3bc1e7493b8b28a9dadd2b9b254e3335/samples/README.md#what-sample-inputs-demonstrate)
  */
 @DefaultNonNull
 class OverrideParameters {
