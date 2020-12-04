@@ -22,35 +22,18 @@ import org.jspecify.annotations.NullnessUnspecified;
 public class AnnotatedReceiver<T extends @Nullable Object, U> {
 
   void foo(AnnotatedReceiver<T, U> this) {
-    // jspecify_nullness_mismatch
-    nullableReceiverTypeParameter();
-    // jspecify_nullness_not_enough_information
-    unspecifiedReceiverTypeParameter();
+    this.foo()
   }
 
-  // jspecify_unrecognized_location
+  // jspecify_nullness_intrinsically_not_nullable
   void nullableReceiverInvalid(@Nullable AnnotatedReceiver<T, U> this) {
     this.foo();
   }
 
-  // jspecify_unrecognized_location
+  // jspecify_nullness_intrinsically_not_nullable
   void unspecifiedReceiverInvalid(@NullnessUnspecified AnnotatedReceiver<T, U> this) {
     this.foo();
   }
 
-  void nullableReceiverTypeParameter(AnnotatedReceiver<@Nullable T, U> this) {
-    this.foo();
-  }
-
-  // jspecify_nullness_mismatch
-  void illformedNullableReceiverTypeParameter(AnnotatedReceiver<T, @Nullable U> this) {}
-
-  void unspecifiedReceiverTypeParameter(AnnotatedReceiver<@NullnessUnspecified T, U> this) {
-    this.foo();
-  }
-
-  void coercedUnspecifiedReceiverTypeParameter(AnnotatedReceiver<T, @NullnessUnspecified U> this) {
-    // jspecify_nullness_not_enough_information
-    this.foo();
-  }
+  // TODO(#157,#158): figure out bar(AnnotatedReceiver<@Nullable T, @NullnessUnspecified U> this)
 }
