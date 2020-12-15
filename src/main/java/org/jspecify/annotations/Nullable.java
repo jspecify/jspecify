@@ -16,7 +16,7 @@
 package org.jspecify.annotations;
 
 import static java.lang.annotation.ElementType.TYPE_USE;
-import static java.lang.annotation.RetentionPolicy.CLASS;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 @Documented
 @Target(TYPE_USE)
-@Retention(CLASS)
+@Retention(RUNTIME)
 /**
  * <b>WARNING:</b> This is not the final package name for this annotation. In addition, we are still
  * discussing questions about semantics, particularly around type-variable usages. After that,
