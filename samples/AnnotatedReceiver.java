@@ -31,8 +31,11 @@ interface AnnotatedReceiver {
 
   // TODO(#157,#158): figure out bar(AnnotatedReceiver<@Nullable T, @NullnessUnspecified U> this)
 
-  // jspecify_nullness_intrinsically_not_nullable
-  abstract class Base extends @Nullable AnnotatedReceiver {
+  abstract class Base
+      // jspecify_nullness_intrinsically_not_nullable
+      extends @Nullable Object
+      // jspecify_nullness_intrinsically_not_nullable
+      implements @Nullable AnnotatedReceiver {
     // jspecify_nullness_intrinsically_not_nullable
     @Nullable Base() {}
   }
