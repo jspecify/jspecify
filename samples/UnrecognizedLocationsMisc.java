@@ -16,18 +16,18 @@
 
 import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
-interface AnnotatedReceiver {
+class UnrecognizedLocationsMisc {
+  interface Super {}
 
-  void foo(AnnotatedReceiver this);
-
-  // jspecify_nullness_intrinsically_not_nullable
-  void nullableReceiverInvalid(@Nullable AnnotatedReceiver this);
-
-  // jspecify_nullness_intrinsically_not_nullable
-  void unspecifiedReceiverInvalid(@NullnessUnspecified AnnotatedReceiver this);
-
-  // TODO(#157,#158): figure out bar(AnnotatedReceiver<@Nullable T, @NullnessUnspecified U> this)
+  static class Sub
+      // jspecify_nullness_intrinsically_not_nullable
+      extends @Nullable Object
+      // jspecify_nullness_intrinsically_not_nullable
+      implements @Nullable Super {
+    // jspecify_nullness_intrinsically_not_nullable
+    @Nullable
+    Sub() {}
+  }
 }
