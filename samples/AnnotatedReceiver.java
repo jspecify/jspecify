@@ -30,4 +30,10 @@ interface AnnotatedReceiver {
   void unspecifiedReceiverInvalid(@NullnessUnspecified AnnotatedReceiver this);
 
   // TODO(#157,#158): figure out bar(AnnotatedReceiver<@Nullable T, @NullnessUnspecified U> this)
+
+  // jspecify_nullness_intrinsically_not_nullable
+  abstract class Base extends @Nullable AnnotatedReceiver {
+    // jspecify_nullness_intrinsically_not_nullable
+    @Nullable Base() {}
+  }
 }
