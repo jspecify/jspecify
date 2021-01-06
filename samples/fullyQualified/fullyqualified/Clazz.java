@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package lib;
+package fullyqualified;
 
-public enum Enumeration {}
+public class Clazz {}

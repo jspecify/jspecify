@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package lib.sub;
+package fullyqualified.sub;
 
 public class Clazz {}

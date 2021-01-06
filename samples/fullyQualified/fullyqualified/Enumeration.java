@@ -14,13 +14,6 @@
  * limitations under the License.
  */
 
-package caller;
+package fullyqualified;
 
-class Caller {
-  Caller(
-      lib.Clazz clazz,
-      lib.Enumeration enumeration,
-      lib.Interface iface,
-      lib.Annotation annotation,
-      lib.sub.Clazz subClazz) {}
-}
+public enum Enumeration {}

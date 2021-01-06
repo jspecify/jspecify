@@ -14,6 +14,13 @@
  * limitations under the License.
  */
 
-package lib;
+package fullyqualified;
 
-public @interface Annotation {}
+class Caller {
+  Caller(
+      fullyqualified.Clazz clazz,
+      fullyqualified.Enumeration enumeration,
+      fullyqualified.Interface iface,
+      fullyqualified.Annotation annotation,
+      fullyqualified.sub.Clazz subClazz) {}
+}
