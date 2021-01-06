@@ -14,6 +14,6 @@
  * limitations under the License.
  */
 
-package fullyqualified;
+package fullyqualified.sub;
 
-public class Clazz {}
+public interface Interface {}

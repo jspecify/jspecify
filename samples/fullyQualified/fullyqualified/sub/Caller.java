@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package fullyqualified;
+package fullyqualified.sub;
 
 class Caller {
   Caller(
-      fullyqualified.Clazz clazz,
-      fullyqualified.Enumeration enumeration,
-      fullyqualified.Interface iface,
-      fullyqualified.Annotation annotation,
-      fullyqualified.sub.Clazz subClazz) {}
+      fullyqualified.sub.Clazz clazz,
+      fullyqualified.sub.Enumeration enumeration,
+      fullyqualified.sub.Interface iface,
+      fullyqualified.sub.Annotation annotation) {}
 }
