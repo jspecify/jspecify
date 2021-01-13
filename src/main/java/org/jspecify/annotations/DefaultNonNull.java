@@ -23,9 +23,6 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Documented
-@Target({TYPE, PACKAGE})
-@Retention(RUNTIME)
 /**
  * <b>WARNING:</b> This is not the final class name or package name for this annotation. In
  * addition, we are still discussing questions about semantics, particularly around type-variable
@@ -34,4 +31,7 @@ import java.lang.annotation.Target;
  * <p>These annotations exist only as a skeleton for the final product. At this point, we are not
  * even building prototypes that use them.
  */
+@Documented
+@Target({TYPE, PACKAGE})
+@Retention(RUNTIME)
 public @interface DefaultNonNull {}
