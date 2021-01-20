@@ -573,11 +573,12 @@ The Java rules are defined in `JLS
 5.1.10 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10>`__.
 We add to them as follows:
 
--  The output type of the conversion has the same `nullness
-   operator <#nullness-operator>`__ as the input type.
+-  The parameterized type that is the output of the conversion has the
+   same `nullness operator <#nullness-operator>`__ as the parameterized
+   type that is the input type.
 
 -  Disregard the JLS rule about ``<?>``. Instead, treat ``?`` like
-   ``? extends     Object``, where the `nullness
+   ``? extends Object``, where the `nullness
    operator <#nullness-operator>`__ of the ``Object`` bound is specified
    by `“Bound of an unbounded wildcard.” <#unbounded-wildcard>`__
 
