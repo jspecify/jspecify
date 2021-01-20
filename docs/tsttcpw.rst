@@ -56,7 +56,7 @@ An nullness operator is one of 3 values:
 
 -  ``UNION_NULL``
 -  ``NO_CHANGE``
--  ``CODE_NOT_NULLNESS_AWARE``
+-  ``UNSPECIFIED``
 
 ..
 
@@ -157,7 +157,7 @@ Once one condition is met, skip the remaining conditions.
 -  If the type usage appears in a `null-aware
    context <#null-aware-context>`__, its nullness operator is
    ``NO_CHANGE``.
--  Its nullness operator is ``CODE_NOT_NULLNESS_AWARE``.
+-  Its nullness operator is ``UNSPECIFIED``.
 
 .. _intersection-types:
 
@@ -214,8 +214,8 @@ one condition is met, skip the remaining conditions.
 
 -  If either nullness operator is ``UNION_NULL``, the desired nullness
    operator is ``UNION_NULL``.
--  If either nullness operator is ``CODE_NOT_NULLNESS_AWARE``, the
-   desired nullness operator is ``CODE_NOT_NULLNESS_AWARE``.
+-  If either nullness operator is ``UNSPECIFIED``, the desired nullness
+   operator is ``UNSPECIFIED``.
 -  The desired nullness operator is ``NO_CHANGE``.
 
 Then, if the input augmented type is *not* an intersection type, the
@@ -261,7 +261,7 @@ is ``Object`` and whose `nullness operator <#nullness-operator>`__ is
 
 If an unbounded wildcard appears outside a null-aware context, then it
 has a single upper bound whose base type is ``Object`` and whose
-nullness operator is ``CODE_NOT_NULLNESS_AWARE``.
+nullness operator is ``UNSPECIFIED``.
 
    In both cases, we specify a bound that does not exist in the source
    or bytecode, deviating from the JLS. Because the base type of the
@@ -302,7 +302,7 @@ of ``Object`` and a `nullness operator <#nullness-operator>`__ of
 
 If an ``Object``-bounded type parameter appears outside a null-aware
 context, then its bound has a base type of ``Object`` and a nullness
-operator of ``CODE_NOT_NULLNESS_AWARE``.
+operator of ``UNSPECIFIED``.
 
    All these rules match the behavior of `our normal
    rules <#augmented-type-of-usage>`__ for determining the `augmented
@@ -340,7 +340,7 @@ This produces multiple null types:
 -  the null base type with nullness operator ``UNION_NULL``: the type of
    the null reference
 
--  the null base type with nullness operator ``CODE_NOT_NULLNESS_AWARE``
+-  the null base type with nullness operator ``UNSPECIFIED``
 
       This may be relevant only in implementation code.
 
@@ -355,12 +355,11 @@ convenient world” and 1 for “the most convenient world.”
 Tools may implement either or both versions of the rules.
 
    Our goal is to allow tools and their users to choose their desired
-   level of strictness in the presence of ``CODE_NOT_NULLNESS_AWARE``.
-   “The least convenient world” usually assumes that types are
-   incompatible unless it has enough information to prove they are
-   compatible; “the most convenient world” assumes that types are
-   compatible unless it has enough information to prove they are
-   incompatible.
+   level of strictness in the presence of ``UNSPECIFIED``. “The least
+   convenient world” usually assumes that types are incompatible unless
+   it has enough information to prove they are compatible; “the most
+   convenient world” assumes that types are compatible unless it has
+   enough information to prove they are incompatible.
 
    Thus, strict tools may want to implement the least-convenient-world
    version of rules, and lenient tools may wish to implement the
@@ -478,7 +477,7 @@ of the following conditions:
 
 **Most convenient world:** The rule is the same except that the
 requirement for ``UNION_NULL`` is loosened to “``UNION_NULL`` or
-``CODE_NOT_NULLNESS_AWARE``.”
+``UNSPECIFIED``.”
 
 Null-exclusive under every parameterization
 -------------------------------------------
@@ -504,7 +503,7 @@ following hold:
 
 **Most convenient world:** The rules are the same except that the
 requirement for ``NO_CHANGE`` is loosened to “``NO_CHANGE`` or
-``CODE_NOT_NULLNESS_AWARE``.”
+``UNSPECIFIED``.”
 
 Nullness-subtype-establishing direct-supertype edges
 ----------------------------------------------------
@@ -531,7 +530,7 @@ Lower-bound rule:
 
 **Most convenient world:** The rules are the same except that the
 requirements for ``NO_CHANGE`` are loosened to “``NO_CHANGE`` or
-``CODE_NOT_NULLNESS_AWARE``.”
+``UNSPECIFIED``.”
 
 Containment
 -----------
@@ -557,7 +556,7 @@ We add to them as follows:
 
 **Most convenient world:** The rules are the same except that the
 requirement for ``UNION_NULL`` is loosened to “``UNION_NULL`` or
-``CODE_NOT_NULLNESS_AWARE``.”
+``UNSPECIFIED``.”
 
 Capture conversion
 ------------------
