@@ -52,16 +52,18 @@ types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_
 Nullness operator
 -----------------
 
-An nullness operator is one of 3 values:
+An nullness operator is one of 4 values:
 
 -  ``UNION_NULL``
 -  ``NO_CHANGE``
 -  ``UNSPECIFIED``
+-  ``MINUS_NULL``
 
 ..
 
-   The distinction among these 3 values is similar to the distinction
-   among the Kotlin types ``Foo?``, ``Foo``, and ``Foo!``, respectively.
+   The distinction among these 4 values is similar to the distinction
+   among the Kotlin types ``Foo?``, ``Foo``, ``Foo!``, and ``Foo!!``,
+   respectively.
 
 Augmented type
 --------------
@@ -159,6 +161,14 @@ Once one condition is met, skip the remaining conditions.
    ``NO_CHANGE``.
 -  Its nullness operator is ``UNSPECIFIED``.
 
+..
+
+   These rules never produce the fourth nullness operator,
+   ``MINUS_NULL``. However, if tool authors prefer, they can safely
+   produce ``MINUS_NULL`` in any case in which it is equivalent to
+   ``NO_CHANGE``. For example, there is no difference between a
+   ``String`` with ``NO_CHANGE`` and a ``String`` with ``MINUS_NULL``.
+
 .. _intersection-types:
 
 Augmented type of an intersection type
@@ -219,6 +229,8 @@ one from the augmented type), compute a “desired nullness operator.” Do
 so by applying the following rules in order. Once one condition is met,
 skip the remaining conditions.
 
+-  If the nullness operator to apply is ``MINUS_NULL``, the desired
+   nullness operator is ``MINUS_NULL``.
 -  If either nullness operator is ``UNION_NULL``, the desired nullness
    operator is ``UNION_NULL``.
 -  If either nullness operator is ``UNSPECIFIED``, the desired nullness
@@ -238,6 +250,10 @@ applying the desired nullness operator to ``Tᵢ``.
    because the nullness operator `of the intersection type
    itself <#intersection-types>`__ is defined to always be
    ``NO_CHANGE``.
+
+TODO(cpovirk): Update these rules for the “out of bounds” case now that
+we have ``MINUS_NULL`` to make that work. That will probably require
+redefining the process to take 2 full augmented types as input.
 
 .. _unbounded-wildcard:
 
@@ -344,6 +360,11 @@ This produces multiple null types:
    used in `capture conversion <#capture-conversion>`__
 
       No value, including ``null`` itself, has this type.
+
+-  the null base type with nullness operator ``MINUS_NULL``
+
+      This is equivalent to the previous type. Tools may use the 2
+      interchangeably.
 
 -  the null base type with nullness operator ``UNION_NULL``: the type of
    the null reference
@@ -484,7 +505,7 @@ of the following conditions:
    under every parameterization.
 
 **Most convenient world:** The rule is the same except that the
-requirement for ``UNION_NULL`` is loosened to “``UNION_NULL`` or
+requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
 ``UNSPECIFIED``.”
 
 Null-exclusive under every parameterization
@@ -492,11 +513,17 @@ Null-exclusive under every parameterization
 
 A type is null-exclusive under every parameterization if it has a
 `nullness-subtype-establishing
-path <#nullness-subtype-establishing-path>`__ to any augmented class or
-array type.
+path <#nullness-subtype-establishing-path>`__ to either of the
+following:
 
-   This rule refers specifically to a “class or array type,” as distinct
-   from other types like type variables and intersection types.
+-  any type whose `nullness operator <#nullness-operator>`__ is
+   ``MINUS_NULL``
+
+-  any augmented class or array type
+
+      This rule refers specifically to a “class or array type,” as
+      distinct from other types like type variables and intersection
+      types.
 
 Nullness-subtype-establishing path
 ----------------------------------
@@ -504,14 +531,20 @@ Nullness-subtype-establishing path
 ``A`` has a nullness-subtype-establishing path to ``F`` if both of the
 following hold:
 
--  ``A`` has `nullness operator <#nullness-operator>`__ ``NO_CHANGE``.
+-  ``A`` has `nullness operator <#nullness-operator>`__ ``NO_CHANGE`` or
+   ``MINUS_NULL``.
+
 -  There is a path from ``A`` to ``F`` through
    `nullness-subtype-establishing direct-supertype
    edges <#nullness-subtype-establishing-direct-supertype-edges>`__.
 
+      The path may be empty. That is, ``A`` has a
+      nullness-subtype-establishing path to itself – as long as it has
+      one of the required nullness operators.
+
 **Most convenient world:** The rules are the same except that the
-requirement for ``NO_CHANGE`` is loosened to “``NO_CHANGE`` or
-``UNSPECIFIED``.”
+requirement for “``NO_CHANGE`` or ``MINUS_NULL``” is loosened to
+“``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”
 
 Nullness-subtype-establishing direct-supertype edges
 ----------------------------------------------------
@@ -523,9 +556,10 @@ Upper-bound rule:
 
 -  if ``T`` is an augmented intersection type: all the intersection
    type’s elements whose `nullness operator <#nullness-operator>`__ is
-   ``NO_CHANGE``
+   ``NO_CHANGE`` or ``MINUS_NULL``
 -  if ``T`` is an augmented type variable: all the corresponding type
-   parameter’s upper bounds whose nullness operator is ``NO_CHANGE``
+   parameter’s upper bounds whose nullness operator is ``NO_CHANGE`` or
+   ``MINUS_NULL``
 -  otherwise: no nodes
 
 Lower-bound rule:
@@ -534,11 +568,17 @@ Lower-bound rule:
    type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
    is the same as ``T``\ ’s base type and whose nullness operator is
    ``NO_CHANGE``: the type variable ``P``
+
+   TODO(cpovirk): What if the lower bound has some other nullness
+   operator? I’m pretty sure that we want to allow ``UNSPECIFIED`` in
+   the most convenient world (as we did before my recent edits), and we
+   may want to allow more.
+
 -  otherwise: no nodes
 
 **Most convenient world:** The rules are the same except that the
-requirements for ``NO_CHANGE`` are loosened to “``NO_CHANGE`` or
-``UNSPECIFIED``.”
+requirements for “``NO_CHANGE`` or ``MINUS_NULL``” are loosened to
+“``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”
 
 Containment
 -----------
@@ -548,7 +588,7 @@ The Java rules are defined in `JLS
 We add to them as follows:
 
 -  Disregard the 2 rules that refer to a bare ``?``. Instead, treat
-   ``?`` like ``?     extends Object``, where the `nullness
+   ``?`` like ``? extends Object``, where the `nullness
    operator <#nullness-operator>`__ of the ``Object`` bound is specified
    by `“Bound of an unbounded wildcard.” <#unbounded-wildcard>`__
 
@@ -563,7 +603,7 @@ We add to them as follows:
    the `same type <#same-type>`__.
 
 **Most convenient world:** The rules are the same except that the
-requirement for ``UNION_NULL`` is loosened to “``UNION_NULL`` or
+requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
 ``UNSPECIFIED``.”
 
 Capture conversion
