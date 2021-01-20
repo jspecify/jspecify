@@ -19,7 +19,7 @@ current working decisions in an effort to remain simple.**
    part) from the previous:
 
    1. What annotation (if any) appears directly on that type usage?
-   2. What is the `additional nullness <#additional-nullness>`__ of that
+   2. What is the `nullness operator <#nullness-operator>`__ of that
       type usage?
    3. For that type usage…
 
@@ -49,10 +49,10 @@ definition of `augmented types <#augmented-type>`__ (as oppposed to
 `base
 types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__).
 
-Additional nullness
--------------------
+Nullness operator
+-----------------
 
-An additional nullness is one of 3 values:
+An nullness operator is one of 3 values:
 
 -  ``UNION_NULL``
 -  ``NO_CHANGE``
@@ -68,18 +68,17 @@ Augmented type
 
 An augmented type consists of a `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-and an `additional nullness <#additional-nullness>`__ corresponding to
-*each* of its `type
+and a `nullness operator <#nullness-operator>`__ corresponding to *each*
+of its `type
 components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5>`__.
 
    This differs from our current `glossary
    definition <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.367l48xhsikk>`__,
-   which is written in terms of a “nullness” for each component, not an
-   “additional nullness.” Still, the glossary’s concept of the
-   “nullness” of a type is derivable from the type’s additional
-   nullness. Notably, the glossary’s “nullable” type is our `least
-   convenient world’s <#multiple-worlds>`__\ ’s `null-inclusive under
-   every
+   which is written in terms of a “nullness” for each component, not a
+   “nullness operator.” Still, the glossary’s concept of the “nullness”
+   of a type is derivable from the type’s nullness operator. Notably,
+   the glossary’s “nullable” type is our `least convenient
+   world’s <#multiple-worlds>`__\ ’s `null-inclusive under every
    parameterization <#null-inclusive-under-every-parameterization>`__,
    and the glossary’s “non-nullable” type is our least convenient
    world’s `null-exclusive under every
@@ -104,15 +103,15 @@ When this spec uses capital letters, they refer to augmented types
 (unless otherwise noted). This is in contrast to the JLS, which
 typically uses them to refer to base types.
 
-When this spec refers to “the additional nullness of” a type ``T``, it
-refers specifically to the additional nullness of the type component
-that is the entire type ``T``, without reference to the additional
-nullness of any other type components of ``T``.
+When this spec refers to “the nullness operator of” a type ``T``, it
+refers specifically to the nullness operator of the type component that
+is the entire type ``T``, without reference to the nullness operator of
+any other type components of ``T``.
 
-   For example, the additional nullness of ``List<@Nullable Object>``
+   For example, the nullness operator of ``List<@Nullable Object>``
    would be ``NO_CHANGE`` (at least in a `null-aware
-   context <#null-aware-context>`__), even though the additional
-   nullness of its element type ``Object`` is ``UNION_NULL``.
+   context <#null-aware-context>`__), even though the nullness operator
+   of its element type ``Object`` is ``UNION_NULL``.
 
 Null-aware context
 ------------------
@@ -147,18 +146,18 @@ rule here.
 Because the JLS already has rules for determining the `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 for a type usage, this section covers only how to determine its
-`additional nullness <#additional-nullness>`__.
+`nullness operator <#nullness-operator>`__.
 
-To determine the additional nullness, apply the following rules in
-order. Once one condition is met, skip the remaining conditions.
+To determine the nullness operator, apply the following rules in order.
+Once one condition is met, skip the remaining conditions.
 
 -  If the type usage is annotated with
-   ``@org.jspecify.annotations.Nullable``, its additional nullness is
+   ``@org.jspecify.annotations.Nullable``, its nullness operator is
    ``UNION_NULL``.
 -  If the type usage appears in a `null-aware
-   context <#null-aware-context>`__, its additional nullness is
+   context <#null-aware-context>`__, its nullness operator is
    ``NO_CHANGE``.
--  Its additional nullness is ``CODE_NOT_NULLNESS_AWARE``.
+-  Its nullness operator is ``CODE_NOT_NULLNESS_AWARE``.
 
 .. _intersection-types:
 
@@ -175,11 +174,11 @@ Augmented type of an intersection type
    One result of all this is that it’s never possible for a programmer
    to write an annotation “on an intersection type.”
 
-This spec assigns an `additional nullness <#additional-nullness>`__ to
-each individual element of an intersection type, following our normal
-rules for type usages. It also assigns an additional nullness to the
-intersection type as a whole. The additional nullness of the type as a
-whole is always ``NO_CHANGE``.
+This spec assigns a `nullness operator <#nullness-operator>`__ to each
+individual element of an intersection type, following our normal rules
+for type usages. It also assigns a nullness operator to the intersection
+type as a whole. The nullness operator of the type as a whole is always
+``NO_CHANGE``.
 
    This lets us provide, for every `base
    type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__,
@@ -188,48 +187,48 @@ whole is always ``NO_CHANGE``.
    ``UNION_NULL`` intersection type whose members are ``UNION_NULL``
    ``Foo`` and ``UNION_NULL`` ``Bar``” is a subtype of “a ``NO_CHANGE``
    intersection type with those same members.” Plus, it would be
-   difficult for tools to output the additional nullness of an
+   difficult for tools to output the nullness operator of an
    intersection type in a human-readable way.
 
 ..
 
-   To avoid ever creating an intersection type with an additional
-   nullness other than ``NO_CHANGE``, we define special handling for
-   intersection types under `“Unioning an augmented type with an
-   additional nullness.” <#unioning>`__
+   To avoid ever creating an intersection type with a nullness operator
+   other than ``NO_CHANGE``, we define special handling for intersection
+   types under `“Unioning an augmented type with a nullness
+   operator.” <#unioning>`__
 
 .. _unioning:
 
-Unioning an augmented type with an additional nullness
-------------------------------------------------------
+Unioning an augmented type with a nullness operator
+---------------------------------------------------
 
-Given an `augmented type <#augmented-type>`__ (which, again, includes an
-`additional nullness <#additional-nullness>`__ for the type) and a
-second additional nullness, we define a process to union the augmented
-type with the second additional nullness:
+Given an `augmented type <#augmented-type>`__ (which, again, includes a
+`nullness operator <#nullness-operator>`__ for the type) and a second
+nullness operator, we define a process to union the augmented type with
+the second nullness operator:
 
-First, based on the pair of additional nullnesses (the one from the
-augmented type and the second additional nullness), compute a “desired
-additional nullness.” Do so by applying the following rules in order.
-Once one condition is met, skip the remaining conditions.
+First, based on the pair of nullness operators (the one from the
+augmented type and the second nullness operator), compute a “desired
+nullness operator.” Do so by applying the following rules in order. Once
+one condition is met, skip the remaining conditions.
 
--  If either additional nullness is ``UNION_NULL``, the desired
-   additional nullness is ``UNION_NULL``.
--  If either additional nullness is ``CODE_NOT_NULLNESS_AWARE``, the
-   desired additional nullness is ``CODE_NOT_NULLNESS_AWARE``.
--  The desired additional nullness is ``NO_CHANGE``.
+-  If either nullness operator is ``UNION_NULL``, the desired nullness
+   operator is ``UNION_NULL``.
+-  If either nullness operator is ``CODE_NOT_NULLNESS_AWARE``, the
+   desired nullness operator is ``CODE_NOT_NULLNESS_AWARE``.
+-  The desired nullness operator is ``NO_CHANGE``.
 
 Then, if the input augmented type is *not* an intersection type, the
-output is the same as the input but with its additional nullness
-replaced with the desired additional nullness.
+output is the same as the input but with its nullness operator replaced
+with the desired nullness operator.
 
 Otherwise, the output is an intersection type. For every element ``Tᵢ``
 of the input type, the output type has an element that is ``Tᵢ`` unioned
-with the desired additional nullness.
+with the desired nullness operator.
 
-   In this case, the desired additional nullness is always equal to the
-   second additional nullness that was an input to this process. That’s
-   because the additional nullness `of the intersection type
+   In this case, the desired nullness operator is always equal to the
+   second nullness operator that was an input to this process. That’s
+   because the nullness operator `of the intersection type
    itself <#intersection-types>`__ is defined to always be
    ``NO_CHANGE``.
 
@@ -257,12 +256,12 @@ If an unbounded wildcard appears in a `null-aware
 context <#null-aware-context>`__, then it has a single upper bound whose
 `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-is ``Object`` and whose `additional nullness <#additional-nullness>`__
-is ``UNION_NULL``.
+is ``Object`` and whose `nullness operator <#nullness-operator>`__ is
+``UNION_NULL``.
 
 If an unbounded wildcard appears outside a null-aware context, then it
 has a single upper bound whose base type is ``Object`` and whose
-additional nullness is ``CODE_NOT_NULLNESS_AWARE``.
+nullness operator is ``CODE_NOT_NULLNESS_AWARE``.
 
    In both cases, we specify a bound that does not exist in the source
    or bytecode, deviating from the JLS. Because the base type of the
@@ -271,7 +270,7 @@ additional nullness is ``CODE_NOT_NULLNESS_AWARE``.
 
 Whenever a JLS rule refers specifically to ``<?>``, disregard it, and
 instead apply the rules for ``<? extends T>``, where ``T`` has a base
-type of ``Object`` and the additional nullness defined by this section.
+type of ``Object`` and the nullness operator defined by this section.
 
 .. _object-bounded-type-parameter:
 
@@ -295,15 +294,15 @@ JSpecify nullness type annotations on the bound.
 If an ``Object``-bounded type parameter appears in a `null-aware
 context <#null-aware-context>`__, then its bound has a `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-of ``Object`` and an `additional nullness <#additional-nullness>`__ of
+of ``Object`` and a `nullness operator <#nullness-operator>`__ of
 ``NO_CHANGE``.
 
    Note that this gives ``<T>`` a different bound than ``<?>`` (though
    only in a null-aware context).
 
 If an ``Object``-bounded type parameter appears outside a null-aware
-context, then its bound has a base type of ``Object`` and an additional
-nullness of ``CODE_NOT_NULLNESS_AWARE``.
+context, then its bound has a base type of ``Object`` and a nullness
+operator of ``CODE_NOT_NULLNESS_AWARE``.
 
    All these rules match the behavior of `our normal
    rules <#augmented-type-of-usage>`__ for determining the `augmented
@@ -320,29 +319,28 @@ parameter ``Pᵢ``:
 For every type ``V`` whose `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 is ``Pᵢ``, replace ``V`` with the `union <#unioning>`__ of ``Aᵢ`` and
-the `additional nullness <#additional-nullness>`__ of ``V``.
+the `nullness operator <#nullness-operator>`__ of ``V``.
 
 .. _null-types:
 
 Augmented null types
 --------------------
 
-The JLS refers to “the null type.” In this spec, we assign an
-`additional nullness <#additional-nullness>`__ to all types, including
-the null type. This produces multiple null types:
+The JLS refers to “the null type.” In this spec, we assign a `nullness
+operator <#nullness-operator>`__ to all types, including the null type.
+This produces multiple null types:
 
 -  the null `base
    type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-   with additional nullness ``NO_CHANGE``: the “bottom”/“nothing” type
+   with nullness operator ``NO_CHANGE``: the “bottom”/“nothing” type
    used in `capture conversion <#capture-conversion>`__
 
       No value, including ``null`` itself, has this type.
 
--  the null base type with additional nullness ``UNION_NULL``: the type
-   of the null reference
+-  the null base type with nullness operator ``UNION_NULL``: the type of
+   the null reference
 
--  the null base type with additional nullness
-   ``CODE_NOT_NULLNESS_AWARE``
+-  the null base type with nullness operator ``CODE_NOT_NULLNESS_AWARE``
 
       This may be relevant only in implementation code.
 
@@ -426,14 +424,14 @@ We add to them as follows:
    operating on `augmented types <#augmented-type>`__, not `base
    types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__.
    However, when applying the Java direct-supertype rules themselves,
-   *ignore* the `additional nullness <#additional-nullness>`__ of the
-   input types and output types. The augmented types matter only when
-   the Java rules refer to *other* rules that are defined in this spec.
-   *Those* rules respect the additional nullness of some type components
-   – but never the additional nullness of the type component that
-   represents the whole input or output type.
+   *ignore* the `nullness operator <#nullness-operator>`__ of the input
+   types and output types. The augmented types matter only when the Java
+   rules refer to *other* rules that are defined in this spec. *Those*
+   rules respect the nullness operator of some type components – but
+   never the nullness operator of the type component that represents the
+   whole input or output type.
 
-      To “ignore” the output’s additional nullness, we recommend
+      To “ignore” the output’s nullness operator, we recommend
       outputting a value of ``NO_CHANGE``, since that is valid for all
       types, including `intersection types <#intersection-types>`__.
 
@@ -474,7 +472,7 @@ Null-inclusive under every parameterization
 A type is null-inclusive under every parameterization if it meets either
 of the following conditions:
 
--  Its `additional nullness <#additional-nullness>`__ is ``UNION_NULL``.
+-  Its `nullness operator <#nullness-operator>`__ is ``UNION_NULL``.
 -  It is an intersection type whose elements all are null-inclusive
    under every parameterization.
 
@@ -499,8 +497,7 @@ Nullness-subtype-establishing path
 ``A`` has a nullness-subtype-establishing path to ``F`` if both of the
 following hold:
 
--  ``A`` has `additional nullness <#additional-nullness>`__
-   ``NO_CHANGE``.
+-  ``A`` has `nullness operator <#nullness-operator>`__ ``NO_CHANGE``.
 -  There is a path from ``A`` to ``F`` through
    `nullness-subtype-establishing direct-supertype
    edges <#nullness-subtype-establishing-direct-supertype-edges>`__.
@@ -518,17 +515,17 @@ union of the nodes computed by the following 2 rules:
 Upper-bound rule:
 
 -  if ``T`` is an augmented intersection type: all the intersection
-   type’s elements whose `additional nullness <#additional-nullness>`__
-   is ``NO_CHANGE``
+   type’s elements whose `nullness operator <#nullness-operator>`__ is
+   ``NO_CHANGE``
 -  if ``T`` is an augmented type variable: all the corresponding type
-   parameter’s upper bounds whose additional nullness is ``NO_CHANGE``
+   parameter’s upper bounds whose nullness operator is ``NO_CHANGE``
 -  otherwise: no nodes
 
 Lower-bound rule:
 
 -  for every type parameter ``P`` that has a lower bound whose `base
    type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-   is the same as ``T``\ ’s base type and whose additional nullness is
+   is the same as ``T``\ ’s base type and whose nullness operator is
    ``NO_CHANGE``: the type variable ``P``
 -  otherwise: no nodes
 
@@ -544,16 +541,15 @@ The Java rules are defined in `JLS
 We add to them as follows:
 
 -  Disregard the 2 rules that refer to a bare ``?``. Instead, treat
-   ``?`` like ``?     extends Object``, where the `additional
-   nullness <#additional-nullness>`__ of the ``Object`` bound is
-   specified by `“Bound of an unbounded
-   wildcard.” <#unbounded-wildcard>`__
+   ``?`` like ``?     extends Object``, where the `nullness
+   operator <#nullness-operator>`__ of the ``Object`` bound is specified
+   by `“Bound of an unbounded wildcard.” <#unbounded-wildcard>`__
 
       This is just a part of our universal rule to treat a bare ``?``
       like ``? extends Object``.
 
 -  The rule written specifically for ``? extends Object`` applies only
-   if the additional nullness of the ``Object`` bound is ``UNION_NULL``.
+   if the nullness operator of the ``Object`` bound is ``UNION_NULL``.
 
 -  When the JLS refers to the same type ``T`` on both sides of a rule,
    the rule applies if and only if this spec defines the 2 types to be
@@ -570,18 +566,17 @@ The Java rules are defined in `JLS
 5.1.10 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10>`__.
 We add to them as follows:
 
--  The output type of the conversion has the same `additional
-   nullness <#additional-nullness>`__ as the input type.
+-  The output type of the conversion has the same `nullness
+   operator <#nullness-operator>`__ as the input type.
 
 -  Disregard the JLS rule about ``<?>``. Instead, treat ``?`` like
-   ``? extends     Object``, where the `additional
-   nullness <#additional-nullness>`__ of the ``Object`` bound is
-   specified by `“Bound of an unbounded
-   wildcard.” <#unbounded-wildcard>`__
+   ``? extends     Object``, where the `nullness
+   operator <#nullness-operator>`__ of the ``Object`` bound is specified
+   by `“Bound of an unbounded wildcard.” <#unbounded-wildcard>`__
 
       This is just a part of our universal rule to treat a bare ``?``
       like ``? extends Object``.
 
 -  When a rule generates a lower bound that is the null type, we specify
-   that its additional nullness is ``NO_CHANGE``. (See `“Augmented null
+   that its nullness operator is ``NO_CHANGE``. (See `“Augmented null
    types.” <#null-types>`__)
