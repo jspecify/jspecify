@@ -194,23 +194,30 @@ type as a whole. The nullness operator of the type as a whole is always
 
    To avoid ever creating an intersection type with a nullness operator
    other than ``NO_CHANGE``, we define special handling for intersection
-   types under `“Unioning an augmented type with a nullness
-   operator.” <#unioning>`__
+   types under `“Applying a nullness operator to an augmented
+   type.” <#applying-operator>`__
 
-.. _unioning:
+.. _applying-operator:
 
-Unioning an augmented type with a nullness operator
----------------------------------------------------
+Applying a nullness operator to an augmented type
+-------------------------------------------------
 
-Given an `augmented type <#augmented-type>`__ (which, again, includes a
-`nullness operator <#nullness-operator>`__ for the type) and a second
-nullness operator, we define a process to union the augmented type with
-the second nullness operator:
+The process of applying a `nullness operator <#nullness-operator>`__
+requires 2 inputs:
 
-First, based on the pair of nullness operators (the one from the
-augmented type and the second nullness operator), compute a “desired
-nullness operator.” Do so by applying the following rules in order. Once
-one condition is met, skip the remaining conditions.
+-  the nullness operator to apply
+-  the `augmented type <#augmented-type>`__ (which, again, includes a
+   `nullness operator <#nullness-operator>`__ for that type) to apply it
+   to
+
+The result of the process is an augmented type.
+
+The process is as follows:
+
+First, based on the pair of nullness operators (the one to apply and the
+one from the augmented type), compute a “desired nullness operator.” Do
+so by applying the following rules in order. Once one condition is met,
+skip the remaining conditions.
 
 -  If either nullness operator is ``UNION_NULL``, the desired nullness
    operator is ``UNION_NULL``.
@@ -223,11 +230,11 @@ output is the same as the input but with its nullness operator replaced
 with the desired nullness operator.
 
 Otherwise, the output is an intersection type. For every element ``Tᵢ``
-of the input type, the output type has an element that is ``Tᵢ`` unioned
-with the desired nullness operator.
+of the input type, the output type has an element that is the result of
+applying the desired nullness operator to ``Tᵢ``.
 
    In this case, the desired nullness operator is always equal to the
-   second nullness operator that was an input to this process. That’s
+   nullness operator to apply that was an input to this process. That’s
    because the nullness operator `of the intersection type
    itself <#intersection-types>`__ is defined to always be
    ``NO_CHANGE``.
@@ -318,8 +325,9 @@ parameter ``Pᵢ``:
 
 For every type ``V`` whose `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-is ``Pᵢ``, replace ``V`` with the `union <#unioning>`__ of ``Aᵢ`` and
-the `nullness operator <#nullness-operator>`__ of ``V``.
+is ``Pᵢ``, replace ``V`` with the result of
+`applying <#applying-operator>`__ the `nullness
+operator <#nullness-operator>`__ of ``V`` to ``Aᵢ``.
 
 .. _null-types:
 
