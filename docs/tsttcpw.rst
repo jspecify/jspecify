@@ -28,6 +28,8 @@ current working decisions in an effort to remain simple.**
       -  neither (as in “parametric nullness”)
       -  both (as in “unspecified nullness” in “lenient mode”)
 
+   TODO(cpovirk): Link to my “Don’t say ‘nullable’” doc once I write it.
+
 .. _concept-references:
 
 References to concepts defined by this spec
@@ -542,7 +544,7 @@ The Java rules are defined in `JLS
 We add to them as follows:
 
 -  Disregard the 2 rules that refer to a bare ``?``. Instead, treat
-   ``?`` like ``? extends Object``, where the `additional
+   ``?`` like ``?     extends Object``, where the `additional
    nullness <#additional-nullness>`__ of the ``Object`` bound is
    specified by `“Bound of an unbounded
    wildcard.” <#unbounded-wildcard>`__
@@ -572,7 +574,7 @@ We add to them as follows:
    nullness <#additional-nullness>`__ as the input type.
 
 -  Disregard the JLS rule about ``<?>``. Instead, treat ``?`` like
-   ``? extends Object``, where the `additional
+   ``? extends     Object``, where the `additional
    nullness <#additional-nullness>`__ of the ``Object`` bound is
    specified by `“Bound of an unbounded
    wildcard.” <#unbounded-wildcard>`__
