@@ -207,54 +207,6 @@ type as a whole. The nullness operator of the type as a whole is always
    types under `“Applying a nullness operator to an augmented
    type.” <#applying-operator>`__
 
-.. _applying-operator:
-
-Applying a nullness operator to an augmented type
--------------------------------------------------
-
-The process of applying a `nullness operator <#nullness-operator>`__
-requires 2 inputs:
-
--  the nullness operator to apply
--  the `augmented type <#augmented-type>`__ (which, again, includes a
-   `nullness operator <#nullness-operator>`__ for that type) to apply it
-   to
-
-The result of the process is an augmented type.
-
-The process is as follows:
-
-First, based on the pair of nullness operators (the one to apply and the
-one from the augmented type), compute a “desired nullness operator.” Do
-so by applying the following rules in order. Once one condition is met,
-skip the remaining conditions.
-
--  If the nullness operator to apply is ``MINUS_NULL``, the desired
-   nullness operator is ``MINUS_NULL``.
--  If either nullness operator is ``UNION_NULL``, the desired nullness
-   operator is ``UNION_NULL``.
--  If either nullness operator is ``UNSPECIFIED``, the desired nullness
-   operator is ``UNSPECIFIED``.
--  The desired nullness operator is ``NO_CHANGE``.
-
-Then, if the input augmented type is *not* an intersection type, the
-output is the same as the input but with its nullness operator replaced
-with the desired nullness operator.
-
-Otherwise, the output is an intersection type. For every element ``Tᵢ``
-of the input type, the output type has an element that is the result of
-applying the desired nullness operator to ``Tᵢ``.
-
-   In this case, the desired nullness operator is always equal to the
-   nullness operator to apply that was an input to this process. That’s
-   because the nullness operator `of the intersection type
-   itself <#intersection-types>`__ is defined to always be
-   ``NO_CHANGE``.
-
-TODO(cpovirk): Update these rules for the “out of bounds” case now that
-we have ``MINUS_NULL`` to make that work. That will probably require
-redefining the process to take 2 full augmented types as input.
-
 .. _unbounded-wildcard:
 
 Bound of an “unbounded” wildcard
@@ -344,6 +296,54 @@ type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_i
 is ``Pᵢ``, replace ``V`` with the result of
 `applying <#applying-operator>`__ the `nullness
 operator <#nullness-operator>`__ of ``V`` to ``Aᵢ``.
+
+.. _applying-operator:
+
+Applying a nullness operator to an augmented type
+-------------------------------------------------
+
+The process of applying a `nullness operator <#nullness-operator>`__
+requires 2 inputs:
+
+-  the nullness operator to apply
+-  the `augmented type <#augmented-type>`__ (which, again, includes a
+   `nullness operator <#nullness-operator>`__ for that type) to apply it
+   to
+
+The result of the process is an augmented type.
+
+The process is as follows:
+
+First, based on the pair of nullness operators (the one to apply and the
+one from the augmented type), compute a “desired nullness operator.” Do
+so by applying the following rules in order. Once one condition is met,
+skip the remaining conditions.
+
+-  If the nullness operator to apply is ``MINUS_NULL``, the desired
+   nullness operator is ``MINUS_NULL``.
+-  If either nullness operator is ``UNION_NULL``, the desired nullness
+   operator is ``UNION_NULL``.
+-  If either nullness operator is ``UNSPECIFIED``, the desired nullness
+   operator is ``UNSPECIFIED``.
+-  The desired nullness operator is ``NO_CHANGE``.
+
+Then, if the input augmented type is *not* an intersection type, the
+output is the same as the input but with its nullness operator replaced
+with the desired nullness operator.
+
+Otherwise, the output is an intersection type. For every element ``Tᵢ``
+of the input type, the output type has an element that is the result of
+applying the desired nullness operator to ``Tᵢ``.
+
+   In this case, the desired nullness operator is always equal to the
+   nullness operator to apply that was an input to this process. That’s
+   because the nullness operator `of the intersection type
+   itself <#intersection-types>`__ is defined to always be
+   ``NO_CHANGE``.
+
+TODO(cpovirk): Update these rules for the “out of bounds” case now that
+we have ``MINUS_NULL`` to make that work. That will probably require
+redefining the process to take 2 full augmented types as input.
 
 .. _null-types:
 
