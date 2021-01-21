@@ -285,100 +285,6 @@ operator of ``UNSPECIFIED``.
    part is that we consider the source code ``<T>`` to have a bound of
    ``Object``, just as it does when compiled to bytecode.
 
-Substitution
-------------
-
-   Substitution on Java base types barely requires an explanation: See
-   `JLS
-   1.3 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3>`__.
-   Substitution on `augmented types <#augmented-type>`__, however, is
-   trickier: If ``Map.get`` returns “``V`` with `nullness
-   operator <#nullness-operator>`__ ``UNION_NULL``,” and if a user has a
-   map whose value type is “``String`` with nullness operator
-   ``UNSPECIFIED``,” then what does its ``get`` method return? Naive
-   substitution would produce “``String`` with nullness operator
-   ``UNSPECIFIED`` with nullness operator ``UNION_NULL``.” To reduce
-   that to a proper augmented type with a single nullness operator, we
-   define this process.
-
-To substitute each type argument ``Aᵢ`` for each corresponding type
-parameter ``Pᵢ``:
-
-For every type ``V`` whose `base
-type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
-is ``Pᵢ``, replace ``V`` with the result of the following operation:
-
--  If ``V`` is `null-exclusive under every
-   parameterization <#null-exclusive-under-every-parameterization>`__ in
-   the `least convenient world <#multiple-worlds>`__, then replace it
-   with the result of `applying <#applying-operator>`__ ``MINUS_NULL``
-   to ``Aᵢ``.
-
-      This is the one instance in which a rule references another rule
-      to be run under a *different* “world.” Normally, all rules are run
-      `under the same “world.” <#propagating-multiple-worlds>`__ But in
-      this instance, the null-exclusivity rule (and all rules that it in
-      turn applies) are always run in the least convenient world.
-
-   ..
-
-      This special case improves behavior in “the
-      ``ImmutableList.Builder`` case”: Consider an unannotated user of
-      that class. Its builder will have an element type whose `nullness
-      operator <#nullness-operator>`__ is ``UNSPECIFIED``. Without this
-      special case, ``builder.add(objectUnionNull)`` would pass the
-      subtyping check in the `most convenient
-      world <#multiple-worlds>`__. This would happen even though we have
-      enough information to know that the parameter to ``add`` is
-      universally null-exclusive — even in the most convenient world.
-      The special case here makes that subtyping check fail.
-
--  Otherwise, replace ``V`` with the result of applying the nullness
-   operator of ``V`` to ``Aᵢ``.
-
-.. _applying-operator:
-
-Applying a nullness operator to an augmented type
--------------------------------------------------
-
-The process of applying a `nullness operator <#nullness-operator>`__
-requires 2 inputs:
-
--  the nullness operator to apply
--  the `augmented type <#augmented-type>`__ (which, again, includes a
-   `nullness operator <#nullness-operator>`__ for that type) to apply it
-   to
-
-The result of the process is an augmented type.
-
-The process is as follows:
-
-First, based on the pair of nullness operators (the one to apply and the
-one from the augmented type), compute a “desired nullness operator.” Do
-so by applying the following rules in order. Once one condition is met,
-skip the remaining conditions.
-
--  If the nullness operator to apply is ``MINUS_NULL``, the desired
-   nullness operator is ``MINUS_NULL``.
--  If either nullness operator is ``UNION_NULL``, the desired nullness
-   operator is ``UNION_NULL``.
--  If either nullness operator is ``UNSPECIFIED``, the desired nullness
-   operator is ``UNSPECIFIED``.
--  The desired nullness operator is ``NO_CHANGE``.
-
-Then, if the input augmented type is *not* an `intersection
-type <#intersection-types>`__, the output is the same as the input but
-with its nullness operator replaced with the desired nullness operator.
-
-Otherwise, the output is an intersection type. For every element ``Tᵢ``
-of the input type, the output type has an element that is the result of
-applying the desired nullness operator to ``Tᵢ``.
-
-   In this case, the desired nullness operator is always equal to the
-   nullness operator to apply that was an input to this process. That’s
-   because the nullness operator of the intersection type itself is
-   defined to always be ``NO_CHANGE``.
-
 .. _null-types:
 
 Augmented null types
@@ -639,6 +545,100 @@ We add to them as follows:
 **Most convenient world:** The rules are the same except that the
 requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
 ``UNSPECIFIED``.”
+
+Substitution
+------------
+
+   Substitution on Java base types barely requires an explanation: See
+   `JLS
+   1.3 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3>`__.
+   Substitution on `augmented types <#augmented-type>`__, however, is
+   trickier: If ``Map.get`` returns “``V`` with `nullness
+   operator <#nullness-operator>`__ ``UNION_NULL``,” and if a user has a
+   map whose value type is “``String`` with nullness operator
+   ``UNSPECIFIED``,” then what does its ``get`` method return? Naive
+   substitution would produce “``String`` with nullness operator
+   ``UNSPECIFIED`` with nullness operator ``UNION_NULL``.” To reduce
+   that to a proper augmented type with a single nullness operator, we
+   define this process.
+
+To substitute each type argument ``Aᵢ`` for each corresponding type
+parameter ``Pᵢ``:
+
+For every type ``V`` whose `base
+type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
+is ``Pᵢ``, replace ``V`` with the result of the following operation:
+
+-  If ``V`` is `null-exclusive under every
+   parameterization <#null-exclusive-under-every-parameterization>`__ in
+   the `least convenient world <#multiple-worlds>`__, then replace it
+   with the result of `applying <#applying-operator>`__ ``MINUS_NULL``
+   to ``Aᵢ``.
+
+      This is the one instance in which a rule references another rule
+      to be run under a *different* “world.” Normally, all rules are run
+      `under the same “world.” <#propagating-multiple-worlds>`__ But in
+      this instance, the null-exclusivity rule (and all rules that it in
+      turn applies) are always run in the least convenient world.
+
+   ..
+
+      This special case improves behavior in “the
+      ``ImmutableList.Builder`` case”: Consider an unannotated user of
+      that class. Its builder will have an element type whose `nullness
+      operator <#nullness-operator>`__ is ``UNSPECIFIED``. Without this
+      special case, ``builder.add(objectUnionNull)`` would pass the
+      subtyping check in the `most convenient
+      world <#multiple-worlds>`__. This would happen even though we have
+      enough information to know that the parameter to ``add`` is
+      universally null-exclusive — even in the most convenient world.
+      The special case here makes that subtyping check fail.
+
+-  Otherwise, replace ``V`` with the result of applying the nullness
+   operator of ``V`` to ``Aᵢ``.
+
+.. _applying-operator:
+
+Applying a nullness operator to an augmented type
+-------------------------------------------------
+
+The process of applying a `nullness operator <#nullness-operator>`__
+requires 2 inputs:
+
+-  the nullness operator to apply
+-  the `augmented type <#augmented-type>`__ (which, again, includes a
+   `nullness operator <#nullness-operator>`__ for that type) to apply it
+   to
+
+The result of the process is an augmented type.
+
+The process is as follows:
+
+First, based on the pair of nullness operators (the one to apply and the
+one from the augmented type), compute a “desired nullness operator.” Do
+so by applying the following rules in order. Once one condition is met,
+skip the remaining conditions.
+
+-  If the nullness operator to apply is ``MINUS_NULL``, the desired
+   nullness operator is ``MINUS_NULL``.
+-  If either nullness operator is ``UNION_NULL``, the desired nullness
+   operator is ``UNION_NULL``.
+-  If either nullness operator is ``UNSPECIFIED``, the desired nullness
+   operator is ``UNSPECIFIED``.
+-  The desired nullness operator is ``NO_CHANGE``.
+
+Then, if the input augmented type is *not* an `intersection
+type <#intersection-types>`__, the output is the same as the input but
+with its nullness operator replaced with the desired nullness operator.
+
+Otherwise, the output is an intersection type. For every element ``Tᵢ``
+of the input type, the output type has an element that is the result of
+applying the desired nullness operator to ``Tᵢ``.
+
+   In this case, the desired nullness operator is always equal to the
+   nullness operator to apply that was an input to this process. That’s
+   because the nullness operator of the intersection type itself is
+   defined to always be ``NO_CHANGE``.
 
 Capture conversion
 ------------------
