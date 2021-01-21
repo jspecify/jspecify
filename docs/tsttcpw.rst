@@ -80,7 +80,7 @@ components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvta
    “nullness operator.” Still, the glossary’s concept of the “nullness”
    of a type is derivable from the type’s nullness operator. Notably,
    the glossary’s “nullable” type is our `least convenient
-   world’s <#multiple-worlds>`__\ ’s `null-inclusive under every
+   world <#multiple-worlds>`__\ ’s `null-inclusive under every
    parameterization <#null-inclusive-under-every-parameterization>`__,
    and the glossary’s “non-nullable” type is our least convenient
    world’s `null-exclusive under every
@@ -454,7 +454,7 @@ We add to them as follows:
    *ignore* the `nullness operator <#nullness-operator>`__ of the input
    types and output types. The augmented types matter only when the Java
    rules refer to *other* rules that are defined in this spec. *Those*
-   rules respect the nullness operator of some type components – but
+   rules respect the nullness operator of some type components — but
    never the nullness operator of the type component that represents the
    whole input or output type.
 
@@ -538,7 +538,7 @@ following hold:
    edges <#nullness-subtype-establishing-direct-supertype-edges>`__.
 
       The path may be empty. That is, ``A`` has a
-      nullness-subtype-establishing path to itself – as long as it has
+      nullness-subtype-establishing path to itself — as long as it has
       one of the required nullness operators.
 
 **Most convenient world:** The rules are the same except that the
