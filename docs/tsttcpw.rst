@@ -136,8 +136,8 @@ Otherwise, it is not.
 
 .. _augmented-type-of-usage:
 
-Augmented type of a type usage in code
---------------------------------------
+Augmented type of a type usage appearing in code
+------------------------------------------------
 
 For most type usages in source code or bytecode on which JSpecify
 nullness annotations are structurally valid, this section defines how to
@@ -411,6 +411,10 @@ We add to them as follows:
 Nullness subtyping
 ------------------
 
+   The primary complication in subtyping comes from type-variable
+   usages. Our rules for them must account for every combination of type
+   arguments with which a given generic type can be parameterized.
+
 ``A`` is a nullness subtype of ``F`` if any of the following conditions
 are met:
 
@@ -433,6 +437,14 @@ either <https://groups.google.com/d/msg/jspecify-dev/yPnkx_GSb0Q/hLgS_431AQAJ>`_
 Fortunately, this “mostly transitive” behavior is exactly the behavior
 that implementations are likely to produce naturally. Maybe someday we
 will find a way to specify this fully correctly.)
+
+Nullness subtyping (and thus subtyping itself) is *not* reflexive.
+
+   It does end up being reflexive in the `most convenient
+   world <#multiple-worlds>`__. We don’t state that as a rule for 2
+   reasons: First, it arises naturally from the definitions in that
+   world. Second, we don’t want to suggest that subtyping is reflexive
+   in the `least convenient world <#multiple-worlds>`__.
 
 Null-inclusive under every parameterization
 -------------------------------------------
@@ -565,7 +577,7 @@ Substitution
 To substitute each type argument ``Aᵢ`` for each corresponding type
 parameter ``Pᵢ``:
 
-For every type ``V`` whose `base
+For every type-variable usage ``V`` whose `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 is ``Pᵢ``, replace ``V`` with the result of the following operation:
 
