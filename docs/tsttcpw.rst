@@ -121,14 +121,19 @@ Null-aware context
 To determine whether a type usage appears in a null-aware context:
 
 Look for an ``@org.jspecify.annotations.NullAware`` annotation on any of
-the containing scopes surrounding the type usage.
+the enclosing scopes surrounding the type usage.
 
-Class members are contained by classes, which may be contained by other
-class members or classes, and top-level classes are contained by
-packages, which may be contained by modules.
+Class members are enclosed by classes, which may be enclosed by other
+class members or classes. and top-level classes are enclosed by
+packages, which may be enclosed by modules.
 
-   This concept of “containing scopes” is different from the concept of
-   “containing types” described under `Containment <#containment>`__.
+   Packages are *not* enclosed by “parent” packages.
+
+..
+
+   This definition of “enclosing” likely matches `the definition in the
+   Java compiler
+   API <https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__.
 
 If an ``@org.jspecify.annotations.NullAware`` annotation exists on one
 of these scopes, then the type usage is in a null-aware context.
