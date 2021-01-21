@@ -88,9 +88,9 @@ components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvta
 
 For our purposes, base types (and thus augmented types) include not just
 class and interface types, array types, and type variables but also
-intersection types and the null type. This is true even though the JLS
-sometimes does not supply rules for intersection types and sometimes has
-separate rules for the null type.
+`intersection types <#intersection-types>`__ and the null type. This is
+true even though the JLS sometimes does not supply rules for
+intersection types and sometimes has separate rules for the null type.
 
 The goal of this spec is to define rules for augmented types compatible
 with those that the JLS defines for base types.
@@ -327,9 +327,9 @@ skip the remaining conditions.
    operator is ``UNSPECIFIED``.
 -  The desired nullness operator is ``NO_CHANGE``.
 
-Then, if the input augmented type is *not* an intersection type, the
-output is the same as the input but with its nullness operator replaced
-with the desired nullness operator.
+Then, if the input augmented type is *not* an `intersection
+type <#intersection-types>`__, the output is the same as the input but
+with its nullness operator replaced with the desired nullness operator.
 
 Otherwise, the output is an intersection type. For every element ``Tᵢ``
 of the input type, the output type has an element that is the result of
@@ -337,9 +337,8 @@ applying the desired nullness operator to ``Tᵢ``.
 
    In this case, the desired nullness operator is always equal to the
    nullness operator to apply that was an input to this process. That’s
-   because the nullness operator `of the intersection type
-   itself <#intersection-types>`__ is defined to always be
-   ``NO_CHANGE``.
+   because the nullness operator of the intersection type itself is
+   defined to always be ``NO_CHANGE``.
 
 TODO(cpovirk): Update these rules for the “out of bounds” case now that
 we have ``MINUS_NULL`` to make that work. That will probably require
@@ -501,8 +500,8 @@ A type is null-inclusive under every parameterization if it meets either
 of the following conditions:
 
 -  Its `nullness operator <#nullness-operator>`__ is ``UNION_NULL``.
--  It is an intersection type whose elements all are null-inclusive
-   under every parameterization.
+-  It is an `intersection type <#intersection-types>`__ whose elements
+   all are null-inclusive under every parameterization.
 
 **Most convenient world:** The rule is the same except that the
 requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
@@ -522,8 +521,8 @@ following:
 -  any augmented class or array type
 
       This rule refers specifically to a “class or array type,” as
-      distinct from other types like type variables and intersection
-      types.
+      distinct from other types like type variables and `intersection
+      types <#intersection-types>`__.
 
 Nullness-subtype-establishing path
 ----------------------------------
@@ -554,9 +553,9 @@ union of the nodes computed by the following 2 rules:
 
 Upper-bound rule:
 
--  if ``T`` is an augmented intersection type: all the intersection
-   type’s elements whose `nullness operator <#nullness-operator>`__ is
-   ``NO_CHANGE`` or ``MINUS_NULL``
+-  if ``T`` is an augmented `intersection type <#intersection-types>`__:
+   all the intersection type’s elements whose `nullness
+   operator <#nullness-operator>`__ is ``NO_CHANGE`` or ``MINUS_NULL``
 -  if ``T`` is an augmented type variable: all the corresponding type
    parameter’s upper bounds whose nullness operator is ``NO_CHANGE`` or
    ``MINUS_NULL``
