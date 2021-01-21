@@ -168,6 +168,13 @@ Once one condition is met, skip the remaining conditions.
 
 ..
 
+   The choice of nullness operator is *not* affected by any nullness
+   operator that appears in a corresponding location in a supertype. For
+   example, if one type declares a method whose return type is annotated
+   ``@Nullable``, and if another type overrides that method but does not
+   declare the return type as ``@Nullable``, then the override’s return
+   type will *not* have nullness operator ``UNION_NULL``.
+
    These rules never produce the fourth nullness operator,
    ``MINUS_NULL``. However, if tool authors prefer, they can safely
    produce ``MINUS_NULL`` in any case in which it is equivalent to
