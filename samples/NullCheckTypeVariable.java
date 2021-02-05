@@ -24,6 +24,7 @@ class NullCheckTypeVariable<T> {
     if (o != null) {
       return o;
     } else {
+      // jspecify_nullness_mismatch
       return o;
     }
   }
@@ -48,6 +49,7 @@ class NullCheckTypeVariable<T> {
 
   Object x3(T o) {
     if (o == null) {
+      // jspecify_nullness_mismatch
       return o;
     } else {
       return o;

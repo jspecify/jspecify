@@ -25,6 +25,7 @@ class NullCheck {
     if (o != null) {
       return o;
     } else {
+      // jspecify_nullness_mismatch
       return o;
     }
   }
@@ -49,6 +50,7 @@ class NullCheck {
 
   Object x3(Object o) {
     if (o == null) {
+      // jspecify_nullness_mismatch
       return o;
     } else {
       return o;
