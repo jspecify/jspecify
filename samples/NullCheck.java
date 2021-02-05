@@ -33,7 +33,7 @@ class NullCheck {
     if (o != null) {
       return o;
     } else {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_mismatch
       return o;
     }
   }
