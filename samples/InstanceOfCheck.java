@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class InstanceOfCheck {
   Object x0(Object o) {
-    if (o instanceof Object) {
+    if (o instanceof Foo) {
       return o;
     } else {
       return o;
@@ -29,7 +29,7 @@ class InstanceOfCheck {
   }
 
   Object x1(@NullnessUnspecified Object o) {
-    if (o instanceof Object) {
+    if (o instanceof Foo) {
       return o;
     } else {
       // jspecify_nullness_not_enough_information
@@ -38,11 +38,13 @@ class InstanceOfCheck {
   }
 
   Object x2(@Nullable Object o) {
-    if (o instanceof Object) {
+    if (o instanceof Foo) {
       return o;
     } else {
       // jspecify_nullness_mismatch
       return o;
     }
   }
+
+  class Foo {}
 }
