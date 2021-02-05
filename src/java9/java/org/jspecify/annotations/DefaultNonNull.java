@@ -15,6 +15,7 @@
  */
 package org.jspecify.annotations;
 
+import static java.lang.annotation.ElementType.MODULE;
 import static java.lang.annotation.ElementType.PACKAGE;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.CLASS;
@@ -32,8 +33,6 @@ import java.lang.annotation.Target;
  * even building prototypes that use them.
  */
 @Documented
-@Target({TYPE, PACKAGE})
+@Target({TYPE, PACKAGE, MODULE})
 @Retention(CLASS)
-public @interface DefaultNonNull {
-    // note for maintainers: When you update this file, please update the file in src/java9 too.
-}
+public @interface DefaultNonNull {}

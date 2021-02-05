@@ -1,0 +1,36 @@
+/**
+ * This build configuration configures project to necessary files to support JEP 238: Multi-Release JAR Files.
+ * https://openjdk.java.net/jeps/238
+ *
+ * It puts class files built for Java 9+ into META-INF/versions/9 directory.
+ * It also create a manifest file with Multi-Release attribute.
+ */
+
+sourceSets {
+    // The source set for classes stored in META-INF/versions/9 directory
+    java9 {
+        java {
+            srcDirs = ['src/java9/java']
+        }
+    }
+}
+
+tasks.named('compileJava9Java', JavaCompile).configure {
+    options.release = 9
+}
+
+def processMrJarResources = tasks.register('processMrJarResources', Copy)
+processMrJarResources.configure {
+    from sourceSets.java9.output
+    into "${sourceSets.main.output.resourcesDir}/META-INF/versions/9"
+}
+
+tasks.named('classes').configure {
+    dependsOn processMrJarResources
+}
+
+jar {
+    manifest {
+        attributes 'Multi-Release': true
+    }
+}

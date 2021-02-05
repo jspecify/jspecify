@@ -6,42 +6,20 @@ plugins {
     id 'org.javamodularity.moduleplugin' version '1.7.0'
 }
 
-apply from: "gradle/format.gradle"
-apply from: "gradle/publish.gradle"
-
-repositories { mavenCentral() }
-
 ext {
     junitVersion = '5.7.0'
     errorproneVersion = '2.3.4'
 }
 
+repositories { mavenCentral() }
+
+apply from: "gradle/mrjar.gradle"
+apply from: "gradle/integration-test.gradle"
+apply from: "gradle/format.gradle"
+apply from: "gradle/publish.gradle"
+
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
     errorprone "com.google.errorprone:error_prone_core:${errorproneVersion}"
-}
-
-test { useJUnitPlatform() }
-
-def testOnJava8 = tasks.register("testOnJava8", Test)
-tasks.named('test').configure {
-    // to let pre-merge build confirms test passes on Java 8 but fails on Java 11
-    shouldRunAfter testOnJava8
-}
-testOnJava8.configure {
-    group 'Verification'
-    description 'Runs the unit tests with JDK8, to verify the support for Java without jigsaw.'
-
-    dependsOn tasks.named('testClasses')
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
-}
-
-tasks.named('check').configure {
-    dependsOn testOnJava8
 }
 
 java {
