@@ -65,7 +65,6 @@ class OverrideParameters {
 
   interface SubObjectUnionNull extends Super {
     @Override
-    // jspecify_nullness_mismatch
     void useObject(@Nullable Object o);
 
     @Override
