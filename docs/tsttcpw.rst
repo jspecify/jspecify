@@ -175,10 +175,13 @@ Once one condition is met, skip the remaining conditions.
    declare the return type as ``@Nullable``, then the override’s return
    type will *not* have nullness operator ``UNION_NULL``.
 
-   These rules never produce the fourth nullness operator,
-   ``MINUS_NULL``. However, if tool authors prefer, they can safely
-   produce ``MINUS_NULL`` in any case in which it is equivalent to
-   ``NO_CHANGE``. For example, there is no difference between a
+   The rules here never produce the fourth nullness operator,
+   ``MINUS_NULL``. (It will appear later in
+   `substitution <#substitution>`__. Additionally, we expect for tool
+   authors to produce ``MINUS_NULL`` based on the results of null checks
+   in implementation code.) However, if tool authors prefer, they can
+   safely produce ``MINUS_NULL`` in any case in which it is equivalent
+   to ``NO_CHANGE``. For example, there is no difference between a
    ``String`` with ``NO_CHANGE`` and a ``String`` with ``MINUS_NULL``.
 
 .. _intersection-types:
