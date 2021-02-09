@@ -20,6 +20,7 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @DefaultNonNull
 class NullCheck {
+  // TODO(cpovirk): Soften README to permit flow-sensitive samples in moderation.
   Object x1(@NullnessUnspecified Object o) {
     if (o != null) {
       return o;
