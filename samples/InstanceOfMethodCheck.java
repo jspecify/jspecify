@@ -21,7 +21,7 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class InstanceOfMethodCheck {
   Object x0(Object o) {
-    if (Object.class.isInstance(o)) {
+    if (Foo.class.isInstance(o)) {
       return o;
     } else {
       return o;
@@ -29,7 +29,7 @@ class InstanceOfMethodCheck {
   }
 
   Object x1(@NullnessUnspecified Object o) {
-    if (Object.class.isInstance(o)) {
+    if (Foo.class.isInstance(o)) {
       return o;
     } else {
       // jspecify_nullness_not_enough_information
@@ -38,11 +38,13 @@ class InstanceOfMethodCheck {
   }
 
   Object x2(@Nullable Object o) {
-    if (Object.class.isInstance(o)) {
+    if (Foo.class.isInstance(o)) {
       return o;
     } else {
       // jspecify_nullness_mismatch
       return o;
     }
   }
+
+  class Foo {}
 }
