@@ -27,7 +27,6 @@ class UnrecognizedLocationsMisc {
       // jspecify_nullness_intrinsically_not_nullable
       implements @Nullable Super {
     // jspecify_nullness_intrinsically_not_nullable
-    @Nullable
-    Sub() {}
+    @Nullable Sub() {}
   }
 }
