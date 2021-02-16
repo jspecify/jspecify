@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: jspecify \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-15 11:04+0000\n"
+"POT-Creation-Date: 2021-02-16 01:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,8 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: ../../index.rst:60
-#, fuzzy
+#: ../../index.rst:65
 msgid "Contents"
 msgstr "コンテンツ"
 
@@ -74,7 +73,7 @@ msgstr "標準の欠落は、Javaと他のJVM言語との間の相互運用と�
 msgid ""
 "This missing artifact, with full specifications, is what we are working "
 "to create. [1]_"
-msgstr "この失われた成果物を正式な仕様と共に作成することが、私達が成そうとしていることです。"
+msgstr "この失われた成果物を正式な仕様と共に作成することが、私達が成そうとしていることです。 [1]_"
 
 #: ../../index.rst:20
 msgid ""
@@ -82,124 +81,142 @@ msgid ""
 "know about the xkcd comic."
 msgstr "私達はxkcdを読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
 
-#: ../../index.rst:27
-msgid "Talks about JSpecify"
-msgstr "JSpecifyに関するトーク"
+#: ../../index.rst:23
+msgid "Activity"
+msgstr "活動"
 
 #: ../../index.rst:25
 msgid ""
-"`JVMLS19 overview presentation "
-"<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
-msgstr ""
-"`JVMLS19 にて発表されたプロジェクト概要（英文） "
-"<https://drive.google.com/file/d/15wZ-cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
+"The primary location for our day-to-day work is on GitHub: "
+"https://github.com/jspecify/jspecify"
+msgstr "私達は日々、主にGitHubで活動しています: https://github.com/jspecify/jspecify"
 
 #: ../../index.rst:28
+msgid "Talks about JSpecify"
+msgstr "JSpecifyに関するトーク"
+
+#: ../../index.rst:30
+msgid ""
+"`JVMLS19 overview presentation <https://drive.google.com/file/d/15wZ-"
+"cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
+msgstr ""
+"`JVMLS19 にて発表されたプロジェクト概要（英文） <https://drive.google.com/file/d/15wZ-"
+"cVPkfsNYzSez9WrAF4gEjWNzlDAD/view>`_"
+
+#: ../../index.rst:33
 msgid "Participants"
 msgstr "参加団体"
 
-#: ../../index.rst:30
+#: ../../index.rst:35
 msgid ""
 "People from the following projects and organizations are collaborating on"
 " this project:"
 msgstr "以下に挙げるプロジェクトや組織がこのプロジェクトに協力しています:"
 
-#: ../../index.rst:33
+#: ../../index.rst:38
 msgid "Project"
 msgstr "プロジェクト"
 
-#: ../../index.rst:33
+#: ../../index.rst:38
 msgid "Organization"
 msgstr "組織"
 
-#: ../../index.rst:35
+#: ../../index.rst:40
 msgid "`Android <https://www.android.com>`_"
 msgstr ""
 
-#: ../../index.rst:35 ../../index.rst:39 ../../index.rst:41
+#: ../../index.rst:40 ../../index.rst:44 ../../index.rst:46
 msgid "`Google <https://google.com>`_"
 msgstr ""
 
-#: ../../index.rst:37
+#: ../../index.rst:42
 msgid "`Checker Framework <https://checkerframework.org>`_"
 msgstr ""
 
-#: ../../index.rst:39
+#: ../../index.rst:42
+msgid "`Checker Framework Team <https://checkerframework.org>`_"
+msgstr ""
+
+#: ../../index.rst:44
 msgid "`Error Prone <https://errorprone.info>`_"
 msgstr ""
 
-#: ../../index.rst:41
+#: ../../index.rst:46
 msgid "`Guava <https://github.com/google/guava>`_"
 msgstr ""
 
-#: ../../index.rst:43
+#: ../../index.rst:48
 msgid "`IntelliJ IDEA <https://www.jetbrains.com/idea/>`_"
 msgstr ""
 
-#: ../../index.rst:43 ../../index.rst:45
+#: ../../index.rst:48 ../../index.rst:50
 msgid "`JetBrains <https://www.jetbrains.com/>`_"
 msgstr ""
 
-#: ../../index.rst:45
+#: ../../index.rst:50
 msgid "`Kotlin <https://kotlinlang.org/>`_"
 msgstr ""
 
-#: ../../index.rst:47
+#: ../../index.rst:52
 msgid "`NullAway <https://github.com/uber/NullAway>`_"
 msgstr ""
 
-#: ../../index.rst:47
+#: ../../index.rst:52
 msgid "`Uber <https://uber.com>`_"
 msgstr ""
 
-#: ../../index.rst:49
+#: ../../index.rst:54
 msgid "`PMD <https://pmd.github.io/>`_"
 msgstr ""
 
-#: ../../index.rst:51
-msgid "`Spring <https://pivotal.io/spring-app-framework>`_"
+#: ../../index.rst:54
+msgid "`PMD Team <https://pmd.github.io/>`_"
 msgstr ""
 
-#: ../../index.rst:51
-msgid "`Pivotal <https://pivotal.io>`_"
+#: ../../index.rst:56
+msgid "`Spring <https://tanzu.vmware.com/spring-app-framework>`_"
 msgstr ""
 
-#: ../../index.rst:53
+#: ../../index.rst:56
+msgid "`VMware <https://www.vmware.com/>`_"
+msgstr ""
+
+#: ../../index.rst:58
 msgid "`SonarQube <https://www.sonarqube.org/>`_"
 msgstr ""
 
-#: ../../index.rst:53
+#: ../../index.rst:58
 msgid "`SonarSource <https://www.sonarsource.com/>`_"
 msgstr ""
 
-#: ../../index.rst:55
+#: ../../index.rst:60
 msgid "`SpotBugs <http://spotbugs.rtfd.io/>`_"
 msgstr ""
 
-#: ../../index.rst:55
+#: ../../index.rst:60
 msgid "`SpotBugs Team <https://github.com/spotbugs/>`_"
 msgstr ""
 
-#: ../../index.rst:57
+#: ../../index.rst:62
 msgid "`Square <https://squareup.com>`_"
 msgstr ""
 
-#: ../../index.rst:67
+#: ../../index.rst:72
 msgid "Contact Info"
 msgstr "連絡先"
 
-#: ../../index.rst:69
+#: ../../index.rst:74
 msgid "Email the group at <jspecify-dev@googlegroups.com>."
 msgstr "jspecify-dev@googlegroups.com にメールを送ってください。"
 
-#: ../../index.rst:72
+#: ../../index.rst:77
 msgid "Indices and searches"
 msgstr "索引と検索"
 
-#: ../../index.rst:74
+#: ../../index.rst:79
 msgid ":ref:`genindex`"
 msgstr ""
 
-#: ../../index.rst:75
+#: ../../index.rst:80
 msgid ":ref:`search`"
 msgstr ""
