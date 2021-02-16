@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2020 The jspecify Authors.
+ * Copyright 2018-2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,12 @@ package org.jspecify.annotations;
 
 import static java.lang.annotation.ElementType.PACKAGE;
 import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.CLASS;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-@Documented
-@Target({TYPE, PACKAGE})
-@Retention(CLASS)
 /**
  * <b>WARNING:</b> This is not the final class name or package name for this annotation. In
  * addition, we are still discussing questions about semantics, particularly around type-variable
@@ -34,4 +31,9 @@ import java.lang.annotation.Target;
  * <p>These annotations exist only as a skeleton for the final product. At this point, we are not
  * even building prototypes that use them.
  */
-public @interface DefaultNonNull {}
+@Documented
+@Target({TYPE, PACKAGE})
+@Retention(RUNTIME)
+public @interface DefaultNonNull {
+  // note for maintainers: When you update this file, please update the file in src/java9 too.
+}

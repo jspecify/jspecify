@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# jspecify documentation build configuration file, created by
+# JSpecify documentation build configuration file, created by
 # sphinx-quickstart on Wed Apr  1 12:16:19 2020.
 #
 # This file is execfile()d with the current directory set to its
@@ -46,9 +46,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'jspecify'
-copyright = '2020, The jspecify Authors'
-author = 'jspecify'
+project = 'JSpecify'
+copyright = '2020, The JSpecify Authors'
+author = 'JSpecify'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -139,7 +139,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'jspecify.tex', 'jspecify Documentation',
+    (master_doc, 'jspecify.tex', 'JSpecify Documentation',
      'jspecify', 'manual'),
 ]
 
@@ -149,7 +149,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'jspecify', 'jspecify Documentation',
+    (master_doc, 'jspecify', 'JSpecify Documentation',
      [author], 1)
 ]
 
@@ -160,7 +160,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'jspecify', 'jspecify Documentation',
+    (master_doc, 'jspecify', 'JSpecify Documentation',
      author, 'jspecify', 'One line description of project.',
      'Miscellaneous'),
 ]

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,12 +38,12 @@ class MultiBoundTypeVariableToOtherUnspec {
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x4(
       T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> @NullnessUnspecified Lib x5(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
@@ -52,12 +52,12 @@ class MultiBoundTypeVariableToOtherUnspec {
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> @NullnessUnspecified Lib x7(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> @NullnessUnspecified Lib x8(T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 

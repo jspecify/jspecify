@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,12 +25,12 @@ class ClassToObject {
   }
 
   Object x1(@NullnessUnspecified ClassToObject x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x2(@Nullable ClassToObject x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
@@ -41,13 +41,13 @@ class ClassToObject {
 
   @NullnessUnspecified
   Object x4(@NullnessUnspecified ClassToObject x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x5(@Nullable ClassToObject x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 

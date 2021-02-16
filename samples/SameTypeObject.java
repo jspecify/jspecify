@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,37 +25,37 @@ class SameTypeObject {
   }
 
   Lib<Object> x1(Lib<@NullnessUnspecified Object> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Lib<Object> x2(Lib<@Nullable Object> x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Lib<@NullnessUnspecified Object> x3(Lib<Object> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Lib<@NullnessUnspecified Object> x4(Lib<@NullnessUnspecified Object> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Lib<@NullnessUnspecified Object> x5(Lib<@Nullable Object> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Lib<@Nullable Object> x6(Lib<Object> x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Lib<@Nullable Object> x7(Lib<@NullnessUnspecified Object> x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 

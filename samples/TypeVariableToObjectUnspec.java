@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,13 +53,13 @@ class TypeVariableToObjectUnspec<
 
   @NullnessUnspecified
   Object x2(UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x3(NullChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
@@ -75,61 +75,61 @@ class TypeVariableToObjectUnspec<
 
   @NullnessUnspecified
   Object x6(UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x7(NullChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x8(UnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x9(ChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x10(UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x11(NullChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x12(ParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x13(ChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x14(UnspecChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   @NullnessUnspecified
   Object x15(NullChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 }

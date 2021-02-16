@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,62 +42,62 @@ class TypeVariableUnspecToParent<
     //
     UnusedT> {
   Never1T x0(@NullnessUnspecified ChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Never1T x1(@NullnessUnspecified UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Never1T x2(@NullnessUnspecified NullChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Never2T x3(@NullnessUnspecified ChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Never2T x4(@NullnessUnspecified UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Never2T x5(@NullnessUnspecified NullChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   UnspecT x6(@NullnessUnspecified ChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   UnspecT x7(@NullnessUnspecified UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   UnspecT x8(@NullnessUnspecified NullChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   ParametricT x9(@NullnessUnspecified ChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   ParametricT x10(@NullnessUnspecified UnspecChildOfParametricT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   ParametricT x11(@NullnessUnspecified NullChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 }

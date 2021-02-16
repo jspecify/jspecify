@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,82 +42,82 @@ class TypeVariableUnspecToObject<
     //
     UnusedT> {
   Object x0(@NullnessUnspecified Never1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x1(@NullnessUnspecified ChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x2(@NullnessUnspecified UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x3(@NullnessUnspecified NullChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x4(@NullnessUnspecified Never2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x5(@NullnessUnspecified ChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x6(@NullnessUnspecified UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x7(@NullnessUnspecified NullChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x8(@NullnessUnspecified UnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x9(@NullnessUnspecified ChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x10(@NullnessUnspecified UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x11(@NullnessUnspecified NullChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x12(@NullnessUnspecified ParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x13(@NullnessUnspecified ChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x14(@NullnessUnspecified UnspecChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x15(@NullnessUnspecified NullChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 }

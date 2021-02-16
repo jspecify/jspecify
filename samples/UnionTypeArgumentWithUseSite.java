@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class UnionTypeArgumentWithUseSite {
     void t(Object t);
 
     @Override
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     void tUnspec(@NullnessUnspecified Object t);
 
     @Override
@@ -42,11 +42,11 @@ class UnionTypeArgumentWithUseSite {
 
   interface SubUnspec extends Super<@NullnessUnspecified Object> {
     @Override
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     void t(@NullnessUnspecified Object t);
 
     @Override
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     void tUnspec(@NullnessUnspecified Object t);
 
     @Override
@@ -66,39 +66,39 @@ class UnionTypeArgumentWithUseSite {
 
   interface SubWeaker extends Super<Object> {
     @Override
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     void tUnspec(Object t);
 
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     void tUnionNull(Object t);
   }
 
   interface SubWeakerUnspec extends Super<@NullnessUnspecified Object> {
     @Override
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     void t(Object t);
 
     @Override
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     void tUnspec(Object t);
 
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     void tUnionNull(Object t);
   }
 
   interface SubWeakerUnionNull extends Super<@Nullable Object> {
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     void t(Object t);
 
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     void tUnspec(Object t);
 
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     void tUnionNull(Object t);
   }
 }

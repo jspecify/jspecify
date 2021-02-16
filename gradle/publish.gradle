@@ -6,7 +6,7 @@ publishing {
             pom {
                 groupId = 'org.jspecify'
                 artifactId = 'annotations'
-                name = 'jspecify annotations'
+                name = 'JSpecify annotations'
                 description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
                 url = 'https://jspecify.org/'
                 from components.java

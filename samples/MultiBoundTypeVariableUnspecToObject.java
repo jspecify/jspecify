@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,48 +21,48 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class MultiBoundTypeVariableUnspecToObject {
   <T extends Object & Lib> Object x0(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @NullnessUnspecified Lib> Object x1(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @Nullable Lib> Object x2(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & Lib> Object x3(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> Object x4(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> Object x5(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & Lib> Object x6(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> Object x7(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> Object x8(@NullnessUnspecified T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 

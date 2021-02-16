@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,20 +27,20 @@ class SuperTypeVariableUnspec {
       @Nullable T tUnionNull) {
     lib.useT(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnionNull);
 
     //
 
     lib.useTUnspec(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnionNull);
 
     //
@@ -59,20 +59,20 @@ class SuperTypeVariableUnspec {
       @Nullable T tUnionNull) {
     lib.useT(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnionNull);
 
     //
 
     lib.useTUnspec(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnionNull);
 
     //
@@ -91,20 +91,20 @@ class SuperTypeVariableUnspec {
       @Nullable T tUnionNull) {
     lib.useT(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnionNull);
 
     //
 
     lib.useTUnspec(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnionNull);
 
     //
@@ -123,20 +123,20 @@ class SuperTypeVariableUnspec {
       @Nullable T tUnionNull) {
     lib.useT(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useT(tUnionNull);
 
     //
 
     lib.useTUnspec(t);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnspec);
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     lib.useTUnspec(tUnionNull);
 
     //

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,12 +50,12 @@ class TypeVariableToObject<
   }
 
   Object x2(UnspecChildOfNever1T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x3(NullChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
@@ -68,52 +68,52 @@ class TypeVariableToObject<
   }
 
   Object x6(UnspecChildOfNever2T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x7(NullChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x8(UnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x9(ChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x10(UnspecChildOfUnspecT x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   Object x11(NullChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x12(ParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x13(ChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x14(UnspecChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x15(NullChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 }

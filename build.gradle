@@ -6,23 +6,21 @@ plugins {
     id 'org.javamodularity.moduleplugin' version '1.7.0'
 }
 
-apply from: "gradle/format.gradle"
-apply from: "gradle/publish.gradle"
-
-repositories { mavenCentral() }
-
 ext {
-    junitVersion = '5.6.1'
+    junitVersion = '5.7.0'
     errorproneVersion = '2.3.4'
 }
 
+repositories { mavenCentral() }
+
+apply from: "gradle/mrjar.gradle"
+apply from: "gradle/integration-test.gradle"
+apply from: "gradle/format.gradle"
+apply from: "gradle/publish.gradle"
+
 dependencies {
-    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
     errorprone "com.google.errorprone:error_prone_core:${errorproneVersion}"
 }
-
-test { useJUnitPlatform() }
 
 java {
     withJavadocJar()

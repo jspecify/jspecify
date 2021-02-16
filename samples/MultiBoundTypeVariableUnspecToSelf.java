@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,48 +21,48 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class MultiBoundTypeVariableUnspecToSelf {
   <T extends Object & Lib> T x0(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @NullnessUnspecified Lib> T x1(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends Object & @Nullable Lib> T x2(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & Lib> T x3(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> T x4(
       @NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> T x5(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & Lib> T x6(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> T x7(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> T x8(@NullnessUnspecified T x) {
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     return x;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,15 +28,15 @@ interface ContravariantReturns {
   interface Subtype extends ContravariantReturns {
     @Override
     @Nullable
-    // MISMATCH
+    // jspecify_nullness_mismatch
     Object makeObject();
 
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     Lib<?> makeImplicitlyObjectBounded();
 
     @Override
-    // MISMATCH
+    // jspecify_nullness_mismatch
     Lib<? extends @Nullable Object> makeExplicitlyObjectBounded();
   }
 

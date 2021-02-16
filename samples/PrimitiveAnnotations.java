@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,18 @@ import org.jspecify.annotations.Nullable;
 
 @DefaultNonNull
 class PrimitiveAnnotations {
-  // PARADOX
-  int x1;
-  // PARADOX
-  @Nullable int[] x2;
+  void foo(
+      // jspecify_nullness_intrinsically_not_nullable
+      @Nullable int x1,
+      // jspecify_nullness_intrinsically_not_nullable
+      @Nullable int[] x2,
+      int x3,
+      int[] x4,
+      int @Nullable [] x5,
+
+      // jspecify_nullness_intrinsically_not_nullable
+      Lib<@Nullable int[]> x6,
+      Lib<int @Nullable []> x7) {}
+
+  class Lib<T extends @Nullable Object> {}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,82 +42,82 @@ class TypeVariableUnionNullToObject<
     //
     UnusedT> {
   Object x0(@Nullable Never1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x1(@Nullable ChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x2(@Nullable UnspecChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x3(@Nullable NullChildOfNever1T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x4(@Nullable Never2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x5(@Nullable ChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x6(@Nullable UnspecChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x7(@Nullable NullChildOfNever2T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x8(@Nullable UnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x9(@Nullable ChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x10(@Nullable UnspecChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x11(@Nullable NullChildOfUnspecT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x12(@Nullable ParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x13(@Nullable ChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x14(@Nullable UnspecChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   Object x15(@Nullable NullChildOfParametricT x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 }

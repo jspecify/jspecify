@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,10 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class ContainmentSuperVsExtends {
   void x() {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     new Check<Lib<? extends Object>, Lib<? super Foo>>();
 
-    // NOT-ENOUGH-INFORMATION
+    // jspecify_nullness_not_enough_information
     new Check<Lib<? extends @NullnessUnspecified Object>, Lib<? super Foo>>();
 
     new Check<Lib<? extends @Nullable Object>, Lib<? super Foo>>();

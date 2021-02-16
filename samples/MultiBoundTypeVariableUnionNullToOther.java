@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,47 +21,47 @@ import org.jspecify.annotations.NullnessUnspecified;
 @DefaultNonNull
 class MultiBoundTypeVariableUnionNullToOther {
   <T extends Object & Lib> Lib x0(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends Object & @NullnessUnspecified Lib> Lib x1(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends Object & @Nullable Lib> Lib x2(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends @NullnessUnspecified Object & Lib> Lib x3(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @NullnessUnspecified Lib> Lib x4(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends @NullnessUnspecified Object & @Nullable Lib> Lib x5(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends @Nullable Object & Lib> Lib x6(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> Lib x7(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
   <T extends @Nullable Object & @Nullable Lib> Lib x8(@Nullable T x) {
-    // MISMATCH
+    // jspecify_nullness_mismatch
     return x;
   }
 
