@@ -18,7 +18,7 @@ import org.jspecify.annotations.DefaultNonNull;
 import org.jspecify.annotations.Nullable;
 
 @DefaultNonNull
-class UnrecognizedLocationsMisc {
+abstract class UnrecognizedLocationsMisc {
   interface Super {}
 
   static class Sub
@@ -29,4 +29,18 @@ class UnrecognizedLocationsMisc {
     // jspecify_nullness_intrinsically_not_nullable
     @Nullable Sub() {}
   }
+
+  void foo() throws Exception {
+    try {
+      // jspecify_unrecognized_location
+      @Nullable Object o;
+      // jspecify_unrecognized_location
+    } catch (@Nullable Exception e) {
+    }
+
+    // jspecify_unrecognized_location
+    try (@Nullable AutoCloseable a = get()) {}
+  }
+
+  abstract AutoCloseable get();
 }
