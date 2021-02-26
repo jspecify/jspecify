@@ -35,6 +35,15 @@ abstract class UnrecognizedLocationsMisc {
     try {
       // jspecify_unrecognized_location
       @Nullable Object o;
+
+      @Nullable Object[] a0;
+
+      // jspecify_unrecognized_location
+      Object @Nullable [] a1;
+
+      // jspecify_unrecognized_location
+      @Nullable Object @Nullable [] a2;
+
       // jspecify_unrecognized_location
     } catch (@Nullable Exception e) {
     }
