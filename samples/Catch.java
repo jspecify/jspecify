@@ -17,7 +17,7 @@
 import org.jspecify.annotations.DefaultNonNull;
 
 @DefaultNonNull
-class Catch {
+abstract class Catch {
   void x() {
     try {
       throw new Exception();
@@ -25,5 +25,13 @@ class Catch {
       e.printStackTrace();
       // TODO(cpovirk): Edit README to permit referencing java.lang.Exception. Or remove this.
     }
+
+    try {
+      throw new RuntimeException();
+    } catch (RuntimeException | Error e) {
+      handleException(e);
+    }
   }
+
+  abstract void handleException(Throwable t);
 }
