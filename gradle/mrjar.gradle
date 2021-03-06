@@ -27,3 +27,8 @@ jar {
         attributes 'Multi-Release': true
     }
 }
+
+javadoc {
+    // Prefer the copy of DefaultNonNull whose @Target includes MODULE.
+    source = sourceSets.java9.allJava + sourceSets.main.allJava
+}
