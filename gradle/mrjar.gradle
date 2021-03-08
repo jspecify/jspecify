@@ -16,7 +16,6 @@ sourceSets {
 
     main {
         java {
-            srcDirs = ['src/main/java']
             exclude('**/DefaultNonNull.java')
         }
     }
