@@ -24,17 +24,14 @@ dependencies {
 
 java {
     withJavadocJar()
-    // TODO(cpovirk): Use withSourcesJar if I can find a way to fully *override* its default value for `from`.
+    withSourcesJar()
 
-    task('sourcesJar', type: Jar, dependsOn: classes) {
-        classifier = 'sources'
+    tasks.named('sourcesJar') {
         exclude('**.class')
-        // Prefer the copy of DefaultNonNull whose @Target includes MODULE.
+
+        // Use the copy of DefaultNonNull whose @Target includes MODULE.
         // TODO(cpovirk): Move configuration to mrjar.gradle? Maybe we could achieve it with task.named('sourcesJar') if mrjar.gradle were applied after we create this task?
-        from sourceSets.java9.allJava + sourceSets.main_except_overlapping.allJava
-    }
-    tasks.named('assemble') {
-        dependsOn('sourcesJar')
+        from sourceSets.java9.allJava
     }
 }
 
