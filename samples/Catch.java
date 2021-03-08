@@ -27,6 +27,13 @@ abstract class Catch {
     }
 
     try {
+      doWork();
+    } catch (SomeError | SomeRuntimeException e) {
+    } catch (Throwable e) {
+      e.printStackTrace();
+    }
+
+    try {
       throw new RuntimeException();
     } catch (RuntimeException | Error e) {
       handleException(e);
@@ -34,4 +41,12 @@ abstract class Catch {
   }
 
   abstract void handleException(Throwable t);
+
+  abstract void doWork() throws SomeException;
+
+  static class SomeException extends Exception {}
+
+  static class SomeRuntimeException extends RuntimeException {}
+
+  static class SomeError extends Error {}
 }
