@@ -33,6 +33,11 @@ java {
         // TODO(cpovirk): Move configuration to mrjar.gradle? Maybe we could achieve it with task.named('sourcesJar') if mrjar.gradle were applied after we create this task?
         from sourceSets.java9.allJava
     }
+
+    compileJava {
+        // Use the copy of DefaultNonNull whose @Target omits MODULE.
+        source += fileTree(dir: 'src/main/java', include: '**/DefaultNonNull.java')
+    }
 }
 
 defaultTasks 'spotlessApply', 'build'

@@ -7,13 +7,6 @@
  */
 
 sourceSets {
-    java8 {
-        java {
-            srcDirs = ['src/main/java']
-            include('**/DefaultNonNull.java')
-        }
-    }
-
     // The source set for classes stored in META-INF/versions/9 directory
     java9 {
         java {
@@ -33,13 +26,7 @@ tasks.named('compileJava9Java', JavaCompile).configure {
     options.release = 9
 }
 
-tasks.named('compileJava8Java', JavaCompile).configure {
-    // Required because modularity.mixedJavaRelease affects only the main compile.
-    options.release = 8
-}
-
 jar {
-    from sourceSets.java8.output
     into('META-INF/versions/9') {
         from sourceSets.java9.output
     }
