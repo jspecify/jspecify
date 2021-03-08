@@ -13,6 +13,13 @@ sourceSets {
             srcDirs = ['src/java9/java']
         }
     }
+
+    main_except_overlapping {
+        java {
+            srcDirs = ['src/main/java']
+            exclude('**/DefaultNonNull.java')
+        }
+    }
 }
 
 tasks.named('compileJava9Java', JavaCompile).configure {
@@ -30,5 +37,5 @@ jar {
 
 javadoc {
     // Prefer the copy of DefaultNonNull whose @Target includes MODULE.
-    source = sourceSets.java9.allJava + sourceSets.main.allJava
+    source = sourceSets.java9.allJava + sourceSets.main_except_overlapping.allJava
 }
