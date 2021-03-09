@@ -36,5 +36,5 @@ jar {
 
 javadoc {
     // Use the copy of DefaultNonNull whose @Target includes MODULE.
-    source = sourceSets.java9.allJava + sourceSets.main.allJava
+    source += sourceSets.java9.allJava
 }
