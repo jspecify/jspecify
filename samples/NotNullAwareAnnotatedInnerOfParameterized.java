@@ -16,7 +16,7 @@
 
 import org.jspecify.annotations.Nullable;
 
-class NotNullAwareAnnotatedInnerOfParameterized<T> {
+abstract class NotNullAwareAnnotatedInnerOfParameterized<T> {
   interface Lib<T extends @Nullable Object> {}
 
   class Nested {
@@ -43,4 +43,11 @@ class NotNullAwareAnnotatedInnerOfParameterized<T> {
       // jspecify_nullness_intrinsically_not_nullable
       Lib<NotNullAwareAnnotatedInnerOfParameterized<?>.@Nullable Nested.DoublyNested> l2,
       Lib<NotNullAwareAnnotatedInnerOfParameterized<?>.Nested.DoublyNested> l3) {}
+
+  Nested.DoublyNested create(Nested n) {
+    return n.new DoublyNested();
+  }
+
+  // jspecify_nullness_intrinsically_not_nullable
+  abstract @Nullable NotNullAwareAnnotatedInnerOfParameterized<?>.Nested returnType();
 }
