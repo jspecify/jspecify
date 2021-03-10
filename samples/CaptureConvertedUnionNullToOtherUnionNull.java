@@ -56,11 +56,13 @@ abstract class CaptureConvertedUnionNullToOtherUnionNull {
   }
 
   @Nullable
+  // jspecify_but_expect_warning
   Lib x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
     return unionNull(x.get());
   }
 
   @Nullable
+  // jspecify_but_expect_warning
   Lib x8(UnspecBounded<? extends @Nullable Lib> x) {
     return unionNull(x.get());
   }

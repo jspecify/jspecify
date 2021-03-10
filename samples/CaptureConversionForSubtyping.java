@@ -24,6 +24,7 @@ class CaptureConversionForSubtyping {
   }
 
   Object x(Supplier<? extends Object, ?> bar) {
+    // jspecify_but_expect_warning
     return bar.get();
   }
 }

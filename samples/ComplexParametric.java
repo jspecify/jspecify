@@ -83,6 +83,7 @@ class ComplexParametric {
 
   interface SuperNeverUnspec<T extends Object & @NullnessUnspecified Foo> extends SuperSuper<T> {
     default void x() {
+      // jspecify_but_expect_warning
       checkNeverNull(t());
       // jspecify_nullness_not_enough_information
       checkUnspecNull(t());
@@ -117,8 +118,9 @@ class ComplexParametric {
 
   interface SuperNeverUnionNull<T extends Object & @Nullable Foo> extends SuperSuper<T> {
     default void x() {
+      // jspecify_but_expect_error
       checkNeverNull(t());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkUnspecNull(t());
       checkT(t());
       // jspecify_nullness_not_enough_information
@@ -126,9 +128,9 @@ class ComplexParametric {
       // jspecify_nullness_mismatch
       checkTUnionNull(t());
 
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkNeverNull(tUnspec());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkUnspecNull(tUnspec());
       // jspecify_nullness_not_enough_information
       checkT(tUnspec());
@@ -139,7 +141,7 @@ class ComplexParametric {
 
       // jspecify_nullness_mismatch
       checkNeverNull(tUnionNull());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       this.<T>checkUnspecNull(tUnionNull());
       // jspecify_nullness_mismatch
       checkT(tUnionNull());
@@ -151,6 +153,7 @@ class ComplexParametric {
 
   interface SuperUnspecNever<T extends @NullnessUnspecified Object & Foo> extends SuperSuper<T> {
     default void x() {
+      // jspecify_but_expect_warning
       checkNeverNull(t());
       // jspecify_nullness_not_enough_information
       checkUnspecNull(t());
@@ -195,8 +198,9 @@ class ComplexParametric {
 
   interface SuperUnionNullNever<T extends @Nullable Object & Foo> extends SuperSuper<T> {
     default void x() {
+      // jspecify_but_expect_error
       checkNeverNull(t());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkUnspecNull(t());
       checkT(t());
       // jspecify_nullness_not_enough_information
@@ -204,9 +208,9 @@ class ComplexParametric {
       // jspecify_nullness_mismatch
       checkTUnionNull(t());
 
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkNeverNull(tUnspec());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkUnspecNull(tUnspec());
       // jspecify_nullness_not_enough_information
       checkT(tUnspec());
@@ -217,7 +221,7 @@ class ComplexParametric {
 
       // jspecify_nullness_mismatch
       checkNeverNull(tUnionNull());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       this.<T>checkUnspecNull(tUnionNull());
       // jspecify_nullness_mismatch
       checkT(tUnionNull());
@@ -247,7 +251,7 @@ class ComplexParametric {
 
       // jspecify_nullness_mismatch
       checkNeverNull(tUnspec());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       checkUnspecNull(tUnspec());
       // jspecify_nullness_not_enough_information
       checkT(tUnspec());
@@ -258,7 +262,7 @@ class ComplexParametric {
 
       // jspecify_nullness_mismatch
       checkNeverNull(tUnionNull());
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_error
       this.<T>checkUnspecNull(tUnionNull());
       // jspecify_nullness_mismatch
       checkT(tUnionNull());

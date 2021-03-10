@@ -21,6 +21,7 @@ abstract class CastOfCaptureOfUnboundedWildcardForObjectBoundedTypeParameter {
   abstract void consume(Bar bar);
 
   void x(Supplier<?> supplier) {
+    // jspecify_but_expect_error
     consume((Bar) supplier.get());
   }
 

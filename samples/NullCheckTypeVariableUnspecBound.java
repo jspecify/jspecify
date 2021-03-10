@@ -24,7 +24,7 @@ class NullCheckTypeVariableUnspecBound<T extends @NullnessUnspecified Object> {
     if (o != null) {
       return o;
     } else {
-      // jspecify_nullness_mismatch
+      // jspecify_nullness_mismatch jspecify_but_expect_warning
       return o;
     }
   }
@@ -49,7 +49,7 @@ class NullCheckTypeVariableUnspecBound<T extends @NullnessUnspecified Object> {
 
   Object x3(T o) {
     if (o == null) {
-      // jspecify_nullness_mismatch
+      // jspecify_nullness_mismatch jspecify_but_expect_warning
       return o;
     } else {
       return o;

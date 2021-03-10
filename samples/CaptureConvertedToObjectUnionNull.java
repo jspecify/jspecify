@@ -56,11 +56,13 @@ class CaptureConvertedToObjectUnionNull {
   }
 
   @Nullable
+  // jspecify_but_expect_warning
   Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
     return x.get();
   }
 
   @Nullable
+  // jspecify_but_expect_warning
   Object x8(UnspecBounded<? extends @Nullable Lib> x) {
     return x.get();
   }

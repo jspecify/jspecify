@@ -25,14 +25,17 @@ class MultiBoundTypeVariableToObject {
   }
 
   <T extends Object & @NullnessUnspecified Lib> Object x1(T x) {
+    // jspecify_but_expect_warning
     return x;
   }
 
   <T extends Object & @Nullable Lib> Object x2(T x) {
+    // jspecify_but_expect_error
     return x;
   }
 
   <T extends @NullnessUnspecified Object & Lib> Object x3(T x) {
+    // jspecify_but_expect_warning
     return x;
   }
 
@@ -47,11 +50,12 @@ class MultiBoundTypeVariableToObject {
   }
 
   <T extends @Nullable Object & Lib> Object x6(T x) {
+    // jspecify_but_expect_error
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> Object x7(T x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_error
     return x;
   }
 

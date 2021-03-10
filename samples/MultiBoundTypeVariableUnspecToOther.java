@@ -31,7 +31,7 @@ class MultiBoundTypeVariableUnspecToOther {
   }
 
   <T extends Object & @Nullable Lib> Lib x2(@NullnessUnspecified T x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_error
     return x;
   }
 
@@ -52,12 +52,12 @@ class MultiBoundTypeVariableUnspecToOther {
   }
 
   <T extends @Nullable Object & Lib> Lib x6(@NullnessUnspecified T x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_error
     return x;
   }
 
   <T extends @Nullable Object & @NullnessUnspecified Lib> Lib x7(@NullnessUnspecified T x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_error
     return x;
   }
 
