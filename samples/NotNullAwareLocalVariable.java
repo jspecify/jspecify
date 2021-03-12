@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-abstract class NotNullAwareLocalVariable {
-  @DefaultNonNull
+abstract class NotNullMarkedLocalVariable {
+  @NullMarked
   interface Super {
     String string();
 

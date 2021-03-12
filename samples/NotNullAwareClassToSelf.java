@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareClassToSelf {
+class NotNullMarkedClassToSelf {
   Lib x0(Lib x) {
     // jspecify_nullness_not_enough_information
     return x;
@@ -67,6 +67,6 @@ class NotNullAwareClassToSelf {
     return x;
   }
 
-  @DefaultNonNull
+  @NullMarked
   interface Lib {}
 }

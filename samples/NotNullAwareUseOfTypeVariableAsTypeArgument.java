@@ -14,28 +14,28 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareUseOfTypeVariableAsTypeArgument {
-  @DefaultNonNull
+class NotNullMarkedUseOfTypeVariableAsTypeArgument {
+  @NullMarked
   interface Lib<T extends @Nullable Object> {}
 
   interface Super<T extends @Nullable Object> {
     Lib<T> get();
   }
 
-  @DefaultNonNull
+  @NullMarked
   interface SubObject extends Super<Object> {}
 
-  @DefaultNonNull
+  @NullMarked
   interface SubObjectUnspec extends Super<@NullnessUnspecified Object> {}
 
-  @DefaultNonNull
+  @NullMarked
   interface SubObjectUnionNull extends Super<@Nullable Object> {}
 
-  @DefaultNonNull
+  @NullMarked
   class Caller {
     @Nullable
     Lib<? extends Object> x0(SubObject s) {

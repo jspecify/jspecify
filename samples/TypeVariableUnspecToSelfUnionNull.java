@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class TypeVariableUnspecToSelfUnionNull<
     Never1T,
     ChildOfNever1T extends Never1T,

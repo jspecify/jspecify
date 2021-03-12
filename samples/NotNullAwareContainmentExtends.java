@@ -17,7 +17,7 @@
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareContainmentExtends {
+class NotNullMarkedContainmentExtends {
   void x() {
     // jspecify_nullness_not_enough_information
     new Check<Lib<? extends Foo>, Lib<? extends Foo>>();

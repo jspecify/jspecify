@@ -35,4 +35,4 @@ import java.lang.annotation.Target;
 @Documented
 @Target({TYPE, PACKAGE, MODULE})
 @Retention(RUNTIME)
-public @interface DefaultNonNull {}
+public @interface NullMarked {}

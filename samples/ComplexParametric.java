@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
@@ -25,7 +25,7 @@ import org.jspecify.nullness.NullnessUnspecified;
  * implementations of type inference and/or if we passed explicit type arguments. Fortunately, most
  * of the checks here are for edge cases that are unlikely to arise in practice.
  */
-@DefaultNonNull
+@NullMarked
 class ComplexParametric {
   interface SuperSuper<T extends @Nullable Object> {
     Lib<T> t();

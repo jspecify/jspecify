@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class SuperTypeVariableUnionNull {
   <T> void implicitlyObjectBounded(
       Lib<? super @Nullable T> lib, T t, @NullnessUnspecified T tUnspec, @Nullable T tUnionNull) {

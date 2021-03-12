@@ -17,7 +17,7 @@
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareAnnotatedWildcardUnspec {
+class NotNullMarkedAnnotatedWildcardUnspec {
   interface Lib<T extends @Nullable Object> {}
 
   void foo(

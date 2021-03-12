@@ -1,7 +1,7 @@
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 interface InferenceChoosesNullableTypeVariable {
   <T extends @Nullable Object> void consume(T t);
 

@@ -17,7 +17,7 @@
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-abstract class NotNullAwareIfCondition {
+abstract class NotNullMarkedIfCondition {
   abstract int i();
 
   abstract int j();

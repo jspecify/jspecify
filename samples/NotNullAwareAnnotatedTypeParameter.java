@@ -16,7 +16,7 @@
 
 import org.jspecify.nullness.Nullable;
 
-class NotNullAwareAnnotatedTypeParameter {
+class NotNullMarkedAnnotatedTypeParameter {
   // jspecify_unrecognized_location
   interface Lib1<@Nullable T> {}
 

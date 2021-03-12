@@ -30,15 +30,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("@DefaultNonNull")
-class DefaultNonNullTest {
+@DisplayName("@NullMarked")
+class NullMarkedTest {
   boolean isJava8() {
     String version = System.getProperty("java.version");
     return version.startsWith("1.8");
   }
 
   Set<String> loadTargets() {
-    return Arrays.stream(DefaultNonNull.class.getAnnotation(Target.class).value())
+    return Arrays.stream(NullMarked.class.getAnnotation(Target.class).value())
         .map(ElementType::toString)
         .collect(Collectors.toSet());
   }
