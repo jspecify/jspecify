@@ -16,8 +16,8 @@
 
 package selftype;
 
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.Nullable;
 
 @DefaultNonNull
 public class SelfType<T extends SelfType<T>> {

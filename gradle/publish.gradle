@@ -5,7 +5,7 @@ publishing {
         mavenJava(MavenPublication) {
             pom {
                 groupId = 'org.jspecify'
-                artifactId = 'annotations'
+                artifactId = 'jspecify'
                 name = 'JSpecify annotations'
                 description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
                 url = 'https://jspecify.org/'

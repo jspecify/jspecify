@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jspecify.annotations;
+package org.jspecify.nullness;
 
 import static java.lang.annotation.ElementType.TYPE_USE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -23,9 +23,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <b>WARNING:</b> This is not the final package name for this annotation. In addition, we are still
- * discussing questions about semantics, particularly around type-variable usages. After that,
- * changes and documentation will follow.
+ * <b>WARNING:</b> This is not the final class name or package name for this annotation. We are not
+ * even sure if an annotation like this one will make the 1.0 release.
  *
  * <p>These annotations exist only as a skeleton for the final product. At this point, we are not
  * even building prototypes that use them.
@@ -33,4 +32,4 @@ import java.lang.annotation.Target;
 @Documented
 @Target(TYPE_USE)
 @Retention(RUNTIME)
-public @interface Nullable {}
+public @interface NullnessUnspecified {}
