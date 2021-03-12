@@ -18,7 +18,7 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.SortedMap;
 import java.util.SortedSet;
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 interface ComparatorPure {

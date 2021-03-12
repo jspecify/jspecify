@@ -120,7 +120,7 @@ Null-aware context
 
 To determine whether a type usage appears in a null-aware context:
 
-Look for an ``@org.jspecify.annotations.NullAware`` annotation on any of
+Look for an ``@org.jspecify.nullness.NullAware`` annotation on any of
 the enclosing scopes surrounding the type usage.
 
 Class members are enclosed by classes, which may be enclosed by other
@@ -135,9 +135,9 @@ packages, which may be enclosed by modules.
    Java compiler
    API <https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__.
 
-If an ``@org.jspecify.annotations.NullAware`` annotation exists on one
-of these scopes, then the type usage is in a null-aware context.
-Otherwise, it is not.
+If an ``@org.jspecify.nullness.NullAware`` annotation exists on one of
+these scopes, then the type usage is in a null-aware context. Otherwise,
+it is not.
 
 .. _augmented-type-of-usage:
 
@@ -159,7 +159,7 @@ To determine the nullness operator, apply the following rules in order.
 Once one condition is met, skip the remaining conditions.
 
 -  If the type usage is annotated with
-   ``@org.jspecify.annotations.Nullable``, its nullness operator is
+   ``@org.jspecify.nullness.Nullable``, its nullness operator is
    ``UNION_NULL``.
 -  If the type usage appears in a `null-aware
    context <#null-aware-context>`__, its nullness operator is

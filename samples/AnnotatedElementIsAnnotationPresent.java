@@ -15,7 +15,7 @@
  */
 
 import java.lang.reflect.AnnotatedElement;
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 class AnnotatedElementIsAnnotationPresent {

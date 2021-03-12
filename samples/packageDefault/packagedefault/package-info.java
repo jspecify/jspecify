@@ -17,4 +17,4 @@
 @DefaultNonNull
 package packagedefault;
 
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;

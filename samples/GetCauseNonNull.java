@@ -16,7 +16,7 @@
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutionException;
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 class GetCauseNonNull {

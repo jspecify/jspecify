@@ -15,8 +15,8 @@
  */
 
 import java.util.stream.Stream;
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.Nullable;
 
 @DefaultNonNull
 class StreamFilterIsInstanceAndMapCastNonFilterEquivalents {

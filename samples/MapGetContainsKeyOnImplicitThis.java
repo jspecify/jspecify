@@ -15,7 +15,7 @@
  */
 
 import java.util.Map;
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 abstract class MapGetContainsKeyOnImplicitThis implements Map<Object, Object> {

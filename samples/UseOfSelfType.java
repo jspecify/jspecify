@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 // TODO(cpovirk): Rework this to read a *non-JDK* type from bytecode, and then release it.
 @DefaultNonNull

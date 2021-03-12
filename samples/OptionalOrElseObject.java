@@ -15,9 +15,9 @@
  */
 
 import java.util.Optional;
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
+import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.Nullable;
+import org.jspecify.nullness.NullnessUnspecified;
 
 @DefaultNonNull
 abstract class OptionalOrElseObject {

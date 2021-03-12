@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 // did not manage to reproduce the failure from Invokable.java at 3861...
 @DefaultNonNull

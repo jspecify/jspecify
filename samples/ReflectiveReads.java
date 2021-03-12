@@ -16,7 +16,7 @@
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 abstract class ReflectiveReads {

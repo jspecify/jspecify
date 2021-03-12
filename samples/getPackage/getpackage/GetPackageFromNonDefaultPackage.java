@@ -16,7 +16,7 @@
 
 package getpackage;
 
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 class GetPackageFromNonDefaultPackage {

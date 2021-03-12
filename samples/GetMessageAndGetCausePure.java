@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
+import org.jspecify.nullness.DefaultNonNull;
 
 @DefaultNonNull
 interface GetMessageAndGetCausePure {

@@ -13,6 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-module org.jspecify.annotations {
-  exports org.jspecify.annotations;
+module org.jspecify {
+  exports org.jspecify.nullness;
 }
