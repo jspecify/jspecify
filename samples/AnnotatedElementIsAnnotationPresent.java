@@ -15,9 +15,9 @@
  */
 
 import java.lang.reflect.AnnotatedElement;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class AnnotatedElementIsAnnotationPresent {
   Object noCheck(AnnotatedElement element, Class<Foo> clazz) {
     // jspecify_nullness_mismatch

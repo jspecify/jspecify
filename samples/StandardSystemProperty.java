@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class StandardSystemProperty {
   Object x0() {
     return System.getProperty("line.separator");

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 interface GetMessageAndGetCausePure {
   default void noCheck(Throwable t) {
     // jspecify_nullness_mismatch

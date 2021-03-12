@@ -15,11 +15,11 @@
  */
 
 import java.util.Map;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class MapGetContainsKeyUnspecBoundedTypeVariableValue<V extends @NullnessUnspecified Object> {
   Object noCheckObject(Map<Object, V> map, Object key) {
     // jspecify_nullness_mismatch

@@ -18,9 +18,9 @@ import java.util.NavigableMap;
 import java.util.NavigableSet;
 import java.util.SortedMap;
 import java.util.SortedSet;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 interface ComparatorPure {
   default void noCheck(SortedSet<?> s) {
     // jspecify_nullness_mismatch

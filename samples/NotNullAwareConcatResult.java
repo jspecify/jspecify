@@ -17,7 +17,7 @@
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareConcatResult {
+class NotNullMarkedConcatResult {
   String constant() {
     return "a" + "b";
   }

@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 abstract class AugmentedInferenceAgreesWithBaseInference {
   void x(Foo<Object> a, Foo<@Nullable Object> b) {
     // List of possibly heterogeneous Foo types.

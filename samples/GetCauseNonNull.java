@@ -16,9 +16,9 @@
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutionException;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class GetCauseNonNull {
   Object getCause(Throwable t) {
     // jspecify_nullness_mismatch

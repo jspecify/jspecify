@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 abstract class PredicateMethodReferenceOnAnnotation {
   @interface Annotation {
     boolean b() default false;

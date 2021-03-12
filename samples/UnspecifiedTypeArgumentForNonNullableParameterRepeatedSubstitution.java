@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class UnspecifiedTypeArgumentForNonNullableParameterRepeatedSubstitution {
   interface SuperSupplierWithNonNullableBound<E> {
     E get();

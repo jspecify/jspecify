@@ -16,10 +16,10 @@
 
 import java.util.Objects;
 import java.util.stream.Stream;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 class StreamFilterNonNull {
   Stream<Object> operator(Stream<@Nullable Object> s) {
     return s.filter(x -> x != null);

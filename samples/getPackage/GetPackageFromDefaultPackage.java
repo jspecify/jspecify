@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class GetPackageFromDefaultPackage {
   Object get() {
     // jspecify_nullness_mismatch jspecify_but_expect_nothing

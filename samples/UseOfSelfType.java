@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
 // TODO(cpovirk): Rework this to read a *non-JDK* type from bytecode, and then release it.
-@DefaultNonNull
+@NullMarked
 interface UseOfSelfType {
   <T extends Enum<T>> void go();
 

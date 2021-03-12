@@ -15,7 +15,7 @@
  */
 
 import java.lang.reflect.TypeVariable;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
 // did not manage to reproduce exactly the same set of problems as i saw with TypeResolver at 3904
 // (that is, with addComputedTypeAnnotations commented out): reproduced the error at
@@ -24,7 +24,7 @@ import org.jspecify.nullness.DefaultNonNull;
 // elements and types...?
 //
 // and the errors in this file persist even with my addComputedTypeAnnotations override restored...
-@DefaultNonNull
+@NullMarked
 class GetGenericDeclaration {
   // jspecify_but_expect_warning
   Object x(TypeVariable<?> typeVariable) {

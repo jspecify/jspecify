@@ -16,11 +16,11 @@
 
 import static java.util.Objects.requireNonNull;
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class RequireNonNull {
   Object x0(Object o) {
     requireNonNull(o);

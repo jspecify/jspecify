@@ -16,9 +16,9 @@
 
 package getpackage;
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class GetPackageFromNonDefaultPackage {
   Object getOnSimpleName() {
     return GetPackageFromNonDefaultPackage.class.getPackage();

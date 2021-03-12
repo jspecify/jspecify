@@ -15,11 +15,11 @@
  */
 
 import java.util.concurrent.atomic.AtomicReference;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class NullExclusiveAtomicReferenceNoArg {
   void x0() {
     // jspecify_nullness_mismatch

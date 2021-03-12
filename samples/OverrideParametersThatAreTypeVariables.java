@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 class OverrideParametersThatAreTypeVariables {
   interface Super<E extends @Nullable Object> {
     void useE(E e);

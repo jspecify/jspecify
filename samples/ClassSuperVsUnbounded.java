@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
 // did not manage to reproduce the failure from Invokable.java at 3861...
-@DefaultNonNull
+@NullMarked
 abstract class ClassSuperVsUnbounded<T, R> implements java.lang.reflect.Member {
   abstract Class<? super Object> make0();
 

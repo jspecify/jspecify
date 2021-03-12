@@ -16,11 +16,11 @@
 
 package wildcardswithdefault;
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 public class WildcardsWithDefault {
   // jspecify_but_expect_warning
   public void noBoundsNotNull(A<?, ?, ?> a) {}
@@ -30,10 +30,10 @@ public class WildcardsWithDefault {
       A<? extends @Nullable Object, ? extends @Nullable Object, ? extends @Nullable Object> a) {}
 }
 
-@DefaultNonNull
+@NullMarked
 class A<T extends Object, E extends @Nullable Object, F extends @NullnessUnspecified Object> {}
 
-@DefaultNonNull
+@NullMarked
 class Use {
   public static void main(
       A<Object, Object, Object> aNotNullNotNullNotNull,

@@ -15,10 +15,10 @@
  */
 
 import java.util.Map;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 class MapGetWildcardValueType {
   Object keySetObject(Map<Object, ? extends Object> map) {
     for (Object o : map.keySet()) {

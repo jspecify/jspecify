@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class CurrentThreadThreadGroup {
   Object x() {
     return Thread.currentThread().getThreadGroup();

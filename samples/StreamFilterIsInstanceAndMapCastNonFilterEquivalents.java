@@ -15,10 +15,10 @@
  */
 
 import java.util.stream.Stream;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 class StreamFilterIsInstanceAndMapCastNonFilterEquivalents {
   Stream<Object> justFilter(Stream<@Nullable Object> s) {
     // jspecify_nullness_mismatch

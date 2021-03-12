@@ -15,9 +15,9 @@
  */
 
 import java.util.Map;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 abstract class MapGetContainsKeyOnImplicitThis implements Map<Object, Object> {
   Object noCheckObject(Object key) {
     // jspecify_nullness_mismatch

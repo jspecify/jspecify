@@ -17,7 +17,7 @@
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareOverrides {
+class NotNullMarkedOverrides {
   interface Super {
     Object makeObject();
 

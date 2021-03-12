@@ -16,7 +16,7 @@
 
 import org.jspecify.nullness.Nullable;
 
-abstract class NotNullAwareAnnotatedInnerOfNonParameterized {
+abstract class NotNullMarkedAnnotatedInnerOfNonParameterized {
   interface Lib<T extends @Nullable Object> {}
 
   class Nested {
@@ -27,27 +27,27 @@ abstract class NotNullAwareAnnotatedInnerOfNonParameterized {
       @Nullable Nested x4,
 
       // jspecify_nullness_intrinsically_not_nullable
-      @Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested x5,
-      NotNullAwareAnnotatedInnerOfNonParameterized.@Nullable Nested x6,
+      @Nullable NotNullMarkedAnnotatedInnerOfNonParameterized.Nested x5,
+      NotNullMarkedAnnotatedInnerOfNonParameterized.@Nullable Nested x6,
 
       // jspecify_nullness_intrinsically_not_nullable
-      @Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested.DoublyNested x7,
+      @Nullable NotNullMarkedAnnotatedInnerOfNonParameterized.Nested.DoublyNested x7,
 
       // jspecify_nullness_intrinsically_not_nullable
-      NotNullAwareAnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested x8,
-      NotNullAwareAnnotatedInnerOfNonParameterized.Nested.@Nullable DoublyNested x9,
+      NotNullMarkedAnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested x8,
+      NotNullMarkedAnnotatedInnerOfNonParameterized.Nested.@Nullable DoublyNested x9,
 
       // jspecify_nullness_intrinsically_not_nullable
-      Lib<@Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested.DoublyNested> l1,
+      Lib<@Nullable NotNullMarkedAnnotatedInnerOfNonParameterized.Nested.DoublyNested> l1,
 
       // jspecify_nullness_intrinsically_not_nullable
-      Lib<NotNullAwareAnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested> l2,
-      Lib<NotNullAwareAnnotatedInnerOfNonParameterized.Nested.DoublyNested> l3) {}
+      Lib<NotNullMarkedAnnotatedInnerOfNonParameterized.@Nullable Nested.DoublyNested> l2,
+      Lib<NotNullMarkedAnnotatedInnerOfNonParameterized.Nested.DoublyNested> l3) {}
 
   Nested.DoublyNested create(Nested n) {
     return n.new DoublyNested();
   }
 
   // jspecify_nullness_intrinsically_not_nullable
-  abstract @Nullable NotNullAwareAnnotatedInnerOfNonParameterized.Nested returnType();
+  abstract @Nullable NotNullMarkedAnnotatedInnerOfNonParameterized.Nested returnType();
 }

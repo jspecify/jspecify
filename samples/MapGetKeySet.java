@@ -16,9 +16,9 @@
 
 import java.util.Map;
 import java.util.NavigableMap;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class MapGetKeySet {
   Object otherColletion(Map<Object, Object> map) {
     for (Object o : map.values()) {

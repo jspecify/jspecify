@@ -16,9 +16,9 @@
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 abstract class ReflectiveReads {
   void x(Field f) throws Exception {
     Object o = f.get(null);

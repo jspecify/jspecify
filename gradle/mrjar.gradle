@@ -16,7 +16,7 @@ sourceSets {
 
     main {
         java {
-            exclude('**/DefaultNonNull.java')
+            exclude('**/NullMarked.java')
         }
     }
 }
@@ -35,6 +35,6 @@ jar {
 }
 
 javadoc {
-    // Use the copy of DefaultNonNull whose @Target includes MODULE.
+    // Use the copy of NullMarked whose @Target includes MODULE.
     source += sourceSets.java9.allJava
 }

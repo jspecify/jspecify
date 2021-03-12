@@ -14,43 +14,43 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-class NotNullAwareLambdaAndMethodReferenceInference {
-  @DefaultNonNull
+class NotNullMarkedLambdaAndMethodReferenceInference {
+  @NullMarked
   interface Map<K extends @Nullable Object, V extends @Nullable Object> {}
 
-  @DefaultNonNull
+  @NullMarked
   interface List<E extends @Nullable Object> {}
 
-  @DefaultNonNull
+  @NullMarked
   interface Foo {
     boolean isBar();
   }
 
-  @DefaultNonNull
+  @NullMarked
   interface Stream<T extends @Nullable Object> {
     <R extends @Nullable Object, A extends @Nullable Object> R collect(
         Collector<? super T, A, R> collector);
   }
 
-  @DefaultNonNull
+  @NullMarked
   interface Predicate<T extends @Nullable Object> {
     boolean test(T t);
   }
 
-  @DefaultNonNull
+  @NullMarked
   interface Collectors {
     <T extends @Nullable Object> Collector<T, ?, Map<Boolean, List<T>>> partitioningBy(
         Predicate<? super T> predicate);
   }
 
-  @DefaultNonNull
+  @NullMarked
   interface Collector<
       T extends @Nullable Object, A extends @Nullable Object, R extends @Nullable Object> {}
 
-  @DefaultNonNull
+  @NullMarked
   abstract class Super {
     abstract Stream<Foo> foos();
 

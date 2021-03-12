@@ -17,7 +17,7 @@
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class NotNullAwareContainmentSuper {
+class NotNullMarkedContainmentSuper {
   void x() {
     // jspecify_nullness_not_enough_information
     new Check<Lib<? super Foo>, Lib<? super Foo>>();

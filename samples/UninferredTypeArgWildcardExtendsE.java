@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 class UninferredTypeArgWildcardExtendsE {
   <E> void copyOf(Super<? extends E> sup) {
     Sub<? extends E> sub = (sup instanceof Sub) ? cast(sup) : create(sup);

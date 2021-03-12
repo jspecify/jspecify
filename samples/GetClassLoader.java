@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 
-@DefaultNonNull
+@NullMarked
 class GetClassLoader {
   Object arbitrary(Class<?> c) {
     // jspecify_nullness_mismatch

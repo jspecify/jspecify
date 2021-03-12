@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.DefaultNonNull;
+import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 class NullExclusiveThreadLocal {
   void x(ThreadLocal<Object> threadLocal) {
     // jspecify_nullness_mismatch
