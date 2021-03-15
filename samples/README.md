@@ -86,13 +86,13 @@ two annotations, or between annotations and source code. You can think of these
 as extending the normal JLS type rules to cover types that have been augmented
 with nullness information. (For example, the value of a `return` statement must
 be convertible to the method's return type, and the receiver in a method call
-should not be `@Nullable`.) Nullness checkers are likely (but not obligated) to
-report an error for each `jspecify_nullness_mismatch` comment, are likely to
-make many different decisions in whether to issues a diagnostic (error, warning,
-or no diagnostic) for any particular `jspecify_nullness_not_enough_information`
-comment, and are not *obligated* to do anything for any particular comment. (For
-some background on that, see the disclaimers above. Also, note that a nullness
-checker can be sound even if it does not issue errors for some cases of
+should not be `@Nullable`.) Nullness checkers are likely to report an error for
+each `jspecify_nullness_mismatch` comment, are likely to make many different
+decisions in whether to issues a diagnostic (error, warning, or no diagnostic)
+for any particular `jspecify_nullness_not_enough_information` comment, and are
+not *obligated* to do anything for any particular comment. (For some background
+on that, see the disclaimers above. Also, note that a nullness checker can be
+sound even if it does not issue errors for some cases of
 `jspecify_nullness_mismatch` or `jspecify_nullness_not_enough_information`!)
 
 -   `jspecify_nullness_mismatch`
