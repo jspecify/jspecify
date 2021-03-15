@@ -59,7 +59,7 @@ document in order to interpret this information correctly.
 General
 -------
 
-The package name will be ``org.jspecify.annotations``.
+The package name will be ``org.jspecify.nullness``.
 [`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
 
 We will release one canonical artifact, in which all annotations have
