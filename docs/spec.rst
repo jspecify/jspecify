@@ -56,14 +56,6 @@ document; it will be necessary to read (or refer to) the
 `glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
 document in order to interpret this information correctly.
 
-Goals
------
-
-Fulfill the `project
-requirements <https://docs.google.com/document/d/1d5NgP4Pjk_ahkISpRa3nFb1FzPz9yS9luByiBj6qCsk/edit>`__
-and `nullness-specific
-requirements <https://docs.google.com/document/d/106aEs5DspNywGwdBwGX_iSSERicTPcSma7bQ8GYMZb4/edit>`__.
-
 General
 -------
 
