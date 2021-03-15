@@ -45,6 +45,8 @@ Whatever our final samples look like, we do **not** expect to present them as
             well-known APIs
         -   looking at whether the parameter to a call to `Map.get` is known to
             be present in that map
+        -   defining a rule to treat all unannotated type usages the same, when
+            the JSpecify rules give some of them "unspecified nullness"
 
 -   Based on the information they have available for any given piece of code,
     tools always have the option to issue a warning / error / other diagnostic
