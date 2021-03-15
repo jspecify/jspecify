@@ -598,14 +598,14 @@ is the entire type ``T``, without reference to the nullness operator of
 any other type components of ``T``.
 
    For example, the nullness operator of ``List<@Nullable Object>``
-   would be ``NO_CHANGE`` (at least in a `null-aware
-   context <#null-aware-context>`__), even though the nullness operator
+   would be ``NO_CHANGE`` (at least in a `null-marked
+   context <#null-marked-context>`__), even though the nullness operator
    of its element type ``Object`` is ``UNION_NULL``.
 
-Null-aware context
-------------------
+Null-marked context
+-------------------
 
-To determine whether a type usage appears in a null-aware context:
+To determine whether a type usage appears in a null-marked context:
 
 Look for an ``@org.jspecify.nullness.NullMarked`` annotation on any of
 the enclosing scopes surrounding the type usage.
@@ -623,8 +623,8 @@ packages, which may be enclosed by modules.
    API <https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__.
 
 If an ``@org.jspecify.nullness.NullMarked`` annotation exists on one of
-these scopes, then the type usage is in a null-aware context. Otherwise,
-it is not.
+these scopes, then the type usage is in a null-marked context.
+Otherwise, it is not.
 
 .. _augmented-type-of-usage:
 
@@ -648,8 +648,8 @@ Once one condition is met, skip the remaining conditions.
 -  If the type usage is annotated with
    ``@org.jspecify.nullness.Nullable``, its nullness operator is
    ``UNION_NULL``.
--  If the type usage appears in a `null-aware
-   context <#null-aware-context>`__, its nullness operator is
+-  If the type usage appears in a `null-marked
+   context <#null-marked-context>`__, its nullness operator is
    ``NO_CHANGE``.
 -  Its nullness operator is ``UNSPECIFIED``.
 
@@ -729,14 +729,14 @@ even a sole upper bound of ``Object``.
    instead apply `the normal rules <#augmented-type-of-usage>`__ for the
    explicit bound type.
 
-If an unbounded wildcard appears in a `null-aware
-context <#null-aware-context>`__, then it has a single upper bound whose
-`base
+If an unbounded wildcard appears in a `null-marked
+context <#null-marked-context>`__, then it has a single upper bound
+whose `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 is ``Object`` and whose `nullness operator <#nullness-operator>`__ is
 ``UNION_NULL``.
 
-If an unbounded wildcard appears outside a null-aware context, then it
+If an unbounded wildcard appears outside a null-marked context, then it
 has a single upper bound whose base type is ``Object`` and whose
 nullness operator is ``UNSPECIFIED``.
 
@@ -768,16 +768,16 @@ In bytecode, ``<T>`` and ``<T extends Object>`` are both represented as
 a type parameter with only a single upper bound, ``Object``, and no
 JSpecify nullness type annotations on the bound.
 
-If an ``Object``-bounded type parameter appears in a `null-aware
-context <#null-aware-context>`__, then its bound has a `base
+If an ``Object``-bounded type parameter appears in a `null-marked
+context <#null-marked-context>`__, then its bound has a `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 of ``Object`` and a `nullness operator <#nullness-operator>`__ of
 ``NO_CHANGE``.
 
    Note that this gives ``<T>`` a different bound than ``<?>`` (though
-   only in a null-aware context).
+   only in a null-marked context).
 
-If an ``Object``-bounded type parameter appears outside a null-aware
+If an ``Object``-bounded type parameter appears outside a null-marked
 context, then its bound has a base type of ``Object`` and a nullness
 operator of ``UNSPECIFIED``.
 
