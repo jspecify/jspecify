@@ -17,7 +17,7 @@
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.NullnessUnspecified;
 
-interface NullMarkedDirectUseOfNotNullAwareBoundedTypeVariable {
+interface NullMarkedDirectUseOfNotNullMarkedBoundedTypeVariable {
   class UnspecBounded1<T> {
     @NullMarked
     class Inner {
