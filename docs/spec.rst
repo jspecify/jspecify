@@ -154,7 +154,7 @@ The defaulting annotations
 --------------------------
 
 In this release, we will provide a single parameterless declaration
-annotation called ``@DefaultNonNull``.
+annotation called ``@NullMarked``.
 [`#5 <https://github.com/jspecify/jspecify/issues/5>`__,
 `#87 <https://github.com/jspecify/jspecify/issues/87>`__]
 
@@ -188,8 +188,8 @@ Type hierarchy
 Our nullability annotations produce the following apparent type
 hierarchy [`#80 <https://github.com/jspecify/jspecify/issues/80>`__]:
 
-| ``Foo`` (written in the context of ``@DefaultNonNull``)
-| ``⋖ Foo`` (written outside the context of ``@DefaultNonNull``)
+| ``Foo`` (written in the context of ``@NullMarked``)
+| ``⋖ Foo`` (written outside the context of ``@NullMarked``)
 | ``⋖ @Nullable Foo``
 
 It can be useful to conceptualize these similarly to `3-valued
@@ -204,7 +204,7 @@ similar to how the Java type system handles wildcards.
 The above rules make ``@Nullable Object`` the top (least precise) type.
 (Note that ``null`` is *not* the bottom type.) Here are some more
 examples of subtyping, with types written in the context of
-``@DefaultNonNull``:
+``@NullMarked``:
 
 -  ``String ⋖ Object ⋖ @Nullable Object``
 -  ``String ⋖ @Nullable String ⋖ @Nullable Object``
@@ -293,8 +293,8 @@ Parametric nullability
 ^^^^^^^^^^^^^^^^^^^^^^
 
 If a type parameter’s bound is nullable, then unannotated usages of that
-type parameter (inside the scope of ``@DefaultNonNull``) have
-*parametric nullability*.
+type parameter (inside the scope of ``@NullMarked``) have *parametric
+nullability*.
 
 Type arguments of parameterized types
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -365,20 +365,19 @@ As an example, let’s consider a fragment of Guava’s ``ImmutableMap``:
 
 .. code:: java
 
-   @DefaultNonNull
+   @NullMarked
    public class ImmutableMap<K, V> implements Map<K, V> {
      public static <K, V> ImmutableMap<K, V> of(K key, V value);
      public @Nullable V get(@Nullable Object key);
    }
 
-Because of the use of ``@DefaultNonNull``, every type use in this
-class’s declaration is fixed to either nullable or non-null (including
+Because of the use of ``@NullMarked``, every type use in this class’s
+declaration is fixed to either nullable or non-null (including
 type-variable uses, since their type parameters are considered
 implicitly bounded by non-null ``Object``).
 
 -  Can the parameters to ``of()``\ ’s be null? No, from ``K`` and
-   ``V``\ ’s bounds, which are determined implicitly by
-   ``@DefaultNonNull``.
+   ``V``\ ’s bounds, which are determined implicitly by ``@NullMarked``.
 -  Can ``get()``\ ’s return ``null``? Yes, from its explicit annotation.
 -  It is a mismatch to refer to
    ``ImmutableMap<@Nullable String, Object>`` because
@@ -399,7 +398,7 @@ allow functions that accept and/or return ``null``:
 
 .. code:: java
 
-   @DefaultNonNull
+   @NullMarked
    public interface Function<F extends @Nullable Object, T extends @Nullable Object> {
      T apply(F in);
    }
@@ -413,7 +412,7 @@ nulls:
 
 .. code:: java
 
-   @DefaultNonNull
+   @NullMarked
    class Foo implements Function<String, Integer> {
    }
 
@@ -430,7 +429,7 @@ As an example, consider a hypothetical annotated version of
 
 .. code:: java
 
-   @DefaultNonNull
+   @NullMarked
    public interface List<E extends @Nullable Object> extends Collection<E> {
      public boolean add(E element);
      public E get(int index);
@@ -440,7 +439,7 @@ Now, in client code like this:
 
 .. code:: java
 
-   @DefaultNonNull
+   @NullMarked
    public String foo(List<String> xs) {
      xs.add(null); // mismatch: add() expects non-null String
      return xs.get(0); // compatible: get() returns non-null String
@@ -464,7 +463,7 @@ For the latter point, consider the following example:
 
 .. code:: java
 
-   @DefaultNonNull
+   @NullMarked
    class Box<T extends @Nullable Object> {
      private final T value;
 
