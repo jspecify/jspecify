@@ -50,7 +50,10 @@ Whatever our final samples look like, we do **not** expect to present them as
 
 -   Based on the information they have available for any given piece of code,
     tools always have the option to issue a warning / error / other diagnostic
-    for that code, and they always have the option not to.
+    for that code, and they always have the option not to. (Even for a tool that
+    uses *all* JSpecify information and *only* JSpecify information, that
+    information is, at its heart, *information* for tools to apply as their
+    authors see fit.)
 
 ## Syntax
 
