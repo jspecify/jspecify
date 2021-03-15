@@ -188,8 +188,8 @@ Type hierarchy
 Our nullability annotations produce the following apparent type
 hierarchy [`#80 <https://github.com/jspecify/jspecify/issues/80>`__]:
 
-| ``Foo`` (written in the context of ``@NullMarked``)
-| ``⋖ Foo`` (written outside the context of ``@NullMarked``)
+| ``Foo`` (written in the scope of ``@NullMarked``)
+| ``⋖ Foo`` (written outside the scope of ``@NullMarked``)
 | ``⋖ @Nullable Foo``
 
 It can be useful to conceptualize these similarly to `3-valued
@@ -203,7 +203,7 @@ similar to how the Java type system handles wildcards.
 
 The above rules make ``@Nullable Object`` the top (least precise) type.
 (Note that ``null`` is *not* the bottom type.) Here are some more
-examples of subtyping, with types written in the context of
+examples of subtyping, with types written in the scope of
 ``@NullMarked``:
 
 -  ``String ⋖ Object ⋖ @Nullable Object``
@@ -590,13 +590,13 @@ any other type components of ``T``.
 
    For example, the nullness operator of ``List<@Nullable Object>``
    would be ``NO_CHANGE`` (at least in a `null-marked
-   context <#null-marked-context>`__), even though the nullness operator
-   of its element type ``Object`` is ``UNION_NULL``.
+   scope <#null-marked-scope>`__), even though the nullness operator of
+   its element type ``Object`` is ``UNION_NULL``.
 
-Null-marked context
--------------------
+Null-marked scope
+-----------------
 
-To determine whether a type usage appears in a null-marked context:
+To determine whether a type usage appears in a null-marked scope:
 
 Look for an ``@org.jspecify.nullness.NullMarked`` annotation on any of
 the enclosing scopes surrounding the type usage.
@@ -614,8 +614,8 @@ packages, which may be enclosed by modules.
    API <https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__.
 
 If an ``@org.jspecify.nullness.NullMarked`` annotation exists on one of
-these scopes, then the type usage is in a null-marked context.
-Otherwise, it is not.
+these scopes, then the type usage is in a null-marked scope. Otherwise,
+it is not.
 
 .. _augmented-type-of-usage:
 
@@ -640,7 +640,7 @@ Once one condition is met, skip the remaining conditions.
    ``@org.jspecify.nullness.Nullable``, its nullness operator is
    ``UNION_NULL``.
 -  If the type usage appears in a `null-marked
-   context <#null-marked-context>`__, its nullness operator is
+   scope <#null-marked-scope>`__, its nullness operator is
    ``NO_CHANGE``.
 -  Its nullness operator is ``UNSPECIFIED``.
 
@@ -721,13 +721,13 @@ even a sole upper bound of ``Object``.
    explicit bound type.
 
 If an unbounded wildcard appears in a `null-marked
-context <#null-marked-context>`__, then it has a single upper bound
-whose `base
+scope <#null-marked-scope>`__, then it has a single upper bound whose
+`base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 is ``Object`` and whose `nullness operator <#nullness-operator>`__ is
 ``UNION_NULL``.
 
-If an unbounded wildcard appears outside a null-marked context, then it
+If an unbounded wildcard appears outside a null-marked scope, then it
 has a single upper bound whose base type is ``Object`` and whose
 nullness operator is ``UNSPECIFIED``.
 
@@ -760,16 +760,16 @@ a type parameter with only a single upper bound, ``Object``, and no
 JSpecify nullness type annotations on the bound.
 
 If an ``Object``-bounded type parameter appears in a `null-marked
-context <#null-marked-context>`__, then its bound has a `base
+scope <#null-marked-scope>`__, then its bound has a `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 of ``Object`` and a `nullness operator <#nullness-operator>`__ of
 ``NO_CHANGE``.
 
    Note that this gives ``<T>`` a different bound than ``<?>`` (though
-   only in a null-marked context).
+   only in a null-marked scope).
 
 If an ``Object``-bounded type parameter appears outside a null-marked
-context, then its bound has a base type of ``Object`` and a nullness
+scope, then its bound has a base type of ``Object`` and a nullness
 operator of ``UNSPECIFIED``.
 
    All these rules match the behavior of `our normal
