@@ -71,19 +71,19 @@ annotations defined in this document will be marked
 The type-use annotations
 ------------------------
 
-In this release, we will provide a single parameterless type-use
-annotation called ``@Nullable``.
+We will provide a single parameterless type-use annotation called
+``@Nullable``.
 
-.. _structural-legality-type-use:
+.. _recognized-locations-type-use:
 
-Structural legality
-~~~~~~~~~~~~~~~~~~~
+Recognized locations
+~~~~~~~~~~~~~~~~~~~~
 
-The set of type-use annotations are specified to be *structurally* legal
-in the set of circumstances detailed below. Where annotations are
-structurally legal, semantic violations are of course still possible.
+The set of type-use annotations are specified to be *recognized* in the
+set of circumstances detailed below. Where annotations are recognized,
+semantic violations are of course still possible.
 
--  Illegal on type usages that are `categorically
+-  Unrecognized on type usages that are `categorically
    non-nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.2m67iuk50zcb>`__
    (this supersedes all rules that follow):
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
@@ -96,7 +96,7 @@ structurally legal, semantic violations are of course still possible.
    -  Note that the following rules still apply to any non-root
       component types of such type usages.
 
--  Otherwise, legal on any
+-  Otherwise, recognized on any
    `non-root <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869>`__
    component type, regardless of the root type or surrounding `type
    context <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t>`__.
@@ -105,14 +105,16 @@ structurally legal, semantic violations are of course still possible.
       argument <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.3gm7aajjj46m>`__,
       explicit wildcard bound, array component type, or the type used in
       a variadic parameter declaration.
-   -  For example, ``Iterator<@Nullable String>`` is structurally legal
-      *anywhere* that ``Iterator<String>`` is.
-   -  Cannot annotate a type parameter or wildcard *itself*, only their
-      bounds. [`#19 <https://github.com/jspecify/jspecify/issues/19>`__,
+   -  For example, the annotation in ``Iterator<@Nullable String>`` is
+      always recognized.
+   -  Exception: Annotations on a type parameter or wildcard *itself*
+      are unrecognized. (Annotation on their *bounds* are still
+      recognized.)
+      [`#19 <https://github.com/jspecify/jspecify/issues/19>`__,
       `#31 <https://github.com/jspecify/jspecify/issues/31>`__]
 
--  Legal in the following type contexts (including when the type usage
-   is a `type
+-  Recognized in the following type contexts (including when the type
+   usage is a `type
    variable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo>`__,
    regardless of its bound):
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
@@ -121,18 +123,18 @@ structurally legal, semantic violations are of course still possible.
    -  Formal parameter type (of a method, constructor, or lambda
       expression).
    -  Field type.
-   -  Type parameter upper bound (but *not* the type parameter itself)
+   -  Type parameter upper bound (but, again, *not* the type parameter
+      itself)
       [`#60 <https://github.com/jspecify/jspecify/issues/60>`__].
 
--  Illegal when applied to a class declaration.
+-  Unrecognized when applied to a class declaration.
    [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
 
    -  For example, ``public @Nullable class Foo {}`` is not allowed.
 
--  Except as already indicated, the legality of applying to a type usage
-   in `implementation
-   code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__
-   (and the semantics of doing so) is currently unspecified:
+-  Except as already indicated, unrecognized when applying to a type
+   usage in `implementation
+   code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__:
 
    -  A local variable type.
    -  The type in a cast expression.
@@ -140,42 +142,39 @@ structurally legal, semantic violations are of course still possible.
    -  An explicit type argument supplied to a generic method or
       constructor (including via a member reference), or to an instance
       creation expression for a generic class.
+   -  TODO(cpovirk): This should probably include local variables’ type
+      arguments, their array component types, and perhaps other cases.
 
-Tools are encouraged to treat an illegally placed annotation in Java
-source code as an error. In bytecode, illegally placed annotations may
-be best ignored.
-
-Type usages defined here as *legal* or *illegal* (as opposed to
-*unspecified*) to receive type use annotations are considered **in
-scope** of this specification. Tools may extend this specification to
-*unspecified* type usages at their own choosing.
+Tools are encouraged to treat an unrecognized annotation in Java source
+code as an error unless they define semantics for that location. In
+bytecode, unrecognized annotations may be best ignored (again, unless a
+tool defines semantics for them).
 
 The defaulting annotations
 --------------------------
 
-In this release, we will provide a single parameterless declaration
-annotation called ``@NullMarked``.
+We will provide a single parameterless declaration annotation called
+``@NullMarked``.
 [`#5 <https://github.com/jspecify/jspecify/issues/5>`__,
 `#87 <https://github.com/jspecify/jspecify/issues/87>`__]
 
-.. _structural-legality-defaulting:
+.. _recognized-locations-declaration:
 
-Structural legality
-~~~~~~~~~~~~~~~~~~~
+Recognized locations
+~~~~~~~~~~~~~~~~~~~~
 
--  The set of defaulting annotations can be applied to:
+The set of defaulting annotations are recognized when applied to:
 
-   -  A *named* class.
-   -  A package. [*debated*
-      `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
-   -  A module. [*debated*
-      `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
-   -  *Not* a method
-      [`#43 <https://github.com/jspecify/jspecify/issues/43>`__],
-      constructor
-      [`#43 <https://github.com/jspecify/jspecify/issues/43>`__], or
-      field [`#50 <https://github.com/jspecify/jspecify/issues/50>`__].
-      *debated*
+-  A *named* class.
+-  A package. [*debated*
+   `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
+-  A module. [*debated*
+   `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
+-  *Not* a method
+   [`#43 <https://github.com/jspecify/jspecify/issues/43>`__],
+   constructor
+   [`#43 <https://github.com/jspecify/jspecify/issues/43>`__], or field
+   [`#50 <https://github.com/jspecify/jspecify/issues/50>`__]. *debated*
 
 Semantics
 ---------
@@ -278,8 +277,8 @@ surrounding the type usage.
 -  If no such defaulting annotation exists, then no defaulting
    annotation is in effect.
 
-We call any type usage that itself carries a `structurally
-legal <#structural-legality-type-use>`__ type-use annotation
+We call any type usage that itself carries a
+`recognized <#recognized-locations-type-use>`__ type-use annotation
 **explicitly annotated**.
 
 Parameterized types
