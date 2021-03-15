@@ -7,8 +7,9 @@ About this document
 This document summarizes our current thinking for proposing a set of
 nullness annotations. **Nothing here is “set in stone” yet.**
 
-**As of March 2021, this doc is currently two docs concatenated together. They
-conflict with each other in places. We will iterate to address this.**
+**As of March 2021, this doc is currently two docs concatenated
+together. They conflict with each other in places. We will iterate to
+address this.**
 
 It will be very helpful to read or refer to the `core
 concepts/glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
@@ -223,10 +224,9 @@ others. Similarly, the **lub** (*least upper bound*) of a set of types
 is a type from the set that is at most as specific as all others.
 
 Finally, a **type check** (e.g., to determine assignability) for a pair
-of `augmented
-types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.367l48xhsikk>`__
-includes validating **both** (a) a type check of the `base
-types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.e98jyoqkxvjd>`__,
+of `augmented types <#augmented-type>`__ includes validating **both**
+(a) a type check of the `base
+types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__,
 handled by the off-the-shelf compiler, and (b) a type check for
 nullability.
 
@@ -257,6 +257,7 @@ nullability.
    -  This means that “list of nullable string” and “list of non-null
       string” are not convertible to each other, but “list of non-null
       string” is convertible to ``List<? extends @Nullable String>``.
+
    -  In addition, we encourage unsoundly allowing unspecified nullness
       to be “the same type” as any nullness, even for invariant type
       components
@@ -325,7 +326,7 @@ Overriding
 If a method overrides other methods according to Java language rules
 (see `JLS
 8.4.8.1 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1>`__,
-also cf. \ `JVMS
+also cf. `JVMS
 5.4.5 <https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5>`__),
 then tools may wish to check that:
 
