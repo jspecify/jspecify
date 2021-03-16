@@ -62,11 +62,9 @@ Whatever our final samples look like, we do **not** expect to present them as
 A special comment on a given line of a `.java` file provides information about
 the following line.
 
-<!-- TODO(cpovirk): Update "illegal" terminology in Markdown spec, and link there. -->
-
 The first three special comments indicate that JSpecify annotations are applied
 in ways that are
-[unrecognized](https://docs.google.com/document/d/15NND5nBxMkZ-Us6wz3Pfbt4ODIaWaJ6JDs4w6h9kUaY/edit#heading=h.ib00ltjpj1xa).
+[unrecognized](https://jspecify.dev/spec.html#recognized-locations-type-use).
 Tools are likely to report an error in the case of the first two, somewhat less
 likely to report an error in the case of the third (since they might choose to
 give their meaning to annotations there), and not *obligated* to do anything for
