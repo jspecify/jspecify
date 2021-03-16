@@ -19,8 +19,7 @@ import org.jspecify.nullness.Nullable;
 
 @NullMarked
 interface CovariantReturns {
-  @Nullable
-  Object makeObject();
+  @Nullable Object makeObject();
 
   Lib<?> makeImplicitlyObjectBounded();
 

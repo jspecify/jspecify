@@ -23,11 +23,9 @@ class OverrideReturns {
   interface Super {
     Object makeObject();
 
-    @NullnessUnspecified
-    Object makeObjectUnspec();
+    @NullnessUnspecified Object makeObjectUnspec();
 
-    @Nullable
-    Object makeObjectUnionNull();
+    @Nullable Object makeObjectUnionNull();
   }
 
   interface SubObject extends Super {
@@ -43,33 +41,27 @@ class OverrideReturns {
 
   interface SubObjectUnspec extends Super {
     @Override
-    @NullnessUnspecified
     // jspecify_nullness_not_enough_information
-    Object makeObject();
+    @NullnessUnspecified Object makeObject();
 
     @Override
-    @NullnessUnspecified
     // jspecify_nullness_not_enough_information
-    Object makeObjectUnspec();
+    @NullnessUnspecified Object makeObjectUnspec();
 
     @Override
-    @NullnessUnspecified
-    Object makeObjectUnionNull();
+    @NullnessUnspecified Object makeObjectUnionNull();
   }
 
   interface SubObjectUnionNull extends Super {
     @Override
-    @Nullable
     // jspecify_nullness_mismatch
-    Object makeObject();
+    @Nullable Object makeObject();
 
     @Override
-    @Nullable
     // jspecify_nullness_not_enough_information
-    Object makeObjectUnspec();
+    @Nullable Object makeObjectUnspec();
 
     @Override
-    @Nullable
-    Object makeObjectUnionNull();
+    @Nullable Object makeObjectUnionNull();
   }
 }

@@ -34,35 +34,29 @@ class ClassToObject {
     return x;
   }
 
-  @NullnessUnspecified
-  Object x3(ClassToObject x) {
+  @NullnessUnspecified Object x3(ClassToObject x) {
     return x;
   }
 
-  @NullnessUnspecified
-  Object x4(@NullnessUnspecified ClassToObject x) {
+  @NullnessUnspecified Object x4(@NullnessUnspecified ClassToObject x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  Object x5(@Nullable ClassToObject x) {
+  @NullnessUnspecified Object x5(@Nullable ClassToObject x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @Nullable
-  Object x6(ClassToObject x) {
+  @Nullable Object x6(ClassToObject x) {
     return x;
   }
 
-  @Nullable
-  Object x7(@NullnessUnspecified ClassToObject x) {
+  @Nullable Object x7(@NullnessUnspecified ClassToObject x) {
     return x;
   }
 
-  @Nullable
-  Object x8(@Nullable ClassToObject x) {
+  @Nullable Object x8(@Nullable ClassToObject x) {
     return x;
   }
 }

@@ -25,14 +25,12 @@ class NullLiteralToClass {
     return null;
   }
 
-  @NullnessUnspecified
-  Object x1() {
+  @NullnessUnspecified Object x1() {
     // jspecify_nullness_not_enough_information
     return null;
   }
 
-  @Nullable
-  Object x2() {
+  @Nullable Object x2() {
     return null;
   }
 }

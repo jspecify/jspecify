@@ -41,83 +41,67 @@ class TypeVariableToObjectUnionNull<
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
-  @Nullable
-  Object x0(Never1T x) {
+  @Nullable Object x0(Never1T x) {
     return x;
   }
 
-  @Nullable
-  Object x1(ChildOfNever1T x) {
+  @Nullable Object x1(ChildOfNever1T x) {
     return x;
   }
 
-  @Nullable
-  Object x2(UnspecChildOfNever1T x) {
+  @Nullable Object x2(UnspecChildOfNever1T x) {
     return x;
   }
 
-  @Nullable
-  Object x3(NullChildOfNever1T x) {
+  @Nullable Object x3(NullChildOfNever1T x) {
     return x;
   }
 
-  @Nullable
-  Object x4(Never2T x) {
+  @Nullable Object x4(Never2T x) {
     return x;
   }
 
-  @Nullable
-  Object x5(ChildOfNever2T x) {
+  @Nullable Object x5(ChildOfNever2T x) {
     return x;
   }
 
-  @Nullable
-  Object x6(UnspecChildOfNever2T x) {
+  @Nullable Object x6(UnspecChildOfNever2T x) {
     return x;
   }
 
-  @Nullable
-  Object x7(NullChildOfNever2T x) {
+  @Nullable Object x7(NullChildOfNever2T x) {
     return x;
   }
 
-  @Nullable
-  Object x8(UnspecT x) {
+  @Nullable Object x8(UnspecT x) {
     return x;
   }
 
-  @Nullable
-  Object x9(ChildOfUnspecT x) {
+  @Nullable Object x9(ChildOfUnspecT x) {
     return x;
   }
 
-  @Nullable
-  Object x10(UnspecChildOfUnspecT x) {
+  @Nullable Object x10(UnspecChildOfUnspecT x) {
     return x;
   }
 
-  @Nullable
-  Object x11(NullChildOfUnspecT x) {
+  @Nullable Object x11(NullChildOfUnspecT x) {
     return x;
   }
 
-  @Nullable
-  Object x12(ParametricT x) {
+  @Nullable Object x12(ParametricT x) {
     return x;
   }
 
-  @Nullable
-  Object x13(ChildOfParametricT x) {
+  @Nullable Object x13(ChildOfParametricT x) {
     return x;
   }
 
-  @Nullable
-  Object x14(UnspecChildOfParametricT x) {
+  @Nullable Object x14(UnspecChildOfParametricT x) {
     return x;
   }
 
-  @Nullable
-  Object x15(NullChildOfParametricT x) {
+  @Nullable Object x15(NullChildOfParametricT x) {
     return x;
   }
 }
