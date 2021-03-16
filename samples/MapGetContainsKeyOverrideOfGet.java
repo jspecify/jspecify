@@ -22,8 +22,7 @@ import org.jspecify.nullness.Nullable;
 class MapGetContainsKeyOverrideOfGet {
   interface MyMap<K extends @Nullable Object, V extends @Nullable Object> extends Map<K, V> {
     @Override
-    @Nullable
-    V get(@Nullable Object o);
+    @Nullable V get(@Nullable Object o);
   }
 
   Object noCheckObject(MyMap<Object, Object> map, Object key) {

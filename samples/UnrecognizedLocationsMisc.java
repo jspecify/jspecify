@@ -27,8 +27,7 @@ abstract class UnrecognizedLocationsMisc {
       // jspecify_nullness_intrinsically_not_nullable jspecify_but_expect_nothing
       implements @Nullable Super {
     // jspecify_nullness_intrinsically_not_nullable jspecify_but_expect_nothing
-    @Nullable
-    Sub() {}
+    @Nullable Sub() {}
   }
 
   void foo() throws Exception {

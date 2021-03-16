@@ -27,9 +27,8 @@ interface ContravariantReturns {
 
   interface Subtype extends ContravariantReturns {
     @Override
-    @Nullable
     // jspecify_nullness_mismatch
-    Object makeObject();
+    @Nullable Object makeObject();
 
     @Override
     // jspecify_nullness_mismatch

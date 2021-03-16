@@ -21,12 +21,10 @@ import org.jspecify.nullness.NullnessUnspecified;
 @NullMarked
 enum EnumAnnotations {
   // jspecify_nullness_intrinsically_not_nullable
-  @Nullable
-  FOO,
+  @Nullable FOO,
 
   // jspecify_nullness_intrinsically_not_nullable
-  @NullnessUnspecified
-  BAR,
+  @NullnessUnspecified BAR,
 
   BAZ;
 }

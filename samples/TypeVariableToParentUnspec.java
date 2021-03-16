@@ -41,70 +41,58 @@ class TypeVariableToParentUnspec<
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
-  @NullnessUnspecified
-  Never1T x0(ChildOfNever1T x) {
+  @NullnessUnspecified Never1T x0(ChildOfNever1T x) {
     return x;
   }
 
-  @NullnessUnspecified
-  Never1T x1(UnspecChildOfNever1T x) {
+  @NullnessUnspecified Never1T x1(UnspecChildOfNever1T x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  Never1T x2(NullChildOfNever1T x) {
+  @NullnessUnspecified Never1T x2(NullChildOfNever1T x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  Never2T x3(ChildOfNever2T x) {
+  @NullnessUnspecified Never2T x3(ChildOfNever2T x) {
     return x;
   }
 
-  @NullnessUnspecified
-  Never2T x4(UnspecChildOfNever2T x) {
+  @NullnessUnspecified Never2T x4(UnspecChildOfNever2T x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  Never2T x5(NullChildOfNever2T x) {
+  @NullnessUnspecified Never2T x5(NullChildOfNever2T x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  UnspecT x6(ChildOfUnspecT x) {
+  @NullnessUnspecified UnspecT x6(ChildOfUnspecT x) {
     return x;
   }
 
-  @NullnessUnspecified
-  UnspecT x7(UnspecChildOfUnspecT x) {
+  @NullnessUnspecified UnspecT x7(UnspecChildOfUnspecT x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  UnspecT x8(NullChildOfUnspecT x) {
+  @NullnessUnspecified UnspecT x8(NullChildOfUnspecT x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  ParametricT x9(ChildOfParametricT x) {
+  @NullnessUnspecified ParametricT x9(ChildOfParametricT x) {
     return x;
   }
 
-  @NullnessUnspecified
-  ParametricT x10(UnspecChildOfParametricT x) {
+  @NullnessUnspecified ParametricT x10(UnspecChildOfParametricT x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  ParametricT x11(NullChildOfParametricT x) {
+  @NullnessUnspecified ParametricT x11(NullChildOfParametricT x) {
     // jspecify_nullness_not_enough_information
     return x;
   }

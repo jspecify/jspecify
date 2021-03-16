@@ -20,65 +20,53 @@ import org.jspecify.nullness.NullnessUnspecified;
 
 @NullMarked
 abstract class CaptureConvertedUnionNullToOtherUnionNull {
-  @Nullable
-  Lib x0(ImplicitlyObjectBounded<? extends Lib> x) {
+  @Nullable Lib x0(ImplicitlyObjectBounded<? extends Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
+  @Nullable Lib x1(ImplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x2(ImplicitlyObjectBounded<? extends @Nullable Lib> x) {
+  @Nullable Lib x2(ImplicitlyObjectBounded<? extends @Nullable Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x3(ExplicitlyObjectBounded<? extends Lib> x) {
+  @Nullable Lib x3(ExplicitlyObjectBounded<? extends Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
+  @Nullable Lib x4(ExplicitlyObjectBounded<? extends @NullnessUnspecified Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
+  @Nullable Lib x5(ExplicitlyObjectBounded<? extends @Nullable Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x6(UnspecBounded<? extends Lib> x) {
+  @Nullable Lib x6(UnspecBounded<? extends Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
   // jspecify_but_expect_warning
-  Lib x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
+  @Nullable Lib x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
   // jspecify_but_expect_warning
-  Lib x8(UnspecBounded<? extends @Nullable Lib> x) {
+  @Nullable Lib x8(UnspecBounded<? extends @Nullable Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x9(NullableBounded<? extends Lib> x) {
+  @Nullable Lib x9(NullableBounded<? extends Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
+  @Nullable Lib x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
     return unionNull(x.get());
   }
 
-  @Nullable
-  Lib x11(NullableBounded<? extends @Nullable Lib> x) {
+  @Nullable Lib x11(NullableBounded<? extends @Nullable Lib> x) {
     return unionNull(x.get());
   }
 

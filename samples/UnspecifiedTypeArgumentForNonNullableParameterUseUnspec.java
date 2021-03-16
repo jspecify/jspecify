@@ -20,8 +20,7 @@ import org.jspecify.nullness.NullnessUnspecified;
 @NullMarked
 class UnspecifiedTypeArgumentForNonNullableParameterUseUnspec {
   interface SupplierWithNonNullableBound<E> {
-    @NullnessUnspecified
-    E get();
+    @NullnessUnspecified E get();
   }
 
   String x0(

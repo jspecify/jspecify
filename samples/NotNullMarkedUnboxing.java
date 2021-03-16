@@ -23,11 +23,9 @@ class NotNullMarkedUnboxing {
   interface Super {
     Integer getInteger();
 
-    @NullnessUnspecified
-    Integer getIntegerUnspec();
+    @NullnessUnspecified Integer getIntegerUnspec();
 
-    @Nullable
-    Integer getIntegerUnionNull();
+    @Nullable Integer getIntegerUnionNull();
   }
 
   abstract class Sub implements Super {

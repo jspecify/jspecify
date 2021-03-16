@@ -49,8 +49,7 @@ abstract class Ternary {
     return b() ? objectUnionNull() : objectUnionNull();
   }
 
-  @Nullable
-  Object x6() {
+  @Nullable Object x6() {
     return b() ? objectUnspec() : objectUnspec();
   }
 

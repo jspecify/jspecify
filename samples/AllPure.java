@@ -20,11 +20,9 @@ import org.jspecify.nullness.Nullable;
 @NullMarked
 interface AllPure {
   interface Foo {
-    @Nullable
-    Object bar();
+    @Nullable Object bar();
 
-    @Nullable
-    Object bar(Object o);
+    @Nullable Object bar(Object o);
   }
 
   interface FooSupplier {

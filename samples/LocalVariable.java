@@ -23,11 +23,9 @@ abstract class LocalVariable {
   interface Super {
     String string();
 
-    @NullnessUnspecified
-    String stringUnspec();
+    @NullnessUnspecified String stringUnspec();
 
-    @Nullable
-    String stringUnionNull();
+    @Nullable String stringUnionNull();
   }
 
   abstract class Sub implements Super {
