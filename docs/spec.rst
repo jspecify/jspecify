@@ -1,100 +1,139 @@
 JSpecify spec outline
 =====================
 
-About this document
--------------------
+   .. rubric:: About this document
+      :name: about-this-document
 
-This document summarizes our current thinking for proposing a set of
-nullness annotations. **Nothing here is “set in stone” yet.**
+   This document summarizes our current thinking for proposing a set of
+   nullness annotations. **Nothing here is “set in stone” yet.**
 
-**As of March 2021, this doc is currently two docs concatenated
-together. They conflict with each other in places. We will iterate to
-address this.**
+   **As of March 2021, this doc is currently two docs concatenated
+   together. They conflict with each other in places. We will iterate to
+   address this.**
 
-It will be very helpful to read or refer to the `core
-concepts/glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
-document in order to understand this material correctly. There are
-numerous other documents in our `shared
-folder <https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__.
+   It will be very helpful to read or refer to the `core
+   concepts/glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
+   document in order to understand this material correctly. There are
+   numerous other documents in our `shared
+   folder <https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__.
 
-Overview
---------
+   .. rubric:: Overview
+      :name: overview
 
-We propose a set of type annotations to specify the intended nullness of
-individual type usages. At a high level, our proposed semantics is
-similar to existing tools’ treatment of nullness type annotations. We
-treat nullness annotations as purely compile-time type refinements
-without effect on runtime semantics. Besides the typical
-“`nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.ejpb5ee0msjt>`__”
-and
-“`non-nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.8wgyiwyvi49f>`__”
-refinements, we distinguish values of “`unspecified
-nullness <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3>`__”,
-which typically arise from unannotated code, and allow for (with
-optional warnings if desired) type checks involving “unspecified
-nullness” to succeed even when they are unsound.
+   We propose a type annotation to specify the nullness of individual
+   type usages. At a high level, our proposed semantics is similar to
+   existing tools’ treatment of nullness type annotations. We treat
+   nullness annotations as purely compile-time type refinements without
+   effect on runtime semantics. Besides the typical
+   “`nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.ejpb5ee0msjt>`__”
+   and
+   “`non-nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.8wgyiwyvi49f>`__”
+   refinements, we distinguish values of “`unspecified
+   nullness <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3>`__”,
+   which typically arise from unannotated code, and allow for (with
+   optional warnings if desired) type checks involving “unspecified
+   nullness” to succeed even when they are unsound.
 
-To avoid excessive annotation overhead in hand-written Java code while
-clearly distinguishing annotated from legacy code, we also propose a set
-of explicit defaulting annotations. In the absence of a defaulting
-annotation, type usages will be considered of “unspecified nullness.”
+   To avoid excessive annotation overhead in hand-written Java code
+   while clearly distinguishing annotated from legacy code, we also
+   propose a declaration annotation, with semantics similar to existing
+   tools’ semantics of “non-null by default.” In the absence of that
+   annotation, type usages will be considered of “unspecified nullness.”
 
-We give `semantics <#semantics>`__ to these annotations independent of
-particular tools. We don’t specify what tools must do with that semantic
-information, nor do we forbid them from adding to it (e.g., with flow
-typing in implementation code). We merely define how to interpret our
-annotations in method, field, and class declarations. This approach
-gives documented meaning to annotations appearing in declarations while
-allowing Java code authors to use their normal toolchain to compile code
-(though we do recommend code authors use additional tools to minimize
-the chance of incorrect annotations). Crucially, this approach also
-allows any tool to interpret annotations that appear in Java bytecode
-produced by other tools.
+   We give `semantics <#semantics>`__ to these annotations independent
+   of particular tools. We don’t specify what tools must do with that
+   semantic information, nor do we forbid them from adding to it (e.g.,
+   with flow typing in implementation code). We merely define how to
+   interpret our annotations in method, field, and class declarations.
+   This approach gives documented meaning to annotations appearing in
+   declarations while allowing Java code authors to use their normal
+   toolchain to compile code (though we do recommend code authors use
+   additional tools to minimize the chance of incorrect annotations).
+   Crucially, this approach also allows any tool to interpret
+   annotations that appear in Java bytecode produced by other tools.
 
-**Note:** we have adopted precise meanings for the terms used in this
-document; it will be necessary to read (or refer to) the
-`glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
-document in order to interpret this information correctly.
+   **Note:** we have adopted precise meanings for the terms used in this
+   document; it will be necessary to read (or refer to) the
+   `glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
+   document in order to interpret this information correctly.
 
 General
 -------
 
-The package name will be ``org.jspecify.nullness``.
-[`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
+-  The package name is ``org.jspecify.nullness``.
+   [`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
+-  The JPMS module name is ``org.jspecify``.
+   [`#181 <https://github.com/jspecify/jspecify/issues/181>`__]
+-  The Maven artifact is ``org.jspecify:jspecify``.
+   [`#181 <https://github.com/jspecify/jspecify/issues/181>`__]
 
-We will release one canonical artifact, in which all annotations have
-runtime retention.
+All annotations have runtime retention.
 [`#28 <https://github.com/jspecify/jspecify/issues/28>`__] None of the
-annotations defined in this document will be marked
+annotations are marked
 `repeatable <https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html>`__.
 
-The type-use annotations
-------------------------
+The type-use annotation
+-----------------------
 
-We will provide a single parameterless type-use annotation called
-``@Nullable``.
+We provide a parameterless type-use annotation called ``@Nullable``.
 
-.. _recognized-locations-type-use:
+Recognized locations for type-use annotations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Recognized locations
-~~~~~~~~~~~~~~~~~~~~
+Our type-use annotation is specified to be *recognized* in the
+circumstances detailed below. An annotation in a recognized location has
+the semantics described in this spec. The spec does not assign meaning
+to annotations in unrecognized locations.
 
-The set of type-use annotations are specified to be *recognized* in the
-set of circumstances detailed below. Where annotations are recognized,
-semantic violations are of course still possible.
+   Of course, when an annotation appears in an recognized location, that
+   does not make it “correct”: It may specify a type that a tool can
+   identify as *incompatible* with the type that the tool requires for
+   that particular location, given the information it has about related
+   code from annotations and other sources.
 
--  Unrecognized on type usages that are `categorically
-   non-nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.2m67iuk50zcb>`__
-   (this supersedes all rules that follow):
+-  Unrecognized when applied to any component of a type usage in
+   `implementation
+   code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__:
+
+   -  A local variable type.
+   -  The type in a cast expression.
+   -  An array or object creation expression.
+   -  An explicit type argument supplied to a generic method or
+      constructor (including via a member reference), or to an instance
+      creation expression for a generic class.
+
+-  Unrecognized when applied to a class declaration.
+   [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
+
+      For example, ``public @Nullable class Foo {}`` is unrecognized.
+
+-  Unrecognized on type usages that are intrinsically non-nullable:
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
 
    -  When the annotated type usage is of any primitive type.
-   -  For an outer type used as a component type in an inner type
-      expression.
-   -  In a `non-nullable type
-      context <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.d00h1zvk0vt3>`__.
-   -  Note that the following rules still apply to any non-root
-      component types of such type usages.
+
+   -  For the outer type that qualifies an inner type.
+
+         For example, ``@Nullable Foo.Bar`` is unrecognized because the
+         outer type ``Foo`` is intrinsically non-nullable.
+
+   -  In any of the following non-nullable type contexts:
+
+      -  supertype in a class declaration
+      -  thrown exception type
+      -  enum constant declaration
+      -  receiver parameter type
+
+   But note that the following rules still apply to any non-root
+   component types of such type usages.
+
+-  Unrecognized on any component of a receiver parameter type.
+   [`#157 <https://github.com/jspecify/jspecify/issues/157>`__]
+
+      This partially overlaps with the rule about non-nullable type
+      contexts above: Both rules cover an annotation on the
+      intrinsically non-nullable top-level type, but this rule extends
+      that to *all* components of the type.
 
 -  Otherwise, recognized on any
    `non-root <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869>`__
@@ -105,76 +144,68 @@ semantic violations are of course still possible.
       argument <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.3gm7aajjj46m>`__,
       explicit wildcard bound, array component type, or the type used in
       a variadic parameter declaration.
-   -  For example, the annotation in ``Iterator<@Nullable String>`` is
-      always recognized.
+
+         For example, the annotation in ``Iterator<@Nullable String>``
+         is always recognized.
+
    -  Exception: Annotations on a type parameter or wildcard *itself*
-      are unrecognized. (Annotation on their *bounds* are still
-      recognized.)
+      are unrecognized.
       [`#19 <https://github.com/jspecify/jspecify/issues/19>`__,
       `#31 <https://github.com/jspecify/jspecify/issues/31>`__]
+
+         Annotations on their *bounds* are still recognized.
 
 -  Recognized in the following type contexts (including when the type
    usage is a `type
    variable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo>`__,
-   regardless of its bound):
+   regardless of the corresponding type parameter’s bound):
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
 
    -  Return type of a method.
-   -  Formal parameter type (of a method, constructor, or lambda
-      expression).
+
+   -  Formal parameter type of a method or constructor.
+
    -  Field type.
-   -  Type parameter upper bound (but, again, *not* the type parameter
-      itself)
-      [`#60 <https://github.com/jspecify/jspecify/issues/60>`__].
 
--  Unrecognized when applied to a class declaration.
-   [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
+   -  Type parameter upper bound.
+      [`#60 <https://github.com/jspecify/jspecify/issues/60>`__]
 
-   -  For example, ``public @Nullable class Foo {}`` is not allowed.
+         But, again, *not* the type parameter itself.
 
--  Except as already indicated, unrecognized when applying to a type
-   usage in `implementation
-   code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__:
+..
 
-   -  A local variable type.
-   -  The type in a cast expression.
-   -  An array or object creation expression.
-   -  An explicit type argument supplied to a generic method or
-      constructor (including via a member reference), or to an instance
-      creation expression for a generic class.
-   -  TODO(cpovirk): This should probably include local variables’ type
-      arguments, their array component types, and perhaps other cases.
+   Tools are encouraged to treat an unrecognized annotation in Java
+   source code as an error unless they define semantics for that
+   location – and especially to treat annotations on intrinsically
+   non-nullable locations as an error. In bytecode, unrecognized
+   annotations may be best ignored (again, unless a tool defines
+   semantics for them).
 
-Tools are encouraged to treat an unrecognized annotation in Java source
-code as an error unless they define semantics for that location. In
-bytecode, unrecognized annotations may be best ignored (again, unless a
-tool defines semantics for them).
-
-The defaulting annotations
+The declaration annotation
 --------------------------
 
-We will provide a single parameterless declaration annotation called
+We provide a single parameterless declaration annotation called
 ``@NullMarked``.
 [`#5 <https://github.com/jspecify/jspecify/issues/5>`__,
 `#87 <https://github.com/jspecify/jspecify/issues/87>`__]
 
-.. _recognized-locations-declaration:
+Recognized locations for declaration annotations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Recognized locations
-~~~~~~~~~~~~~~~~~~~~
-
-The set of defaulting annotations are recognized when applied to:
+Our declaration annotation is specified to be *recognized* when applied
+to the locations listed below:
 
 -  A *named* class.
--  A package. [*debated*
-   `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
--  A module. [*debated*
-   `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
--  *Not* a method
+-  A package. [`#34 <https://github.com/jspecify/jspecify/issues/34>`__]
+-  A module. [`#34 <https://github.com/jspecify/jspecify/issues/34>`__]
+
+..
+
+   *Not* a method
    [`#43 <https://github.com/jspecify/jspecify/issues/43>`__],
    constructor
    [`#43 <https://github.com/jspecify/jspecify/issues/43>`__], or field
-   [`#50 <https://github.com/jspecify/jspecify/issues/50>`__]. *debated*
+   [`#50 <https://github.com/jspecify/jspecify/issues/50>`__].
 
 Semantics
 ---------
@@ -278,8 +309,8 @@ surrounding the type usage.
    annotation is in effect.
 
 We call any type usage that itself carries a
-`recognized <#recognized-locations-type-use>`__ type-use annotation
-**explicitly annotated**.
+`recognized <#recognized-locations-for-type-use-annotations>`__ type-use
+annotation **explicitly annotated**.
 
 Parameterized types
 ~~~~~~~~~~~~~~~~~~~
