@@ -14,12 +14,37 @@
  * limitations under the License.
  */
 
+import javax.annotation.CheckForNull;
 import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 import org.jspecify.nullness.NullnessUnspecified;
 
-class ProtoDeclarationAnnotations {
-  @NullMarked
+@NullMarked
+class UseCheckForNull {
+  Object x0(Object o) {
+    return o;
+  }
+
+  @CheckForNull
+  Object x1(Object o) {
+    return o;
+  }
+
+  Object x2(@CheckForNull Object o) {
+    // jspecify_nullness_mismatch
+    return o;
+  }
+
+  @CheckForNull
+  Object x3(@CheckForNull Object o) {
+    return o;
+  }
+
+  Object x4(@CheckForNull Object[] o) {
+    // jspecify_nullness_mismatch
+    return o;
+  }
+
   class User {
     void params(
         SomeProto proto,
@@ -47,21 +72,14 @@ class ProtoDeclarationAnnotations {
     }
   }
 
-  @ProtoNonnullApi
   interface SomeProto {
     Object nonNull();
 
-    @ProtoMethodMayReturnNull
+    @CheckForNull
     Object unionNull();
 
     void nonNull(Object o);
 
-    void unionNull(@ProtoMethodAcceptsNullParameter Object o);
+    void unionNull(@CheckForNull Object o);
   }
-
-  @interface ProtoMethodMayReturnNull {}
-
-  @interface ProtoNonnullApi {}
-
-  @interface ProtoMethodAcceptsNullParameter {}
 }
