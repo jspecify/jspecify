@@ -18,12 +18,25 @@ import org.jspecify.nullness.NullMarked;
 
 @NullMarked
 class GetClassLoader {
-  Object arbitrary(Class<?> c) {
+  Object arbitraryClass(Class<?> c) {
     // jspecify_nullness_mismatch
     return c.getClassLoader();
   }
 
+  Object arbitraryObject(Object o) {
+    // jspecify_nullness_mismatch
+    return o.getClass().getClassLoader();
+  }
+
   Object literal() {
     return GetClassLoader.class.getClassLoader();
+  }
+
+  Object explicitThis() {
+    return this.getClass().getClassLoader();
+  }
+
+  Object implicitThis() {
+    return getClass().getClassLoader();
   }
 }
