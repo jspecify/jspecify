@@ -60,4 +60,12 @@ class ArraysCopyOf {
   }
 
   // TODO(cpovirk): Samples for the Class-accepting overloads.
+
+  <T extends @Nullable Object> T[] parametric(T[] o) {
+    return copyOf(o, o.length);
+  }
+
+  <T extends @Nullable Object> @Nullable T[] parametricUnionNull(@Nullable T[] o) {
+    return copyOf(o, o.length);
+  }
 }
