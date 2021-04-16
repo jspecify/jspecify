@@ -43,12 +43,12 @@ class ArraysCopyOf {
   }
 
   Object[] arbitraryUnspec(@NullnessUnspecified Object[] o, int length) {
-    // jspecify_nullness_mismatch jspecify_but_expect_warning
+    // jspecify_nullness_mismatch jspecify_but_expect_nothing
     return copyOf(o, length);
   }
 
   Object[] arrayLengthUnspec(@NullnessUnspecified Object[] o) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     return copyOf(o, o.length);
   }
 
