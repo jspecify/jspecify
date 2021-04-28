@@ -16,10 +16,11 @@
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 import org.jspecify.nullness.NullMarked;
 
 @NullMarked
-class GetCauseNonNull {
+abstract class GetCauseNonNull {
   Object getCause(Throwable t) {
     // jspecify_nullness_mismatch
     return t.getCause();
@@ -36,4 +37,17 @@ class GetCauseNonNull {
   Object getTargetException(InvocationTargetException e) {
     return e.getTargetException();
   }
+
+  void afterMulticatch() {
+    try {
+      doSomething();
+    } catch (TimeoutException | InterruptedException e) {
+    } catch (ExecutionException e) {
+      consume(e.getCause());
+    }
+  }
+
+  abstract void doSomething() throws ExecutionException, InterruptedException, TimeoutException;
+
+  abstract void consume(Throwable t);
 }
