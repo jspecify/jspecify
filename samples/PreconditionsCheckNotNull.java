@@ -20,9 +20,9 @@ import org.jspecify.nullness.NullMarked;
 import org.jspecify.nullness.Nullable;
 
 @NullMarked
-class PreconditionsCheckNotNullMessage {
+class PreconditionsCheckNotNull {
   void x(@Nullable Object o) {
-    // jspecify_nullness_mismatch
+    // jspecify_but_expect_warning
     checkNotNull(o);
   }
 }
