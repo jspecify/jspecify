@@ -227,12 +227,12 @@ components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvta
    which is written in terms of a “nullness” for each component, not a
    “nullness operator.” Still, the glossary’s concept of the “nullness”
    of a type is derivable from the type’s nullness operator. Notably,
-   the glossary’s “nullable” type is our `least convenient
-   world <#multiple-worlds>`__\ ’s `trusted null-inclusive under every
-   parameterization <#trusted-null-inclusive-under-every-parameterization>`__,
-   and the glossary’s “non-nullable” type is our least convenient
-   world’s `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__.
+   the glossary’s “nullable” type is `trusted null-inclusive under every
+   parameterization <#trusted-null-inclusive-under-every-parameterization>`__
+   `in all worlds <#multiple-worlds>`__, and the glossary’s
+   “non-nullable” type is `trusted null-exclusive under every
+   parameterization <#trusted-null-exclusive-under-every-parameterization>`__
+   `in all worlds <#multiple-worlds>`__.
 
 For our purposes, base types (and thus augmented types) include not just
 class and interface types, array types, and type variables but also
@@ -476,56 +476,61 @@ This produces multiple null types:
 
       This may be relevant only in implementation code.
 
-.. _multiple-worlds:
+Multiple “worlds”
+-----------------
 
-The least convenient world and the most convenient world
---------------------------------------------------------
-
-Some of the rules in this spec come in 2 versions, 1 for “the least
-convenient world” and 1 for “the most convenient world.”
+Some of the rules in this spec come in 2 versions: One version requires
+a property to hold “in all worlds,” and the other requires it to hold
+only “in some world.”
 
 Tools may implement either or both versions of the rules.
 
    Our goal is to allow tools and their users to choose their desired
-   level of strictness in the presence of ``UNSPECIFIED``. “The least
-   convenient world” usually assumes that types are incompatible unless
-   it has enough information to prove they are compatible; “the most
-   convenient world” assumes that types are compatible unless it has
-   enough information to prove they are incompatible.
+   level of strictness in the presence of ``UNSPECIFIED``. The basic
+   idea is that, every time a tool encounters a type component with the
+   nullness operator ``UNSPECIFIED``, it forks off 2 “worlds”: 1 in
+   which the operator is ``UNION_NULL`` and 1 in which it is
+   ``NO_CHANGE``.
 
-   Thus, strict tools may want to implement the least-convenient-world
-   version of rules, and lenient tools may wish to implement the
-   most-convenient-world version. Or a tool might implement both and let
-   users select which rules to apply.
+   Since we lack a nullness specification for the type, we assume that
+   either of the resulting worlds may be the “correct” specification.
+   The all-worlds version of a rule, by requiring types to be compatible
+   in all possible worlds, holds that types are incompatible unless it
+   has enough information to prove they are compatible. The some-world
+   version, by requiring types to be compatible only in *some* world,
+   holds that types are compatible unless it has enough information to
+   prove they are incompatible. (By behaving “optimistically,” the
+   some-world checking behaves much like Kotlin’s checking of “platform
+   types.”)
 
-   Another possibility is for a tool to implement both versions and to
-   use that to distinguish between “errors” and “warnings.” Such a tool
-   might run each check first in the least convenient world and then, if
-   the check fails, run it again in the most convenient world. If the
-   check fails in both worlds, the tool would produce an error. If it
-   passes only because of the most convenient interpretation, the tool
-   would produce a warning.
+   Thus, strict tools may want to implement the all-worlds version of
+   rules, and lenient tools may wish to implement the some-world
+   version. Or a tool might implement both and let users select which
+   rules to apply.
 
-The main body of each section describes the *least*-convenient-world
-rule. If the most-convenient-world rule differs, the differences are
-explained at the end.
+   Yet another possibility is for a tool to implement both versions and
+   to use that to distinguish between “errors” and “warnings.” Such a
+   tool might run each check first in the all-worlds version and then,
+   if the check fails, run it again in the some-world version. If the
+   check fails in both cases, the tool would produce an error. If it
+   passes only because of the some-world version, the tool would produce
+   a warning.
+
+The main body of each section of the spec describes the all-worlds rule.
+If the some-world rule differs, the differences are explained at the
+end.
 
 .. _propagating-multiple-worlds:
 
-Propagating the most/least convenient world
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Propagating the choice of world
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When one rule in this spec refers to another, it refers to the rule for
-the same “world.” For example, when the rules for
+When one rule in this spec refers to another, it refers to the same
+version of the rule. For example, when the rules for
 `containment <#containment>`__ refer to the rules for
-`subtyping <#subtyping>`__, the most-convenient-world containment check
-applies the most-convenient-world subtyping check, and the
-least-convenient-world containment check applies the
-least-convenient-world subtyping check.
-
-This applies even if a rule says it is the same for both worlds: It
-means “the same except that any other rules are applied in the
-corresponding world.”
+`subtyping <#subtyping>`__, the some-world containment check applies the
+some-world subtyping check, and the all-worlds containment check applies
+the all-worlds subtyping check.
 
 Same type
 ---------
@@ -603,11 +608,13 @@ will find a way to specify this fully correctly.)
 
 Nullness subtyping (and thus subtyping itself) is *not* reflexive.
 
-   It does end up being reflexive in the `most convenient
-   world <#multiple-worlds>`__. We don’t state that as a rule for 2
-   reasons: First, it arises naturally from the definitions in that
-   world. Second, we don’t want to suggest that subtyping is reflexive
-   in the `least convenient world <#multiple-worlds>`__.
+   Subtyping does end up being transitive when the check is required to
+   hold in `all worlds <#multiple-worlds>`__. And it does end up being
+   reflexive when the check is required to hold only in `some
+   world <#multiple-worlds>`__. We don’t state those properties as rules
+   for 2 reasons: First, they arise naturally from the definitions.
+   Second, we don’t want to suggest that subtyping is reflexive and
+   transitive under both versions of the rule.
 
 Trusted null-inclusive under every parameterization
 ---------------------------------------------------
@@ -619,9 +626,8 @@ meets either of the following conditions:
 -  It is an `intersection type <#intersection-types>`__ whose elements
    all are trusted null-inclusive under every parameterization.
 
-**Most convenient world:** The rule is the same except that the
-requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
-``UNSPECIFIED``.”
+**Some-world version:** The rule is the same except that the requirement
+for “``UNION_NULL``” is loosened to “``UNION_NULL`` or ``UNSPECIFIED``.”
 
 Trusted null-exclusive under every parameterization
 ---------------------------------------------------
@@ -657,7 +663,7 @@ following hold:
       nullness-subtype-establishing path to itself — as long as it has
       one of the required nullness operators.
 
-**Most convenient world:** The rules are the same except that the
+**Some-world version:** The rules are the same except that the
 requirement for “``NO_CHANGE`` or ``MINUS_NULL``” is loosened to
 “``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”
 
@@ -686,12 +692,12 @@ Lower-bound rule:
 
    TODO(cpovirk): What if the lower bound has some other nullness
    operator? I’m pretty sure that we want to allow ``UNSPECIFIED`` in
-   the most convenient world (as we did before my recent edits), and we
-   may want to allow more.
+   the some-world version (as we did before my recent edits), and we may
+   want to allow more.
 
 -  otherwise: no nodes
 
-**Most convenient world:** The rules are the same except that the
+**Some-world version:** The rules are the same except that the
 requirements for “``NO_CHANGE`` or ``MINUS_NULL``” are loosened to
 “``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”
 
@@ -717,7 +723,7 @@ We add to them as follows:
    the rule applies if and only if this spec defines the 2 types to be
    the `same type <#same-type>`__.
 
-**Most convenient world:** The rules are the same except that the
+**Some-world version:** The rules are the same except that the
 requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
 ``UNSPECIFIED``.”
 
@@ -746,15 +752,15 @@ is ``Pᵢ``, replace ``V`` with the result of the following operation:
 
 -  If ``V`` is `trusted null-exclusive under every
    parameterization <#trusted-null-exclusive-under-every-parameterization>`__
-   in the `least convenient world <#multiple-worlds>`__, then replace it
-   with the result of `applying <#applying-operator>`__ ``MINUS_NULL``
-   to ``Aᵢ``.
+   in `all worlds <#multiple-worlds>`__, then replace it with the result
+   of `applying <#applying-operator>`__ ``MINUS_NULL`` to ``Aᵢ``.
 
-      This is the one instance in which a rule references another rule
-      to be run under a *different* “world.” Normally, all rules are run
-      `under the same “world.” <#propagating-multiple-worlds>`__ But in
-      this instance, the null-exclusivity rule (and all rules that it in
-      turn applies) are always run in the least convenient world.
+      This is the one instance in which a rule specifically refers to
+      the `all-worlds <#multiple-worlds>`__ version of another rule.
+      Normally, `a rule “propagates” its version to other
+      rules <#propagating-multiple-worlds>`__. But in this instance, the
+      null-exclusivity rule (and all rules that it in turn applies) are
+      the `all-worlds <#multiple-worlds>`__ versions.
 
    ..
 
@@ -763,11 +769,11 @@ is ``Pᵢ``, replace ``V`` with the result of the following operation:
       that class. Its builder will have an element type whose `nullness
       operator <#nullness-operator>`__ is ``UNSPECIFIED``. Without this
       special case, ``builder.add(objectUnionNull)`` would pass the
-      subtyping check in the `most convenient
-      world <#multiple-worlds>`__. This would happen even though we have
-      enough information to know that the parameter to ``add`` is
-      universally null-exclusive — even in the most convenient world.
-      The special case here makes that subtyping check fail.
+      subtyping check in the `some-world <#multiple-worlds>`__ version.
+      This would happen even though we have enough information to know
+      that the parameter to ``add`` is universally null-exclusive,
+      regardless of world. The special case here makes that subtyping
+      check fail, as desired.
 
 -  Otherwise, replace ``V`` with the result of applying the nullness
    operator of ``V`` to ``Aᵢ``.
