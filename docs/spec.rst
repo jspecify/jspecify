@@ -47,16 +47,10 @@ We provide a parameterless type-use annotation called ``@Nullable``.
 Recognized locations for type-use annotations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Our type-use annotation is specified to be *recognized* in the
-circumstances detailed below. An annotation in a recognized location has
-the semantics described in this spec. The spec does not assign meaning
-to annotations in unrecognized locations.
-
-   Of course, when an annotation appears in an recognized location, that
-   does not make it “correct”: It may specify a type that a tool can
-   identify as *incompatible* with the type that the tool requires for
-   that particular location, given the information it has about related
-   code from annotations and other sources.
+A location is a *recognized* location for our type-use annotation in the
+circumstances detailed below. A type at recognized location has the
+semantics described in this spec. The spec does not assign semantics to
+types in other locations, nor to any annotations on such types.
 
 -  Unrecognized when applied to any component of a type usage in
    `implementation
@@ -68,6 +62,14 @@ to annotations in unrecognized locations.
    -  An explicit type argument supplied to a generic method or
       constructor (including via a member reference), or to an instance
       creation expression for a generic class.
+
+   ..
+
+      In practice, we expect that tools will treat annotations in most
+      of the above locations much like they treat annotations in other
+      locations. Still, this spec does not concern itself with
+      implementation code: We believe that the most important domain for
+      us to focus on is that of APIs.
 
 -  Unrecognized when applied to a class declaration.
    [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
@@ -113,14 +115,16 @@ to annotations in unrecognized locations.
       a variadic parameter declaration.
 
          For example, the annotation in ``Iterator<@Nullable String>``
-         is always recognized.
+         is always recognized, aside from the exception for
+         implementation code discussed above.
 
-   -  Exception: Annotations on a type parameter or wildcard *itself*
-      are unrecognized.
+   -  Exception: Annotations on a type-parameter declaration or a
+      wildcard *itself* are unrecognized.
       [`#19 <https://github.com/jspecify/jspecify/issues/19>`__,
       `#31 <https://github.com/jspecify/jspecify/issues/31>`__]
 
-         Annotations on their *bounds* are still recognized.
+         Annotations on their *bounds* can still be recognized. So too
+         can annotations on a *type-variable usage*.
 
 -  Recognized in the following type contexts (including when the type
    usage is a `type
@@ -143,7 +147,7 @@ to annotations in unrecognized locations.
 
    Tools are encouraged to treat an unrecognized annotation in Java
    source code as an error unless they define semantics for that
-   location – and especially to treat annotations on intrinsically
+   location — and especially to treat annotations on intrinsically
    non-nullable locations as an error. In bytecode, unrecognized
    annotations may be best ignored (again, unless a tool defines
    semantics for them).
