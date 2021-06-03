@@ -71,7 +71,7 @@ Details common to all annotations
 
 -  The package name is ``org.jspecify.nullness``.
    [`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
--  The JPMS module name is ``org.jspecify``.
+-  The Java module name is ``org.jspecify``.
    [`#181 <https://github.com/jspecify/jspecify/issues/181>`__]
 -  The Maven artifact is ``org.jspecify:jspecify``.
    [`#181 <https://github.com/jspecify/jspecify/issues/181>`__]
