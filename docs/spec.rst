@@ -483,7 +483,7 @@ Some of the rules in this spec come in 2 versions: One version requires
 a property to hold “in all worlds,” and the other requires it to hold
 only “in some world.”
 
-Tools may implement either or both versions of the rules.
+Tool authors may wish to implement either or both versions of the rules.
 
    Our goal is to allow tools and their users to choose their desired
    level of strictness in the presence of ``UNSPECIFIED``. The basic
@@ -520,6 +520,10 @@ The main body of each section of the spec describes the all-worlds rule.
 If the some-world rule differs, the differences are explained at the
 end.
 
+   A small warning: To implement the full some-world rules, a tool must
+   also implement at least part of the all-worlds rules. Those rules are
+   required as part of `substitution <#substitution>`__.
+
 .. _propagating-multiple-worlds:
 
 Propagating the choice of world
@@ -531,6 +535,9 @@ version of the rule. For example, when the rules for
 `subtyping <#subtyping>`__, the some-world containment check applies the
 some-world subtyping check, and the all-worlds containment check applies
 the all-worlds subtyping check.
+
+This meta-rule applies except when a rule refers explicitly to a
+particular version of another rule.
 
 Same type
 ---------
