@@ -545,6 +545,11 @@ Same type
 ``S`` and ``T`` are the same type if ``S`` is a `subtype <#subtyping>`__
 of ``T`` and ``T`` is a subtype of ``S``.
 
+The same-type check is *not* defined to be reflexive or transitive.
+
+   For more discussion of reflexive and transitive checks, see the
+   comments under `nullness subtyping <#nullness-subtyping>`__.
+
 Subtyping
 ---------
 
@@ -601,7 +606,8 @@ are met:
    path <#nullness-subtype-establishing-path>`__ to any type whose base
    type is the same as the base type of ``F``.
 
-Nullness subtyping (and thus subtyping itself) is *not* transitive.
+Nullness subtyping (and thus subtyping itself) is *not* defined to be
+reflexive or transitive.
 
 (Contrast this with our `nullness-delegating
 subtyping <#nullness-delegating-subtyping>`__ rules and
@@ -613,8 +619,6 @@ Fortunately, this “mostly transitive” behavior is exactly the behavior
 that implementations are likely to produce naturally. Maybe someday we
 will find a way to specify this fully correctly.)
 
-Nullness subtyping (and thus subtyping itself) is *not* reflexive.
-
    Subtyping does end up being transitive when the check is required to
    hold in `all worlds <#multiple-worlds>`__. And it does end up being
    reflexive when the check is required to hold only in `some
@@ -622,6 +626,15 @@ Nullness subtyping (and thus subtyping itself) is *not* reflexive.
    for 2 reasons: First, they arise naturally from the definitions.
    Second, we don’t want to suggest that subtyping is reflexive and
    transitive under both versions of the rule.
+
+   Yes, it’s pretty terrible for something called “subtyping” not to be
+   reflexive or transitive. A more accurate name for this concept would
+   be “consistent,” a term used in gradual typing. However, we use
+   “subtyping” anyway. In our defense, we need to name multiple
+   concepts, including not just subtyping but also
+   `same-type <#same-type>`__ checks and `containment <#containment>`__.
+   If we were to coin a new term for each, tool authors would need to
+   mentally map between those terms and the analogous Java terms.
 
 Trusted null-inclusive under every parameterization
 ---------------------------------------------------
