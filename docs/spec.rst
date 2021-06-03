@@ -264,18 +264,6 @@ and a `nullness operator <#nullness-operator>`__ corresponding to *each*
 of its `type
 components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5>`__.
 
-   This differs from our current `glossary
-   definition <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.367l48xhsikk>`__,
-   which is written in terms of a “nullness” for each component, not a
-   “nullness operator.” Still, the glossary’s concept of the “nullness”
-   of a type is derivable from the type’s nullness operator. Notably,
-   the glossary’s “nullable” type is `trusted null-inclusive under every
-   parameterization <#trusted-null-inclusive-under-every-parameterization>`__
-   `in all worlds <#multiple-worlds>`__, and the glossary’s
-   “non-nullable” type is `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__
-   `in all worlds <#multiple-worlds>`__.
-
 For our purposes, base types (and thus augmented types) include not just
 class and interface types, array types, and type variables but also
 `intersection types <#intersection-types>`__ and the null type. This is
