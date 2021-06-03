@@ -1,16 +1,24 @@
-JSpecify spec
-=============
+JSpecify nullness spec draft
+============================
 
 This document is our draft specification for the semantics of a set of
 nullness annotations.
 
-   .. rubric:: High-level overview
-      :name: high-level-overview
+   .. rubric:: Advice to readers
+      :name: advice-to-readers
 
-   I should probably preemptively clarify at least one thing. In this
-   doc, I have tried to distinguish explicitly between 3 “kinds of
-   nullability” of a given type usage. Each kind is derived (at least in
-   part) from the previous:
+   For someone new to our nullness annotations, this document does not
+   make a good introduction. This document is targeted more at tool
+   authors or advanced users. For new users, we are working on
+   additional documentation, including Javadoc, a User Guide, and a FAQ.
+
+   .. rubric:: The world “nullable”
+      :name: the-world-nullable
+
+   In this doc, I aim not to refer to whether a type “is nullable.”
+   Instead, I draw some distinctions, creating roughly 3 kinds of “Is it
+   nullable?” questions we can ask for any given type usage. Each kind
+   is derived (at least in part) from the previous:
 
    1. What annotation (if any) appears directly on that type usage?
    2. What is the `nullness operator <#nullness-operator>`__ of that
@@ -19,10 +27,44 @@ nullness annotations.
 
       -  Is it safe to assume that is not ``null``?
       -  Is it safe to put a ``null`` into it?
-      -  neither (as in “parametric nullness”)
-      -  both (as in “unspecified nullness” in “lenient mode”)
+      -  neither (what we sometimes call “parametric nullness”)
+      -  both (as can happen with ``UNSPECIFIED`` under lenient tools)
 
-   TODO(cpovirk): Link to my “Don’t say ‘nullable’” doc once I write it.
+   .. rubric:: The scope of this spec
+      :name: the-scope-of-this-spec
+
+   This spec does not address *when* tools must apply a given check. For
+   example, it does not state when tools must apply the
+   `subtyping <#subtyping>`__ check.
+
+   We expect that tools will typically apply them in the same cases that
+   they apply standard Java checks. For example, if code contains the
+   parameterized type ``List<@Nullable Foo>``, we would expect tools to
+   check that ``@Nullable Foo`` is a subtype of the bound of the type
+   parameter of ``List``.
+
+   However, this is up to tool authors. In fact, JSpecify annotations
+   can be used even by tools that are not “nullness checkers” at all.
+   For example, a tool that lists the members of an API could show the
+   nullness of each type in the API, without any checking that those
+   types are “correct.”
+
+Normative and non-normative sections
+------------------------------------
+
+This document contains some non-normative comments to emphasize points
+or to anticipate likely questions. Those comments are set off as block
+quotes.
+
+   This is an example of a non-normative comment.
+
+This document also links to other documents. Those documents are
+non-normative.
+
+   As of this writing, we know that this spec is not entirely
+   sufficient: It sometimes relies on references to other documents
+   (like the glossary). We will need to fix this by copying those
+   definitions here.
 
 Details common to all annotations
 ---------------------------------
