@@ -313,9 +313,9 @@ packages, which may be enclosed by modules.
    Java compiler
    API <https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__.
 
-If an ``@org.jspecify.nullness.NullMarked`` annotation exists on one of
-these scopes, then the type usage is in a null-marked scope. Otherwise,
-it is not.
+If one of those scopes is directly annotated with
+``@org.jspecify.nullness.NullMarked``, then the type usage is in a
+null-marked scope. Otherwise, it is not.
 
 .. _augmented-type-of-usage:
 
