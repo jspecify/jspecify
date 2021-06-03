@@ -24,8 +24,8 @@ nullness annotations.
 
    TODO(cpovirk): Link to my “Don’t say ‘nullable’” doc once I write it.
 
-General
--------
+Details common to all annotations
+---------------------------------
 
 -  The package name is ``org.jspecify.nullness``.
    [`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
