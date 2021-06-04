@@ -11,6 +11,7 @@ nullness annotations.
    make a good introduction. This document is targeted more at tool
    authors or advanced users. For new users, we are working on
    additional documentation, including Javadoc, a User Guide, and a FAQ.
+   At the moment, you can see our `design overview <design-overview>`__.
 
    .. rubric:: The world “nullable”
       :name: the-world-nullable
@@ -20,7 +21,7 @@ nullness annotations.
    nullable?” questions we can ask for any given type usage. Each kind
    is derived (at least in part) from the previous:
 
-   1. What annotation (if any) appears directly on that type usage?
+   1. Does ``@Nullable`` appear directly on that type usage?
    2. What is the `nullness operator <#nullness-operator>`__ of that
       type usage?
    3. For that type usage…
@@ -63,8 +64,13 @@ non-normative.
 
    As of this writing, we know that this spec is not entirely
    sufficient: It sometimes relies on references to other documents
-   (like the glossary). We will need to fix this by copying those
-   definitions here.
+   (like the
+   `glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__).
+   We will need to fix this by copying those definitions here.
+
+   (Incidentally, I don’t recommend trying to read through the glossary
+   as part of reviewing this doc: The glossary includes many concepts
+   that we don’t need here, and we have not maintained it recently.)
 
 Details common to all annotations
 ---------------------------------
@@ -90,15 +96,16 @@ Recognized locations for type-use annotations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 A location is a *recognized* location for our type-use annotation in the
-circumstances detailed below. A type at recognized location has the
+circumstances detailed below. A type at a recognized location has the
 semantics described in this spec. The spec does not assign semantics to
 types in other locations, nor to any annotations on such types.
 
--  Unrecognized when applied to any component of a type usage in
+-  Unrecognized location: any component of a type usage in
    `implementation
    code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__:
 
    -  A local variable type.
+   -  An exception parameter.
    -  The type in a cast expression.
    -  An array or object creation expression.
    -  An explicit type argument supplied to a generic method or
@@ -107,46 +114,52 @@ types in other locations, nor to any annotations on such types.
 
    ..
 
-      In practice, we expect that tools will treat annotations in most
-      of the above locations much like they treat annotations in other
-      locations. Still, this spec does not concern itself with
-      implementation code: We believe that the most important domain for
-      us to focus on is that of APIs.
+      In practice, we expect that tools will treat types (and their
+      annotations) in *most* of the above locations much like they treat
+      types in other locations. Still, this spec does not concern itself
+      with implementation code: We believe that the most important
+      domain for us to focus on is that of APIs.
 
--  Unrecognized when applied to a class declaration.
+-  Unrecognized location: a class declaration.
    [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
 
-      For example, ``public @Nullable class Foo {}`` is unrecognized.
+      For example, the annotation in ``public @Nullable class Foo {}``
+      is in an unrecognized location.
 
--  Unrecognized on type usages that are intrinsically non-nullable:
+-  Unrecognized location: any type usage that is intrinsically
+   non-nullable:
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
 
-   -  When the annotated type usage is of any primitive type.
+   -  A type usage of a primitive type.
 
-   -  For the outer type that qualifies an inner type.
+   -  The outer type that qualifies an inner type.
 
-         For example, ``@Nullable Foo.Bar`` is unrecognized because the
-         outer type ``Foo`` is intrinsically non-nullable.
+         For example, the annotation in ``@Nullable Foo.Bar`` is in an
+         unrecognized location because the outer type ``Foo`` is
+         intrinsically non-nullable.
 
-   -  In any of the following non-nullable type contexts:
+   -  Any of the following type contexts:
 
       -  supertype in a class declaration
       -  thrown exception type
       -  enum constant declaration
       -  receiver parameter type
 
-   But note that the following rules still apply to any non-root
-   component types of such type usages.
+   ..
 
--  Unrecognized on any component of a receiver parameter type.
+      But note that the following rules, while they do not apply to
+      intrinsically non-nullable type usages themselves, still apply to
+      any other *component* types of such type usages.
+
+-  Unrecognized location: any component of a receiver parameter type.
    [`#157 <https://github.com/jspecify/jspecify/issues/157>`__]
 
       This partially overlaps with the rule about non-nullable type
-      contexts above: Both rules cover an annotation on the
-      intrinsically non-nullable top-level type, but this rule extends
-      that to *all* components of the type.
+      contexts above: Both rules cover the intrinsically non-nullable
+      top-level type, but this rule extends that to *all* components of
+      the type.
 
--  Otherwise, recognized on any
+-  Recognized location (except where covered by the above rules): any
    `non-root <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869>`__
    component type, regardless of the root type or surrounding `type
    context <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t>`__.
@@ -157,18 +170,18 @@ types in other locations, nor to any annotations on such types.
       a variadic parameter declaration.
 
          For example, the annotation in ``Iterator<@Nullable String>``
-         is always recognized, aside from the exception for
-         implementation code discussed above.
+         is always in a recognized location, aside from the exception
+         for implementation code discussed above.
 
-   -  Exception: Annotations on a type-parameter declaration or a
-      wildcard *itself* are unrecognized.
+   -  Exception: A type-parameter declaration or a wildcard *itself* is
+      an unrecognized location.
       [`#19 <https://github.com/jspecify/jspecify/issues/19>`__,
       `#31 <https://github.com/jspecify/jspecify/issues/31>`__]
 
-         Annotations on their *bounds* can still be recognized. So too
-         can annotations on a *type-variable usage*.
+         Their *bounds* can still be recognized locations. So too can
+         *type-variable usages*.
 
--  Recognized in the following type contexts (including when the type
+-  Recognized location: any of the following (including when the type
    usage is a `type
    variable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo>`__,
    regardless of the corresponding type parameter’s bound):
@@ -187,12 +200,12 @@ types in other locations, nor to any annotations on such types.
 
 ..
 
-   Tools are encouraged to treat an unrecognized annotation in Java
-   source code as an error unless they define semantics for that
-   location — and especially to treat annotations on intrinsically
-   non-nullable locations as an error. In bytecode, unrecognized
-   annotations may be best ignored (again, unless a tool defines
-   semantics for them).
+   Tools are encouraged to issue an error for an annotation in an
+   unrecognized location in source code unless they define semantics for
+   that location — and especially to issue errors for annotations in
+   intrinsically non-nullable locations. In bytecode, annotations in
+   unrecognized locations may be best ignored (again, unless a tool
+   defines semantics for them).
 
 The declaration annotation
 --------------------------
@@ -288,10 +301,9 @@ refers specifically to the nullness operator of the type component that
 is the entire type ``T``, without reference to the nullness operator of
 any other type components of ``T``.
 
-   For example, the nullness operator of ``List<@Nullable Object>``
-   would be ``NO_CHANGE`` (at least in a `null-marked
-   scope <#null-marked-scope>`__), even though the nullness operator of
-   its element type ``Object`` is ``UNION_NULL``.
+   For example, “the nullness operator of ``List<@Nullable Object>``”
+   refers to the nullness of the list’s type, not that of its element
+   type.
 
 Null-marked scope
 -----------------
