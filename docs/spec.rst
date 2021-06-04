@@ -628,10 +628,10 @@ Nullness subtyping
 ``A`` is a nullness subtype of ``F`` if any of the following conditions
 are met:
 
--  ``F`` is `trusted null-inclusive under every
-   parameterization <#trusted-null-inclusive-under-every-parameterization>`__.
--  ``A`` is `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__.
+-  ``F`` is `null-inclusive under every
+   parameterization <#null-inclusive-under-every-parameterization>`__.
+-  ``A`` is `null-exclusive under every
+   parameterization <#null-exclusive-under-every-parameterization>`__.
 -  ``A`` has a `nullness-subtype-establishing
    path <#nullness-subtype-establishing-path>`__ to any type whose base
    type is the same as the base type of ``F``.
@@ -666,24 +666,24 @@ will find a way to specify this fully correctly.)
    If we were to coin a new term for each, tool authors would need to
    mentally map between those terms and the analogous Java terms.
 
-Trusted null-inclusive under every parameterization
----------------------------------------------------
+Null-inclusive under every parameterization
+-------------------------------------------
 
-A type is trusted null-inclusive under every parameterization if it
-meets either of the following conditions:
+A type is null-inclusive under every parameterization if it meets either
+of the following conditions:
 
 -  Its `nullness operator <#nullness-operator>`__ is ``UNION_NULL``.
 -  It is an `intersection type <#intersection-types>`__ whose elements
-   all are trusted null-inclusive under every parameterization.
+   all are null-inclusive under every parameterization.
 
 **Some-world version:** The rule is the same except that the requirement
 for “``UNION_NULL``” is loosened to “``UNION_NULL`` or ``UNSPECIFIED``.”
 
-Trusted null-exclusive under every parameterization
----------------------------------------------------
+Null-exclusive under every parameterization
+-------------------------------------------
 
-A type is trusted null-exclusive under every parameterization if it has
-a `nullness-subtype-establishing
+A type is null-exclusive under every parameterization if it has a
+`nullness-subtype-establishing
 path <#nullness-subtype-establishing-path>`__ to either of the
 following:
 
@@ -800,10 +800,10 @@ For every type-variable usage ``V`` whose `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 is ``Pᵢ``, replace ``V`` with the result of the following operation:
 
--  If ``V`` is `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__
-   in `all worlds <#multiple-worlds>`__, then replace it with the result
-   of `applying <#applying-operator>`__ ``MINUS_NULL`` to ``Aᵢ``.
+-  If ``V`` is `null-exclusive under every
+   parameterization <#null-exclusive-under-every-parameterization>`__ in
+   `all worlds <#multiple-worlds>`__, then replace it with the result of
+   `applying <#applying-operator>`__ ``MINUS_NULL`` to ``Aᵢ``.
 
       This is the one instance in which a rule specifically refers to
       the `all-worlds <#multiple-worlds>`__ version of another rule.
