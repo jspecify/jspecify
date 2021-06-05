@@ -7,7 +7,7 @@ plugins {
 }
 
 ext {
-    junitVersion = '5.7.0'
+    junitVersion = '5.7.2'
     errorproneVersion = '2.3.4'
 }
 
