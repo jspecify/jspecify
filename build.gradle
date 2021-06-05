@@ -2,13 +2,13 @@ plugins {
     id 'java-library'
     id 'maven-publish'
     id 'com.diffplug.spotless' version '5.1.0'
-    id 'net.ltgt.errorprone' version '1.2.1'
+    id 'net.ltgt.errorprone' version '2.0.1'
     id 'org.javamodularity.moduleplugin' version '1.8.7'
 }
 
 ext {
     junitVersion = '5.7.2'
-    errorproneVersion = '2.3.4'
+    errorproneVersion = '2.7.1'
 }
 
 repositories { mavenCentral() }
