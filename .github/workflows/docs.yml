@@ -15,7 +15,6 @@ jobs:
 
       - run: |
           docker build -t jspecify-sphinx docs
-          docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make linkcheck
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make html
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" -e BUILDDIR="_build-ja" html
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx cp -R _build-ja/html _build/html/ja
