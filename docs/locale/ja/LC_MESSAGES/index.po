@@ -162,7 +162,7 @@ msgid "`NullAway <https://github.com/uber/NullAway>`_"
 msgstr ""
 
 #: ../../index.rst:52
-msgid "`Uber <https://uber.com>`_"
+msgid "`Uber <https://www.uber.com>`_"
 msgstr ""
 
 #: ../../index.rst:54

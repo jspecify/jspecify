@@ -49,7 +49,7 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------------+----------------------------------------------------------+
 | `Kotlin <https://kotlinlang.org/>`_                      | `JetBrains <https://www.jetbrains.com/>`_                |
 +----------------------------------------------------------+----------------------------------------------------------+
-| `NullAway <https://github.com/uber/NullAway>`_           | `Uber <https://uber.com>`_                               |
+| `NullAway <https://github.com/uber/NullAway>`_           | `Uber <https://www.uber.com>`_                           |
 +----------------------------------------------------------+----------------------------------------------------------+
 | `PMD <https://pmd.github.io/>`_                          | `PMD Team <https://pmd.github.io/>`_                     |
 +----------------------------------------------------------+----------------------------------------------------------+
