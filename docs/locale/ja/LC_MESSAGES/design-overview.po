@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../design-overview.rst:61
 msgid "Semantics"
-msgstr "セマンティクス"
+msgstr "セマンティクス（意味論）"
 
 #: ../../design-overview.rst:63
 msgid "In this section, we discuss how type checking should play out."
@@ -168,6 +168,9 @@ msgid ""
 "examples of subtyping, with types written in the scope of "
 "``@NullMarked``:"
 msgstr ""
+"上記のルールにより、 ``@Nullable Object`` は最上位の（最も精度の低い）型となります。"
+"``null`` は最下位の型ではないことに注意してください。"
+"以下に、 ``@NullMarked`` のスコープで書かれた型を使った細分化の例をいくつか示します。"
 
 #: ../../design-overview.rst:89
 msgid "``String ⋖ Object ⋖ @Nullable Object``"
@@ -188,6 +191,9 @@ msgid ""
 "others. Similarly, the **lub** (*least upper bound*) of a set of types is"
 " a type from the set that is at most as specific as all others."
 msgstr ""
+"任意の型の集合に対し、**下限** (*greatest lower bound, glb*) をその集合に含まれる"
+"他のすべての型よりも小さなひとつの型として定義できます。同様に、**上限** (*least upper bound, lub*)を"
+"その集合に含まれる他のすべての型よりも大きなひとつの型として定義できます。
 
 #: ../../design-overview.rst:98
 msgid ""
@@ -198,6 +204,10 @@ msgid ""
 "w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__, handled by "
 "the off-the-shelf compiler, and (b) a type check for nullability."
 msgstr ""
+"最後に、`拡張型 <#augmented-type>`__ の組に対する**型チェック**（例えば割当可能性の判断）には"
+"(a) 一般的なコンパイラが扱う `基本型 <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ と、"
+"(b) nullabilityのための型チェック、その両方を検証することが含まれます。"
 
 #: ../../design-overview.rst:105
 msgid ""
@@ -347,7 +357,7 @@ msgstr ""
 
 #: ../../design-overview.rst:196
 msgid "Overriding"
-msgstr ""
+msgstr "オーバーライド"
 
 #: ../../design-overview.rst:198
 msgid ""
@@ -382,7 +392,7 @@ msgstr ""
 
 #: ../../design-overview.rst:219
 msgid "Concerns around uninitialized objects"
-msgstr ""
+msgstr "未初期化オブジェクトに関する懸念点"
 
 #: ../../design-overview.rst:221
 msgid ""
