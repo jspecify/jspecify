@@ -31,7 +31,7 @@ msgid ""
 "nullness annotations. **Nothing here is “set in stone” yet.**"
 msgstr ""
 "この文書は現時点における、私達のnullness用アノテーションの設計に対する提案をまとめています。"
-"**ここに書かれている内容には確定したものはありません。**"
+"**ここに書かれている内容は何も確定していません。**"
 
 #: ../../design-overview.rst:10
 msgid ""
@@ -51,6 +51,11 @@ msgid ""
 "folder "
 "<https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__."
 msgstr ""
+"`コアコンセプトならびに用語集 <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit>`__ も合わせて確認すると、この資料を正しく理解する助けになります。"
+"その他のドキュメントも `共有フォルダ "
+"<https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__ "
+"にて保存されています。"
 
 #: ../../design-overview.rst:21
 msgid "Overview"
@@ -74,6 +79,15 @@ msgid ""
 "warnings if desired) type checks involving “unspecified nullness” to "
 "succeed even when they are unsound."
 msgstr ""
+"私達は、個々の“型の使用“（訳注：`type usage <https://docs.oracle.com/javase/jp/8/docs/api/java/lang/annotation/ElementType.html#TYPE_USE>`__ のこと）の"
+"nullnessを指定するための型注釈を提案します。"
+"高いレベルでは、我々の提案するセマンティクス（意味論）は、既存ツールが提供するnullness"
+"型アノテーションの扱いと似ています。我々はnullnessアノテーションを、実行時のセマンティクスに"
+"影響を与えない、純粋なコンパイル時の型の改良として扱います。"
+"この型注釈は典型的な“nullable“と“non-nullable“の改良に加えて、注釈のないコードから一般的に生じる“"
+"unspecified nullness“の値を区別し、“unspecified nullness“を含む型チェックが不健全であっても"
+"（訳注：`健全性 <http://web.sfc.keio.ac.jp/~hagino/logic16/05.pdf>`__ を満たさないという意味）"
+"成功させることができます（必要に応じてオプションで警告を表示します）。"
 
 #: ../../design-overview.rst:37
 msgid ""
@@ -85,7 +99,7 @@ msgid ""
 msgstr ""
 "Javaコードに過剰なアノテーションを書いて回る手間を回避しつつ、アノテーションが施されたコードとそうでない"
 "レガシーなコードを明確に区別するために、既存のツールの “non-null by default“に似たセマンティクスを持つ"
-"宣言アノテーションも提案する。このアノテーションがない場合、型の使用は “unspecified nullness“ として扱われる。"
+"宣言アノテーションも提案します。このアノテーションがない場合、型の使用は “unspecified nullness“ として扱われます。"
 
 #: ../../design-overview.rst:43
 msgid ""
@@ -113,7 +127,7 @@ msgstr ""
 
 #: ../../design-overview.rst:61
 msgid "Semantics"
-msgstr "セマンティクス（意味論）"
+msgstr "セマンティクス"
 
 #: ../../design-overview.rst:63
 msgid "In this section, we discuss how type checking should play out."
@@ -204,7 +218,7 @@ msgid ""
 "w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__, handled by "
 "the off-the-shelf compiler, and (b) a type check for nullability."
 msgstr ""
-"最後に、`拡張型 <#augmented-type>`__ の組に対する**型チェック**（例えば割当可能性の判断）には"
+"最後に、`拡張型 <#augmented-type>`__ の組に対する **型チェック** （例えば割当可能性の判断）には"
 "(a) 一般的なコンパイラが扱う `基本型 <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
 "w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ と、"
 "(b) nullabilityのための型チェック、その両方を検証することが含まれます。"
@@ -312,7 +326,7 @@ msgstr ""
 
 #: ../../design-overview.rst:166
 msgid "Parameterized types"
-msgstr ""
+msgstr "パラメータ化された型"
 
 #: ../../design-overview.rst:168
 msgid ""
