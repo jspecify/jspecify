@@ -6,3 +6,5 @@ jspecify.org. That domain redirects to jspecify.dev, which we also own. You can
 see the source of this page in GitHub:
 
 https://github.com/jspecify/jspecify/blob/main/docs/ossrh.rst
+
+My request is at https://issues.sonatype.org/browse/OSSRH-69944
