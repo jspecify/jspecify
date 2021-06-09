@@ -49,7 +49,7 @@ signing {
 
 tasks.withType(Sign) {
     onlyIf {
-        privateKey != null && pgpPassword != null
+        privateKey?.trim() && pgpPassword?.trim()
     }
 }
 
