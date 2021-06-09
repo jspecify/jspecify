@@ -22,4 +22,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - run: |
-          ./gradlew spotlessCheck build --no-daemon
+          ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
+        env:
+          ORG_GRADLE_PROJECT_privateKey: ${{ secrets.PGP_ARMORED_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_pgpPassword: ${{ secrets.PGP_PASS_PHREASE }}
