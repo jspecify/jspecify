@@ -7,10 +7,6 @@ About this document
 This document summarizes our current thinking for proposing a set of
 nullness annotations. **Nothing here is “set in stone” yet.**
 
-**As of March 2021, this doc is currently two docs concatenated
-together. They conflict with each other in places. We will iterate to
-address this.**
-
 It will be very helpful to read or refer to the `core
 concepts/glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
 document in order to understand this material correctly. There are
