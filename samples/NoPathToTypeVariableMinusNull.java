@@ -16,7 +16,7 @@
 
 import org.jspecify.nullness.NullMarked;
 
-class NoPathToTypeVaribleMinusNull {
+class NoPathToTypeVariableMinusNull {
   @NullMarked
   interface Super<E> {
     void accept(E e);
