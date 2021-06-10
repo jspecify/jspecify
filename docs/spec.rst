@@ -1,102 +1,165 @@
-JSpecify spec outline
-=====================
+JSpecify nullness spec draft
+============================
 
-About this document
--------------------
+This document is our draft specification for the semantics of a set of
+nullness annotations.
 
-This document summarizes our current thinking for proposing a set of
-nullness annotations. **Nothing here is “set in stone” yet.**
+   .. rubric:: Advice to readers
+      :name: advice-to-readers
 
-**As of March 2021, this doc is currently two docs concatenated
-together. They conflict with each other in places. We will iterate to
-address this.**
+   For someone new to our nullness annotations, this document does not
+   make a good introduction. This document is targeted more at tool
+   authors or advanced users. For new users, we are working on
+   additional documentation, including Javadoc, a User Guide, and a FAQ.
+   At the moment, you can see our `design overview <design-overview>`__.
 
-It will be very helpful to read or refer to the `core
-concepts/glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
-document in order to understand this material correctly. There are
-numerous other documents in our `shared
-folder <https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__.
+   .. rubric:: The world “nullable”
+      :name: the-world-nullable
 
-Overview
---------
+   In this doc, I aim not to refer to whether a type “is nullable.”
+   Instead, I draw some distinctions, creating roughly 3 kinds of “Is it
+   nullable?” questions we can ask for any given type usage. Each kind
+   is derived (at least in part) from the previous:
 
-We propose a set of type annotations to specify the intended nullness of
-individual type usages. At a high level, our proposed semantics is
-similar to existing tools’ treatment of nullness type annotations. We
-treat nullness annotations as purely compile-time type refinements
-without effect on runtime semantics. Besides the typical
-“`nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.ejpb5ee0msjt>`__”
-and
-“`non-nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.8wgyiwyvi49f>`__”
-refinements, we distinguish values of “`unspecified
-nullness <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3>`__”,
-which typically arise from unannotated code, and allow for (with
-optional warnings if desired) type checks involving “unspecified
-nullness” to succeed even when they are unsound.
+   1. Does ``@Nullable`` appear directly on that type usage?
+   2. What is the `nullness operator <#nullness-operator>`__ of that
+      type usage?
+   3. For that type usage…
 
-To avoid excessive annotation overhead in hand-written Java code while
-clearly distinguishing annotated from legacy code, we also propose a set
-of explicit defaulting annotations. In the absence of a defaulting
-annotation, type usages will be considered of “unspecified nullness.”
+      -  Is it safe to assume that is not ``null``?
+      -  Is it safe to put a ``null`` into it?
+      -  neither (what we sometimes call “parametric nullness”)
+      -  both (as can happen with ``UNSPECIFIED`` under lenient tools)
 
-We give `semantics <#semantics>`__ to these annotations independent of
-particular tools. We don’t specify what tools must do with that semantic
-information, nor do we forbid them from adding to it (e.g., with flow
-typing in implementation code). We merely define how to interpret our
-annotations in method, field, and class declarations. This approach
-gives documented meaning to annotations appearing in declarations while
-allowing Java code authors to use their normal toolchain to compile code
-(though we do recommend code authors use additional tools to minimize
-the chance of incorrect annotations). Crucially, this approach also
-allows any tool to interpret annotations that appear in Java bytecode
-produced by other tools.
+   .. rubric:: The scope of this spec
+      :name: the-scope-of-this-spec
 
-**Note:** we have adopted precise meanings for the terms used in this
-document; it will be necessary to read (or refer to) the
-`glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
-document in order to interpret this information correctly.
+   This spec does not address *when* tools must apply a given check. For
+   example, it does not state when tools must apply the
+   `subtyping <#subtyping>`__ check.
 
-General
--------
+   We expect that tools will typically apply them in the same cases that
+   they apply standard Java checks. For example, if code contains the
+   parameterized type ``List<@Nullable Foo>``, we would expect tools to
+   check that ``@Nullable Foo`` is a subtype of the bound of the type
+   parameter of ``List``.
 
-The package name will be ``org.jspecify.nullness``.
-[`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
+   However, this is up to tool authors. In fact, JSpecify annotations
+   can be used even by tools that are not “nullness checkers” at all.
+   For example, a tool that lists the members of an API could show the
+   nullness of each type in the API, without any checking that those
+   types are “correct.”
 
-We will release one canonical artifact, in which all annotations have
-runtime retention.
+Normative and non-normative sections
+------------------------------------
+
+This document contains some non-normative comments to emphasize points
+or to anticipate likely questions. Those comments are set off as block
+quotes.
+
+   This is an example of a non-normative comment.
+
+This document also links to other documents. Those documents are
+non-normative.
+
+   As of this writing, we know that this spec is not entirely
+   sufficient: It sometimes relies on references to other documents
+   (like the
+   `glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__).
+   We will need to fix this by copying those definitions here.
+
+   (Incidentally, I don’t recommend trying to read through the glossary
+   as part of reviewing this doc: The glossary includes many concepts
+   that we don’t need here, and we have not maintained it recently.)
+
+Details common to all annotations
+---------------------------------
+
+-  The package name is ``org.jspecify.nullness``.
+   [`#1 <https://github.com/jspecify/jspecify/issues/1>`__]
+-  The Java module name is ``org.jspecify``.
+   [`#181 <https://github.com/jspecify/jspecify/issues/181>`__]
+-  The Maven artifact is ``org.jspecify:jspecify``.
+   [`#181 <https://github.com/jspecify/jspecify/issues/181>`__]
+
+All annotations have runtime retention.
 [`#28 <https://github.com/jspecify/jspecify/issues/28>`__] None of the
-annotations defined in this document will be marked
+annotations are marked
 `repeatable <https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html>`__.
 
-The type-use annotations
-------------------------
+The type-use annotation
+-----------------------
 
-We will provide a single parameterless type-use annotation called
-``@Nullable``.
+We provide a parameterless type-use annotation called ``@Nullable``.
 
-.. _recognized-locations-type-use:
+Recognized locations for type-use annotations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Recognized locations
-~~~~~~~~~~~~~~~~~~~~
+A location is a *recognized* location for our type-use annotation in the
+circumstances detailed below. A type at a recognized location has the
+semantics described in this spec. The spec does not assign semantics to
+types in other locations, nor to any annotations on such types.
 
-The set of type-use annotations are specified to be *recognized* in the
-set of circumstances detailed below. Where annotations are recognized,
-semantic violations are of course still possible.
+-  Unrecognized location: any component of a type usage in
+   `implementation
+   code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__:
 
--  Unrecognized on type usages that are `categorically
-   non-nullable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.2m67iuk50zcb>`__
-   (this supersedes all rules that follow):
+   -  A local variable type.
+   -  An exception parameter.
+   -  The type in a cast expression.
+   -  An array or object creation expression.
+   -  An explicit type argument supplied to a generic method or
+      constructor (including via a member reference), or to an instance
+      creation expression for a generic class.
+
+   ..
+
+      In practice, we expect that tools will treat types (and their
+      annotations) in *most* of the above locations much like they treat
+      types in other locations. Still, this spec does not concern itself
+      with implementation code: We believe that the most important
+      domain for us to focus on is that of APIs.
+
+-  Unrecognized location: a class declaration.
+   [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
+
+      For example, the annotation in ``public @Nullable class Foo {}``
+      is in an unrecognized location.
+
+-  Unrecognized location: any type usage that is intrinsically
+   non-nullable:
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
 
-   -  When the annotated type usage is of any primitive type.
-   -  For an outer type used as a component type in an inner type
-      expression.
-   -  In a `non-nullable type
-      context <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.d00h1zvk0vt3>`__.
-   -  Note that the following rules still apply to any non-root
-      component types of such type usages.
+   -  A type usage of a primitive type.
 
--  Otherwise, recognized on any
+   -  The outer type that qualifies an inner type.
+
+         For example, the annotation in ``@Nullable Foo.Bar`` is in an
+         unrecognized location because the outer type ``Foo`` is
+         intrinsically non-nullable.
+
+   -  Any of the following type contexts:
+
+      -  supertype in a class declaration
+      -  thrown exception type
+      -  enum constant declaration
+      -  receiver parameter type
+
+   ..
+
+      But note that the following rules, while they do not apply to
+      intrinsically non-nullable type usages themselves, still apply to
+      any other *component* types of such type usages.
+
+-  Unrecognized location: any component of a receiver parameter type.
+   [`#157 <https://github.com/jspecify/jspecify/issues/157>`__]
+
+      This partially overlaps with the rule about non-nullable type
+      contexts above: Both rules cover the intrinsically non-nullable
+      top-level type, but this rule extends that to *all* components of
+      the type.
+
+-  Recognized location (except where covered by the above rules): any
    `non-root <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869>`__
    component type, regardless of the root type or surrounding `type
    context <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t>`__.
@@ -105,407 +168,70 @@ semantic violations are of course still possible.
       argument <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.3gm7aajjj46m>`__,
       explicit wildcard bound, array component type, or the type used in
       a variadic parameter declaration.
-   -  For example, the annotation in ``Iterator<@Nullable String>`` is
-      always recognized.
-   -  Exception: Annotations on a type parameter or wildcard *itself*
-      are unrecognized. (Annotation on their *bounds* are still
-      recognized.)
+
+         For example, the annotation in ``Iterator<@Nullable String>``
+         is always in a recognized location, aside from the exception
+         for implementation code discussed above.
+
+   -  Exception: A type-parameter declaration or a wildcard *itself* is
+      an unrecognized location.
       [`#19 <https://github.com/jspecify/jspecify/issues/19>`__,
       `#31 <https://github.com/jspecify/jspecify/issues/31>`__]
 
--  Recognized in the following type contexts (including when the type
+         Their *bounds* can still be recognized locations. So too can
+         *type-variable usages*.
+
+-  Recognized location: any of the following (including when the type
    usage is a `type
    variable <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo>`__,
-   regardless of its bound):
+   regardless of the corresponding type parameter’s bound):
    [`#17 <https://github.com/jspecify/jspecify/issues/17>`__]
 
    -  Return type of a method.
-   -  Formal parameter type (of a method, constructor, or lambda
-      expression).
+
+   -  Formal parameter type of a method or constructor.
+
    -  Field type.
-   -  Type parameter upper bound (but, again, *not* the type parameter
-      itself)
-      [`#60 <https://github.com/jspecify/jspecify/issues/60>`__].
 
--  Unrecognized when applied to a class declaration.
-   [`#7 <https://github.com/jspecify/jspecify/issues/7>`__]
+   -  Type parameter upper bound.
+      [`#60 <https://github.com/jspecify/jspecify/issues/60>`__]
 
-   -  For example, ``public @Nullable class Foo {}`` is not allowed.
+         But, again, *not* the type parameter itself.
 
--  Except as already indicated, unrecognized when applying to a type
-   usage in `implementation
-   code <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs>`__:
+..
 
-   -  A local variable type.
-   -  The type in a cast expression.
-   -  An array or object creation expression.
-   -  An explicit type argument supplied to a generic method or
-      constructor (including via a member reference), or to an instance
-      creation expression for a generic class.
-   -  TODO(cpovirk): This should probably include local variables’ type
-      arguments, their array component types, and perhaps other cases.
+   Tools are encouraged to issue an error for an annotation in an
+   unrecognized location in source code unless they define semantics for
+   that location — and especially to issue errors for annotations in
+   intrinsically non-nullable locations. In bytecode, annotations in
+   unrecognized locations may be best ignored (again, unless a tool
+   defines semantics for them).
 
-Tools are encouraged to treat an unrecognized annotation in Java source
-code as an error unless they define semantics for that location. In
-bytecode, unrecognized annotations may be best ignored (again, unless a
-tool defines semantics for them).
-
-The defaulting annotations
+The declaration annotation
 --------------------------
 
-We will provide a single parameterless declaration annotation called
+We provide a single parameterless declaration annotation called
 ``@NullMarked``.
 [`#5 <https://github.com/jspecify/jspecify/issues/5>`__,
 `#87 <https://github.com/jspecify/jspecify/issues/87>`__]
 
-.. _recognized-locations-declaration:
+Recognized locations for declaration annotations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Recognized locations
-~~~~~~~~~~~~~~~~~~~~
-
-The set of defaulting annotations are recognized when applied to:
+Our declaration annotation is specified to be *recognized* when applied
+to the locations listed below:
 
 -  A *named* class.
--  A package. [*debated*
-   `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
--  A module. [*debated*
-   `#34 <https://github.com/jspecify/jspecify/issues/34>`__]
--  *Not* a method
+-  A package. [`#34 <https://github.com/jspecify/jspecify/issues/34>`__]
+-  A module. [`#34 <https://github.com/jspecify/jspecify/issues/34>`__]
+
+..
+
+   *Not* a method
    [`#43 <https://github.com/jspecify/jspecify/issues/43>`__],
    constructor
    [`#43 <https://github.com/jspecify/jspecify/issues/43>`__], or field
-   [`#50 <https://github.com/jspecify/jspecify/issues/50>`__]. *debated*
-
-Semantics
----------
-
-In this section, we discuss how type checking should play out.
-
-Type hierarchy
-~~~~~~~~~~~~~~
-
-Our nullability annotations produce the following apparent type
-hierarchy [`#80 <https://github.com/jspecify/jspecify/issues/80>`__]:
-
-| ``Foo`` (written in the scope of ``@NullMarked``)
-| ``⋖ Foo`` (written outside the scope of ``@NullMarked``)
-| ``⋖ @Nullable Foo``
-
-It can be useful to conceptualize these similarly to `3-valued
-logic <https://en.wikipedia.org/wiki/Three-valued_logic>`__
-[`#33 <https://github.com/jspecify/jspecify/issues/33>`__]. While that’s
-workable, it can be useful to instead define “unspecified nullness” as
-an existential quantification over the other two (which logically still
-validates the above hierarchy). Two unrelated occurrences of unspecified
-nullness can sometimes be represented as two different variables,
-similar to how the Java type system handles wildcards.
-
-The above rules make ``@Nullable Object`` the top (least precise) type.
-(Note that ``null`` is *not* the bottom type.) Here are some more
-examples of subtyping, with types written in the scope of
-``@NullMarked``:
-
--  ``String ⋖ Object ⋖ @Nullable Object``
--  ``String ⋖ @Nullable String ⋖ @Nullable Object``
--  ``null ⋖ @Nullable String ⋖ @Nullable Object``
-
-For a given set of types, we can define their **glb** (*greatest lower
-bound*) as a type from the given set that is at least as specific as all
-others. Similarly, the **lub** (*least upper bound*) of a set of types
-is a type from the set that is at most as specific as all others.
-
-Finally, a **type check** (e.g., to determine assignability) for a pair
-of `augmented types <#augmented-type>`__ includes validating **both**
-(a) a type check of the `base
-types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__,
-handled by the off-the-shelf compiler, and (b) a type check for
-nullability.
-
--  This specification additionally encourages allowing type checks
-   involving unspecified nullness to succeed even when they are
-   **unsound** (optionally with warnings, similar to “unchecked
-   conversions” in Java generics), such as the following
-   [`#33 <https://github.com/jspecify/jspecify/issues/33>`__]:
-
-   -  a nullable type where a subtype of unspecified nullness is
-      required
-   -  a type of unspecified nullness where a subtype of a non-null type
-      is required
-   -  a type of unspecified nullness where a subtype of unspecified
-      nullness is required
-
--  For usability reasons, many tools will not generate generate
-   warnings/errors when applying unsound rules like those above. Others
-   may generate them optionally, likely with the warnings/errors off by
-   default. Even when a tool does report these warnings/errors, we
-   **strongly** encourage the tool to permit users to suppress these
-   warnings without suppressing other soundness violations.
-
--  When converting type components of parameterized types, their
-   nullabilities should be considered invariant where their base types
-   are.
-
-   -  This means that “list of nullable string” and “list of non-null
-      string” are not convertible to each other, but “list of non-null
-      string” is convertible to ``List<? extends @Nullable String>``.
-
-   -  In addition, we encourage unsoundly allowing unspecified nullness
-      to be “the same type” as any nullness, even for invariant type
-      components
-      [`#33 <https://github.com/jspecify/jspecify/issues/33>`__]. In
-      particular, we encourage allowing the following type checks to
-      succeed unsoundly (similar to raw type conversions)
-      [`#69 <https://github.com/jspecify/jspecify/issues/69>`__]:
-
-      -  “a list of ``Bar`` instances that are not null” is “the same
-         type as” “a list of ``Bar`` instances that have unspecified
-         nullness”
-      -  “a list of ``Bar`` instances that are nullable” is “the same
-         type as” “a list of ``Bar`` instances that have unspecified
-         nullness”
-
-Defaulting annotations in effect
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For a given type usage, we define the **defaulting annotation in
-effect** to be the one located at the *nearest containing scope*
-surrounding the type usage.
-
--  Class members are contained by classes, which may be contained by
-   other class members or classes, and top-level classes are contained
-   by packages, which may be contained by modules.
--  If no such defaulting annotation exists, then no defaulting
-   annotation is in effect.
-
-We call any type usage that itself carries a
-`recognized <#recognized-locations-type-use>`__ type-use annotation
-**explicitly annotated**.
-
-Parameterized types
-~~~~~~~~~~~~~~~~~~~
-
-This section directly builds on `JLS
-4.5 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5>`__
-to extend nullability to parameterized types.
-
-Parametric nullability
-^^^^^^^^^^^^^^^^^^^^^^
-
-If a type parameter’s bound is nullable, then unannotated usages of that
-type parameter (inside the scope of ``@NullMarked``) have *parametric
-nullability*.
-
-Type arguments of parameterized types
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Tools may wish to check that type arguments are subtypes of the
-corresponding bounds’ types (in addition to base type well-formedness,
-see `JLS
-4.5 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5>`__).
-As usual, tools may still wish to allow (with warning if desired)
-unsound type arguments involving unspecified nullness.
-
-Specifically, a tool might reject a parameterized type with an explicit
-annotation, such as ``ImmutableList<@Nullable String>``, if
-``ImmutableList``\ ’s type parameter is bounded to be non-null. The tool
-might report an error when encountering this case in source code and
-otherwise ignore the explicit ``@Nullable`` annotation.
-
-Overriding
-~~~~~~~~~~
-
-If a method overrides other methods according to Java language rules
-(see `JLS
-8.4.8.1 <https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1>`__,
-also cf. `JVMS
-5.4.5 <https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5>`__),
-then tools may wish to check that:
-
--  The overriding method’s augmented return type is be
-   return-type-substitutable for the
-   `supermethods <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.5nvbughni6vx>`__\ ’
-   return types (corresponds to covariant return types for base types,
-   an uncontroversial Java feature).
-
-As usual, tools may wish to allow (with warning if desired) unsound
-declarations involving unspecified nullness. Note that
-`supermethods <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.5nvbughni6vx>`__
-and
-`superparameters <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.m2gxs1ddzqwp>`__
-may be defined by members of parameterized supertypes.
-
-Concerns around uninitialized objects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The broad intention of nullability is that type usages specified as
-non-null should at runtime only represent non-null values. Since fields
-have to be initialized before they can be non-null, this turns out to be
-impractical in edge cases, however. Further, this problem can affect
-method return values, e.g., when methods return field values. We
-therefore likewise only expect non-null guarantees to hold for instance
-(static, respectively) fields and method results by the time their
-declaring class’s constructor (static initializer, respectively) has
-finished (similar to when final fields are guaranteed to be
-initialized).
-
-Note this semantics does allow for situations in which null values may
-be observable in “non-null” fields and method returns, namely while
-objects are under construction. We simply encourage API owners to
-minimize these cases for non-private (both static and instance) fields
-and methods, which typically involves not “leaking” object references
-outside an API until they’re fully constructed. Some tools may attempt
-to identify such “leaks” and may attempt to ensure proper field
-initialization as defined here during object construction.
-
-Examples
-~~~~~~~~
-
-As an example, let’s consider a fragment of Guava’s ``ImmutableMap``:
-
-.. code:: java
-
-   @NullMarked
-   public class ImmutableMap<K, V> implements Map<K, V> {
-     public static <K, V> ImmutableMap<K, V> of(K key, V value);
-     public @Nullable V get(@Nullable Object key);
-   }
-
-Because of the use of ``@NullMarked``, every type use in this class’s
-declaration is fixed to either nullable or non-null (including
-type-variable uses, since their type parameters are considered
-implicitly bounded by non-null ``Object``).
-
--  Can the parameters to ``of()``\ ’s be null? No, from ``K`` and
-   ``V``\ ’s bounds, which are determined implicitly by ``@NullMarked``.
--  Can ``get()``\ ’s return ``null``? Yes, from its explicit annotation.
--  It is a mismatch to refer to
-   ``ImmutableMap<@Nullable String, Object>`` because
-   ``@Nullable String`` is outside of ``K``\ ’s bounds.
-
-To illustrate wildcards, consider a method return type
-``ImmutableMap<? extends @Nullable String, ?>`` with no defaulting
-annotation in scope:
-
--  Can the method return a null map? That is unspecified, since no
-   defaulting annotation is in scope.
--  Can the map’s keys or values be null? No, because the wildcards
-   inherit that bound from the bounds of ``K`` and ``V`` in
-   ``ImmutableMap``.
-
-As another example, Guava’s ``Function`` would be declared as follows to
-allow functions that accept and/or return ``null``:
-
-.. code:: java
-
-   @NullMarked
-   public interface Function<F extends @Nullable Object, T extends @Nullable Object> {
-     T apply(F in);
-   }
-
-Note ``F``\ ’s and ``T``\ ’s admittedly verbose but very explicit
-``extends @Nullable Object`` bounds, which mean that ``apply``\ ’s
-parameter and result are of parametric nullability.
-
-Concrete ``Function`` implementations can still choose not to support
-nulls:
-
-.. code:: java
-
-   @NullMarked
-   class Foo implements Function<String, Integer> {
-   }
-
-Discussion: Expression types
-----------------------------
-
-It is not the purpose of this proposal to dictate precise behavior that
-checkers must follow. But we expect Java source code analyzers to want
-to extend our semantics from type usages as defined above to expression
-types (including expression type components).
-
-As an example, consider a hypothetical annotated version of
-``java.util.List``:
-
-.. code:: java
-
-   @NullMarked
-   public interface List<E extends @Nullable Object> extends Collection<E> {
-     public boolean add(E element);
-     public E get(int index);
-   }
-
-Now, in client code like this:
-
-.. code:: java
-
-   @NullMarked
-   public String foo(List<String> xs) {
-     xs.add(null); // mismatch: add() expects non-null String
-     return xs.get(0); // compatible: get() returns non-null String
-   }
-
-Note that (because of the defaulting annotation in effect) both
-``foo``\ ’s return type’s and ``xs``\ ’s ``String`` type argument’s are
-non-null types. That means that, considering ``xs``\ ’s type argument,
-``xs.add()``\ ’s expected parameter type is likewise non-null
-``String``, as is ``xs.get()``\ ’s return type.
-
-Note that unlike with base types, a ``null`` reference is *no longer*
-automatically assignable to any type:
-
--  It clearly isn’t usable where a non-null value is required (as in the
-   example above).
--  It also isn’t assignable to types with parametric nullability (since
-   their type parameters permit non-null instantiations).
-
-For the latter point, consider the following example:
-
-.. code:: java
-
-   @NullMarked
-   class Box<T extends @Nullable Object> {
-     private final T value;
-
-     public Box(T value) {
-       this.value = value;
-     }
-
-     public T get() {
-       return null;  // mismatch: T can be instantiated with a non-null qualifier.
-     }
-   }
-
-Again we do not prescribe how tools handle any of these scenarios, so
-tools may be silent or issue lower-priority warnings on source lines
-marked “mismatch” here. They’re purely illustrative of how we imagine
-tools will apply semantics to expression typing.
-
-The Simplest(?) Thing That Could Possibly Work for subtyping
-------------------------------------------------------------
-
-   .. rubric:: High-level overview
-      :name: high-level-overview
-
-   It may be that some people will use this doc to guide their
-   implementations in the near future. Please don’t hesitate to let
-   cpovirk know of any confusing bits.
-
-   I should probably preemptively clarify at least one thing. In this
-   doc, I have tried to distinguish explicitly between 3 “kinds of
-   nullability” of a given type usage. Each kind is derived (at least in
-   part) from the previous:
-
-   1. What annotation (if any) appears directly on that type usage?
-   2. What is the `nullness operator <#nullness-operator>`__ of that
-      type usage?
-   3. For that type usage…
-
-      -  Is it safe to assume that is not ``null``?
-      -  Is it safe to put a ``null`` into it?
-      -  neither (as in “parametric nullness”)
-      -  both (as in “unspecified nullness” in “lenient mode”)
-
-   TODO(cpovirk): Link to my “Don’t say ‘nullable’” doc once I write it.
+   [`#50 <https://github.com/jspecify/jspecify/issues/50>`__].
 
 .. _concept-references:
 
@@ -551,18 +277,6 @@ and a `nullness operator <#nullness-operator>`__ corresponding to *each*
 of its `type
 components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5>`__.
 
-   This differs from our current `glossary
-   definition <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.367l48xhsikk>`__,
-   which is written in terms of a “nullness” for each component, not a
-   “nullness operator.” Still, the glossary’s concept of the “nullness”
-   of a type is derivable from the type’s nullness operator. Notably,
-   the glossary’s “nullable” type is our `least convenient
-   world <#multiple-worlds>`__\ ’s `trusted null-inclusive under every
-   parameterization <#trusted-null-inclusive-under-every-parameterization>`__,
-   and the glossary’s “non-nullable” type is our least convenient
-   world’s `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__.
-
 For our purposes, base types (and thus augmented types) include not just
 class and interface types, array types, and type variables but also
 `intersection types <#intersection-types>`__ and the null type. This is
@@ -587,10 +301,9 @@ refers specifically to the nullness operator of the type component that
 is the entire type ``T``, without reference to the nullness operator of
 any other type components of ``T``.
 
-   For example, the nullness operator of ``List<@Nullable Object>``
-   would be ``NO_CHANGE`` (at least in a `null-marked
-   scope <#null-marked-scope>`__), even though the nullness operator of
-   its element type ``Object`` is ``UNION_NULL``.
+   For example, “the nullness operator of ``List<@Nullable Object>``”
+   refers to the nullness of the list’s type, not that of its element
+   type.
 
 Null-marked scope
 -----------------
@@ -612,9 +325,9 @@ packages, which may be enclosed by modules.
    Java compiler
    API <https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__.
 
-If an ``@org.jspecify.nullness.NullMarked`` annotation exists on one of
-these scopes, then the type usage is in a null-marked scope. Otherwise,
-it is not.
+If one of those scopes is directly annotated with
+``@org.jspecify.nullness.NullMarked``, then the type usage is in a
+null-marked scope. Otherwise, it is not.
 
 .. _augmented-type-of-usage:
 
@@ -805,62 +518,79 @@ This produces multiple null types:
 
       This may be relevant only in implementation code.
 
-.. _multiple-worlds:
+Multiple “worlds”
+-----------------
 
-The least convenient world and the most convenient world
---------------------------------------------------------
+Some of the rules in this spec come in 2 versions: One version requires
+a property to hold “in all worlds,” and the other requires it to hold
+only “in some world.”
 
-Some of the rules in this spec come in 2 versions, 1 for “the least
-convenient world” and 1 for “the most convenient world.”
-
-Tools may implement either or both versions of the rules.
+Tool authors may wish to implement either or both versions of the rules.
 
    Our goal is to allow tools and their users to choose their desired
-   level of strictness in the presence of ``UNSPECIFIED``. “The least
-   convenient world” usually assumes that types are incompatible unless
-   it has enough information to prove they are compatible; “the most
-   convenient world” assumes that types are compatible unless it has
-   enough information to prove they are incompatible.
+   level of strictness in the presence of ``UNSPECIFIED``. The basic
+   idea is that, every time a tool encounters a type component with the
+   nullness operator ``UNSPECIFIED``, it forks off 2 “worlds”: 1 in
+   which the operator is ``UNION_NULL`` and 1 in which it is
+   ``NO_CHANGE``.
 
-   Thus, strict tools may want to implement the least-convenient-world
-   version of rules, and lenient tools may wish to implement the
-   most-convenient-world version. Or a tool might implement both and let
-   users select which rules to apply.
+   Since we lack a nullness specification for the type, we assume that
+   either of the resulting worlds may be the “correct” specification.
+   The all-worlds version of a rule, by requiring types to be compatible
+   in all possible worlds, holds that types are incompatible unless it
+   has enough information to prove they are compatible. The some-world
+   version, by requiring types to be compatible only in *some* world,
+   holds that types are compatible unless it has enough information to
+   prove they are incompatible. (By behaving “optimistically,” the
+   some-world checking behaves much like Kotlin’s checking of “platform
+   types.”)
 
-   Another possibility is for a tool to implement both versions and to
-   use that to distinguish between “errors” and “warnings.” Such a tool
-   might run each check first in the least convenient world and then, if
-   the check fails, run it again in the most convenient world. If the
-   check fails in both worlds, the tool would produce an error. If it
-   passes only because of the most convenient interpretation, the tool
-   would produce a warning.
+   Thus, strict tools may want to implement the all-worlds version of
+   rules, and lenient tools may wish to implement the some-world
+   version. Or a tool might implement both and let users select which
+   rules to apply.
 
-The main body of each section describes the *least*-convenient-world
-rule. If the most-convenient-world rule differs, the differences are
-explained at the end.
+   Yet another possibility is for a tool to implement both versions and
+   to use that to distinguish between “errors” and “warnings.” Such a
+   tool might run each check first in the all-worlds version and then,
+   if the check fails, run it again in the some-world version. If the
+   check fails in both cases, the tool would produce an error. If it
+   passes only because of the some-world version, the tool would produce
+   a warning.
+
+The main body of each section of the spec describes the all-worlds rule.
+If the some-world rule differs, the differences are explained at the
+end.
+
+   A small warning: To implement the full some-world rules, a tool must
+   also implement at least part of the all-worlds rules. Those rules are
+   required as part of `substitution <#substitution>`__.
 
 .. _propagating-multiple-worlds:
 
-Propagating the most/least convenient world
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Propagating the choice of world
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-When one rule in this spec refers to another, it refers to the rule for
-the same “world.” For example, when the rules for
+When one rule in this spec refers to another, it refers to the same
+version of the rule. For example, when the rules for
 `containment <#containment>`__ refer to the rules for
-`subtyping <#subtyping>`__, the most-convenient-world containment check
-applies the most-convenient-world subtyping check, and the
-least-convenient-world containment check applies the
-least-convenient-world subtyping check.
+`subtyping <#subtyping>`__, the some-world containment check applies the
+some-world subtyping check, and the all-worlds containment check applies
+the all-worlds subtyping check.
 
-This applies even if a rule says it is the same for both worlds: It
-means “the same except that any other rules are applied in the
-corresponding world.”
+This meta-rule applies except when a rule refers explicitly to a
+particular version of another rule.
 
 Same type
 ---------
 
 ``S`` and ``T`` are the same type if ``S`` is a `subtype <#subtyping>`__
 of ``T`` and ``T`` is a subtype of ``S``.
+
+The same-type check is *not* defined to be reflexive or transitive.
+
+   For more discussion of reflexive and transitive checks, see the
+   comments under `nullness subtyping <#nullness-subtyping>`__.
 
 Subtyping
 ---------
@@ -910,15 +640,21 @@ Nullness subtyping
 ``A`` is a nullness subtype of ``F`` if any of the following conditions
 are met:
 
--  ``F`` is `trusted null-inclusive under every
-   parameterization <#trusted-null-inclusive-under-every-parameterization>`__.
--  ``A`` is `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__.
+-  ``F`` is `null-inclusive under every
+   parameterization <#null-inclusive-under-every-parameterization>`__.
+
+-  ``A`` is `null-exclusive under every
+   parameterization <#null-exclusive-under-every-parameterization>`__.
+
 -  ``A`` has a `nullness-subtype-establishing
    path <#nullness-subtype-establishing-path>`__ to any type whose base
-   type is the same as the base type of ``F``.
+   type is the same as the base type of ``F``, and ``F`` does *not* have
+   `nullness operator <#nullness-operator>`__ ``MINUS_NULL``.
 
-Nullness subtyping (and thus subtyping itself) is *not* transitive.
+      The third case is necessary only for type-variable usages.
+
+Nullness subtyping (and thus subtyping itself) is *not* defined to be
+reflexive or transitive.
 
 (Contrast this with our `nullness-delegating
 subtyping <#nullness-delegating-subtyping>`__ rules and
@@ -930,33 +666,41 @@ Fortunately, this “mostly transitive” behavior is exactly the behavior
 that implementations are likely to produce naturally. Maybe someday we
 will find a way to specify this fully correctly.)
 
-Nullness subtyping (and thus subtyping itself) is *not* reflexive.
+   Subtyping does end up being transitive when the check is required to
+   hold in `all worlds <#multiple-worlds>`__. And it does end up being
+   reflexive when the check is required to hold only in `some
+   world <#multiple-worlds>`__. We don’t state those properties as rules
+   for 2 reasons: First, they arise naturally from the definitions.
+   Second, we don’t want to suggest that subtyping is reflexive and
+   transitive under both versions of the rule.
 
-   It does end up being reflexive in the `most convenient
-   world <#multiple-worlds>`__. We don’t state that as a rule for 2
-   reasons: First, it arises naturally from the definitions in that
-   world. Second, we don’t want to suggest that subtyping is reflexive
-   in the `least convenient world <#multiple-worlds>`__.
+   Yes, it’s pretty terrible for something called “subtyping” not to be
+   reflexive or transitive. A more accurate name for this concept would
+   be “consistent,” a term used in gradual typing. However, we use
+   “subtyping” anyway. In our defense, we need to name multiple
+   concepts, including not just subtyping but also
+   `same-type <#same-type>`__ checks and `containment <#containment>`__.
+   If we were to coin a new term for each, tool authors would need to
+   mentally map between those terms and the analogous Java terms.
 
-Trusted null-inclusive under every parameterization
----------------------------------------------------
+Null-inclusive under every parameterization
+-------------------------------------------
 
-A type is trusted null-inclusive under every parameterization if it
-meets either of the following conditions:
+A type is null-inclusive under every parameterization if it meets either
+of the following conditions:
 
 -  Its `nullness operator <#nullness-operator>`__ is ``UNION_NULL``.
 -  It is an `intersection type <#intersection-types>`__ whose elements
-   all are trusted null-inclusive under every parameterization.
+   all are null-inclusive under every parameterization.
 
-**Most convenient world:** The rule is the same except that the
-requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
-``UNSPECIFIED``.”
+**Some-world version:** The rule is the same except that the requirement
+for “``UNION_NULL``” is loosened to “``UNION_NULL`` or ``UNSPECIFIED``.”
 
-Trusted null-exclusive under every parameterization
----------------------------------------------------
+Null-exclusive under every parameterization
+-------------------------------------------
 
-A type is trusted null-exclusive under every parameterization if it has
-a `nullness-subtype-establishing
+A type is null-exclusive under every parameterization if it has a
+`nullness-subtype-establishing
 path <#nullness-subtype-establishing-path>`__ to either of the
 following:
 
@@ -986,7 +730,7 @@ following hold:
       nullness-subtype-establishing path to itself — as long as it has
       one of the required nullness operators.
 
-**Most convenient world:** The rules are the same except that the
+**Some-world version:** The rules are the same except that the
 requirement for “``NO_CHANGE`` or ``MINUS_NULL``” is loosened to
 “``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”
 
@@ -1015,12 +759,12 @@ Lower-bound rule:
 
    TODO(cpovirk): What if the lower bound has some other nullness
    operator? I’m pretty sure that we want to allow ``UNSPECIFIED`` in
-   the most convenient world (as we did before my recent edits), and we
-   may want to allow more.
+   the some-world version (as we did before my recent edits), and we may
+   want to allow more.
 
 -  otherwise: no nodes
 
-**Most convenient world:** The rules are the same except that the
+**Some-world version:** The rules are the same except that the
 requirements for “``NO_CHANGE`` or ``MINUS_NULL``” are loosened to
 “``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”
 
@@ -1046,7 +790,7 @@ We add to them as follows:
    the rule applies if and only if this spec defines the 2 types to be
    the `same type <#same-type>`__.
 
-**Most convenient world:** The rules are the same except that the
+**Some-world version:** The rules are the same except that the
 requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or
 ``UNSPECIFIED``.”
 
@@ -1073,17 +817,17 @@ For every type-variable usage ``V`` whose `base
 type <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__
 is ``Pᵢ``, replace ``V`` with the result of the following operation:
 
--  If ``V`` is `trusted null-exclusive under every
-   parameterization <#trusted-null-exclusive-under-every-parameterization>`__
-   in the `least convenient world <#multiple-worlds>`__, then replace it
-   with the result of `applying <#applying-operator>`__ ``MINUS_NULL``
-   to ``Aᵢ``.
+-  If ``V`` is `null-exclusive under every
+   parameterization <#null-exclusive-under-every-parameterization>`__ in
+   `all worlds <#multiple-worlds>`__, then replace it with the result of
+   `applying <#applying-operator>`__ ``MINUS_NULL`` to ``Aᵢ``.
 
-      This is the one instance in which a rule references another rule
-      to be run under a *different* “world.” Normally, all rules are run
-      `under the same “world.” <#propagating-multiple-worlds>`__ But in
-      this instance, the null-exclusivity rule (and all rules that it in
-      turn applies) are always run in the least convenient world.
+      This is the one instance in which a rule specifically refers to
+      the `all-worlds <#multiple-worlds>`__ version of another rule.
+      Normally, `a rule “propagates” its version to other
+      rules <#propagating-multiple-worlds>`__. But in this instance, the
+      null-exclusivity rule (and all rules that it in turn applies) are
+      the `all-worlds <#multiple-worlds>`__ versions.
 
    ..
 
@@ -1092,11 +836,11 @@ is ``Pᵢ``, replace ``V`` with the result of the following operation:
       that class. Its builder will have an element type whose `nullness
       operator <#nullness-operator>`__ is ``UNSPECIFIED``. Without this
       special case, ``builder.add(objectUnionNull)`` would pass the
-      subtyping check in the `most convenient
-      world <#multiple-worlds>`__. This would happen even though we have
-      enough information to know that the parameter to ``add`` is
-      universally null-exclusive — even in the most convenient world.
-      The special case here makes that subtyping check fail.
+      subtyping check in the `some-world <#multiple-worlds>`__ version.
+      This would happen even though we have enough information to know
+      that the parameter to ``add`` is universally null-exclusive,
+      regardless of world. The special case here makes that subtyping
+      check fail, as desired.
 
 -  Otherwise, replace ``V`` with the result of applying the nullness
    operator of ``V`` to ``Aᵢ``.
