@@ -642,11 +642,16 @@ are met:
 
 -  ``F`` is `null-inclusive under every
    parameterization <#null-inclusive-under-every-parameterization>`__.
+
 -  ``A`` is `null-exclusive under every
    parameterization <#null-exclusive-under-every-parameterization>`__.
+
 -  ``A`` has a `nullness-subtype-establishing
    path <#nullness-subtype-establishing-path>`__ to any type whose base
-   type is the same as the base type of ``F``.
+   type is the same as the base type of ``F``, and ``F`` does *not* have
+   `nullness operator <#nullness-operator>`__ ``MINUS_NULL``.
+
+      The third case is necessary only for type-variable usages.
 
 Nullness subtyping (and thus subtyping itself) is *not* defined to be
 reflexive or transitive.

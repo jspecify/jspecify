@@ -10,6 +10,7 @@ To build this document, run the following commands:
 ```sh
 $ cd path/to/jspecify
 $ docker build -t jspecify-sphinx docs
+$ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make linkcheck
 $ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make html
 ```
 

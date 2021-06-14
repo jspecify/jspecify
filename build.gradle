@@ -1,14 +1,14 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'com.diffplug.spotless' version '5.1.0'
-    id 'net.ltgt.errorprone' version '1.2.1'
-    id 'org.javamodularity.moduleplugin' version '1.7.0'
+    id 'com.diffplug.spotless' version '5.12.5'
+    id 'net.ltgt.errorprone' version '2.0.1'
+    id 'org.javamodularity.moduleplugin' version '1.8.7'
 }
 
 ext {
-    junitVersion = '5.7.0'
-    errorproneVersion = '2.3.4'
+    junitVersion = '5.7.2'
+    errorproneVersion = '2.7.1'
 }
 
 repositories { mavenCentral() }
@@ -32,6 +32,7 @@ java {
         // Use the copy of NullMarked whose @Target includes MODULE.
         // TODO(cpovirk): Move configuration to mrjar.gradle? Maybe we could achieve it with task.named('sourcesJar') if mrjar.gradle were applied after we create this task?
         from sourceSets.java9.allJava
+        dependsOn tasks.named('compileModuleInfoJava')
     }
 
     compileJava {
