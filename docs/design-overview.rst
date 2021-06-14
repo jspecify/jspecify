@@ -48,10 +48,12 @@ the chance of incorrect annotations). Crucially, this approach also
 allows any tool to interpret annotations that appear in Java bytecode
 produced by other tools.
 
-**Note:** we have adopted precise meanings for the terms used in this
-document; it will be necessary to read (or refer to) the
-`glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
-document in order to interpret this information correctly.
+.. note::
+
+   We have adopted precise meanings for the terms used in this
+   document; it will be necessary to read (or refer to) the
+   `glossary <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit>`__
+   document in order to interpret this information correctly.
 
 Semantics
 ---------
