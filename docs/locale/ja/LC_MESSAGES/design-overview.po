@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JSpecify \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-06-05 03:31+0000\n"
+"POT-Creation-Date: 2021-06-14 09:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,20 +29,9 @@ msgstr "この文書について"
 msgid ""
 "This document summarizes our current thinking for proposing a set of "
 "nullness annotations. **Nothing here is “set in stone” yet.**"
-msgstr ""
-"この文書は現時点における、私達のnullness用アノテーションの設計に対する提案をまとめています。"
-"**ここに書かれている内容は何も確定していません。**"
+msgstr "この文書は現時点における、私達のnullness用アノテーションの設計に対する提案をまとめています。**ここに書かれている内容は何も確定していません。**"
 
 #: ../../design-overview.rst:10
-msgid ""
-"**As of March 2021, this doc is currently two docs concatenated together."
-" They conflict with each other in places. We will iterate to address "
-"this.**"
-msgstr ""
-"**2021年3月時点で、この文書は2つの文書を包括しています。またそれぞれの文書は互いに衝突してもいます。"
-"この問題への対処は継続的に行っていきます。**"
-
-#: ../../design-overview.rst:14
 msgid ""
 "It will be very helpful to read or refer to the `core concepts/glossary "
 "<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
@@ -52,16 +41,16 @@ msgid ""
 "<https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__."
 msgstr ""
 "`コアコンセプトならびに用語集 <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
-"w-vZBeHkTvtaqPSU_icIccc/edit>`__ も合わせて確認すると、この資料を正しく理解する助けになります。"
-"その他のドキュメントも `共有フォルダ "
-"<https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__ "
-"にて保存されています。"
+"w-vZBeHkTvtaqPSU_icIccc/edit>`__ "
+"も合わせて確認すると、この資料を正しく理解する助けになります。その他のドキュメントも `共有フォルダ "
+"<https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN->`__"
+" にて保存されています。"
 
-#: ../../design-overview.rst:21
+#: ../../design-overview.rst:17
 msgid "Overview"
 msgstr "概要"
 
-#: ../../design-overview.rst:23
+#: ../../design-overview.rst:19
 msgid ""
 "We propose a type annotation to specify the nullness of individual type "
 "usages. At a high level, our proposed semantics is similar to existing "
@@ -79,17 +68,16 @@ msgid ""
 "warnings if desired) type checks involving “unspecified nullness” to "
 "succeed even when they are unsound."
 msgstr ""
-"私達は、個々の“型の使用“（訳注：`type usage <https://docs.oracle.com/javase/jp/8/docs/api/java/lang/annotation/ElementType.html#TYPE_USE>`__ のこと）の"
-"nullnessを指定するための型注釈を提案します。"
-"高いレベルでは、我々の提案するセマンティクス（意味論）は、既存ツールが提供するnullness"
-"型アノテーションの扱いと似ています。我々はnullnessアノテーションを、実行時のセマンティクスに"
-"影響を与えない、純粋なコンパイル時の型の改良として扱います。"
-"この型注釈は典型的な“nullable“と“non-nullable“の改良に加えて、注釈のないコードから一般的に生じる“"
-"unspecified nullness“の値を区別し、“unspecified nullness“を含む型チェックが不健全であっても"
-"（訳注：`健全性 <http://web.sfc.keio.ac.jp/~hagino/logic16/05.pdf>`__ を満たさないという意味）"
-"成功させることができます（必要に応じてオプションで警告を表示します）。"
+"私達は、個々の“型の使用“（訳注：`type usage "
+"<https://docs.oracle.com/javase/jp/8/docs/api/java/lang/annotation/ElementType.html#TYPE_USE>`__"
+" "
+"のこと）のnullnessを指定するための型注釈を提案します。高いレベルでは、我々の提案するセマンティクス（意味論）は、既存ツールが提供するnullness型アノテーションの扱いと似ています。我々はnullnessアノテーションを、実行時のセマンティクスに影響を与えない、純粋なコンパイル時の型の改良として扱います。この型注釈は典型的な“nullable“と"
+"“non-nullable“の改良に加えて、注釈のないコードから一般的に生じる“unspecified "
+"nullness“の値を区別し、“unspecified nullness“を含む型チェックが不健全であっても（訳注：`健全性 "
+"<http://web.sfc.keio.ac.jp/~hagino/logic16/05.pdf>`__ "
+"を満たさないという意味）成功させることができます（必要に応じてオプションで警告を表示します）。"
 
-#: ../../design-overview.rst:37
+#: ../../design-overview.rst:33
 msgid ""
 "To avoid excessive annotation overhead in hand-written Java code while "
 "clearly distinguishing annotated from legacy code, we also propose a "
@@ -97,11 +85,11 @@ msgid ""
 "semantics of “non-null by default.” In the absence of that annotation, "
 "type usages will be considered of “unspecified nullness.”"
 msgstr ""
-"Javaコードに過剰なアノテーションを書いて回る手間を回避しつつ、アノテーションが施されたコードとそうでない"
-"レガシーなコードを明確に区別するために、既存のツールの “non-null by default“に似たセマンティクスを持つ"
-"宣言アノテーションも提案します。このアノテーションがない場合、型の使用は “unspecified nullness“ として扱われます。"
+"Javaコードに過剰なアノテーションを書いて回る手間を回避しつつ、アノテーションが施されたコードとそうでないレガシーなコードを明確に区別するために、既存のツールの"
+" “non-null by default“に似たセマンティクスを持つ宣言アノテーションも提案します。このアノテーションがない場合、型の使用は "
+"“unspecified nullness“ として扱われます。"
 
-#: ../../design-overview.rst:43
+#: ../../design-overview.rst:39
 msgid ""
 "We give `semantics <#semantics>`__ to these annotations independent of "
 "particular tools. We don’t specify what tools must do with that semantic "
@@ -116,7 +104,7 @@ msgid ""
 "by other tools."
 msgstr ""
 
-#: ../../design-overview.rst:55
+#: ../../design-overview.rst:51
 msgid ""
 "**Note:** we have adopted precise meanings for the terms used in this "
 "document; it will be necessary to read (or refer to) the `glossary "
@@ -125,39 +113,39 @@ msgid ""
 "information correctly."
 msgstr ""
 
-#: ../../design-overview.rst:61
+#: ../../design-overview.rst:57
 msgid "Semantics"
 msgstr "セマンティクス"
 
-#: ../../design-overview.rst:63
+#: ../../design-overview.rst:59
 msgid "In this section, we discuss how type checking should play out."
 msgstr "この節では、型検査がどのように行われるべきか説明します。"
 
-#: ../../design-overview.rst:66
+#: ../../design-overview.rst:62
 msgid "Type hierarchy"
 msgstr "型の階層"
 
-#: ../../design-overview.rst:68
+#: ../../design-overview.rst:64
 msgid ""
 "Our nullability annotations produce the following apparent type hierarchy"
 " [`#80 <https://github.com/jspecify/jspecify/issues/80>`__]:"
 msgstr ""
-"私達のnullabilityアノテーションは、以下に挙げる明確な型の階層を生成します"
-" [`#80 <https://github.com/jspecify/jspecify/issues/80>`__]:"
+"私達のnullabilityアノテーションは、以下に挙げる明確な型の階層を生成します [`#80 "
+"<https://github.com/jspecify/jspecify/issues/80>`__]:"
 
-#: ../../design-overview.rst:71
+#: ../../design-overview.rst:67
 msgid "``Foo`` (written in the scope of ``@NullMarked``)"
 msgstr "``Foo`` (``@NullMarked`` のスコープで書かれたもの)"
 
-#: ../../design-overview.rst:72
+#: ../../design-overview.rst:68
 msgid "``⋖ Foo`` (written outside the scope of ``@NullMarked``)"
 msgstr "``⋖ Foo`` (``@NullMarked`` のスコープ外で書かれたもの)"
 
-#: ../../design-overview.rst:73
+#: ../../design-overview.rst:69
 msgid "``⋖ @Nullable Foo``"
 msgstr ""
 
-#: ../../design-overview.rst:75
+#: ../../design-overview.rst:71
 msgid ""
 "It can be useful to conceptualize these similarly to `3-valued logic "
 "<https://en.wikipedia.org/wiki/Three-valued_logic>`__ [`#33 "
@@ -168,48 +156,46 @@ msgid ""
 "nullness can sometimes be represented as two different variables, similar"
 " to how the Java type system handles wildcards."
 msgstr ""
-"これは `3値論理 <https://ja.wikipedia.org/wiki/3%E5%80%A4%E8%AB%96%E7%90%86>`__ [`#33 "
-"<https://github.com/jspecify/jspecify/issues/33>`__] と同じような概念だと言えます。"
-"この方法も有効ですが、代わりに “unspecified nullness“ を他の2つに対する存在量化として定義しても便利です"
-"（論理的には前述の階層を検証することになります）。"
-"Javaの型システムがワイルドカードを処理するのと同様に、2つの無関係な “unspecified nullness“ が"
-"2つの異なる変数として表される場合があります。"
+"これは `3値論理 <https://ja.wikipedia.org/wiki/3%E5%80%A4%E8%AB%96%E7%90%86>`__"
+" [`#33 <https://github.com/jspecify/jspecify/issues/33>`__] "
+"と同じような概念だと言えます。この方法も有効ですが、代わりに “unspecified nullness“ "
+"を他の2つに対する存在量化として定義しても便利です（論理的には前述の階層を検証することになります）。Javaの型システムがワイルドカードを処理するのと同様に、2つの無関係な"
+" “unspecified nullness“ が2つの異なる変数として表される場合があります。"
 
-#: ../../design-overview.rst:84
+#: ../../design-overview.rst:80
 msgid ""
 "The above rules make ``@Nullable Object`` the top (least precise) type. "
 "(Note that ``null`` is *not* the bottom type.) Here are some more "
 "examples of subtyping, with types written in the scope of "
 "``@NullMarked``:"
 msgstr ""
-"上記のルールにより、 ``@Nullable Object`` は最上位の（最も精度の低い）型となります。"
-"``null`` は最下位の型ではないことに注意してください。"
-"以下に、 ``@NullMarked`` のスコープで書かれた型を使った細分化の例をいくつか示します。"
+"上記のルールにより、 ``@Nullable Object`` は最上位の（最も精度の低い）型となります。``null`` "
+"は最下位の型ではないことに注意してください。以下に、 ``@NullMarked`` のスコープで書かれた型を使った細分化の例をいくつか示します。"
 
-#: ../../design-overview.rst:89
+#: ../../design-overview.rst:85
 msgid "``String ⋖ Object ⋖ @Nullable Object``"
 msgstr ""
 
-#: ../../design-overview.rst:90
+#: ../../design-overview.rst:86
 msgid "``String ⋖ @Nullable String ⋖ @Nullable Object``"
 msgstr ""
 
-#: ../../design-overview.rst:91
+#: ../../design-overview.rst:87
 msgid "``null ⋖ @Nullable String ⋖ @Nullable Object``"
 msgstr ""
 
-#: ../../design-overview.rst:93
+#: ../../design-overview.rst:89
 msgid ""
 "For a given set of types, we can define their **glb** (*greatest lower "
 "bound*) as a type from the given set that is at least as specific as all "
 "others. Similarly, the **lub** (*least upper bound*) of a set of types is"
 " a type from the set that is at most as specific as all others."
 msgstr ""
-"任意の型の集合に対し、**下限** (*greatest lower bound, glb*) をその集合に含まれる"
-"他のすべての型よりも小さなひとつの型として定義できます。同様に、**上限** (*least upper bound, lub*)を"
-"その集合に含まれる他のすべての型よりも大きなひとつの型として定義できます。
+"任意の型の集合に対し、**下限** (*greatest lower bound, glb*) "
+"をその集合に含まれる他のすべての型よりも小さなひとつの型として定義できます。同様に、**上限** (*least upper bound, "
+"lub*)をその集合に含まれる他のすべての型よりも大きなひとつの型として定義できます"
 
-#: ../../design-overview.rst:98
+#: ../../design-overview.rst:94
 msgid ""
 "Finally, a **type check** (e.g., to determine assignability) for a pair "
 "of `augmented types <#augmented-type>`__ includes validating **both** (a)"
@@ -218,12 +204,12 @@ msgid ""
 "w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__, handled by "
 "the off-the-shelf compiler, and (b) a type check for nullability."
 msgstr ""
-"最後に、`拡張型 <#augmented-type>`__ の組に対する **型チェック** （例えば割当可能性の判断）には"
-"(a) 一般的なコンパイラが扱う `基本型 <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
-"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ と、"
-"(b) nullabilityのための型チェック、その両方を検証することが含まれます。"
+"最後に、`拡張型 <#augmented-type>`__ の組に対する **型チェック** （例えば割当可能性の判断）には(a) "
+"一般的なコンパイラが扱う `基本型 <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf"
+"--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ と、(b) "
+"nullabilityのための型チェック、その両方を検証することが含まれます。"
 
-#: ../../design-overview.rst:105
+#: ../../design-overview.rst:101
 msgid ""
 "This specification additionally encourages allowing type checks involving"
 " unspecified nullness to succeed even when they are **unsound** "
@@ -232,23 +218,23 @@ msgid ""
 "<https://github.com/jspecify/jspecify/issues/33>`__]:"
 msgstr ""
 
-#: ../../design-overview.rst:111
+#: ../../design-overview.rst:107
 msgid "a nullable type where a subtype of unspecified nullness is required"
 msgstr ""
 
-#: ../../design-overview.rst:113
+#: ../../design-overview.rst:109
 msgid ""
 "a type of unspecified nullness where a subtype of a non-null type is "
 "required"
 msgstr ""
 
-#: ../../design-overview.rst:115
+#: ../../design-overview.rst:111
 msgid ""
 "a type of unspecified nullness where a subtype of unspecified nullness is"
 " required"
 msgstr ""
 
-#: ../../design-overview.rst:118
+#: ../../design-overview.rst:114
 msgid ""
 "For usability reasons, many tools will not generate generate "
 "warnings/errors when applying unsound rules like those above. Others may "
@@ -258,20 +244,20 @@ msgid ""
 "suppressing other soundness violations."
 msgstr ""
 
-#: ../../design-overview.rst:125
+#: ../../design-overview.rst:121
 msgid ""
 "When converting type components of parameterized types, their "
 "nullabilities should be considered invariant where their base types are."
 msgstr ""
 
-#: ../../design-overview.rst:129
+#: ../../design-overview.rst:125
 msgid ""
 "This means that “list of nullable string” and “list of non-null string” "
 "are not convertible to each other, but “list of non-null string” is "
 "convertible to ``List<? extends @Nullable String>``."
 msgstr ""
 
-#: ../../design-overview.rst:133
+#: ../../design-overview.rst:129
 msgid ""
 "In addition, we encourage unsoundly allowing unspecified nullness to be "
 "“the same type” as any nullness, even for invariant type components [`#33"
@@ -281,76 +267,76 @@ msgid ""
 "<https://github.com/jspecify/jspecify/issues/69>`__]:"
 msgstr ""
 
-#: ../../design-overview.rst:141
+#: ../../design-overview.rst:137
 msgid ""
 "“a list of ``Bar`` instances that are not null” is “the same type as” “a "
 "list of ``Bar`` instances that have unspecified nullness”"
 msgstr ""
 
-#: ../../design-overview.rst:144
+#: ../../design-overview.rst:140
 msgid ""
 "“a list of ``Bar`` instances that are nullable” is “the same type as” “a "
 "list of ``Bar`` instances that have unspecified nullness”"
 msgstr ""
 
-#: ../../design-overview.rst:149
+#: ../../design-overview.rst:145
 msgid "Defaulting annotations in effect"
 msgstr ""
 
-#: ../../design-overview.rst:151
+#: ../../design-overview.rst:147
 msgid ""
 "For a given type usage, we define the **defaulting annotation in effect**"
 " to be the one located at the *nearest containing scope* surrounding the "
 "type usage."
 msgstr ""
 
-#: ../../design-overview.rst:155
+#: ../../design-overview.rst:151
 msgid ""
 "Class members are contained by classes, which may be contained by other "
 "class members or classes, and top-level classes are contained by "
 "packages, which may be contained by modules."
 msgstr ""
 
-#: ../../design-overview.rst:158
+#: ../../design-overview.rst:154
 msgid ""
 "If no such defaulting annotation exists, then no defaulting annotation is"
 " in effect."
 msgstr ""
 
-#: ../../design-overview.rst:161
+#: ../../design-overview.rst:157
 msgid ""
 "We call any type usage that itself carries a `recognized <#recognized-"
 "locations-for-type-use-annotations>`__ type-use annotation **explicitly "
 "annotated**."
 msgstr ""
 
-#: ../../design-overview.rst:166
+#: ../../design-overview.rst:162
 msgid "Parameterized types"
 msgstr "パラメータ化された型"
 
-#: ../../design-overview.rst:168
+#: ../../design-overview.rst:164
 msgid ""
 "This section directly builds on `JLS 4.5 "
 "<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5>`__"
 " to extend nullability to parameterized types."
 msgstr ""
 
-#: ../../design-overview.rst:173
+#: ../../design-overview.rst:169
 msgid "Parametric nullability"
 msgstr ""
 
-#: ../../design-overview.rst:175
+#: ../../design-overview.rst:171
 msgid ""
 "If a type parameter’s bound is nullable, then unannotated usages of that "
 "type parameter (inside the scope of ``@NullMarked``) have *parametric "
 "nullability*."
 msgstr ""
 
-#: ../../design-overview.rst:180
+#: ../../design-overview.rst:176
 msgid "Type arguments of parameterized types"
 msgstr ""
 
-#: ../../design-overview.rst:182
+#: ../../design-overview.rst:178
 msgid ""
 "Tools may wish to check that type arguments are subtypes of the "
 "corresponding bounds’ types (in addition to base type well-formedness, "
@@ -360,7 +346,7 @@ msgid ""
 "unsound type arguments involving unspecified nullness."
 msgstr ""
 
-#: ../../design-overview.rst:189
+#: ../../design-overview.rst:185
 msgid ""
 "Specifically, a tool might reject a parameterized type with an explicit "
 "annotation, such as ``ImmutableList<@Nullable String>``, if "
@@ -369,11 +355,11 @@ msgid ""
 "otherwise ignore the explicit ``@Nullable`` annotation."
 msgstr ""
 
-#: ../../design-overview.rst:196
+#: ../../design-overview.rst:192
 msgid "Overriding"
 msgstr "オーバーライド"
 
-#: ../../design-overview.rst:198
+#: ../../design-overview.rst:194
 msgid ""
 "If a method overrides other methods according to Java language rules (see"
 " `JLS 8.4.8.1 "
@@ -383,7 +369,7 @@ msgid ""
 " then tools may wish to check that:"
 msgstr ""
 
-#: ../../design-overview.rst:205
+#: ../../design-overview.rst:201
 msgid ""
 "The overriding method’s augmented return type is be return-type-"
 "substitutable for the `supermethods "
@@ -393,7 +379,7 @@ msgid ""
 "uncontroversial Java feature)."
 msgstr ""
 
-#: ../../design-overview.rst:211
+#: ../../design-overview.rst:207
 msgid ""
 "As usual, tools may wish to allow (with warning if desired) unsound "
 "declarations involving unspecified nullness. Note that `supermethods "
@@ -404,11 +390,11 @@ msgid ""
 "defined by members of parameterized supertypes."
 msgstr ""
 
-#: ../../design-overview.rst:219
+#: ../../design-overview.rst:215
 msgid "Concerns around uninitialized objects"
 msgstr "未初期化オブジェクトに関する懸念点"
 
-#: ../../design-overview.rst:221
+#: ../../design-overview.rst:217
 msgid ""
 "The broad intention of nullability is that type usages specified as non-"
 "null should at runtime only represent non-null values. Since fields have "
@@ -421,7 +407,7 @@ msgid ""
 "finished (similar to when final fields are guaranteed to be initialized)."
 msgstr ""
 
-#: ../../design-overview.rst:232
+#: ../../design-overview.rst:228
 msgid ""
 "Note this semantics does allow for situations in which null values may be"
 " observable in “non-null” fields and method returns, namely while objects"
@@ -433,15 +419,15 @@ msgid ""
 "here during object construction."
 msgstr ""
 
-#: ../../design-overview.rst:242
+#: ../../design-overview.rst:238
 msgid "Examples"
 msgstr ""
 
-#: ../../design-overview.rst:244
+#: ../../design-overview.rst:240
 msgid "As an example, let’s consider a fragment of Guava’s ``ImmutableMap``:"
 msgstr ""
 
-#: ../../design-overview.rst:254
+#: ../../design-overview.rst:250
 msgid ""
 "Because of the use of ``@NullMarked``, every type use in this class’s "
 "declaration is fixed to either nullable or non-null (including type-"
@@ -449,64 +435,64 @@ msgid ""
 "bounded by non-null ``Object``)."
 msgstr ""
 
-#: ../../design-overview.rst:259
+#: ../../design-overview.rst:255
 msgid ""
 "Can the parameters to ``of()``\\ ’s be null? No, from ``K`` and ``V``\\ "
 "’s bounds, which are determined implicitly by ``@NullMarked``."
 msgstr ""
 
-#: ../../design-overview.rst:261
+#: ../../design-overview.rst:257
 msgid "Can ``get()``\\ ’s return ``null``? Yes, from its explicit annotation."
 msgstr ""
 
-#: ../../design-overview.rst:262
+#: ../../design-overview.rst:258
 msgid ""
 "It is a mismatch to refer to ``ImmutableMap<@Nullable String, Object>`` "
 "because ``@Nullable String`` is outside of ``K``\\ ’s bounds."
 msgstr ""
 
-#: ../../design-overview.rst:266
+#: ../../design-overview.rst:262
 msgid ""
 "To illustrate wildcards, consider a method return type ``ImmutableMap<? "
 "extends @Nullable String, ?>`` with no defaulting annotation in scope:"
 msgstr ""
 
-#: ../../design-overview.rst:270
+#: ../../design-overview.rst:266
 msgid ""
 "Can the method return a null map? That is unspecified, since no "
 "defaulting annotation is in scope."
 msgstr ""
 
-#: ../../design-overview.rst:272
+#: ../../design-overview.rst:268
 msgid ""
 "Can the map’s keys or values be null? No, because the wildcards inherit "
 "that bound from the bounds of ``K`` and ``V`` in ``ImmutableMap``."
 msgstr ""
 
-#: ../../design-overview.rst:276
+#: ../../design-overview.rst:272
 msgid ""
 "As another example, Guava’s ``Function`` would be declared as follows to "
 "allow functions that accept and/or return ``null``:"
 msgstr ""
 
-#: ../../design-overview.rst:286
+#: ../../design-overview.rst:282
 msgid ""
 "Note ``F``\\ ’s and ``T``\\ ’s admittedly verbose but very explicit "
 "``extends @Nullable Object`` bounds, which mean that ``apply``\\ ’s "
 "parameter and result are of parametric nullability."
 msgstr ""
 
-#: ../../design-overview.rst:290
+#: ../../design-overview.rst:286
 msgid ""
 "Concrete ``Function`` implementations can still choose not to support "
 "nulls:"
 msgstr ""
 
-#: ../../design-overview.rst:300
+#: ../../design-overview.rst:296
 msgid "Discussion: Expression types"
 msgstr ""
 
-#: ../../design-overview.rst:302
+#: ../../design-overview.rst:298
 msgid ""
 "It is not the purpose of this proposal to dictate precise behavior that "
 "checkers must follow. But we expect Java source code analyzers to want to"
@@ -514,17 +500,17 @@ msgid ""
 "types (including expression type components)."
 msgstr ""
 
-#: ../../design-overview.rst:307
+#: ../../design-overview.rst:303
 msgid ""
 "As an example, consider a hypothetical annotated version of "
 "``java.util.List``:"
 msgstr ""
 
-#: ../../design-overview.rst:318
+#: ../../design-overview.rst:314
 msgid "Now, in client code like this:"
 msgstr ""
 
-#: ../../design-overview.rst:328
+#: ../../design-overview.rst:324
 msgid ""
 "Note that (because of the defaulting annotation in effect) both ``foo``\\"
 " ’s return type’s and ``xs``\\ ’s ``String`` type argument’s are non-null"
@@ -533,33 +519,32 @@ msgid ""
 "``String``, as is ``xs.get()``\\ ’s return type."
 msgstr ""
 
-#: ../../design-overview.rst:334
+#: ../../design-overview.rst:330
 msgid ""
 "Note that unlike with base types, a ``null`` reference is *no longer* "
 "automatically assignable to any type:"
 msgstr ""
 
-#: ../../design-overview.rst:337
+#: ../../design-overview.rst:333
 msgid ""
 "It clearly isn’t usable where a non-null value is required (as in the "
 "example above)."
 msgstr ""
 
-#: ../../design-overview.rst:339
+#: ../../design-overview.rst:335
 msgid ""
 "It also isn’t assignable to types with parametric nullability (since "
 "their type parameters permit non-null instantiations)."
 msgstr ""
 
-#: ../../design-overview.rst:342
+#: ../../design-overview.rst:338
 msgid "For the latter point, consider the following example:"
 msgstr ""
 
-#: ../../design-overview.rst:359
+#: ../../design-overview.rst:355
 msgid ""
 "Again we do not prescribe how tools handle any of these scenarios, so "
 "tools may be silent or issue lower-priority warnings on source lines "
 "marked “mismatch” here. They’re purely illustrative of how we imagine "
 "tools will apply semantics to expression typing."
 msgstr ""
-
