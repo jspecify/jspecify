@@ -220,22 +220,28 @@ msgid ""
 "generics), such as the following [`#33 "
 "<https://github.com/jspecify/jspecify/issues/33>`__]:"
 msgstr ""
+"この仕様はさらに、次に述べるように、不特定のnullを含む型チェックが **不健全** であっても"
+"成功できるようにすることを推奨しています（Javaジェネリックの“未チェックの変換“と同様、警告を出しても構いません）。"
+"例を以下に示します [`#33 "
+"<https://github.com/jspecify/jspecify/issues/33>`__]:"
 
 #: ../../design-overview.rst:109
 msgid "a nullable type where a subtype of unspecified nullness is required"
-msgstr ""
+msgstr "nullnessが明示されない派生型が求められるところに、nullableな型が使われる"
 
 #: ../../design-overview.rst:111
 msgid ""
 "a type of unspecified nullness where a subtype of a non-null type is "
 "required"
 msgstr ""
+"non-nullな派生型が求められるところに、nullnessが明瞭でない型が使われる"
 
 #: ../../design-overview.rst:113
 msgid ""
 "a type of unspecified nullness where a subtype of unspecified nullness is"
 " required"
 msgstr ""
+"nullnessが明示されない派生型が求められるところに、nullnessが明瞭でない型が使われる"
 
 #: ../../design-overview.rst:116
 msgid ""
@@ -323,6 +329,9 @@ msgid ""
 "<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5>`__"
 " to extend nullability to parameterized types."
 msgstr ""
+"この節は `JLS 4.5 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5>`__"
+" をベースにしてnullabilityをパラメータ化された型に拡張します。"
 
 #: ../../design-overview.rst:171
 msgid "Parametric nullability"
@@ -337,7 +346,7 @@ msgstr ""
 
 #: ../../design-overview.rst:178
 msgid "Type arguments of parameterized types"
-msgstr ""
+msgstr "パラメータ化された型の型引数"
 
 #: ../../design-overview.rst:180
 msgid ""
