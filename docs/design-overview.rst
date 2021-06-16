@@ -113,7 +113,7 @@ nullability.
    -  a type of unspecified nullness where a subtype of unspecified
       nullness is required
 
--  For usability reasons, many tools will not generate generate
+-  For usability reasons, many tools will not generate
    warnings/errors when applying unsound rules like those above. Others
    may generate them optionally, likely with the warnings/errors off by
    default. Even when a tool does report these warnings/errors, we
