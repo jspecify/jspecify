@@ -40,6 +40,17 @@ $ pip install --upgrade myst-parser
 $ ( cd docs && make html )
 ```
 
+## How to view the built pages locally
+
+The easiest way I know of is to run Python's built-in webserver:
+
+```sh
+$ cd _build/html
+$ python3 -m http.server 8000
+```
+
+Then the pages should appear at, e.g., http://yourhost:8000/design-overview.html
+
 ## CommonMark vs. reStructuredText
 
 These docs use reStructuredText (hence the `.rst` extension). If you are used to
