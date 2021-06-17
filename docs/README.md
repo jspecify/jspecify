@@ -35,7 +35,8 @@ $ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D la
 Under Debian and Ubuntu, you may be able to run:
 
 ```sh
-$ sudo apt-get install python3-sphinx python3-sphinx-rtd-theme
+$ sudo apt-get install python3-sphinx python3-sphinx-rtd-theme python3-pip
+$ pip install --upgrade myst-parser
 $ ( cd docs && make html )
 ```
 
