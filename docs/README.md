@@ -50,14 +50,3 @@ $ python3 -m http.server 8000
 ```
 
 Then the pages should appear at, e.g., http://yourhost:8000/design-overview.html
-
-## CommonMark vs. reStructuredText
-
-These docs use reStructuredText (hence the `.rst` extension). If you are used to
-CommonMark (and similar flavors of Markdown, like
-[GitHub's](https://github.github.com/gfm/)), you may want to use a converter
-that rewrites CommonMark to reStructuredText:
-
-```sh
-$ pandoc --from=markdown --to=rst docs/foo.md --output=docs/foo.rst
-```
