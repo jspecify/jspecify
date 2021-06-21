@@ -614,8 +614,8 @@ Lower-bound rule:
 
 The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
 
--   Disregard the 2 rules that refer to a bare `?`. Instead, treat `?` like
-    `? extends Object`, where the [nullness operator] of the `Object` bound is
+-   Disregard the 2 rules that refer to a bare `?`. Instead, treat `?` like `?
+    extends Object`, where the [nullness operator] of the `Object` bound is
     specified by ["Bound of an unbounded wildcard."](#unbounded-wildcard)
 
     > This is just a part of our universal rule to treat a bare `?` like `?
@@ -714,9 +714,9 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 -   The parameterized type that is the output of the conversion has the same
     [nullness operator] as the parameterized type that is the input type.
 
--   Disregard the JLS rule about `<?>`. Instead, treat `?` like
-    `? extends Object`, where the [nullness operator] of the `Object` bound is
-    specified by ["Bound of an unbounded wildcard."](#unbounded-wildcard)
+-   Disregard the JLS rule about `<?>`. Instead, treat `?` like `? extends
+    Object`, where the [nullness operator] of the `Object` bound is specified by
+    ["Bound of an unbounded wildcard."](#unbounded-wildcard)
 
     > This is just a part of our universal rule to treat a bare `?` like `?
     > extends Object`.
@@ -744,7 +744,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
-[Containment]: #containment
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10
@@ -764,6 +763,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [base type]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [base types]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [capture conversion]: #capture-conversion
+[containment]: #containment
 [design overview]: design-overview
 [glossary]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit
 [implementation code]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs
