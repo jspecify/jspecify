@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated type usage includes {@code null} as a possible value. See <a
+ * Indicates that the annotated type usage includes {@code null} as a value. See <a
  * href="https://jspecify.dev/user-guide">the JSpecify User Guide</a> for details.
  *
  * <p><b>WARNING:</b> We have not finalized the package name for this annotation. In addition, we
