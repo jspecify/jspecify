@@ -143,8 +143,8 @@ locations, nor to any annotations on such types.
         type, or the type used in a variadic parameter declaration.
 
         > For example, the annotation in `Iterator<@Nullable String>` is always
-        > in a recognized location, aside from the exception for implementation
-        > code discussed above.
+        > in a recognized location, aside from the exceptions for implementation
+        > code and receiver parameters discussed above.
 
     -   Exception: A type-parameter declaration or a wildcard _itself_ is an
         unrecognized location. \[[#19], [#31]\]
@@ -242,7 +242,7 @@ type `T`, without reference to the nullness operator of any other type
 components of `T`.
 
 > For example, "the nullness operator of `List<@Nullable Object>`" refers to the
-> nullness of the list's type, not that of its element type.
+> whether the list itself may be `null`, not whether its elements may be.
 
 ## Null-marked scope
 
@@ -305,8 +305,8 @@ condition is met, skip the remaining conditions.
 > multiple types. Then the intersection type is derived from those. Intersection
 > types can also arise from operations like [capture conversion]. See [JLS 4.9].
 >
-> One result of all this is that it's never possible for a programmer to write
-> an annotation "on an intersection type."
+> One result of this is that it's never possible for a programmer to write an
+> annotation "on an intersection type."
 
 This spec assigns a [nullness operator] to each individual element of an
 intersection type, following our normal rules for type usages. It also assigns a
@@ -366,8 +366,8 @@ In source, an `Object`-bounded type parameter can be writen in either of 2 ways:
 See [JLS 4.4].
 
 In bytecode, `<T>` and `<T extends Object>` are both represented as a type
-parameter with only a single upper bound, `Object`, and no JSpecify nullness
-type annotations on the bound.
+parameter with a single upper bound, `Object`, and no JSpecify nullness type
+annotations on the bound.
 
 If an `Object`-bounded type parameter appears in a [null-marked scope], then its
 bound has a [base type] of `Object` and a [nullness operator] of `NO_CHANGE`.
@@ -448,7 +448,7 @@ some-world rule differs, the differences are explained at the end.
 > implement at least part of the all-worlds rules. Those rules are required as
 > part of [substitution].
 
-### Propagating the choice of world <a name="propagating-multiple-worlds"></a>
+### Propagating how many worlds a check must hold in <a name="propagating-multiple-worlds"></a>
 
 When one rule in this spec refers to another, it refers to the same version of
 the rule. For example, when the rules for [containment] refer to the rules for
@@ -614,8 +614,8 @@ Lower-bound rule:
 
 The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
 
--   Disregard the 2 rules that refer to a bare `?`. Instead, treat `?` like
-    `? extends Object`, where the [nullness operator] of the `Object` bound is
+-   Disregard the 2 rules that refer to a bare `?`. Instead, treat `?` like `?
+    extends Object`, where the [nullness operator] of the `Object` bound is
     specified by ["Bound of an unbounded wildcard."](#unbounded-wildcard)
 
     > This is just a part of our universal rule to treat a bare `?` like `?
@@ -714,9 +714,9 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 -   The parameterized type that is the output of the conversion has the same
     [nullness operator] as the parameterized type that is the input type.
 
--   Disregard the JLS rule about `<?>`. Instead, treat `?` like
-    `? extends Object`, where the [nullness operator] of the `Object` bound is
-    specified by ["Bound of an unbounded wildcard."](#unbounded-wildcard)
+-   Disregard the JLS rule about `<?>`. Instead, treat `?` like `? extends
+    Object`, where the [nullness operator] of the `Object` bound is specified by
+    ["Bound of an unbounded wildcard."](#unbounded-wildcard)
 
     > This is just a part of our universal rule to treat a bare `?` like `?
     > extends Object`.
@@ -744,7 +744,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
-[Containment]: #containment
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10
@@ -764,6 +763,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [base type]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [base types]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [capture conversion]: #capture-conversion
+[containment]: #containment
 [design overview]: design-overview
 [glossary]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit
 [implementation code]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs

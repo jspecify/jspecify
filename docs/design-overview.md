@@ -90,8 +90,8 @@ nullability.
     -   a type of unspecified nullness where a subtype of unspecified nullness
         is required
 
--   For usability reasons, many tools will not generate warnings/errors
-    when applying unsound rules like those above. Others may generate them
+-   For usability reasons, many tools will not generate warnings/errors when
+    applying unsound rules like those above. Others may generate them
     optionally, likely with the warnings/errors off by default. Even when a tool
     does report these warnings/errors, we **strongly** encourage the tool to
     permit users to suppress these warnings without suppressing other soundness
@@ -316,7 +316,6 @@ to expression typing.
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
-[Containment]: #containment
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10
@@ -334,6 +333,7 @@ to expression typing.
 [base type]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [base types]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [capture conversion]: #capture-conversion
+[containment]: #containment
 [glossary]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit
 [implementation code]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs
 [intersection type]: #intersection-types
