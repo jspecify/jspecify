@@ -24,12 +24,14 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <b>WARNING:</b> This is not the final class name or package name for this annotation. In
- * addition, we are still discussing questions about semantics, particularly around type-variable
- * usages. After that, changes and documentation will follow.
+ * Indicates that within the annotated scope (class or package), type usages
+ * <i>generally</i> do <i>not</i> include {@code null} as a value, unless they are individually
+ * marked otherwise.  Without this annotation, these type usages would instead have <i>unspecified
+ * nullness</i>. Several exceptions to this rule and an explanation of unspecified nullness are
+ * covered in the <a href="https://jspecify.dev/user-guide">JSpecify User Guide</a>.
  *
- * <p>These annotations exist only as a skeleton for the final product. At this point, we are not
- * even building prototypes that use them.
+ * <p><b>WARNING: Do not release libraries using this annotation at this time.</b> It is under
+ * development, and <i>any</i> aspect of its naming, location, or design may change before 1.0.
  */
 @Documented
 @Target({TYPE, PACKAGE})
