@@ -188,7 +188,9 @@ locations listed below:
 
 > _Not_ a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
 
-## References to concepts defined by this spec <a name="concept-references"></a>
+(concept-references)=
+
+## References to concepts defined by this spec
 
 When a rule in this spec refers to any concept that is defined in this spec (for
 example, [substitution] or [containment]), apply this spec's definition (as
@@ -264,7 +266,9 @@ If one of those scopes is directly annotated with
 `@org.jspecify.nullness.NullMarked`, then the type usage is in a null-marked
 scope. Otherwise, it is not.
 
-## Augmented type of a type usage appearing in code <a name="augmented-type-of-usage"></a>
+(augmented-type-of-usage)=
+
+## Augmented type of a type usage appearing in code
 
 For most type usages in source code or bytecode on which JSpecify nullness
 annotations are structurally valid, this section defines how to determine their
@@ -298,7 +302,9 @@ condition is met, skip the remaining conditions.
 > difference between a `String` with `NO_CHANGE` and a `String` with
 > `MINUS_NULL`.
 
-## Augmented type of an intersection type <a name="intersection-types"></a>
+(intersection-types)=
+
+## Augmented type of an intersection type
 
 > Technically speaking, the JLS does not define syntax for an intersection type.
 > Instead, it defines a syntax for type parameters and casts that supports
@@ -324,7 +330,9 @@ the type as a whole is always `NO_CHANGE`.
 > than `NO_CHANGE`, we define special handling for intersection types under
 > ["Applying a nullness operator to an augmented type."][applying operator]
 
-## Bound of an "unbounded" wildcard <a name="unbounded-wildcard"></a>
+(unbounded-wildcard)=
+
+## Bound of an "unbounded" wildcard
 
 In source, an unbounded wildcard is written as `<?>`. This section does **not**
 apply to `<? extends Object>`, even though that is often equivalent to `<?>`.
@@ -356,7 +364,9 @@ Whenever a JLS rule refers specifically to `<?>`, disregard it, and instead
 apply the rules for `<? extends T>`, where `T` has a base type of `Object` and
 the nullness operator defined by this section.
 
-## Bound of an `Object`-bounded type parameter <a name="object-bounded-type-parameter"></a>
+(object-bounded-type-parameter)=
+
+## Bound of an `Object`-bounded type parameter
 
 In source, an `Object`-bounded type parameter can be writen in either of 2 ways:
 
@@ -384,7 +394,9 @@ its bound has a base type of `Object` and a nullness operator of `UNSPECIFIED`.
 > consider the source code `<T>` to have a bound of `Object`, just as it does
 > when compiled to bytecode.
 
-## Augmented null types <a name="null-types"></a>
+(null-types)=
+
+## Augmented null types
 
 The JLS refers to "the null type." In this spec, we assign a [nullness operator]
 to all types, including the null type. This produces multiple null types:
@@ -406,7 +418,9 @@ to all types, including the null type. This produces multiple null types:
 
     > This may be relevant only in implementation code.
 
-## Multiple "worlds" <a name="multiple-worlds"></a>
+(multiple-worlds)=
+
+## Multiple "worlds"
 
 Some of the rules in this spec come in 2 versions: One version requires a
 property to hold "in all worlds," and the other requires it to hold only "in
@@ -448,7 +462,9 @@ some-world rule differs, the differences are explained at the end.
 > implement at least part of the all-worlds rules. Those rules are required as
 > part of [substitution].
 
-### Propagating how many worlds a check must hold in <a name="propagating-multiple-worlds"></a>
+(propagating-multiple-worlds)=
+
+### Propagating how many worlds a check must hold in
 
 When one rule in this spec refers to another, it refers to the same version of
 the rule. For example, when the rules for [containment] refer to the rules for
@@ -477,7 +493,9 @@ The same-type check is _not_ defined to be reflexive or transitive.
     [nullness-delegating subtyping rules for Java].
 -   `A` is a [nullness subtype] of `F`.
 
-## Nullness-delegating subtyping rules for Java <a name="nullness-delegating-subtyping"></a>
+(nullness-delegating-subtyping)=
+
+## Nullness-delegating subtyping rules for Java
 
 The Java subtyping rules are defined in [JLS 4.10]. We add to them as follows:
 
@@ -669,7 +687,9 @@ the result of the following operation:
 -   Otherwise, replace `V` with the result of applying the nullness operator of
     `V` to `Aᵢ`.
 
-## Applying a nullness operator to an augmented type <a name="applying-operator"></a>
+(applying-operator)=
+
+## Applying a nullness operator to an augmented type
 
 The process of applying a [nullness operator] requires 2 inputs:
 
