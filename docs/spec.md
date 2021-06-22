@@ -37,10 +37,29 @@ standard Java checks. For example, if code contains the parameterized type
 `List<@Nullable Foo>`, we would expect tools to check that `@Nullable Foo` is a
 subtype of the bound of the type parameter of `List`.
 
-However, this is up to tool authors. In fact, JSpecify annotations can be used
-even by tools that are not "nullness checkers" at all. For example, a tool that
-lists the members of an API could show the nullness of each type in the API,
-without any checking that those types are "correct."
+However, this is up to tool authors, who may have reasons to take a different
+approach. For example:
+
+-   Java
+    [requires checks in some cases in which they aren't necessary for soundness][#49]
+    and [doesn't require checks in some cases in which checks _are_ necessary
+    for soundness][#65].
+
+-   JSpecify annotations can be used even by tools that are not "nullness
+    checkers" at all. For example, a tool that lists the members of an API could
+    show the nullness of each type in the API, without any checking that those
+    types are "correct."
+
+-   Even when a tool is a "nullness checker," it might be written for another
+    language, like Kotlin, with its own rules for when to perform type checks.
+    Or the tool might target a future version of Java whose language features
+    would not be covered by this version of this spec.
+
+Note also that this spec covers only nullness information _from JSpecify
+annotations_. Tools may have additional sources of information. For example, a
+tool may recognize additional annotations. Or a tool may define a rule to treat
+all unannotated type usages the same, even those that this spec assigns
+"unspecified nullness."
 
 ### That's all!
 
@@ -55,15 +74,18 @@ anticipate likely questions. Those comments are set off as block quotes.
 
 > This is an example of a non-normative comment.
 
-This document also links to other documents. Those documents are non-normative.
+This document also links to other documents. Those documents are non-normative,
+except for when we link to the Java Language Specification to defer to its
+rules.
 
 > As of this writing, we know that this spec is not entirely sufficient: It
 > sometimes relies on references to other documents (like the [glossary]). We
 > will need to fix this by copying those definitions here.
 >
-> (Incidentally, I don't recommend trying to read through the glossary as part
-> of reviewing this doc: The glossary includes many concepts that we don't need
-> here, and we have not maintained it recently.)
+> (Incidentally, I recommend viewing the glossary as a mostly separate effort
+> from this doc: The glossary presents a slightly different model of both
+> nullness and the Java type system. Over time, we'll want to either bring the
+> two more closely in line or else draw a clearer line between them.)
 
 ## Details common to all annotations
 
@@ -113,9 +135,12 @@ locations, nor to any annotations on such types.
     -   A type usage of a primitive type.
     -   The outer type that qualifies an inner type.
 
+        > Every outer type is intrinsically non-nullable because every instance
+        > of an inner class has an associated instance of the outer class.
+
         > For example, the annotation in `@Nullable Foo.Bar` is in an
-        > unrecognized location because the outer type `Foo` is intrinsically
-        > non-nullable.
+        > unrecognized location because Java syntax attaches it to the outer
+        > type `Foo`.
 
     -   Any of the following type contexts:
 
@@ -166,11 +191,13 @@ locations, nor to any annotations on such types.
 
         > But, again, _not_ the type parameter itself.
 
-> Tools are encouraged to issue an error for an annotation in an unrecognized
-> location in source code unless they define semantics for that location --- and
-> especially to issue errors for annotations in intrinsically non-nullable
-> locations. In bytecode, annotations in unrecognized locations may be best
-> ignored (again, unless a tool defines semantics for them).
+> When analyzing source code, tools are encouraged to offer an option to issue
+> an error for an annotation in an unrecognized location (unless they define
+> semantics for that location). Tools are especially encouraged to issue an
+> error for an annotation in a location that is intrinsically non-nullable. When
+> reading _bytecode_, however, tools may be best off ignoring an annotation in
+> an unrecognized location (again, unless they define semantics for that
+> location).
 
 ## The declaration annotation
 
@@ -336,7 +363,8 @@ the type as a whole is always `NO_CHANGE`.
 
 In source, an unbounded wildcard is written as `<?>`. This section does **not**
 apply to `<? extends Object>`, even though that is often equivalent to `<?>`.
-See [JLS 4.5.1].
+
+> See [JLS 4.5.1].
 
 In bytecode, such a wildcard is represented as a wildcard type with an empty
 list of upper bounds and an empty list of lower bounds. This section does
@@ -373,7 +401,7 @@ In source, an `Object`-bounded type parameter can be writen in either of 2 ways:
 -   `<T>`
 -   `<T extends Object>` with no JSpecify nullness type annotations on the bound
 
-See [JLS 4.4].
+> See [JLS 4.4].
 
 In bytecode, `<T>` and `<T extends Object>` are both represented as a type
 parameter with a single upper bound, `Object`, and no JSpecify nullness type
@@ -756,9 +784,11 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#33]: https://github.com/jspecify/jspecify/issues/33
 [#34]: https://github.com/jspecify/jspecify/issues/34
 [#43]: https://github.com/jspecify/jspecify/issues/43
+[#49]: https://github.com/jspecify/jspecify/issues/49
 [#50]: https://github.com/jspecify/jspecify/issues/50
 [#5]: https://github.com/jspecify/jspecify/issues/5
 [#60]: https://github.com/jspecify/jspecify/issues/60
+[#65]: https://github.com/jspecify/jspecify/issues/65
 [#69]: https://github.com/jspecify/jspecify/issues/69
 [#7]: https://github.com/jspecify/jspecify/issues/7
 [#80]: https://github.com/jspecify/jspecify/issues/80
