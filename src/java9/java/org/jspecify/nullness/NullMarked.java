@@ -38,5 +38,5 @@ import java.lang.annotation.Target;
 @Target({TYPE, PACKAGE, MODULE})
 @Retention(RUNTIME)
 public @interface NullMarked {
-  // note for maintainers: When you update this file, please update the file in src/java9 too.
+  // note for maintainers: When you update this file, please update the file in src/main too.
 }

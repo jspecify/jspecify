@@ -23,10 +23,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <b>This annotation is not planned for inclusion in JSpecify 1.0</b>, unless <a
- * href="https://github.com/jspecify/jspecify/issues/137">this issue is reopened and resolved
+ * <b>This annotation is not planned for inclusion in JSpecify 1.0</b>, unless
+ * <a href="https://github.com/jspecify/jspecify/issues/137">this issue</a> is reopened and resolved
  * favorably. It's here temporarily until some tests are fixed, and in the meantime we will be
- * deleting from any release branch we start.
+ * deleting it from any release branch we start.
  */
 @Documented
 @Target(TYPE_USE)
