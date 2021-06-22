@@ -23,12 +23,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated type usage includes {@code null} as a value. See <a
- * href="https://jspecify.dev/user-guide">the JSpecify User Guide</a> for details.
+ * Indicates that the annotated type usage includes {@code null} as a value. To understand the
+ * nullness of nearby <i>unannotated</i> type usages, check for {@link NullMarked} on the enclosing
+ * class, package, or module. See the <a href="https://jspecify.dev/user-guide">JSpecify User
+ * Guide</a> for details.
  *
- * <p><b>WARNING:</b> We have not finalized the package name for this annotation. In addition, we
- * are still discussing questions about semantics, particularly around type-variable usages. After
- * that, changes and further documentation will follow.
+ * <p><b>WARNING: Do not release libraries using this annotation at this time.</b> It is under
+ * development, and <i>any</i> aspect of its naming, location, or design may change before 1.0.
  */
 @Documented
 @Target(TYPE_USE)
