@@ -244,7 +244,7 @@ On the other hand, the return type `@Nullable E` of the (fictitious) `getFirst`
 method is always `@Nullable`. It will be `@Nullable String` whether called on a
 `List<@Nullable String>` or a `List<String>`. The idea is that the method returns
 the first element of the list, or null if the list is empty. Similarly, the real
-methods `@Nullable V get(Object key)` in `Map` and `@Nullable E peek()` in `Queue can
+methods `@Nullable V get(Object key)` in `Map` and `@Nullable E peek()` in `Queue` can
 return null even when `V` and `E` can't be null.
 
 The distinction here is an important one that is worth repeating. A use of a
