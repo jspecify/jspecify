@@ -1,23 +1,26 @@
 # JSpecify user guide
 
-The JSpecify project defines annotations that describe what types in Java code
-can be null. This allows tools to help developers avoid NullPointerExceptions,
-by pinpointing places where those exceptions might happen because the code
-doesn't guard against the possibility that a reference might be null. At the
-same time, the annotations make it possible to declare that certain references
-can never be null.
+In Java code, whether an expression may evaluate to null is often documented
+only in natural language, if at all.  The goal of JSpecify is to permit
+programmers to express specifications (initially, just nullness properties) in a
+machine-readable way.
 
-These annotations are principally used by tools to check source code. They do
-not necessarily have any effect when the code is being run.
+JSpecify defines annotations that describe whether a Java type contains the value null.
+Such annotations are useful to:
+ * programmers reading the code,
+ * tools that help developers avoid NullPointerExceptions,
+ * tools that perform run-time checking and test generation,
+ * documentation systems,
+ * and for other purposes.
+
 
 ## Java variables are references
 
-In Java, all variables, except primitives like `int`, are references. We often
-think of `String x;` as meaning "`x` is a `String`", but actually it means "`x` is a
-_reference_ to a `String`". One important difference between these two views is that
-`x` can also be null. The goal of JSpecify is to move towards a world where `String
-x;` means "`x` is a reference to an actual string", and if you want a reference
-that might be null then you write `@Nullable String x;`.
+In Java, any non-primitive expression may evaluate to null; for example, the
+`String` type consists of the values { null, "", "a", ... }.
+It is useful for a programmer to specify a supertype of `String` that consists
+of the values { "", "a", ... }, without `null`.
+
 
 ## Types and nullness
 
