@@ -6,12 +6,11 @@ programmers to express specifications (initially, just nullness properties) in a
 machine-readable way.
 
 JSpecify defines annotations that describe whether a Java type contains the value null.
-Such annotations are useful to:
+Such annotations are useful (for example) to:
  * programmers reading the code,
  * tools that help developers avoid NullPointerExceptions,
- * tools that perform run-time checking and test generation,
- * documentation systems,
- * and for other purposes.
+ * tools that perform run-time checking and test generation, and
+ * documentation systems.
 
 
 ## Java variables are references
