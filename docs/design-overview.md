@@ -5,9 +5,8 @@
 This document summarizes our current thinking for proposing a set of nullness
 annotations. **Nothing here is "set in stone" yet.**
 
-It will be very helpful to read or refer to the
-[core concepts/glossary][glossary] document in order to understand this material
-correctly. There are numerous other documents in our [shared folder].
+If you are looking for an introduction to _using_ the annotations, you will
+probably prefer the [user guide].
 
 ## Overview
 
@@ -369,3 +368,4 @@ to expression typing.
 [type context]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t
 [type variable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo
 [unspecified nullness]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3
+[user guide]: user-guide

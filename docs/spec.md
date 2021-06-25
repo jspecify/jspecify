@@ -9,8 +9,8 @@ annotations.
 
 For someone new to our nullness annotations, this document does not make a good
 introduction. This document is targeted more at tool authors or advanced users.
-For new users, we are working on additional documentation, including Javadoc, a
-[User Guide](user-guide), and a FAQ. At the moment, you can see our
+New users will prefer to start with our [User Guide]. We are working on further
+user documentation, including Javadoc. For an intermediate perspective, see our
 [design overview].
 
 ### The world "nullable"
@@ -864,3 +864,4 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [type context]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t
 [type variable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo
 [unspecified nullness]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3
+[user guide]: user-guide
