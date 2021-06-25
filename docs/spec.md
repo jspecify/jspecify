@@ -10,7 +10,8 @@ annotations.
 For someone new to our nullness annotations, this document does not make a good
 introduction. This document is targeted more at tool authors or advanced users.
 For new users, we are working on additional documentation, including Javadoc, a
-User Guide, and a FAQ. At the moment, you can see our [design overview].
+[User Guide](user-guide), and a FAQ. At the moment, you can see our
+[design overview].
 
 ### The world "nullable"
 
@@ -41,8 +42,8 @@ However, this is up to tool authors, who may have reasons to take a different
 approach. For example:
 
 -   Java
-    [requires checks in some cases in which they aren't necessary for soundness][#49]
-    and [doesn't require checks in some cases in which checks _are_ necessary
+    [requires checks in some cases in which they aren't necessary for soundness][#49],
+    and it [doesn't require checks in some cases in which checks _are_ necessary
     for soundness][#65].
 
 -   JSpecify annotations can be used even by tools that are not "nullness
@@ -139,8 +140,8 @@ locations, nor to any annotations on such types.
         > of an inner class has an associated instance of the outer class.
 
         > For example, the annotation in `@Nullable Foo.Bar` is in an
-        > unrecognized location because Java syntax attaches it to the outer
-        > type `Foo`.
+        > unrecognized location: Java syntax attaches it to the outer type
+        > `Foo`.
 
     -   Any of the following type contexts:
 
@@ -232,7 +233,7 @@ In particular, when a JLS rule refers to types, apply this spec's definition of
 
 ## Nullness operator
 
-An nullness operator is one of 4 values:
+A nullness operator is one of 4 values:
 
 -   `UNION_NULL`
 -   `NO_CHANGE`
@@ -270,8 +271,8 @@ specifically to the nullness operator of the type component that is the entire
 type `T`, without reference to the nullness operator of any other type
 components of `T`.
 
-> For example, "the nullness operator of `List<@Nullable Object>`" refers to the
-> whether the list itself may be `null`, not whether its elements may be.
+> For example, "the nullness operator of `List<Object>`" refers to whether the
+> list itself may be `null`, not whether its elements may be.
 
 ## Null-marked scope
 
@@ -298,7 +299,7 @@ scope. Otherwise, it is not.
 ## Augmented type of a type usage appearing in code
 
 For most type usages in source code or bytecode on which JSpecify nullness
-annotations are structurally valid, this section defines how to determine their
+annotations are [recognized], this section defines how to determine their
 [augmented types]. Note, however, that rules for specific cases below take
 precedence over the general rule here.
 
