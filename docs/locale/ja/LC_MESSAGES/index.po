@@ -77,9 +77,9 @@ msgstr "この失われた成果物を正式な仕様と共に作成すること
 
 #: ../../index.rst:20
 msgid ""
-"We have seen the xkcd comic. Please do not send us the xkcd comic. We "
+"We have seen the `xkcd comic <https://xkcd.com/927/>`_. Please do not send us the xkcd comic. We "
 "know about the xkcd comic."
-msgstr "私達はxkcdを読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
+msgstr "私達はあの `xkcdマンガ  <https://xkcd.com/927/>`_ を読んだことがあります。どうかあのマンガを私達に送らないでください。知ってます。"
 
 #: ../../index.rst:23
 msgid "Activity"

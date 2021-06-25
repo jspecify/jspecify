@@ -17,7 +17,7 @@ Finally, it complicates interoperation between Java and other JVM languages, whi
 
 This missing artifact, with full specifications, is what we are working to create. [1]_
 
-.. [1] We have seen the xkcd comic. Please do not send us the xkcd comic. We know about the xkcd comic.
+.. [1] We have seen the `xkcd comic <https://xkcd.com/927/>`_. Please do not send us the xkcd comic. We know about the xkcd comic.
 
 Activity
 --------
