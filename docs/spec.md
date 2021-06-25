@@ -108,8 +108,10 @@ circumstances detailed below. A type at a recognized location has the semantics
 described in this spec. The spec does not assign semantics to types in other
 locations, nor to any annotations on such types.
 
--   Unrecognized location: any component of a type usage in
-    [implementation code][]:
+-   Unrecognized location: any component of a type usage in the following
+    locations:
+
+    > These all fit under the umbrella of "implementation code."
 
     -   A local variable type.
     -   An exception parameter.
@@ -165,7 +167,7 @@ locations, nor to any annotations on such types.
     [non-root] component type, regardless of the root type or surrounding
     [type context].
 
-    -   This may be a [type argument], explicit wildcard bound, array component
+    -   This may be a type argument, explicit wildcard bound, array component
         type, or the type used in a variadic parameter declaration.
 
         > For example, the annotation in `Iterator<@Nullable String>` is always
@@ -179,7 +181,7 @@ locations, nor to any annotations on such types.
         > _type-variable usages_.
 
 -   Recognized location: any of the following (including when the type usage is
-    a [type variable], regardless of the corresponding type parameter's bound):
+    a type variable, regardless of the corresponding type parameter's bound):
     \[[#17]\]
 
     -   Return type of a method.
