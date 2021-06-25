@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
  * package, or module. See the <a href="https://jspecify.dev/user-guide">JSpecify User Guide</a> for
  * details.
  *
- * <p><b>WARNING: Do not release libraries using this annotation at this time.</b> It is under
+ * <p><b>WARNING: Do not release projects using this annotation at this time.</b> It is under
  * development, and <i>any</i> aspect of its naming, location, or design may change before 1.0.
  */
 @Documented
