@@ -233,6 +233,13 @@ definition.
 In particular, when a JLS rule refers to types, apply this spec's definition of
 [augmented types] \(as oppposed to [base types]).
 
+## Base type
+
+A _base type_ is a type as defined in [JLS 4].
+
+> JLS 4 does not consider type-use annotations to be part of types, so neither
+> does our concept of "base type."
+
 ## Nullness operator
 
 A nullness operator is one of 4 values:
@@ -805,6 +812,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [JLS 4.5.2]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.2
 [JLS 4.5]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5
 [JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.9
+[JLS 4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html
 [JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10
 [JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
@@ -813,8 +821,8 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [applying operator]: #applying-operator
 [augmented type]: #augmented-type
 [augmented types]: #augmented-type
-[base type]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
-[base types]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
+[base type]: #base-type
+[base types]: #base-type
 [capture conversion]: #capture-conversion
 [containment]: #containment
 [design overview]: design-overview
