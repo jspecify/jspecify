@@ -25,7 +25,7 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated type usage includes {@code null} as a value. To understand the
  * nullness of <i>unannotated</i> type usages, check for {@link NullMarked} on the enclosing class,
- * package, or module. See the <a href="https://jspecify.dev/user-guide">JSpecify User Guide</a> for
+ * package, or module. See the <a href="http://jspecify.org/user-guide">JSpecify User Guide</a> for
  * details.
  *
  * <p><b>WARNING:</b> This annotation is under
