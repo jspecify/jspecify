@@ -25,8 +25,8 @@ import java.lang.annotation.Target;
 
 /**
  * Indicates that within the annotated scope (class or package), type usages <i>generally</i> do
- * <i>not</i> include {@code null} as a value, unless they are individually marked otherwise.
- * Without this annotation, these type usages would instead have <i>unspecified nullness</i>.
+ * <i>not</i> include {@code null} as a value, unless they are individually marked otherwise using {@link Nullable} (or checker-specific other annotations).
+ * Without this annotation, unmarked type usages would instead have <i>unspecified nullness</i>.
  * Several exceptions to this rule and an explanation of unspecified nullness are covered in the <a
  * href="http://jspecify.org/user-guide">JSpecify User Guide</a>.
  *
