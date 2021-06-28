@@ -8,7 +8,7 @@ publishing {
                 artifactId = 'jspecify'
                 name = 'JSpecify annotations'
                 description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
-                url = 'https://jspecify.org/'
+                url = 'http://jspecify.org/'
                 from components.java
                 licenses {
                     license {
