@@ -30,8 +30,9 @@ import java.lang.annotation.Target;
  * Several exceptions to this rule and an explanation of unspecified nullness are covered in the <a
  * href="http://jspecify.org/user-guide">JSpecify User Guide</a>.
  *
- * <p><b>WARNING: Do not release libraries using this annotation at this time.</b> It is under
- * development, and <i>any</i> aspect of its naming, location, or design may change before 1.0.
+ * <p><b>WARNING:</b> This annotation is under development, and <i>any</i> aspect of its naming,
+ * location, or design may change before 1.0. <b>Do not release libraries using this annotation at
+ * this time.</b>
  */
 @Documented
 @Target({TYPE, PACKAGE})
