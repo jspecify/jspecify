@@ -1,14 +1,17 @@
 # JSpecify user guide
 
-The JSpecify project defines annotations that describe what types in Java code
-can be null. This allows tools to help developers avoid NullPointerExceptions,
-by pinpointing places where those exceptions might happen because the code
-doesn't guard against the possibility that a reference might be null. At the
-same time, the annotations make it possible to declare that certain references
-can never be null.
+In Java code, whether an expression may evaluate to null is often documented
+only in natural language, if at all.  The goal of JSpecify is to permit
+programmers to express specifications (initially, just nullness properties) in a
+machine-readable way.
 
-These annotations are principally used by tools to check source code. They do
-not necessarily have any effect when the code is being run.
+JSpecify defines annotations that describe whether a Java type contains the value null.
+Such annotations are useful to (for example):
+ * programmers reading the code,
+ * tools that help developers avoid NullPointerExceptions,
+ * tools that perform run-time checking and test generation, and
+ * documentation systems.
+
 
 ## Java variables are references
 
