@@ -27,9 +27,10 @@ import java.lang.annotation.Target;
 /**
  * Indicates that within the annotated scope (class, package, or module), type usages
  * <i>generally</i> do <i>not</i> include {@code null} as a value, unless they are individually
- * marked otherwise. Without this annotation, these type usages would instead have <i>unspecified
- * nullness</i>. Several exceptions to this rule and an explanation of unspecified nullness are
- * covered in the <a href="http://jspecify.org/user-guide">JSpecify User Guide</a>.
+ * marked otherwise using {@link Nullable} (or checker-specific other annotations). Without this
+ * annotation, unmarked type usages would instead have <i>unspecified nullness</i>. Several
+ * exceptions to this rule and an explanation of unspecified nullness are covered in the <a
+ * href="http://jspecify.org/user-guide">JSpecify User Guide</a>.
  *
  * <p><b>WARNING: Do not release libraries using this annotation at this time.</b> It is under
  * development, and <i>any</i> aspect of its naming, location, or design may change before 1.0.
