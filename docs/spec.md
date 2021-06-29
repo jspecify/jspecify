@@ -33,10 +33,10 @@ the previous:
 This spec does not address _when_ tools must apply a given check. For example,
 it does not state when tools must apply the [subtyping] check.
 
-We expect that tools will typically apply them in the same cases that they apply
-standard Java checks. For example, if code contains the parameterized type
-`List<@Nullable Foo>`, we would expect tools to check that `@Nullable Foo` is a
-subtype of the bound of the type parameter of `List`.
+We anticipate that tools will typically apply them in the same cases that they
+apply standard Java checks. For example, if code contains the parameterized type
+`List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable Foo`
+is a subtype of the bound of the type parameter of `List`.
 
 However, this is up to tool authors, who may have reasons to take a different
 approach. For example:
@@ -121,11 +121,11 @@ locations, nor to any annotations on such types.
         (including via a member reference), or to an instance creation
         expression for a generic class.
 
-    > In practice, we expect that tools will treat types (and their annotations)
-    > in _most_ of the above locations much like they treat types in other
-    > locations. Still, this spec does not concern itself with implementation
-    > code: We believe that the most important domain for us to focus on is that
-    > of APIs.
+    > In practice, we anticipate that tools will treat types (and their
+    > annotations) in _most_ of the above locations much like they treat types
+    > in other locations. Still, this spec does not concern itself with
+    > implementation code: We believe that the most important domain for us to
+    > focus on is that of APIs.
 
 -   Unrecognized location: a class declaration. \[[#7]\]
 
@@ -332,12 +332,12 @@ condition is met, skip the remaining conditions.
 > `UNION_NULL`.
 
 > The rules here never produce the fourth nullness operator, `MINUS_NULL`. (It
-> will appear later in [substitution]. Additionally, we expect for tool authors
-> to produce `MINUS_NULL` based on the results of null checks in implementation
-> code.) However, if tool authors prefer, they can safely produce `MINUS_NULL`
-> in any case in which it is equivalent to `NO_CHANGE`. For example, there is no
-> difference between a `String` with `NO_CHANGE` and a `String` with
-> `MINUS_NULL`.
+> will appear later in [substitution]. Additionally, we anticipate that tools
+> will produce `MINUS_NULL` based on the results of null checks in
+> implementation code.) However, if tool authors prefer, they can safely produce
+> `MINUS_NULL` in any case in which it is equivalent to `NO_CHANGE`. For
+> example, there is no difference between a `String` with `NO_CHANGE` and a
+> `String` with `MINUS_NULL`.
 
 (intersection-types)=
 
@@ -619,6 +619,9 @@ A type is null-exclusive under every parameterization if it has a
 
     > This rule refers specifically to a "class or array type," as distinct from
     > other types like type variables and [intersection types].
+
+> When code dereferences an expression, we anticipate that tools will check
+> whether the expression is null-exclusive under every parameterization.
 
 ## Nullness-subtype-establishing path
 
