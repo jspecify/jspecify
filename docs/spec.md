@@ -13,7 +13,7 @@ New users will prefer to start with our [User Guide]. We are working on further
 user documentation, including Javadoc. For an intermediate perspective, see our
 [design overview].
 
-### The world "nullable"
+### The word "nullable"
 
 In this doc, I aim not to refer to whether a type "is nullable." Instead, I draw
 some distinctions, creating roughly 3 kinds of "Is it nullable?" questions we
