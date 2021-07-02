@@ -24,26 +24,26 @@ that might be null then you write `@Nullable String x;`.
 
 ## Types and nullness
 
-In the JSpecify world, most references have one of three possible properties
+In the JSpecify world, most TODO references have one of three possible properties
 regarding nullness:
 1. They can be null.
 2. They can't be null.
 3. We don't know if they can be null or not.
 
-If `x` is a reference of a certain type, then if `x` can be null, `x.toString()` is
+If `x` is a reference of a certain type, then if `x` can be null, the dereference `x.toString()` is
 unsafe because it could produce a NullPointerException. If `x` can't be null,
 `x.toString()` can never produce a NullPointerException. And if we don't know
 whether `x` can be null or not, `x.toString()` might or might not be unsafe.
 
 There are two JSpecify annotations that indicate these properties:
 * `@Nullable` applied to a type denotes a reference of that type that can be null.
-* `@NullMarked` applied to a module, class, or package means that a reference in
+* `@NullMarked` applied to a class, package, or module means that a reference in
 that scope can't be null unless its type is explicitly marked `@Nullable`. (Below
 we will see that there are some exceptions to this for [local
 variables](#local-variables) and [type variables](#defining-generics).)
 
 If a type is not explicitly marked `@Nullable` and is not inside a `@NullMarked`
-class or package, then we don't know if references of that type can be null or
+class, package, or module, then we don't know if references of that type can be null or
 not.
 
 The notion of "can't be null" should really be read with a footnote that says
@@ -59,7 +59,7 @@ includes references that can be null. Code that deals with those references must
 be able to deal with the null case.
 
 ```java
-  public static void print(@Nullable String x) {
+  void print(@Nullable String x) {
     System.out.println(String.valueOf(x));
   }
 ```
@@ -96,6 +96,7 @@ The `@NullMarked` annotation indicates that references can't be null in its scop
 unless their types are explicitly marked `@Nullable`. If applied to a package then
 its scope is all the code in the package. If applied to a class or interface
 then its scope is all the code in that class or interface.
+TODO: mention modules. First use of `interface`, before `class` subsumed all type declarations.
 
 ```java
 @NullMarked
@@ -114,8 +115,9 @@ In this example, both methods are in the scope of `@NullMarked`, so plain `Strin
 means "a reference to a `String` that can't be null". `@Nullable String` continues
 to mean "a reference to a `String` that can be null". Tools should warn you if you
 try to pass a "reference to a `String` that can be null" to `spaceIndex`, since its
-argument can't be null, and indeed it will throw NullPointerException if given a
+argument can't be null, and indeed it will throw a NullPointerException if given a
 null argument.
+TODO: warning only expected if call is also in `@NullMarked` context, per earlier comment?
 
 As mentioned above, there are some exceptions to this interpretation for local
 variables (as we'll see next) and [type variables](#defining-generics).
@@ -131,8 +133,8 @@ the values that are assigned to the variable. For example:
 @NullMarked
 public class MyClass {
   void myMethod(@Nullable String one, String two) {
-    String copyOfOne = one;
-    String copyOfTwo = two;
+    String aliasOfOne = one;
+    String aliasOfTwo = two;
     String oneOrTwo = random() ? one : two;
     String twoOrNull = Strings.emptyToNull(two);
     ...
@@ -140,10 +142,10 @@ public class MyClass {
 }
 ```
 
-Analysis can tell that all of these variables except `copyOfTwo` can be null.
-`copyOfTwo` can't be null since `two` can't be null: it is not `@Nullable` and it is
-inside the scope of `@NullMarked`. `copyOfOne` can be null since it is a copy of a
-`@Nullable` parameter. `oneOrTwo` can be null because it may be a copy of a
+Analysis can tell that all of these variables except `aliasOfTwo` can be null.
+`aliasOfTwo` can't be null since `two` can't be null: it is not `@Nullable` and it is
+inside the scope of `@NullMarked`. `aliasOfOne` can be null since it is an alias of a
+`@Nullable` parameter. `oneOrTwo` can be null because it may be an alias of a
 `@Nullable` parameter. And `twoOrNull` can be null because its value comes from a
 method that returns `@Nullable String`.
 
@@ -198,7 +200,7 @@ public interface List<E extends @Nullable Object> {...}
 
 If it were `interface List<E>` rather than `interface List<E extends @Nullable
 Object>` then `NumberList<E extends @Nullable Number> extends List<E>` would not be
-legal. That's because `List<E>` is short for `List<E extends Object>`. Inside
+legal. That's because `interface List<E>` is short for `interface List<E extends Object>`. Inside
 `@NullMarked`, plain `Object` means "`Object` reference that can't be null". The `<E
 extends @Nullable Number>` from NumberList would not be compatible with that.
 
@@ -341,6 +343,7 @@ won't need to know.
 
 There are a couple of places where the syntax of type annotations like `@Nullable`
 is counterintuitive.
+TODO: make the principle clear: type use annotation immediately before the annotated type.
 
 1. For a nested type like `Map.Entry`, if you want to say that the value can be null
 then the syntax is `Map.@Nullable Entry`. You can often avoid dealing with this by
