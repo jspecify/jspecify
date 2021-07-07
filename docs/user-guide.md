@@ -24,7 +24,7 @@ that might be null then you write `@Nullable String x;`.
 
 ## Types and nullness
 
-In the JSpecify world, most TODO references have one of three possible properties
+In the JSpecify world, references have one of three possible properties
 regarding nullness:
 1. They can be null.
 2. They can't be null.
@@ -37,13 +37,13 @@ whether `x` can be null or not, `x.toString()` might or might not be unsafe.
 
 There are two JSpecify annotations that indicate these properties:
 * `@Nullable` applied to a type denotes a reference of that type that can be null.
-* `@NullMarked` applied to a class, package, or module means that a reference in
+* `@NullMarked` applied to a module, package, or class means that a reference in
 that scope can't be null unless its type is explicitly marked `@Nullable`. (Below
 we will see that there are some exceptions to this for [local
 variables](#local-variables) and [type variables](#defining-generics).)
 
 If a type is not explicitly marked `@Nullable` and is not inside a `@NullMarked`
-class, package, or module, then we don't know if references of that type can be null or
+module, package, or class, then we don't know if references of that type can be null or
 not.
 
 The notion of "can't be null" should really be read with a footnote that says
@@ -93,10 +93,9 @@ is safe but the second is not.
 ## `@NullMarked`
 
 The `@NullMarked` annotation indicates that references can't be null in its scope,
-unless their types are explicitly marked `@Nullable`. If applied to a package then
-its scope is all the code in the package. If applied to a class or interface
-then its scope is all the code in that class or interface.
-TODO: mention modules. First use of `interface`, before `class` subsumed all type declarations.
+unless their types are explicitly marked `@Nullable`. If applied to a module or
+package then its scope is all the code in the module or package. Similarly, if
+applied to a class then its scope is all the code in that class.
 
 ```java
 @NullMarked
@@ -354,6 +353,8 @@ might be undesirable because `Entry` is such a common type name.
 then the syntax is `@Nullable String[]`. If you want to say that the _array itself_
 can be null then the syntax is `String @Nullable []`. And if both the elements and
 the array itself can be null, the syntax is `@Nullable String @Nullable []`.
+
+1. TODO: comment on declaration vs type use annotations, especially for arrays.
 
 ### Wildcard bounds
 
