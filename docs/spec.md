@@ -108,89 +108,86 @@ circumstances detailed below. A type at a recognized location has the semantics
 described in this spec. The spec does not assign semantics to types in other
 locations, nor to any annotations on such types.
 
--   Unrecognized location: any component of a type usage in the following
-    locations:
+The following locations are recognized except when overruled by one of the
+exceptions in the subsequent sections: \[[#17]\]
 
-    > These all fit under the umbrella of "implementation code."
+-   return type of a method
 
-    -   A local variable type.
-    -   An exception parameter.
-    -   The type in a cast expression.
-    -   An array or object creation expression.
-    -   An explicit type argument supplied to a generic method or constructor
-        (including via a member reference), or to an instance creation
-        expression for a generic class.
+-   formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
 
-    > In practice, we anticipate that tools will treat types (and their
-    > annotations) in _most_ of the above locations much like they treat types
-    > in other locations. Still, this spec does not concern itself with
-    > implementation code: We believe that the most important domain for us to
-    > focus on is that of APIs.
+    > This excludes the receiver parameter.
 
--   Unrecognized location: a class declaration. \[[#7]\]
+-   field type
 
-    > For example, the annotation in `public @Nullable class Foo {}` is in an
-    > unrecognized location.
+-   type parameter upper bound \[[#60]\]
 
--   Unrecognized location: any type usage that is intrinsically non-nullable:
-    \[[#17]\]
+-   non-wildcard type argument
 
-    -   A type usage of a primitive type.
-    -   The outer type that qualifies an inner type.
+-   wildcard bound
 
-        > Every outer type is intrinsically non-nullable because every instance
-        > of an inner class has an associated instance of the outer class.
+-   array component type
 
-        > For example, the annotation in `@Nullable Foo.Bar` is in an
-        > unrecognized location: Java syntax attaches it to the outer type
-        > `Foo`.
+-   type used in a variadic parameter declaration
 
-    -   Any of the following type contexts:
+However, any location above is unrecognized if it matches either of the
+following cases: \[[#17]\]
 
-        -   supertype in a class declaration
-        -   thrown exception type
-        -   enum constant declaration
-        -   receiver parameter type
+> We refer to these cases (and some other cases below) as "intrinsically
+> non-nullable."
 
-    > But note that the following rules, while they do not apply to
-    > intrinsically non-nullable type usages themselves, still apply to any
-    > other _component_ types of such type usages.
+-   a type usage of a primitive type
 
--   Unrecognized location: any component of a receiver parameter type.
-    \[[#157]\]
+-   the outer type that qualifies an inner type
 
-    > This partially overlaps with the rule about non-nullable type contexts
-    > above: Both rules cover the intrinsically non-nullable top-level type, but
-    > this rule extends that to _all_ components of the type.
+    > For example, the annotation in `@Nullable Foo.Bar` is in an unrecognized
+    > location: Java syntax attaches it to the outer type `Foo`.
 
--   Recognized location (except where covered by the above rules): any
-    [non-root] component type, regardless of the root type or surrounding
-    [type context].
+    > Every outer type is intrinsically non-nullable because every instance of
+    > an inner class has an associated instance of the outer class.
 
-    -   This may be a type argument, explicit wildcard bound, array component
-        type, or the type used in a variadic parameter declaration.
+Additionally, any location above is unrecognized if it makes up _any component_
+of a type in the following locations: \[[#17]\]
 
-        > For example, the annotation in `Iterator<@Nullable String>` is always
-        > in a recognized location, aside from the exceptions for implementation
-        > code and receiver parameters discussed above.
+> These locations all fit under the umbrella of "implementation code."
+> Implementation code may use types that contain type arguments, wildcard
+> bounds, and array component types, which would be recognized locations if not
+> for the exceptions defined by this section.
 
-    -   Exception: A type-parameter declaration or a wildcard _itself_ is an
-        unrecognized location. \[[#19], [#31]\]
+-   a local variable type
+-   an exception parameter
+-   the type in a cast expression
+-   an array or object creation expression
+-   an explicit type argument supplied to a generic method or constructor
+    (including via a member reference) or to an instance creation expression for
+    a generic class
 
-        > Their _bounds_ can still be recognized locations. So too can
-        > _type-variable usages_.
+> In practice, we anticipate that tools will treat types (and their annotations)
+> in _most_ of the above locations much like they treat types in other
+> locations. Still, this spec does not concern itself with implementation code:
+> We believe that the most important domain for us to focus on is that of APIs.
 
--   Recognized location: any of the following: \[[#17]\]
+All locations that are not explicitly listed as recognized are unrecognized.
 
-    -   Return type of a method.
-
-    -   Formal parameter type of a method or constructor.
-
-    -   Field type.
-
-    -   Type parameter upper bound. \[[#60]\]
-
-        > But, again, _not_ the type parameter itself.
+> Other notable unrecognized annotations include: \[[#17]\]
+>
+> Some additional intrinsically non-nullable locations:
+>
+> -   supertype in a class declaration
+> -   thrown exception type
+> -   enum constant declaration
+> -   receiver parameter type
+>
+> Some other locations that individual tools are more likely to assign semantics
+> to:
+>
+> -   a class declaration \[[#7]\]: For example, the annotation in `public
+>     @Nullable class Foo {}` is in an unrecognized location.
+> -   a type-parameter declaration or a wildcard _itself_ \[[#19], [#31]\]
+> -   any component (type argument, etc.) of a receiver parameter type
+>     \[[#157]\]
+>
+> But note that types "inside" some of these locations can still be recognized,
+> such as a _type argument_ of a supertype.
 
 > When analyzing source code, tools are encouraged to offer an option to issue
 > an error for an annotation in an unrecognized location (unless they define
@@ -813,6 +810,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.9
 [JLS 4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html
 [JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10
+[JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.1
 [JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
 [all worlds]: #multiple-worlds
