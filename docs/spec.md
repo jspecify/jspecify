@@ -10,8 +10,7 @@ annotations.
 For someone new to our nullness annotations, this document does not make a good
 introduction. This document is targeted more at tool authors or advanced users.
 New users will prefer to start with our [User Guide]. We are working on further
-user documentation, including Javadoc. For an intermediate perspective, see our
-[design overview].
+user documentation, including Javadoc.
 
 ### The word "nullable"
 
@@ -23,10 +22,11 @@ the previous:
 1.  Does `@Nullable` appear directly on that type usage?
 2.  What is the [nullness operator] of that type usage?
 3.  For that type usage...
-    -   Is it safe to assume that is not `null`?
-    -   Is it safe to put a `null` into it?
+    -   Is it "reasonable" to assume that is not `null`?
+    -   Is it "reasonable" to put a `null` into it?
     -   neither (what we sometimes call "parametric nullness")
-    -   both (as can happen with `UNSPECIFIED` under lenient tools)
+    -   both (as can happen with [nullness operator] `UNSPECIFIED` under lenient
+        tools)
 
 ### The scope of this spec
 
@@ -59,8 +59,8 @@ approach. For example:
 Note also that this spec covers only nullness information _from JSpecify
 annotations_. Tools may have additional sources of information. For example, a
 tool may recognize additional annotations. Or a tool may define a rule to treat
-all unannotated type usages the same, even those that this spec assigns
-"unspecified nullness."
+all unannotated type usages the same, rather than implementing different
+behavior for those that this spec assigns "unspecified nullness."
 
 ### That's all!
 
@@ -180,9 +180,7 @@ locations, nor to any annotations on such types.
         > Their _bounds_ can still be recognized locations. So too can
         > _type-variable usages_.
 
--   Recognized location: any of the following (including when the type usage is
-    a type variable, regardless of the corresponding type parameter's bound):
-    \[[#17]\]
+-   Recognized location: any of the following: \[[#17]\]
 
     -   Return type of a method.
 
@@ -259,16 +257,14 @@ corresponding to _each_ of its [type components].
 
 For our purposes, base types (and thus augmented types) include not just class
 and interface types, array types, and type variables but also
-[intersection types] and the null type. This is true even though the JLS
-sometimes does not supply rules for intersection types and sometimes has
-separate rules for the null type.
+[intersection types] and the null type.
 
-The goal of this spec is to define rules for augmented types compatible with
-those that the JLS defines for base types.
-
-> In almost all cases, this spec agrees with the JLS's rules when specifying
-> what _base_ types appear in a piece of code. It makes an exception for
-> ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
+> This spec aims to define rules for augmented types compatible with those that
+> the JLS defines for base types.
+>
+> Accordingly, in almost all cases, this spec agrees with the JLS's rules when
+> specifying what _base_ types appear in a piece of code. It makes an exception
+> for ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
 > specifies a bound of `Object` that the JLS does not specify.
 
 When this spec uses capital letters, they refer to augmented types (unless
