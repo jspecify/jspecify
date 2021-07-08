@@ -79,14 +79,78 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
-> As of this writing, we know that this spec is not entirely sufficient: It
-> sometimes relies on references to other documents (like the [glossary]). We
-> will need to fix this by copying those definitions here.
+## References to concepts defined by this spec
+
+When a rule in this spec refers to any concept that is defined in this spec (for
+example, [substitution] or [containment]), apply this spec's definition (as
+opposed to other definitions, such as the ones in the JLS).
+
+Additionally, when a rule in this spec refers to a JLS rule that in turn refers
+to a concept that is defined in this spec, likewise apply this spec's
+definition.
+
+In particular, when a JLS rule refers to types, apply this spec's definition of
+[augmented types] \(as oppposed to [base types]).
+
+## Base type
+
+A _base type_ is a type as defined in [JLS 4].
+
+> JLS 4 does not consider type-use annotations to be part of types, so neither
+> does our concept of "base type."
+
+## Type components
+
+A _type component_ of a given type is a type that transitively forms some part
+of that type. Specifically, a type component is one of the following:
+
+-   a non-wildcard type argument
+-   a wildcard bound
+-   an array component type
+-   an enclosing type
+-   an element of an intersection type
+-   the entire type
+
+## Nullness operator
+
+A nullness operator is one of 4 values:
+
+-   `UNION_NULL`
+-   `NO_CHANGE`
+-   `UNSPECIFIED`
+-   `MINUS_NULL`
+
+> The distinction among these 4 values is similar to the distinction among the
+> Kotlin types `Foo?`, `Foo`, `Foo!`, and `Foo!!`, respectively.
+
+## Augmented type
+
+An augmented type consists of a [base type] and a [nullness operator]
+corresponding to _each_ of its [type components].
+
+For our purposes, base types (and thus augmented types) include not just class
+and interface types, array types, and type variables but also
+[intersection types] and the null type.
+
+> This spec aims to define rules for augmented types compatible with those that
+> the JLS defines for base types.
 >
-> (Incidentally, I recommend viewing the glossary as a mostly separate effort
-> from this doc: The glossary presents a slightly different model of both
-> nullness and the Java type system. Over time, we'll want to either bring the
-> two more closely in line or else draw a clearer line between them.)
+> Accordingly, in almost all cases, this spec agrees with the JLS's rules when
+> specifying what _base_ types appear in a piece of code. It makes an exception
+> for ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
+> specifies a bound of `Object` that the JLS does not specify.
+
+When this spec uses capital letters, they refer to augmented types (unless
+otherwise noted). This is in contrast to the JLS, which typically uses them to
+refer to base types.
+
+When this spec refers to "the nullness operator of" a type `T`, it refers
+specifically to the nullness operator of the type component that is the entire
+type `T`, without reference to the nullness operator of any other type
+components of `T`.
+
+> For example, "the nullness operator of `List<Object>`" refers to whether the
+> list itself may be `null`, not whether its elements may be.
 
 ## Details common to all annotations
 
@@ -145,8 +209,8 @@ following cases: \[[#17]\]
     > Every outer type is intrinsically non-nullable because every instance of
     > an inner class has an associated instance of the outer class.
 
-Additionally, any location above is unrecognized if it makes up _any component_
-of a type in the following locations: \[[#17]\]
+Additionally, any location above is unrecognized if it makes up _any
+[type component]_ of a type in the following locations: \[[#17]\]
 
 > These locations all fit under the umbrella of "implementation code."
 > Implementation code may use types that contain type arguments, wildcard
@@ -183,8 +247,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 > -   a class declaration \[[#7]\]: For example, the annotation in `public
 >     @Nullable class Foo {}` is in an unrecognized location.
 > -   a type-parameter declaration or a wildcard _itself_ \[[#19], [#31]\]
-> -   any component (type argument, etc.) of a receiver parameter type
->     \[[#157]\]
+> -   any [type component] of a receiver parameter type \[[#157]\]
 >
 > But note that types "inside" some of these locations can still be recognized,
 > such as a _type argument_ of a supertype.
@@ -214,67 +277,6 @@ locations listed below:
 > _Not_ a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
 
 (concept-references)=
-
-## References to concepts defined by this spec
-
-When a rule in this spec refers to any concept that is defined in this spec (for
-example, [substitution] or [containment]), apply this spec's definition (as
-opposed to other definitions, such as the ones in the JLS).
-
-Additionally, when a rule in this spec refers to a JLS rule that in turn refers
-to a concept that is defined in this spec, likewise apply this spec's
-definition.
-
-In particular, when a JLS rule refers to types, apply this spec's definition of
-[augmented types] \(as oppposed to [base types]).
-
-## Base type
-
-A _base type_ is a type as defined in [JLS 4].
-
-> JLS 4 does not consider type-use annotations to be part of types, so neither
-> does our concept of "base type."
-
-## Nullness operator
-
-A nullness operator is one of 4 values:
-
--   `UNION_NULL`
--   `NO_CHANGE`
--   `UNSPECIFIED`
--   `MINUS_NULL`
-
-> The distinction among these 4 values is similar to the distinction among the
-> Kotlin types `Foo?`, `Foo`, `Foo!`, and `Foo!!`, respectively.
-
-## Augmented type
-
-An augmented type consists of a [base type] and a [nullness operator]
-corresponding to _each_ of its [type components].
-
-For our purposes, base types (and thus augmented types) include not just class
-and interface types, array types, and type variables but also
-[intersection types] and the null type.
-
-> This spec aims to define rules for augmented types compatible with those that
-> the JLS defines for base types.
->
-> Accordingly, in almost all cases, this spec agrees with the JLS's rules when
-> specifying what _base_ types appear in a piece of code. It makes an exception
-> for ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
-> specifies a bound of `Object` that the JLS does not specify.
-
-When this spec uses capital letters, they refer to augmented types (unless
-otherwise noted). This is in contrast to the JLS, which typically uses them to
-refer to base types.
-
-When this spec refers to "the nullness operator of" a type `T`, it refers
-specifically to the nullness operator of the type component that is the entire
-type `T`, without reference to the nullness operator of any other type
-components of `T`.
-
-> For example, "the nullness operator of `List<Object>`" refers to whether the
-> list itself may be `null`, not whether its elements may be.
 
 ## Null-marked scope
 
@@ -823,16 +825,11 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [capture conversion]: #capture-conversion
 [containment]: #containment
 [design overview]: design-overview
-[glossary]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit
-[implementation code]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs
 [in all worlds]: #multiple-worlds
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
-[non-nullable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.8wgyiwyvi49f
-[non-root]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869
 [null-marked scope]: #null-marked-scope
-[nullable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.ejpb5ee0msjt
 [nullness operator]: #nullness-operator
 [nullness subtype]: #nullness-subtyping
 [nullness subtyping]: #nullness-subtyping
@@ -851,14 +848,8 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [substitution]: #substitution
 [subtype]: #subtyping
 [subtyping]: #subtyping
-[supermethods]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.5nvbughni6vx
-[superparameters]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.m2gxs1ddzqwp
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
-[type argument]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.3gm7aajjj46m
-[type component]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5
-[type components]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5
-[type context]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t
-[type variable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo
-[unspecified nullness]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3
+[type component]: #type-components
+[type components]: #type-components
 [user guide]: user-guide
