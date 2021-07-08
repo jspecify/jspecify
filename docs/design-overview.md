@@ -1,12 +1,11 @@
-# JSpecify design overview
+# JSpecify nullness design overview
 
 ## About this document
 
-This document summarizes our current thinking for proposing a set of nullness
-annotations. **Nothing here is "set in stone" yet.**
-
-If you are looking for an introduction to _using_ the annotations, you will
-probably prefer the [user guide].
+This document summarizes some the state of our thinking from mid-2020. Nothing
+here is set in stone, and parts of the doc have gone out of date. For a more
+informal overview, see our in-progress [user guide]. For a more formal
+description, see our in-progress [spec].
 
 ## Overview
 
@@ -326,42 +325,18 @@ to expression typing.
 [JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10
 [JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
-[applying operator]: #applying-operator
-[augmented type]: #augmented-type
-[augmented types]: #augmented-type
 [base type]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
 [base types]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i
-[capture conversion]: #capture-conversion
-[containment]: #containment
 [glossary]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit
 [implementation code]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs
-[intersection type]: #intersection-types
-[intersection types]: #intersection-types
-[least convenient world]: #multiple-worlds
-[most convenient world]: #multiple-worlds
 [non-nullable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.8wgyiwyvi49f
 [non-root]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869
-[null-marked scope]: #null-marked-scope
 [nullable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.ejpb5ee0msjt
-[nullness operator]: #nullness-operator
-[nullness subtype]: #nullness-subtyping
-[nullness subtyping]: #nullness-subtyping
-[nullness-delegating subtyping rules for Java]: #nullness-delegating-subtyping
-[nullness-delegating subtyping]: #nullness-delegating-subtyping
-[nullness-subtype-establishing direct-supertype edges]: #nullness-subtype-establishing-direct-supertype-edges
-[nullness-subtype-establishing path]: #nullness-subtype-establishing-path
-[recognized]: #recognized-locations-for-type-use-annotations
 [repeatable]: https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html
-[same type]: #same-type
-[semantics]: #semantics
 [shared folder]: https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN-
-[substitution]: #substitution
-[subtype]: #subtyping
-[subtyping]: #subtyping
+[spec]: spec
 [supermethods]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.5nvbughni6vx
 [superparameters]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.m2gxs1ddzqwp
-[trusted null-exclusive under every parameterization]: #trusted-null-exclusive-under-every-parameterization
-[trusted null-inclusive under every parameterization]: #trusted-null-inclusive-under-every-parameterization
 [type argument]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.3gm7aajjj46m
 [type component]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5
 [type components]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5
