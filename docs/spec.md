@@ -120,8 +120,43 @@ A nullness operator is one of 4 values:
 -   `UNSPECIFIED`
 -   `MINUS_NULL`
 
-> The distinction among these 4 values is similar to the distinction among the
-> Kotlin types `Foo?`, `Foo`, `Foo!`, and `Foo!!`, respectively.
+> The informal meaning of the operators is:
+>
+> -   `UNION_NULL`: This is the operator produced by putting `@Nullable` on a
+>     type usage.
+>     -   The type usage `String` `UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
+>         etc., plus `null`.
+>     -   The type-variable usage `T` `UNION_NULL` includes all members of `T`,
+>         plus `null` if it wasn't already included.
+> -   `NO_CHANGE`: This is the operator produced by _not_ putting `@Nullable` on
+>     a type usage (aside from the exception discussed under `UNSPECIFIED`
+>     below).
+>     -   The type usage `String` `NO_CHANGE` includes `"a"`, `"b"`, `"ab"`,
+>         etc., without including `null`.
+>     -   The type-variable usage `T` `NO_CHANGE` includes exactly the members
+>         of `T`: If `null` was a member of `T`, then it's a member of `T`
+>         `NO_CHANGE`. If it was not a member of `T`, then it is not a member of
+>         `T` `NO_CHANGE`.
+>     -   One way to conceptualize this is that `String` `NO_CHANGE` means
+>         "non-null `String`" but that `T` `NO_CHANGE` means "nullness comes
+>         from the value of `T`."
+> -   `UNSPECIFIED`: This is the operator produced by not putting `@Nullable` on
+>     a type usage _in code that is outside a [null-marked scope]_. Roughly, it
+>     is the operator assigned to "completely unannotated code."
+>     -   The type usage `String` `UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
+>         etc., but the developer did not specify whether to include `null`.
+>     -   The type-variable usage `T` `UNSPECIFIED` includes all members of `T`.
+>         But the developer did not specify whether to add `null` if it wasn't
+>         already included.
+> -   `MINUS_NULL`: This operator not only does not _add_ `null` but also
+>     actively _removes_ it from a type-variable usage that would otherwise
+>     include it.
+>     -   The type usage `String` `MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
+>         etc., without including `null`. (This is equivalent to `String`
+>         `NO_CHANGE`.)
+>     -   The type-variable usage `T` `MINUS_NULL` includes all members of `T`
+>         _except_ for `null`. (This is equivalent to `T` `NO_CHANGE` unless
+>         `null` was a member of `T`.)
 
 ## Augmented type
 
