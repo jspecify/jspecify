@@ -22,6 +22,8 @@ publishing {
                     url = 'https://github.com/jspecify/jspecify/'
                 }
                 developers {
+                    // These are here only because Sonatype requires us to list someone.
+                    // Any project member is welcome to add themselves if they want to.
                     developer {
                         id = 'kevinb9n'
                         name = 'Kevin Bourrillion'
