@@ -172,6 +172,9 @@ circumstances detailed below. A type at a recognized location has the semantics
 described in this spec. The spec does not assign semantics to types in other
 locations, nor to any annotations on such types.
 
+> For now, we've chosen to restrict ourselves to API locations for which tools
+> mostly agree on what it means for a type in that location to be `@Nullable`.
+
 The following locations are recognized except when overruled by one of the
 exceptions in the subsequent sections: \[[#17]\]
 
