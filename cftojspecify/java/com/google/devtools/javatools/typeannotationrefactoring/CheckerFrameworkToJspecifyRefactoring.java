@@ -147,11 +147,11 @@ public final class CheckerFrameworkToJspecifyRefactoring {
       public Void visitImport(ImportTree node, Void aVoid) {
         if (!addedImports) {
           addedImports = true;
-          definiteReplacements.put(atStart(node), "import org.jspecify.annotations.Nullable;\n");
+          definiteReplacements.put(atStart(node), "import org.jspecify.nullness.Nullable;\n");
           possibleReplacements.put(
               atStart(node),
-              "import org.jspecify.annotations.DefaultNonNull;\n"
-                  + "import org.jspecify.annotations.Nullable;\n");
+              "import org.jspecify.nullness.NullMarked;\n"
+                  + "import org.jspecify.nullness.Nullable;\n");
         }
         if (node.getQualifiedIdentifier().toString().startsWith("org.checkerframework.")) {
           definiteReplacements.put(inPlaceOfNodeAndTrailingNewline(node, unit), "");
@@ -176,7 +176,7 @@ public final class CheckerFrameworkToJspecifyRefactoring {
                               : Stream.of(a))
                   .anyMatch(a -> ((LiteralTree) a).getValue().equals("nullness"));
           definiteReplacements.put(inPlaceOf(node, unit), "");
-          possibleReplacements.put(inPlaceOf(node, unit), "@DefaultNonNull");
+          possibleReplacements.put(inPlaceOf(node, unit), "@NullMarked");
         } else if (CF_ANNOTATIONS.contains(simpleName)) {
           definiteReplacements.put(inPlaceOf(node, unit), "");
         }

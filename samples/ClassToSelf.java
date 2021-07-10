@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
+import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class ClassToSelf {
   Lib x0(Lib x) {
     return x;
@@ -34,35 +34,29 @@ class ClassToSelf {
     return x;
   }
 
-  @NullnessUnspecified
-  Lib x3(Lib x) {
+  @NullnessUnspecified Lib x3(Lib x) {
     return x;
   }
 
-  @NullnessUnspecified
-  Lib x4(@NullnessUnspecified Lib x) {
+  @NullnessUnspecified Lib x4(@NullnessUnspecified Lib x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @NullnessUnspecified
-  Lib x5(@Nullable Lib x) {
+  @NullnessUnspecified Lib x5(@Nullable Lib x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
 
-  @Nullable
-  Lib x6(Lib x) {
+  @Nullable Lib x6(Lib x) {
     return x;
   }
 
-  @Nullable
-  Lib x7(@NullnessUnspecified Lib x) {
+  @Nullable Lib x7(@NullnessUnspecified Lib x) {
     return x;
   }
 
-  @Nullable
-  Lib x8(@Nullable Lib x) {
+  @Nullable Lib x8(@Nullable Lib x) {
     return x;
   }
 

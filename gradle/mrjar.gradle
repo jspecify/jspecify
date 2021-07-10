@@ -13,6 +13,12 @@ sourceSets {
             srcDirs = ['src/java9/java']
         }
     }
+
+    main {
+        java {
+            exclude('**/NullMarked.java')
+        }
+    }
 }
 
 tasks.named('compileJava9Java', JavaCompile).configure {
@@ -26,4 +32,9 @@ jar {
     manifest {
         attributes 'Multi-Release': true
     }
+}
+
+javadoc {
+    // Use the copy of NullMarked whose @Target includes MODULE.
+    source += sourceSets.java9.allJava
 }

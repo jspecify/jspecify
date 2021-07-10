@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
-import org.jspecify.annotations.NullnessUnspecified;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
+import org.jspecify.nullness.NullnessUnspecified;
 
-@DefaultNonNull
+@NullMarked
 class TypeVariableToSelfUnionNull<
     Never1T,
     ChildOfNever1T extends Never1T,
@@ -41,83 +41,67 @@ class TypeVariableToSelfUnionNull<
     NullChildOfParametricT extends @Nullable ParametricT,
     //
     UnusedT> {
-  @Nullable
-  Never1T x0(Never1T x) {
+  @Nullable Never1T x0(Never1T x) {
     return x;
   }
 
-  @Nullable
-  ChildOfNever1T x1(ChildOfNever1T x) {
+  @Nullable ChildOfNever1T x1(ChildOfNever1T x) {
     return x;
   }
 
-  @Nullable
-  UnspecChildOfNever1T x2(UnspecChildOfNever1T x) {
+  @Nullable UnspecChildOfNever1T x2(UnspecChildOfNever1T x) {
     return x;
   }
 
-  @Nullable
-  NullChildOfNever1T x3(NullChildOfNever1T x) {
+  @Nullable NullChildOfNever1T x3(NullChildOfNever1T x) {
     return x;
   }
 
-  @Nullable
-  Never2T x4(Never2T x) {
+  @Nullable Never2T x4(Never2T x) {
     return x;
   }
 
-  @Nullable
-  ChildOfNever2T x5(ChildOfNever2T x) {
+  @Nullable ChildOfNever2T x5(ChildOfNever2T x) {
     return x;
   }
 
-  @Nullable
-  UnspecChildOfNever2T x6(UnspecChildOfNever2T x) {
+  @Nullable UnspecChildOfNever2T x6(UnspecChildOfNever2T x) {
     return x;
   }
 
-  @Nullable
-  NullChildOfNever2T x7(NullChildOfNever2T x) {
+  @Nullable NullChildOfNever2T x7(NullChildOfNever2T x) {
     return x;
   }
 
-  @Nullable
-  UnspecT x8(UnspecT x) {
+  @Nullable UnspecT x8(UnspecT x) {
     return x;
   }
 
-  @Nullable
-  ChildOfUnspecT x9(ChildOfUnspecT x) {
+  @Nullable ChildOfUnspecT x9(ChildOfUnspecT x) {
     return x;
   }
 
-  @Nullable
-  UnspecChildOfUnspecT x10(UnspecChildOfUnspecT x) {
+  @Nullable UnspecChildOfUnspecT x10(UnspecChildOfUnspecT x) {
     return x;
   }
 
-  @Nullable
-  NullChildOfUnspecT x11(NullChildOfUnspecT x) {
+  @Nullable NullChildOfUnspecT x11(NullChildOfUnspecT x) {
     return x;
   }
 
-  @Nullable
-  ParametricT x12(ParametricT x) {
+  @Nullable ParametricT x12(ParametricT x) {
     return x;
   }
 
-  @Nullable
-  ChildOfParametricT x13(ChildOfParametricT x) {
+  @Nullable ChildOfParametricT x13(ChildOfParametricT x) {
     return x;
   }
 
-  @Nullable
-  UnspecChildOfParametricT x14(UnspecChildOfParametricT x) {
+  @Nullable UnspecChildOfParametricT x14(UnspecChildOfParametricT x) {
     return x;
   }
 
-  @Nullable
-  NullChildOfParametricT x15(NullChildOfParametricT x) {
+  @Nullable NullChildOfParametricT x15(NullChildOfParametricT x) {
     return x;
   }
 }

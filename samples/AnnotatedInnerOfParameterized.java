@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
-class AnnotatedInnerOfParameterized<T> {
+@NullMarked
+abstract class AnnotatedInnerOfParameterized<T> {
   interface Lib<T extends @Nullable Object> {}
 
   class Nested {
@@ -45,4 +45,11 @@ class AnnotatedInnerOfParameterized<T> {
       // jspecify_nullness_intrinsically_not_nullable
       Lib<AnnotatedInnerOfParameterized<?>.@Nullable Nested.DoublyNested> l2,
       Lib<AnnotatedInnerOfParameterized<?>.Nested.DoublyNested> l3) {}
+
+  Nested.DoublyNested create(Nested n) {
+    return n.new DoublyNested();
+  }
+
+  // jspecify_nullness_intrinsically_not_nullable
+  abstract @Nullable AnnotatedInnerOfParameterized<?>.Nested returnType();
 }

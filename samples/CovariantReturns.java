@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-import org.jspecify.annotations.DefaultNonNull;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
-@DefaultNonNull
+@NullMarked
 interface CovariantReturns {
-  @Nullable
-  Object makeObject();
+  @Nullable Object makeObject();
 
   Lib<?> makeImplicitlyObjectBounded();
 

@@ -1,14 +1,18 @@
 // run `./gradlew publishToMavenLocal` to install artifact to your Local Maven Repository
 
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply plugin: 'io.github.gradle-nexus.publish-plugin'
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
             pom {
                 groupId = 'org.jspecify'
-                artifactId = 'annotations'
+                artifactId = 'jspecify'
                 name = 'JSpecify annotations'
                 description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
-                url = 'https://jspecify.org/'
+                url = 'http://jspecify.org/'
                 from components.java
                 licenses {
                     license {
@@ -23,6 +27,29 @@ publishing {
                 }
             }
         }
+    }
+}
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            // //only for users registered in Sonatype after 24 Feb 2021
+            nexusUrl = uri("https://s01.oss.sonatype.org/service/local/")
+        }
+    }
+}
+
+def privateKey = findProperty('privateKey')
+def pgpPassword = findProperty('pgpPassword')
+
+signing {
+    useInMemoryPgpKeys(privateKey, pgpPassword)
+    sign publishing.publications.mavenJava
+}
+
+tasks.withType(Sign) {
+    onlyIf {
+        privateKey?.trim() && pgpPassword?.trim()
     }
 }
 

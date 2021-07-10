@@ -1,0 +1,1129 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2020, The JSpecify Authors
+# This file is distributed under the same license as the JSpecify package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2021.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: JSpecify \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-16 00:56+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: ../../tsttcpw.rst:2
+msgid "The Simplest(?) Thing That Could Possibly Work for subtyping"
+msgstr ""
+
+#: ../../tsttcpw.rst:4
+msgid ""
+"**This is not “the JSpecify spec.” This is an initial attempt to formally"
+" specify only a subset of the rules we’ll need for a subset of features "
+"we wish to cover. Additionally, it deviates from some of our current "
+"working decisions in an effort to remain simple.**"
+msgstr ""
+
+#: ../../tsttcpw.rst
+msgid "High-level overview"
+msgstr ""
+
+#: ../../tsttcpw.rst:12
+msgid ""
+"It may be that some people will use this doc to guide their "
+"implementations in the near future. Please don’t hesitate to let cpovirk "
+"know of any confusing bits."
+msgstr ""
+
+#: ../../tsttcpw.rst:16
+msgid ""
+"I should probably preemptively clarify at least one thing. In this doc, I"
+" have tried to distinguish explicitly between 3 “kinds of nullability” of"
+" a given type usage. Each kind is derived (at least in part) from the "
+"previous:"
+msgstr ""
+
+#: ../../tsttcpw.rst:21
+msgid "What annotation (if any) appears directly on that type usage?"
+msgstr ""
+
+#: ../../tsttcpw.rst:22
+msgid "What is the `nullness operator <#nullness-operator>`__ of that type usage?"
+msgstr ""
+
+#: ../../tsttcpw.rst:24
+msgid "For that type usage…"
+msgstr ""
+
+#: ../../tsttcpw.rst:26
+msgid "Is it safe to assume that is not ``null``?"
+msgstr ""
+
+#: ../../tsttcpw.rst:27
+msgid "Is it safe to put a ``null`` into it?"
+msgstr ""
+
+#: ../../tsttcpw.rst:28
+msgid "neither (as in “parametric nullness”)"
+msgstr ""
+
+#: ../../tsttcpw.rst:29
+msgid "both (as in “unspecified nullness” in “lenient mode”)"
+msgstr ""
+
+#: ../../tsttcpw.rst:31
+msgid "TODO(cpovirk): Link to my “Don’t say ‘nullable’” doc once I write it."
+msgstr ""
+
+#: ../../tsttcpw.rst:36
+msgid "References to concepts defined by this spec"
+msgstr ""
+
+#: ../../tsttcpw.rst:38
+msgid ""
+"When a rule in this spec refers to any concept that is defined in this "
+"spec (for example, `substitution <#substitution>`__ or `containment "
+"<#containment>`__), apply this spec’s definition (as opposed to other "
+"definitions, such as the ones in the JLS)."
+msgstr ""
+
+#: ../../tsttcpw.rst:43
+msgid ""
+"Additionally, when a rule in this spec refers to a JLS rule that in turn "
+"refers to a concept that is defined in this spec, likewise apply this "
+"spec’s definition."
+msgstr ""
+
+#: ../../tsttcpw.rst:47
+msgid ""
+"In particular, when a JLS rule refers to types, apply this spec’s "
+"definition of `augmented types <#augmented-type>`__ (as oppposed to `base"
+" types <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__)."
+msgstr ""
+
+#: ../../tsttcpw.rst:53
+msgid "Nullness operator"
+msgstr ""
+
+#: ../../tsttcpw.rst:55
+msgid "An nullness operator is one of 4 values:"
+msgstr ""
+
+#: ../../tsttcpw.rst:57
+msgid "``UNION_NULL``"
+msgstr ""
+
+#: ../../tsttcpw.rst:58
+msgid "``NO_CHANGE``"
+msgstr ""
+
+#: ../../tsttcpw.rst:59
+msgid "``UNSPECIFIED``"
+msgstr ""
+
+#: ../../tsttcpw.rst:60
+msgid "``MINUS_NULL``"
+msgstr ""
+
+#: ../../tsttcpw.rst:64
+msgid ""
+"The distinction among these 4 values is similar to the distinction among "
+"the Kotlin types ``Foo?``, ``Foo``, ``Foo!``, and ``Foo!!``, "
+"respectively."
+msgstr ""
+
+#: ../../tsttcpw.rst:69
+msgid "Augmented type"
+msgstr ""
+
+#: ../../tsttcpw.rst:71
+msgid ""
+"An augmented type consists of a `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ and a "
+"`nullness operator <#nullness-operator>`__ corresponding to *each* of its"
+" `type components <https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf"
+"--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:77
+msgid ""
+"This differs from our current `glossary definition "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.367l48xhsikk>`__, which is "
+"written in terms of a “nullness” for each component, not a “nullness "
+"operator.” Still, the glossary’s concept of the “nullness” of a type is "
+"derivable from the type’s nullness operator. Notably, the glossary’s "
+"“nullable” type is our `least convenient world <#multiple-worlds>`__\\ ’s"
+" `trusted null-inclusive under every parameterization <#trusted-null-"
+"inclusive-under-every-parameterization>`__, and the glossary’s “non-"
+"nullable” type is our least convenient world’s `trusted null-exclusive "
+"under every parameterization <#trusted-null-exclusive-under-every-"
+"parameterization>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:89
+msgid ""
+"For our purposes, base types (and thus augmented types) include not just "
+"class and interface types, array types, and type variables but also "
+"`intersection types <#intersection-types>`__ and the null type. This is "
+"true even though the JLS sometimes does not supply rules for intersection"
+" types and sometimes has separate rules for the null type."
+msgstr ""
+
+#: ../../tsttcpw.rst:95
+msgid ""
+"The goal of this spec is to define rules for augmented types compatible "
+"with those that the JLS defines for base types."
+msgstr ""
+
+#: ../../tsttcpw.rst:98
+msgid ""
+"In almost all cases, this spec agrees with the JLS’s rules when "
+"specifying what *base* types appear in a piece of code. It makes an "
+"exception for `“Bound of an unbounded wildcard,” <#unbounded-wildcard>`__"
+" for which it specifies a bound of ``Object`` that the JLS does not "
+"specify."
+msgstr ""
+
+#: ../../tsttcpw.rst:104
+msgid ""
+"When this spec uses capital letters, they refer to augmented types "
+"(unless otherwise noted). This is in contrast to the JLS, which typically"
+" uses them to refer to base types."
+msgstr ""
+
+#: ../../tsttcpw.rst:108
+msgid ""
+"When this spec refers to “the nullness operator of” a type ``T``, it "
+"refers specifically to the nullness operator of the type component that "
+"is the entire type ``T``, without reference to the nullness operator of "
+"any other type components of ``T``."
+msgstr ""
+
+#: ../../tsttcpw.rst:113
+msgid ""
+"For example, the nullness operator of ``List<@Nullable Object>`` would be"
+" ``NO_CHANGE`` (at least in a `null-aware context <#null-aware-"
+"context>`__), even though the nullness operator of its element type "
+"``Object`` is ``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:119
+msgid "Null-aware context"
+msgstr ""
+
+#: ../../tsttcpw.rst:121
+msgid "To determine whether a type usage appears in a null-aware context:"
+msgstr ""
+
+#: ../../tsttcpw.rst:123
+msgid ""
+"Look for an ``@org.jspecify.annotations.NullAware`` annotation on any of "
+"the enclosing scopes surrounding the type usage."
+msgstr ""
+
+#: ../../tsttcpw.rst:126
+msgid ""
+"Class members are enclosed by classes, which may be enclosed by other "
+"class members or classes. and top-level classes are enclosed by packages,"
+" which may be enclosed by modules."
+msgstr ""
+
+#: ../../tsttcpw.rst:130
+msgid "Packages are *not* enclosed by “parent” packages."
+msgstr ""
+
+#: ../../tsttcpw.rst:134
+msgid ""
+"This definition of “enclosing” likely matches `the definition in the Java"
+" compiler API "
+"<https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement()>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:138
+msgid ""
+"If an ``@org.jspecify.annotations.NullAware`` annotation exists on one of"
+" these scopes, then the type usage is in a null-aware context. Otherwise,"
+" it is not."
+msgstr ""
+
+#: ../../tsttcpw.rst:145
+msgid "Augmented type of a type usage appearing in code"
+msgstr ""
+
+#: ../../tsttcpw.rst:147
+msgid ""
+"For most type usages in source code or bytecode on which JSpecify "
+"nullness annotations are structurally valid, this section defines how to "
+"determine their `augmented types <#augmented-type>`__. Note, however, "
+"that rules for specific cases below take precedence over the general rule"
+" here."
+msgstr ""
+
+#: ../../tsttcpw.rst:153
+msgid ""
+"Because the JLS already has rules for determining the `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ for a type "
+"usage, this section covers only how to determine its `nullness operator "
+"<#nullness-operator>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:158
+msgid ""
+"To determine the nullness operator, apply the following rules in order. "
+"Once one condition is met, skip the remaining conditions."
+msgstr ""
+
+#: ../../tsttcpw.rst:161
+msgid ""
+"If the type usage is annotated with "
+"``@org.jspecify.annotations.Nullable``, its nullness operator is "
+"``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:164
+msgid ""
+"If the type usage appears in a `null-aware context <#null-aware-"
+"context>`__, its nullness operator is ``NO_CHANGE``."
+msgstr ""
+
+#: ../../tsttcpw.rst:167
+msgid "Its nullness operator is ``UNSPECIFIED``."
+msgstr ""
+
+#: ../../tsttcpw.rst:171
+msgid ""
+"The choice of nullness operator is *not* affected by any nullness "
+"operator that appears in a corresponding location in a supertype. For "
+"example, if one type declares a method whose return type is annotated "
+"``@Nullable``, and if another type overrides that method but does not "
+"declare the return type as ``@Nullable``, then the override’s return type"
+" will *not* have nullness operator ``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:178
+msgid ""
+"The rules here never produce the fourth nullness operator, "
+"``MINUS_NULL``. (It will appear later in `substitution "
+"<#substitution>`__. Additionally, we expect for tool authors to produce "
+"``MINUS_NULL`` based on the results of null checks in implementation "
+"code.) However, if tool authors prefer, they can safely produce "
+"``MINUS_NULL`` in any case in which it is equivalent to ``NO_CHANGE``. "
+"For example, there is no difference between a ``String`` with "
+"``NO_CHANGE`` and a ``String`` with ``MINUS_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:190
+msgid "Augmented type of an intersection type"
+msgstr ""
+
+#: ../../tsttcpw.rst:192
+msgid ""
+"Technically speaking, the JLS does not define syntax for an intersection "
+"type. Instead, it defines a syntax for type parameters and casts that "
+"supports multiple types. Then the intersection type is derived from "
+"those. Intersection types can also arise from operations like `capture "
+"conversion <#capture-conversion>`__. See `JLS 4.9 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.9>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:199
+msgid ""
+"One result of all this is that it’s never possible for a programmer to "
+"write an annotation “on an intersection type.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:202
+msgid ""
+"This spec assigns a `nullness operator <#nullness-operator>`__ to each "
+"individual element of an intersection type, following our normal rules "
+"for type usages. It also assigns a nullness operator to the intersection "
+"type as a whole. The nullness operator of the type as a whole is always "
+"``NO_CHANGE``."
+msgstr ""
+
+#: ../../tsttcpw.rst:208
+msgid ""
+"This lets us provide, for every `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__, a rule for "
+"computing its `augmented type <#augmented-type>`__. But we require "
+"``NO_CHANGE`` so as to avoid questions like whether “a ``UNION_NULL`` "
+"intersection type whose members are ``UNION_NULL`` ``Foo`` and "
+"``UNION_NULL`` ``Bar``” is a subtype of “a ``NO_CHANGE`` intersection "
+"type with those same members.” Plus, it would be difficult for tools to "
+"output the nullness operator of an intersection type in a human-readable "
+"way."
+msgstr ""
+
+#: ../../tsttcpw.rst:220
+msgid ""
+"To avoid ever creating an intersection type with a nullness operator "
+"other than ``NO_CHANGE``, we define special handling for intersection "
+"types under `“Applying a nullness operator to an augmented type.” "
+"<#applying-operator>`__"
+msgstr ""
+
+#: ../../tsttcpw.rst:228
+msgid "Bound of an “unbounded” wildcard"
+msgstr ""
+
+#: ../../tsttcpw.rst:230
+msgid ""
+"In source, an unbounded wildcard is written as ``<?>``. This section does"
+" **not** apply to ``<? extends Object>``, even though that is often "
+"equivalent to ``<?>``. See `JLS 4.5.1 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.1>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:235
+msgid ""
+"In bytecode, such a wildcard is represented as a wildcard type with an "
+"empty list of upper bounds and an empty list of lower bounds. This "
+"section does **not** apply to a wildcard with any bounds in either list, "
+"even a sole upper bound of ``Object``."
+msgstr ""
+
+#: ../../tsttcpw.rst:240
+msgid ""
+"For a wildcard with an explicit bound of ``Object`` (that is, ``<? "
+"extends Object>``, perhaps with an annotation on ``Object``), instead "
+"apply `the normal rules <#augmented-type-of-usage>`__ for the explicit "
+"bound type."
+msgstr ""
+
+#: ../../tsttcpw.rst:245
+msgid ""
+"If an unbounded wildcard appears in a `null-aware context <#null-aware-"
+"context>`__, then it has a single upper bound whose `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ is ``Object`` "
+"and whose `nullness operator <#nullness-operator>`__ is ``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:252
+msgid ""
+"If an unbounded wildcard appears outside a null-aware context, then it "
+"has a single upper bound whose base type is ``Object`` and whose nullness"
+" operator is ``UNSPECIFIED``."
+msgstr ""
+
+#: ../../tsttcpw.rst:256
+msgid ""
+"In both cases, we specify a bound that does not exist in the source or "
+"bytecode, deviating from the JLS. Because the base type of the bound is "
+"``Object``, this should produce no user-visible differences except to "
+"tools that implement JSpecify nullness analysis."
+msgstr ""
+
+#: ../../tsttcpw.rst:261
+msgid ""
+"Whenever a JLS rule refers specifically to ``<?>``, disregard it, and "
+"instead apply the rules for ``<? extends T>``, where ``T`` has a base "
+"type of ``Object`` and the nullness operator defined by this section."
+msgstr ""
+
+#: ../../tsttcpw.rst:268
+msgid "Bound of an ``Object``-bounded type parameter"
+msgstr ""
+
+#: ../../tsttcpw.rst:270
+msgid ""
+"In source, an ``Object``-bounded type parameter can be writen in either "
+"of 2 ways:"
+msgstr ""
+
+#: ../../tsttcpw.rst:273
+msgid "``<T>``"
+msgstr ""
+
+#: ../../tsttcpw.rst:274
+msgid ""
+"``<T extends Object>`` with no JSpecify nullness type annotations on the "
+"bound"
+msgstr ""
+
+#: ../../tsttcpw.rst:277
+msgid ""
+"See `JLS 4.4 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.4>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:280
+msgid ""
+"In bytecode, ``<T>`` and ``<T extends Object>`` are both represented as a"
+" type parameter with only a single upper bound, ``Object``, and no "
+"JSpecify nullness type annotations on the bound."
+msgstr ""
+
+#: ../../tsttcpw.rst:284
+msgid ""
+"If an ``Object``-bounded type parameter appears in a `null-aware context "
+"<#null-aware-context>`__, then its bound has a `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ of ``Object`` "
+"and a `nullness operator <#nullness-operator>`__ of ``NO_CHANGE``."
+msgstr ""
+
+#: ../../tsttcpw.rst:290
+msgid ""
+"Note that this gives ``<T>`` a different bound than ``<?>`` (though only "
+"in a null-aware context)."
+msgstr ""
+
+#: ../../tsttcpw.rst:293
+msgid ""
+"If an ``Object``-bounded type parameter appears outside a null-aware "
+"context, then its bound has a base type of ``Object`` and a nullness "
+"operator of ``UNSPECIFIED``."
+msgstr ""
+
+#: ../../tsttcpw.rst:297
+msgid ""
+"All these rules match the behavior of `our normal rules <#augmented-type-"
+"of-usage>`__ for determining the `augmented type <#augmented-type>`__ of "
+"the bound ``Object``. The only “special” part is that we consider the "
+"source code ``<T>`` to have a bound of ``Object``, just as it does when "
+"compiled to bytecode."
+msgstr ""
+
+#: ../../tsttcpw.rst:306
+msgid "Augmented null types"
+msgstr ""
+
+#: ../../tsttcpw.rst:308
+msgid ""
+"The JLS refers to “the null type.” In this spec, we assign a `nullness "
+"operator <#nullness-operator>`__ to all types, including the null type. "
+"This produces multiple null types:"
+msgstr ""
+
+#: ../../tsttcpw.rst:312
+msgid ""
+"the null `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ with nullness "
+"operator ``NO_CHANGE``: the “bottom”/“nothing” type used in `capture "
+"conversion <#capture-conversion>`__"
+msgstr ""
+
+#: ../../tsttcpw.rst:317
+msgid "No value, including ``null`` itself, has this type."
+msgstr ""
+
+#: ../../tsttcpw.rst:319
+msgid "the null base type with nullness operator ``MINUS_NULL``"
+msgstr ""
+
+#: ../../tsttcpw.rst:321
+msgid ""
+"This is equivalent to the previous type. Tools may use the 2 "
+"interchangeably."
+msgstr ""
+
+#: ../../tsttcpw.rst:324
+msgid ""
+"the null base type with nullness operator ``UNION_NULL``: the type of the"
+" null reference"
+msgstr ""
+
+#: ../../tsttcpw.rst:327
+msgid "the null base type with nullness operator ``UNSPECIFIED``"
+msgstr ""
+
+#: ../../tsttcpw.rst:329
+msgid "This may be relevant only in implementation code."
+msgstr ""
+
+#: ../../tsttcpw.rst:334
+msgid "The least convenient world and the most convenient world"
+msgstr ""
+
+#: ../../tsttcpw.rst:336
+msgid ""
+"Some of the rules in this spec come in 2 versions, 1 for “the least "
+"convenient world” and 1 for “the most convenient world.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:339
+msgid "Tools may implement either or both versions of the rules."
+msgstr ""
+
+#: ../../tsttcpw.rst:341
+msgid ""
+"Our goal is to allow tools and their users to choose their desired level "
+"of strictness in the presence of ``UNSPECIFIED``. “The least convenient "
+"world” usually assumes that types are incompatible unless it has enough "
+"information to prove they are compatible; “the most convenient world” "
+"assumes that types are compatible unless it has enough information to "
+"prove they are incompatible."
+msgstr ""
+
+#: ../../tsttcpw.rst:348
+msgid ""
+"Thus, strict tools may want to implement the least-convenient-world "
+"version of rules, and lenient tools may wish to implement the most-"
+"convenient-world version. Or a tool might implement both and let users "
+"select which rules to apply."
+msgstr ""
+
+#: ../../tsttcpw.rst:353
+msgid ""
+"Another possibility is for a tool to implement both versions and to use "
+"that to distinguish between “errors” and “warnings.” Such a tool might "
+"run each check first in the least convenient world and then, if the check"
+" fails, run it again in the most convenient world. If the check fails in "
+"both worlds, the tool would produce an error. If it passes only because "
+"of the most convenient interpretation, the tool would produce a warning."
+msgstr ""
+
+#: ../../tsttcpw.rst:361
+msgid ""
+"The main body of each section describes the *least*-convenient-world "
+"rule. If the most-convenient-world rule differs, the differences are "
+"explained at the end."
+msgstr ""
+
+#: ../../tsttcpw.rst:368
+msgid "Propagating the most/least convenient world"
+msgstr ""
+
+#: ../../tsttcpw.rst:370
+msgid ""
+"When one rule in this spec refers to another, it refers to the rule for "
+"the same “world.” For example, when the rules for `containment "
+"<#containment>`__ refer to the rules for `subtyping <#subtyping>`__, the "
+"most-convenient-world containment check applies the most-convenient-world"
+" subtyping check, and the least-convenient-world containment check "
+"applies the least-convenient-world subtyping check."
+msgstr ""
+
+#: ../../tsttcpw.rst:378
+msgid ""
+"This applies even if a rule says it is the same for both worlds: It means"
+" “the same except that any other rules are applied in the corresponding "
+"world.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:383
+msgid "Same type"
+msgstr ""
+
+#: ../../tsttcpw.rst:385
+msgid ""
+"``S`` and ``T`` are the same type if ``S`` is a `subtype <#subtyping>`__ "
+"of ``T`` and ``T`` is a subtype of ``S``."
+msgstr ""
+
+#: ../../tsttcpw.rst:389
+msgid "Subtyping"
+msgstr ""
+
+#: ../../tsttcpw.rst:391
+msgid "``A`` is a subtype of ``F`` if both of the following conditions are met:"
+msgstr ""
+
+#: ../../tsttcpw.rst:393
+msgid ""
+"``A`` is a subtype of ``F`` according to the `nullness-delegating "
+"subtyping rules for Java <#nullness-delegating-subtyping>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:395
+msgid "``A`` is a `nullness subtype <#nullness-subtyping>`__ of ``F``."
+msgstr ""
+
+#: ../../tsttcpw.rst:400
+msgid "Nullness-delegating subtyping rules for Java"
+msgstr ""
+
+#: ../../tsttcpw.rst:402
+msgid ""
+"The Java subtyping rules are defined in `JLS 4.10 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10>`__."
+" We add to them as follows:"
+msgstr ""
+
+#: ../../tsttcpw.rst:406
+msgid ""
+"`As always <#concept-references>`__, interpret the Java rules as "
+"operating on `augmented types <#augmented-type>`__, not `base types "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__. However, when"
+" applying the Java direct-supertype rules themselves, *ignore* the "
+"`nullness operator <#nullness-operator>`__ of the input types and output "
+"types. The augmented types matter only when the Java rules refer to "
+"*other* rules that are defined in this spec. *Those* rules respect the "
+"nullness operator of some type components — but never the nullness "
+"operator of the type component that represents the whole input or output "
+"type."
+msgstr ""
+
+#: ../../tsttcpw.rst:417
+msgid ""
+"To “ignore” the output’s nullness operator, we recommend outputting a "
+"value of ``NO_CHANGE``, since that is valid for all types, including "
+"`intersection types <#intersection-types>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:421
+msgid ""
+"When the Java array rules require one type to be a *direct* supertype of "
+"another, consider the direct supertypes of ``T`` to be *every* type that "
+"``T`` is a `subtype <#subtyping>`__ of (as always, applying the "
+"definition of subtyping in this spec)."
+msgstr ""
+
+#: ../../tsttcpw.rst:427
+msgid "Nullness subtyping"
+msgstr ""
+
+#: ../../tsttcpw.rst:429
+msgid ""
+"The primary complication in subtyping comes from type-variable usages. "
+"Our rules for them must account for every combination of type arguments "
+"with which a given generic type can be parameterized."
+msgstr ""
+
+#: ../../tsttcpw.rst:433
+msgid ""
+"``A`` is a nullness subtype of ``F`` if any of the following conditions "
+"are met:"
+msgstr ""
+
+#: ../../tsttcpw.rst:436
+msgid ""
+"``F`` is `trusted null-inclusive under every parameterization <#trusted-"
+"null-inclusive-under-every-parameterization>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:438
+msgid ""
+"``A`` is `trusted null-exclusive under every parameterization <#trusted-"
+"null-exclusive-under-every-parameterization>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:440
+msgid ""
+"``A`` has a `nullness-subtype-establishing path <#nullness-subtype-"
+"establishing-path>`__ to any type whose base type is the same as the base"
+" type of ``F``."
+msgstr ""
+
+#: ../../tsttcpw.rst:444
+msgid "Nullness subtyping (and thus subtyping itself) is *not* transitive."
+msgstr ""
+
+#: ../../tsttcpw.rst:446
+msgid ""
+"(Contrast this with our `nullness-delegating subtyping <#nullness-"
+"delegating-subtyping>`__ rules and `containment <#containment>`__ rules: "
+"Each of those is defined as a transitive closure. However, technically "
+"speaking, `there are cases in which those should not be transitive, "
+"either <https://groups.google.com/d/msg/jspecify-"
+"dev/yPnkx_GSb0Q/hLgS_431AQAJ>`__. Fortunately, this “mostly transitive” "
+"behavior is exactly the behavior that implementations are likely to "
+"produce naturally. Maybe someday we will find a way to specify this fully"
+" correctly.)"
+msgstr ""
+
+#: ../../tsttcpw.rst:456
+msgid "Nullness subtyping (and thus subtyping itself) is *not* reflexive."
+msgstr ""
+
+#: ../../tsttcpw.rst:458
+msgid ""
+"It does end up being reflexive in the `most convenient world <#multiple-"
+"worlds>`__. We don’t state that as a rule for 2 reasons: First, it arises"
+" naturally from the definitions in that world. Second, we don’t want to "
+"suggest that subtyping is reflexive in the `least convenient world "
+"<#multiple-worlds>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:465
+msgid "Trusted null-inclusive under every parameterization"
+msgstr ""
+
+#: ../../tsttcpw.rst:467
+msgid ""
+"A type is trusted null-inclusive under every parameterization if it meets"
+" either of the following conditions:"
+msgstr ""
+
+#: ../../tsttcpw.rst:470
+msgid "Its `nullness operator <#nullness-operator>`__ is ``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:471
+msgid ""
+"It is an `intersection type <#intersection-types>`__ whose elements all "
+"are trusted null-inclusive under every parameterization."
+msgstr ""
+
+#: ../../tsttcpw.rst:474
+msgid ""
+"**Most convenient world:** The rule is the same except that the "
+"requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or "
+"``UNSPECIFIED``.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:479
+msgid "Trusted null-exclusive under every parameterization"
+msgstr ""
+
+#: ../../tsttcpw.rst:481
+msgid ""
+"A type is trusted null-exclusive under every parameterization if it has a"
+" `nullness-subtype-establishing path <#nullness-subtype-establishing-"
+"path>`__ to either of the following:"
+msgstr ""
+
+#: ../../tsttcpw.rst:486
+msgid ""
+"any type whose `nullness operator <#nullness-operator>`__ is "
+"``MINUS_NULL``"
+msgstr ""
+
+#: ../../tsttcpw.rst:489
+msgid "any augmented class or array type"
+msgstr ""
+
+#: ../../tsttcpw.rst:491
+msgid ""
+"This rule refers specifically to a “class or array type,” as distinct "
+"from other types like type variables and `intersection types "
+"<#intersection-types>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:496
+msgid "Nullness-subtype-establishing path"
+msgstr ""
+
+#: ../../tsttcpw.rst:498
+msgid ""
+"``A`` has a nullness-subtype-establishing path to ``F`` if both of the "
+"following hold:"
+msgstr ""
+
+#: ../../tsttcpw.rst:501
+msgid ""
+"``A`` has `nullness operator <#nullness-operator>`__ ``NO_CHANGE`` or "
+"``MINUS_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:504
+msgid ""
+"There is a path from ``A`` to ``F`` through `nullness-subtype-"
+"establishing direct-supertype edges <#nullness-subtype-establishing-"
+"direct-supertype-edges>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:508
+msgid ""
+"The path may be empty. That is, ``A`` has a nullness-subtype-establishing"
+" path to itself — as long as it has one of the required nullness "
+"operators."
+msgstr ""
+
+#: ../../tsttcpw.rst:512
+msgid ""
+"**Most convenient world:** The rules are the same except that the "
+"requirement for “``NO_CHANGE`` or ``MINUS_NULL``” is loosened to "
+"“``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:517
+msgid "Nullness-subtype-establishing direct-supertype edges"
+msgstr ""
+
+#: ../../tsttcpw.rst:519
+msgid ""
+"``T`` has nullness-subtype-establishing direct-supertype edges to the "
+"union of the nodes computed by the following 2 rules:"
+msgstr ""
+
+#: ../../tsttcpw.rst:522
+msgid "Upper-bound rule:"
+msgstr ""
+
+#: ../../tsttcpw.rst:524
+msgid ""
+"if ``T`` is an augmented `intersection type <#intersection-types>`__: all"
+" the intersection type’s elements whose `nullness operator <#nullness-"
+"operator>`__ is ``NO_CHANGE`` or ``MINUS_NULL``"
+msgstr ""
+
+#: ../../tsttcpw.rst:527
+msgid ""
+"if ``T`` is an augmented type variable: all the corresponding type "
+"parameter’s upper bounds whose nullness operator is ``NO_CHANGE`` or "
+"``MINUS_NULL``"
+msgstr ""
+
+#: ../../tsttcpw.rst:530 ../../tsttcpw.rst:544
+msgid "otherwise: no nodes"
+msgstr ""
+
+#: ../../tsttcpw.rst:532
+msgid "Lower-bound rule:"
+msgstr ""
+
+#: ../../tsttcpw.rst:534
+msgid ""
+"for every type parameter ``P`` that has a lower bound whose `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ is the same as"
+" ``T``\\ ’s base type and whose nullness operator is ``NO_CHANGE``: the "
+"type variable ``P``"
+msgstr ""
+
+#: ../../tsttcpw.rst:539
+msgid ""
+"TODO(cpovirk): What if the lower bound has some other nullness operator? "
+"I’m pretty sure that we want to allow ``UNSPECIFIED`` in the most "
+"convenient world (as we did before my recent edits), and we may want to "
+"allow more."
+msgstr ""
+
+#: ../../tsttcpw.rst:546
+msgid ""
+"**Most convenient world:** The rules are the same except that the "
+"requirements for “``NO_CHANGE`` or ``MINUS_NULL``” are loosened to "
+"“``NO_CHANGE``, ``MINUS_NULL``, or ``UNSPECIFIED``.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:551
+msgid "Containment"
+msgstr ""
+
+#: ../../tsttcpw.rst:553
+msgid ""
+"The Java rules are defined in `JLS 4.5.1 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.1>`__."
+" We add to them as follows:"
+msgstr ""
+
+#: ../../tsttcpw.rst:557
+msgid ""
+"Disregard the 2 rules that refer to a bare ``?``. Instead, treat ``?`` "
+"like ``? extends Object``, where the `nullness operator <#nullness-"
+"operator>`__ of the ``Object`` bound is specified by `“Bound of an "
+"unbounded wildcard.” <#unbounded-wildcard>`__"
+msgstr ""
+
+#: ../../tsttcpw.rst:562 ../../tsttcpw.rst:686
+msgid ""
+"This is just a part of our universal rule to treat a bare ``?`` like ``? "
+"extends Object``."
+msgstr ""
+
+#: ../../tsttcpw.rst:565
+msgid ""
+"The rule written specifically for ``? extends Object`` applies only if "
+"the nullness operator of the ``Object`` bound is ``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:568
+msgid ""
+"When the JLS refers to the same type ``T`` on both sides of a rule, the "
+"rule applies if and only if this spec defines the 2 types to be the `same"
+" type <#same-type>`__."
+msgstr ""
+
+#: ../../tsttcpw.rst:572
+msgid ""
+"**Most convenient world:** The rules are the same except that the "
+"requirement for “``UNION_NULL``” is loosened to “``UNION_NULL`` or "
+"``UNSPECIFIED``.”"
+msgstr ""
+
+#: ../../tsttcpw.rst:577
+msgid "Substitution"
+msgstr ""
+
+#: ../../tsttcpw.rst:579
+msgid ""
+"Substitution on Java base types barely requires an explanation: See `JLS "
+"1.3 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3>`__."
+" Substitution on `augmented types <#augmented-type>`__, however, is "
+"trickier: If ``Map.get`` returns “``V`` with `nullness operator "
+"<#nullness-operator>`__ ``UNION_NULL``,” and if a user has a map whose "
+"value type is “``String`` with nullness operator ``UNSPECIFIED``,” then "
+"what does its ``get`` method return? Naive substitution would produce "
+"“``String`` with nullness operator ``UNSPECIFIED`` with nullness operator"
+" ``UNION_NULL``.” To reduce that to a proper augmented type with a single"
+" nullness operator, we define this process."
+msgstr ""
+
+#: ../../tsttcpw.rst:592
+msgid ""
+"To substitute each type argument ``Aᵢ`` for each corresponding type "
+"parameter ``Pᵢ``:"
+msgstr ""
+
+#: ../../tsttcpw.rst:595
+msgid ""
+"For every type-variable usage ``V`` whose `base type "
+"<https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--"
+"w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.k81vs7t5p45i>`__ is ``Pᵢ``, "
+"replace ``V`` with the result of the following operation:"
+msgstr ""
+
+#: ../../tsttcpw.rst:599
+msgid ""
+"If ``V`` is `trusted null-exclusive under every parameterization "
+"<#trusted-null-exclusive-under-every-parameterization>`__ in the `least "
+"convenient world <#multiple-worlds>`__, then replace it with the result "
+"of `applying <#applying-operator>`__ ``MINUS_NULL`` to ``Aᵢ``."
+msgstr ""
+
+#: ../../tsttcpw.rst:605
+msgid ""
+"This is the one instance in which a rule references another rule to be "
+"run under a *different* “world.” Normally, all rules are run `under the "
+"same “world.” <#propagating-multiple-worlds>`__ But in this instance, the"
+" null-exclusivity rule (and all rules that it in turn applies) are always"
+" run in the least convenient world."
+msgstr ""
+
+#: ../../tsttcpw.rst:613
+msgid ""
+"This special case improves behavior in “the ``ImmutableList.Builder`` "
+"case”: Consider an unannotated user of that class. Its builder will have "
+"an element type whose `nullness operator <#nullness-operator>`__ is "
+"``UNSPECIFIED``. Without this special case, "
+"``builder.add(objectUnionNull)`` would pass the subtyping check in the "
+"`most convenient world <#multiple-worlds>`__. This would happen even "
+"though we have enough information to know that the parameter to ``add`` "
+"is universally null-exclusive — even in the most convenient world. The "
+"special case here makes that subtyping check fail."
+msgstr ""
+
+#: ../../tsttcpw.rst:624
+msgid ""
+"Otherwise, replace ``V`` with the result of applying the nullness "
+"operator of ``V`` to ``Aᵢ``."
+msgstr ""
+
+#: ../../tsttcpw.rst:630
+msgid "Applying a nullness operator to an augmented type"
+msgstr ""
+
+#: ../../tsttcpw.rst:632
+msgid ""
+"The process of applying a `nullness operator <#nullness-operator>`__ "
+"requires 2 inputs:"
+msgstr ""
+
+#: ../../tsttcpw.rst:635
+msgid "the nullness operator to apply"
+msgstr ""
+
+#: ../../tsttcpw.rst:636
+msgid ""
+"the `augmented type <#augmented-type>`__ (which, again, includes a "
+"`nullness operator <#nullness-operator>`__ for that type) to apply it to"
+msgstr ""
+
+#: ../../tsttcpw.rst:640
+msgid "The result of the process is an augmented type."
+msgstr ""
+
+#: ../../tsttcpw.rst:642
+msgid "The process is as follows:"
+msgstr ""
+
+#: ../../tsttcpw.rst:644
+msgid ""
+"First, based on the pair of nullness operators (the one to apply and the "
+"one from the augmented type), compute a “desired nullness operator.” Do "
+"so by applying the following rules in order. Once one condition is met, "
+"skip the remaining conditions."
+msgstr ""
+
+#: ../../tsttcpw.rst:649
+msgid ""
+"If the nullness operator to apply is ``MINUS_NULL``, the desired nullness"
+" operator is ``MINUS_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:651
+msgid ""
+"If either nullness operator is ``UNION_NULL``, the desired nullness "
+"operator is ``UNION_NULL``."
+msgstr ""
+
+#: ../../tsttcpw.rst:653
+msgid ""
+"If either nullness operator is ``UNSPECIFIED``, the desired nullness "
+"operator is ``UNSPECIFIED``."
+msgstr ""
+
+#: ../../tsttcpw.rst:655
+msgid "The desired nullness operator is ``NO_CHANGE``."
+msgstr ""
+
+#: ../../tsttcpw.rst:657
+msgid ""
+"Then, if the input augmented type is *not* an `intersection type "
+"<#intersection-types>`__, the output is the same as the input but with "
+"its nullness operator replaced with the desired nullness operator."
+msgstr ""
+
+#: ../../tsttcpw.rst:661
+msgid ""
+"Otherwise, the output is an intersection type. For every element ``Tᵢ`` "
+"of the input type, the output type has an element that is the result of "
+"applying the desired nullness operator to ``Tᵢ``."
+msgstr ""
+
+#: ../../tsttcpw.rst:665
+msgid ""
+"In this case, the desired nullness operator is always equal to the "
+"nullness operator to apply that was an input to this process. That’s "
+"because the nullness operator of the intersection type itself is defined "
+"to always be ``NO_CHANGE``."
+msgstr ""
+
+#: ../../tsttcpw.rst:671
+msgid "Capture conversion"
+msgstr ""
+
+#: ../../tsttcpw.rst:673
+msgid ""
+"The Java rules are defined in `JLS 5.1.10 "
+"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10>`__."
+" We add to them as follows:"
+msgstr ""
+
+#: ../../tsttcpw.rst:677
+msgid ""
+"The parameterized type that is the output of the conversion has the same "
+"`nullness operator <#nullness-operator>`__ as the parameterized type that"
+" is the input type."
+msgstr ""
+
+#: ../../tsttcpw.rst:681
+msgid ""
+"Disregard the JLS rule about ``<?>``. Instead, treat ``?`` like ``? "
+"extends Object``, where the `nullness operator <#nullness-operator>`__ of"
+" the ``Object`` bound is specified by `“Bound of an unbounded wildcard.” "
+"<#unbounded-wildcard>`__"
+msgstr ""
+
+#: ../../tsttcpw.rst:689
+msgid ""
+"When a rule generates a lower bound that is the null type, we specify "
+"that its nullness operator is ``NO_CHANGE``. (See `“Augmented null "
+"types.” <#null-types>`__)"
+msgstr ""
+
