@@ -17,10 +17,11 @@ Such annotations are useful to (for example):
 
 In Java, all non-primitive variables are references. We often think of `String
 x;` as meaning "`x` is a `String`", but actually it means "`x` is a _reference_
-to an object of type `String`". One important difference between these two views
-is that `x` can also be null.  JSpecify can help move towards a world where
-`String x;` means "`x` is a reference to an actual string", and if you want a
-reference that might be null then you write `@Nullable String x;`.
+to a string or it is null". JSpecify includes a notion of "null-marked code"
+where `String x;` means "`x` is a reference to an actual string", and if you
+want a reference that might be null then you write `@Nullable String
+x;`. Null-marked code is simply code that is covered by the `@NullMarked`
+annotation.
 
 ## Types and nullness
 
@@ -88,7 +89,7 @@ Tools could then use the `@Nullable` information to determine that the first use
 is safe but the second is not.
 
 As far as JSpecify is concerned, `String` and `@Nullable String` are _different_
-types. A variable of type `String` can reference any non-null string. A variable
+types. A variable of type `String` can reference any string. A variable
 of type `@Nullable String` can too, but it can also be null. This means that
 `String` is a _subtype_ of `@Nullable String`, in the same way that `Integer` is
 a subtype of `Number`. One way to look at this is that a subtype narrows the
@@ -134,9 +135,9 @@ public class Strings {
 ```
 
 In this example, both methods are in the scope of `@NullMarked`, so plain `String`
-means "a string reference that can't be null". `@Nullable String` continues
-to mean "a string reference that can be null". Tools should warn you if you
-try to pass a "string reference that can be null" to `spaceIndex`, since its
+means "a reference to a string, not null". `@Nullable String` continues
+to mean "a reference to a string, or null". Tools should warn you if you
+try to pass a "reference to a string, or null" to `spaceIndex`, since its
 argument can't be null, and indeed it will throw NullPointerException if given a
 null argument.
 
