@@ -79,145 +79,6 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
-> As of this writing, we know that this spec is not entirely sufficient: It
-> sometimes relies on references to other documents (like the [glossary]). We
-> will need to fix this by copying those definitions here.
->
-> (Incidentally, I recommend viewing the glossary as a mostly separate effort
-> from this doc: The glossary presents a slightly different model of both
-> nullness and the Java type system. Over time, we'll want to either bring the
-> two more closely in line or else draw a clearer line between them.)
-
-## Details common to all annotations
-
--   The package name is `org.jspecify.nullness`. \[[#1]\]
--   The Java module name is `org.jspecify`. \[[#181]\]
--   The Maven artifact is `org.jspecify:jspecify`. \[[#181]\]
-
-All annotations have runtime retention. \[[#28]\] None of the annotations are
-marked [repeatable].
-
-## The type-use annotation
-
-We provide a parameterless type-use annotation called `@Nullable`.
-
-### Recognized locations for type-use annotations
-
-A location is a _recognized_ location for our type-use annotation in the
-circumstances detailed below. A type at a recognized location has the semantics
-described in this spec. The spec does not assign semantics to types in other
-locations, nor to any annotations on such types.
-
--   Unrecognized location: any component of a type usage in the following
-    locations:
-
-    > These all fit under the umbrella of "implementation code."
-
-    -   A local variable type.
-    -   An exception parameter.
-    -   The type in a cast expression.
-    -   An array or object creation expression.
-    -   An explicit type argument supplied to a generic method or constructor
-        (including via a member reference), or to an instance creation
-        expression for a generic class.
-
-    > In practice, we anticipate that tools will treat types (and their
-    > annotations) in _most_ of the above locations much like they treat types
-    > in other locations. Still, this spec does not concern itself with
-    > implementation code: We believe that the most important domain for us to
-    > focus on is that of APIs.
-
--   Unrecognized location: a class declaration. \[[#7]\]
-
-    > For example, the annotation in `public @Nullable class Foo {}` is in an
-    > unrecognized location.
-
--   Unrecognized location: any type usage that is intrinsically non-nullable:
-    \[[#17]\]
-
-    -   A type usage of a primitive type.
-    -   The outer type that qualifies an inner type.
-
-        > Every outer type is intrinsically non-nullable because every instance
-        > of an inner class has an associated instance of the outer class.
-
-        > For example, the annotation in `@Nullable Foo.Bar` is in an
-        > unrecognized location: Java syntax attaches it to the outer type
-        > `Foo`.
-
-    -   Any of the following type contexts:
-
-        -   supertype in a class declaration
-        -   thrown exception type
-        -   enum constant declaration
-        -   receiver parameter type
-
-    > But note that the following rules, while they do not apply to
-    > intrinsically non-nullable type usages themselves, still apply to any
-    > other _component_ types of such type usages.
-
--   Unrecognized location: any component of a receiver parameter type.
-    \[[#157]\]
-
-    > This partially overlaps with the rule about non-nullable type contexts
-    > above: Both rules cover the intrinsically non-nullable top-level type, but
-    > this rule extends that to _all_ components of the type.
-
--   Recognized location (except where covered by the above rules): any
-    [non-root] component type, regardless of the root type or surrounding
-    [type context].
-
-    -   This may be a type argument, explicit wildcard bound, array component
-        type, or the type used in a variadic parameter declaration.
-
-        > For example, the annotation in `Iterator<@Nullable String>` is always
-        > in a recognized location, aside from the exceptions for implementation
-        > code and receiver parameters discussed above.
-
-    -   Exception: A type-parameter declaration or a wildcard _itself_ is an
-        unrecognized location. \[[#19], [#31]\]
-
-        > Their _bounds_ can still be recognized locations. So too can
-        > _type-variable usages_.
-
--   Recognized location: any of the following: \[[#17]\]
-
-    -   Return type of a method.
-
-    -   Formal parameter type of a method or constructor.
-
-    -   Field type.
-
-    -   Type parameter upper bound. \[[#60]\]
-
-        > But, again, _not_ the type parameter itself.
-
-> When analyzing source code, tools are encouraged to offer an option to issue
-> an error for an annotation in an unrecognized location (unless they define
-> semantics for that location). Tools are especially encouraged to issue an
-> error for an annotation in a location that is intrinsically non-nullable. When
-> reading _bytecode_, however, tools may be best off ignoring an annotation in
-> an unrecognized location (again, unless they define semantics for that
-> location).
-
-## The declaration annotation
-
-We provide a single parameterless declaration annotation called `@NullMarked`.
-\[[#5], [#87]\]
-
-### Recognized locations for declaration annotations
-
-Our declaration annotation is specified to be _recognized_ when applied to the
-locations listed below:
-
--   A _named_ class.
--   A package. \[[#34]\]
--   A module. \[[#34]\]
-
-> _Not_ a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
-
-(concept-references)=
-
 ## References to concepts defined by this spec
 
 When a rule in this spec refers to any concept that is defined in this spec (for
@@ -237,6 +98,18 @@ A _base type_ is a type as defined in [JLS 4].
 
 > JLS 4 does not consider type-use annotations to be part of types, so neither
 > does our concept of "base type."
+
+## Type components
+
+A _type component_ of a given type is a type that transitively forms some part
+of that type. Specifically, a type component is one of the following:
+
+-   a non-wildcard type argument
+-   a wildcard bound
+-   an array component type
+-   an enclosing type
+-   an element of an intersection type
+-   the entire type
 
 ## Nullness operator
 
@@ -278,6 +151,135 @@ components of `T`.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
+
+## Details common to all annotations
+
+-   The package name is `org.jspecify.nullness`. \[[#1]\]
+-   The Java module name is `org.jspecify`. \[[#181]\]
+-   The Maven artifact is `org.jspecify:jspecify`. \[[#181]\]
+
+All annotations have runtime retention. \[[#28]\] None of the annotations are
+marked [repeatable].
+
+## The type-use annotation
+
+We provide a parameterless type-use annotation called `@Nullable`.
+
+### Recognized locations for type-use annotations
+
+A location is a _recognized_ location for our type-use annotation in the
+circumstances detailed below. A type at a recognized location has the semantics
+described in this spec. The spec does not assign semantics to types in other
+locations, nor to any annotations on such types.
+
+> For now, we've chosen to restrict ourselves to API locations for which tools
+> mostly agree on what it means for a type in that location to be `@Nullable`.
+
+The following locations are recognized except when overruled by one of the
+exceptions in the subsequent sections: \[[#17]\]
+
+-   return type of a method
+
+-   formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
+
+    > This excludes the receiver parameter.
+
+-   field type
+
+-   type parameter upper bound \[[#60]\]
+
+-   non-wildcard type argument
+
+-   wildcard bound
+
+-   array component type
+
+-   type used in a variadic parameter declaration
+
+However, any location above is unrecognized if it matches either of the
+following cases: \[[#17]\]
+
+> We refer to these cases (and some other cases below) as "intrinsically
+> non-nullable."
+
+-   a type usage of a primitive type
+
+-   the outer type that qualifies an inner type
+
+    > For example, the annotation in `@Nullable Foo.Bar` is in an unrecognized
+    > location: Java syntax attaches it to the outer type `Foo`.
+
+    > Every outer type is intrinsically non-nullable because every instance of
+    > an inner class has an associated instance of the outer class.
+
+Additionally, any location above is unrecognized if it makes up _any
+[type component]_ of a type in the following locations: \[[#17]\]
+
+> These locations all fit under the umbrella of "implementation code."
+> Implementation code may use types that contain type arguments, wildcard
+> bounds, and array component types, which would be recognized locations if not
+> for the exceptions defined by this section.
+
+-   a local variable type
+-   an exception parameter
+-   the type in a cast expression
+-   an array or object creation expression
+-   an explicit type argument supplied to a generic method or constructor
+    (including via a member reference) or to an instance creation expression for
+    a generic class
+
+> In practice, we anticipate that tools will treat types (and their annotations)
+> in _most_ of the above locations much like they treat types in other
+> locations. Still, this spec does not concern itself with implementation code:
+> We believe that the most important domain for us to focus on is that of APIs.
+
+All locations that are not explicitly listed as recognized are unrecognized.
+
+> Other notable unrecognized annotations include: \[[#17]\]
+>
+> Some additional intrinsically non-nullable locations:
+>
+> -   supertype in a class declaration
+> -   thrown exception type
+> -   enum constant declaration
+> -   receiver parameter type
+>
+> Some other locations that individual tools are more likely to assign semantics
+> to:
+>
+> -   a class declaration \[[#7]\]: For example, the annotation in `public
+>     @Nullable class Foo {}` is in an unrecognized location.
+> -   a type-parameter declaration or a wildcard _itself_ \[[#19], [#31]\]
+> -   any [type component] of a receiver parameter type \[[#157]\]
+>
+> But note that types "inside" some of these locations can still be recognized,
+> such as a _type argument_ of a supertype.
+
+> When analyzing source code, tools are encouraged to offer an option to issue
+> an error for an annotation in an unrecognized location (unless they define
+> semantics for that location). Tools are especially encouraged to issue an
+> error for an annotation in a location that is intrinsically non-nullable. When
+> reading _bytecode_, however, tools may be best off ignoring an annotation in
+> an unrecognized location (again, unless they define semantics for that
+> location).
+
+## The declaration annotation
+
+We provide a single parameterless declaration annotation called `@NullMarked`.
+\[[#5], [#87]\]
+
+### Recognized locations for declaration annotations
+
+Our declaration annotation is specified to be _recognized_ when applied to the
+locations listed below:
+
+-   A _named_ class.
+-   A package. \[[#34]\]
+-   A module. \[[#34]\]
+
+> _Not_ a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
+
+(concept-references)=
 
 ## Null-marked scope
 
@@ -813,6 +815,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.9
 [JLS 4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html
 [JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10
+[JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.1
 [JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
 [all worlds]: #multiple-worlds
@@ -825,16 +828,11 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [capture conversion]: #capture-conversion
 [containment]: #containment
 [design overview]: design-overview
-[glossary]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit
-[implementation code]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.cjuxrgo7keqs
 [in all worlds]: #multiple-worlds
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
-[non-nullable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.8wgyiwyvi49f
-[non-root]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.j1ewrpknx869
 [null-marked scope]: #null-marked-scope
-[nullable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.ejpb5ee0msjt
 [nullness operator]: #nullness-operator
 [nullness subtype]: #nullness-subtyping
 [nullness subtyping]: #nullness-subtyping
@@ -853,14 +851,8 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [substitution]: #substitution
 [subtype]: #subtyping
 [subtyping]: #subtyping
-[supermethods]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.5nvbughni6vx
-[superparameters]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.m2gxs1ddzqwp
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
-[type argument]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.3gm7aajjj46m
-[type component]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5
-[type components]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.g7gl9fwq1tt5
-[type context]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=kix.pfoww2aic35t
-[type variable]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.uxek2gfsybvo
-[unspecified nullness]: https://docs.google.com/document/d/1KQrBxwaVIPIac_6SCf--w-vZBeHkTvtaqPSU_icIccc/edit#bookmark=id.xb9w6p3ilsq3
+[type component]: #type-components
+[type components]: #type-components
 [user guide]: user-guide
