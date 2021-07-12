@@ -30,8 +30,8 @@ the previous:
 
 ### The scope of this spec
 
-This spec does not address _when_ tools must apply a given check. For example,
-it does not state when tools must apply the [subtyping] check.
+Currently, this spec does not address _when_ tools must apply a given check. For
+example, it does not state when tools must apply the [subtyping] check.
 
 We anticipate that tools will typically apply them in the same cases that they
 apply standard Java checks. For example, if code contains the parameterized type
@@ -497,29 +497,30 @@ Some of the rules in this spec come in 2 versions: One version requires a
 property to hold "in all worlds," and the other requires it to hold only "in
 some world."
 
-Tool authors may wish to implement either or both versions of the rules.
+Tool authors may choose to implement neither, either, or both versions of the
+rules.
 
 > Our goal is to allow tools and their users to choose their desired level of
 > strictness in the presence of `UNSPECIFIED`. The basic idea is that, every
 > time a tool encounters a type component with the nullness operator
-> `UNSPECIFIED`, it forks off 2 "worlds": 1 in which the operator is
-> `UNION_NULL` and 1 in which it is `NO_CHANGE`.
+> `UNSPECIFIED`, it has the option to fork off 2 "worlds": 1 in which the
+> operator is `UNION_NULL` and 1 in which it is `NO_CHANGE`.
 >
-> Since we lack a nullness specification for the type, we assume that either of
-> the resulting worlds may be the "correct" specification. The all-worlds
-> version of a rule, by requiring types to be compatible in all possible worlds,
-> holds that types are incompatible unless it has enough information to prove
-> they are compatible. The some-world version, by requiring types to be
-> compatible only in _some_ world, holds that types are compatible unless it has
-> enough information to prove they are incompatible. (By behaving
-> "optimistically," the some-world checking behaves much like Kotlin's checking
-> of "platform types.")
+> In more detail: When tools lack a nullness specification for a type, they may
+> choose to assume that either of the resulting worlds may be the "correct"
+> specification. The all-worlds version of a rule, by requiring types to be
+> compatible in all possible worlds, holds that types are incompatible unless it
+> has enough information to prove they are compatible. The some-world version,
+> by requiring types to be compatible only in _some_ world, holds that types are
+> compatible unless it has enough information to prove they are incompatible.
+> (By behaving "optimistically," the some-world checking behaves much like
+> Kotlin's checking of "platform types.")
 >
-> Thus, strict tools may want to implement the all-worlds version of rules, and
-> lenient tools may wish to implement the some-world version. Or a tool might
-> implement both and let users select which rules to apply.
+> Thus, a strict tool might choose to implement the all-worlds version of rules,
+> and a lenient tool might choose to implement the some-world version. Yet
+> another tool might implement both and let users select which rules to apply.
 >
-> Yet another possibility is for a tool to implement both versions and to use
+> Still another possibility is for a tool to implement both versions and to use
 > that to distinguish between "errors" and "warnings." Such a tool might run
 > each check first in the all-worlds version and then, if the check fails, run
 > it again in the some-world version. If the check fails in both cases, the tool
@@ -585,8 +586,7 @@ The Java subtyping rules are defined in [JLS 4.10]. We add to them as follows:
 
 -   When the Java array rules require one type to be a _direct_ supertype of
     another, consider the direct supertypes of `T` to be _every_ type that `T`
-    is a [subtype] of (as always, applying the definition of subtyping in this
-    spec).
+    is a [subtype] of.
 
 ## Nullness subtyping
 
@@ -768,8 +768,8 @@ the result of the following operation:
 The process of applying a [nullness operator] requires 2 inputs:
 
 -   the nullness operator to apply
--   the [augmented type] \(which, again, includes a [nullness operator] for that
-    type) to apply it to
+-   the [augmented type] \(which, as always, includes a nullness operator for
+    that type) to apply it to
 
 The result of the process is an augmented type.
 
