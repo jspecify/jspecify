@@ -107,8 +107,8 @@ class Example {
   void useNullable(@Nullable String x) {...}
   void useNonNull(String x) {...}
   void example(@Nullable String nullable, String nonNull) {
-	useNullable(nonNull); // JSpecify allows this
-	useNonNull(nullable); // JSpecify doesn't allow this
+    useNullable(nonNull); // JSpecify allows this
+    useNonNull(nullable); // JSpecify doesn't allow this
   }
 }
 ```
