@@ -104,12 +104,11 @@ might be null).
 ```java
 @NullMarked
 class Example {
-  private String nonNull;
-  private @Nullable String nullable;
-
-  void example() {
-	nullable = nonNull; // JSpecify allows this
-	nonNull = nullable; // JSpecify doesn't allow this
+  void useNullable(@Nullable String x) {...}
+  void useNonNull(String x) {...}
+  void example(@Nullable String nullable, String nonNull) {
+	useNullable(nonNull); // JSpecify allows this
+	useNonNull(nullable); // JSpecify doesn't allow this
   }
 }
 ```
