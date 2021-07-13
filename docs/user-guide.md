@@ -101,12 +101,15 @@ other subtype). In the same way, a `@Nullable String` can be assigned from a
 might be null).
 
 ```java
-void good(String nonNull, @Nullable String nullable) {
-  nullable = nonNull; // JSpecify allows this
-}
+@NullMarked
+class Example {
+  private String nonNull;
+  private @Nullable String nullable;
 
-void bad(String nonNull, @Nullable String nullable) {
-  nonNull = nullable; // JSpecify doesn't allow this
+  void example() {
+	nullable = nonNull; // JSpecify allows this
+	nonNull = nullable; // JSpecify doesn't allow this
+  }
 }
 ```
 
