@@ -25,6 +25,22 @@ publishing {
                     developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
                     url = 'https://github.com/jspecify/jspecify/'
                 }
+                developers {
+                    // These are here only because Sonatype requires us to list someone.
+                    // Any project member is welcome to add themselves if they want to.
+                    developer {
+                        id = 'kevinb9n'
+                        name = 'Kevin Bourrillion'
+                        email = 'kevinb@google.com'
+                    }
+                    developer {
+                        id = 'KengoTODA'
+                        name = 'Kengo TODA'
+                        email = 'skypencil@gmail.com'
+                        url = 'https://github.com/KengoTODA/'
+                        timezone = '+8'
+                    }
+                }
             }
         }
     }
