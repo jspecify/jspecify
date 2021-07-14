@@ -15,36 +15,34 @@ Such annotations are useful to (for example):
 
 ## Java variables are references
 
-In Java, all variables, except primitives like `int`, are references. We often
-think of `String x;` as meaning "`x` is a `String`", but actually it means "`x` is a
-_reference_ to a `String`". One important difference between these two views is that
-`x` can also be null. The goal of JSpecify is to move towards a world where `String
-x;` means "`x` is a reference to an actual string", and if you want a reference
-that might be null then you write `@Nullable String x;`.
+In Java, all non-primitive variables are references. We often think of `String
+x` as meaning "`x` is a `String`", but actually it means "`x` is a _reference_,
+either null or a reference to a string object".
+
+JSpecify includes a `@NullMarked` annotation. In code covered by that
+annotation, `String x` means "`x` is a reference to a string object", and
+`@Nullable String x` means "`x` is either null or a reference to a string object"
 
 ## Types and nullness
 
-In the JSpecify world, most references have one of three possible properties
-regarding nullness:
-1. They can be null.
-2. They can't be null.
-3. We don't know if they can be null or not.
+Each reference can have one of three possible properties regarding nullness:
 
-If `x` is a reference of a certain type, then if `x` can be null, `x.toString()` is
-unsafe because it could produce a NullPointerException. If `x` can't be null,
-`x.toString()` can never produce a NullPointerException. And if we don't know
-whether `x` can be null or not, `x.toString()` might or might not be unsafe.
+1. JSpecify annotations indicate that it can be null.
+2. JSpecify annotations indicate that it can't be null.
+3. JSpecify annotations don't indicate whether it can be null.
+
+For a given reference `x`, if `x` can be null then `x.getClass()` is unsafe because
+it could produce a NullPointerException. If `x` can't be null, `x.getClass()`
+can never produce a NullPointerException. If JSpecify annotations haven't said
+whether `x` can be null or not, we don't know whether `x.getClass()` is safe (at
+least as far as JSpecify is concerned).
 
 There are two JSpecify annotations that indicate these properties:
-* `@Nullable` applied to a type denotes a reference of that type that can be null.
-* `@NullMarked` applied to a module, class, or package means that a reference in
+* `@Nullable` applied to a type means a reference of that type that can be null.
+* `@NullMarked` applied to a module, package, or class means that a reference in
 that scope can't be null unless its type is explicitly marked `@Nullable`. (Below
 we will see that there are some exceptions to this for [local
 variables](#local-variables) and [type variables](#defining-generics).)
-
-If a type is not explicitly marked `@Nullable` and is not inside a `@NullMarked`
-class or package, then we don't know if references of that type can be null or
-not.
 
 The notion of "can't be null" should really be read with a footnote that says
 "if all the code in question is `@NullMarked`". For example, if you have some code
@@ -59,7 +57,7 @@ includes references that can be null. Code that deals with those references must
 be able to deal with the null case.
 
 ```java
-  public static void print(@Nullable String x) {
+  static void print(@Nullable String x) {
     System.out.println(String.valueOf(x));
   }
 ```
@@ -69,7 +67,7 @@ call. The body of the `print` method does not do anything with `x` that would
 provoke a NullPointerException so this method is safe.
 
 ```java
-  public static @Nullable String emptyToNull(@Nullable String x) {
+  static @Nullable String emptyToNull(@Nullable String x) {
     return (x == null || x.isEmpty()) ? null : x;
   }
 ```
@@ -78,7 +76,7 @@ In this example, the parameter `x` can still be null, but now the return value c
 be too. You might use this method like this:
 
 ```java
-  public static void doSomething(@Nullable String x) {
+  void doSomething(@Nullable String x) {
     print(emptyToNull(x));
     // OK: print accepts a @Nullable String
 
@@ -90,12 +88,41 @@ be too. You might use this method like this:
 Tools could then use the `@Nullable` information to determine that the first use
 is safe but the second is not.
 
+As far as JSpecify is concerned, `String` and `@Nullable String` are _different_
+types. A variable of type `String` can reference any string object. A variable
+of type `@Nullable String` can too, but it can also be null. This means that
+`String` is a _subtype_ of `@Nullable String`, in the same way that `Integer` is
+a subtype of `Number`. One way to look at this is that a subtype narrows the
+range of possibilities. A `Number` variable can be assigned from an `Integer`
+but it can also be assigned from a `Long`. Meanwhile an `Integer` variable
+can't be assigned from a `Number` (since that `Number` might be a `Long` or some
+other subtype). Likewise, a `@Nullable String` can be assigned from a
+`String` but a `String` can't be assigned from a `@Nullable String` (since that
+might be null).
+
+```java
+@NullMarked
+class Example {
+  void useNullable(@Nullable String x) {...}
+  void useNonNull(String x) {...}
+  void example(@Nullable String nullable, String nonNull) {
+    useNullable(nonNull); // JSpecify allows this
+    useNonNull(nullable); // JSpecify doesn't allow this
+  }
+}
+```
+
 ## `@NullMarked`
 
 The `@NullMarked` annotation indicates that references can't be null in its scope,
-unless their types are explicitly marked `@Nullable`. If applied to a package then
+unless their types are explicitly marked `@Nullable`. If applied to a module then
+its scope is all the code in the module. If applied to a package then
 its scope is all the code in the package. If applied to a class or interface
 then its scope is all the code in that class or interface.
+
+Outside `@NullMarked`, `@Nullable String` still means a reference that can be
+null, but JSpecify doesn't have anything to say about whether plain `String` can
+be null.
 
 ```java
 @NullMarked
@@ -111,9 +138,9 @@ public class Strings {
 ```
 
 In this example, both methods are in the scope of `@NullMarked`, so plain `String`
-means "a reference to a `String` that can't be null". `@Nullable String` continues
-to mean "a reference to a `String` that can be null". Tools should warn you if you
-try to pass a "reference to a `String` that can be null" to `spaceIndex`, since its
+means "a reference to a string object, not null". `@Nullable String` continues
+to mean "a reference to a string object, or null". Tools should warn you if you
+try to pass a "reference to a string object, or null" to `spaceIndex`, since its
 argument can't be null, and indeed it will throw NullPointerException if given a
 null argument.
 
@@ -129,10 +156,10 @@ the values that are assigned to the variable. For example:
 
 ```java
 @NullMarked
-public class MyClass {
+class MyClass {
   void myMethod(@Nullable String one, String two) {
-    String copyOfOne = one;
-    String copyOfTwo = two;
+    String anotherOne = one;
+    String anotherTwo = two;
     String oneOrTwo = random() ? one : two;
     String twoOrNull = Strings.emptyToNull(two);
     ...
@@ -140,10 +167,10 @@ public class MyClass {
 }
 ```
 
-Analysis can tell that all of these variables except `copyOfTwo` can be null.
-`copyOfTwo` can't be null since `two` can't be null: it is not `@Nullable` and it is
-inside the scope of `@NullMarked`. `copyOfOne` can be null since it is a copy of a
-`@Nullable` parameter. `oneOrTwo` can be null because it may be a copy of a
+Analysis can tell that all of these variables except `anotherTwo` can be null.
+`anotherTwo` can't be null since `two` can't be null: it is not `@Nullable` and it is
+inside the scope of `@NullMarked`. `anotherOne` can be null since it is assigned from
+a `@Nullable` parameter. `oneOrTwo` can be null because it may assigned from a
 `@Nullable` parameter. And `twoOrNull` can be null because its value comes from a
 method that returns `@Nullable String`.
 
@@ -152,8 +179,8 @@ method that returns `@Nullable String`.
 When you are referencing a generic type, the rules about `@Nullable` and
 `@NullMarked` are as you would expect from what we have seen. For example,
 `List<@Nullable String>` means a list where each element is either a reference to
-an actual string or it is null. In a `@NullMarked` context, `List<String>` means a
-list where each element is a reference to an actual string and _can't_ be null.
+a string object or it is null. In a `@NullMarked` context, `List<String>` means a
+list where each element is a reference to a string object and _can't_ be null.
 
 ### <a id="defining-generics">Defining generic types</a>
 
@@ -197,10 +224,11 @@ public interface List<E extends @Nullable Object> {...}
 ```
 
 If it were `interface List<E>` rather than `interface List<E extends @Nullable
-Object>` then `NumberList<E extends @Nullable Number> extends List<E>` would not be
-legal. That's because `List<E>` is short for `List<E extends Object>`. Inside
-`@NullMarked`, plain `Object` means "`Object` reference that can't be null". The `<E
-extends @Nullable Number>` from NumberList would not be compatible with that.
+Object>` then `NumberList<E extends @Nullable Number> extends List<E>` would not
+be legal. That's because `interface List<E>` is short for `interface List<E
+extends Object>`. Inside `@NullMarked`, plain `Object` means "`Object` reference
+that can't be null". The `<E extends @Nullable Number>` from NumberList would
+not be compatible with `<E extends Object>`.
 
 The implication of all this is that every time you define a type variable like `E`
 you need to decide whether it can represent a `@Nullable` type. If it can, then it
@@ -216,8 +244,7 @@ public class ImmutableList<E> implements List<E> {...}
 
 Here, because it is `ImmutableList<E>` and not `ImmutableList<E extends @Nullable
 Object>`, it is not legal to write `ImmutableList<@Nullable String>`. You can only
-write `ImmutableList<String>`, which is a list of non-null references to
-`String` objects.
+write `ImmutableList<String>`, which is a list of non-null `String` references.
 
 ### Using type variables in generic types
 
@@ -226,9 +253,9 @@ Let's look at what the methods in the `List` interface might look like:
 ```
 @NullMarked
 public interface List<E extends @Nullable Object> {
-  public boolean add(E element);
-  public E get(int index);
-  public @Nullable E getFirst();
+  boolean add(E element);
+  E get(int index);
+  @Nullable E getFirst();
   ...
 }
 ```
@@ -337,20 +364,27 @@ The previous sections cover 99% of everything you need to know to be able to use
 JSpecify annotations effectively. Here we'll cover a few details you probably
 won't need to know.
 
-### Type annotation syntax
+### Type-use annotation syntax
 
-There are a couple of places where the syntax of type annotations like `@Nullable`
-is counterintuitive.
+There are a couple of places where the syntax of type-use annotations like
+`@Nullable` may be surprising.
 
-1. For a nested type like `Map.Entry`, if you want to say that the value can be null
-then the syntax is `Map.@Nullable Entry`. You can often avoid dealing with this by
-importing the nested type directly, but in this case `import java.util.Map.Entry`
-might be undesirable because `Entry` is such a common type name.
+1. For a nested static type like `Map.Entry`, if you want to say that the value
+can be null then the syntax is `Map.@Nullable Entry`. You can often avoid
+dealing with this by importing the nested type directly, but in this case
+`import java.util.Map.Entry` might be undesirable because `Entry` is such a
+common type name.
 
 1. For an array type, if you want to say that the _elements_ of the array can be null
 then the syntax is `@Nullable String[]`. If you want to say that the _array itself_
 can be null then the syntax is `String @Nullable []`. And if both the elements and
 the array itself can be null, the syntax is `@Nullable String @Nullable []`.
+
+A good way to remember this is that it is the thing right after `@Nullable` that
+can be null. It is the `Entry` that can be null in `Map.@Nullable Entry`,
+not the `Map`. It is the `String` that can be null in `@Nullable
+String[]` and it is the `[]`, meaning the array, that can be null in `String
+@Nullable []`.
 
 ### Wildcard bounds
 
