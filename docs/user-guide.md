@@ -17,12 +17,11 @@ Such annotations are useful to (for example):
 
 In Java, all non-primitive variables are references. We often think of `String
 x` as meaning "`x` is a `String`", but actually it means "`x` is a _reference_,
-either null or a reference to a string".
+either null or a reference to a string object".
 
 JSpecify includes a `@NullMarked` annotation. In code covered by that
-annotation, `String x` means "`x` is a reference to an actual string", and
-`@Nullable String x` means "`x` is either null or a reference to an actual
-string."
+annotation, `String x` means "`x` is a reference to a string object", and
+`@Nullable String x` means "`x` is either null or a reference to a string object"
 
 ## Types and nullness
 
@@ -90,7 +89,7 @@ Tools could then use the `@Nullable` information to determine that the first use
 is safe but the second is not.
 
 As far as JSpecify is concerned, `String` and `@Nullable String` are _different_
-types. A variable of type `String` can reference any string. A variable
+types. A variable of type `String` can reference any string object. A variable
 of type `@Nullable String` can too, but it can also be null. This means that
 `String` is a _subtype_ of `@Nullable String`, in the same way that `Integer` is
 a subtype of `Number`. One way to look at this is that a subtype narrows the
@@ -116,7 +115,8 @@ class Example {
 ## `@NullMarked`
 
 The `@NullMarked` annotation indicates that references can't be null in its scope,
-unless their types are explicitly marked `@Nullable`. If applied to a package then
+unless their types are explicitly marked `@Nullable`. If applied to a module then
+its scope is all the code in the module. If applied to a package then
 its scope is all the code in the package. If applied to a class or interface
 then its scope is all the code in that class or interface.
 
@@ -138,9 +138,9 @@ public class Strings {
 ```
 
 In this example, both methods are in the scope of `@NullMarked`, so plain `String`
-means "a reference to a string, not null". `@Nullable String` continues
-to mean "a reference to a string, or null". Tools should warn you if you
-try to pass a "reference to a string, or null" to `spaceIndex`, since its
+means "a reference to a string object, not null". `@Nullable String` continues
+to mean "a reference to a string object, or null". Tools should warn you if you
+try to pass a "reference to a string object, or null" to `spaceIndex`, since its
 argument can't be null, and indeed it will throw NullPointerException if given a
 null argument.
 
@@ -169,8 +169,8 @@ class MyClass {
 
 Analysis can tell that all of these variables except `anotherTwo` can be null.
 `anotherTwo` can't be null since `two` can't be null: it is not `@Nullable` and it is
-inside the scope of `@NullMarked`. `anotherOne` can be null since it is a copy of a
-`@Nullable` parameter. `oneOrTwo` can be null because it may be a copy of a
+inside the scope of `@NullMarked`. `anotherOne` can be null since it is assigned from
+a `@Nullable` parameter. `oneOrTwo` can be null because it may assigned from a
 `@Nullable` parameter. And `twoOrNull` can be null because its value comes from a
 method that returns `@Nullable String`.
 
@@ -179,8 +179,8 @@ method that returns `@Nullable String`.
 When you are referencing a generic type, the rules about `@Nullable` and
 `@NullMarked` are as you would expect from what we have seen. For example,
 `List<@Nullable String>` means a list where each element is either a reference to
-an actual string or it is null. In a `@NullMarked` context, `List<String>` means a
-list where each element is a reference to an actual string and _can't_ be null.
+a string object or it is null. In a `@NullMarked` context, `List<String>` means a
+list where each element is a reference to a string object and _can't_ be null.
 
 ### <a id="defining-generics">Defining generic types</a>
 
@@ -381,8 +381,8 @@ can be null then the syntax is `String @Nullable []`. And if both the elements a
 the array itself can be null, the syntax is `@Nullable String @Nullable []`.
 
 A good way to remember this is that it is the thing right after `@Nullable` that
-can be null. It is the `Entry` objects that can be null in `Map.@Nullable
-Entry`, not the `Map`. It is the `String` that can be null in `@Nullable
+can be null. It is the `Entry` that can be null in `Map.@Nullable Entry`,
+not the `Map`. It is the `String` that can be null in `@Nullable
 String[]` and it is the `[]`, meaning the array, that can be null in `String
 @Nullable []`.
 
