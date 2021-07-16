@@ -68,6 +68,7 @@ People from the following projects and organizations are collaborating on this p
 
    design-overview
    spec
+   user-guide
 
 Contact Info
 ------------

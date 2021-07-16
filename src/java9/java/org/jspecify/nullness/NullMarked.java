@@ -25,14 +25,20 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <b>WARNING:</b> This is not the final class name or package name for this annotation. In
- * addition, we are still discussing questions about semantics, particularly around type-variable
- * usages. After that, changes and documentation will follow.
+ * Indicates that within the annotated scope (class, package, or module), type usages
+ * <i>generally</i> do <i>not</i> include {@code null} as a value, unless they are individually
+ * marked otherwise using {@link Nullable} (or checker-specific other annotations). Without this
+ * annotation, unmarked type usages would instead have <i>unspecified nullness</i>. Several
+ * exceptions to this rule and an explanation of unspecified nullness are covered in the <a
+ * href="http://jspecify.org/user-guide">JSpecify User Guide</a>.
  *
- * <p>These annotations exist only as a skeleton for the final product. At this point, we are not
- * even building prototypes that use them.
+ * <p><b>WARNING:</b> This annotation is under development, and <i>any</i> aspect of its naming,
+ * location, or design may change before 1.0. <b>Do not release libraries using this annotation at
+ * this time.</b>
  */
 @Documented
 @Target({TYPE, PACKAGE, MODULE})
 @Retention(RUNTIME)
-public @interface NullMarked {}
+public @interface NullMarked {
+  // note for maintainers: When you update this file, please update the file in src/main too.
+}

@@ -23,11 +23,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * <b>WARNING:</b> This is not the final class name or package name for this annotation. We are not
- * even sure if an annotation like this one will make the 1.0 release.
- *
- * <p>These annotations exist only as a skeleton for the final product. At this point, we are not
- * even building prototypes that use them.
+ * <b>This annotation is not planned for inclusion in JSpecify 1.0</b>, unless <a
+ * href="https://github.com/jspecify/jspecify/issues/137">this issue</a> is reopened and resolved
+ * favorably. It's here temporarily until some tests are fixed, and in the meantime we will be
+ * deleting it from any release branch we start.
  */
 @Documented
 @Target(TYPE_USE)

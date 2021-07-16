@@ -22,4 +22,4 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
       - run: |
-          ./gradlew spotlessCheck build --no-daemon
+          ./gradlew spotlessCheck build publishToMavenLocal --no-daemon

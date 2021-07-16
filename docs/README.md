@@ -35,17 +35,18 @@ $ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D la
 Under Debian and Ubuntu, you may be able to run:
 
 ```sh
-$ sudo apt-get install python3-sphinx python3-sphinx-rtd-theme
+$ sudo apt-get install python3-sphinx python3-sphinx-rtd-theme python3-pip
+$ pip install --upgrade myst-parser
 $ ( cd docs && make html )
 ```
 
-## CommonMark vs. reStructuredText
+## How to view the built pages locally
 
-These docs use reStructuredText (hence the `.rst` extension). If you are used to
-CommonMark (and similar flavors of Markdown, like
-[GitHub's](https://github.github.com/gfm/)), you may want to use a converter
-that rewrites CommonMark to reStructuredText:
+The easiest way I know of is to run Python's built-in webserver:
 
 ```sh
-$ pandoc --from=markdown --to=rst docs/foo.md --output=docs/foo.rst
+$ cd _build/html
+$ python3 -m http.server 8000
 ```
+
+Then the pages should appear at, e.g., http://yourhost:8000/design-overview.html
