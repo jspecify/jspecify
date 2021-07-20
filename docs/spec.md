@@ -862,7 +862,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [base types]: #base-type
 [capture conversion]: #capture-conversion
 [containment]: #containment
-[design overview]: design-overview
 [in all worlds]: #multiple-worlds
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types

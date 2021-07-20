@@ -66,7 +66,6 @@ People from the following projects and organizations are collaborating on this p
    :maxdepth: 1
    :caption: Contents
 
-   design-overview
    spec
    user-guide
 

@@ -49,4 +49,4 @@ $ cd _build/html
 $ python3 -m http.server 8000
 ```
 
-Then the pages should appear at, e.g., http://yourhost:8000/design-overview.html
+Then the pages should appear at, e.g., http://yourhost:8000/user-guide.html
