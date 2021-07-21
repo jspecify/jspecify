@@ -52,6 +52,10 @@ that scope does not include null unless its type is explicitly marked `@Nullable
 (Below we will see that there are some exceptions to this for [local
 variables](#local-variables) and [type variables](#defining-generics).)
 
+A type that includes null is a supertype of the corresponding type that does not
+include null.
+For example, within `@NullMarked`, `String` is a subtype of `@Nullable String`.
+
 
 ## `@Nullable`
 
