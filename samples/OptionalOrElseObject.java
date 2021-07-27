@@ -24,16 +24,19 @@ abstract class OptionalOrElseObject {
   abstract Optional<Object> o();
 
   Object x0(Object p) {
-    return o().orElse(p);
+    Object result = o().orElse(p);
+    return result;
   }
 
   Object x1(@NullnessUnspecified Object p) {
+    Object result = o().orElse(p);
     // jspecify_nullness_not_enough_information
-    return o().orElse(p);
+    return result;
   }
 
   Object x2(@Nullable Object p) {
+    Object result = o().orElse(p);
     // jspecify_nullness_mismatch
-    return o().orElse(p);
+    return result;
   }
 }
