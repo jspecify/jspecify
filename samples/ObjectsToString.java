@@ -37,4 +37,9 @@ class ObjectsToString {
     // jspecify_nullness_mismatch
     return result;
   }
+
+  String x(@Nullable Object nullable) {
+    // Make sure the checker doesn't crash when it sees the 1-arg overload.
+    return Objects.toString(nullable);
+  }
 }
