@@ -37,9 +37,9 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------------+----------------------------------------------------------+
 |Project                                                   |Organization                                              |
 +==========================================================+==========================================================+
-| `Android <https://www.android.com>`_                     | `Google <https://google.com>`_                           |
+| `Infer <https://www.fbinfer.com>`_                       | `Facebook <https://about.facebook.com>`_                 |
 +----------------------------------------------------------+----------------------------------------------------------+
-| `Checker Framework <https://checkerframework.org>`_      | `Checker Framework Team <https://checkerframework.org>`_ |
+| `Android <https://www.android.com>`_                     | `Google <https://google.com>`_                           |
 +----------------------------------------------------------+----------------------------------------------------------+
 | `Error Prone <https://errorprone.info>`_                 | `Google <https://google.com>`_                           |
 +----------------------------------------------------------+----------------------------------------------------------+
@@ -59,14 +59,13 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------------+----------------------------------------------------------+
 | `SpotBugs <http://spotbugs.rtfd.io/>`_                   | `SpotBugs Team <https://github.com/spotbugs/>`_          |
 +----------------------------------------------------------+----------------------------------------------------------+
-|                                                          | `Square <https://squareup.com>`_                         |
+| (various)                                                | `Square <https://squareup.com>`_                         |
 +----------------------------------------------------------+----------------------------------------------------------+
 
 .. toctree::
    :maxdepth: 1
    :caption: Contents
 
-   design-overview
    spec
    user-guide
 
