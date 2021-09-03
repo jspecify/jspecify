@@ -19,7 +19,7 @@ jobs:
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" -e BUILDDIR="_build-ja" html
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx cp -R _build-ja/html _build/html/ja
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: document
           path: docs/_build/html
