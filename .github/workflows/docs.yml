@@ -19,14 +19,13 @@ jobs:
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" -e BUILDDIR="_build-ja" html
           docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx cp -R _build-ja/html _build/html/ja
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: document
           path: docs/_build/html
 
-      - uses: JamesIves/github-pages-deploy-action@3.6.2
+      - uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: docs/_build/html
+          branch: gh-pages
+          folder: docs/_build/html
         if: github.event_name == 'push'
