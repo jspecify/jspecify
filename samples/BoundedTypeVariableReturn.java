@@ -47,5 +47,5 @@ class BoundedTypeVariableReturn {
 
   interface Foo {}
 
-  interface Lib<T> {}
+  interface Lib<T extends @Nullable Object> {}
 }
