@@ -40,5 +40,5 @@ abstract class AugmentedInferenceAgreesWithBaseInference {
 
   interface Foo<T extends @Nullable Object> {}
 
-  interface List<T> {}
+  interface List<T extends @Nullable Object> {}
 }
