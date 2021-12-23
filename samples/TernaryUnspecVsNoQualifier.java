@@ -16,6 +16,7 @@
 
 import java.util.Collections;
 import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 /*
  * I haven't thought deeply about where checkers could identify mismatches or not-enough-information
@@ -42,11 +43,10 @@ class TernaryUnspecVsNoQualifier {
     }
   }
 
-  abstract static class Foo<T> {
+  abstract static class Foo<T extends @Nullable Object> {
     abstract Iterable<Foo<T>> others();
 
     void go(boolean b) {
-      // jspecify_nullness_not_enough_information
       Iterable<Foo<T>> it =
           // jspecify_nullness_not_enough_information
           b ? ImmutableList.of(this) : Iterables.concat(others(), ImmutableList.of(this));
