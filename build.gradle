@@ -3,7 +3,7 @@ plugins {
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0' apply false
     id 'com.diffplug.spotless' version '5.14.3'
     id 'net.ltgt.errorprone' version '2.0.2'
-    id 'org.javamodularity.moduleplugin' version '1.8.7'
+    id 'org.javamodularity.moduleplugin' version '1.8.9'
 }
 
 ext {

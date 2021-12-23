@@ -13,13 +13,6 @@ jobs:
         with:
           distribution: adopt
           java-version: 11
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
+          cache: gradle
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
