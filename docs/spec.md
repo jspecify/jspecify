@@ -164,6 +164,10 @@ A nullness operator is one of 4 values:
 An augmented type consists of a [base type] and a [nullness operator]
 corresponding to *each* of its [type components].
 
+> Arguably, an augmented type with nullness operator `UNSPECIFIED` is better
+> understood not as representing "a type" but as representing a *lack* of the
+> nullness portion of the type.
+
 For our purposes, base types (and thus augmented types) include not just class
 and interface types, array types, and type variables but also
 [intersection types] and the null type.
