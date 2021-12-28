@@ -364,13 +364,21 @@ condition is met, skip the remaining conditions.
 > `@Nullable`, then the override's return type will *not* have nullness operator
 > `UNION_NULL`.
 
-> The rules here never produce the fourth nullness operator, `MINUS_NULL`. (It
-> will appear later in [substitution]. Additionally, we anticipate that tools
-> will produce `MINUS_NULL` based on the results of null checks in
-> implementation code.) However, if tool authors prefer, they can safely produce
-> `MINUS_NULL` in any case in which it is equivalent to `NO_CHANGE`. For
-> example, there is no difference between a `String` with `NO_CHANGE` and a
-> `String` with `MINUS_NULL`.
+> The rules here never produce the fourth nullness operator, `MINUS_NULL`.
+> However, if tool authors prefer, they can safely produce `MINUS_NULL` in any
+> case in which it is equivalent to `NO_CHANGE`. For example, there is no
+> difference between a `String` with `NO_CHANGE` and a `String` with
+> `MINUS_NULL`.
+
+> So why does `MINUS_NULL` exist at all? It does appear later in this spec in
+> the section on [substitution]. However, its main purpose is to provide tools
+> with a way to represent the nullness of certain expressions in implementation
+> code: Consider `ArrayList<E>`. `ArrayList` supports null elements, so the
+> class has to handle the possibility that any expression of type `E` may be
+> null. However, if implementation code contains the statement `if (e != null) {
+> ... }`, then tools can assume that `e` is non-null inside. The purpose of
+> `MINUS_NULL` is to represent that such an expression is known not to be null,
+> even though its base type `E` suggests otherwise.
 
 (intersection-types)=
 
@@ -749,14 +757,28 @@ the result of the following operation:
     > But in this instance, the null-exclusivity rule (and all rules that it in
     > turn applies) are the [all-worlds] versions.
 
-    > This special case improves behavior in "the `ImmutableList.Builder` case":
-    > Consider an unannotated user of that class. Its builder will have an
-    > element type whose [nullness operator] is `UNSPECIFIED`. Without this
-    > special case, `builder.add(objectUnionNull)` would pass the subtyping
-    > check in the [some-world] version. This would happen even though we have
-    > enough information to know that the parameter to `add` is universally
-    > null-exclusive, regardless of world. The special case here makes that
-    > subtyping check fail, as desired.
+    > The purpose of this special case is to improve behavior in "the
+    > `ImmutableList.Builder` case": Because `ImmutableList.Builder.add` always
+    > throws `NullPointerException` for a null argument, we would like for
+    > `add(null)` to be a compile error, even under lenient tools.
+    > Unfortunately, without this special case, lenient tools could permit
+    > `add(null)` in unannotated code. For an example, read on.
+    >
+    > Consider an unannotated user of `ImmutableList.Builder<Foo> builder`. Its
+    > type argument `Foo` will have a [nullness operator] of `UNSPECIFIED`.
+    > Without this special case, the parameter of `builder.add` would have a
+    > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool applies
+    > the [some-world] subtyping check to `builder.add(null)`, the check would
+    > pass.
+    >
+    > To solve this, we need a special case for substitution for null-exclusive
+    > type parameters like the one on `ImmutableList.Builder`. That special case
+    > needs to produce a type with a nullness operator other than `UNSPECIFIED`.
+    > One valid option is to produce `NO_CHANGE`. We, however, happened to
+    > choose `MINUS_NULL`: That choice lets tools produce errors directly on the
+    > site of `builder.add(null)`, even in the case of an invalid declaration
+    > `ImmutableList.Builder<@Nullable Foo>`. This choice follows Kotlin's
+    > precedent.
 
 -   Otherwise, replace `V` with the result of applying the nullness operator of
     `V` to `Aᵢ`.
