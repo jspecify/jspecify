@@ -45,7 +45,7 @@ approach. For example:
 
 -   Java [places some restrictions that aren't necessary for soundness][#49],
     and it
-    [is lenient in at least once way that can lead to runtime errors][#65].
+    [is lenient in at least one way that can lead to runtime errors][#65].
 
 -   JSpecify annotations can be used even by tools that are not "nullness
     checkers" at all. For example, a tool that lists the members of an API could
