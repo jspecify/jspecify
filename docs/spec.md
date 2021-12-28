@@ -30,21 +30,22 @@ the previous:
 
 ### The scope of this spec
 
-Currently, this spec does not address *when* tools must apply a given check. For
-example, it does not state when tools must apply the [subtyping] check.
+Currently, this spec does not address *when* tools must apply any part of the
+spec. For example, it does not state when tools must check that the [subtyping]
+relation holds.
 
-We anticipate that tools will typically apply them in the same cases that they
-apply standard Java checks. For example, if code contains the parameterized type
+We anticipate that tools will typically apply parts of this spec in the same
+cases that they apply the corresponding parts of the Java Language
+Specification. For example, if code contains the parameterized type
 `List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable Foo`
 is a subtype of the bound of the type parameter of `List`.
 
 However, this is up to tool authors, who may have reasons to take a different
 approach. For example:
 
--   Java
-    [requires checks in some cases in which they aren't necessary for soundness][#49],
-    and it [doesn't require checks in some cases in which checks *are* necessary
-    for soundness][#65].
+-   Java [places some restrictions that aren't necessary for soundness][#49],
+    and it
+    [is lenient in at least once way that can lead to runtime errors][#65].
 
 -   JSpecify annotations can be used even by tools that are not "nullness
     checkers" at all. For example, a tool that lists the members of an API could
@@ -521,19 +522,20 @@ rules.
 > has enough information to prove they are compatible. The some-world version,
 > by requiring types to be compatible only in *some* world, holds that types are
 > compatible unless it has enough information to prove they are incompatible.
-> (By behaving "optimistically," the some-world checking behaves much like
-> Kotlin's checking of "platform types.")
+> (By behaving "optimistically," the some-world version is much like Kotlin's
+> rules for "platform types.")
 >
 > Thus, a strict tool might choose to implement the all-worlds version of rules,
 > and a lenient tool might choose to implement the some-world version. Yet
 > another tool might implement both and let users select which rules to apply.
 >
 > Still another possibility is for a tool to implement both versions and to use
-> that to distinguish between "errors" and "warnings." Such a tool might run
-> each check first in the all-worlds version and then, if the check fails, run
-> it again in the some-world version. If the check fails in both cases, the tool
-> would produce an error. If it passes only because of the some-world version,
-> the tool would produce a warning.
+> that to distinguish between "errors" and "warnings." Such a tool might always
+> first process code with the all-worlds version and then with the some-world
+> version. If the tools detects, say, an out-of-bounds type argument in both
+> cases, the tool would produce an error. But, if the tool detects such a
+> problem with the all-worlds version but not with the some-world version, the
+> tool would produce a warning.
 
 The main body of each section of the spec describes the all-worlds rule. If the
 some-world rule differs, the differences are explained at the end.
@@ -544,13 +546,13 @@ some-world rule differs, the differences are explained at the end.
 
 (propagating-multiple-worlds)=
 
-### Propagating how many worlds a check must hold in
+### Propagating how many worlds a relation must hold in
 
 When one rule in this spec refers to another, it refers to the same version of
 the rule. For example, when the rules for [containment] refer to the rules for
-[subtyping], the some-world containment check applies the some-world subtyping
-check, and the all-worlds containment check applies the all-worlds subtyping
-check.
+[subtyping], the some-world containment relation refers to the some-world
+subtyping relation, and the all-worlds containment relation refers to the
+all-worlds subtyping relation.
 
 This meta-rule applies except when a rule refers explicitly to a particular
 version of another rule.
@@ -560,10 +562,10 @@ version of another rule.
 `S` and `T` are the same type if `S` is a [subtype] of `T` and `T` is a subtype
 of `S`.
 
-The same-type check is *not* defined to be reflexive or transitive.
+The same-type relation is *not* defined to be reflexive or transitive.
 
-> For more discussion of reflexive and transitive checks, see the comments under
-> [nullness subtyping].
+> For more discussion of reflexive and transitive relations, see the comments
+> under [nullness subtyping].
 
 ## Subtyping
 
@@ -623,19 +625,19 @@ Fortunately, this "mostly transitive" behavior is exactly the behavior that
 implementations are likely to produce naturally. Maybe someday we will find a
 way to specify this fully correctly.)
 
-> Subtyping does end up being transitive when the check is required to hold in
-> [all worlds]. And it does end up being reflexive when the check is required to
-> hold only in [some world]. We don't state those properties as rules for 2
-> reasons: First, they arise naturally from the definitions. Second, we don't
-> want to suggest that subtyping is reflexive and transitive under both versions
-> of the rule.
+> Subtyping does end up being transitive when the relation is required to hold
+> in [all worlds]. And it does end up being reflexive when the relation is
+> required to hold only in [some world]. We don't state those properties as
+> rules for 2 reasons: First, they arise naturally from the definitions. Second,
+> we don't want to suggest that subtyping is reflexive and transitive under both
+> versions of the rule.
 >
 > Yes, it's pretty terrible for something called "subtyping" not to be reflexive
 > or transitive. A more accurate name for this concept would be "consistent," a
 > term used in gradual typing. However, we use "subtyping" anyway. In our
 > defense, we need to name multiple concepts, including not just subtyping but
-> also [same-type] checks and [containment]. If we were to coin a new term for
-> each, tool authors would need to mentally map between those terms and the
+> also the [same-type] relation and [containment]. If we were to coin a new term
+> for each, tool authors would need to mentally map between those terms and the
 > analogous Java terms.
 
 ## Null-inclusive under every parameterization
@@ -768,8 +770,8 @@ the result of the following operation:
     > type argument `Foo` will have a [nullness operator] of `UNSPECIFIED`.
     > Without this special case, the parameter of `builder.add` would have a
     > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool applies
-    > the [some-world] subtyping check to `builder.add(null)`, the check would
-    > pass.
+    > the [some-world] subtyping relation to `builder.add(null)`, the relation
+    > would hold.
     >
     > To solve this, we need a special case for substitution for null-exclusive
     > type parameters like the one on `ImmutableList.Builder`. That special case
