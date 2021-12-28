@@ -638,7 +638,8 @@ way to specify this fully correctly.)
 > defense, we need to name multiple concepts, including not just subtyping but
 > also the [same-type] relation and [containment]. If we were to coin a new term
 > for each, tool authors would need to mentally map between those terms and the
-> analogous Java terms.
+> analogous Java terms. (Still, yes: Feel free to read terms like "subtyping" as
+> if they hvae scare quotes around them.)
 
 ## Null-inclusive under every parameterization
 
