@@ -754,9 +754,12 @@ Upper-bound rule:
 
 Lower-bound rule:
 
--   for every type parameter `P` that has a lower bound whose [base type] is the
-    same as `T`'s base type and whose nullness operator is `NO_CHANGE`: the type
-    variable `P`
+-   the augmented type "`C` with nullness operator `NO_CHANGE`" for every type
+    variable `C` whose lower bound meets both of the following conditions:
+
+    -   Its [base type] is the same as `T`'s base type.
+
+    -   Its nullness operator is `NO_CHANGE`.
 
     TODO(cpovirk): What if the lower bound has some other nullness operator? I'm
     pretty sure that we want to allow `UNSPECIFIED` in the some-world version
