@@ -622,20 +622,26 @@ The same-type relation is *not* defined to be reflexive or transitive.
 Nullness subtyping (and thus subtyping itself) is *not* defined to be reflexive
 or transitive.
 
-(Contrast this with our [nullness-delegating subtyping] rules and [containment]
-rules: Each of those is defined as a transitive closure. However, technically
-speaking,
-[there are cases in which those should not be transitive, either](https://groups.google.com/d/msg/jspecify-dev/yPnkx_GSb0Q/hLgS_431AQAJ).
-Fortunately, this "mostly transitive" behavior is exactly the behavior that
-implementations are likely to produce naturally. Maybe someday we will find a
-way to specify this fully correctly.)
-
-> Subtyping does end up being transitive when the relation is required to hold
-> in all worlds. And it does end up being reflexive when the relation is
-> required to hold only in [some world]. We don't state those properties as
-> rules for 2 reasons: First, they arise naturally from the definitions. Second,
-> we don't want to suggest that subtyping is reflexive and transitive under both
-> versions of the rule.
+> If we defined nullness subtyping to be reflexive, then "`String` with nullness
+> operator `UNSPECIFIED`" would be a subtype of "`String` with nullness operator
+> `UNSPECIFIED`," even under the [all-worlds] rules. In other words, we'd be
+> saying that unannotated code is always free from nullness errors. That is
+> clearly false. (Nevertheless, lenient tools will choose not to issue errors
+> for such code. They can do this by implementing the [some-world] rules.)
+>
+> If we defined nullness subtyping to be transitive, then we'd say that
+> "`String` with nullness operator `UNION_NULL`" is a subtype of "`String` with
+> nullness operator `NO_CHANGE`" under the some-world rules. That would happen
+> because of a chain of subtyping rules:
+>
+> -   "`String` with nullness operator `UNION_NULL`" is a subtype of "`String`
+>     with nullness operator `UNSPECIFIED`."
+>
+> -   "`String` with nullness operator `UNSPECIFIED`" is a subtype of "`String`
+>     with nullness operator `NO_CHANGE`."
+>
+> Therefore, "`String` with nullness operator `UNION_NULL`" is a subtype of
+> "`String` with nullness operator `NO_CHANGE`."
 >
 > Yes, it's pretty terrible for something called "subtyping" not to be reflexive
 > or transitive. A more accurate name for this concept would be "consistent," a
@@ -644,7 +650,25 @@ way to specify this fully correctly.)
 > also the [same-type] relation and [containment]. If we were to coin a new term
 > for each, tool authors would need to mentally map between those terms and the
 > analogous Java terms. (Still, yes: Feel free to read terms like "subtyping" as
-> if they have scare quotes around them.)
+> if they hvae scare quotes around them.)
+>
+> Subtyping does end up being transitive when the relation is required to hold
+> in all worlds. And it does end up being reflexive when the relation is
+> required to hold only in [some world]. We don't state those properties as
+> rules for 2 reasons: First, they arise naturally from the definitions. Second,
+> we don't want to suggest that subtyping is reflexive and transitive under both
+> versions of the rule.
+
+Contrast this with our [nullness-delegating subtyping] rules and [containment]
+rules: Each of those is defined as a transitive closure. However, this is
+incorrect, and we should fix it: Transitivity causes the same problem there as
+it does here: `List<? extends @Nullable String>` ends up as a subtype of `List<?
+extends String>` because of a chain of subtyping rules that uses "`String` with
+nullness operator `UNSPECIFIED`" as part of the intermediate step. Luckily, tool
+authors that set out to implement transitivity for these two rules are very
+unlikely to write code that "notices" this chain. So, in practice, users are
+likely to see the "mostly transitive" that we intend, even if we haven't found a
+way to formally specify it yet.
 
 ## Null-inclusive under every parameterization
 
