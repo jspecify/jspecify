@@ -80,6 +80,8 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
+(concept-references)=
+
 ## References to concepts defined by this spec
 
 When a rule in this spec refers to any concept that is defined in this spec (for
@@ -318,8 +320,6 @@ locations listed below:
 -   A module. \[[#34]\]
 
 > *Not* a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
-
-(concept-references)=
 
 ## Null-marked scope
 
