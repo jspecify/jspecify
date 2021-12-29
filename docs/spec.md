@@ -774,6 +774,14 @@ Lower-bound rule:
 
     -   Its nullness operator is *not* `MINUS_NULL`.
 
+> In short, whether you have a `Predicate<? super String>`, a `Predicate<? super
+> @Nullable String>`, or unannotated code that doesn't specify the nullness
+> operator for the bound, you can always pass its `test` method a `String`. (If
+> you want to pass a `@Nullable String`, then you'll need for the bound to be
+> [null-inclusive under every parameterization]. The existence of the
+> null-inclusiveness rule frees this current rule from having to cover that
+> case.)
+
 **Some-world version:** The rules are the same except that the requirements for
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
 `UNSPECIFIED`."
