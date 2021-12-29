@@ -676,13 +676,27 @@ A type is null-inclusive under every parameterization if it meets either of the
 following conditions:
 
 -   Its [nullness operator] is `UNION_NULL`.
+
+    > This is the simplest part of the simplest case: A type usage always
+    > includes `null` if it's annotated with `@Nullable`.
+
 -   It is an [intersection type] whose elements all are null-inclusive under
     every parameterization.
 
 **Some-world version:** The rule is the same except that the requirement for
 "`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
 
+> That is: It's possible that any type usage in unannotated code "ought to be"
+> annotated with `@Nullable`.
+
 ## Null-exclusive under every parameterization
+
+> This is a straightforward concept ("never includes `null`"), but it's not as
+> simple to implement as the null-_inclusive_ rule was. This null-_exclusive_
+> rule has to cover cases like `String`, `E` (where `<E extends Object>`), and
+> `E` (where `<E extends @Nullable Object>` but nearby code has performed a null
+> check on the expression). The case of `<E extends Object>` is an example of
+> why the following rule requires looking for a "path."
 
 A type is null-exclusive under every parameterization if it has a
 [nullness-subtype-establishing path] to either of the following:
