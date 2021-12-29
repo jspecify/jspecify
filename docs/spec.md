@@ -772,11 +772,7 @@ Lower-bound rule:
 
     -   Its [base type] is the same as `T`'s base type.
 
-    -   Its nullness operator is `NO_CHANGE`.
-
-    TODO(cpovirk): What if the lower bound has some other nullness operator? I'm
-    pretty sure that we want to allow `UNSPECIFIED` in the some-world version
-    (as we did before my recent edits), and we may want to allow more.
+    -   Its nullness operator is *not* `MINUS_NULL`.
 
 **Some-world version:** The rules are the same except that the requirements for
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
