@@ -729,6 +729,18 @@ hold:
 
 ## Nullness-subtype-establishing direct-supertype edges
 
+> This section defines the supertypes for a given type --- but limited to those
+> that matter for nullness checking. For example, there's no need for the rules
+> to reflect that "`String` with nullness operator `NO_CHANGE`" extends
+> "`Object` with nullness operator `NO_CHANGE`": If we've established that a
+> type has a path to "`String` with nullness operator `NO_CHANGE`," then we
+> already know that it's [null-exclusive under every parameterization], based on
+> the rules above, and that's enough to prove subtyping. And if we *haven't*
+> established that, then the `String`-`Object` edge isn't going to change that.
+>
+> Thus, the rules here are restricted to type variables and intersection types,
+> whose supertypes may have nullness annotations.
+
 `T` has nullness-subtype-establishing direct-supertype edges to the union of the
 nodes computed by the following 2 rules:
 
