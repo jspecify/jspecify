@@ -644,7 +644,7 @@ way to specify this fully correctly.)
 > also the [same-type] relation and [containment]. If we were to coin a new term
 > for each, tool authors would need to mentally map between those terms and the
 > analogous Java terms. (Still, yes: Feel free to read terms like "subtyping" as
-> if they hvae scare quotes around them.)
+> if they have scare quotes around them.)
 
 ## Null-inclusive under every parameterization
 
