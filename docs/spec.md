@@ -794,20 +794,44 @@ Lower-bound rule:
 
 ## Nullness-delegating subtyping rules for Java
 
-The Java subtyping rules are defined in [JLS 4.10]. We add to them as follows:
+> Recall that this rule exists to handle subcomponents of types --- namely, type
+> arguments and array component types: It essentially says "Check nullness
+> subtyping for subcomponents as appropriate."
+
+The Java subtyping rules are defined in [JLS 4.10]. (Each rule takes a type as
+input and produces zero or more direct supertypes as outputs.) We add to them as
+follows:
 
 -   [As always](#concept-references), interpret the Java rules as operating on
-    [augmented types], not [base types]. However, when applying the Java
-    direct-supertype rules themselves, *ignore* the [nullness operator] of the
-    input types and output types. The augmented types matter only when the Java
-    rules refer to *other* rules that are defined in this spec. *Those* rules
-    respect the nullness operator of some type components --- but never the
-    nullness operator of the type component that represents the whole input or
-    output type.
+    [augmented types], not [base types]. This raises the question of *how* to
+    extend these particular rules to operate on augmented types. The answer has
+    two parts:
 
-    > To "ignore" the output's nullness operator, we recommend outputting a
-    > value of `NO_CHANGE`, since that is valid for all types, including
-    > [intersection types].
+    -   The first part applies only to the nullness operator *"of the type."*
+        [As always](#augmented-type), this means the nullness operator of the
+        type component that is the entire type.
+
+        No matter what nullness operator the input augmented type has, the rules
+        still apply, and they still produce the same direct supertypes. Thanks
+        to that rule, the nullness operator of any *produced supertype* is never
+        read by the subtyping rules, so any nullness operator is valid for it,
+        too.
+
+        > Essentially, this rule says that the top-level types do no matter:
+        > They have already been checked by the [nullness subtyping] check.
+        >
+        > For simplicity, we recommend producing a nullness operator of
+        > `NO_CHANGE`: That operator is valid for all types, including
+        > [intersection types].
+
+    -   The nullness operators of *subcomponents* of the augmented types *do*
+        matter. That's because some Java rules place requirements on those
+        subcomponents. [As always](#concept-references), check those
+        requirements by applying *this spec's* definitions.
+
+        > Those definitions (like [containment]) refer back to definitions (like
+        > [nullness subtyping]) that use the nullness operator of the types in
+        > question.
 
 -   When the Java array rules require one type to be a *direct* supertype of
     another, consider the direct supertypes of `T` to be *every* type that `T`
