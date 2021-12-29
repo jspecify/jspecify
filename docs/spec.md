@@ -575,48 +575,49 @@ The same-type relation is *not* defined to be reflexive or transitive.
 
 `A` is a subtype of `F` if both of the following conditions are met:
 
+-   `A` is a [nullness subtype] of `F`.
 -   `A` is a subtype of `F` according to the
     [nullness-delegating subtyping rules for Java].
--   `A` is a [nullness subtype] of `F`.
 
-(nullness-delegating-subtyping)=
-
-## Nullness-delegating subtyping rules for Java
-
-The Java subtyping rules are defined in [JLS 4.10]. We add to them as follows:
-
--   [As always](#concept-references), interpret the Java rules as operating on
-    [augmented types], not [base types]. However, when applying the Java
-    direct-supertype rules themselves, *ignore* the [nullness operator] of the
-    input types and output types. The augmented types matter only when the Java
-    rules refer to *other* rules that are defined in this spec. *Those* rules
-    respect the nullness operator of some type components --- but never the
-    nullness operator of the type component that represents the whole input or
-    output type.
-
-    > To "ignore" the output's nullness operator, we recommend outputting a
-    > value of `NO_CHANGE`, since that is valid for all types, including
-    > [intersection types].
-
--   When the Java array rules require one type to be a *direct* supertype of
-    another, consider the direct supertypes of `T` to be *every* type that `T`
-    is a [subtype] of.
+> The first condition suffices for most cases. The second condition is necessary
+> only for types that have subcomponents --- namely, parameterized types and
+> arrays. And it essentially says "Check the first condition on subcomponents as
+> appropriate."
 
 ## Nullness subtyping
 
-> The primary complication in subtyping comes from type-variable usages. Our
-> rules for them must account for every combination of type arguments with which
-> a given generic type can be parameterized.
-
 `A` is a nullness subtype of `F` if any of the following conditions are met:
 
+> Nullness subtyping asks the question: If `A` includes `null`, does `F` also
+> include `null`? There are 3 cases in which this is true, 2 easy and 1 hard:
+
 -   `F` is [null-inclusive under every parameterization].
+
+    > This is the first easy case: `F` always includes `null`.
+
 -   `A` is [null-exclusive under every parameterization].
+
+    > This is the second easy case: `A` never includes `null`.
+
 -   `A` has a [nullness-subtype-establishing path] to any type whose base type
     is the same as the base type of `F`, and `F` does *not* have
     [nullness operator] `MINUS_NULL`.
 
-    > The third case is necessary only for type-variable usages.
+    > This is the hard case: A given type-variable usage does not necessarily
+    > always include `null`, nor does it necessarily always exclude `null`. (For
+    > example, consider a usage of `E` inside `ArrayList<E>`. `ArrayList` may be
+    > instantiated as either an `ArrayList<@Nullable String>` or an
+    > `ArrayList<String>`.)
+    >
+    > Subtyping questions for type-variable usages are more complex: `E` is a
+    > nullness subtype of `E`; `@Nullable E` is not. Similarly, if `<F extends
+    > E>`, then `F` is a nullness subtype of `E`. But if `<F extends @Nullable
+    > E>`, it is not.
+
+> A further level of complexity in all this is `UNSPECIFIED`. For example, in
+> the [all-worlds] version of the following rules, a type with nullness operator
+> `UNSPECIFIED` can be both null-_inclusive_ under every parameterization and
+> null-_exclusive_ under every parameterization.
 
 Nullness subtyping (and thus subtyping itself) is *not* defined to be reflexive
 or transitive.
@@ -630,7 +631,7 @@ implementations are likely to produce naturally. Maybe someday we will find a
 way to specify this fully correctly.)
 
 > Subtyping does end up being transitive when the relation is required to hold
-> in [all worlds]. And it does end up being reflexive when the relation is
+> in all worlds. And it does end up being reflexive when the relation is
 > required to hold only in [some world]. We don't state those properties as
 > rules for 2 reasons: First, they arise naturally from the definitions. Second,
 > we don't want to suggest that subtyping is reflexive and transitive under both
@@ -716,6 +717,29 @@ Lower-bound rule:
 **Some-world version:** The rules are the same except that the requirements for
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
 `UNSPECIFIED`."
+
+(nullness-delegating-subtyping)=
+
+## Nullness-delegating subtyping rules for Java
+
+The Java subtyping rules are defined in [JLS 4.10]. We add to them as follows:
+
+-   [As always](#concept-references), interpret the Java rules as operating on
+    [augmented types], not [base types]. However, when applying the Java
+    direct-supertype rules themselves, *ignore* the [nullness operator] of the
+    input types and output types. The augmented types matter only when the Java
+    rules refer to *other* rules that are defined in this spec. *Those* rules
+    respect the nullness operator of some type components --- but never the
+    nullness operator of the type component that represents the whole input or
+    output type.
+
+    > To "ignore" the output's nullness operator, we recommend outputting a
+    > value of `NO_CHANGE`, since that is valid for all types, including
+    > [intersection types].
+
+-   When the Java array rules require one type to be a *direct* supertype of
+    another, consider the direct supertypes of `T` to be *every* type that `T`
+    is a [subtype] of.
 
 ## Containment
 
