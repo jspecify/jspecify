@@ -762,8 +762,6 @@ Lower-bound rule:
     pretty sure that we want to allow `UNSPECIFIED` in the some-world version
     (as we did before my recent edits), and we may want to allow more.
 
--   otherwise: no nodes
-
 **Some-world version:** The rules are the same except that the requirements for
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
 `UNSPECIFIED`."
