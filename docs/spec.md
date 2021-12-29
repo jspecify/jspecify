@@ -757,6 +757,19 @@ Lower-bound rule:
 -   the augmented type "`C` with nullness operator `NO_CHANGE`" for every type
     variable `C` whose lower bound meets both of the following conditions:
 
+    > This rule specifies "`C` with nullness operator `NO_CHANGE`" instead of
+    > just "`C`" because our definition of [nullness-subtype-establishing path]
+    > operates on augmented types. However, the nullness operator does not
+    > matter in this case: After the initial check of the nullness operator of
+    > the type called "`A`" above, no steps of the process look at the nullness
+    > operator of the "from" node.
+
+    <!-- TODO(cpovirk): Figure out whether the path's "*from* type" could be a
+    base type instead of an augmented type. Maybe I've been sticking with an
+    augmented type because that provides better access to bounds in our
+    prototype... possibly because the augmented types reflect
+    substitution/asMemberOf operations?? -->
+
     -   Its [base type] is the same as `T`'s base type.
 
     -   Its nullness operator is `NO_CHANGE`.
