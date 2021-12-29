@@ -825,9 +825,10 @@ follows:
         > [intersection types].
 
     -   The nullness operators of *subcomponents* of the augmented types *do*
-        matter. That's because some Java rules place requirements on those
-        subcomponents. [As always](#concept-references), check those
-        requirements by applying *this spec's* definitions.
+        matter. For example, some Java rules produce subtypes only if
+        subcomponents meet certain requirements.
+        [As always](#concept-references), check those requirements by applying
+        *this spec's* definitions.
 
         > Those definitions (like [containment]) refer back to definitions (like
         > [nullness subtyping]) that use the nullness operator of the types in
