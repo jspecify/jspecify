@@ -902,10 +902,8 @@ the result of the following operation:
     > To solve this, we need a special case for substitution for null-exclusive
     > type parameters like the one on `ImmutableList.Builder`. That special case
     > needs to produce a type with a nullness operator other than `UNSPECIFIED`.
-    > One valid option is to produce `NO_CHANGE`. We, however, happened to
-    > choose `MINUS_NULL`: That choice lets tools recognize that there's an
-    > error in code like `Optional.of(null)` without needing to implement type
-    > inference.
+    > One valid option is to produce `NO_CHANGE`; we happened to choose
+    > `MINUS_NULL`.
 
 -   Otherwise, replace `V` with the result of applying the nullness operator of
     `V` to `Aᵢ`.
