@@ -127,38 +127,38 @@ A nullness operator is one of 4 values:
 >
 > -   `UNION_NULL`: This is the operator produced by putting `@Nullable` on a
 >     type usage.
->     -   The type usage `String` `UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
+>     -   The type usage `String UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
 >         etc., plus `null`.
->     -   The type-variable usage `T` `UNION_NULL` includes all members of `T`,
+>     -   The type-variable usage `T UNION_NULL` includes all members of `T`,
 >         plus `null` if it wasn't already included.
 > -   `NO_CHANGE`: This is the operator produced by *not* putting `@Nullable` on
 >     a type usage (aside from the exception discussed under `UNSPECIFIED`
 >     below).
->     -   The type usage `String` `NO_CHANGE` includes `"a"`, `"b"`, `"ab"`,
->         etc., without including `null`.
->     -   The type-variable usage `T` `NO_CHANGE` includes exactly the members
->         of `T`: If `null` was a member of `T`, then it's a member of `T`
->         `NO_CHANGE`. If it was not a member of `T`, then it is not a member of
->         `T` `NO_CHANGE`.
->     -   One way to conceptualize this is that `String` `NO_CHANGE` means
->         "non-null `String`" but that `T` `NO_CHANGE` means "nullness comes
->         from the value of `T`."
+>     -   The type usage `String NO_CHANGE` includes `"a"`, `"b"`, `"ab"`, etc.,
+>         without including `null`.
+>     -   The type-variable usage `T NO_CHANGE` includes exactly the members of
+>         `T`: If `null` was a member of `T`, then it's a member of `T
+>         NO_CHANGE`. If it was not a member of `T`, then it is not a member of
+>         `T NO_CHANGE`.
+>     -   One way to conceptualize this is that `String NO_CHANGE` means
+>         "non-null `String`" but that `T NO_CHANGE` means "nullness comes from
+>         the value of `T`."
 > -   `UNSPECIFIED`: This is the operator produced by not putting `@Nullable` on
 >     a type usage *in code that is outside a [null-marked scope]*. Roughly, it
 >     is the operator assigned to "completely unannotated code."
->     -   The type usage `String` `UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
+>     -   The type usage `String UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
 >         etc., but the developer did not specify whether to include `null`.
->     -   The type-variable usage `T` `UNSPECIFIED` includes all members of `T`.
+>     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`.
 >         But the developer did not specify whether to add `null` if it wasn't
 >         already included.
 > -   `MINUS_NULL`: This operator not only does not *add* `null` but also
 >     actively *removes* it from a type-variable usage that would otherwise
 >     include it.
->     -   The type usage `String` `MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
->         etc., without including `null`. (This is equivalent to `String`
->         `NO_CHANGE`.)
->     -   The type-variable usage `T` `MINUS_NULL` includes all members of `T`
->         *except* for `null`. (This is equivalent to `T` `NO_CHANGE` unless
+>     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
+>         etc., without including `null`. (This is equivalent to `String
+>         NO_CHANGE`.)
+>     -   The type-variable usage `T MINUS_NULL` includes all members of `T`
+>         *except* for `null`. (This is equivalent to `T NO_CHANGE` unless
 >         `null` was a member of `T`.)
 
 ## Augmented type
@@ -372,8 +372,7 @@ condition is met, skip the remaining conditions.
 > The rules here never produce the fourth nullness operator, `MINUS_NULL`.
 > However, if tool authors prefer, they can safely produce `MINUS_NULL` in any
 > case in which it is equivalent to `NO_CHANGE`. For example, there is no
-> difference between a `String` with `NO_CHANGE` and a `String` with
-> `MINUS_NULL`.
+> difference between `String NO_CHANGE` and `String MINUS_NULL`.
 
 > So why does `MINUS_NULL` exist at all? It does appear later in this spec in
 > the section on [substitution]. However, its main purpose is to provide tools
@@ -404,8 +403,8 @@ the type as a whole is always `NO_CHANGE`.
 
 > This lets us provide, for every [base type], a rule for computing its
 > [augmented type]. But we require `NO_CHANGE` so as to avoid questions like
-> whether "a `UNION_NULL` intersection type whose members are `UNION_NULL` `Foo`
-> and `UNION_NULL` `Bar`" is a subtype of "a `NO_CHANGE` intersection type with
+> whether "a `UNION_NULL` intersection type whose members are `Foo UNION_NULL`
+> and `Bar UNION_NULL`" is a subtype of "a `NO_CHANGE` intersection type with
 > those same members." Plus, it would be difficult for tools to output the
 > nullness operator of an intersection type in a human-readable way.
 
@@ -622,26 +621,22 @@ The same-type relation is *not* defined to be reflexive or transitive.
 Nullness subtyping (and thus subtyping itself) is *not* defined to be reflexive
 or transitive.
 
-> If we defined nullness subtyping to be reflexive, then "`String` with nullness
-> operator `UNSPECIFIED`" would be a subtype of "`String` with nullness operator
-> `UNSPECIFIED`," even under the [all-worlds] rules. In other words, we'd be
-> saying that unannotated code is always free from nullness errors. That is
-> clearly false. (Nevertheless, lenient tools will choose not to issue errors
-> for such code. They can do this by implementing the [some-world] rules.)
+> If we defined nullness subtyping to be reflexive, then `String UNSPECIFIED`
+> would be a subtype of `String UNSPECIFIED`, even under the [all-worlds] rules.
+> In other words, we'd be saying that unannotated code is always free from
+> nullness errors. That is clearly false. (Nevertheless, lenient tools will
+> choose not to issue errors for such code. They can do this by implementing the
+> [some-world] rules.)
 >
-> If we defined nullness subtyping to be transitive, then we'd say that
-> "`String` with nullness operator `UNION_NULL`" is a subtype of "`String` with
-> nullness operator `NO_CHANGE`" under the some-world rules. That would happen
-> because of a chain of subtyping rules:
+> If we defined nullness subtyping to be transitive, then we'd say that `String
+> UNION_NULL` is a subtype of `String NO_CHANGE` under the some-world rules.
+> That would happen because of a chain of subtyping rules:
 >
-> -   "`String` with nullness operator `UNION_NULL`" is a subtype of "`String`
->     with nullness operator `UNSPECIFIED`."
+> -   `String UNION_NULL` is a subtype of `String UNSPECIFIED`.
 >
-> -   "`String` with nullness operator `UNSPECIFIED`" is a subtype of "`String`
->     with nullness operator `NO_CHANGE`."
+> -   `String UNSPECIFIED` is a subtype of `String NO_CHANGE`.
 >
-> Therefore, "`String` with nullness operator `UNION_NULL`" is a subtype of
-> "`String` with nullness operator `NO_CHANGE`."
+> Therefore, `String UNION_NULL` is a subtype of `String NO_CHANGE`.
 >
 > Yes, it's pretty terrible for something called "subtyping" not to be reflexive
 > or transitive. A more accurate name for this concept would be "consistent," a
@@ -663,12 +658,12 @@ Contrast this with our [nullness-delegating subtyping] rules and [containment]
 rules: Each of those is defined as a transitive closure. However, this is
 incorrect, and we should fix it: Transitivity causes the same problem there as
 it does here: `List<? extends @Nullable String>` ends up as a subtype of `List<?
-extends String>` because of a chain of subtyping rules that uses "`String` with
-nullness operator `UNSPECIFIED`" as part of the intermediate step. Luckily, tool
-authors that set out to implement transitivity for these two rules are very
-unlikely to write code that "notices" this chain. So, in practice, users are
-likely to see the "mostly transitive" that we intend, even if we haven't found a
-way to formally specify it yet.
+extends String>` because of a chain of subtyping rules that uses `String
+UNSPECIFIED` as part of the intermediate step. Luckily, tool authors that set
+out to implement transitivity for these two rules are very unlikely to write
+code that "notices" this chain. So, in practice, users are likely to see the
+"mostly transitive" that we intend, even if we haven't found a way to formally
+specify it yet.
 
 ## Null-inclusive under every parameterization
 
@@ -735,12 +730,11 @@ hold:
 
 > This section defines the supertypes for a given type --- but limited to those
 > that matter for nullness checking. For example, there's no need for the rules
-> to reflect that "`String` with nullness operator `NO_CHANGE`" extends
-> "`Object` with nullness operator `NO_CHANGE`": If we've established that a
-> type has a path to "`String` with nullness operator `NO_CHANGE`," then we
-> already know that it's [null-exclusive under every parameterization], based on
-> the rules above, and that's enough to prove subtyping. And if we *haven't*
-> established that, then the `String`-`Object` edge isn't going to change that.
+> to reflect that `String NO_CHANGE` extends `Object NO_CHANGE`: If we've
+> established that a type has a path to `String NO_CHANGE`, then we already know
+> that it's [null-exclusive under every parameterization], based on the rules
+> above, and that's enough to prove subtyping. And if we *haven't* established
+> that, then the `String`-`Object` edge isn't going to change that.
 >
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
@@ -758,15 +752,14 @@ Upper-bound rule:
 
 Lower-bound rule:
 
--   the augmented type "`C` with nullness operator `NO_CHANGE`" for every type
-    variable `C` whose lower bound meets both of the following conditions:
+-   the augmented type `C NO_CHANGE` for every type variable `C` whose lower
+    bound meets both of the following conditions:
 
-    > This rule specifies "`C` with nullness operator `NO_CHANGE`" instead of
-    > just "`C`" because our definition of [nullness-subtype-establishing path]
-    > operates on augmented types. However, the nullness operator does not
-    > matter in this case: After the initial check of the nullness operator of
-    > the type called "`A`" above, no steps of the process look at the nullness
-    > operator of the "from" node.
+    > This rule specifies "`C NO_CHANGE`" instead of just "`C`" because our
+    > definition of [nullness-subtype-establishing path] operates on augmented
+    > types. However, the nullness operator does not matter in this case: After
+    > the initial check of the nullness operator of the type called "`A`" above,
+    > no steps of the process look at the nullness operator of the "from" node.
 
     <!-- TODO(cpovirk): Figure out whether the path's "*from* type" could be a
     base type instead of an augmented type. Maybe I've been sticking with an
@@ -862,12 +855,10 @@ The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
 
 > Substitution on Java base types barely requires an explanation: See [JLS 1.3].
 > Substitution on [augmented types], however, is trickier: If `Map.get` returns
-> "`V` with [nullness operator] `UNION_NULL`," and if a user has a map whose
-> value type is "`String` with nullness operator `UNSPECIFIED`," then what does
-> its `get` method return? Naive substitution would produce "`String` with
-> nullness operator `UNSPECIFIED` with nullness operator `UNION_NULL`." To
-> reduce that to a proper augmented type with a single nullness operator, we
-> define this process.
+> `V UNION_NULL`, and if a user has a map whose value type is `String
+> UNSPECIFIED`, then what does its `get` method return? Naive substitution would
+> produce `String UNSPECIFIED UNION_NULL`. To reduce that to a proper augmented
+> type with a single nullness operator, we define this process.
 
 To substitute each type argument `Aᵢ` for each corresponding type parameter
 `Pᵢ`:
