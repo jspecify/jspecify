@@ -59,9 +59,9 @@ approach. For example:
 
 Note also that this spec covers only nullness information *from JSpecify
 annotations*. Tools may have additional sources of information. For example, a
-tool may recognize additional annotations. Or a tool may define a rule to treat
-all unannotated type usages the same, rather than implementing different
-behavior for those that this spec assigns "unspecified nullness."
+tool may recognize additional annotations. Or a tool may omit the concept of
+`UNSPECIFIED` and apply a policy that type usages like `Object` are always
+non-nullable.
 
 ### That's all!
 
@@ -250,6 +250,11 @@ following cases: \[[#17]\]
 
     > For example, the annotation in `@Nullable Foo.Bar` is in an unrecognized
     > location: Java syntax attaches it to the outer type `Foo`.
+    >
+    > (Note that `@Nullable Foo.Bar` is a *Java* syntax error when `Bar` is a
+    > *static* type. If `Bar` is a non-static type, then Java permits the code.
+    > So JSpecify tools have the oppotunity to reject it, given that the author
+    > probably intended `Foo.@Nullable Bar`.)
 
     > Every outer type is intrinsically non-nullable because every instance of
     > an inner class has an associated instance of the outer class.
@@ -325,8 +330,8 @@ locations listed below:
 
 To determine whether a type usage appears in a null-marked scope:
 
-Look for an `@org.jspecify.nullness.NullMarked` annotation on any of the
-enclosing scopes surrounding the type usage.
+Look for an `@org.jspecify.nullness.NullMarked` annotation on any of the scopes
+enclosing the type usage.
 
 Class members are enclosed by classes, which may be enclosed by other class
 members or classes. and top-level classes are enclosed by packages, which may be
@@ -416,15 +421,15 @@ the type as a whole is always `NO_CHANGE`.
 
 ## Bound of an "unbounded" wildcard
 
-In source, an unbounded wildcard is written as `<?>`. This section does **not**
+In source, an unbounded wildcard is written as `<?>`. This section does *not*
 apply to `<? extends Object>`, even though that is often equivalent to `<?>`.
 
 > See [JLS 4.5.1].
 
 In bytecode, such a wildcard is represented as a wildcard type with an empty
-list of upper bounds and an empty list of lower bounds. This section does
-**not** apply to a wildcard with any bounds in either list, even a sole upper
-bound of `Object`.
+list of upper bounds and an empty list of lower bounds. This section does *not*
+apply to a wildcard with any bounds in either list, even a sole upper bound of
+`Object`.
 
 > For a wildcard with an explicit bound of `Object` (that is, `<? extends
 > Object>`, perhaps with an annotation on `Object`), instead apply
@@ -487,7 +492,7 @@ to all types, including the null type. This produces multiple null types:
 -   the null [base type] with nullness operator `NO_CHANGE`: the
     "bottom"/"nothing" type used in [capture conversion]
 
-    > No value, including `null` itself, has this type.
+    > No value has this type, not even `null` itself.
 
 -   the null base type with nullness operator `MINUS_NULL`
 
@@ -538,7 +543,9 @@ rules.
 > version. If the tools detects, say, an out-of-bounds type argument in both
 > cases, the tool would produce an error. But, if the tool detects such a
 > problem with the all-worlds version but not with the some-world version, the
-> tool would produce a warning.
+> tool would produce a warning. (Such warnings mean *approximately* that "There
+> is some way that the code could be annotated that would make this an error and
+> some way that would make it *not* an error, even under strict tools.")
 
 The main body of each section of the spec describes the all-worlds rule. If the
 some-world rule differs, the differences are explained at the end.
@@ -628,9 +635,9 @@ or transitive.
 > choose not to issue errors for such code. They can do this by implementing the
 > [some-world] rules.)
 >
-> If we defined nullness subtyping to be transitive, then we'd say that `String
-> UNION_NULL` is a subtype of `String NO_CHANGE` under the some-world rules.
-> That would happen because of a chain of subtyping rules:
+> If we defined nullness subtyping to be transitive, then `String UNION_NULL`
+> would be a subtype of `String NO_CHANGE` under the some-world rules. That
+> would happen because of a chain of subtyping rules:
 >
 > -   `String UNION_NULL` is a subtype of `String UNSPECIFIED`.
 >
@@ -662,8 +669,8 @@ extends String>` because of a chain of subtyping rules that uses `String
 UNSPECIFIED` as part of the intermediate step. Luckily, tool authors that set
 out to implement transitivity for these two rules are very unlikely to write
 code that "notices" this chain. So, in practice, users are likely to see the
-"mostly transitive" that we intend, even if we haven't found a way to formally
-specify it yet.
+"mostly transitive" behavior that we intend, even if we haven't found a way to
+formally specify it yet.
 
 ## Null-inclusive under every parameterization
 
@@ -729,12 +736,13 @@ hold:
 ## Nullness-subtype-establishing direct-supertype edges
 
 > This section defines the supertypes for a given type --- but limited to those
-> that matter for nullness checking. For example, there's no need for the rules
-> to reflect that `String NO_CHANGE` extends `Object NO_CHANGE`: If we've
-> established that a type has a path to `String NO_CHANGE`, then we already know
-> that it's [null-exclusive under every parameterization], based on the rules
-> above, and that's enough to prove subtyping. And if we *haven't* established
-> that, then the `String`-`Object` edge isn't going to change that.
+> that fill the gaps in our nullness checking of "top-level" types. For example,
+> there's no need for the rules to reflect that `String NO_CHANGE` extends
+> `Object NO_CHANGE`: If we've established that a type has a path to `String
+> NO_CHANGE`, then we already know that it's
+> [null-exclusive under every parameterization], based on the rules above, and
+> that's enough to prove subtyping. And if we *haven't* established that, then
+> the `String`-`Object` edge isn't going to change that.
 >
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
