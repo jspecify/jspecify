@@ -685,6 +685,9 @@ following conditions:
 -   It is an [intersection type] whose elements all are null-inclusive under
     every parameterization.
 
+TODO(cpovirk): It seems likely that we need an additional condition here for `T
+super @Nullable Foo`, as produced by capture conversion.
+
 **Some-world version:** The rule is the same except that the requirement for
 "`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
 
