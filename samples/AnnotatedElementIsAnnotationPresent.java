@@ -31,5 +31,13 @@ class AnnotatedElementIsAnnotationPresent {
     return "";
   }
 
+  Object checkWildcard(AnnotatedElement element, Class<? extends Foo> clazz) {
+    if (element.isAnnotationPresent(clazz)) {
+      // jspecify_but_expect_error
+      return element.getAnnotation(clazz);
+    }
+    return "";
+  }
+
   @interface Foo {}
 }
