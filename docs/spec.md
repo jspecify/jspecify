@@ -543,9 +543,9 @@ rules.
 > version. If the tools detects, say, an out-of-bounds type argument in both
 > cases, the tool would produce an error. But, if the tool detects such a
 > problem with the all-worlds version but not with the some-world version, the
-> tool would produce a warning. (Such warnings mean *approximately* that "There
-> is some way that the code could be annotated that would make this an error and
-> some way that would make it *not* an error, even under strict tools.")
+> tool would produce a warning. Under this scheme, a warning means roughly that
+> "There is some way that the code could be annotated that would produce an
+> error here."
 
 The main body of each section of the spec describes the all-worlds rule. If the
 some-world rule differs, the differences are explained at the end.
