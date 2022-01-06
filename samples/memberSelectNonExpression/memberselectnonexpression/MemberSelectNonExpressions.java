@@ -17,6 +17,7 @@
 package memberselectnonexpression;
 
 import org.jspecify.nullness.NullMarked;
+import org.jspecify.nullness.Nullable;
 
 class MemberSelectNonExpressions {
   @NullMarked
@@ -60,13 +61,13 @@ class MemberSelectNonExpressions {
     }
 
     static void x1() {
-      StaticParameterized<?> s0;
-      MemberSelectNonExpressions.StaticParameterized<?> s1;
-      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<?> s2;
+      StaticParameterized<Object> s0;
+      MemberSelectNonExpressions.StaticParameterized<Object> s1;
+      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<Object> s2;
 
-      StaticParameterized<?>.Inner i0;
-      MemberSelectNonExpressions.StaticParameterized<?>.Inner i1;
-      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<?>.Inner i2;
+      StaticParameterized<Object>.Inner i0;
+      MemberSelectNonExpressions.StaticParameterized<Object>.Inner i1;
+      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<Object>.Inner i2;
     }
   }
 
@@ -76,7 +77,7 @@ class MemberSelectNonExpressions {
     static int x;
   }
 
-  static class StaticParameterized<T> {
+  static class StaticParameterized<T extends @Nullable Object> {
     static void x() {}
 
     static int x;
