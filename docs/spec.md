@@ -30,21 +30,22 @@ the previous:
 
 ### The scope of this spec
 
-Currently, this spec does not address _when_ tools must apply a given check. For
-example, it does not state when tools must apply the [subtyping] check.
+Currently, this spec does not address *when* tools must apply any part of the
+spec. For example, it does not state when tools must check that the [subtyping]
+relation holds.
 
-We anticipate that tools will typically apply them in the same cases that they
-apply standard Java checks. For example, if code contains the parameterized type
+We anticipate that tools will typically apply parts of this spec in the same
+cases that they apply the corresponding parts of the Java Language
+Specification. For example, if code contains the parameterized type
 `List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable Foo`
 is a subtype of the bound of the type parameter of `List`.
 
 However, this is up to tool authors, who may have reasons to take a different
 approach. For example:
 
--   Java
-    [requires checks in some cases in which they aren't necessary for soundness][#49],
-    and it [doesn't require checks in some cases in which checks _are_ necessary
-    for soundness][#65].
+-   Java [places some restrictions that aren't necessary for soundness][#49],
+    and it
+    [is lenient in at least one way that can lead to runtime errors][#65].
 
 -   JSpecify annotations can be used even by tools that are not "nullness
     checkers" at all. For example, a tool that lists the members of an API could
@@ -56,11 +57,11 @@ approach. For example:
     Or the tool might target a future version of Java whose language features
     would not be covered by this version of this spec.
 
-Note also that this spec covers only nullness information _from JSpecify
-annotations_. Tools may have additional sources of information. For example, a
-tool may recognize additional annotations. Or a tool may define a rule to treat
-all unannotated type usages the same, rather than implementing different
-behavior for those that this spec assigns "unspecified nullness."
+Note also that this spec covers only nullness information *from JSpecify
+annotations*. Tools may have additional sources of information. For example, a
+tool may recognize additional annotations. Or a tool may omit the concept of
+`UNSPECIFIED` and apply a policy that type usages like `Object` are always
+non-nullable.
 
 ### That's all!
 
@@ -79,6 +80,8 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
+(concept-references)=
+
 ## References to concepts defined by this spec
 
 When a rule in this spec refers to any concept that is defined in this spec (for
@@ -94,14 +97,14 @@ In particular, when a JLS rule refers to types, apply this spec's definition of
 
 ## Base type
 
-A _base type_ is a type as defined in [JLS 4].
+A *base type* is a type as defined in [JLS 4].
 
 > JLS 4 does not consider type-use annotations to be part of types, so neither
 > does our concept of "base type."
 
 ## Type components
 
-A _type component_ of a given type is a type that transitively forms some part
+A *type component* of a given type is a type that transitively forms some part
 of that type. Specifically, a type component is one of the following:
 
 -   a non-wildcard type argument
@@ -124,44 +127,48 @@ A nullness operator is one of 4 values:
 >
 > -   `UNION_NULL`: This is the operator produced by putting `@Nullable` on a
 >     type usage.
->     -   The type usage `String` `UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
+>     -   The type usage `String UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
 >         etc., plus `null`.
->     -   The type-variable usage `T` `UNION_NULL` includes all members of `T`,
+>     -   The type-variable usage `T UNION_NULL` includes all members of `T`,
 >         plus `null` if it wasn't already included.
-> -   `NO_CHANGE`: This is the operator produced by _not_ putting `@Nullable` on
+> -   `NO_CHANGE`: This is the operator produced by *not* putting `@Nullable` on
 >     a type usage (aside from the exception discussed under `UNSPECIFIED`
 >     below).
->     -   The type usage `String` `NO_CHANGE` includes `"a"`, `"b"`, `"ab"`,
->         etc., without including `null`.
->     -   The type-variable usage `T` `NO_CHANGE` includes exactly the members
->         of `T`: If `null` was a member of `T`, then it's a member of `T`
->         `NO_CHANGE`. If it was not a member of `T`, then it is not a member of
->         `T` `NO_CHANGE`.
->     -   One way to conceptualize this is that `String` `NO_CHANGE` means
->         "non-null `String`" but that `T` `NO_CHANGE` means "nullness comes
->         from the value of `T`."
+>     -   The type usage `String NO_CHANGE` includes `"a"`, `"b"`, `"ab"`, etc.,
+>         without including `null`.
+>     -   The type-variable usage `T NO_CHANGE` includes exactly the members of
+>         `T`: If `null` was a member of `T`, then it's a member of `T
+>         NO_CHANGE`. If it was not a member of `T`, then it is not a member of
+>         `T NO_CHANGE`.
+>     -   One way to conceptualize this is that `String NO_CHANGE` means
+>         "non-null `String`" but that `T NO_CHANGE` means "nullness comes from
+>         the value of `T`."
 > -   `UNSPECIFIED`: This is the operator produced by not putting `@Nullable` on
->     a type usage _in code that is outside a [null-marked scope]_. Roughly, it
+>     a type usage *in code that is outside a [null-marked scope]*. Roughly, it
 >     is the operator assigned to "completely unannotated code."
->     -   The type usage `String` `UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
+>     -   The type usage `String UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
 >         etc., but the developer did not specify whether to include `null`.
->     -   The type-variable usage `T` `UNSPECIFIED` includes all members of `T`.
+>     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`.
 >         But the developer did not specify whether to add `null` if it wasn't
 >         already included.
-> -   `MINUS_NULL`: This operator not only does not _add_ `null` but also
->     actively _removes_ it from a type-variable usage that would otherwise
+> -   `MINUS_NULL`: This operator not only does not *add* `null` but also
+>     actively *removes* it from a type-variable usage that would otherwise
 >     include it.
->     -   The type usage `String` `MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
->         etc., without including `null`. (This is equivalent to `String`
->         `NO_CHANGE`.)
->     -   The type-variable usage `T` `MINUS_NULL` includes all members of `T`
->         _except_ for `null`. (This is equivalent to `T` `NO_CHANGE` unless
+>     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
+>         etc., without including `null`. (This is equivalent to `String
+>         NO_CHANGE`.)
+>     -   The type-variable usage `T MINUS_NULL` includes all members of `T`
+>         *except* for `null`. (This is equivalent to `T NO_CHANGE` unless
 >         `null` was a member of `T`.)
 
 ## Augmented type
 
 An augmented type consists of a [base type] and a [nullness operator]
-corresponding to _each_ of its [type components].
+corresponding to *each* of its [type components].
+
+> Arguably, an augmented type with nullness operator `UNSPECIFIED` is better
+> understood not as representing "a type" but as representing a *lack* of the
+> nullness portion of the type.
 
 For our purposes, base types (and thus augmented types) include not just class
 and interface types, array types, and type variables but also
@@ -171,7 +178,7 @@ and interface types, array types, and type variables but also
 > the JLS defines for base types.
 >
 > Accordingly, in almost all cases, this spec agrees with the JLS's rules when
-> specifying what _base_ types appear in a piece of code. It makes an exception
+> specifying what *base* types appear in a piece of code. It makes an exception
 > for ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
 > specifies a bound of `Object` that the JLS does not specify.
 
@@ -202,7 +209,7 @@ We provide a parameterless type-use annotation called `@Nullable`.
 
 ### Recognized locations for type-use annotations
 
-A location is a _recognized_ location for our type-use annotation in the
+A location is a *recognized* location for our type-use annotation in the
 circumstances detailed below. A type at a recognized location has the semantics
 described in this spec. The spec does not assign semantics to types in other
 locations, nor to any annotations on such types.
@@ -243,12 +250,17 @@ following cases: \[[#17]\]
 
     > For example, the annotation in `@Nullable Foo.Bar` is in an unrecognized
     > location: Java syntax attaches it to the outer type `Foo`.
+    >
+    > (Note that `@Nullable Foo.Bar` is a *Java* syntax error when `Bar` is a
+    > *static* type. If `Bar` is a non-static type, then Java permits the code.
+    > So JSpecify tools have the oppotunity to reject it, given that the author
+    > probably intended `Foo.@Nullable Bar`.)
 
     > Every outer type is intrinsically non-nullable because every instance of
     > an inner class has an associated instance of the outer class.
 
-Additionally, any location above is unrecognized if it makes up _any
-[type component]_ of a type in the following locations: \[[#17]\]
+Additionally, any location above is unrecognized if it makes up *any
+[type component]* of a type in the following locations: \[[#17]\]
 
 > These locations all fit under the umbrella of "implementation code."
 > Implementation code may use types that contain type arguments, wildcard
@@ -264,7 +276,7 @@ Additionally, any location above is unrecognized if it makes up _any
     a generic class
 
 > In practice, we anticipate that tools will treat types (and their annotations)
-> in _most_ of the above locations much like they treat types in other
+> in *most* of the above locations much like they treat types in other
 > locations. Still, this spec does not concern itself with implementation code:
 > We believe that the most important domain for us to focus on is that of APIs.
 
@@ -284,17 +296,17 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 > -   a class declaration \[[#7]\]: For example, the annotation in `public
 >     @Nullable class Foo {}` is in an unrecognized location.
-> -   a type-parameter declaration or a wildcard _itself_ \[[#19], [#31]\]
+> -   a type-parameter declaration or a wildcard *itself* \[[#19], [#31]\]
 > -   any [type component] of a receiver parameter type \[[#157]\]
 >
 > But note that types "inside" some of these locations can still be recognized,
-> such as a _type argument_ of a supertype.
+> such as a *type argument* of a supertype.
 
 > When analyzing source code, tools are encouraged to offer an option to issue
 > an error for an annotation in an unrecognized location (unless they define
 > semantics for that location). Tools are especially encouraged to issue an
 > error for an annotation in a location that is intrinsically non-nullable. When
-> reading _bytecode_, however, tools may be best off ignoring an annotation in
+> reading *bytecode*, however, tools may be best off ignoring an annotation in
 > an unrecognized location (again, unless they define semantics for that
 > location).
 
@@ -305,23 +317,21 @@ We provide a single parameterless declaration annotation called `@NullMarked`.
 
 ### Recognized locations for declaration annotations
 
-Our declaration annotation is specified to be _recognized_ when applied to the
+Our declaration annotation is specified to be *recognized* when applied to the
 locations listed below:
 
--   A _named_ class.
+-   A *named* class.
 -   A package. \[[#34]\]
 -   A module. \[[#34]\]
 
-> _Not_ a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
-
-(concept-references)=
+> *Not* a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
 
 ## Null-marked scope
 
 To determine whether a type usage appears in a null-marked scope:
 
-Look for an `@org.jspecify.nullness.NullMarked` annotation on any of the
-enclosing scopes surrounding the type usage.
+Look for an `@org.jspecify.nullness.NullMarked` annotation on any of the scopes
+enclosing the type usage.
 
 Class members are enclosed by classes, which may be enclosed by other class
 members or classes. and top-level classes are enclosed by packages, which may be
@@ -364,13 +374,20 @@ condition is met, skip the remaining conditions.
 > `@Nullable`, then the override's return type will *not* have nullness operator
 > `UNION_NULL`.
 
-> The rules here never produce the fourth nullness operator, `MINUS_NULL`. (It
-> will appear later in [substitution]. Additionally, we anticipate that tools
-> will produce `MINUS_NULL` based on the results of null checks in
-> implementation code.) However, if tool authors prefer, they can safely produce
-> `MINUS_NULL` in any case in which it is equivalent to `NO_CHANGE`. For
-> example, there is no difference between a `String` with `NO_CHANGE` and a
-> `String` with `MINUS_NULL`.
+> The rules here never produce the fourth nullness operator, `MINUS_NULL`.
+> However, if tool authors prefer, they can safely produce `MINUS_NULL` in any
+> case in which it is equivalent to `NO_CHANGE`. For example, there is no
+> difference between `String NO_CHANGE` and `String MINUS_NULL`.
+
+> So why does `MINUS_NULL` exist at all? It does appear later in this spec in
+> the section on [substitution]. However, its main purpose is to provide tools
+> with a way to represent the nullness of certain expressions in implementation
+> code: Consider `ArrayList<E>`. `ArrayList` supports null elements, so the
+> class has to handle the possibility that any expression of type `E` may be
+> null. However, if implementation code contains the statement `if (e != null) {
+> ... }`, then tools can assume that `e` is non-null inside. The purpose of
+> `MINUS_NULL` is to represent that such an expression is known not to be null,
+> even though its base type `E` suggests otherwise.
 
 (intersection-types)=
 
@@ -391,8 +408,8 @@ the type as a whole is always `NO_CHANGE`.
 
 > This lets us provide, for every [base type], a rule for computing its
 > [augmented type]. But we require `NO_CHANGE` so as to avoid questions like
-> whether "a `UNION_NULL` intersection type whose members are `UNION_NULL` `Foo`
-> and `UNION_NULL` `Bar`" is a subtype of "a `NO_CHANGE` intersection type with
+> whether "a `UNION_NULL` intersection type whose members are `Foo UNION_NULL`
+> and `Bar UNION_NULL`" is a subtype of "a `NO_CHANGE` intersection type with
 > those same members." Plus, it would be difficult for tools to output the
 > nullness operator of an intersection type in a human-readable way.
 
@@ -404,15 +421,15 @@ the type as a whole is always `NO_CHANGE`.
 
 ## Bound of an "unbounded" wildcard
 
-In source, an unbounded wildcard is written as `<?>`. This section does **not**
+In source, an unbounded wildcard is written as `<?>`. This section does *not*
 apply to `<? extends Object>`, even though that is often equivalent to `<?>`.
 
 > See [JLS 4.5.1].
 
 In bytecode, such a wildcard is represented as a wildcard type with an empty
-list of upper bounds and an empty list of lower bounds. This section does
-**not** apply to a wildcard with any bounds in either list, even a sole upper
-bound of `Object`.
+list of upper bounds and an empty list of lower bounds. This section does *not*
+apply to a wildcard with any bounds in either list, even a sole upper bound of
+`Object`.
 
 > For a wildcard with an explicit bound of `Object` (that is, `<? extends
 > Object>`, perhaps with an annotation on `Object`), instead apply
@@ -475,7 +492,7 @@ to all types, including the null type. This produces multiple null types:
 -   the null [base type] with nullness operator `NO_CHANGE`: the
     "bottom"/"nothing" type used in [capture conversion]
 
-    > No value, including `null` itself, has this type.
+    > No value has this type, not even `null` itself.
 
 -   the null base type with nullness operator `MINUS_NULL`
 
@@ -511,21 +528,24 @@ rules.
 > specification. The all-worlds version of a rule, by requiring types to be
 > compatible in all possible worlds, holds that types are incompatible unless it
 > has enough information to prove they are compatible. The some-world version,
-> by requiring types to be compatible only in _some_ world, holds that types are
+> by requiring types to be compatible only in *some* world, holds that types are
 > compatible unless it has enough information to prove they are incompatible.
-> (By behaving "optimistically," the some-world checking behaves much like
-> Kotlin's checking of "platform types.")
+> (By behaving "optimistically," the some-world version is much like Kotlin's
+> rules for "platform types.")
 >
 > Thus, a strict tool might choose to implement the all-worlds version of rules,
 > and a lenient tool might choose to implement the some-world version. Yet
 > another tool might implement both and let users select which rules to apply.
 >
 > Still another possibility is for a tool to implement both versions and to use
-> that to distinguish between "errors" and "warnings." Such a tool might run
-> each check first in the all-worlds version and then, if the check fails, run
-> it again in the some-world version. If the check fails in both cases, the tool
-> would produce an error. If it passes only because of the some-world version,
-> the tool would produce a warning.
+> that to distinguish between "errors" and "warnings." Such a tool might always
+> first process code with the all-worlds version and then with the some-world
+> version. If the tools detects, say, an out-of-bounds type argument in both
+> cases, the tool would produce an error. But, if the tool detects such a
+> problem with the all-worlds version but not with the some-world version, the
+> tool would produce a warning. Under this scheme, a warning means roughly that
+> "There is some way that the code could be annotated that would produce an
+> error here."
 
 The main body of each section of the spec describes the all-worlds rule. If the
 some-world rule differs, the differences are explained at the end.
@@ -536,13 +556,13 @@ some-world rule differs, the differences are explained at the end.
 
 (propagating-multiple-worlds)=
 
-### Propagating how many worlds a check must hold in
+### Propagating how many worlds a relation must hold in
 
 When one rule in this spec refers to another, it refers to the same version of
 the rule. For example, when the rules for [containment] refer to the rules for
-[subtyping], the some-world containment check applies the some-world subtyping
-check, and the all-worlds containment check applies the all-worlds subtyping
-check.
+[subtyping], the some-world containment relation refers to the some-world
+subtyping relation, and the all-worlds containment relation refers to the
+all-worlds subtyping relation.
 
 This meta-rule applies except when a rule refers explicitly to a particular
 version of another rule.
@@ -552,83 +572,105 @@ version of another rule.
 `S` and `T` are the same type if `S` is a [subtype] of `T` and `T` is a subtype
 of `S`.
 
-The same-type check is _not_ defined to be reflexive or transitive.
+The same-type relation is *not* defined to be reflexive or transitive.
 
-> For more discussion of reflexive and transitive checks, see the comments under
-> [nullness subtyping].
+> For more discussion of reflexive and transitive relations, see the comments
+> under [nullness subtyping].
 
 ## Subtyping
 
 `A` is a subtype of `F` if both of the following conditions are met:
 
+-   `A` is a [nullness subtype] of `F`.
 -   `A` is a subtype of `F` according to the
     [nullness-delegating subtyping rules for Java].
--   `A` is a [nullness subtype] of `F`.
 
-(nullness-delegating-subtyping)=
-
-## Nullness-delegating subtyping rules for Java
-
-The Java subtyping rules are defined in [JLS 4.10]. We add to them as follows:
-
--   [As always](#concept-references), interpret the Java rules as operating on
-    [augmented types], not [base types]. However, when applying the Java
-    direct-supertype rules themselves, _ignore_ the [nullness operator] of the
-    input types and output types. The augmented types matter only when the Java
-    rules refer to _other_ rules that are defined in this spec. _Those_ rules
-    respect the nullness operator of some type components --- but never the
-    nullness operator of the type component that represents the whole input or
-    output type.
-
-    > To "ignore" the output's nullness operator, we recommend outputting a
-    > value of `NO_CHANGE`, since that is valid for all types, including
-    > [intersection types].
-
--   When the Java array rules require one type to be a _direct_ supertype of
-    another, consider the direct supertypes of `T` to be _every_ type that `T`
-    is a [subtype] of.
+> The first condition suffices for most cases. The second condition is necessary
+> only for types that have subcomponents --- namely, parameterized types and
+> arrays. And it essentially says "Check the first condition on subcomponents as
+> appropriate."
 
 ## Nullness subtyping
 
-> The primary complication in subtyping comes from type-variable usages. Our
-> rules for them must account for every combination of type arguments with which
-> a given generic type can be parameterized.
-
 `A` is a nullness subtype of `F` if any of the following conditions are met:
 
+> Nullness subtyping asks the question: If `A` includes `null`, does `F` also
+> include `null`? There are 3 cases in which this is true, 2 easy and 1 hard:
+
 -   `F` is [null-inclusive under every parameterization].
+
+    > This is the first easy case: `F` always includes `null`.
+
 -   `A` is [null-exclusive under every parameterization].
+
+    > This is the second easy case: `A` never includes `null`.
+
 -   `A` has a [nullness-subtype-establishing path] to any type whose base type
-    is the same as the base type of `F`, and `F` does _not_ have
+    is the same as the base type of `F`, and `F` does *not* have
     [nullness operator] `MINUS_NULL`.
 
-    > The third case is necessary only for type-variable usages.
+    > This is the hard case: A given type-variable usage does not necessarily
+    > always include `null`, nor does it necessarily always exclude `null`. (For
+    > example, consider a usage of `E` inside `ArrayList<E>`. `ArrayList` may be
+    > instantiated as either an `ArrayList<@Nullable String>` or an
+    > `ArrayList<String>`.)
+    >
+    > Subtyping questions for type-variable usages are more complex: `E` is a
+    > nullness subtype of `E`; `@Nullable E` is not. Similarly, if `<F extends
+    > E>`, then `F` is a nullness subtype of `E`. But if `<F extends @Nullable
+    > E>`, it is not.
 
-Nullness subtyping (and thus subtyping itself) is _not_ defined to be reflexive
+> A further level of complexity in all this is `UNSPECIFIED`. For example, in
+> the [all-worlds] version of the following rules, a type with nullness operator
+> `UNSPECIFIED` can be both null-_inclusive_ under every parameterization and
+> null-_exclusive_ under every parameterization.
+
+Nullness subtyping (and thus subtyping itself) is *not* defined to be reflexive
 or transitive.
 
-(Contrast this with our [nullness-delegating subtyping] rules and [containment]
-rules: Each of those is defined as a transitive closure. However, technically
-speaking,
-[there are cases in which those should not be transitive, either](https://groups.google.com/d/msg/jspecify-dev/yPnkx_GSb0Q/hLgS_431AQAJ).
-Fortunately, this "mostly transitive" behavior is exactly the behavior that
-implementations are likely to produce naturally. Maybe someday we will find a
-way to specify this fully correctly.)
-
-> Subtyping does end up being transitive when the check is required to hold in
-> [all worlds]. And it does end up being reflexive when the check is required to
-> hold only in [some world]. We don't state those properties as rules for 2
-> reasons: First, they arise naturally from the definitions. Second, we don't
-> want to suggest that subtyping is reflexive and transitive under both versions
-> of the rule.
+> If we defined nullness subtyping to be reflexive, then `String UNSPECIFIED`
+> would be a subtype of `String UNSPECIFIED`, even under the [all-worlds] rules.
+> In other words, we'd be saying that unannotated code is always free from
+> nullness errors. That is clearly false. (Nevertheless, lenient tools will
+> choose not to issue errors for such code. They can do this by implementing the
+> [some-world] rules.)
+>
+> If we defined nullness subtyping to be transitive, then `String UNION_NULL`
+> would be a subtype of `String NO_CHANGE` under the some-world rules. That
+> would happen because of a chain of subtyping rules:
+>
+> -   `String UNION_NULL` is a subtype of `String UNSPECIFIED`.
+>
+> -   `String UNSPECIFIED` is a subtype of `String NO_CHANGE`.
+>
+> Therefore, `String UNION_NULL` is a subtype of `String NO_CHANGE`.
 >
 > Yes, it's pretty terrible for something called "subtyping" not to be reflexive
 > or transitive. A more accurate name for this concept would be "consistent," a
 > term used in gradual typing. However, we use "subtyping" anyway. In our
 > defense, we need to name multiple concepts, including not just subtyping but
-> also [same-type] checks and [containment]. If we were to coin a new term for
-> each, tool authors would need to mentally map between those terms and the
-> analogous Java terms.
+> also the [same-type] relation and [containment]. If we were to coin a new term
+> for each, tool authors would need to mentally map between those terms and the
+> analogous Java terms. (Still, yes: Feel free to read terms like "subtyping" as
+> if they hvae scare quotes around them.)
+>
+> Subtyping does end up being transitive when the relation is required to hold
+> in all worlds. And it does end up being reflexive when the relation is
+> required to hold only in [some world]. We don't state those properties as
+> rules for 2 reasons: First, they arise naturally from the definitions. Second,
+> we don't want to suggest that subtyping is reflexive and transitive under both
+> versions of the rule.
+
+Contrast this with our [nullness-delegating subtyping] rules and [containment]
+rules: Each of those is defined as a transitive closure. However, this is
+incorrect, and we should fix it: Transitivity causes the same problem there as
+it does here: `List<? extends @Nullable String>` ends up as a subtype of `List<?
+extends String>` because of a chain of subtyping rules that uses `String
+UNSPECIFIED` as part of the intermediate step. Luckily, tool authors that set
+out to implement transitivity for these two rules are very unlikely to write
+code that "notices" this chain. So, in practice, users are likely to see the
+"mostly transitive" behavior that we intend, even if we haven't found a way to
+formally specify it yet.
 
 ## Null-inclusive under every parameterization
 
@@ -636,13 +678,30 @@ A type is null-inclusive under every parameterization if it meets either of the
 following conditions:
 
 -   Its [nullness operator] is `UNION_NULL`.
+
+    > This is the simplest part of the simplest case: A type usage always
+    > includes `null` if it's annotated with `@Nullable`.
+
 -   It is an [intersection type] whose elements all are null-inclusive under
     every parameterization.
+
+TODO(cpovirk): It seems likely that we need an additional condition here for `T
+super @Nullable Foo`, as produced by capture conversion.
 
 **Some-world version:** The rule is the same except that the requirement for
 "`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
 
+> That is: It's possible that any type usage in unannotated code "ought to be"
+> annotated with `@Nullable`.
+
 ## Null-exclusive under every parameterization
+
+> This is a straightforward concept ("never includes `null`"), but it's not as
+> simple to implement as the null-_inclusive_ rule was. This null-_exclusive_
+> rule has to cover cases like `String`, `E` (where `<E extends Object>`), and
+> `E` (where `<E extends @Nullable Object>` but nearby code has performed a null
+> check on the expression). The case of `<E extends Object>` is an example of
+> why the following rule requires looking for a "path."
 
 A type is null-exclusive under every parameterization if it has a
 [nullness-subtype-establishing path] to either of the following:
@@ -657,6 +716,10 @@ A type is null-exclusive under every parameterization if it has a
 > whether the expression is null-exclusive under every parameterization.
 
 ## Nullness-subtype-establishing path
+
+> Note that this definition is used both by the definition of
+> [null-inclusive under every parameterization] and by the third condition in
+> the definition [nullness subtyping] itself (the "type-variable case").
 
 `A` has a nullness-subtype-establishing path to `F` if both of the following
 hold:
@@ -675,6 +738,18 @@ hold:
 
 ## Nullness-subtype-establishing direct-supertype edges
 
+> This section defines the supertypes for a given type --- but limited to those
+> that fill the gaps in our nullness checking of "top-level" types. For example,
+> there's no need for the rules to reflect that `String NO_CHANGE` extends
+> `Object NO_CHANGE`: If we've established that a type has a path to `String
+> NO_CHANGE`, then we already know that it's
+> [null-exclusive under every parameterization], based on the rules above, and
+> that's enough to prove subtyping. And if we *haven't* established that, then
+> the `String`-`Object` edge isn't going to change that.
+>
+> Thus, the rules here are restricted to type variables and intersection types,
+> whose supertypes may have nullness annotations.
+
 `T` has nullness-subtype-establishing direct-supertype edges to the union of the
 nodes computed by the following 2 rules:
 
@@ -688,19 +763,84 @@ Upper-bound rule:
 
 Lower-bound rule:
 
--   for every type parameter `P` that has a lower bound whose [base type] is the
-    same as `T`'s base type and whose nullness operator is `NO_CHANGE`: the type
-    variable `P`
+-   the augmented type `C NO_CHANGE` for every type variable `C` whose lower
+    bound meets both of the following conditions:
 
-    TODO(cpovirk): What if the lower bound has some other nullness operator? I'm
-    pretty sure that we want to allow `UNSPECIFIED` in the some-world version
-    (as we did before my recent edits), and we may want to allow more.
+    > This rule specifies "`C NO_CHANGE`" instead of just "`C`" because our
+    > definition of [nullness-subtype-establishing path] operates on augmented
+    > types. However, the nullness operator does not matter in this case: After
+    > the initial check of the nullness operator of the type called "`A`" above,
+    > no steps of the process look at the nullness operator of the "from" node.
 
--   otherwise: no nodes
+    <!-- TODO(cpovirk): Figure out whether the path's "*from* type" could be a
+    base type instead of an augmented type. Maybe I've been sticking with an
+    augmented type because that provides better access to bounds in our
+    prototype... possibly because the augmented types reflect
+    substitution/asMemberOf operations?? -->
+
+    -   Its [base type] is the same as `T`'s base type.
+
+    -   Its nullness operator is *not* `MINUS_NULL`.
+
+> In short, whether you have a `Predicate<? super String>`, a `Predicate<? super
+> @Nullable String>`, or unannotated code that doesn't specify the nullness
+> operator for the bound, you can always pass its `test` method a `String`. (If
+> you want to pass a `@Nullable String`, then you'll need for the bound to be
+> [null-inclusive under every parameterization]. The existence of the
+> null-inclusiveness rule frees this current rule from having to cover that
+> case.)
 
 **Some-world version:** The rules are the same except that the requirements for
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
 `UNSPECIFIED`."
+
+(nullness-delegating-subtyping)=
+
+## Nullness-delegating subtyping rules for Java
+
+> Recall that this rule exists to handle subcomponents of types --- namely, type
+> arguments and array component types: It essentially says "Check nullness
+> subtyping for subcomponents as appropriate."
+
+The Java subtyping rules are defined in [JLS 4.10]. (Each rule takes a type as
+input and produces zero or more direct supertypes as outputs.) We add to them as
+follows:
+
+-   [As always](#concept-references), interpret the Java rules as operating on
+    [augmented types], not [base types]. This raises the question of *how* to
+    extend these particular rules to operate on augmented types. The answer has
+    two parts:
+
+    -   The first part applies only to the nullness operator *"of the type."*
+        [As always](#augmented-type), this means the nullness operator of the
+        type component that is the entire type.
+
+        No matter what nullness operator the input augmented type has, the rules
+        still apply, and they still produce the same direct supertypes. Thanks
+        to that rule, the nullness operator of any *produced supertype* is never
+        read by the subtyping rules, so any nullness operator is valid for it,
+        too.
+
+        > Essentially, this rule says that the top-level types do no matter:
+        > They have already been checked by the [nullness subtyping] check.
+        >
+        > For simplicity, we recommend producing a nullness operator of
+        > `NO_CHANGE`: That operator is valid for all types, including
+        > [intersection types].
+
+    -   The nullness operators of *subcomponents* of the augmented types *do*
+        matter. For example, some Java rules produce subtypes only if
+        subcomponents meet certain requirements.
+        [As always](#concept-references), check those requirements by applying
+        *this spec's* definitions.
+
+        > Those definitions (like [containment]) refer back to definitions (like
+        > [nullness subtyping]) that use the nullness operator of the types in
+        > question.
+
+-   When the Java array rules require one type to be a *direct* supertype of
+    another, consider the direct supertypes of `T` to be *every* type that `T`
+    is a [subtype] of.
 
 ## Containment
 
@@ -726,12 +866,10 @@ The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
 
 > Substitution on Java base types barely requires an explanation: See [JLS 1.3].
 > Substitution on [augmented types], however, is trickier: If `Map.get` returns
-> "`V` with [nullness operator] `UNION_NULL`," and if a user has a map whose
-> value type is "`String` with nullness operator `UNSPECIFIED`," then what does
-> its `get` method return? Naive substitution would produce "`String` with
-> nullness operator `UNSPECIFIED` with nullness operator `UNION_NULL`." To
-> reduce that to a proper augmented type with a single nullness operator, we
-> define this process.
+> `V UNION_NULL`, and if a user has a map whose value type is `String
+> UNSPECIFIED`, then what does its `get` method return? Naive substitution would
+> produce `String UNSPECIFIED UNION_NULL`. To reduce that to a proper augmented
+> type with a single nullness operator, we define this process.
 
 To substitute each type argument `Aᵢ` for each corresponding type parameter
 `Pᵢ`:
@@ -749,14 +887,25 @@ the result of the following operation:
     > But in this instance, the null-exclusivity rule (and all rules that it in
     > turn applies) are the [all-worlds] versions.
 
-    > This special case improves behavior in "the `ImmutableList.Builder` case":
-    > Consider an unannotated user of that class. Its builder will have an
-    > element type whose [nullness operator] is `UNSPECIFIED`. Without this
-    > special case, `builder.add(objectUnionNull)` would pass the subtyping
-    > check in the [some-world] version. This would happen even though we have
-    > enough information to know that the parameter to `add` is universally
-    > null-exclusive, regardless of world. The special case here makes that
-    > subtyping check fail, as desired.
+    > The purpose of this special case is to improve behavior in "the
+    > `ImmutableList.Builder` case": Because `ImmutableList.Builder.add` always
+    > throws `NullPointerException` for a null argument, we would like for
+    > `add(null)` to be a compile error, even under lenient tools.
+    > Unfortunately, without this special case, lenient tools could permit
+    > `add(null)` in unannotated code. For an example, read on.
+    >
+    > Consider an unannotated user of `ImmutableList.Builder<Foo> builder`. Its
+    > type argument `Foo` will have a [nullness operator] of `UNSPECIFIED`.
+    > Without this special case, the parameter of `builder.add` would have a
+    > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool applies
+    > the [some-world] subtyping relation to `builder.add(null)`, the relation
+    > would hold.
+    >
+    > To solve this, we need a special case for substitution for null-exclusive
+    > type parameters like the one on `ImmutableList.Builder`. That special case
+    > needs to produce a type with a nullness operator other than `UNSPECIFIED`.
+    > One valid option is to produce `NO_CHANGE`; we happened to choose
+    > `MINUS_NULL`.
 
 -   Otherwise, replace `V` with the result of applying the nullness operator of
     `V` to `Aᵢ`.
@@ -788,7 +937,7 @@ remaining conditions.
     is `UNSPECIFIED`.
 -   The desired nullness operator is `NO_CHANGE`.
 
-Then, if the input augmented type is _not_ an [intersection type], the output is
+Then, if the input augmented type is *not* an [intersection type], the output is
 the same as the input but with its nullness operator replaced with the desired
 nullness operator.
 
