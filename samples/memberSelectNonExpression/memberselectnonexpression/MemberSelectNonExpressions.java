@@ -19,14 +19,8 @@ package memberselectnonexpression;
 import org.jspecify.nullness.NullMarked;
 
 class MemberSelectNonExpressions {
-  static class Static {
-    static void x() {}
-
-    static int x;
-  }
-
   @NullMarked
-  static class Usage {
+  static class NullMarkedUsage {
     static void x0() {
       int x;
 
@@ -49,6 +43,37 @@ class MemberSelectNonExpressions {
       MemberSelectNonExpressions.StaticParameterized<Object>.Inner i1;
       memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<Object>.Inner i2;
     }
+  }
+
+  static class NotNullMarkedUsage {
+    static void x0() {
+      int x;
+
+      Static.x();
+      x = Static.x;
+
+      MemberSelectNonExpressions.Static.x();
+      x = MemberSelectNonExpressions.Static.x;
+
+      memberselectnonexpression.MemberSelectNonExpressions.Static.x();
+      x = memberselectnonexpression.MemberSelectNonExpressions.Static.x;
+    }
+
+    static void x1() {
+      StaticParameterized<?> s0;
+      MemberSelectNonExpressions.StaticParameterized<?> s1;
+      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<?> s2;
+
+      StaticParameterized<?>.Inner i0;
+      MemberSelectNonExpressions.StaticParameterized<?>.Inner i1;
+      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<?>.Inner i2;
+    }
+  }
+
+  static class Static {
+    static void x() {}
+
+    static int x;
   }
 
   static class StaticParameterized<T> {
