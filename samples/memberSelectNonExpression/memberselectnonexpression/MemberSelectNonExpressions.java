@@ -19,14 +19,8 @@ package memberselectnonexpression;
 import org.jspecify.nullness.NullMarked;
 
 class MemberSelectNonExpressions {
-  static class Static {
-    static void x() {}
-
-    static int x;
-  }
-
   @NullMarked
-  static class Usage {
+  static class NullMarkedUsage {
     static void x0() {
       int x;
 
@@ -53,6 +47,46 @@ class MemberSelectNonExpressions {
       MemberSelectNonExpressions.StaticParameterized<Object>.Inner i1;
       memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<Object>.Inner i2;
     }
+  }
+
+  static class NotNullMarkedUsage {
+    static void x0() {
+      int x;
+
+      // jspecify_but_expect_warning
+      Static.x();
+      // jspecify_but_expect_warning
+      x = Static.x;
+
+      // jspecify_but_expect_warning
+      MemberSelectNonExpressions.Static.x();
+      // jspecify_but_expect_warning
+      x = MemberSelectNonExpressions.Static.x;
+
+      // jspecify_but_expect_warning
+      memberselectnonexpression.MemberSelectNonExpressions.Static.x();
+      // jspecify_but_expect_warning
+      x = memberselectnonexpression.MemberSelectNonExpressions.Static.x;
+    }
+
+    static void x1() {
+      // jspecify_but_expect_warning
+      StaticParameterized<?> s0;
+      // jspecify_but_expect_warning
+      MemberSelectNonExpressions.StaticParameterized<?> s1;
+      // jspecify_but_expect_warning
+      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<?> s2;
+
+      StaticParameterized<?>.Inner i0;
+      MemberSelectNonExpressions.StaticParameterized<?>.Inner i1;
+      memberselectnonexpression.MemberSelectNonExpressions.StaticParameterized<?>.Inner i2;
+    }
+  }
+
+  static class Static {
+    static void x() {}
+
+    static int x;
   }
 
   static class StaticParameterized<T> {
