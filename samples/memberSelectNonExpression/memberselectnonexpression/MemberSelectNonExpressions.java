@@ -28,14 +28,10 @@ class MemberSelectNonExpressions {
       Static.x();
       x = Static.x;
 
-      // jspecify_but_expect_warning
       MemberSelectNonExpressions.Static.x();
-      // jspecify_but_expect_warning
       x = MemberSelectNonExpressions.Static.x;
 
-      // jspecify_but_expect_warning
       memberselectnonexpression.MemberSelectNonExpressions.Static.x();
-      // jspecify_but_expect_warning
       x = memberselectnonexpression.MemberSelectNonExpressions.Static.x;
     }
 
@@ -54,19 +50,13 @@ class MemberSelectNonExpressions {
     static void x0() {
       int x;
 
-      // jspecify_but_expect_warning
       Static.x();
-      // jspecify_but_expect_warning
       x = Static.x;
 
-      // jspecify_but_expect_warning
       MemberSelectNonExpressions.Static.x();
-      // jspecify_but_expect_warning
       x = MemberSelectNonExpressions.Static.x;
 
-      // jspecify_but_expect_warning
       memberselectnonexpression.MemberSelectNonExpressions.Static.x();
-      // jspecify_but_expect_warning
       x = memberselectnonexpression.MemberSelectNonExpressions.Static.x;
     }
 
