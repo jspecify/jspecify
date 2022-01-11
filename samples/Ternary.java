@@ -53,6 +53,19 @@ abstract class Ternary {
     return b() ? objectUnspec() : objectUnspec();
   }
 
+  Object x7() {
+    // jspecify_nullness_mismatch
+    return b() ? null : objectUnionNull();
+  }
+
+  // jspecify_nullness_mismatch
+  Object x0 = b() ? null : objectUnionNull();
+
+  // jspecify_nullness_not_enough_information
+  @NullnessUnspecified Object x1 = b() ? null : objectUnionNull();
+
+  @Nullable Object x2 = b() ? null : objectUnionNull();
+
   abstract boolean b();
 
   abstract Object object();
