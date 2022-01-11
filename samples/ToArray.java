@@ -26,6 +26,10 @@ class ToArray {
     return c.toArray();
   }
 
+  Object[] boundedWildcard(Collection<? extends Object> c) {
+    return c.toArray();
+  }
+
   Object[] object(Collection<Object> c) {
     return c.toArray();
   }
@@ -83,6 +87,10 @@ class ToArray {
 
   <T extends @Nullable Object> Object[] unboundedUnionNull(Collection<@Nullable T> c) {
     // jspecify_nullness_mismatch
+    return c.toArray();
+  }
+
+  <T> Object[] objectBoundedTypeParameterWildcard(Collection<? extends T> c) {
     return c.toArray();
   }
 
