@@ -799,7 +799,7 @@ Lower-bound rule:
 ## Nullness-delegating subtyping rules for Java
 
 > Recall that this rule exists to handle subcomponents of types --- namely, type
-> arguments and array component types: It essentially says "Check nullness
+> arguments and array component types. It essentially says "Check nullness
 > subtyping for subcomponents as appropriate."
 
 The Java subtyping rules are defined in [JLS 4.10]. (Each rule takes a type as
@@ -811,15 +811,19 @@ follows:
     extend these particular rules to operate on augmented types. The answer has
     two parts:
 
-    -   The first part applies only to the nullness operator *"of the type."*
-        [As always](#augmented-type), this means the nullness operator of the
-        type component that is the entire type.
+    -   The first part of the answer applies only to the nullness operator *"of
+        the type."* ([As always](#augmented-type), this means the nullness
+        operator of the type component that is the entire type.)
 
-        No matter what nullness operator the input augmented type has, the rules
-        still apply, and they still produce the same direct supertypes. Thanks
-        to that rule, the nullness operator of any *produced supertype* is never
-        read by the subtyping rules, so any nullness operator is valid for it,
-        too.
+        And the first part of the answer is: No matter what nullness operator
+        the input augmented type has, the rules still apply, and they still
+        produce the same direct supertypes.
+
+        > Thanks to that rule, the nullness operator of any *output* type is
+        > never read by the subtyping rules.
+
+        So, when computing output types, tools may produce them with *any*
+        nullness operator.
 
         > Essentially, this rule says that the top-level types do no matter:
         > They have already been checked by the [nullness subtyping] check.
@@ -835,8 +839,8 @@ follows:
         *this spec's* definitions.
 
         > Those definitions (like [containment]) refer back to definitions (like
-        > [nullness subtyping]) that use the nullness operator of the types in
-        > question.
+        > [nullness subtyping]) that use the nullness operators of the
+        > subcomponents in question.
 
 -   When the Java array rules require one type to be a *direct* supertype of
     another, consider the direct supertypes of `T` to be *every* type that `T`
@@ -897,9 +901,9 @@ the result of the following operation:
     > Consider an unannotated user of `ImmutableList.Builder<Foo> builder`. Its
     > type argument `Foo` will have a [nullness operator] of `UNSPECIFIED`.
     > Without this special case, the parameter of `builder.add` would have a
-    > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool applies
-    > the [some-world] subtyping relation to `builder.add(null)`, the relation
-    > would hold.
+    > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool would
+    > check whether the [some-world] subtyping relation holds for
+    > `builder.add(null)`, it would find that it does.
     >
     > To solve this, we need a special case for substitution for null-exclusive
     > type parameters like the one on `ImmutableList.Builder`. That special case
@@ -965,8 +969,9 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
     > extends Object`.
 
 -   When a rule generates a lower bound that is the null type, we specify that
-    its nullness operator is `NO_CHANGE`. (See
-    ["Augmented null types."](#null-types))
+    its nullness operator is `NO_CHANGE`.
+
+    > See ["Augmented null types."](#null-types)
 
 [#100]: https://github.com/jspecify/jspecify/issues/100
 [#157]: https://github.com/jspecify/jspecify/issues/157
