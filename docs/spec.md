@@ -210,12 +210,21 @@ We provide a parameterless type-use annotation called `@Nullable`.
 ### Recognized locations for type-use annotations
 
 A location is a *recognized* location for our type-use annotation in the
-circumstances detailed below. A type at a recognized location has the semantics
-described in this spec. The spec does not assign semantics to types in other
-locations, nor to any annotations on such types.
+circumstances detailed below. This spec does not define semantics for
+annotations in other locations.
 
 > For now, we've chosen to restrict ourselves to API locations for which tools
 > mostly agree on what it means for a type in that location to be `@Nullable`.
+>
+> When analyzing source code, tools are encouraged to offer an option to issue
+> an error for an annotation in an unrecognized location (unless they define
+> semantics for that location). Tools are especially encouraged to issue an
+> error for an annotation in a location that is "intrinsically non-nullable"
+> (defined below).
+>
+> When reading *bytecode*, however, tools may be best off ignoring an annotation
+> in an unrecognized location (again, unless they define semantics for that
+> location).
 
 The following locations are recognized except when overruled by one of the
 exceptions in the subsequent sections: \[[#17]\]
@@ -301,14 +310,6 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 > But note that types "inside" some of these locations can still be recognized,
 > such as a *type argument* of a supertype.
-
-> When analyzing source code, tools are encouraged to offer an option to issue
-> an error for an annotation in an unrecognized location (unless they define
-> semantics for that location). Tools are especially encouraged to issue an
-> error for an annotation in a location that is intrinsically non-nullable. When
-> reading *bytecode*, however, tools may be best off ignoring an annotation in
-> an unrecognized location (again, unless they define semantics for that
-> location).
 
 ## The declaration annotation
 
