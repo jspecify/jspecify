@@ -785,9 +785,6 @@ hold:
 -   if `T` is an augmented type variable: all the corresponding type parameter's
     upper bounds whose nullness operator is `NO_CHANGE` or `MINUS_NULL`
 
-    <!-- TODO(cpovirk): Do we need to say anything about performing
-         substitution of any type arguments into those bounds? -->
-
 -   otherwise: no nodes
 
 **Some-world version:** The rules are the same except that the requirements for
