@@ -22,7 +22,6 @@ class ContainmentExtendsBounded {
   void x() {
     new Check<Lib<? extends Foo>, Lib<? extends Foo>>();
     new Check<Lib<? extends @Nullable Foo>, Lib<? extends Foo>>();
-    // jspecify_nullness_mismatch
     new Check<Lib<? extends Foo>, Lib<? extends @Nullable Foo>>();
   }
 
