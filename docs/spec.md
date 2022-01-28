@@ -596,7 +596,7 @@ The same-type relation is *not* defined to be reflexive or transitive.
 `A` is a nullness subtype of `F` if any of the following conditions are met:
 
 > Nullness subtyping asks the question: If `A` includes `null`, does `F` also
-> include `null`? There are 3 cases in which this is true, 2 easy and 1 hard:
+> include `null`? There are 4 cases in which this is true, 2 easy and 2 hard:
 
 -   `F` is [null-inclusive under every parameterization].
 
@@ -610,16 +610,33 @@ The same-type relation is *not* defined to be reflexive or transitive.
     is the same as the base type of `F`, and `F` does *not* have
     [nullness operator] `MINUS_NULL`.
 
-    > This is the hard case: A given type-variable usage does not necessarily
-    > always include `null`, nor does it necessarily always exclude `null`. (For
-    > example, consider a usage of `E` inside `ArrayList<E>`. `ArrayList` may be
-    > instantiated as either an `ArrayList<@Nullable String>` or an
-    > `ArrayList<String>`.)
+    > This is the first hard case: A given type-variable usage does not
+    > necessarily always include `null`, nor does it necessarily always exclude
+    > `null`. (For example, consider a usage of `E` inside `ArrayList<E>`.
+    > `ArrayList` may be instantiated as either an `ArrayList<@Nullable String>`
+    > or an `ArrayList<String>`.)
     >
     > Subtyping questions for type-variable usages are more complex: `E` is a
     > nullness subtype of `E`; `@Nullable E` is not. Similarly, if `<F extends
     > E>`, then `F` is a nullness subtype of `E`. But if `<F extends @Nullable
     > E>`, it is not.
+
+-   `F` is a type-variable usage that meets *both* of the following conditions:
+
+    -   It does *not* have nullness operator `MINUS_NULL`.
+
+    -   `A` is a nullness subtype of its lower bound.
+
+    > This is the second hard case: It covers type variables that are introduced
+    > by capture conversion of `? super` wildcards.
+    >
+    > In short, whether you have a `Predicate<? super String>`, a `Predicate<?
+    > super @Nullable String>`, or unannotated code that doesn't specify the
+    > nullness operator for the bound, you can always pass its `test` method a
+    > `String`. (If you want to pass a `@Nullable String`, then you'll need for
+    > the bound to be [null-inclusive under every parameterization]. The
+    > existence of the null-inclusiveness rule frees this current rule from
+    > having to cover that case.)
 
 > A further level of complexity in all this is `UNSPECIFIED`. For example, in
 > the [all-worlds] version of the following rules, a type with nullness operator
@@ -675,7 +692,7 @@ formally specify it yet.
 
 ## Null-inclusive under every parameterization
 
-A type is null-inclusive under every parameterization if it meets either of the
+A type is null-inclusive under every parameterization if it meets any of the
 following conditions:
 
 -   Its [nullness operator] is `UNION_NULL`.
@@ -686,8 +703,17 @@ following conditions:
 -   It is an [intersection type] whose elements all are null-inclusive under
     every parameterization.
 
-TODO(cpovirk): It seems likely that we need an additional condition here for `T
-super @Nullable Foo`, as produced by capture conversion.
+-   It is a type variable that meets *both* of the following conditions:
+
+    -   It does *not* have nullness operator `MINUS_NULL`.
+
+    -   Its lower bound is null-inclusive under every parameterization.
+
+    > This third case is probably irrelevant in practice: It covers `? super
+    > @Nullable Foo`, which is already covered by the rules for
+    > [nullness subtyping]. It's included here in case some tool has reason to
+    > check whether a type is null-inclusive under every parameterization
+    > *outside* of a check for nullness subtyping.
 
 **Some-world version:** The rule is the same except that the requirement for
 "`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
@@ -751,45 +777,15 @@ hold:
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
 
-`T` has nullness-subtype-establishing direct-supertype edges to the union of the
-nodes computed by the following 2 rules:
-
-Upper-bound rule:
+`T` has nullness-subtype-establishing direct-supertype edges to the following:
 
 -   if `T` is an augmented [intersection type]: all the intersection type's
     elements whose [nullness operator] is `NO_CHANGE` or `MINUS_NULL`
+
 -   if `T` is an augmented type variable: all the corresponding type parameter's
     upper bounds whose nullness operator is `NO_CHANGE` or `MINUS_NULL`
+
 -   otherwise: no nodes
-
-Lower-bound rule:
-
--   the augmented type `C NO_CHANGE` for every type variable `C` whose lower
-    bound meets both of the following conditions:
-
-    > This rule specifies "`C NO_CHANGE`" instead of just "`C`" because our
-    > definition of [nullness-subtype-establishing path] operates on augmented
-    > types. However, the nullness operator does not matter in this case: After
-    > the initial check of the nullness operator of the type called "`A`" above,
-    > no steps of the process look at the nullness operator of the "from" node.
-
-    <!-- TODO(cpovirk): Figure out whether the path's "*from* type" could be a
-    base type instead of an augmented type. Maybe I've been sticking with an
-    augmented type because that provides better access to bounds in our
-    prototype... possibly because the augmented types reflect
-    substitution/asMemberOf operations?? -->
-
-    -   Its [base type] is the same as `T`'s base type.
-
-    -   Its nullness operator is *not* `MINUS_NULL`.
-
-> In short, whether you have a `Predicate<? super String>`, a `Predicate<? super
-> @Nullable String>`, or unannotated code that doesn't specify the nullness
-> operator for the bound, you can always pass its `test` method a `String`. (If
-> you want to pass a `@Nullable String`, then you'll need for the bound to be
-> [null-inclusive under every parameterization]. The existence of the
-> null-inclusiveness rule frees this current rule from having to cover that
-> case.)
 
 **Some-world version:** The rules are the same except that the requirements for
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
