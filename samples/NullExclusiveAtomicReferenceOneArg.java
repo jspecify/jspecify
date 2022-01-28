@@ -56,4 +56,23 @@ class NullExclusiveAtomicReferenceOneArg {
 
     AtomicReference<@Nullable T> c = new AtomicReference<@Nullable T>(o);
   }
+
+  static class MyAtomicReferenceExplicitSuper extends AtomicReference<Object> {
+    MyAtomicReferenceExplicitSuper() {
+      super("");
+    }
+  }
+
+  static class MyAtomicReferenceExplicitSuperUnspec
+      extends AtomicReference<@NullnessUnspecified Object> {
+    MyAtomicReferenceExplicitSuperUnspec() {
+      super("");
+    }
+  }
+
+  static class MyAtomicReferenceExplicitSuperUnionNull extends AtomicReference<@Nullable Object> {
+    MyAtomicReferenceExplicitSuperUnionNull() {
+      super("");
+    }
+  }
 }

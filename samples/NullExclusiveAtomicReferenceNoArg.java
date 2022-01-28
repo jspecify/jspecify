@@ -76,4 +76,24 @@ class NullExclusiveAtomicReferenceNoArg {
       super();
     }
   }
+
+  // jspecify_nullness_not_enough_information
+  static class MyAtomicReferenceImplicitSuperUnspec
+      extends AtomicReference<@NullnessUnspecified Object> {}
+
+  static class MyAtomicReferenceExplicitSuperUnspec
+      extends AtomicReference<@NullnessUnspecified Object> {
+    MyAtomicReferenceExplicitSuperUnspec() {
+      // jspecify_nullness_not_enough_information
+      super();
+    }
+  }
+
+  static class MyAtomicReferenceImplicitSuperUnionNull extends AtomicReference<@Nullable Object> {}
+
+  static class MyAtomicReferenceExplicitSuperUnionNull extends AtomicReference<@Nullable Object> {
+    MyAtomicReferenceExplicitSuperUnionNull() {
+      super();
+    }
+  }
 }
