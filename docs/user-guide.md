@@ -40,7 +40,7 @@ haven't said whether `x` can be null or not, we don't know whether
 
 There are two JSpecify annotations that indicate these properties:
 
-*   `@Nullable` applied to a type means a reference of that type that can be
+*   `@Nullable` applied to a type means a reference of that type can be
     null.
 
 *   `@NullMarked` applied to a module, package, or class means that a reference
