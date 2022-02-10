@@ -907,6 +907,17 @@ the result of the following operation:
     > needs to produce a type with a nullness operator other than `UNSPECIFIED`.
     > One valid option is to produce `NO_CHANGE`; we happened to choose
     > `MINUS_NULL`.
+    >
+    > The choice between `NO_CHANGE` and `MINUS_NULL` makes little difference
+    > for the parameter types of `ImmutableList.Builder`, but it can matter more
+    > for other APIs' *return types*. For example, consider `@NullMarked class
+    > Foo<E extends @Nullable Object>`, which somewhere uses the type
+    > [`FluentIterable<E>`]. `FluentIterable` has a method `Optional<E>
+    > first()`. Even when `E` is a type like `String UNION_NULL` (or `String
+    > UNSPECIFIED`), we know that `first().get()` will never return `null`. To
+    > surface that information to tools, we need to define our substitution rule
+    > to return `E MINUS_NULL`: If we instead used `E NO_CHANGE`, then the
+    > return type would look like it might include `null`.
 
 -   Otherwise, replace `V` with the result of applying the nullness operator of
     `V` to `Aᵢ`.
@@ -991,6 +1002,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
+[`FluentIterable<E>`]: https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/FluentIterable.html
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10
