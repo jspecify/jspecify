@@ -28,13 +28,12 @@ interface WildcardBoundWithAnnotations {
 
   default <T> void x0(Supplier<? extends T> s, Lib<T> l) {
     use(s, l);
-    // jspecify_but_expect_warning
     useUnspec(s, l);
     useUnionNull(s, l);
   }
 
   default <T> void x1(Supplier<? extends @NullnessUnspecified T> s, Lib<T> l) {
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // jspecify_nullness_not_enough_information
     use(s, l);
     // jspecify_nullness_not_enough_information
     useUnspec(s, l);
@@ -42,7 +41,7 @@ interface WildcardBoundWithAnnotations {
   }
 
   default <T> void x2(Supplier<? extends @Nullable T> s, Lib<T> l) {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     use(s, l);
     // jspecify_nullness_not_enough_information
     useUnspec(s, l);

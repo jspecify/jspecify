@@ -23,7 +23,7 @@ class ContainmentExtends {
   void x() {
     new Check<Lib<? extends Foo>, Lib<? extends Foo>>();
 
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     new Check<Lib<? extends Foo>, Lib<? extends @NullnessUnspecified Foo>>();
 
     // jspecify_nullness_mismatch
@@ -31,7 +31,7 @@ class ContainmentExtends {
 
     new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends Foo>>();
 
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     new Check<Lib<? extends @NullnessUnspecified Foo>, Lib<? extends @NullnessUnspecified Foo>>();
 
     // jspecify_nullness_not_enough_information

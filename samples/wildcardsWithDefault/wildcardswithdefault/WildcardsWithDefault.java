@@ -22,11 +22,9 @@ import org.jspecify.nullness.NullnessUnspecified;
 
 @NullMarked
 public class WildcardsWithDefault {
-  // jspecify_but_expect_warning
   public void noBoundsNotNull(A<?, ?, ?> a) {}
 
   public void noBoundsNullable(
-      // jspecify_but_expect_warning
       A<? extends @Nullable Object, ? extends @Nullable Object, ? extends @Nullable Object> a) {}
 }
 

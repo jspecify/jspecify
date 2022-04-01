@@ -50,17 +50,17 @@ class NotNullMarkedTypeVariableBound {
   @NullMarked
   class Callers {
     Object x0(UnspecBounded1<?>.Nested x) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return x.get();
     }
 
     Object x0(UnspecBounded2<?>.Nested x) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return x.get();
     }
 
     Object x0(UnspecBounded3<?>.Nested x) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return x.get();
     }
 

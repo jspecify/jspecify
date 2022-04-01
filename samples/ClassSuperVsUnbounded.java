@@ -22,7 +22,6 @@ abstract class ClassSuperVsUnbounded<T, R> implements java.lang.reflect.Member {
   abstract Class<? super Object> make0();
 
   @Override
-  // jspecify_nullness_not_enough_information
   public abstract Class<? super T> getDeclaringClass();
 
   abstract static class Sub<T> extends ClassSuperVsUnbounded<T, T> {

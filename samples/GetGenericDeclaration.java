@@ -26,7 +26,6 @@ import org.jspecify.nullness.NullMarked;
 // and the errors in this file persist even with my addComputedTypeAnnotations override restored...
 @NullMarked
 class GetGenericDeclaration {
-  // jspecify_but_expect_warning
   Object x(TypeVariable<?> typeVariable) {
     // jspecify_but_expect_warning
     return typeVariable.getGenericDeclaration();

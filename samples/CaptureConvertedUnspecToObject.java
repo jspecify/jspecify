@@ -55,13 +55,11 @@ abstract class CaptureConvertedUnspecToObject {
     return unspec(x.get());
   }
 
-  // jspecify_but_expect_warning
   Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
     // jspecify_nullness_not_enough_information
     return unspec(x.get());
   }
 
-  // jspecify_but_expect_warning
   Object x8(UnspecBounded<? extends @Nullable Lib> x) {
     // jspecify_nullness_not_enough_information
     return unspec(x.get());

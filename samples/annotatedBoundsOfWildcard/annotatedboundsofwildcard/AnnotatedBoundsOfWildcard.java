@@ -23,31 +23,27 @@ import org.jspecify.nullness.NullnessUnspecified;
 @NullMarked
 public class AnnotatedBoundsOfWildcard {
   public void superAsIs(
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       Test<? super Base, ? super @Nullable Base, ? super @NullnessUnspecified Base> a) {}
 
-  // jspecify_but_expect_warning
   public void superNotNull(Test<? super Base, ? super Base, ? super Base> a) {}
 
   public void superNullable(
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       Test<? super @Nullable Base, ? super @Nullable Base, ? super @Nullable Base> a) {}
 
   public void extendsAsIs(
-      // jspecify_but_expect_warning
       Test<? extends Base, ? extends @Nullable Base, ? extends @NullnessUnspecified Base> a) {}
 
   public void extendsNotNull(Test<? extends Base, ? extends Base, ? extends Base> a) {}
 
   public void extendsNullable(
-      // jspecify_but_expect_warning
       Test<? extends @Nullable Base, ? extends @Nullable Base, ? extends @Nullable Base> a) {}
 
   public void noBounds(
       Test<
               ? extends @NullnessUnspecified Object,
               ? extends @NullnessUnspecified Object,
-              // jspecify_but_expect_warning
               ? extends @NullnessUnspecified Object>
           a) {}
 }

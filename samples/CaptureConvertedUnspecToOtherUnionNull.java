@@ -48,12 +48,10 @@ abstract class CaptureConvertedUnspecToOtherUnionNull {
     return unspec(x.get());
   }
 
-  // jspecify_but_expect_warning
   @Nullable Lib x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
     return unspec(x.get());
   }
 
-  // jspecify_but_expect_warning
   @Nullable Lib x8(UnspecBounded<? extends @Nullable Lib> x) {
     return unspec(x.get());
   }

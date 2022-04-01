@@ -38,19 +38,19 @@ interface CaptureAsInferredTypeArgument {
   }
 
   default void unspecBounded(Lib<? extends @NullnessUnspecified Object> l) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     useImplicitlyObjectBounded(l);
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     useExplicitlyObjectBounded(l);
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     useUnspecBounded(l);
     useUnionNullBounded(l);
   }
 
   default void implicitlyUnionNullBounded(Lib<?> l) {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     useImplicitlyObjectBounded(l);
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     useExplicitlyObjectBounded(l);
     // jspecify_nullness_not_enough_information
     useUnspecBounded(l);
@@ -58,9 +58,9 @@ interface CaptureAsInferredTypeArgument {
   }
 
   default void explicitlyUnionNullBounded(Lib<? extends @Nullable Object> l) {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     useImplicitlyObjectBounded(l);
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     useExplicitlyObjectBounded(l);
     // jspecify_nullness_not_enough_information
     useUnspecBounded(l);

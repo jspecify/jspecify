@@ -48,15 +48,13 @@ class CaptureConvertedToObjectUnspec {
     return x.get();
   }
 
-  // jspecify_but_expect_warning
   @NullnessUnspecified Object x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     return x.get();
   }
 
-  // jspecify_but_expect_warning
   @NullnessUnspecified Object x8(UnspecBounded<? extends @Nullable Lib> x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     return x.get();
   }
 
@@ -65,7 +63,7 @@ class CaptureConvertedToObjectUnspec {
   }
 
   @NullnessUnspecified Object x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     return x.get();
   }
 

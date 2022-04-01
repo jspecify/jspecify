@@ -74,7 +74,7 @@ class CaptureConvertedTypeVariableBounded {
     }
 
     Object x1(Inner<? extends @NullnessUnspecified Object> p) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return p.get();
     }
 
@@ -99,7 +99,7 @@ class CaptureConvertedTypeVariableBounded {
     }
 
     Object x1(Inner<? extends @NullnessUnspecified Object> p) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return p.get();
     }
 

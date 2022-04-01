@@ -23,12 +23,12 @@ class SuperVsObject {
   interface Receiver<T extends @Nullable Object> {}
 
   <T extends @Nullable Object> Receiver<? super T> x0(Receiver<Object> r) {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     return r;
   }
 
   <T extends @NullnessUnspecified Object> Receiver<? super T> x1(Receiver<Object> r) {
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // jspecify_nullness_not_enough_information
     return r;
   }
 

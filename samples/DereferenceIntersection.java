@@ -55,16 +55,14 @@ class DereferenceIntersection {
     }
   }
 
-  // jspecify_but_expect_warning
   void x7(UnspecBounded<? extends @NullnessUnspecified Lib> x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     synchronized (x.get()) {
     }
   }
 
-  // jspecify_but_expect_warning
   void x8(UnspecBounded<? extends @Nullable Lib> x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     synchronized (x.get()) {
     }
   }
@@ -75,7 +73,7 @@ class DereferenceIntersection {
   }
 
   void x10(NullableBounded<? extends @NullnessUnspecified Lib> x) {
-    // jspecify_nullness_not_enough_information
+    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
     synchronized (x.get()) {
     }
   }

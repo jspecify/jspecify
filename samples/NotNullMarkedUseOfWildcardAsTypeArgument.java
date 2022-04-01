@@ -29,12 +29,12 @@ class NotNullMarkedUseOfWildcardAsTypeArgument {
   @NullMarked
   class Caller {
     @Nullable Lib<? extends Object> x0(Super s) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return s.get();
     }
 
     @Nullable Lib<? extends @NullnessUnspecified Object> x1(Super s) {
-      // jspecify_nullness_not_enough_information
+      // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
       return s.get();
     }
 

@@ -19,6 +19,5 @@ interface NotNullMarkedUseOfSelfType {
   // jspecify_nullness_not_enough_information
   <T extends Enum<T>> void go();
 
-  // jspecify_but_expect_warning
   void go(Enum<?> e);
 }

@@ -32,7 +32,7 @@ class ObjectAsSuperOfTypeVariable {
   }
 
   <T extends @Nullable Object> void passToAllPurposeReceiver(Supplier<T> s, Receiver<Object> r) {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // jspecify_nullness_mismatch
     pass(s, r);
   }
 }

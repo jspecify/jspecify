@@ -24,10 +24,9 @@ class CastOfCaptureOfUnboundedWildcardForNotNullMarkedObjectBoundedTypeParameter
 
   @NullMarked
   abstract class Sub implements Super {
-    // jspecify_but_expect_warning
     void x(Supplier<?> supplier) {
       if (supplier != null) {
-        // jspecify_nullness_not_enough_information jspecify_but_expect_error
+        // jspecify_nullness_not_enough_information
         consume((Bar) supplier.get());
       }
     }
