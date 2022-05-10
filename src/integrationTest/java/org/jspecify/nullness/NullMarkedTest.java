@@ -52,9 +52,12 @@ class NullMarkedTest {
     }
 
     @Test
-    void annotationDoesNotIncludesModuleAsTarget() {
-      Set<String> targets = loadTargets();
-      assertEquals(new HashSet<String>(Arrays.asList("TYPE", "PACKAGE")), targets);
+    void basicReflectionDoesNotThrowException() {
+      Object unused = NullMarked.class.getMethods();
+      /*
+       * But reading the *annotations* on NullMarked would result in an exception: Those annotations
+       * include @Target, which refers to MODULE, which doesn't exist under Java 8.
+       */
     }
   }
 

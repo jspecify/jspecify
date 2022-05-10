@@ -3,7 +3,6 @@ plugins {
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0' apply false
     id 'com.diffplug.spotless' version '6.1.0'
     id 'net.ltgt.errorprone' version '2.0.2'
-    id 'org.javamodularity.moduleplugin' version '1.8.9'
 }
 
 ext {
@@ -26,18 +25,12 @@ java {
     withJavadocJar()
     withSourcesJar()
 
+    sourceCompatibility 8
+    targetCompatibility 8
+    // but compile against newer JDK libraries so that we can use @Target({..., MODULE})
+
     tasks.named('sourcesJar') {
         exclude('**.class')
-
-        // Use the copy of NullMarked whose @Target includes MODULE.
-        // TODO(cpovirk): Move configuration to mrjar.gradle? Maybe we could achieve it with task.named('sourcesJar') if mrjar.gradle were applied after we create this task?
-        from sourceSets.java9.allJava
-        dependsOn tasks.named('compileModuleInfoJava')
-    }
-
-    compileJava {
-        // Use the copy of NullMarked whose @Target omits MODULE.
-        source += fileTree(dir: 'src/main/java', include: '**/NullMarked.java')
     }
 }
 
