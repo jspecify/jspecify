@@ -17,9 +17,9 @@ sourceSets {
                  * javac invocation contains only a module-info, so javac fails
                  * because we're creating an empty module.
                  *
-                 * But we won't include the classes again under
-                 * META-INF/versions/9, thanks to some more configuration
-                 * below.
+                 * But we won't include the main .class files when we place the
+                 * output module-info.class under META-INF/versions/9, thanks
+                 * to some more configuration below.
                  */
                 'src/main/java'
             ]
@@ -35,8 +35,8 @@ jar {
     into('META-INF/versions/9') {
         from(sourceSets.java9.output) {
             /*
-             * As discussed above, we compile all the classes again. But all
-             * that we really want under META-INF/versions/9 is the
+             * As discussed above, we compiled all the classes again. But all
+             * that we want to include under META-INF/versions/9 is the
              * module-info.
              */
             include 'module-info.class'
