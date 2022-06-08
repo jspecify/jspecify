@@ -53,7 +53,7 @@ People from the following projects and organizations are collaborating on this p
 +----------------------------------------------------------+----------------------------------------------------------+
 | `NullAway <https://github.com/uber/NullAway>`_           | `Uber <https://uber.com>`_                               |
 +----------------------------------------------------------+----------------------------------------------------------+
-| `OpenJDK <https://openjdk.java.net>`_                    | `Oracle <https://www.oracle.com>`_
+| `OpenJDK <https://openjdk.java.net>`_                    | `Oracle <https://www.oracle.com>`_                       |
 +----------------------------------------------------------+----------------------------------------------------------+
 | `PMD <https://pmd.github.io/>`_                          | `PMD Team <https://pmd.github.io/>`_                     |
 +----------------------------------------------------------+----------------------------------------------------------+
