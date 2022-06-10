@@ -39,7 +39,7 @@ People from the following projects and organizations are collaborating on this p
 +==========================================================+==========================================================+
 | `Android <https://www.android.com>`_                     | `Google <https://google.com>`_                           |
 +----------------------------------------------------------+----------------------------------------------------------+
-| `Eisop <https://eisop.uwaterloo.ca>`_                    | `University of Waterloo <https://www.uwaterloo.ca>`_     |
+| `EISOP <https://eisop.uwaterloo.ca>`_                    | `EISOP Team <https://github.com/eisop>`_                 |
 +----------------------------------------------------------+----------------------------------------------------------+
 | `Error Prone <https://errorprone.info>`_                 | `Google <https://google.com>`_                           |
 +----------------------------------------------------------+----------------------------------------------------------+
