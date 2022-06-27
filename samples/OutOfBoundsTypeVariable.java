@@ -26,5 +26,11 @@ class OutOfBoundsTypeVariable {
 
   interface Foo {}
 
-  interface Lib<T> {}
+  interface Lib<T> {
+    T get();
+  }
+
+  <F extends @Nullable Foo> Object go(User<F> user) {
+    return user.get();
+  }
 }
