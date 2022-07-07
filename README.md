@@ -1,19 +1,13 @@
 # JSpecify
 
-**This project is a placeholder.** We are using the issue tracker for some of
-our conversations, but the existing code in the repo does not reflect our
-current design decisions, and we have many decisions left to make.
+An artifact of well-specified annotations to power static analysis checks and JVM language interoperability.
+Developed by consensus of the partner organizations listed at our main web site, jspecify.org.
 
-An artifact of well-named and well-specified annotations to power static
-analysis checks.
+Our current focus is on annotations for nullness analysis.
 
-Our focus, starting in 2018 and extending for the next several years, is
-annotations for nullness.
-
-This is not an officially supported product of any of the participant
-organizations.
+The latest release is numbered 0.2 as a clear signal to **not** depend on it yet.
+It will still undergo many changes.
 
 ## How to build
 
-Simply run `./gradlew` to build artifacts. Or run `./gradlew
-publishToMavenLocal` to install artifacts to your Local Maven Repository.
+Run `./gradlew` to build artifacts, or `./gradlew publishToMavenLocal` to install artifacts to your Local Maven Repository.
