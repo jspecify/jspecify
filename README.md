@@ -1,6 +1,6 @@
 # JSpecify
 
-An artifact of well-specified annotations to power static analysis checks and JVM language interoperability.
+An artifact of well-specified annotations to power static analysis checks and JVM language interop.
 Developed by consensus of the partner organizations listed at our main web site, jspecify.org.
 
 Our current focus is on annotations for nullness analysis.
