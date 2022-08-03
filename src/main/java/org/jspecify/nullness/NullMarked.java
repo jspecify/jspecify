@@ -27,18 +27,17 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that within the annotated scope (class, package, or module), type usages
- * <i>generally</i> do <i>not</i> include {@code null} as a value, unless they are individually
- * marked otherwise using {@link Nullable} (or checker-specific other annotations). Without this
- * annotation, unmarked type usages would instead have <i>unspecified nullness</i>. Several
- * exceptions to this rule and an explanation of unspecified nullness are covered in the <a
- * href="http://jspecify.org/user-guide">JSpecify User Guide</a>.
+ * Indicates that the annotated element and the code transitively <a
+ * href=”https://docs.oracle.com/en/java/javase/18/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosedElements()”>enclosed</a>
+ * within it is <b>null-marked code</b>: type usages are generally considered to exclude {@code
+ * null} as a value unless specified otherwise (special cases to be covered below). Using this
+ * annotation avoids the need to write {@link NonNull @NonNull} many times throughout your code.
  *
  * <p><b>WARNING:</b> This annotation is under development, and <i>any</i> aspect of its naming,
  * location, or design may change before 1.0. <b>Do not release libraries using this annotation at
  * this time.</b>
  */
 @Documented
-@Target({ TYPE, METHOD, CONSTRUCTOR, PACKAGE, MODULE })
+@Target({TYPE, METHOD, CONSTRUCTOR, PACKAGE, MODULE})
 @Retention(RUNTIME)
 public @interface NullMarked {}
