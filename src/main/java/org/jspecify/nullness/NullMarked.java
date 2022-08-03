@@ -15,6 +15,8 @@
  */
 package org.jspecify.nullness;
 
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.MODULE;
 import static java.lang.annotation.ElementType.PACKAGE;
 import static java.lang.annotation.ElementType.TYPE;
@@ -37,6 +39,6 @@ import java.lang.annotation.Target;
  * this time.</b>
  */
 @Documented
-@Target({TYPE, PACKAGE, MODULE})
+@Target({ TYPE, METHOD, CONSTRUCTOR, PACKAGE, MODULE })
 @Retention(RUNTIME)
 public @interface NullMarked {}
