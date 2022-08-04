@@ -26,15 +26,14 @@ import java.lang.annotation.Target;
  * Indicates that the annotated type usage is considered to include {@code null} as a value. A "type
  * usage" is commonly a variable type or method return type; other cases are covered below as well.
  *
- * <p>Example usages: <pre>
- * &#64;Nullable String field;
+ * <p>Example usages:
  *
- * &#64;Nullable String getField() { return field; }
- *
- * void setField(&#64;Nullable String value) { field = value; }
- *
- * List&lt;&#64;Nullable String> getList() { ... }
- * </pre>
+ * <ul>
+ *   <li>{@code @Nullable String field;}
+ *   <li>{@code @Nullable String getField() { return field; }}
+ *   <li>void setField(@Nullable String value) { field = value; }}
+ *   <li>{@code List<@Nullable String> getList() { ... }}
+ * </ul>
  *
  * <p>For a guided introduction to JSpecify nullness annotations, please see the <a
  * href="https://jspecify.dev/user-guide.html">user guide</a>.
