@@ -72,7 +72,9 @@ class NullMarkedTest {
     @Test
     void annotationIncludesModuleAsTarget() {
       Set<String> targets = loadTargets();
-      assertEquals(new HashSet<String>(Arrays.asList("TYPE", "PACKAGE", "MODULE")), targets);
+      assertEquals(
+          new HashSet<String>(Arrays.asList("TYPE", "METHOD", "CONSTRUCTOR", "PACKAGE", "MODULE")),
+          targets);
     }
   }
 }
