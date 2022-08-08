@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2020 The JSpecify Authors.
+ * Copyright 2022 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,17 +23,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated type usage is considered to include {@code null} as a value. A "type
- * usage" is commonly a variable type or method return type; other cases are covered below as well.
- *
- * <p>Example usages:
- *
- * <ul>
- *   <li>{@code @Nullable String field;}
- *   <li>{@code @Nullable String getField() { return field; }}
- *   <li>void setField(@Nullable String value) { field = value; }}
- *   <li>{@code List<@Nullable String> getList() { ... }}
- * </ul>
+ * Indicates that the annotated type usage is considered to exclude {@code null} as a value (used
+ * infrequently, as we typically apply {@link NullMarked @NullMarked} to some enclosing element
+ * instead).
  *
  * <p>For a guided introduction to JSpecify nullness annotations, please see the <a
  * href="https://jspecify.dev/user-guide.html">user guide</a>.
@@ -45,4 +37,4 @@ import java.lang.annotation.Target;
 @Documented
 @Target(TYPE_USE)
 @Retention(RUNTIME)
-public @interface Nullable {}
+public @interface NonNull {}
