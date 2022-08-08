@@ -36,9 +36,24 @@ import java.lang.annotation.Target;
  * this time.</b>
  */
 @Documented
-@Repeatable(ImpliesAnnotations.class)
+@Repeatable(Implies.Container.class)
 @Retention(RUNTIME)
 @Target(ANNOTATION_TYPE)
 public @interface Implies {
   Class<? extends Annotation> value();
+
+  /**
+   * Container annotation for the repeatable {@link Implies @Implies} annotation. The compiler will
+   * use this to contain repeated applications of {@link Implies}.
+   *
+   * <p><b>WARNING:</b> This annotation is under development, and <i>any</i> aspect of its naming,
+   * location, or design may change before 1.0. <b>Do not release libraries using this annotation at
+   * this time.</b>
+   */
+  @Documented
+  @Retention(RUNTIME)
+  @Target(ANNOTATION_TYPE)
+  @interface Container {
+    Implies[] value();
+  }
 }
