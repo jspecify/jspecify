@@ -2,6 +2,8 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+The instructions bellow assume that you're inside `docs/` directory.
+
 ### Installation
 
 ```
@@ -26,7 +28,7 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
-The site is built and published to GH Pages via GH Actions.
+The site is built and published to GitHub Pages via GitHub Actions.
 
 ### Manual Deployment
 
