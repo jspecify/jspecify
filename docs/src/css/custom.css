@@ -1,0 +1,42 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #4b67aa;
+  --ifm-color-primary-dark: #435d99;
+  --ifm-color-primary-darker: #405890;
+  --ifm-color-primary-darkest: #354877;
+  --ifm-color-primary-light: #5874b5;
+  --ifm-color-primary-lighter: #617bb9;
+  --ifm-color-primary-lightest: #7a90c4;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  font-family: 'Fira Sans', sans-serif;
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme='dark'] {
+  --ifm-color-primary: #69b5ce;
+  --ifm-color-primary-dark: #52a9c6;
+  --ifm-color-primary-darker: #46a4c3;
+  --ifm-color-primary-darkest: #3689a4;
+  --ifm-color-primary-light: #80c1d6;
+  --ifm-color-primary-lighter: #8cc6d9;
+  --ifm-color-primary-lightest: #afd8e5;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+[data-theme='dark'] .navbar__logo > img {
+  -webkit-filter: invert(100%); /* safari 6.0 - 9.0 */
+          filter: invert(100%);
+}
+
+header.hero {
+  background-image: url('/img/jspecify-banner-spots.svg');
+  background-repeat: repeat;
+  background-size: 1200px;
+}

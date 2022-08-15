@@ -1,16 +1,21 @@
-# JSpecify nullness spec draft
+---
+title: Specification
+---
+
+# Specification (draft)
 
 This document is our draft specification for the semantics of a set of nullness
 annotations.
 
 --------------------------------------------------------------------------------
 
-## Temporary advice to readers (non-normative)
+:::note Temporary advice to readers (non-normative)
 
 For someone new to our nullness annotations, this document does not make a good
 introduction. This document is targeted more at tool authors or advanced users.
 New users will prefer to start with our [User Guide]. We are working on further
 user documentation, including Javadoc.
+:::
 
 ### The word "nullable"
 
@@ -80,9 +85,7 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
-(concept-references)=
-
-## References to concepts defined by this spec
+## References to concepts defined by this spec {#concept-references}
 
 When a rule in this spec refers to any concept that is defined in this spec (for
 example, [substitution] or [containment]), apply this spec's definition (as
@@ -347,9 +350,7 @@ If one of those scopes is directly annotated with
 `@org.jspecify.nullness.NullMarked`, then the type usage is in a null-marked
 scope. Otherwise, it is not.
 
-(augmented-type-of-usage)=
-
-## Augmented type of a type usage appearing in code
+## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
 For most type usages in source code or bytecode on which JSpecify nullness
 annotations are [recognized], this section defines how to determine their
@@ -390,9 +391,7 @@ condition is met, skip the remaining conditions.
 > `MINUS_NULL` is to represent that such an expression is known not to be null,
 > even though its base type `E` suggests otherwise.
 
-(intersection-types)=
-
-## Augmented type of an intersection type
+## Augmented type of an intersection type {#intersection-types}
 
 > Technically speaking, the JLS does not define syntax for an intersection type.
 > Instead, it defines a syntax for type parameters and casts that supports
@@ -418,9 +417,7 @@ the type as a whole is always `NO_CHANGE`.
 > than `NO_CHANGE`, we define special handling for intersection types under
 > ["Applying a nullness operator to an augmented type."][applying operator]
 
-(unbounded-wildcard)=
-
-## Bound of an "unbounded" wildcard
+## Bound of an "unbounded" wildcard {#unbounded-wildcard}
 
 In source, an unbounded wildcard is written as `<?>`. This section does *not*
 apply to `<? extends Object>`, even though that is often equivalent to `<?>`.
@@ -453,9 +450,7 @@ Whenever a JLS rule refers specifically to `<?>`, disregard it, and instead
 apply the rules for `<? extends T>`, where `T` has a base type of `Object` and
 the nullness operator defined by this section.
 
-(object-bounded-type-parameter)=
-
-## Bound of an `Object`-bounded type parameter
+## Bound of an `Object`-bounded type parameter {#object-bounded-type-parameter}
 
 In source, an `Object`-bounded type parameter can be writen in either of 2 ways:
 
@@ -483,9 +478,7 @@ its bound has a base type of `Object` and a nullness operator of `UNSPECIFIED`.
 > consider the source code `<T>` to have a bound of `Object`, just as it does
 > when compiled to bytecode.
 
-(null-types)=
-
-## Augmented null types
+## Augmented null types {#null-types}
 
 The JLS refers to "the null type." In this spec, we assign a [nullness operator]
 to all types, including the null type. This produces multiple null types:
@@ -507,9 +500,7 @@ to all types, including the null type. This produces multiple null types:
 
     > This may be relevant only in implementation code.
 
-(multiple-worlds)=
-
-## Multiple "worlds"
+## Multiple "worlds" {#multiple-worlds}
 
 Some of the rules in this spec come in 2 versions: One version requires a
 property to hold "in all worlds," and the other requires it to hold only "in
@@ -555,9 +546,7 @@ some-world rule differs, the differences are explained at the end.
 > implement at least part of the all-worlds rules. Those rules are required as
 > part of [substitution].
 
-(propagating-multiple-worlds)=
-
-### Propagating how many worlds a relation must hold in
+### Propagating how many worlds a relation must hold in {#propagating-multiple-worlds}
 
 When one rule in this spec refers to another, it refers to the same version of
 the rule. For example, when the rules for [containment] refer to the rules for
@@ -791,9 +780,7 @@ hold:
 "`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
 `UNSPECIFIED`."
 
-(nullness-delegating-subtyping)=
-
-## Nullness-delegating subtyping rules for Java
+## Nullness-delegating subtyping rules for Java {#nullness-delegating-subtyping}
 
 > Recall that this rule exists to handle subcomponents of types --- namely, type
 > arguments and array component types. It essentially says "Check nullness
@@ -922,9 +909,7 @@ the result of the following operation:
 -   Otherwise, replace `V` with the result of applying the nullness operator of
     `V` to `Aᵢ`.
 
-(applying-operator)=
-
-## Applying a nullness operator to an augmented type
+## Applying a nullness operator to an augmented type {#applying-operator}
 
 The process of applying a [nullness operator] requires 2 inputs:
 

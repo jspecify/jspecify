@@ -1,52 +1,47 @@
-# Landing Pages
+# Website
 
-The docs will rebuild automatically after a commit. If you want to test locally,
-read on:
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-## How to build
+The instructions bellow assume that you're inside `docs/` directory.
 
-To build this document, run the following commands:
+### Installation
 
-```sh
-$ cd path/to/jspecify
-$ docker build -t jspecify-sphinx docs
-$ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make linkcheck
-$ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make html
+```
+$ npm install
 ```
 
-To
-[translate the document into several languages](https://www.sphinx-doc.org/en/master/intl.html),
-generate `.po` files by following commands:
+### Local Development
 
-```sh
-$ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make gettext
-$ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx sphinx-intl update -p _build/gettext -l ja
+```
+$ npm start
 ```
 
-After you finish updating `.po` files, run the following command to generate
-HTML files:
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-```sh
-$ docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" html
+### Build
+
+```
+$ npm run build
 ```
 
-## How to build without Docker
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-Under Debian and Ubuntu, you may be able to run:
+### Deployment
 
-```sh
-$ sudo apt-get install python3-sphinx python3-sphinx-rtd-theme python3-pip
-$ pip install --upgrade myst-parser
-$ ( cd docs && make html )
+The site is built and published to GitHub Pages via GitHub Actions.
+
+### Manual Deployment
+
+Using SSH:
+
+```
+$ USE_SSH=true yarn deploy
 ```
 
-## How to view the built pages locally
+Not using SSH:
 
-The easiest way I know of is to run Python's built-in webserver:
-
-```sh
-$ cd _build/html
-$ python3 -m http.server 8000
+```
+$ GIT_USER=<Your GitHub username> yarn deploy
 ```
 
-Then the pages should appear at, e.g., http://yourhost:8000/user-guide.html
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

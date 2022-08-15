@@ -1,4 +1,8 @@
-# JSpecify user guide
+---
+sidebar_position: 1
+---
+
+# User guide
 
 In Java code, whether an expression may evaluate to null is often documented
 only in natural language, if at all. The goal of JSpecify is to permit
@@ -61,9 +65,9 @@ includes references that can be null. Code that deals with those references must
 be able to deal with the null case.
 
 ```java
-  static void print(@Nullable String x) {
-    System.out.println(String.valueOf(x));
-  }
+static void print(@Nullable String x) {
+  System.out.println(String.valueOf(x));
+}
 ```
 
 In this example, the parameter `x` can be null, so `print(null)` is a valid
@@ -71,22 +75,22 @@ method call. The body of the `print` method does not do anything with `x` that
 would provoke a NullPointerException so this method is safe.
 
 ```java
-  static @Nullable String emptyToNull(@Nullable String x) {
-    return (x == null || x.isEmpty()) ? null : x;
-  }
+static @Nullable String emptyToNull(@Nullable String x) {
+  return (x == null || x.isEmpty()) ? null : x;
+}
 ```
 
 In this example, the parameter `x` can still be null, but now the return value
 can be too. You might use this method like this:
 
 ```java
-  void doSomething(@Nullable String x) {
-    print(emptyToNull(x));
-    // OK: print accepts a @Nullable String
+void doSomething(@Nullable String x) {
+  print(emptyToNull(x));
+  // OK: print accepts a @Nullable String
 
-    String z = emptyToNull(x).toString();
-    // Not OK: emptyToNull(x) can be null
-  }
+  String z = emptyToNull(x).toString();
+  // Not OK: emptyToNull(x) can be null
+}
 ```
 
 Tools could then use the `@Nullable` information to determine that the first use
@@ -150,7 +154,7 @@ NullPointerException if given a null argument.
 As mentioned above, there are some exceptions to this interpretation for local
 variables (as we'll see next) and [type variables](#defining-generics).
 
-## <a id="local-variables">Local variables</a>
+## Local variables {#local-variables}
 
 Tools that understand JSpecify annotations typically *don't* require `@Nullable`
 to be applied to local variables. They may in fact not even allow that. The
@@ -186,7 +190,7 @@ to a string object or it is null. In a `@NullMarked` context, `List<String>`
 means a list where each element is a reference to a string object and *can't* be
 null.
 
-### <a id="defining-generics">Defining generic types</a>
+### Defining generic types {#defining-generics}
 
 Things are a bit more complicated when you are *defining* a generic type.
 Consider this:
@@ -209,7 +213,7 @@ it, since that *can* be null. Inside `@NullMarked`, you must explicitly provide
 a `@Nullable` bound on your type variable if you want it to be able to represent
 a `@Nullable` type:
 
-```
+```java
 @NullMarked
 public class NumberList<E extends @Nullable Number> implements List<E> {...}
 ```
@@ -256,7 +260,7 @@ references.
 
 Let's look at what the methods in the `List` interface might look like:
 
-```
+```java
 @NullMarked
 public interface List<E extends @Nullable Object> {
   boolean add(E element);
@@ -349,15 +353,15 @@ return value is `@Nullable T` so it can be null even when `T` can't.
 Here's another example:
 
 ```java
-  public static <T> List<@Nullable T> nullOutMatches(List<T> list, T toRemove) {
-    List<@Nullable T> copy = new ArrayList<>(list);
-    for (int i = 0; i < copy.size(); i++) {
-      if (copy.get(i).equals(toRemove)) {
-        copy.set(i, null);
-      }
+public static <T> List<@Nullable T> nullOutMatches(List<T> list, T toRemove) {
+  List<@Nullable T> copy = new ArrayList<>(list);
+  for (int i = 0; i < copy.size(); i++) {
+    if (copy.get(i).equals(toRemove)) {
+      copy.set(i, null);
     }
-    return copy;
   }
+  return copy;
+}
 ```
 
 This takes a `List<T>`, which by definition does not contain null elements, and
