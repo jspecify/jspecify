@@ -3,8 +3,8 @@
 <rect width="767" height="535" fill="#D9D9D9"/>
 </mask>
 <g mask="url(#mask0_2_38)">
-<ellipse rx="372.918" ry="239.81" transform="matrix(0.953847 -0.300294 0.305003 0.952351 383.436 267.369)" fill="#B9C5CD"/>
-<rect x="45" y="51.0002" width="661" height="443" rx="23" fill="#D9D9D9"/>
+<ellipse rx="376.303" ry="249.71" transform="matrix(0.975703 -0.2191 0.223918 0.974608 382.35 277.759)" fill="#D1D6DE"/>
+<rect x="45" y="51.0002" width="661" height="443" rx="23" fill="#C8C8C8"/>
 <path d="M45 93.0001H706V471C706 483.703 695.703 494 683 494H68C55.2974 494 45 483.703 45 471V93.0001Z" fill="#4B4564"/>
 <ellipse cx="69.5" cy="72.5001" rx="7.5" ry="8.5" fill="#AB0000"/>
 <ellipse cx="112.5" cy="72.5001" rx="7.5" ry="8.5" fill="#269400"/>
