@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title} Main`}
-      description="Description will go into a meta tag in <head />">
+      description="Standard Java Annotations for Static Analysis">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
