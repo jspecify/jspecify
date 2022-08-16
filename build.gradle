@@ -34,4 +34,8 @@ java {
     }
 }
 
+javadoc {
+    options.encoding = 'UTF-8'
+}
+
 defaultTasks 'spotlessApply', 'build'
