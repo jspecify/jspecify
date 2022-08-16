@@ -4,15 +4,19 @@ on: [push, pull_request]
 
 jobs:
   build:
+    name: JDK ${{ matrix.java_version }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java_version: [11,17]
     steps:
       - uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
-      - name: Set up JDK 11 # to use compile-time analysis by Errorprone
-        uses: actions/setup-java@v2
+      - name: Set up JDK ${{ matrix.java_version }} # to use compile-time analysis by Errorprone
+        uses: actions/setup-java@v3
         with:
-          distribution: adopt
-          java-version: 11
+          distribution: temurin
+          java-version: ${{ matrix.java_version }}
           cache: gradle
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
