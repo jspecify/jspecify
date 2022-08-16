@@ -27,30 +27,65 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated element and the code transitively <a
- * href="https://docs.oracle.com/en/java/javase/18/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosedElements()">enclosed</a>
- * within it is <b>null-unmarked code</b>: type usages generally have <b>unspecified nullness</b>
- * unless explicitly annotated otherwise.
+ * Indicates that the annotated element and the code transitively
+ * <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosedElements()">enclosed</a>
+ * within it is <b>null-unmarked code</b>: there, type usages
+ * generally have <b>unspecified nullness</b> unless explicitly
+ * annotated otherwise.
  *
- * <h2>Null-marked and null-unmarked code</h2>
+ * <p>This annotation's purpose is to ease migration of a large
+ * existing codebase to null-marked status. It makes it
+ * possible to "flip the default" for new code added to a class
+ * or package even before that class or package has been fully
+ * migrated. Since new code is the most important code to
+ * analyze, this is strongly recommended as a temporary measure
+ * whenever necessary. However, once a codebase has been fully
+ * migrated it would be appropriate to ban use of this
+ * annotation.
  *
- * {@link NullMarked @NullMarked} and this annotation work as a pair to include and exclude sections
- * of code from null-marked status. All code is considered either null-marked or null-unmarked
- * (never both).
+ * <p>For a guided introduction to JSpecify nullness
+ * annotations, please see the
+ * <a href="http://jspecify.org/docs/user-guide">User Guide</a>.
  *
- * <p>Code is considered null-marked if its most narrowly enclosing element annotated with either of
- * these two annotations is annotated with {@link NullMarked @NullMarked}.
+ * <p><b>Warning:</b> These annotations are under development,
+ * and <b>any</b> aspect of their naming, locations, or design
+ * is subject to change until the JSpecify 1.0 release.
+ * Moreover, supporting analysis tools will track with these
+ * changes on varying schedules. Releasing a library using
+ * these annotations in its API is <b>strongly discouraged</b>
+ * at this time.
  *
- * <p>Otherwise it is considered null-unmarked: whether that’s because it is more narrowly enclosed
- * by a {@code @NullUnmarked}-annotated element than by any {@link NullMarked @NullMarked}-annotated
- * element, or because neither annotation is present on any enclosing element. There is no
- * distinction made between these cases.
+ * <h3>Null-marked and null-unmarked code</h3>
  *
- * <p><b>WARNING:</b> This annotation is under development, and <i>any</i> aspect of its naming,
- * location, or design may change before 1.0. <b>Do not release libraries using this annotation at
- * this time.</b>
+ * <p>{@link NullMarked) and this annotation work as a pair to
+ * include and exclude sections of code from null-marked
+ * status.
  *
- * @see NullMarked {@code @NullMarked} for more information.
+ * <p>Code is considered null-marked if the most narrowly
+ * enclosing element annotated with either of these two
+ * annotations is annotated with {@code &#64;NullMarked}.
+ *
+ * <p>Otherwise it is considered null-unmarked. This can happen
+ * in two ways: either it is more narrowly enclosed by a {@code
+ * NullUnmarked}-annotated element than by any {@code
+ * NullMarked}-annotated element, or neither annotation is
+ * present on any enclosing element. No distinction is made
+ * between these cases.
+ *
+ * <h3>Unspecified nullness</h3>
+ *
+ * <p>An unannotated type usage in null-unmarked code has
+ * <b>unspecified nullness</b>. There is <i>some</i> correct
+ * way to annotate it, but that information is missing; the
+ * usage conveys <b>no information</b> about whether it
+ * includes or excludes {@code null} as a value. Only type
+ * usages within null-unmarked code may have unspecified
+ * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *
+ * <p>Unspecified nullness is (will be) explained
+ * comprehensively in the
+ * <a href="http://jspecify.org/docs/user-guide">User
+ * Guide</a>.
  */
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
