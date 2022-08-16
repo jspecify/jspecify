@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: gradle/wrapper-validation-action@v1
-      - name: Set up JDK ${{ matrix.java_version }} # to use compile-time analysis by Errorprone
+      - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v3
         with:
           distribution: temurin
