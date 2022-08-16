@@ -217,9 +217,6 @@ import java.lang.annotation.Target;
  * place of {@code String} we might use a nested type such as
  * {@code Map.Entry}. The Java syntax for annotating such a
  * type as nullable looks like {@code Map.&#64;Nullable Entry}.
- * (This syntax makes it possible to annotate an outer type
- * separately, but in our case, outer types are
- * <a href="#applicability">intrinsically non-nullable</a>.)
  *
  * <li>On a <b>record component</b>: As expected,
  * {@code &#64;Nullable} here applies equally to the
