@@ -16,6 +16,7 @@
 package org.jspecify.nullness;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -57,7 +58,10 @@ class NullMarkedTest {
       /*
        * But reading the *annotations* on NullMarked would result in an exception: Those annotations
        * include @Target, which refers to MODULE, which doesn't exist under Java 8.
+       *
+       * (It happens to fail with ArrayStoreException.)
        */
+      assertThrows(ArrayStoreException.class, NullMarked.class::getAnnotations);
     }
   }
 
