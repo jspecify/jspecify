@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <a name="projection"><h3>Non-null projection</h3></a>
+ * <a name="projection"><h2>Non-null projection</h2></a>
  *
  * <p>In the following example, {@code MyOptional}'s type
  * parameter {@code T} accepts only non-null type arguments,
@@ -107,7 +107,7 @@ import java.lang.annotation.Target;
  * a non-null upper bound, and any non-null projections can
  * then be removed.
  *
- * <h3>Where it is not applicable</h3>
+ * <h2>Where it is not applicable</h2>
  *
  * <p>{@code &#64;NonNull} is not applicable in all the
  * <a href="Nullable.html#applicability">same locations</a> as

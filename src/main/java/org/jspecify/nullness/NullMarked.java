@@ -47,14 +47,14 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <h3>Effects of being null-marked</h3>
+ * <h2>Effects of being null-marked</h2>
  *
  * <p>Within null-marked code, as a <i>general</i> rule, a type
  * usage is considered non-null (to exclude {@code null} as a
  * value) unless explicitly annotated as {@link Nullable}.
  * However, there are several special cases to address.
  *
- * <a name="special-cases"><h4>Special cases</h4></a>
+ * <a name="special-cases"><h3>Special cases</h3></a>
  *
  * <p>Within null-marked code:
  *
@@ -113,7 +113,7 @@ import java.lang.annotation.Target;
  *
  * </ul>
  *
- * <h3>Warning about package annotations</h3>
+ * <h2>Warning about package annotations</h2>
  *
  * <p>Use caution when applying this annotation to a package
  * (via {@code package-info}) that does not belong to a module.

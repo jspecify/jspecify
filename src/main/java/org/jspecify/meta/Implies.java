@@ -64,7 +64,7 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <h3>Details</h3>
+ * <h2>Details</h2>
  *
  * <p>An array of other annotation types may be provided,
  * indicating that this annotation carries (at least) the

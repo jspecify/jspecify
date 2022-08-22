@@ -55,7 +55,7 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <h3>Null-marked and null-unmarked code</h3>
+ * <h2>Null-marked and null-unmarked code</h2>
  *
  * <p>{@link NullMarked) and this annotation work as a pair to
  * include and exclude sections of code from null-marked
@@ -72,7 +72,7 @@ import java.lang.annotation.Target;
  * present on any enclosing element. No distinction is made
  * between these cases.
  *
- * <h3>Unspecified nullness</h3>
+ * <h2>Unspecified nullness</h2>
  *
  * <p>An unannotated type usage in null-unmarked code has
  * <b>unspecified nullness</b>. There is <i>some</i> correct

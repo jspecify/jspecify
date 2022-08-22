@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <a name="augmented-types"><h3>Augmented types</h3></a>
+ * <a name="augmented-types"><h2>Augmented types</h2></a>
  *
  * <p>{@code javac}‘s type system ignores this annotation: in
  * all the examples above, the type it recognizes is "string
@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * nullness indicator (usually, "nullable" or "non-null") an
  * <b>augmented type</b>.
  *
- * <a name="notation"><h3>Important note on notation</h3></a>
+ * <a name="notation"><h2>Important note on notation</h2></a>
  *
  * <p>Augmented types are indicated in prose using a
  * <b>shorthand</b>, combining a base type with a symbol
@@ -113,7 +113,7 @@ import java.lang.annotation.Target;
  * but be aware that it might follow its own similar but
  * different scheme instead.
  *
- * <a name="subtypes"><h3>Subtypes</h3></a>
+ * <a name="subtypes"><h2>Subtypes</h2></a>
  *
  * <p>The Java Language Specification defines the subtype
  * relation among base types. That definition is extended here
@@ -144,7 +144,7 @@ import java.lang.annotation.Target;
  * means "any list": it now excludes lists with null elements,
  * unlike {@code List<?>}.
  *
- * <h3>Kinds of type usages</h3>
+ * <h2>Kinds of type usages</h2>
  *
  * <p>The essential meaning of this annotation is always the
  * same: the type in use is considered to include {@code null}
@@ -229,7 +229,7 @@ import java.lang.annotation.Target;
  *
  * </ul>
  *
- * <a name="applicability"><h3>Where it is not applicable</h3></a>
+ * <a name="applicability"><h2>Where it is not applicable</h2></a>
  *
  * <p>This annotation and {@link NonNull} are applicable to any
  * type usage except the following cases, where they have no
@@ -288,7 +288,7 @@ import java.lang.annotation.Target;
  * Whether the code is {@link NullMarked} also has no
  * consequence in these locations.
  *
- * <h3>Unannotated type usages</h3>
+ * <h2>Unannotated type usages</h2>
  *
  * <p>For a type usage where nullness annotations are
  * <a href="#applicability">applicable</a> but not present, its
