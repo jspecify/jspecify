@@ -19,7 +19,7 @@ user documentation, including Javadoc.
 
 ### The word "nullable"
 
-In this doc, I aim not to refer to whether a type "is nullable." Instead, I draw
+In this doc, we aim not to refer to whether a type "is nullable." Instead, we draw
 some distinctions, creating roughly 3 kinds of "Is it nullable?" questions we
 can ask for any given type usage. Each kind is derived (at least in part) from
 the previous:
