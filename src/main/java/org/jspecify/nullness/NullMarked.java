@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  * within it are <b>null-marked code</b>: there, type usages are
  * generally considered to exclude {@code null} as a value
  * unless specified otherwise. Using this annotation avoids the
- * need to write {@link NonNull} many times throughout your
+ * need to write {@link NonNull @NonNull} many times throughout your
  * code.
  *
  * <p>For a guided introduction to JSpecify nullness
