@@ -30,13 +30,13 @@ import java.lang.annotation.Target;
  * <p>Example usages:
  *
  * <pre>{@code
- * &#64;Nullable String field;
+ * @Nullable String field;
  *
- * &#64;Nullable String getField() { return field; }
+ * @Nullable String getField() { return field; }
  *
- * void setField(&#64;Nullable String value) { field = value; }
+ * void setField(@Nullable String value) { field = value; }
  *
- * List<&#64;Nullable String> getList() { … }
+ * List<@Nullable String> getList() { … }
  * }</pre>
  *
  * <p>For a guided introduction to JSpecify nullness
@@ -63,7 +63,7 @@ import java.lang.annotation.Target;
  *
  * <p>It's the function of a JSpecify-compatible <b>nullness
  * analyzer</b> to interpret {@code String} and
- * {@code &#64;Nullable String} (for example) as <i>though</i>
+ * {@code @Nullable String} (for example) as <i>though</i>
  * they are properly distinct types. (We will use
  * {@code String} as a convenient example type throughout this
  * documentation.) We call a base type together with its
@@ -82,12 +82,12 @@ import java.lang.annotation.Target;
  * <li>{@code String!} represents the <b>non-null form</b> of
  * the base type {@code String}: a reference to an actual
  * string object. This might be expressed in Java code as
- * {@code &#64;NonNull String}, or, within null-marked code, as
+ * {@code @NonNull String}, or, within null-marked code, as
  * just {@code String}.
  *
  * <li>{@code String?} represents the <b>nullable form</b> of
  * the base type {@code String}: a "string-or-null". This is
- * usually expressed in Java as {@code &#64;Nullable String}.
+ * usually expressed in Java as {@code @Nullable String}.
  *
  * <li>{@code String*} represents the <b>unspecified form</b>,
  * as we would find in fully unannotated code. This is included
@@ -178,48 +178,48 @@ import java.lang.annotation.Target;
  *
  * <li>On a non-wildcard<b> type argument:</b> A type usage of
  * "nullable string" appears <i>within</i> the compound type
- * {@code List<&#64;Nullable String>}. No matter how this type
+ * {@code List<@Nullable String>}. No matter how this type
  * is used (return type, local variable type, etc.), this tells
  * us the same thing: when using this type, every appearance of
  * {@code E} in {@code List}'s member signatures will be
  * considered nullable. For a list, this means it may contain
  * null <i>elements</i>. If the list reference itself might be
- * null as well, we can write {@code &#64;Nullable
- * List<&#64;Nullable String>}, a "nullable list of nullable
+ * null as well, we can write {@code @Nullable
+ * List<@Nullable String>}, a "nullable list of nullable
  * strings". Type arguments supplied to a generic method
  * invocation or class instance creation expression work
  * similarly.
  *
  * <li>On a<b> type parameter bound:</b> If a type parameter's
- * upper bound is annotated with {@code &#64;Nullable}, as in
- * {@code class Foo<T extends &#64;Nullable Object>}, that
+ * upper bound is annotated with {@code @Nullable}, as in
+ * {@code class Foo<T extends @Nullable Object>}, that
  * means that {@code T} may be bound to nullable types, as in
- * {@code Foo<&#64;Nullable String>}.
+ * {@code Foo<@Nullable String>}.
  *
  * <li>On a<b> type variable</b> usage: A type parameter, like
  * the {@code E} in {@code interface List<E>}, defines a type
  * variable of the same name, usable only <i>within</i> the
  * scope of the declaring API element. In any example using
  * {@code String} above, a type variable like {@code E} might
- * appear instead. {@code &#64;Nullable} continues to mean "or
+ * appear instead. {@code @Nullable} continues to mean "or
  * null" as always, but notably, this works without regard to
  * whether the type argument is <i>already</i> nullable. For
- * example, given {@code class Foo<E extends &#64;Nullable
- * Object>}, with a method {@code &#64;Nullable E eOrNull()},
+ * example, given {@code class Foo<E extends @Nullable
+ * Object>}, with a method {@code @Nullable E eOrNull()},
  * then whether {@code foo} is of type {@code Foo<String>} or
- * {@code Foo<&#64;Nullable String>}, the expression {@code
+ * {@code Foo<@Nullable String>}, the expression {@code
  * foo.eOrNull()} is always nullable. Using {@code
- * &#64;Nullable E} in this way is called "nullable projection"
+ * @Nullable E} in this way is called "nullable projection"
  * (<a href="NonNull.html#projection">non-null projection</a>
  * is likewise supported, but less commonly useful).
  *
  * <li>On a <b>nested type</b>: In most examples above, in
  * place of {@code String} we might use a nested type such as
  * {@code Map.Entry}. The Java syntax for annotating such a
- * type as nullable looks like {@code Map.&#64;Nullable Entry}.
+ * type as nullable looks like {@code Map.@Nullable Entry}.
  *
  * <li>On a <b>record component</b>: As expected,
- * {@code &#64;Nullable} here applies equally to the
+ * {@code @Nullable} here applies equally to the
  * corresponding parameter type of the canonical constructor,
  * and <i>if</i> an accessor method is generated, to that
  * method's return type as well. An explicit accessor method,
@@ -244,7 +244,7 @@ import java.lang.annotation.Target;
  * return type in an annotation interface, or the type
  * following {@code throws} or {@code catch}. In such
  * locations, a nullness annotation could only be contradictory
- * ({@code &#64;Nullable}) or redundant ({@code &#64;NonNull}).
+ * ({@code @Nullable}) or redundant ({@code @NonNull}).
  *
  * <li>On the root type of a <b>local variable</b> declaration.
  * The nullness of a local variable itself is not a fixed
@@ -265,15 +265,15 @@ import java.lang.annotation.Target;
  *
  * <li>On a <b>class declaration</b>. Java permits any type-use
  * annotation to be used as a class annotation
- * ({@code &#64;Annotation class Foo}). However, this is not a
+ * ({@code @Annotation class Foo}). However, this is not a
  * type usage, and JSpecify nullness annotations have no
  * meaning in such a location.
  * (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *
  * <li>On a <b>type parameter or wildcard</b>: Java also
  * permits any type-use annotation to be placed before a type
- * parameter declaration ({@code class Foo<&#64;Annotation T>})
- * or a wildcard type argument ({@code Foo<&#64;Annotation ?
+ * parameter declaration ({@code class Foo<@Annotation T>})
+ * or a wildcard type argument ({@code Foo<@Annotation ?
  * extends Bar>}). However, these are not type usages, and
  * JSpecify nullness annotations have no meaning in such
  * locations. (<a href="https://bit.ly/3ppb8ZC">Why?</a>) The

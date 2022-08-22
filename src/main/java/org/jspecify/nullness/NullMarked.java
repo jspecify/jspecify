@@ -61,7 +61,7 @@ import java.lang.annotation.Target;
  * <ul>
  *
  * <li>Being null-marked has no consequence for any type usage
- * where {@code &#64;Nullable} and {@code &#64;NonNull} are
+ * where {@code @Nullable} and {@code @NonNull} are
  * <a href="Nullable.html#applicability"><b>not
  * applicable</b></a>, such as the root type of a local
  * variable declaration.
@@ -75,7 +75,7 @@ import java.lang.annotation.Target;
  * Therefore, since <i>nullable</i> {@code Object} is the new
  * "<a href="Nullable.html#subtypes">top type</a>", either list
  * might have null elements, even though the word {@code
- * &#64;Nullable} is nowhere in sight. On the other hand, in
+ * @Nullable} is nowhere in sight. On the other hand, in
  * {@code List<? extends Object>} a bound <i>is</i> provided,
  * and as usual, being unannotated it is considered non-null.
  * This means that while {@code List<?>} and {@code List<?
@@ -90,13 +90,13 @@ import java.lang.annotation.Target;
  *   by the compiler. The example {@code class MyList<E>} is
  *   interpreted identically to {@code class MyList<E extends
  *   Object>}: in both cases the type argument in {@code
- *   MyList<&#64;Nullable Foo>} is out-of-bounds, so the list
+ *   MyList<@Nullable Foo>} is out-of-bounds, so the list
  *   elements are always non-null.
  *   (<a href="https://bit.ly/3ppb8ZC">Why?</a>) 
  *   </ul>
  *
  * <li>A usage of a <b>nullable-bounded type variable</b> (such
- * as the {@code E} in {@code class Foo<E extends &#64;Nullable
+ * as the {@code E} in {@code class Foo<E extends @Nullable
  * Bar>}) is not considered nullable, non-null, or even of
  * "unspecified" nullness. Rather it has <b>parametric
  * nullness</b>. In order to support both nullable and non-null
@@ -109,7 +109,7 @@ import java.lang.annotation.Target;
  * <li>By using {@link NullUnmarked}, an element within
  * null-marked code can be excluded and made null-unmarked,
  * exactly as if there were no enclosing
- * {@code &#64;NullMarked} element at all.
+ * {@code @NullMarked} element at all.
  *
  * </ul>
  *

@@ -63,7 +63,7 @@ import java.lang.annotation.Target;
  *
  * <p>Code is considered null-marked if the most narrowly
  * enclosing element annotated with either of these two
- * annotations is annotated with {@code &#64;NullMarked}.
+ * annotations is annotated with {@code @NullMarked}.
  *
  * <p>Otherwise it is considered null-unmarked. This can happen
  * in two ways: either it is more narrowly enclosed by a {@code

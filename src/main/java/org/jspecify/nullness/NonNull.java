@@ -63,12 +63,12 @@ import java.lang.annotation.Target;
  *
  * class MyOptional<T> { … }
  *
- * interface MyList<E extends &#64;Nullable Object> {
+ * interface MyList<E extends @Nullable Object> {
  *   // Returns the first non-null element, if such element exists.
  *   MyOptional<E> firstNonNull() { … } // problem here!
  * }
  *
- * MyList<&#64;Nullable String> maybeNulls = …
+ * MyList<@Nullable String> maybeNulls = …
  * MyList<String> nonNulls = …
  * }</pre>
  *
@@ -87,15 +87,15 @@ import java.lang.annotation.Target;
  *
  * <pre>{@code
  *   // Returns the first non-null element, if such element exists.
- *   MyOptional<&#64;NonNull E> firstNonNull() { … } // problem fixed!
+ *   MyOptional<@NonNull E> firstNonNull() { … } // problem fixed!
  * }</pre>
  *
- * <p>Here, {@code &#64;NonNull E} selects the non-null form of
+ * <p>Here, {@code @NonNull E} selects the non-null form of
  * the type argument, whether it was already non-null or not,
  * which is just what we need in this scenario.
  *
  * <p>If {@code E} has a non-null upper bound, then the
- * apparent projection {@code &#64;NonNull E} is redundant but
+ * apparent projection {@code @NonNull E} is redundant but
  * harmless.
  *
  * <p><a href="Nullable.html#projection">Nullable
@@ -109,7 +109,7 @@ import java.lang.annotation.Target;
  *
  * <h2>Where it is not applicable</h2>
  *
- * <p>{@code &#64;NonNull} is not applicable in all the
+ * <p>{@code @NonNull} is not applicable in all the
  * <a href="Nullable.html#applicability">same locations</a> as
  * {@link Nullable}.
  */
