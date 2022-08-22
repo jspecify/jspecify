@@ -15,17 +15,14 @@
  */
 
 /**
- * Annotations addressing cross-cutting concerns among other annotation types.
- * The single offering so far is {@link Implies @Implies}.
+ * Annotations addressing cross-cutting concerns among other annotation types. The single offering
+ * so far is {@link Implies @Implies}.
  *
  * <h2 id="unfrozen">Important warning</h2>
  *
- * <p>These annotations are under development, and <b>any</b>
- * aspect of their naming, locations, or design is subject to
- * change until the JSpecify 1.0 release. Moreover, supporting
- * analysis tools will be tracking the changes on varying
- * schedules. Releasing a library using these annotations in
+ * <p>These annotations are under development, and <b>any</b> aspect of their naming, locations, or
+ * design is subject to change until the JSpecify 1.0 release. Moreover, supporting analysis tools
+ * will be tracking the changes on varying schedules. Releasing a library using these annotations in
  * its API is <b>strongly discouraged</b> at this time.
  */
 package org.jspecify.meta;
-
