@@ -28,7 +28,7 @@ import java.lang.annotation.Target;
 
 /**
  * Indicates that the annotated element and the code transitively
- * <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosedElements()">enclosed</a>
+ * {@linkplain javax.lang.model.element.Element#getEnclosedElements() enclosed}
  * within it is <b>null-unmarked code</b>: there, type usages
  * generally have <b>unspecified nullness</b> unless explicitly
  * annotated otherwise.
