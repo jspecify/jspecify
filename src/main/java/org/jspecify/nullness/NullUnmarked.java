@@ -57,7 +57,7 @@ import java.lang.annotation.Target;
  *
  * <h2>Null-marked and null-unmarked code</h2>
  *
- * <p>{@link NullMarked) and this annotation work as a pair to
+ * <p>{@link NullMarked} and this annotation work as a pair to
  * include and exclude sections of code from null-marked
  * status.
  *

@@ -76,11 +76,11 @@ import java.lang.annotation.Target;
  * arguments, we need both {@code maybeNulls.firstNonNull()}
  * and {@code nonNulls.firstNonNull()} to produce the same
  * return type: {@code MyOptional!<String!>} (see
- * <a href>notation</a>). However, as specified above, they
- * won't do that. In fact, there is a problem with the
- * {@code firstNonNull()} signature, since the type argument
- * {@code String?} would not meet the requirements of
- * {@code MyOptional}'s type parameter.
+ * <a href="Nullable.java#notation">notation</a>). However, as
+ * specified above, they won't do that. In fact, there is a
+ * problem with the {@code firstNonNull()} signature, since the
+ * type argument {@code String?} would not meet the
+ * requirements of {@code MyOptional}'s type parameter.
  *
  * <p>The solution is to <b>project</b> the type argument to
  * its non-null counterpart:

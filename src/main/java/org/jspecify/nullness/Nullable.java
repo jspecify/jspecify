@@ -92,11 +92,11 @@ import java.lang.annotation.Target;
  * <li>{@code String*} represents the <b>unspecified form</b>,
  * as we would find in fully unannotated code. This is included
  * here to round out the set; a proper explanation of
- * unspecified nullness is in the <a
- * href="http://jspecify.org/docs/user-guide">User Guide</a>.
+ * unspecified nullness is in the
+ * <a href="http://jspecify.org/docs/user-guide">User Guide</a>.
  *
- * <li>A type variable with no suffix, like {@code T}, has <a
- * href="#special-cases">parametric nullness</a>. Any suffix
+ * <li>A type variable with no suffix, like {@code T}, has
+ * <a href="#special-cases">parametric nullness</a>. Any suffix
  * above would indicate a <i>projection</i> of the type
  * variable (see below).
  *
@@ -258,7 +258,7 @@ import java.lang.annotation.Target;
  * <li>On the root type in a <b>cast expression</b>. To inform
  * an analyzer that an expression it sees as nullable is truly
  * non-null, use an assertion or a method like {@link
- * Objects#requireNonNull}.
+ * java.util.Objects#requireNonNull}.
  * (<a href="https://bit.ly/3ppb8ZC">Why?</a>) Subcomponents of
  * the type (type arguments, array component types) are
  * annotatable as usual.

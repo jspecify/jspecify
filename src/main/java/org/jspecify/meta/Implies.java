@@ -120,6 +120,8 @@ public @interface Implies {
    * the array is empty (e.g., {@code &#64;Implies({})
    * &#64;interface One}), this entire annotation is redundant
    * but harmless.
+   *
+   * @return the annotation types implied by this annotation type
    */
   Class<? extends Annotation>[] value();
 }
