@@ -54,7 +54,7 @@ import java.lang.annotation.Target;
  * value) unless explicitly annotated as {@link Nullable}.
  * However, there are several special cases to address.
  *
- * <a name="special-cases"><h3>Special cases</h3></a>
+ * <h3 id="special-cases">Special cases</h3>
  *
  * <p>Within null-marked code:
  *

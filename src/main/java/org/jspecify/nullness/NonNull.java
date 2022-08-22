@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <a name="projection"><h2>Non-null projection</h2></a>
+ * <h2 id="projection">Non-null projection</h2>
  *
  * <p>In the following example, {@code MyOptional}'s type
  * parameter {@code T} accepts only non-null type arguments,

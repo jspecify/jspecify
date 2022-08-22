@@ -51,7 +51,7 @@ import java.lang.annotation.Target;
  * these annotations in its API is <b>strongly discouraged</b>
  * at this time.
  *
- * <a name="augmented-types"><h2>Augmented types</h2></a>
+ * <h2 id="augmented-types">Augmented types</h2>
  *
  * <p>{@code javac}‘s type system ignores this annotation: in
  * all the examples above, the type it recognizes is "string
@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * nullness indicator (usually, "nullable" or "non-null") an
  * <b>augmented type</b>.
  *
- * <a name="notation"><h2>Important note on notation</h2></a>
+ * <h2 id="notation">Important note on notation</h2>
  *
  * <p>Augmented types are indicated in prose using a
  * <b>shorthand</b>, combining a base type with a symbol
@@ -113,7 +113,7 @@ import java.lang.annotation.Target;
  * but be aware that it might follow its own similar but
  * different scheme instead.
  *
- * <a name="subtypes"><h2>Subtypes</h2></a>
+ * <h2 id="subtypes">Subtypes</h2>
  *
  * <p>The Java Language Specification defines the subtype
  * relation among base types. That definition is extended here
@@ -229,7 +229,7 @@ import java.lang.annotation.Target;
  *
  * </ul>
  *
- * <a name="applicability"><h2>Where it is not applicable</h2></a>
+ * <h2 id="applicability">Where it is not applicable</h2>
  *
  * <p>This annotation and {@link NonNull} are applicable to any
  * type usage except the following cases, where they have no
