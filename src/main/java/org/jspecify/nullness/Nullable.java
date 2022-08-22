@@ -96,9 +96,9 @@ import java.lang.annotation.Target;
  * <a href="http://jspecify.org/docs/user-guide">User Guide</a>.
  *
  * <li>A type variable with no suffix, like {@code T}, has
- * <a href="#special-cases">parametric nullness</a>. Any suffix
- * above would indicate a <i>projection</i> of the type
- * variable (see below).
+ * <a href="NullMarked.html#special-cases">parametric
+ * nullness</a>. Any suffix above would indicate a
+ * <i>projection</i> of the type variable (see below).
  *
  * </ul>
  *
