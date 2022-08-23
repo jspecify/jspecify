@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         java_version: [11, 17, 18]
+        experimental: [false]
         include:
           - java_version: 19-ea
             experimental: true
