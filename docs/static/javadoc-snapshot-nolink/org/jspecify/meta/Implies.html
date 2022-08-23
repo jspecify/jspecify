@@ -87,17 +87,13 @@ loadScripts(document, 'script');</script>
 <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
 <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/ElementType.html#ANNOTATION_TYPE" title="class or interface in java.lang.annotation" class="external-link">ANNOTATION_TYPE</a>)
 </span><span class="modifiers">public @interface </span><span class="element-name type-name-label">Implies</span></div>
-<div class="block">Indicates that an annotation type conveys all of the same
- meaning as the given annotation type(s); for example, <code>
- @Implies(One.class) @interface Two {}</code> says that any
- usage of  <code>@Two</code> implicitly conveys all the same
- meaning as <code>@One</code> (with no attributes) would in
- the same location. Note that the <code>Two</code> annotation type
- <i>may</i> add additional meaning of its own as well, and
- may be applicable in locations where <code>One</code> is not.
+<div class="block">Indicates that an annotation type conveys all of the same meaning as the given annotation
+ type(s); for example, <code>@Implies(One.class) @interface Two {}</code> says that any usage of
+ <code>@Two</code> implicitly conveys all the same meaning as <code>@One</code> (with no attributes) would
+ in the same location. Note that the <code>Two</code> annotation type <i>may</i> add additional meaning
+ of its own as well, and may be applicable in locations where <code>One</code> is not.
 
- <p>We will refer to this example throughout this
- documentation:
+ <p>We will refer to this example throughout this documentation:
 
  <pre><code>
  public @interface One {}
@@ -112,60 +108,43 @@ loadScripts(document, 'script');</script>
  @One @Two declaration_c
  </code></pre>
 
- <p>In this example, the meaning conveyed by the annotations
- is exactly the same for <code>declaration_b</code> and <code>
- declaration_c</code>; there, <code>@One</code> is considered
- redundant (but harmless). A JSpecify-compatible tool will
- treat the two identically (apart from optionally reporting
- the redundancy itself).
+ <p>In this example, the meaning conveyed by the annotations is exactly the same for <code>
+ declaration_b</code> and <code>declaration_c</code>; there, <code>@One</code> is considered redundant (but
+ harmless). A JSpecify-compatible tool will treat the two identically (apart from optionally
+ reporting the redundancy itself).
 
- <p><b>Warning:</b> These annotations are under development,
- and <b>any</b> aspect of their naming, locations, or design
- is subject to change until the JSpecify 1.0 release.
- Moreover, supporting analysis tools will be tracking the
- changes on varying schedules. Releasing a library using
- these annotations in its API is <b>strongly discouraged</b>
- at this time.
+ <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
+ naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,
+ supporting analysis tools will be tracking the changes on varying schedules. Releasing a library
+ using these annotations in its API is <b>strongly discouraged</b> at this time.
 
  <h2>Details</h2>
 
- <p>An array of other annotation types may be provided,
- indicating that this annotation carries (at least) the
- combined meanings of <i>all</i> of them.
+ <p>An array of other annotation types may be provided, indicating that this annotation type (the
+ one that is itself annotated with <code>@Implies</code>) carries (at least) the combined meanings of
+ <i>all</i> of them.
 
- <p>In the example above, if <code>Two</code> does not define any
- additional semantics, and lists only one implied annotation,
- we call it an <i>alias</i> for <code>One</code>. In this case,
- the annotations on <i>all</i> three example declarations
- above convey identical meaning, and should be treated
+ <p>In the example above, if <code>Two</code> does not define any additional semantics, and lists only
+ one implied annotation, we call it an <i>alias</i> for <code>One</code>. In this case, the annotations
+ on <i>all</i> three example declarations above convey identical meaning, and should be treated
  identically by tools.
 
- <p>Implication is naturally transitive: if in addition to
- the example code above we also have <code>
- @Implies(Two.class) @interface Three {}</code>, it is
- understood that <code>Three</code> also implies <code>One</code>.
- Listing <code>One.class</code> explicitly is redundant but
- harmless.
+ <p>Implication is naturally transitive: if in addition to the example code above we also have
+ <code>@Implies(Two.class) @interface Three {}</code>, it is understood that <code>Three</code> also implies
+ <code>One</code>. Listing <code>One.class</code> explicitly is redundant but harmless.
 
- <p>It is not possible to supply custom attribute values
- for an implied annotation, such as declaring that <code>
- @Two</code> implies <code>@One("arg")</code> or that <code>
- @Two(key = VALUE)</code> implies <code>@One(key =
- VALUE)</code>.
+ <p>It is not possible to supply custom attribute values for an implied annotation, such as
+ declaring that <code>@Two</code> implies <code>@One("arg")</code> or that <code>@Two(key = VALUE)</code> implies
+ <code>@One(key = VALUE)</code>.
 
- <p>The target types of <code>One</code> and <code>Two</code> may
- differ. <code>@Two</code> may therefore appear in a location
- where <code>@One</code> cannot; for these usages
- <code>@Implies</code> has no effect. The target types of
- <code>One</code> and <code>Two</code> might even be disjoint. For
- example if they are <code>{FIELD}</code> and <code>{TYPE_USE}</code>,
- there are still source locations where either can appear
- (before the type of a field), so the implication still has
- meaning.
+ <p>The target types of <code>One</code> and <code>Two</code> may differ. <code>@Two</code> may therefore appear
+ in a location where <code>@One</code> cannot; for these usages <code>@Implies</code> has no effect. The
+ target types of <code>One</code> and <code>Two</code> might even be disjoint. For example if they are
+ <code>{FIELD}</code> and <code>{TYPE_USE}</code>, there are still source locations where either can appear
+ (before the type of a field), so the implication still has meaning.
 
- <p>If <code>Two</code> has wider retention than <code>One</code>, then
- in any situation where <code>@One</code> would not be
- visible, the effect of <code>@Implies</code> is undefined.</div>
+ <p>If <code>Two</code> has wider retention than <code>One</code>, then in any situation where <code>@One</code>
+ would not be visible, the effect of <code>@Implies</code> is undefined.</div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -181,8 +160,8 @@ loadScripts(document, 'script');</script>
 <div class="col-first even-row-color"><code><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;[]</code></div>
 <div class="col-second even-row-color"><code><a href="#value()" class="member-name-link">value</a></code></div>
 <div class="col-last even-row-color">
-<div class="block">The annotation types implied by this annotation type
- (usually one).</div>
+<div class="block">The annotation types implied by this annotation type (the one that is itself annotated with
+ <code>Implies</code>).</div>
 </div>
 </div>
 </section>
@@ -200,17 +179,13 @@ loadScripts(document, 'script');</script>
 <section class="detail" id="value()">
 <h3>value</h3>
 <div class="member-signature"><span class="return-type"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Class.html" title="class or interface in java.lang" class="external-link">Class</a>&lt;? extends <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Annotation.html" title="class or interface in java.lang.annotation" class="external-link">Annotation</a>&gt;[]</span>&nbsp;<span class="element-name">value</span></div>
-<div class="block">The annotation types implied by this annotation type
- (usually one). May not include any annotation type that
- declares an attribute with no default value. Including this
- annotation type itself, or any annotation type transitively
- implied by another in the array, is redundant but harmless
- (a larger cycle of implication is acceptable). Any number
- of types can be given. Their order is irrelevant. A
- duplicate type in the array is redundant but harmless. If
- the array is empty (e.g., <code>@Implies({})
- @interface One</code>), this entire annotation is redundant
- but harmless.</div>
+<div class="block">The annotation types implied by this annotation type (the one that is itself annotated with
+ <code>Implies</code>). May not include any annotation type that declares an attribute with no
+ default value. Listing this annotation type itself in the array, or any annotation type that is
+ already transitively implied by another listed, is redundant but harmless. (A larger cycle of
+ implication is acceptable.) Any number of types can be given. Their order is irrelevant. A
+ duplicate type in the array is redundant but harmless. If the array is empty (e.g.,
+ <code>@Implies({}) @interface One</code>), this entire annotation is redundant but harmless.</div>
 <dl class="notes">
 <dt>Returns:</dt>
 <dd>the annotation types implied by this annotation type</dd>
