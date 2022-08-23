@@ -93,8 +93,8 @@ public @interface Implies {
    * default value. Listing this annotation type itself in the array, or any annotation type that is
    * already transitively implied by another listed, is redundant but harmless. (A larger cycle of
    * implication is acceptable.) Any number of types can be given. Their order is irrelevant. A
-   * duplicate type in the array is redundant but harmless. If the array is empty (e.g., {@code
-   * @Implies({}) @interface One}), this entire annotation is redundant but harmless.
+   * duplicate type in the array is redundant but harmless. If the array is empty (e.g.,
+   * {@code @Implies({}) @interface One}), this entire annotation is redundant but harmless.
    *
    * @return the annotation types implied by this annotation type
    */
