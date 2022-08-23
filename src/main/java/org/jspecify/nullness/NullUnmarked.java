@@ -55,8 +55,8 @@ import java.lang.annotation.Target;
  * these two annotations is annotated with {@code @NullMarked}.
  *
  * <p>Otherwise it is considered null-unmarked. This can happen in two ways: either it is more
- * narrowly enclosed by a {@code NullUnmarked}-annotated element than by any {@code
- * NullMarked}-annotated element, or neither annotation is present on any enclosing element. No
+ * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any {@code
+ * @NullMarked}-annotated element, or neither annotation is present on any enclosing element. No
  * distinction is made between these cases.
  *
  * <h2>Unspecified nullness</h2>
