@@ -87,16 +87,12 @@ import java.lang.annotation.Target;
 @Target(ANNOTATION_TYPE)
 public @interface Implies {
   /**
-   * The annotation types implied by this annotation type
-   * (usually one). May not include any annotation type that
-   * declares an attribute with no default value. Including this
-   * annotation type itself, or any annotation type transitively
-   * implied by another in the array, is redundant but harmless
-   * (a larger cycle of implication is acceptable). Any number
-   * of types can be given. Their order is irrelevant. A
-   * duplicate type in the array is redundant but harmless. If
-   * the array is empty (e.g., {@code @Implies({})
-   * @interface One}), this entire annotation is redundant
+   * The annotation types implied by this annotation type (usually one). May not include any
+   * annotation type that declares an attribute with no default value. Including this annotation
+   * type itself, or any annotation type transitively implied by another in the array, is redundant
+   * but harmless (a larger cycle of implication is acceptable). Any number of types can be given.
+   * Their order is irrelevant. A duplicate type in the array is redundant but harmless. If the
+   * array is empty (e.g., {@code @Implies({}) @interface One}), this entire annotation is redundant
    * but harmless.
    *
    * @return the annotation types implied by this annotation type
