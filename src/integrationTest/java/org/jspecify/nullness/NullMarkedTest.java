@@ -17,6 +17,7 @@ package org.jspecify.nullness;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.Assumptions.assumeFalse;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -62,6 +63,7 @@ class NullMarkedTest {
        * (It happens to fail with ArrayStoreException.)
        */
       assertThrows(ArrayStoreException.class, NullMarked.class::getAnnotations);
+      fail("The Java 8 test runs!");
     }
   }
 
