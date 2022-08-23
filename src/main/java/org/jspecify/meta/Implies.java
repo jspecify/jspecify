@@ -57,8 +57,9 @@ import java.lang.annotation.Target;
  *
  * <h2>Details</h2>
  *
- * <p>An array of other annotation types may be provided, indicating that this annotation carries
- * (at least) the combined meanings of <i>all</i> of them.
+ * <p>An array of other annotation types may be provided, indicating that this annotation type (the
+ * one that is itself annotated with {@code @Implies}) carries (at least) the combined meanings of
+ * <i>all</i> of them.
  *
  * <p>In the example above, if {@code Two} does not define any additional semantics, and lists only
  * one implied annotation, we call it an <i>alias</i> for {@code One}. In this case, the annotations
@@ -87,13 +88,13 @@ import java.lang.annotation.Target;
 @Target(ANNOTATION_TYPE)
 public @interface Implies {
   /**
-   * The annotation types implied by this annotation type (usually one). May not include any
-   * annotation type that declares an attribute with no default value. Listing this annotation type
-   * itself in the array, or any annotation type that is already transitively implied by another
-   * listed, is redundant but harmless. (A larger cycle of implication is acceptable.) Any number of
-   * types can be given. Their order is irrelevant. A duplicate type in the array is redundant but
-   * harmless. If the array is empty (e.g., {@code @Implies({}) @interface One}), this entire
-   * annotation is redundant but harmless.
+   * The annotation types implied by this annotation type (the one that is itself annotated with
+   * {@code Implies}). May not include any annotation type that declares an attribute with no
+   * default value. Listing this annotation type itself in the array, or any annotation type that is
+   * already transitively implied by another listed, is redundant but harmless. (A larger cycle of
+   * implication is acceptable.) Any number of types can be given. Their order is irrelevant. A
+   * duplicate type in the array is redundant but harmless. If the array is empty (e.g., {@code
+   * @Implies({}) @interface One}), this entire annotation is redundant but harmless.
    *
    * @return the annotation types implied by this annotation type
    */
