@@ -25,3 +25,7 @@ jobs:
           cache: gradle
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
+        if: matrix.java_version != '11'  
+      - run: |
+          ./gradlew spotlessCheck build publishToMavenLocal -x javadoc --no-daemon
+        if: matrix.java_version == '11'  
