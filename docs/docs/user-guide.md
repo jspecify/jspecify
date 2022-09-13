@@ -233,7 +233,7 @@ public interface List<E extends @Nullable Object> {...}
 ```
 
 If it were `interface List<E>` rather than `interface List<E extends @Nullable
-Object>` then `NumberList<E extends @Nullable Number> extends List<E>` would not
+Object>` then `NumberList<E extends @Nullable Number> implements List<E>` would not
 be legal. That's because `interface List<E>` is short for `interface List<E
 extends Object>`. Inside `@NullMarked`, plain `Object` means "`Object` reference
 that can't be null". The `<E extends @Nullable Number>` from NumberList would
