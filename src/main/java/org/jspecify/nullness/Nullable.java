@@ -29,9 +29,9 @@ import java.lang.annotation.Target;
  * <p>Example usages:
  *
  * <pre>{@code
- * @Nullable String field;
+ * &commat;Nullable String field;
  *
- * @Nullable String getField() { return field; }
+ * &commat;Nullable String getField() { return field; }
  *
  * void setField(@Nullable String value) { field = value; }
  *

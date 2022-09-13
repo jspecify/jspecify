@@ -36,13 +36,13 @@ import java.lang.annotation.Target;
  * public @interface One {}
  *
  * // Additional meaning of `@Two`, if any, specified here.
- * @Implies(One.class)
+ * &commat;Implies(One.class)
  * public @interface Two {}
  *
  * // These might be classes, fields, methods, etc.
- * @One declaration_a
- * @Two declaration_b
- * @One @Two declaration_c
+ * &commat;One declaration_a
+ * &commat;Two declaration_b
+ * &commat;One @Two declaration_c
  * }</pre>
  *
  * <p>In this example, the meaning conveyed by the annotations is exactly the same for {@code
