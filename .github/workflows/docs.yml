@@ -1,4 +1,4 @@
-name: Sphinx Document
+name: Docs
 
 on:
   push:
@@ -13,19 +13,23 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - run: |
-          docker build -t jspecify-sphinx docs
-          docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make html
-          docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx make -e SPHINXOPTS="-D language='ja'" -e BUILDDIR="_build-ja" html
-          docker run --rm -v $(pwd)/docs:/docs jspecify-sphinx cp -R _build-ja/html _build/html/ja
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - run: npm install
+        working-directory: docs
+
+      - run: npm run build
+        working-directory: docs
 
       - uses: actions/upload-artifact@v2
         with:
           name: document
-          path: docs/_build/html
+          path: docs/build
 
       - uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
           branch: gh-pages
-          folder: docs/_build/html
+          folder: docs/build
         if: github.event_name == 'push'
