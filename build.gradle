@@ -22,7 +22,9 @@ dependencies {
 }
 
 java {
-    withJavadocJar()
+    if (JavaVersion.current() > JavaVersion.VERSION_14){
+        withJavadocJar()
+    }
     withSourcesJar()
 
     sourceCompatibility 8
