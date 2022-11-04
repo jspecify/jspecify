@@ -14,3 +14,9 @@ Our current focus is on annotations for nullness analysis.
 
 Run `./gradlew` to build artifacts, or `./gradlew publishToMavenLocal` to
 install artifacts to your Local Maven Repository.
+
+(Temporary?) After updating `.java` files, use
+
+`./gradlew javadoc && rsync -a --delete build/docs/javadoc/ docs/static/docs/api`
+
+to update the static hosted generated files.
