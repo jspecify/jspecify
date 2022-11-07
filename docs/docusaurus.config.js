@@ -93,7 +93,7 @@ const config = {
                 to: '/docs/spec',
               },
               {
-                label: 'JSpecify Wiki',
+                label: 'Wiki',
                 to: 'http://github.com/jspecify/jspecify/wiki',
               },
             ],
