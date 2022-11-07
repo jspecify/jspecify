@@ -141,16 +141,14 @@ A nullness operator is one of 4 values:
 >     -   One way to conceptualize this is that `String NO_CHANGE` means
 >         "non-null `String`" but that `T NO_CHANGE` means "nullness comes from
 >         the value of `T`."
-> -   `UNSPECIFIED`: This is the operator produced for a type usage *outside* of
->     [null-marked scope]*, where nullness type-use annotations are applicable
->     **FIX THAT?**
->     yet none appears. Roughly, it is the operator assigned to "completely
->     unannotated code."
+> -   `UNSPECIFIED`: This is the operator produced by not putting `@Nullable` on
+>     a type usage *in code that is outside a [null-marked scope]*. Roughly, it
+>     is the operator assigned to "completely unannotated code."
 >     -   The type usage `String UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
->         etc., but it has been left ambiguous whether to include `null`.
+>         etc., but it is ambiguous whether `null` should be included.
 >     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`.
->         But it is has been left ambiguous whether to add `null` if it wasn't
->         already included.
+>         But it is ambiguous whether `null` should be added to the set (if it
+>         wasn't already).
 > -   `MINUS_NULL`: This operator not only does not *add* `null` but also
 >     actively *removes* it from a type-variable usage that might otherwise
 >     include it.
@@ -195,6 +193,8 @@ a component of `T` or has `T` as a component.
 > list itself may be `null`, not whether its elements may be.
 
 ## Details common to all annotations
+
+For all named annotations referred to by this spec:
 
 -   The package name is `org.jspecify.nullness`. \[[#1]\]
 -   The Java module name is `org.jspecify`. \[[#181]\]
