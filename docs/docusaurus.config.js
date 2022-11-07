@@ -85,7 +85,7 @@ const config = {
                 to: '/docs/user-guide',
               },
               {
-                label: 'Current Javadoc',
+                label: 'Javadoc',
                 to: '/docs/api/org/jspecify/nullness/package-summary.html',
               },
               {
