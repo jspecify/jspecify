@@ -4,7 +4,7 @@ title: About
 
 # JSpecify
 
-**Standard Java Annotations for Static Analysis**
+**Tool-independent Annotations for Java Static Analysis**
 
 ## Our Goal
 

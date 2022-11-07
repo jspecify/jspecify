@@ -7,8 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'JSpecify',
-  tagline: 'Standard Java Annotations for Static Analysis',
-  url: 'https://jspecify.dev/',
+  tagline: 'Tool-Independent Annotations for Java Static Analysis',
+  url: 'http://jspecify.org/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -63,10 +63,10 @@ const config = {
           src: 'img/jspecify-logo.svg',
         },
         items: [
-          {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
-          {to: '/docs/spec', label: 'Specification', position: 'left'},
-          {to: '/blog', label: 'Blog', position: 'left'},
           {to: '/about', label: 'About', position: 'left'},
+          {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
+          {to: '/docs/api/org/jspecify/nullness/package-summary.html', label: 'Javadoc', position: 'left'},
+          {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/jspecify/jspecify',
             label: 'GitHub',
@@ -81,12 +81,20 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'User Guide',
+                label: 'Draft User Guide',
                 to: '/docs/user-guide',
               },
               {
-                label: 'Specification',
+                label: 'Javadoc',
+                to: '/docs/api/org/jspecify/nullness/package-summary.html',
+              },
+              {
+                label: 'Draft Spec',
                 to: '/docs/spec',
+              },
+              {
+                label: 'Wiki',
+                to: 'http://github.com/jspecify/jspecify/wiki',
               },
             ],
           },
@@ -98,7 +106,7 @@ const config = {
                 href: 'https://groups.google.com/g/jspecify-dev'
               },
               {
-                label: 'Mailing List',
+                label: 'Send us mail',
                 href: 'mailto:jspecify-dev@googlegroups.com',
               },
             ],
@@ -107,17 +115,17 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
                 href: 'https://github.com/jspecify/jspecify',
+              },
+              {
+                label: 'Blog',
+                to: '/blog',
               },
             ],
           },
         ],
-        copyright: `Copyright 2018-${new Date().getFullYear()} The JSpecify Authors. Built with Docusaurus.`,
+        copyright: `Copyright ${new Date().getFullYear()} The JSpecify Authors. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,
