@@ -65,7 +65,11 @@ const config = {
         items: [
           {to: '/about', label: 'About', position: 'left'},
           {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
-          {to: '/docs/api/org/jspecify/nullness/package-summary.html', label: 'Javadoc', position: 'left'},
+          {
+            to: 'http://jspecify.org/docs/api/org/jspecify/nullness/package-summary.html',
+            label: 'Javadoc',
+            position: 'left',
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
           {
             href: 'https://github.com/jspecify/jspecify',
