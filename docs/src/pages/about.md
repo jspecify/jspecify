@@ -31,7 +31,7 @@ at enabling automated refactorings and bug prevention.
 Many of their most beneficial analyses require certain Java annotations (such as `@Nullable` or
 `@Immutable`) to be present in the source or class file being analyzed. Yet for the 
 going-on-two-decades since Java annotations were introduced, there's been no serious and 
-successful effort to provide a single well-specified standard for these annotations with 
+successful effort to provide a single well-specified artifact for these annotations with 
 industry consensus. Instead, each tool has generally provided its own, and each tool interprets 
 the meanings of the annotations differently.
 
