@@ -49,10 +49,9 @@ import java.lang.annotation.Target;
  * <h2>Null-marked and null-unmarked code</h2>
  *
  * <p>{@link NullMarked} and this annotation work as a pair to include and exclude sections of code
- * from null-marked status.
- *
- * <p>Code is considered null-marked if the most narrowly enclosing element annotated with either of
- * these two annotations is annotated with {@code @NullMarked}.
+ * from null-marked status (respectively). Specifically, code is considered null-marked if the most
+ * narrowly enclosing element annotated with either of these two annotations is annotated with
+ * {@code @NullMarked}.
  *
  * <p>Otherwise it is considered null-unmarked. This can happen in two ways: either it is more
  * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any
@@ -63,8 +62,8 @@ import java.lang.annotation.Target;
  *
  * <p>An unannotated type usage in null-unmarked code has <b>unspecified nullness</b>. There is
  * <i>some</i> correct way to annotate it, but that information is missing; the usage conveys <b>no
- * information</b> about whether it includes or excludes {@code null} as a value. Only type usages
- * within null-unmarked code may have unspecified nullness. (<a
+ * information</b> about whether it includes or excludes {@code null} as a value. There is no way
+ * for a type usage within null-marked code to have unspecified nullness. (<a
  * href="https://bit.ly/3ppb8ZC">Why?</a>)
  *
  * <p>Unspecified nullness is (will be) explained comprehensively in the <a
