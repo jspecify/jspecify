@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated <a href="http://github.com/jspecify/jspecify/wiki/type-usages">type
+ * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
  * usage</a> (commonly a parameter type or return type) is considered to include {@code null} as a
  * value.
  *
@@ -100,7 +100,7 @@ import java.lang.annotation.Target;
  * <h2 id="applicability">Where it is not applicable</h2>
  *
  * <p>This annotation and {@link NonNull} are applicable to any [type usage]
- * (http://github.com/jspecify/jspecify/wiki/type-usages) except the following cases, where they
+ * (https://github.com/jspecify/jspecify/wiki/type-usages) except the following cases, where they
  * have no defined meaning:
  *
  * <ul>

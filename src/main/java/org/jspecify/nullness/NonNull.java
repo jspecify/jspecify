@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated <a href="http://github.com/jspecify/jspecify/wiki/type-usages">type
+ * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
  * usage</a> (commonly a parameter type or return type) is considered to <i>exclude</i> {@code null}
  * as a value; rarely needed within {@linkplain NullMarked null-marked} code.
  *
