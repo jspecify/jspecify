@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
 
 /**
  * Indicates that the annotated <a href="http://github.com/jspecify/jspecify/wiki/type-usages">type
- * usage</a> (commonly a variable type or return type) is considered to include {@code null} as a
+ * usage</a> (commonly a parameter type or return type) is considered to include {@code null} as a
  * value.
  *
  * <p>Example usages:
@@ -74,8 +74,8 @@ import java.lang.annotation.Target;
  *       {@code @Nullable List<@Nullable String>}, a "nullable list of nullable strings".
  *   <li>On the upper bound of a <b>type parameter</b>: For example, as seen in {@code class List<E
  *       extends @Nullable Object>}. This means that a <i>type argument</i> supplied for that type
- *       parameter is permitted to be nullable if desired: {@code List<@Nullable String>}. A
- *       non-null type argument (as in {@code List<String>}) is always acceptable.
+ *       parameter is permitted to be nullable if desired: {@code List<@Nullable String>}. (A
+ *       non-null type argument, as in {@code List<String>}, is permitted either way.)
  *   <li>On a usage of a <b>type variable</b>: A type parameter, like the {@code E} in {@code
  *       interface List<E>}, defines a "type variable" of the same name, usable only <i>within</i>
  *       the scope of the declaring API element. In any example using {@code String} above, a type

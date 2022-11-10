@@ -50,8 +50,8 @@ import java.lang.annotation.Target;
  *
  * <p>{@link NullMarked} and this annotation work as a pair to include and exclude sections of code
  * from null-marked status (respectively). Specifically, code is considered null-marked if the most
- * narrowly enclosing element annotated with either of these two annotations is annotated with
- * {@code @NullMarked}.
+ * narrowly enclosing element annotated with either of these two annotations exists and is annotated
+ * with {@code @NullMarked}.
  *
  * <p>Otherwise it is considered null-unmarked. This can happen in two ways: either it is more
  * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any

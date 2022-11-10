@@ -73,7 +73,7 @@ import java.lang.annotation.Target;
  *             type argument in {@code MyList<@Nullable Foo>} is out-of-bounds, so the list elements
  *             are always non-null. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       </ul>
- *   <li>When a type variable has nullable upper bound, such as the {@code E} in {@code class Foo<E
+ *   <li>When a type variable has a nullable upper bound, such as the {@code E} in {@code class Foo<E
  *       extends @Nullable Bar>}), an unannotated usage of this type variable is not considered
  *       nullable, non-null, or even of "unspecified" nullness. Rather it has <b>parametric
  *       nullness</b>. In order to support both nullable and non-null type arguments safely, the
