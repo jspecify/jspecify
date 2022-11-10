@@ -73,13 +73,14 @@ import java.lang.annotation.Target;
  *             type argument in {@code MyList<@Nullable Foo>} is out-of-bounds, so the list elements
  *             are always non-null. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       </ul>
- *   <li>When a type variable has a nullable upper bound, such as the {@code E} in {@code class Foo<E
- *       extends @Nullable Bar>}), an unannotated usage of this type variable is not considered
- *       nullable, non-null, or even of "unspecified" nullness. Rather it has <b>parametric
- *       nullness</b>. In order to support both nullable and non-null type arguments safely, the
- *       {@code E} type itself must be handled <i>strictly</i>: as if nullable when "read from", but
- *       as if non-null when "written to". (Contrast with {@code class Foo<E extends Bar>}, where
- *       usages of {@code E} are simply non-null, just like usages of {@code String} are.)
+ *   <li>When a type variable has a nullable upper bound, such as the {@code E} in {@code class
+ *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable is not
+ *       considered nullable, non-null, or even of "unspecified" nullness. Rather it has
+ *       <b>parametric nullness</b>. In order to support both nullable and non-null type arguments
+ *       safely, the {@code E} type itself must be handled <i>strictly</i>: as if nullable when
+ *       "read from", but as if non-null when "written to". (Contrast with {@code class Foo<E
+ *       extends Bar>}, where usages of {@code E} are simply non-null, just like usages of {@code
+ *       String} are.)
  *   <li>By using {@link NullUnmarked}, an element within null-marked code can be excluded and made
  *       null-unmarked, exactly as if there were no enclosing {@code @NullMarked} element at all.
  * </ul>
