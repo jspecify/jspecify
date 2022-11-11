@@ -23,10 +23,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * Indicates that the annotated type usage is considered to exclude {@code null} as a value; rarely
- * needed within {@linkplain NullMarked null-marked} code.
+ * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
+ * usage</a> (commonly a parameter type or return type) is considered to <i>exclude</i> {@code null}
+ * as a value; rarely needed within {@linkplain NullMarked null-marked} code.
  *
- * <p>This annotation has two primary purposes:
+ * <p>This annotation serves two primary purposes:
  *
  * <ul>
  *   <li>To mark any sporadic non-null type usages inside a scope that is not ready to be fully
@@ -64,10 +65,11 @@ import java.lang.annotation.Target;
  *
  * <p>Because {@code MyOptional} accepts only non-null type arguments, we need both {@code
  * maybeNulls.firstNonNull()} and {@code nonNulls.firstNonNull()} to produce the same return type:
- * {@code MyOptional!<String!>} (see <a href="Nullable.java#notation">notation</a>). However, as
- * specified above, they won't do that. In fact, there is a problem with the {@code firstNonNull()}
- * signature, since the type argument {@code String?} would not meet the requirements of {@code
- * MyOptional}'s type parameter.
+ * {@code MyOptional!<String!>} (see <a
+ * href="https://github.com/jspecify/jspecify/wiki/notation#shorthand-notation">notation</a>).
+ * However, as specified above, they won't do that. In fact, there is a problem with the {@code
+ * firstNonNull} signature, since the type argument {@code String?} would not meet the requirements
+ * of {@code MyOptional}'s type parameter.
  *
  * <p>The solution is to <b>project</b> the type argument to its non-null counterpart:
  *
@@ -90,7 +92,7 @@ import java.lang.annotation.Target;
  *
  * <h2>Where it is not applicable</h2>
  *
- * <p>{@code @NonNull} is not applicable in all the <a href="Nullable.html#applicability">same
+ * <p>{@code @NonNull} is inapplicable in all the <a href="Nullable.html#applicability">same
  * locations</a> as {@link Nullable}.
  */
 @Documented
