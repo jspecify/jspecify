@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'JSpecify',
-  tagline: 'Tool-Independent Annotations for Java Static Analysis',
+  tagline: 'Standard Annotations for Java Static Analysis',
   url: 'http://jspecify.org/',
   baseUrl: '/',
   onBrokenLinks: 'throw',

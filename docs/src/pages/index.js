@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title} Main`}
-      description="Tool-Independent Annotations for Java Static Analysis">
+      description="Standard Annotations for Java Static Analysis">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
