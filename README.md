@@ -1,14 +1,16 @@
 # JSpecify
 
-**Note: This project is still under active development. Any and all aspects of
-the project are subject to change prior to the 1.0 release. Do not depend on it
-for production use.**
+**This project is still under active development. Any and all aspects of
+the API and specifications are subject to change prior to the 1.0 release.
+Using the annotations in a released library is not recommended.**
 
 An artifact of well-specified annotations to power static analysis checks and
 JVM language interop.  Developed by consensus of the partner organizations
 listed at our main web site, [jspecify.org](http://jspecify.org).
 
 Our current focus is on annotations for nullness analysis.
+
+See [our web site](http://jspecify.org).
 
 ## Stuff to read
 
@@ -29,14 +31,3 @@ We're striving to get our 0.3 release out before the holidays. Goals for this re
   
 Upon the release we'll advertise the project a bit more widely than we have been
 so far. We're working to make sure it's worth your time to learn about.
-
-## How to build
-
-Run `./gradlew` to build artifacts, or `./gradlew publishToMavenLocal` to
-install artifacts to your Local Maven Repository.
-
-(Temporary?) After updating `.java` files, use
-
-`./gradlew javadoc && rsync -a --delete build/docs/javadoc/ docs/static/docs/api`
-
-to update the static hosted generated files.
