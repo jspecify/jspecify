@@ -32,9 +32,8 @@ const FeatureListPng = [
     Png: require('@site/static/img/jspecify-landing-community.png').default,
     description: (
       <>
-        JSpecify is developed by consensus of its members, who represent a variety of
-        stakeholders in Java static analysis. We discuss designs in the open, where
-        anyone can participate.
+        JSpecify is developed by consensus of members representing a variety of
+        stakeholders in Java static analysis, and we welcome your participation.
       </>
     ),
   },
