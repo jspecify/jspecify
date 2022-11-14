@@ -107,11 +107,11 @@ const config = {
             items: [
               {
                 label: 'Google Group',
-                href: 'https://groups.google.com/g/jspecify-dev'
+                href: 'https://groups.google.com/g/jspecify-discuss'
               },
               {
-                label: 'Send us mail',
-                href: 'mailto:jspecify-dev@googlegroups.com',
+                label: 'Send Us Mail',
+                href: 'mailto:jspecify-discuss@googlegroups.com',
               },
             ],
           },
