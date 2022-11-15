@@ -66,7 +66,7 @@ const config = {
           {to: '/about', label: 'About', position: 'left'},
           {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
           {
-            to: 'http://jspecify.org/docs/api/org/jspecify/nullness/package-summary.html',
+            href: 'http://jspecify.org/docs/api/org/jspecify/nullness/package-summary.html',
             label: 'Javadoc',
             position: 'left',
           },
@@ -89,16 +89,16 @@ const config = {
                 to: '/docs/user-guide',
               },
               {
-                label: 'Javadoc',
-                to: '/docs/api/org/jspecify/nullness/package-summary.html',
+                label: 'Draft Javadoc',
+                href: '/docs/api/org/jspecify/nullness/package-summary.html',
               },
               {
-                label: 'Draft Spec',
+                label: 'Draft Specification',
                 to: '/docs/spec',
               },
               {
-                label: 'Wiki',
-                to: 'http://github.com/jspecify/jspecify/wiki',
+                label: 'The Rest',
+                href: 'https://github.com/jspecify/jspecify/wiki',
               },
             ],
           },
@@ -106,12 +106,12 @@ const config = {
             title: 'Contacts',
             items: [
               {
-                label: 'Google Group',
+                label: 'Public Group',
                 href: 'https://groups.google.com/g/jspecify-discuss'
               },
               {
-                label: 'Send Us Mail',
-                href: 'mailto:jspecify-discuss@googlegroups.com',
+                label: 'Mail The Team',
+                href: 'mailto:jspecify-dev@googlegroups.com',
               },
             ],
           },
@@ -125,6 +125,10 @@ const config = {
               {
                 label: 'Blog',
                 to: '/blog',
+              },
+              {
+                label: 'Get Involved',
+                href: 'https://github.com/jspecify/jspecify/wiki/get-involved'
               },
             ],
           },
