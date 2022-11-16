@@ -26,15 +26,14 @@
  *
  * <h2>What's here?</h2>
  *
- * This package will contain annotations supporting a variety of static analyses. For now it supports
- * just nullness analysis.
+ * This package will contain annotations supporting a variety of static analyses. For now it
+ * supports just nullness analysis.
  *
  * <h3 id="nullness">Nullness</h3>
  *
- * The primary annotations of interest are {@link NullMarked} and {@link Nullable}.
- * Together they provide <b>declarative, use-site nullness</b> for Java types.
- * Less frequently, their negations may be useful: {@link NullUnmarked} and {@link NonNull},
- * respectively.
+ * The primary annotations of interest are {@link NullMarked} and {@link Nullable}. Together they
+ * provide <b>declarative, use-site nullness</b> for Java types. Less frequently, their negations
+ * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
  *
  * <p>For a guided introduction to JSpecify nullness annotations, please see the <a
  * href="http://jspecify.org/docs/user-guide">User Guide</a>.
@@ -60,4 +59,4 @@
  * any appropriate tool even in use. Therefore adopting JSpecify annotations is not a replacement
  * for <b>explicitly checking arguments</b> at runtime.
  */
-package org.jspecify.nullness;
+package org.jspecify.annotations;
