@@ -11,7 +11,7 @@ annotations for nullness analysis.
 
 The primary audience for this document is the authors of analysis tools. Some
 very advanced users might find it interesting. But it would make a very poor
-introduction for anyone else; instead see the [User Guide] and [Javadoc].
+introduction for anyone else; instead see our [Start Here](/start-here) page.
 :::
 
 --------------------------------------------------------------------------------
@@ -1035,4 +1035,3 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [subtyping]: #subtyping
 [type component]: #type-components
 [type components]: #type-components
-[user guide]: user-guide
