@@ -38,8 +38,8 @@ import java.lang.annotation.Target;
  * to analyze, this is strongly recommended as a temporary measure whenever necessary. However, once
  * a codebase has been fully migrated it would be appropriate to ban use of this annotation.
  *
- * <p>For a guided introduction to JSpecify nullness annotations, please see the <a
- * href="http://jspecify.org/docs/user-guide">User Guide</a>.
+ * <p>For a more comprehensive introduction to JSpecify, please see our <a
+ * href="http://jspecify.org">web site</a>.
  *
  * <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
  * naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,
