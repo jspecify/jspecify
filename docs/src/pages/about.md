@@ -26,6 +26,6 @@ Our current members are
 
 ## What is our governance?
 
-Google is leading the project, by consent of the members, who hold us to our
+Google is leading the project, by consent of the member organizations, who hold us to our
 commitment to make decisions by consensus.
 
