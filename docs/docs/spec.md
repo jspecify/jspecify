@@ -196,7 +196,7 @@ a component of `T` or has `T` as a component.
 
 For all named annotations referred to by this spec:
 
--   The package name is `org.jspecify.nullness`. \[[#1]\]
+-   The package name is `org.jspecify.annotations`. \[[#1]\]
 -   The Java module name is `org.jspecify`. \[[#181]\]
 -   The Maven artifact is `org.jspecify:jspecify`. \[[#181]\]
 
@@ -1011,7 +1011,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
-[javadoc]: https://jspecify.dev/docs/api/org/jspecify/nullness/package-summary.html
+[javadoc]: https://jspecify.dev/docs/api/org/jspecify/annotations/package-summary.html
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
 [null-marked scope]: #null-marked-scope

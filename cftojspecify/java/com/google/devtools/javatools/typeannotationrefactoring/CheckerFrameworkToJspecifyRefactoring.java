@@ -147,11 +147,11 @@ public final class CheckerFrameworkToJspecifyRefactoring {
       public Void visitImport(ImportTree node, Void aVoid) {
         if (!addedImports) {
           addedImports = true;
-          definiteReplacements.put(atStart(node), "import org.jspecify.nullness.Nullable;\n");
+          definiteReplacements.put(atStart(node), "import org.jspecify.annotations.Nullable;\n");
           possibleReplacements.put(
               atStart(node),
-              "import org.jspecify.nullness.NullMarked;\n"
-                  + "import org.jspecify.nullness.Nullable;\n");
+              "import org.jspecify.annotations.NullMarked;\n"
+                  + "import org.jspecify.annotations.Nullable;\n");
         }
         if (node.getQualifiedIdentifier().toString().startsWith("org.checkerframework.")) {
           definiteReplacements.put(inPlaceOfNodeAndTrailingNewline(node, unit), "");
