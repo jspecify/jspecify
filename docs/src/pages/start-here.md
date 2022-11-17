@@ -41,9 +41,9 @@ FAQ](http://github.com/jspecify/jspecify/wiki/jspecify-faq).
 
 ### Start with one of
 
-* The [Javadoc](https://jspecify.dev/docs/api/org/jspecify/annotations/package-summary.html),
+* The [Javadoc](/docs/api/org/jspecify/annotations/package-summary.html),
   which is reasonably thorough and specific, though not an organized walkthrough
-* The current [User Guide draft](user-guide), which is better for reading
+* The current [User Guide draft](/docs/user-guide), which is better for reading
   top-to-bottom, but is currently a bit outdated and in need of improvement.
   It will likely change a lot before 1.0.
 
