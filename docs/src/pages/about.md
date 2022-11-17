@@ -4,26 +4,28 @@ title: About Us
 
 ## Who are we?
 
-The following projects and organizations are collaborating on this project:
+Our current members are
 
-| Project                                                 | Organization                                  |
-|---------------------------------------------------------|-----------------------------------------------|
-| [Android](https://www.android.com>)                     | [Google](https://google.com)                  |
-| [EISOP](https://eisop.uwaterloo.ca)                     | [EISOP Team](https://github.com/eisop)        |
-| [Error Prone](https://errorprone.info)                  | [Google](https://google.com)                  |
-| [Guava](https://github.com/google/guava)                | [Google](https://google.com)                  |
-| [Infer](https://www.fbinfer.com)                        | [Meta](https://about.facebook.com)            |
-| [IntelliJ IDEA](https://www.jetbrains.com/idea/)        | [JetBrains](https://www.jetbrains.com/)       |
-| [Kotlin](https://kotlinlang.org/)                       | [JetBrains](https://www.jetbrains.com/)       |
-| [NullAway](https://github.com/uber/NullAway)            | [Uber](https://uber.com)                      |
-| [OpenJDK](https://openjdk.java.net)                     | [Oracle](https://www.oracle.com)              |
-| [PMD](https://pmd.github.io/)                           | [PMD Team](https://pmd.github.io/)            |
-| [Spring](https://tanzu.vmware.com/spring-app-framework) | [VMware](https://www.vmware.com/)             |
-| [SonarQube](https://www.sonarqube.org/)                 | [SonarSource](https://www.sonarsource.com/)   |
-| [SpotBugs](http://spotbugs.rtfd.io/)                    | [SpotBugs Team](https://github.com/spotbugs/) |
-| (various)                                               | [Square](https://squareup.com)                |
+| Organization                                  | Projects                                     |
+|-----------------------------------------------|----------------------------------------------|
+| [EISOP Team](https://github.com/eisop)        | [EISOP](https://eisop.uwaterloo.ca)          |
+| [Google](https://google.com)                  | [Android](https://www.android.com>), [Error Prone](https://errorprone.info), [Guava](https://github.com/google/guava) |
+| [JetBrains](https://www.jetbrains.com/)       | [Kotlin](https://kotlinlang.org/), [IntelliJ IDEA](https://www.jetbrains.com/idea/) |
+| [Meta](https://about.facebook.com)            | [Infer](https://www.fbinfer.com)             |
+| [Oracle](https://www.oracle.com)              | [OpenJDK](https://openjdk.java.net)          |
+| [PMD Team](https://pmd.github.io/)            | [PMD](https://pmd.github.io/)                |
+| [SonarSource](https://www.sonarsource.com/)   | [SonarQube](https://www.sonarqube.org/)      |
+| [SpotBugs Team](https://github.com/spotbugs/) | [SpotBugs](http://spotbugs.rtfd.io/)         |
+| [Square](https://squareup.com)                | (various)                                    |
+| [Uber](https://uber.com)                      | [NullAway](https://github.com/uber/NullAway) |
+| [VMware](https://www.vmware.com/)             | [Spring](https://tanzu.vmware.com/spring-app-framework) |
 
 ## What are we trying to do?
 
 [Start Here](start-here)
+
+## What is our governance?
+
+Google is leading the project, by consent of the members, who hold us to our
+commitment to make decisions by consensus.
 

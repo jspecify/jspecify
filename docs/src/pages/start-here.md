@@ -1,9 +1,14 @@
-# Start here
+---
+title: Start Here
+---
+
+# Start here (to learn more)
 
 ## What is this?
 
-[These organizations](about.md) are working together to define a common set of
+[These organizations](about) are working together to define a common set of
 annotation types for use in static analysis, beginning with nullness analysis.
+
 This includes providing both the JAR file your code can depend on, and *precise*
 specifications of these annotations' semantics.
 
@@ -17,18 +22,20 @@ specifications of these annotations' semantics.
 * **Why do both together?** Because users deserve annotation types with thorough
   Javadoc that can authoritatively answer their questions.
 
-Are we adding Yet Another set of annotations onto the long list? Technically,
-but keep in mind that we *are* the organizations who made most of the
-annotations on the list, and this time we're working together. No shared
-artifact like this has ever been released before. (`javax.annotation` was an
-attempt that never actually released, whose draft work was jammed into Maven
-anyway.)
+Are we adding Yet Another set of annotations onto the long list? In one sense,
+sure. But our release will be the *first* tool-neutral, library-neutral
+artifact in this list; the first to be developed by consensus of the major
+stakeholders. (`javax.annotation` was an aborted attempt that never actually
+released, whose draft work was jammed into Maven anyway.)
 
 **That's it?** Our vision includes much more than just providing nullness
 annotations. But this first project turned out to be Hard (who knew?), so we've
 been focusing tightly on it. We've posted [sketchy
 notes](http://github.com/jspecify/jspecify/wiki/long-term-roadmap) on what else
 we want to do, and will fill that out more when we can.
+
+Learn more about the JSpecify group and its goals in the [JSpecify
+FAQ](http://github.com/jspecify/jspecify/wiki/jspecify-faq).
 
 ## How do I learn about your nullness support?
 
