@@ -31,6 +31,7 @@ loadScripts(document, 'script');</script>
 <li><a href="package-summary.html">Package</a></li>
 <li class="nav-bar-cell1-rev">Class</li>
 <li><a href="package-tree.html">Tree</a></li>
+<li><a href="../../../deprecated-list.html">Deprecated</a></li>
 <li><a href="../../../index-all.html">Index</a></li>
 <li><a href="../../../help-doc.html#class">Help</a></li>
 </ul>
@@ -83,78 +84,16 @@ loadScripts(document, 'script');</script>
 </div>
 <section class="class-description" id="class-description">
 <hr>
-<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Documented.html" title="class or interface in java.lang.annotation" class="external-link">@Documented</a>
+<div class="type-signature"><span class="annotations"><a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/Deprecated.html" title="class or interface in java.lang" class="external-link">@Deprecated</a>
+<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Documented.html" title="class or interface in java.lang.annotation" class="external-link">@Documented</a>
 <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Target.html" title="class or interface in java.lang.annotation" class="external-link">@Target</a>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/ElementType.html#TYPE_USE" title="class or interface in java.lang.annotation" class="external-link">TYPE_USE</a>)
 <a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/Retention.html" title="class or interface in java.lang.annotation" class="external-link">@Retention</a>(<a href="https://docs.oracle.com/en/java/javase/18/docs/api/java.base/java/lang/annotation/RetentionPolicy.html#RUNTIME" title="class or interface in java.lang.annotation" class="external-link">RUNTIME</a>)
 </span><span class="modifiers">public @interface </span><span class="element-name type-name-label">NonNull</span></div>
-<div class="block">Indicates that the annotated type usage is considered to exclude <code>null</code> as a value; rarely
- needed within <a href="NullMarked.html" title="annotation interface in org.jspecify.nullness">null-marked</a> code.
-
- <p>This annotation has two primary purposes:
-
- <ul>
-   <li>To mark any sporadic non-null type usages inside a scope that is not ready to be fully
-       <a href="NullMarked.html" title="annotation interface in org.jspecify.nullness"><code>NullMarked</code></a> yet.
-   <li>To perform a <i>non-null projection</i> of a type variable, explained below.
- </ul>
-
- <p>For a guided introduction to JSpecify nullness annotations, please see the <a href="http://jspecify.org/docs/user-guide">User Guide</a>.
-
- <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
- naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,
- supporting analysis tools will be tracking the changes on varying schedules. Releasing a library
- using these annotations in its API is <b>strongly discouraged</b> at this time.
-
- <h2 id="projection">Non-null projection</h2>
-
- <p>In the following example, <code>MyOptional</code>'s type parameter <code>T</code> accepts only non-null
- type arguments, but <code>MyList</code>'s type parameter <code>E</code> will accept either a non-null or
- nullable type argument.
-
- <pre><code>
- // All the below is null-marked code
-
- class MyOptional&lt;T&gt; { … }
-
- interface MyList&lt;E extends @Nullable Object&gt; {
-   // Returns the first non-null element, if such element exists.
-   MyOptional&lt;E&gt; firstNonNull() { … } // problem here!
- }
-
- MyList&lt;@Nullable String&gt; maybeNulls = …
- MyList&lt;String&gt; nonNulls = …
- </code></pre>
-
- <p>Because <code>MyOptional</code> accepts only non-null type arguments, we need both <code>
- maybeNulls.firstNonNull()</code> and <code>nonNulls.firstNonNull()</code> to produce the same return type:
- <code>MyOptional!&lt;String!&gt;</code> (see <a href="Nullable.java#notation">notation</a>). However, as
- specified above, they won't do that. In fact, there is a problem with the <code>firstNonNull()</code>
- signature, since the type argument <code>String?</code> would not meet the requirements of <code>
- MyOptional</code>'s type parameter.
-
- <p>The solution is to <b>project</b> the type argument to its non-null counterpart:
-
- <pre><code>
- // Returns the first non-null element, if such element exists.
- MyOptional&lt;@NonNull E&gt; firstNonNull() { … } // problem fixed!
- </code></pre>
-
- <p>Here, <code>@NonNull E</code> selects the non-null form of the type argument, whether it was
- already non-null or not, which is just what we need in this scenario.
-
- <p>If <code>E</code> has a non-null upper bound, then the apparent projection <code>@NonNull E</code> is
- redundant but harmless.
-
- <p><a href="Nullable.html#projection">Nullable projection</a> serves the equivalent purpose in
- the opposite direction, and is far more commonly useful.
-
- <p>If a type variable has <i>all</i> its usages being projected in one direction or the other, it
- should be given a non-null upper bound, and any non-null projections can then be removed.
-
- <h2>Where it is not applicable</h2>
-
- <p><code>@NonNull</code> is not applicable in all the <a href="Nullable.html#applicability">same
- locations</a> as <a href="Nullable.html" title="annotation interface in org.jspecify.nullness"><code>Nullable</code></a>.</div>
+<div class="deprecation-block"><span class="deprecated-label">Deprecated.</span>
+<div class="deprecation-comment">use <a href="../annotations/NonNull.html" title="annotation interface in org.jspecify.annotations"><code>NonNull</code></a> instead.</div>
+</div>
+<div class="block">Old location of <a href="../annotations/NonNull.html" title="annotation interface in org.jspecify.annotations"><code>NonNull</code></a>. Please update your references as soon
+ as possible.</div>
 </section>
 <!-- ========= END OF CLASS DATA ========= -->
 </main>

@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 module org.jspecify {
-  exports org.jspecify.nullness;
+  exports org.jspecify.annotations;
 }
