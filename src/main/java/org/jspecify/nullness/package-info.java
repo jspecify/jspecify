@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 
-/** Old location of {@link org.jspecify.nullness}. */
+/** Old location of nullness annotations, which are now in {@link org.jspecify.annotations}. */
 package org.jspecify.nullness;
