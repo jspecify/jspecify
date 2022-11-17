@@ -6,7 +6,7 @@ title: Start Here
 
 ## What is this?
 
-[These organizations](about) are working together to define a common set of
+[A group of organizations](about) are working together to define a common set of
 annotation types for use in Java static analysis, beginning with nullness
 analysis.
 
