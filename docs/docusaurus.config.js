@@ -66,7 +66,7 @@ const config = {
           {to: '/about', label: 'About', position: 'left'},
           {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
           {
-            href: 'http://jspecify.org/docs/api/org/jspecify/nullness/package-summary.html',
+            href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
             label: 'Javadoc',
             position: 'left',
           },
@@ -90,7 +90,7 @@ const config = {
               },
               {
                 label: 'Draft Javadoc',
-                href: '/docs/api/org/jspecify/nullness/package-summary.html',
+                href: '/docs/api/org/jspecify/annotations/package-summary.html',
               },
               {
                 label: 'Draft Specification',
