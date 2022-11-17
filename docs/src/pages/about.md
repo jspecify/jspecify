@@ -9,7 +9,7 @@ Our current members are
 | Organization                                  | Projects                                     |
 |-----------------------------------------------|----------------------------------------------|
 | [EISOP Team](https://github.com/eisop)        | [EISOP](https://eisop.uwaterloo.ca)          |
-| [Google](https://google.com)                  | [Android](https://www.android.com>), [Error Prone](https://errorprone.info), [Guava](https://github.com/google/guava) |
+| [Google](https://google.com)                  | [Android](https://www.android.com), [Error Prone](https://errorprone.info), [Guava](https://github.com/google/guava) |
 | [JetBrains](https://www.jetbrains.com/)       | [Kotlin](https://kotlinlang.org/), [IntelliJ IDEA](https://www.jetbrains.com/idea/) |
 | [Meta](https://about.facebook.com)            | [Infer](https://www.fbinfer.com)             |
 | [Oracle](https://www.oracle.com)              | [OpenJDK](https://openjdk.java.net)          |
