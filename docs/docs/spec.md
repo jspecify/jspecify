@@ -1011,7 +1011,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
-[javadoc]: https://jspecify.dev/docs/api/org/jspecify/annotations/package-summary.html
+[javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
 [null-marked scope]: #null-marked-scope
