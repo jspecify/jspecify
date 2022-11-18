@@ -82,7 +82,7 @@ question might be answered.
 Great question.
 
 It is **not too late** for your input to matter. It's true we've been working on
-this a long time (since 2018), but it's all been groundwork, and none of it is
+this for a long time (since 2018), but it's all been groundwork, and none of it is
 absolutely set in stone except our package and artifact names.
 
 * Join our new [Google Group](https://groups.google.com/g/jspecify-discuss).
