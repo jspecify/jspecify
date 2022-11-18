@@ -24,7 +24,7 @@ specifications of these annotations' semantics.
 
 Our release will be the *first* tool-neutral, library-neutral artifact for
 these annotations; the first to be developed by *consensus* of the major
-stakeholders. (Note: `javax.annotation` was an aborted attempt that never
+stakeholders. (Note: `javax.annotation` was an aborted attempt that was never
 actually released, whose draft work was jammed into Maven anyway.)
 
 Learn more about the JSpecify group and its goals in the [JSpecify
