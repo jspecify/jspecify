@@ -10,7 +10,7 @@ title: Start Here
 annotation types for use in Java static analysis, beginning with nullness
 analysis.
 
-This includes providing both the JAR file your code can depend on, and *precise*
+This includes providing both a JAR file your code can depend on, and *precise*
 specifications of these annotations' semantics.
 
 * **Why standardize the annotations?** This tragic 
