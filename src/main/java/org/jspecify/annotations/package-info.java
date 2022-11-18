@@ -35,8 +35,8 @@
  * provide <b>declarative, use-site nullness</b> for Java types. Less frequently, their negations
  * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
  *
- * <p>For a guided introduction to JSpecify nullness annotations, please see the <a
- * href="http://jspecify.org/docs/user-guide">User Guide</a>.
+ * <p>For a comprehensive introduction to JSpecify, please see <a
+ * href="http://jspecify.org">jspecify.org</a>.
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>
  *

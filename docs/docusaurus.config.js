@@ -63,8 +63,8 @@ const config = {
           src: 'img/jspecify-logo.svg',
         },
         items: [
-          {to: '/about', label: 'About', position: 'left'},
-          {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
+          {to: '/about', label: 'About Us', position: 'left'},
+          {to: '/start-here', label: 'Start Here', position: 'left'},
           {
             href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
             label: 'Javadoc',
@@ -85,6 +85,10 @@ const config = {
             title: 'Docs',
             items: [
               {
+                label: 'Start Here',
+                to: '/start-here',
+              },
+              {
                 label: 'Draft User Guide',
                 to: '/docs/user-guide',
               },
@@ -95,10 +99,6 @@ const config = {
               {
                 label: 'Draft Specification',
                 to: '/docs/spec',
-              },
-              {
-                label: 'The Rest',
-                href: 'https://github.com/jspecify/jspecify/wiki',
               },
             ],
           },
@@ -125,10 +125,6 @@ const config = {
               {
                 label: 'Blog',
                 to: '/blog',
-              },
-              {
-                label: 'Get Involved',
-                href: 'https://github.com/jspecify/jspecify/wiki/get-involved'
               },
             ],
           },

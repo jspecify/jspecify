@@ -21,8 +21,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="https://github.com/jspecify/jspecify/wiki">
-            Read About It
+            to="start-here">
+            Learn More
           </Link>
         </div>
       </div>
