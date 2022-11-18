@@ -17,7 +17,7 @@ specifications of these annotations' semantics.
   [stackoverflow answer](https://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use)
   says it all.
 * **Why standardize the semantics?** Because a library owner, or a team that
-  uses multiple tools, deserves a single source of truth telling them how to
+  uses multiple tools, deserves a single source of truth for how to
   annotate their code, instead of having to decide which tool to make happy.
 * **Why do both together?** Because users deserve annotation types with
   Javadoc *right there* that answers their questions authoritatively.
