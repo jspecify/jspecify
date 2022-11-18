@@ -20,12 +20,12 @@ Our current members are
 | [Uber](https://uber.com)                      | [NullAway](https://github.com/uber/NullAway) |
 | [VMware](https://www.vmware.com/)             | [Spring](https://tanzu.vmware.com/spring-app-framework) |
 
-## What are we trying to do?
-
-[Start Here](start-here)
-
 ## What is our governance?
 
 Google is leading the project, by consent of the member organizations, who hold us to our
 commitment to make decisions by consensus.
+
+## What are we trying to do?
+
+[Start here](start-here).
 

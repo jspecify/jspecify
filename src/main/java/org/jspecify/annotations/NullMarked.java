@@ -33,8 +33,8 @@ import java.lang.annotation.Target;
  * specified otherwise. Using this annotation avoids the need to write {@link NonNull @NonNull} many
  * times throughout your code.
  *
- * <p>For a more comprehensive introduction to JSpecify, please see our <a
- * href="http://jspecify.org">web site</a>.
+ * <p>For a comprehensive introduction to JSpecify, please see <a
+ * href="http://jspecify.org">jspecify.org</a>.
  *
  * <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
  * naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,

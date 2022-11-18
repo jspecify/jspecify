@@ -64,7 +64,7 @@ const config = {
         },
         items: [
           {to: '/about', label: 'About Us', position: 'left'},
-          {to: '/start-here', label: 'Learn More', position: 'left'},
+          {to: '/start-here', label: 'Start Here', position: 'left'},
           {
             href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
             label: 'Javadoc',
@@ -85,7 +85,7 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Start here',
+                label: 'Start Here',
                 to: '/start-here',
               },
               {
