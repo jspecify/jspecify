@@ -14,7 +14,7 @@ Our current members are
 | [Meta](https://about.facebook.com)            | [Infer](https://www.fbinfer.com)             |
 | [Oracle](https://www.oracle.com)              | [OpenJDK](https://openjdk.java.net)          |
 | [PMD Team](https://pmd.github.io/)            | [PMD](https://pmd.github.io/)                |
-| [SonarSource](https://www.sonarsource.com/)   | [SonarQube](https://www.sonarqube.org/)      |
+| [Sonar](https://www.sonarsource.com/)         | [SonarQube](https://www.sonarqube.org/), [SonarCloud](https://www.sonarcloud.io/), [SonarLint](http://www.sonarlint.com/) |
 | [SpotBugs Team](https://github.com/spotbugs/) | [SpotBugs](http://spotbugs.rtfd.io/)         |
 | [Square](https://squareup.com)                | (various)                                    |
 | [Uber](https://uber.com)                      | [NullAway](https://github.com/uber/NullAway) |
