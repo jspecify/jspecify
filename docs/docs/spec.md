@@ -11,7 +11,7 @@ annotations for nullness analysis.
 
 The primary audience for this document is the authors of analysis tools. Some
 very advanced users might find it interesting. But it would make a very poor
-introduction for anyone else; instead see our **[Start Here](/start-here) page**.
+introduction for anyone else; instead see our **[Start Here](/docs/start-here) page**.
 :::
 
 --------------------------------------------------------------------------------
