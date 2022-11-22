@@ -27,5 +27,5 @@ commitment to make decisions by consensus.
 
 ## What are we trying to do?
 
-[Start here](start-here).
+[Start here](/docs/start-here).
 

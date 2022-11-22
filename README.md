@@ -12,4 +12,4 @@ Our current focus is on annotations for nullness analysis.
 
 ## Stuff to read
 
-See [jspecify.org/start-here](http://jspecify.org/start-here).
+See [jspecify.org/docs/start-here](http://jspecify.org/docs/start-here).
