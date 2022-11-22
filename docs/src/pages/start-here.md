@@ -51,7 +51,7 @@ been answered.
   not be worth your time)
 * Or try it out
 
-## How do I try it out?
+### Trying it out?
 
 * For now, we'd suggest holding tight. The previous section will keep you busy!
 * Once we release **version 0.3** (goal: end of 2022):
