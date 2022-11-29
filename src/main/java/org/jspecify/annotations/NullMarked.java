@@ -110,6 +110,6 @@ import java.lang.annotation.Target;
  * </ul>
  */
 @Documented
-@Target({TYPE, METHOD, CONSTRUCTOR, PACKAGE, MODULE})
+@Target({MODULE, PACKAGE, TYPE, METHOD, CONSTRUCTOR})
 @Retention(RUNTIME)
 public @interface NullMarked {}

@@ -84,5 +84,5 @@ import java.lang.annotation.Target;
 // TODO(kevinb9n): word the middle section better with good words
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
-@Target({TYPE, METHOD, CONSTRUCTOR, MODULE, PACKAGE})
+@Target({MODULE, PACKAGE, TYPE, METHOD, CONSTRUCTOR})
 public @interface NullUnmarked {}
