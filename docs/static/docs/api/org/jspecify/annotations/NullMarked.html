@@ -111,22 +111,19 @@ loadScripts(document, 'script');</script>
  <p>Within null-marked code:
 
  <ul>
-   <li>An <b>unbounded wildcard</b> (the <code>?</code> in a type like <code>List&lt;?&gt;</code>, not followed by
-       <code>extends</code> or <code>super</code>) will represent <i>any</i> type within the type
-       parameter's bounds, with no further restriction. A <b>lower-bounded wildcard</b> (<code>
-       List&lt;? super String&gt;</code>) similarly has no <i>upper</i> bound of its own. Therefore, since
-       <i>nullable</i> <code>Object</code> is the new "<a href="Nullable.html#subtypes">top type</a>",
-       either list might have null elements, even though the word <code>@Nullable</code> is nowhere in
-       sight. On the other hand, in <code>List&lt;? extends Object&gt;</code> a bound <i>is</i> provided, and
-       as usual, being unannotated it is considered non-null. This means that while <code>
-       List&lt;?&gt;</code> and <code>List&lt;? extends Object&gt;</code> have always been identical as base types, they
-       are no longer identical as <a href="Nullable.html#augmented-types">augmented types</a>. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+   <li>We might expect the type represented by a <b>wildcard</b> (like the <code>?</code> in <code>
+       List&lt;?&gt;</code>) to be non-null, but it isn't necessarily.  It's non-null only if it <code>
+       extends</code> a non-null type (like in <code>List&lt;? extends String&gt;</code>), or if the <i>class</i>
+       in use accepts only non-null type arguments (such as if <code>List</code> were declared as
+       <code>class List&lt;E extends String&gt;</code>). But if <code>List</code> does accept nullable type
+       arguments, then the wildcards seen in <code>List&lt;?&gt;</code> and <code>List&lt;? super String&gt;</code>
+       must include <code>null</code>, because they have no "upper bound". (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
        <ul>
-         <li>Conversely, a <b>type parameter</b> is always bounded: when none is given explicitly,
-             <code>Object</code> is filled in by the compiler. The example <code>class MyList&lt;E&gt;</code> is
-             interpreted identically to <code>class MyList&lt;E extends Object&gt;</code>: in both cases the
-             type argument in <code>MyList&lt;@Nullable Foo&gt;</code> is out-of-bounds, so the list elements
-             are always non-null. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+         <li>Conversely, a <b>type parameter</b> is always considered to have an upper bound; when
+             none is given explicitly, <code>Object</code> is filled in by the compiler. The example
+             <code>class MyList&lt;E&gt;</code> is interpreted identically to <code>class MyList&lt;E extends
+             Object&gt;</code>: in both cases the type argument in <code>MyList&lt;@Nullable Foo&gt;</code> is
+             out-of-bounds, so the list elements are always non-null. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
        </ul>
    <li>Otherwise, being null-marked has no consequence for any type usage where <code>@Nullable</code>
        and <code>@NonNull</code> are <a href="Nullable.html#applicability"><b>not applicable</b></a>,

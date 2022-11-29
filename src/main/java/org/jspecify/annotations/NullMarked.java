@@ -52,23 +52,21 @@ import java.lang.annotation.Target;
  * <p>Within null-marked code:
  *
  * <ul>
- *   <li>An <b>unbounded wildcard</b> (the {@code ?} in a type like {@code List<?>}, not followed by
- *       {@code extends} or {@code super}) will represent <i>any</i> type within the type
- *       parameter's bounds, with no further restriction. A <b>lower-bounded wildcard</b> ({@code
- *       List<? super String>}) similarly has no <i>upper</i> bound of its own. Therefore, since
- *       <i>nullable</i> {@code Object} is the new "<a href="Nullable.html#subtypes">top type</a>",
- *       either list might have null elements, even though the word {@code @Nullable} is nowhere in
- *       sight. On the other hand, in {@code List<? extends Object>} a bound <i>is</i> provided, and
- *       as usual, being unannotated it is considered non-null. This means that while {@code
- *       List<?>} and {@code List<? extends Object>} have always been identical as base types, they
- *       are no longer identical as <a href="Nullable.html#augmented-types">augmented types</a>. (<a
+ *   <li>We might expect the type represented by a <b>wildcard</b> (like the {@code ?} in {@code
+ *       List<?>}) to be non-null, but it isn't necessarily. It's non-null only if it {@code
+ *       extends} a non-null type (like in {@code List<? extends String>}), or if the <i>class</i>
+ *       in use accepts only non-null type arguments (such as if {@code List} were declared as
+ *       {@code class List<E extends String>}). But if {@code List} does accept nullable type
+ *       arguments, then the wildcards seen in {@code List<?>} and {@code List<? super String>} must
+ *       include {@code null}, because they have no "upper bound". (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       <ul>
- *         <li>Conversely, a <b>type parameter</b> is always bounded: when none is given explicitly,
- *             {@code Object} is filled in by the compiler. The example {@code class MyList<E>} is
- *             interpreted identically to {@code class MyList<E extends Object>}: in both cases the
- *             type argument in {@code MyList<@Nullable Foo>} is out-of-bounds, so the list elements
- *             are always non-null. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *         <li>Conversely, a <b>type parameter</b> is always considered to have an upper bound; when
+ *             none is given explicitly, {@code Object} is filled in by the compiler. The example
+ *             {@code class MyList<E>} is interpreted identically to {@code class MyList<E extends
+ *             Object>}: in both cases the type argument in {@code MyList<@Nullable Foo>} is
+ *             out-of-bounds, so the list elements are always non-null. (<a
+ *             href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       </ul>
  *   <li>Otherwise, being null-marked has no consequence for any type usage where {@code @Nullable}
  *       and {@code @NonNull} are <a href="Nullable.html#applicability"><b>not applicable</b></a>,
