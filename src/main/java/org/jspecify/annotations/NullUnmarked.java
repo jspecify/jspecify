@@ -58,16 +58,28 @@ import java.lang.annotation.Target;
  * {@code @NullMarked}-annotated element, or neither annotation is present on any enclosing element.
  * No distinction is made between these cases.
  *
+ * <p>The effects of being null-marked are described in the <a
+ * href="NullMarked.html#effects">Effects</a> section of {@code NullMarked}.
+ *
  * <h2>Unspecified nullness</h2>
  *
- * <p>An unannotated type usage in null-unmarked code has <b>unspecified nullness</b>. There is
- * <i>some</i> correct way to annotate it, but that information is missing; the usage conveys <b>no
- * information</b> about whether it includes or excludes {@code null} as a value. There is no way
- * for a type usage within null-marked code to have unspecified nullness. (<a
- * href="https://bit.ly/3ppb8ZC">Why?</a>)
+ * <p>Within null-unmarked code, a type usage with no nullness annotation has <b>unspecified
+ * nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means that, while there is always
+ * <i>some</i> correct way to annotate it for nullness, that information is missing: we <i>do not
+ * know</i> whether it includes or excludes {@code null} as a value. In such a case, tools can vary
+ * widely in how strict or lenient their enforcement is, or might make it configurable.
  *
- * <p>Unspecified nullness is (will be) explained comprehensively in the <a
- * href="http://jspecify.org/docs/user-guide">User Guide</a>.
+ * <p>For more, please see this more <a
+ * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
+ * discussion</a> of unspecified nullness.
+ *
+ * <p>There is no way for an individual type usage within null-marked code to have unspecified
+ * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *
+ * <h2>Where it can be used</h2>
+ *
+ * The information in the <a href="NullMarked.html#where">Where it can be used</a> section of {@code
+ * NullMarked} applies as well to this annotation.
  */
 // TODO(kevinb9n): word the middle section better with good words
 @Documented
