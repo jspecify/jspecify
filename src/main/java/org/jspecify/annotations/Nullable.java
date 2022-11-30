@@ -57,7 +57,9 @@ import java.lang.annotation.Target;
  *   <li>On a <b>parameter type</b>: The {@code setField} method (at top) permissively accepts a
  *       "string-or-null", meaning that it is okay to pass an actual string, or to pass {@code
  *       null}. (This doesn't guarantee that passing {@code null} won't produce an exception at
- *       runtime, but it should be much less likely.)
+ *       runtime, but it should be much less likely.) This also applies to the type of a lambda
+ *       expression parameter, if that type is given explicitly (otherwise its nullness must be
+ *       inferred from context).
  *   <li>On a <b>method return type</b>: The {@code getField} method returns a "string-or-null", so
  *       while the caller might get a string back, it should also address the possibility of getting
  *       {@code null} instead. (This doesn't guarantee there is any circumstance in which {@code
@@ -92,16 +94,18 @@ import java.lang.annotation.Target;
  *       nullable looks like {@code Map.@Nullable Entry}.
  *   <li>On a <b>record component</b>: As expected, {@code @Nullable} here applies equally to the
  *       corresponding parameter type of the canonical constructor, and to the return type of a
- *       generated accessor method as well. An <i>explicit</i> accessor method for this record
- *       component, if it exists, is unaffected; it must be annotated explicitly. Note that checking
- *       the expected-non-null components can be done in a "compact constructor".
+ *       generated accessor method as well. If an explicit accessor method is provided for this
+ *       record component, it must still be annotated explicitly. Any non-null components should be
+ *       checked (for example using {@link java.util.Objects#requireNonNull}) in a <a
+ *       href="https://docs.oracle.com/en/java/javase/19/language/records.html">compact
+ *       constructor</a>.
  * </ul>
  *
- * <h2 id="applicability">Where it is not applicable</h2>
+ * <h2 id="applicability">Where it is applicable</h2>
  *
- * <p>This annotation and {@link NonNull} are applicable to any [type usage]
- * (https://github.com/jspecify/jspecify/wiki/type-usages) except the following cases, where they
- * have no defined meaning:
+ * <p>This annotation and {@link NonNull} are applicable to any <a
+ * href="https://github.com/jspecify/jspecify/wiki/type-usages">type usage</a> <b>except</b> the
+ * following cases, where they have no defined meaning:
  *
  * <ul>
  *   <li>On any<b> intrinsically non-null type usage</b>. Some type usages are incapable of
@@ -121,15 +125,18 @@ import java.lang.annotation.Target;
  *       Subcomponents of the type (type arguments, array component types) are annotatable as usual.
  *   <li>On any part of a <b>receiver parameter</b> type (<a
  *       href="https://docs.oracle.com/javase/specs/jls/se18/html/jls-8.html#jls-8.4">JLS 8.4</a>).
+ *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage,
+ *       <i>neither</i> one is recognized.
  * </ul>
  *
- * Whether the code is {@link NullMarked} also has no consequence in these locations.
+ * Whether the code is {@link NullMarked} also has no consequence in the above locations.
  *
  * <h2>Unannotated type usages</h2>
  *
  * <p>For a type usage where nullness annotations are <a href="#applicability">applicable</a> but
  * not present, its nullness depends on whether it appears within {@linkplain NullMarked
- * null-marked} code; see that class for details.
+ * null-marked} code; see that class for details. Note in particular that nullness information from
+ * a superclass is never automatically "inherited".
  */
 @Documented
 @Target(TYPE_USE)
