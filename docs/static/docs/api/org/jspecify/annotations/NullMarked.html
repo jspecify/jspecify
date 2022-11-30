@@ -112,12 +112,12 @@ loadScripts(document, 'script');</script>
 
  <ul>
    <li>We might expect the type represented by a <b>wildcard</b> (like the <code>?</code> in <code>
-       List&lt;?&gt;</code>) to be non-null, but it isn't necessarily.  It's non-null only if it <code>
+       List&lt;?&gt;</code>) to be non-null, but it isn't necessarily. It's non-null only if it <code>
        extends</code> a non-null type (like in <code>List&lt;? extends String&gt;</code>), or if the <i>class</i>
        in use accepts only non-null type arguments (such as if <code>List</code> were declared as
        <code>class List&lt;E extends String&gt;</code>). But if <code>List</code> does accept nullable type
-       arguments, then the wildcards seen in <code>List&lt;?&gt;</code> and <code>List&lt;? super String&gt;</code>
-       must include <code>null</code>, because they have no "upper bound". (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+       arguments, then the wildcards seen in <code>List&lt;?&gt;</code> and <code>List&lt;? super String&gt;</code> must
+       include <code>null</code>, because they have no "upper bound". (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
        <ul>
          <li>Conversely, a <b>type parameter</b> is always considered to have an upper bound; when
              none is given explicitly, <code>Object</code> is filled in by the compiler. The example
@@ -160,7 +160,8 @@ loadScripts(document, 'script');</script>
    <li>Applying this annotation to an instance <b>method</b> of a <i>generic</i> class is
        acceptable, but is not recommended because it can lead to some confusing situations.
    <li>An advantage of Java modules is that you can make a lot of code null-marked with just a
-       single annotation (before the <code>module</code> keyword).
+       single annotation (before the <code>module</code> keyword). <a href="NullUnmarked.html" title="annotation interface in org.jspecify.annotations"><code>NullUnmarked</code></a> is not
+       supported on modules, since it's already the default.
  </ul></div>
 </section>
 <!-- ========= END OF CLASS DATA ========= -->

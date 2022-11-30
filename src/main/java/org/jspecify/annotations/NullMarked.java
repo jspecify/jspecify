@@ -104,7 +104,8 @@ import java.lang.annotation.Target;
  *   <li>Applying this annotation to an instance <b>method</b> of a <i>generic</i> class is
  *       acceptable, but is not recommended because it can lead to some confusing situations.
  *   <li>An advantage of Java modules is that you can make a lot of code null-marked with just a
- *       single annotation (before the {@code module} keyword).
+ *       single annotation (before the {@code module} keyword). {@link NullUnmarked} is not
+ *       supported on modules, since it's already the default.
  * </ul>
  */
 @Documented
