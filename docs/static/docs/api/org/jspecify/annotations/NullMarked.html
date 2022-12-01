@@ -112,12 +112,12 @@ loadScripts(document, 'script');</script>
 
  <ul>
    <li>We might expect the type represented by a <b>wildcard</b> (like the <code>?</code> in <code>
-       List&lt;?&gt;</code>) to be non-null, but it isn't necessarily.  It's non-null only if it <code>
+       List&lt;?&gt;</code>) to be non-null, but it isn't necessarily. It's non-null only if it <code>
        extends</code> a non-null type (like in <code>List&lt;? extends String&gt;</code>), or if the <i>class</i>
        in use accepts only non-null type arguments (such as if <code>List</code> were declared as
        <code>class List&lt;E extends String&gt;</code>). But if <code>List</code> does accept nullable type
-       arguments, then the wildcards seen in <code>List&lt;?&gt;</code> and <code>List&lt;? super String&gt;</code>
-       must include <code>null</code>, because they have no "upper bound". (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+       arguments, then the wildcards seen in <code>List&lt;?&gt;</code> and <code>List&lt;? super String&gt;</code> must
+       include <code>null</code>, because they have no "upper bound". (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
        <ul>
          <li>Conversely, a <b>type parameter</b> is always considered to have an upper bound; when
              none is given explicitly, <code>Object</code> is filled in by the compiler. The example
@@ -142,8 +142,9 @@ loadScripts(document, 'script');</script>
 
  <h2 id="where">Where it can be used</h2>
 
- This annotation (and <a href="NullUnmarked.html" title="annotation interface in org.jspecify.annotations"><code>NullUnmarked</code></a>) can be used on any module, package, class, method, or
- constructor declaration. Special considerations:
+ <code>@NullMarked</code> and <a href="NullUnmarked.html" title="annotation interface in org.jspecify.annotations"><code>@NullUnmarked</code></a> can be used on any package, class,
+ method, or constructor declaration; <code>@NullMarked</code> can be used on a module declaration as
+ well. Special considerations:
 
  <ul>
    <li>To apply this annotation to an entire (single) <b>package</b>, create a <a href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-7.html#jls-7.4.1"><code>
@@ -159,8 +160,11 @@ loadScripts(document, 'script');</script>
        in that way.
    <li>Applying this annotation to an instance <b>method</b> of a <i>generic</i> class is
        acceptable, but is not recommended because it can lead to some confusing situations.
-   <li>An advantage of Java modules is that you can make a lot of code null-marked with just a
-       single annotation (before the <code>module</code> keyword).
+   <li>An advantage of Java <b>modules</b> is that you can make a lot of code null-marked with
+       just a single annotation (before the <code>module</code> keyword). <a href="NullUnmarked.html" title="annotation interface in org.jspecify.annotations"><code>NullUnmarked</code></a> is not
+       supported on modules, since it's already the default.
+   <li>If both <code>@NullMarked</code> and <code>@NullUnmarked</code> appear together on the same element,
+       <i>neither</i> one is recognized.
  </ul></div>
 </section>
 <!-- ========= END OF CLASS DATA ========= -->

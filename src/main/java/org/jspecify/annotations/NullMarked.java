@@ -85,8 +85,9 @@ import java.lang.annotation.Target;
  *
  * <h2 id="where">Where it can be used</h2>
  *
- * This annotation (and {@link NullUnmarked}) can be used on any module, package, class, method, or
- * constructor declaration. Special considerations:
+ * {@code @NullMarked} and {@link NullUnmarked @NullUnmarked} can be used on any package, class,
+ * method, or constructor declaration; {@code @NullMarked} can be used on a module declaration as
+ * well. Special considerations:
  *
  * <ul>
  *   <li>To apply this annotation to an entire (single) <b>package</b>, create a <a
@@ -103,8 +104,11 @@ import java.lang.annotation.Target;
  *       in that way.
  *   <li>Applying this annotation to an instance <b>method</b> of a <i>generic</i> class is
  *       acceptable, but is not recommended because it can lead to some confusing situations.
- *   <li>An advantage of Java modules is that you can make a lot of code null-marked with just a
- *       single annotation (before the {@code module} keyword).
+ *   <li>An advantage of Java <b>modules</b> is that you can make a lot of code null-marked with
+ *       just a single annotation (before the {@code module} keyword). {@link NullUnmarked} is not
+ *       supported on modules, since it's already the default.
+ *   <li>If both {@code @NullMarked} and {@code @NullUnmarked} appear together on the same element,
+ *       <i>neither</i> one is recognized.
  * </ul>
  */
 @Documented
