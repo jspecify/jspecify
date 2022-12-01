@@ -14,6 +14,12 @@ very advanced users might find it interesting. But it would make a very poor
 introduction for anyone else; instead see our **[Start Here](/docs/start-here) page**.
 :::
 
+:::note Status of this specification
+
+This document is current as of JSpecify **0.2.0**, but does not reflect several
+design changes between then and **0.3.0**.
+:::
+
 --------------------------------------------------------------------------------
 
 ### The word "nullable"
@@ -196,7 +202,7 @@ a component of `T` or has `T` as a component.
 
 For all named annotations referred to by this spec:
 
--   The package name is `org.jspecify.annotations`. \[[#1]\]
+-   The package name is `org.jspecify.nullness`. \[[#260]\]
 -   The Java module name is `org.jspecify`. \[[#181]\]
 -   The Maven artifact is `org.jspecify:jspecify`. \[[#181]\]
 
