@@ -24,25 +24,25 @@ class ExtendsTypeVariableImplementedForNullableTypeArgument {
     boolean filterOne(T t);
 
     <U extends T> Sequence<U> filterMany(Sequence<U> in);
+  }
 
-    interface Sub0 extends Filter<@Nullable Object> {
-      // jspecify_nullness_mismatch
-      <U> Sequence<U> filterMany(Sequence<U> in);
-    }
+  interface Sub0 extends Filter<@Nullable Object> {
+    // jspecify_nullness_mismatch
+    <U> Sequence<U> filterMany(Sequence<U> in);
+  }
 
-    interface Sub1 extends Filter<@Nullable Object> {
-      // jspecify_nullness_mismatch
-      <U extends Object> Sequence<U> filterMany(Sequence<U> in);
-    }
+  interface Sub1 extends Filter<@Nullable Object> {
+    // jspecify_nullness_mismatch
+    <U extends Object> Sequence<U> filterMany(Sequence<U> in);
+  }
 
-    interface Sub2 extends Filter<@Nullable Object> {
-      // jspecify_nullness_not_enough_information
-      <U extends @NullnessUnspecified Object> Sequence<U> filterMany(Sequence<U> in);
-    }
+  interface Sub2 extends Filter<@Nullable Object> {
+    // jspecify_nullness_not_enough_information
+    <U extends @NullnessUnspecified Object> Sequence<U> filterMany(Sequence<U> in);
+  }
 
-    interface Sub3 extends Filter<@Nullable Object> {
-      <U extends @Nullable Object> Sequence<U> filterMany(Sequence<U> in);
-    }
+  interface Sub3 extends Filter<@Nullable Object> {
+    <U extends @Nullable Object> Sequence<U> filterMany(Sequence<U> in);
   }
 
   interface Sequence<T extends @Nullable Object> {}
