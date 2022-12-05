@@ -15,5 +15,4 @@
  */
 module org.jspecify {
   exports org.jspecify.annotations;
-  exports org.jspecify.nullness;
 }
