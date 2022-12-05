@@ -20,26 +20,30 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @NullMarked
 class ExtendsTypeVariableImplementedForNullableTypeArgument {
-  interface NullableBounded<T extends @Nullable Object> {
-    <U extends T> void x(U u);
+  interface Filter<T extends @Nullable Object> {
+    boolean filterOne(T t);
 
-    interface Sub0 extends NullableBounded<@Nullable Object> {
+    <U extends T> Sequence<U> filterMany(Sequence<U> in);
+
+    interface Sub0 extends Filter<@Nullable Object> {
       // jspecify_nullness_mismatch
-      <U> void x(U u);
+      <U> Sequence<U> filterMany(Sequence<U> in);
     }
 
-    interface Sub1 extends NullableBounded<@Nullable Object> {
+    interface Sub1 extends Filter<@Nullable Object> {
       // jspecify_nullness_mismatch
-      <U extends Object> void x(U u);
+      <U extends Object> Sequence<U> filterMany(Sequence<U> in);
     }
 
-    interface Sub2 extends NullableBounded<@Nullable Object> {
+    interface Sub2 extends Filter<@Nullable Object> {
       // jspecify_nullness_not_enough_information
-      <U extends @NullnessUnspecified Object> void x(U u);
+      <U extends @NullnessUnspecified Object> Sequence<U> filterMany(Sequence<U> in);
     }
 
-    interface Sub3 extends NullableBounded<@Nullable Object> {
-      <U extends @Nullable Object> void x(U u);
+    interface Sub3 extends Filter<@Nullable Object> {
+      <U extends @Nullable Object> Sequence<U> filterMany(Sequence<U> in);
     }
   }
+
+  interface Sequence<T extends @Nullable Object> {}
 }
