@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.NullnessUnspecified;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NullnessUnspecified;
 
 @NullMarked
 class UnspecifiedTypeArgumentForNonNullableParameter {

@@ -7,8 +7,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'JSpecify',
-  tagline: 'Standard Java Annotations for Static Analysis',
-  url: 'https://jspecify.dev/',
+  tagline: 'Standard Annotations for Java Static Analysis',
+  url: 'http://jspecify.org/',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -63,10 +63,14 @@ const config = {
           src: 'img/jspecify-logo.svg',
         },
         items: [
-          {to: '/docs/user-guide', label: 'User Guide', position: 'left'},
-          {to: '/docs/spec', label: 'Specification', position: 'left'},
+          {to: '/about', label: 'About Us', position: 'left'},
+          {to: '/docs/start-here', label: 'Start Here', position: 'left'},
+          {
+            href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
+            label: 'Javadoc',
+            position: 'left',
+          },
           {to: '/blog', label: 'Blog', position: 'left'},
-          {to: '/about', label: 'About', position: 'left'},
           {
             href: 'https://github.com/jspecify/jspecify',
             label: 'GitHub',
@@ -81,11 +85,19 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'User Guide',
+                label: 'Start Here',
+                to: '/docs/start-here',
+              },
+              {
+                label: 'Draft User Guide',
                 to: '/docs/user-guide',
               },
               {
-                label: 'Specification',
+                label: 'Draft Javadoc',
+                href: '/docs/api/org/jspecify/annotations/package-summary.html',
+              },
+              {
+                label: 'Draft Specification',
                 to: '/docs/spec',
               },
             ],
@@ -94,11 +106,11 @@ const config = {
             title: 'Contacts',
             items: [
               {
-                label: 'Google Group',
-                href: 'https://groups.google.com/g/jspecify-dev'
+                label: 'Public Group',
+                href: 'https://groups.google.com/g/jspecify-discuss'
               },
               {
-                label: 'Mailing List',
+                label: 'Mail The Team',
                 href: 'mailto:jspecify-dev@googlegroups.com',
               },
             ],
@@ -107,17 +119,17 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
                 label: 'GitHub',
                 href: 'https://github.com/jspecify/jspecify',
+              },
+              {
+                label: 'Blog',
+                to: '/blog',
               },
             ],
           },
         ],
-        copyright: `Copyright 2018-${new Date().getFullYear()} The JSpecify Authors. Built with Docusaurus.`,
+        copyright: `Copyright ${new Date().getFullYear()} The JSpecify Authors. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

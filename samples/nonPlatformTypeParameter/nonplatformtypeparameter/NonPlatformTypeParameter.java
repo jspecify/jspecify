@@ -16,8 +16,8 @@
 
 package nonplatformtypeparameter;
 
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 public class NonPlatformTypeParameter<T extends @Nullable Object> {
   public void foo(T t) {}

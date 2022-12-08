@@ -8,8 +8,8 @@ const FeatureListSvg = [
     Svg: require('@site/static/img/jspecify-landing-annot.svg').default,
     description: (
       <>
-        JSpecify defines a standard set of annotations with precise semantics
-        covering the full range of Java&apos;s language features.
+	JSpecify is releasing the first artifact of tool-independent annotations
+        for powering static analysis checks in your Java code.
       </>
     ),
   },
@@ -18,9 +18,9 @@ const FeatureListSvg = [
     Svg: require('@site/static/img/jspecify-landing-bugs.svg').default,
     description: (
       <>
-        JSpecify standard enables static analyzers to find more bugs.
-        Furthermore, writing code against APIs with explicit nullness is just
-        faster and more convenient.
+	JSpecify defines precise semantics, letting analysis tools find more
+	bugs, and more consistently. Library owners won't have to decide which
+        tool to support.
       </>
     ),
   },
@@ -32,8 +32,8 @@ const FeatureListPng = [
     Png: require('@site/static/img/jspecify-landing-community.png').default,
     description: (
       <>
-        JSpecify is developed in collaboration ensuring that all voices are
-        heard and the standard produced can be adopted by a wider Java community.
+        JSpecify is developed by consensus of members representing a variety of
+        stakeholders in Java static analysis, and we welcome your participation.
       </>
     ),
   },
