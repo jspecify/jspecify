@@ -8,11 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java_version: [11, 17, 18]
+        java_version: [11, 17, 18, 19]
         experimental: [false]
-        include:
-          - java_version: 19-ea
-            experimental: true
     continue-on-error: ${{ matrix.experimental }}
     steps:
       - uses: actions/checkout@v2
