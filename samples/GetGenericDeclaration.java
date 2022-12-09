@@ -15,7 +15,7 @@
  */
 
 import java.lang.reflect.TypeVariable;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 // did not manage to reproduce exactly the same set of problems as i saw with TypeResolver at 3904
 // (that is, with addComputedTypeAnnotations commented out): reproduced the error at

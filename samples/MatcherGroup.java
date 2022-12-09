@@ -15,7 +15,7 @@
  */
 
 import java.util.regex.Matcher;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 class MatcherGroup {

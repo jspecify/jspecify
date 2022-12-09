@@ -16,7 +16,7 @@
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 abstract class ReflectiveReads {
