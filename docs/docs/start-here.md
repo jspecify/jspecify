@@ -4,6 +4,8 @@ sidebar_position: 1
 
 # Start Here
 
+Quick links: [Release] | [GitHub] | [UserGuide] | [Javadoc] | [Spec] | [Wiki] | [FAQ] | [Issues] | [Discuss]
+
 ## What is this?
 
 [A group of organizations](/about) are working together to define a common set
@@ -23,11 +25,11 @@ depend on, and *precise* specifications of their semantics.
   authoritatively.
 
 JSpecify is developed by consensus of major stakeholders in Java static
-analysis.  Our eventual 1.0 release will be the first tool-neutral,
-library-neutral artifact for these annotations  (Note: `javax.annotation` was an
+analysis. Our eventual 1.0 release will be the first tool-neutral,
+library-neutral artifact for these annotations. (Note: `javax.annotation` was an
 aborted attempt at this that was never actually released.)
 
-Learn more about the JSpecify group and its goals in the [JSpecify FAQ].
+Learn more about the JSpecify group and its goals in the JSpecify [FAQ].
 
 ## How do I learn about your nullness support?
 
@@ -43,10 +45,10 @@ then [send us a mail](mailto:jspecify-discuss@googlegroups.com)
 
 ### Then if you're *really* interested
 
-* The [specification], written to be understood by owners of compilers and
+* The [spec], written to be understood by owners of compilers and
   static analysis tools, and currently matches JSpecify 0.2, not 0.3
 * Our [wiki] has a number of informal, non-normative articles on varous topics
-* [Open issues]
+* Open [issues]
 * Or try it out...
 
 ### Trying it out?
@@ -82,16 +84,19 @@ is "set in stone" (except, as of 0.3, the package name).
 * Give some thought to what factors would make your own projects more or less
   likely to adopt, and let us know.
 * [File an issue] to request a feature or if something is wrong.
-* Don't forget to Star and Watch our [github repo]!
+* Don't forget to Star and Watch our [github] repo!
 
+[discuss]: https://groups.google.com/g/jspecify-discuss
 [file an issue]: https://github.com/jspecify/jspecify/issues/new
-[github repo]: https://github.com/jspecify/jspecify
+[github]: https://github.com/jspecify/jspecify
 [google group]: https://groups.google.com/g/jspecify-discuss
 [javadoc]: /docs/api/org/jspecify/annotations/package-summary.html
-[jspecify faq]: http://github.com/jspecify/jspecify/wiki/jspecify-faq
+[faq]: http://github.com/jspecify/jspecify/wiki/jspecify-faq
 [nullness design faq]: https://github.com/jspecify/jspecify/wiki/nullness-design-FAQ
-[open issues]: https://github.com/jspecify/jspecify/issues
-[specification]: /docs/spec
+[issues]: https://github.com/jspecify/jspecify/issues
+[release]: https://search.maven.org/artifact/org.jspecify/jspecify/0.3.0/jar
+[spec]: /docs/spec
 [stackoverflow answer]: https://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use
 [user guide]: /docs/user-guide
+[userguide]: /docs/user-guide
 [wiki]: https://github.com/jspecify/jspecify/wiki
