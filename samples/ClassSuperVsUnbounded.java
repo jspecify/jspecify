@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 // did not manage to reproduce the failure from Invokable.java at 3861...
 @NullMarked

@@ -15,8 +15,8 @@
  */
 
 import java.util.Collections;
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 /*
  * I haven't thought deeply about where checkers could identify mismatches or not-enough-information

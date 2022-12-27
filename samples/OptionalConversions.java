@@ -15,8 +15,8 @@
  */
 
 import com.google.common.base.Optional;
-import org.jspecify.nullness.NullMarked;
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 // The warnings below will go away once Optional is @NullMarked.
 @NullMarked

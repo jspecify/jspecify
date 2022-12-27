@@ -21,8 +21,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            to="/docs/user-guide">
-            Read User Guide
+            to="/docs/start-here">
+            Learn More
           </Link>
         </div>
       </div>
@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <Layout
       title={`${siteConfig.title} Main`}
-      description="Standard Java Annotations for Static Analysis">
+      description="Standard Annotations for Java Static Analysis">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

@@ -16,7 +16,7 @@
 
 import java.util.Map;
 import java.util.NavigableMap;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 class MapGetKeySet {

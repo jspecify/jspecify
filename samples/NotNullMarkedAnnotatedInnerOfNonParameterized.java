@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 abstract class NotNullMarkedAnnotatedInnerOfNonParameterized {
   interface Lib<T extends @Nullable Object> {}

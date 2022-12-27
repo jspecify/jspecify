@@ -16,7 +16,7 @@
 
 import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 abstract class DirectoryStreamGetFileName {

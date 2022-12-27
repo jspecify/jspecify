@@ -16,7 +16,7 @@
 
 import static com.google.common.base.StandardSystemProperty.LINE_SEPARATOR;
 
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 @NullMarked
 class GuavaStandardSystemProperty {

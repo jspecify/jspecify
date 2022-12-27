@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import org.jspecify.nullness.NullMarked;
+import org.jspecify.annotations.NullMarked;
 
 // TODO(cpovirk): Rework this to read a *non-JDK* type from bytecode, and then release it.
 @NullMarked
