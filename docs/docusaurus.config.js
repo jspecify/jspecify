@@ -94,7 +94,7 @@ const config = {
               },
               {
                 label: 'Draft Javadoc',
-                href: '/docs/api/org/jspecify/annotations/package-summary.html',
+                href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
               },
               {
                 label: 'Draft Specification',
