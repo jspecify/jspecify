@@ -1,13 +1,13 @@
 plugins {
     id 'java-library'
     id 'io.github.gradle-nexus.publish-plugin' version '1.1.0' apply false
-    id 'com.diffplug.spotless' version '6.9.1'
-    id 'net.ltgt.errorprone' version '2.0.2'
+    id 'com.diffplug.spotless' version '6.14.0'
+    id 'net.ltgt.errorprone' version '3.0.1'
 }
 
 ext {
     junitVersion = '5.8.2'
-    errorproneVersion = '2.10.0'
+    errorproneVersion = '2.18.0'
 }
 
 repositories { mavenCentral() }
