@@ -34,7 +34,7 @@ jobs:
       - name: Check out the reference checker
         uses: actions/checkout@v3
         with:
-          repository: ${{  github.repository.owner }}/nullness-checker-for-checker-framework
+          repository: ${{ github.repository_owner }}/nullness-checker-for-checker-framework
           path: nullness-checker-for-checker-framework
       - name: Set up Java
         uses: actions/setup-java@v3
@@ -42,13 +42,13 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Run Conformance Tests
-        if: github.base.ref == 'main'
+        if: github.base_ref == 'main'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: ConformanceTest
           build-root-directory: nullness-checker-for-checker-framework
       - name: Run Samples Tests
-        if: github.base.ref == 'samples-google-prototype'
+        if: github.base_ref == 'samples-google-prototype'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jspecifySamplesTest
