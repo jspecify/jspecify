@@ -22,3 +22,26 @@ jobs:
           cache: gradle
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
+  conformance-tests:
+    name: Run Conformance Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+        with:
+          path: jspecify
+      - name: Check out the reference checker
+        uses: actions/checkout@v3
+        with:
+          repository: ${{  github.repository.owner }}/nullness-checker-for-checker-framework
+          path: nullness-checker-for-checker-framework
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Run Conformance Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: ConformanceTest
+          build-root-directory: nullness-checker-for-checker-framework
