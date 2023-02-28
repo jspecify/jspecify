@@ -4,25 +4,37 @@ on:
   push:
     branches: [ main ]
   pull_request:
+    branches:
+      - main
     paths:
       - 'docs/**'
 
 jobs:
+  # Runs on PRs and push to ensure the documentation successfully builds.
   build:
+    name: Build Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - run: npm install
+      - name: Install Dependencies
+        run: npm install
         working-directory: docs
 
-      - run: npm run build
+      - name: Build Documentation
+        run: npm run build
         working-directory: docs
 
+  # Deploys the documentation if this is a push to the main branch.
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/head/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/upload-artifact@v2
         with:
           name: document
@@ -32,4 +44,3 @@ jobs:
         with:
           branch: gh-pages
           folder: docs/build
-        if: github.event_name == 'push'
