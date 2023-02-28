@@ -22,8 +22,9 @@ jobs:
           cache: gradle
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
-  conformance-tests:
-    name: Run Conformance Tests
+  reference-checker-tests:
+    if: github.base_ref == 'main' || github.base_ref == 'samples-google-prototype'
+    name: Run Reference Checker Tests
     runs-on: ubuntu-latest
     steps:
       - name: Check out the code
@@ -41,7 +42,14 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Run Conformance Tests
+        if: github.base.ref == 'main'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: ConformanceTest
+          build-root-directory: nullness-checker-for-checker-framework
+      - name: Run Samples Tests
+        if: github.base.ref == 'samples-google-prototype'
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: jspecifySamplesTest
           build-root-directory: nullness-checker-for-checker-framework
