@@ -2,6 +2,14 @@ name: Build
 
 on: [push, pull_request]
 
+env:
+  conformance: ${{
+    (github.event_name == 'pull_request' && github.base_ref == 'main') ||
+    (github.event_name == 'push' && github.ref == 'main') }}
+  samples: ${{
+    (github.event_name == 'pull_request' && github.base_ref == 'samples-google-prototype') ||
+    (github.event_name == 'push' && github.ref == 'samples-google-prototype') }}
+
 jobs:
   build:
     name: JDK ${{ matrix.java_version }}
@@ -23,9 +31,6 @@ jobs:
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
   reference-checker-tests:
-    env:
-      conformance: ${{ (github.event_name == 'pull_request' && github.base_ref == 'main') || (github.event_name == 'push' && github.ref == 'main') }}
-      samples: ${{ (github.event_name == 'pull_request' && github.base_ref == 'samples-google-prototype') || (github.event_name == 'push' && github.ref == 'samples-google-prototype') }}
     if: env.conformance || env.samples
     name: Run Reference Checker Tests
     runs-on: ubuntu-latest
