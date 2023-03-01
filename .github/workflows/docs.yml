@@ -6,8 +6,6 @@ on:
   pull_request:
     branches:
       - main
-    paths:
-      - 'docs/**'
 
 jobs:
   # Runs on PRs and push to ensure the documentation successfully builds.
