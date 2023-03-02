@@ -22,11 +22,16 @@ jobs:
           cache: gradle
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
+
   reference-checker-tests:
-    if: github.base_ref == 'main' || github.base_ref == 'samples-google-prototype'
     name: Run Reference Checker Tests
     runs-on: ubuntu-latest
     steps:
+      - name: Check Environment
+        run: |
+          echo "github.event_name = ${{ github.event_name }}"
+          echo "github.base_ref = ${{ github.base_ref }}"
+          echo "github.ref_name = ${{ github.ref_name }}"
       - name: Check out the code
         uses: actions/checkout@v3
         with:
@@ -42,13 +47,13 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Run Conformance Tests
-        if: github.base_ref == 'main'
+        if: github.base_ref == 'main' || github.ref_name == 'main'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: ConformanceTest
           build-root-directory: nullness-checker-for-checker-framework
       - name: Run Samples Tests
-        if: github.base_ref == 'samples-google-prototype'
+        if: github.base_ref == 'samples-google-prototype' || github.ref_name == 'samples-google-prototype'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jspecifySamplesTest
