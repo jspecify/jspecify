@@ -58,21 +58,21 @@ abstract class Super extends C<@Nullable CK> {
 abstract class CKN extends Super {
   public void main() {
     ak().foo(ak());
-    // test:cannot-convert:null to AK!
+    // test:cannot-convert:null? to AK!
     ak().foo(null);
 
-    // test:cannot-convert:null to AK!
+    // test:cannot-convert:null? to AK!
     akn().foo(null);
 
     bk().foo(bk());
-    // test:cannot-convert:null to B!
+    // test:cannot-convert:null? to B!
     bk().foo(null);
 
     ck().foo(ck());
-    // test:cannot-convert:null to CK!
+    // test:cannot-convert:null? to CK!
     ck().foo(null);
 
-    // test:cannot-convert:null to CK!
+    // test:cannot-convert:null? to CK!
     ckn().foo(null);
   }
 }
