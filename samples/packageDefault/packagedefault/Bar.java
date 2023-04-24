@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 
 class Bar {
   Object x(@Nullable Object o) {
-    // jspecify_nullness_mismatch
+    // test:cannot-convert:Object? to Object!
     return o;
   }
 }
