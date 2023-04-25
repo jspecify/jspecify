@@ -6,7 +6,7 @@ import org.jspecify.annotations.Nullable;
 class Basic {
   @NonNull
   Object cannotConvertNullableToNonNull(@Nullable Object nullable) {
-    // test:cannot-convert:Object? to Object2!
+    // test:cannot-convert:Object? to Object!
     return nullable;
   }
 }
