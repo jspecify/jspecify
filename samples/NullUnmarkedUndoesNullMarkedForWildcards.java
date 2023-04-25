@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The JSpecify Authors.
+ * Copyright 2023 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,21 @@
  * limitations under the License.
  */
 
-package packagedefault;
-
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
-class Bar {
-  Object x(@Nullable Object o) {
-    // test:cannot-convert:Object? to Object!
-    return o;
+@NullMarked
+interface NullUnmarkedUndoesNullMarkedForWildcards {
+  @NullUnmarked
+  default void apply(Supplier<?> supplier) {
+    // jspecify_nullness_not_enough_information
+    acceptObject(supplier.get());
+  }
+
+  void acceptObject(Object o);
+
+  interface Supplier<T extends @Nullable Object> {
+    T get();
   }
 }
