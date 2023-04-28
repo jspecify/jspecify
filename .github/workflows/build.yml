@@ -50,7 +50,7 @@ jobs:
         if: github.base_ref == 'main' || github.ref_name == 'main'
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: ConformanceTest
+          arguments: ConformanceTest ConformanceTestOnSamples
           build-root-directory: nullness-checker-for-checker-framework
       - name: Run Samples Tests
         if: github.base_ref == 'samples-google-prototype' || github.ref_name == 'samples-google-prototype'
