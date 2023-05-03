@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.jspecify.annotations.NullnessUnspecified;
@@ -111,8 +110,7 @@ class TypeVariableUnspecToSelfUnspec<
     return x;
   }
 
-  @NullnessUnspecified UnspecChildOfParametricT x14(
-      @NullnessUnspecified UnspecChildOfParametricT x) {
+  @NullnessUnspecified UnspecChildOfParametricT x14(@NullnessUnspecified UnspecChildOfParametricT x) {
     // jspecify_nullness_not_enough_information
     return x;
   }
