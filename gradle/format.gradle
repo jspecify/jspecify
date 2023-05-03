@@ -1,8 +1,11 @@
 spotless {
     java {
+        target '**/*.java'
+        targetExclude 'gradle/license-header.java'
         removeUnusedImports()
         googleJavaFormat()
         licenseHeaderFile "gradle/license-header.java"
+        formatAnnotations().addTypeAnnotation('NullnessUnspecified')
     }
     groovyGradle {
         target '**/*.gradle'

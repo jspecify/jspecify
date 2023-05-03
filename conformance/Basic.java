@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package conformance;
 
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 class Basic {
-  @NonNull
-  Object cannotConvertNullableToNonNull(@Nullable Object nullable) {
+  @NonNull Object cannotConvertNullableToNonNull(@Nullable Object nullable) {
     // test:cannot-convert:Object? to Object!
     return nullable;
   }
