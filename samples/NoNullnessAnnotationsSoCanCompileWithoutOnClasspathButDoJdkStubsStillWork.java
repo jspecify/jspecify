@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 The jspecify Authors.
+ * Copyright 2021 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+class NoNullnessAnnotationsSoCanCompileWithoutOnClasspathButDoJdkStubsStillWork {
+  void foo() {
+    // jspecify_nullness_mismatch
+    Integer.parseInt(null);
+  }
+}
 /*
  * Our CI is not set up to take advantage of this, but: This file is a sample input that contains no
  * JSpecify nullness annotations and thus can be analyzed without those annotations on the
@@ -30,9 +35,3 @@
  * our checker would recognize. But then we'd have to do the same for any other stubs or else risk
  * the same problem. Plus, the problem is unlikely to begin with.
  */
-class NoNullnessAnnotationsSoCanCompileWithoutOnClasspathButDoJdkStubsStillWork {
-  void foo() {
-    // jspecify_nullness_mismatch
-    Integer.parseInt(null);
-  }
-}

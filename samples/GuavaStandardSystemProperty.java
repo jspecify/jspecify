@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import static com.google.common.base.StandardSystemProperty.LINE_SEPARATOR;
 
 import org.jspecify.annotations.NullMarked;

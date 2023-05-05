@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import java.nio.file.DirectoryStream;
 import java.nio.file.Path;
 import org.jspecify.annotations.NullMarked;

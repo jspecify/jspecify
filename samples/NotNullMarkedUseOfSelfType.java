@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 The jspecify Authors.
+ * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,11 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-// TODO(cpovirk): Rework this to read a *non-JDK* type from bytecode, and then release it.
-interface NotNullMarkedUseOfSelfType {
+class NotNullMarkedUseOfSelfType {
   // jspecify_nullness_not_enough_information
-  <T extends Enum<T>> void go();
+  <T extends Enum<T>> void go() {}
 
-  void go(Enum<?> e);
+  void go(Enum<?> e) {}
 }
+// TODO(cpovirk): Rework this to read a *non-JDK* type from bytecode, and then release it.

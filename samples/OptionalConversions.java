@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import com.google.common.base.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;

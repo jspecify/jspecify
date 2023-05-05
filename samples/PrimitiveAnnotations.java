@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
@@ -30,7 +29,10 @@ class PrimitiveAnnotations {
 
       // jspecify_nullness_intrinsically_not_nullable
       Lib<@Nullable int[]> x6,
-      Lib<int @Nullable []> x7) {}
+      Lib<int @Nullable []> x7,
+
+      // jspecify_nullness_intrinsically_not_nullable
+      @Nullable int[][] x8) {}
 
   class Lib<T extends @Nullable Object> {}
 }
