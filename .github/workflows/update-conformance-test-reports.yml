@@ -6,7 +6,7 @@ on:
     - 'main'
 
 env:
-  reference_checker_repo: ${{ github.repository_owner }}/nullness-checker-for-checker-framework
+  reference_checker_repo: ${{ github.repository_owner }}/${{ vars.reference_checker_repo }}
 
 defaults:
   run:
