@@ -1,6 +1,7 @@
 name: Build
 
 # Requires:
+#
 # * A repository variable named REFERENCE_CHECKER_REPO with the name of the reference checker repo
 #    within this fork of JSpecify.
 
