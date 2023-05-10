@@ -39,8 +39,8 @@ jobs:
       - name: Check out the reference checker
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/nullness-checker-for-checker-framework
-          path: nullness-checker-for-checker-framework
+          repository: ${{ github.repository_owner }}/jspecify-reference-checker
+          path: jspecify-reference-checker
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
@@ -51,10 +51,10 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: ConformanceTest ConformanceTestOnSamples
-          build-root-directory: nullness-checker-for-checker-framework
+          build-root-directory: jspecify-reference-checker
       - name: Run Samples Tests
         if: github.base_ref == 'samples-google-prototype' || github.ref_name == 'samples-google-prototype'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jspecifySamplesTest
-          build-root-directory: nullness-checker-for-checker-framework
+          build-root-directory: jspecify-reference-checker
