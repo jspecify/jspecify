@@ -1,6 +1,15 @@
 name: Build
 
+# Requires:
+#
+# * A repository variable named REFERENCE_CHECKER_REPO with the name of the reference checker repo
+#    within this fork of JSpecify.
+
 on: [push, pull_request]
+
+defaults:
+  run:
+    shell: bash --noprofile --norc -e -o pipefail -x {0}
 
 jobs:
   build:
@@ -27,11 +36,6 @@ jobs:
     name: Run Reference Checker Tests
     runs-on: ubuntu-latest
     steps:
-      - name: Check Environment
-        run: |
-          echo "github.event_name = ${{ github.event_name }}"
-          echo "github.base_ref = ${{ github.base_ref }}"
-          echo "github.ref_name = ${{ github.ref_name }}"
       - name: Check out the code
         uses: actions/checkout@v3
         with:
@@ -39,22 +43,23 @@ jobs:
       - name: Check out the reference checker
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/nullness-checker-for-checker-framework
-          path: nullness-checker-for-checker-framework
+          repository: ${{ github.repository_owner }}/${{ vars.reference_checker_repo }}
+          path: ${{ vars.reference_checker_repo }}
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           distribution: temurin
           java-version: 17
       - name: Run Conformance Tests
-        if: github.base_ref == 'main' || github.ref_name == 'main'
+        if: github.base_ref == 'main' # only PRs onto main
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: ConformanceTest ConformanceTestOnSamples
-          build-root-directory: nullness-checker-for-checker-framework
+          arguments: conformanceTest conformanceTestOnSamples
+          build-root-directory: ${{ vars.reference_checker_repo }}
       - name: Run Samples Tests
+        # PRs or pushes onto samples-google-prototype
         if: github.base_ref == 'samples-google-prototype' || github.ref_name == 'samples-google-prototype'
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jspecifySamplesTest
-          build-root-directory: nullness-checker-for-checker-framework
+          build-root-directory: ${{ vars.reference_checker_repo }}
