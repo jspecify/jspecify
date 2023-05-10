@@ -1,5 +1,12 @@
 name: Update Reference Checker Conformance Test Reports
 
+# Requires:
+# * A repository variable named REFERENCE_CHECKER_REPO with the name of the reference checker repo
+#    within this fork of JSpecify.
+# * A secret named REFERENCE_CHECKER_WORKFLOW_PAT with a fine-grained personal access token that has
+#    read permissions on metadata and read+write permissions on contents for the reference checker
+#    repo within this fork of JSpecify. The token must be only for the single repo.
+
 on:
   push:
     branches:
