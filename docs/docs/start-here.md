@@ -10,7 +10,7 @@ Quick links: [Release] | [GitHub] | [UserGuide] | [Javadoc] | [Spec] | [Wiki] | 
 
 [A group of organizations](/about) are working together to define a common set
 of annotation types for use in JVM languages, to improve static analysis and
-language interoperation. We've been focusing on nullness analysis first.
+language interoperation. Our initial focus is on nullness analysis.
 
 This includes providing both an artifact of annotation types your code can
 depend on, and *precise* specifications of their semantics.
@@ -19,35 +19,34 @@ depend on, and *precise* specifications of their semantics.
   tragic [stackoverflow answer] depicts.
 * **Why standardize the semantics?** Because you deserve a single source of
   truth for how your code should be annotated, instead of having to decide
-  which tool to make happy at the expense of the others.
-* **Why do both together?** Because you deserve annotation types with
-  documentation on them, right there, that can answer your questions
-  authoritatively.
+  which tool to please at the expense of the others.
+* **Why do both together?** Because you deserve to find that information
+  easily, right in the javadoc of the annotation classes themselves.
 
 JSpecify is developed by consensus of major stakeholders in Java static
 analysis. Our eventual 1.0 release will be the first tool-neutral,
 library-neutral artifact for these annotations. (Note: `javax.annotation` was an
-aborted attempt at this that was never actually released.)
+attempt at this that never reached consensus and was never actually released.)
 
 Learn more about the JSpecify group and its goals in the JSpecify [FAQ].
 
 ## How do I learn about your nullness support?
 
-As you read the following and have questions, check the [Nullness Design FAQ],
-then [send us a mail](mailto:jspecify-discuss@googlegroups.com)
+Here are some links. As you read them, you'll probably have a number of "why?"
+questions, which you can look for in the [Nullness Design FAQ]. If you like,
+[send us mail](mailto:jspecify-discuss@googlegroups.com).
 
 ### Begin with one of
 
-* The [Javadoc], which is pretty thorough and specific (but is a reference page,
-  not a tutorial walkthrough)
-* The current [User Guide] draft, which is a better choice for reading
-  top-to-bottom, but is a little bit outdated at the moment
+* The current [User Guide] draft
+* The [Javadoc], which is not a *tutorial* walkthrough, but is thorough,
+  specific, and current.
 
 ### Then if you're *really* interested
 
-* The [spec], written to be understood by owners of compilers and
-  static analysis tools, and currently matches JSpecify 0.2, not 0.3
-* Our [wiki] has a number of informal, non-normative articles on varous topics
+* The [specification], written to be understood by owners of compilers and
+  static analysis tools. Note that it currently matches JSpecify 0.2, not 0.3.
+* Our [wiki] has about 20 informal, non-normative articles on various topics
 * Open [issues]
 * Or try it out...
 
@@ -56,35 +55,36 @@ then [send us a mail](mailto:jspecify-discuss@googlegroups.com)
 * You might wish to be an early adopter of **version 0.3** in your projects;
   see the [adoption](https://github.com/jspecify/jspecify/wiki/adoption) wiki
   page for advice.
-* When our **reference implementation** is ready (targeting 2023 Q1), you'll be
-  able to validate your usages of the annotations against our defined semantics.
-  This is when you will really get to find out how helpful or annoying our
-  current design choices are for you, and we'll be glad to hear about it.  This
-  checker is not quite ready for prime time yet, however. It can be found, but
-  we're not linking to it yet.
+* Please experiment with our 
+  **[reference implementation](https://github.com/jspecify/jspecify-reference-checker)**.
+  This lets you validate your usages of the annotations against our defined
+  semantics, which is when you will really get to find out how helpful or 
+  annoying our current design choices are for you (which you should let us
+  know!). However, this tool is still a work in progress, and is not at *full*
+  conformance with our own specification quite yet.
 * **Version 1.0** will commit **permanently** to the annotation APIs, and they
-  will be safe to depend on. From that point, no incompatible changes from a
-  compilation perspective will happen, and any further specification adjustments
-  will not break null-checking for you or your clients except to improve rare
-  corner cases. We have no prediction for when this release will be. We hope to
-  get as much of your feedback as we can before then.
+  will be safe to depend on. From that point, no compile-breaking changes will
+  ever happen, and future specification adjustments will affect only corner cases.
+  We don't have a date for this release, but it is primarily blocked on community
+  input!
 
 ## How can I get involved?
 
 Great question.
 
-It's not too late for your input to matter. It's true we've been working on this
-for a long time (since 2018), but it's just been laying groundwork. None of it
-is "set in stone" (except, as of 0.3, the package name).
+It's not too late for your input to matter. We've laid in a lot of groundwork,
+but nothing is "baked in" yet (except the package name, as of 0.3).
 
-* Join our new [Google Group]. Introduce yourself! Ask questions or just tell
-  us what you're hoping to see.
+* Join our new [Google Group]. Introduce yourself! Ask questions, complain, or
+  just tell us what you're hoping to see. If your organization should be a
+  member of our group, tell us about yourselves and self-nominate.
 * Do you use any libraries or tools that you think should use/support JSpecify
   annotations? Please tell them about us!
 * Give some thought to what factors would make your own projects more or less
-  likely to adopt, and let us know.
+  likely to adopt JSpecify, and let us know.
 * [File an issue] to request a feature or if something is wrong.
-* Don't forget to Star and Watch our [github] repo!
+* Star and Watch our [github] repo.
+
 
 [discuss]: https://groups.google.com/g/jspecify-discuss
 [file an issue]: https://github.com/jspecify/jspecify/issues/new
