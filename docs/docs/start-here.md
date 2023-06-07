@@ -90,7 +90,7 @@ but nothing is "baked in" yet (except the package name, as of 0.3).
 [file an issue]: https://github.com/jspecify/jspecify/issues/new
 [github]: https://github.com/jspecify/jspecify
 [google group]: https://groups.google.com/g/jspecify-discuss
-[javadoc]: /docs/api/org/jspecify/annotations/package-summary.html
+[javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
 [faq]: http://github.com/jspecify/jspecify/wiki/jspecify-faq
 [nullness design faq]: https://github.com/jspecify/jspecify/wiki/nullness-design-FAQ
 [issues]: https://github.com/jspecify/jspecify/issues
