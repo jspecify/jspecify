@@ -90,9 +90,9 @@ import java.lang.annotation.Target;
  * <p>If a type variable has <i>all</i> its usages being projected in one direction or the other, it
  * should be given a non-null upper bound, and any non-null projections can then be removed.
  *
- * <h2>Where it is not applicable</h2>
+ * <h2>Where it is applicable</h2>
  *
- * <p>{@code @NonNull} is inapplicable in all the <a href="Nullable.html#applicability">same
+ * <p>{@code @NonNull} is applicable in all the <a href="Nullable.html#applicability">same
  * locations</a> as {@link Nullable}.
  */
 @Documented
