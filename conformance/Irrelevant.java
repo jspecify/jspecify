@@ -20,11 +20,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
-// The same element cannot be both @NullMarked and @NullUnmarked.
-// test:irrelevant-annotation:NullMarked
-@NullMarked
-// test:irrelevant-annotation:NullUnmarked
-@NullUnmarked
+// Assertions about recognizing irrelevant annotations: those that have no or contradictory meaning
+// in their context.
 class Irrelevant {
   // Primitive types cannot be nullable.
   // test:irrelevant-annotation:Nullable
@@ -39,4 +36,16 @@ class Irrelevant {
   // Type parameters cannot be non-null.
   // test:irrelevant-annotation:NonNull
   <@NonNull T> void nonNullTypeParameter(T param) {}
+
+  // The same element cannot be both non-null and nullable.
+  // test:irrelevant-annotation:NonNull
+  // test:irrelevant-annotation:Nullable
+  void bothNullableAndNonNull(@Nullable @NonNull String param) {}
+
+  // The same element cannot be both null-marked and null-unmarked.
+  // test:irrelevant-annotation:NullMarked
+  @NullMarked
+  // test:irrelevant-annotation:NullUnmarked
+  @NullUnmarked
+  static class BothNullMarkedAndNullUnmarked {}
 }
