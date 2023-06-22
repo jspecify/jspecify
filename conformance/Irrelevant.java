@@ -15,14 +15,28 @@
  */
 package conformance;
 
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NullUnmarked;
 import org.jspecify.annotations.Nullable;
 
+// The same element cannot be both @NullMarked and @NullUnmarked.
+// test:irrelevant-annotation:NullMarked
+@NullMarked
+// test:irrelevant-annotation:NullUnmarked
+@NullUnmarked
 class Irrelevant {
+  // Primitive types cannot be nullable.
   // test:irrelevant-annotation:Nullable
   @Nullable int nullablePrimitive() {
     return 0;
   }
 
+  // Type parameters cannot be nullable.
   // test:irrelevant-annotation:Nullable
   <@Nullable T> void nullableTypeParameter(T param) {}
+
+  // Type parameters cannot be non-null.
+  // test:irrelevant-annotation:NonNull
+  <@NonNull T> void nonNullTypeParameter(T param) {}
 }
