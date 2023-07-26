@@ -6,8 +6,8 @@ plugins {
 }
 
 ext {
-    junitVersion = '5.8.2'
-    errorproneVersion = '2.18.0'
+    junitVersion = '5.9.3'
+    errorproneVersion = '2.20.0'
 }
 
 repositories { mavenCentral() }
