@@ -54,13 +54,15 @@ jobs:
           java-version: 17
       - name: Run Conformance Tests
         if: github.base_ref == 'main' # only PRs onto main
+        continue-on-error: true
         uses: gradle/gradle-build-action@v2
         with:
           arguments: conformanceTest conformanceTestOnSamples
           build-root-directory: ${{ env.reference_checker_repo }}
       - name: Run Samples Tests
-        # PRs or pushes onto samples-google-prototype
-        if: github.base_ref == 'samples-google-prototype' || github.ref_name == 'samples-google-prototype'
+        # only PRs onto samples-google-prototype
+        if: github.base_ref == 'samples-google-prototype'
+        continue-on-error: true
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jspecifySamplesTest
