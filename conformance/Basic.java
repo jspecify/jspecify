@@ -21,6 +21,16 @@ import org.jspecify.annotations.Nullable;
 class Basic {
   @NonNull Object cannotConvertNullableToNonNull(@Nullable Object nullable) {
     // test:cannot-convert:Object? to Object!
+    // test:sink-type:Object!cannotConvertNullableToNonNull#return
     return nullable;
+  }
+
+  @Nullable Object nullableObject;
+
+  void testSinkType(@NonNull String nonNullString) {
+    // test:sink-type:Object?:nullableObject
+    nullableObject = nonNullString;
+    // test:sink-type:String!:Basic.testSinkType#nonNullString
+    testSinkType("aString");
   }
 }
