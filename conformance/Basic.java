@@ -21,13 +21,14 @@ import org.jspecify.annotations.Nullable;
 class Basic {
   @NonNull Object cannotConvertNullableToNonNull(@Nullable Object nullable) {
     // test:expression-type:Object?:nullable
-    // test:sink-type:Object!cannotConvertNullableToNonNull#return
+    // test:sink-type:Object!:cannotConvertNullableToNonNull#return
     // test:cannot-convert:Object? to Object!
     return nullable;
   }
 
   @Nullable Object canConvertNonNullToNullable(@NonNull Object nonNull) {
     // test:expression-type:Object!:nonNull
+    // test:sink-type:Object?:canConvertNonNullToNullable#return
     return nonNull;
   }
 
@@ -36,7 +37,7 @@ class Basic {
   void testSinkType(@NonNull String nonNullString) {
     // test:sink-type:Object?:nullableObject
     nullableObject = nonNullString;
-    // test:sink-type:String!:Basic.testSinkType#nonNullString
+    // test:sink-type:String!:testSinkType#nonNullString
     testSinkType("aString");
   }
 }
