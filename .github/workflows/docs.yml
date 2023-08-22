@@ -30,7 +30,7 @@ jobs:
   # Deploys the documentation if this is a push to the main branch.
   deploy:
     name: Deploy Documentation
-    if: github.event_name == 'push' && github.ref == 'refs/head/main'
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
     steps:
