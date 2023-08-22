@@ -42,6 +42,7 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: document
+          path: docs/build
 
       - uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
