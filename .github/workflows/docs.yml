@@ -39,8 +39,8 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-       - uses: actions/download-artifact@v2
-         with:
+      - uses: actions/download-artifact@v2
+        with:
           name: document
 
       - uses: JamesIves/github-pages-deploy-action@4.1.5
