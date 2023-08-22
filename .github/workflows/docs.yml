@@ -27,6 +27,11 @@ jobs:
         run: npm run build
         working-directory: docs
 
+      - uses: actions/upload-artifact@v2
+        with:
+          name: document
+          path: docs/build
+
   # Deploys the documentation if this is a push to the main branch.
   deploy:
     name: Deploy Documentation
@@ -34,10 +39,9 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/upload-artifact@v2
-        with:
+       - uses: actions/download-artifact@v2
+         with:
           name: document
-          path: docs/build
 
       - uses: JamesIves/github-pages-deploy-action@4.1.5
         with:
