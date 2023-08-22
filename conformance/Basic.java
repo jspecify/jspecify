@@ -28,7 +28,7 @@ class Basic {
 
   @Nullable Object canConvertNonNullToNullable(@NonNull Object nonNull) {
     // test:expression-type:Object!:nonNull
-    // test:sink-type:Object?:`return
+    // test:sink-type:Object?:return
     return nonNull;
   }
 
