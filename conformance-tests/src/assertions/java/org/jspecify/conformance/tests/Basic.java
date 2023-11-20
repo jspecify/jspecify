@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package basic;
+package org.jspecify.conformance.tests;
 
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
