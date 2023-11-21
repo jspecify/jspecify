@@ -11,52 +11,35 @@ repositories {
 }
 
 sourceSets {
+    // Dependencies required by the assertions
+    deps {
+        java {}
+    }
+    // Java files with assertions
     assertions {
         java {
+            compileClasspath += sourceSets.deps.output
         }
+    }
+}
+
+java {
+    // Source JAR artifact for assertions
+    registerFeature("assertions") {
+        usingSourceSet(sourceSets.assertions)
+        withSourcesJar()
+    }
+    // JAR artifact for dependencies required by the assertions
+    registerFeature("deps") {
+        usingSourceSet(sourceSets.deps)
+        withSourcesJar()
     }
 }
 
 dependencies {
     assertionsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+    depsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
 }
 
-check.dependsOn('compileAssertionsJava')
-
-tasks.register("zipArtifact", Zip) {
-    group "build"
-    from sourceSets.assertions.java
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            afterEvaluate {
-                artifact tasks.zipArtifact
-            }
-            pom {
-                name = 'JSpecify conformance test suite'
-                description = 'A set of assertion files to be interpreted by a conformance test framework library integration'
-                url = 'http://jspecify.org/'
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
-                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
-                    url = 'https://github.com/jspecify/jspecify/conformance'
-                }
-                developers {
-                    developer {
-                        id = 'netdpb'
-                        name = 'David P. Baker'
-                        email = 'dpb@google.com'
-                    }
-                }
-            }
-        }
-    }
-}
+// Make sure assertions compile.
+check.dependsOn(compileAssertionsJava)
