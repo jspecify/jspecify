@@ -1,5 +1,8 @@
+import org.gradle.jvm.tasks.Jar
+
 plugins {
     id 'java'
+    id 'distribution'
 }
 
 group 'org.jspecify.conformance'
@@ -22,6 +25,12 @@ sourceSets {
     }
 }
 
+tasks.register('conformanceTestSuite', Zip) {
+    from sourceSets.assertions.java // assertion files
+    from depsJar // deps JAR
+    from configurations.assertionsRuntimeClasspath // other dependencies
+}
+
 java {
     // Source JAR artifact for assertions
     registerFeature("assertions") {
@@ -32,6 +41,22 @@ java {
     registerFeature("deps") {
         usingSourceSet(sourceSets.deps)
         withSourcesJar()
+    }
+}
+
+distributions {
+    conformanceTests {
+        contents {
+            from(sourceSets.assertions.java) {
+                into '/assertions'
+            }
+            from (depsJar) {
+                into '/deps'
+            }
+            from (configurations.assertionsRuntimeClasspath) {
+                into '/deps'
+            }
+        }
     }
 }
 
