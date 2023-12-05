@@ -23,12 +23,6 @@ sourceSets {
     }
 }
 
-tasks.register('conformanceTestSuite', Zip) {
-    from sourceSets.assertions.java // assertion files
-    from depsJar // deps JAR
-    from configurations.assertionsRuntimeClasspath // other dependencies
-}
-
 java {
     // Source JAR artifact for assertions
     registerFeature("assertions") {
