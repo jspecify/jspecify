@@ -23,15 +23,9 @@ sourceSets {
 }
 
 java {
-    // Source JAR artifact for assertions
-    registerFeature("assertions") {
-        usingSourceSet(sourceSets.assertions)
-        withSourcesJar()
-    }
     // JAR artifact for dependencies required by the assertions
     registerFeature("deps") {
         usingSourceSet(sourceSets.deps)
-        withSourcesJar()
     }
 }
 
