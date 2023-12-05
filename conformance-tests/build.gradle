@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+}
+
+group 'org.jspecify.conformance'
+version '0.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    // Dependencies required by the assertions
+    deps {
+        java {}
+    }
+    // Java files with assertions
+    assertions {
+        java {
+            compileClasspath += sourceSets.deps.output
+        }
+    }
+}
+
+java {
+    // Source JAR artifact for assertions
+    registerFeature("assertions") {
+        usingSourceSet(sourceSets.assertions)
+        withSourcesJar()
+    }
+    // JAR artifact for dependencies required by the assertions
+    registerFeature("deps") {
+        usingSourceSet(sourceSets.deps)
+        withSourcesJar()
+    }
+}
+
+dependencies {
+    assertionsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+    depsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+}
+
+// Make sure assertions compile.
+check.dependsOn(compileAssertionsJava)

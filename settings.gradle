@@ -1,2 +1,7 @@
 // Project name is read-only in build scripts, and defaults to directory name.
 rootProject.name = "jspecify"
+include 'conformance-tests'
+
+// Lets projects within the build depend on each other by module name.
+// See https://docs.gradle.org/current/userguide/composite_builds.html#included_build_declaring_substitutions
+includeBuild('.')
