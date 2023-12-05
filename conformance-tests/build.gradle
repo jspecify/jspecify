@@ -1,6 +1,3 @@
-import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.jvm.tasks.Jar
-
 plugins {
     id 'java'
     id 'java-library-distribution'
