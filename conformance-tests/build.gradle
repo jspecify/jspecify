@@ -1,8 +1,9 @@
+import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.jvm.tasks.Jar
 
 plugins {
     id 'java'
-    id 'distribution'
+    id 'java-library-distribution'
 }
 
 group 'org.jspecify.conformance'
@@ -46,15 +47,14 @@ java {
 
 distributions {
     conformanceTests {
+        distributionBaseName = 'conformance-tests'
         contents {
-            from(sourceSets.assertions.java) {
-                into '/assertions'
+            into('/assertions') {
+                from sourceSets.assertions.java
             }
-            from (depsJar) {
-                into '/deps'
-            }
-            from (configurations.assertionsRuntimeClasspath) {
-                into '/deps'
+            into('/deps') {
+                from depsJar
+                from configurations.assertionsRuntimeClasspath
             }
         }
     }
