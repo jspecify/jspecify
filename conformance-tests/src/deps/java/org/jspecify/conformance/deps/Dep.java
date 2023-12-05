@@ -16,5 +16,4 @@
 package org.jspecify.conformance.deps;
 
 /** This is here only to prove that assertions can refer to classes in deps. */
-public class Dep {
-}
+public class Dep {}
