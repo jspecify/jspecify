@@ -57,7 +57,7 @@ jobs:
         continue-on-error: true
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: conformanceTest conformanceTestOnSamples
+          arguments: conformanceTests
           build-root-directory: ${{ env.reference_checker_repo }}
       - name: Run Samples Tests
         # only PRs onto samples-google-prototype
