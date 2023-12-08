@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library-distribution'
 }
 
 group 'org.jspecify.conformance'
@@ -23,15 +23,24 @@ sourceSets {
 }
 
 java {
-    // Source JAR artifact for assertions
-    registerFeature("assertions") {
-        usingSourceSet(sourceSets.assertions)
-        withSourcesJar()
-    }
     // JAR artifact for dependencies required by the assertions
     registerFeature("deps") {
         usingSourceSet(sourceSets.deps)
-        withSourcesJar()
+    }
+}
+
+distributions {
+    conformanceTests {
+        distributionBaseName = 'conformance-tests'
+        contents {
+            into('/assertions') {
+                from sourceSets.assertions.java
+            }
+            into('/deps') {
+                from depsJar
+                from configurations.assertionsRuntimeClasspath
+            }
+        }
     }
 }
 
