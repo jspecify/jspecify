@@ -57,6 +57,18 @@ java {
     }
 }
 
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    filePermissions {
+        unix('rw-r--r--')
+    }
+    dirPermissions {
+        unix('rwxr-xr-x')
+    }
+}
+
+
 jar {
     manifest {
         attributes("Bundle-Version": version)
