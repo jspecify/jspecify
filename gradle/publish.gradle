@@ -36,6 +36,34 @@ publishing {
                 }
             }
         }
+        conformanceTests(MavenPublication) {
+            pom {
+                groupId = 'org.jspecify.conformance'
+                artifactId = 'conformance-tests'
+                name = 'JSpecify conformance tests'
+                description = 'Assertions and depdendencies representing a set of conformance tests for JSpecify'
+                url = 'http://jspecify.org/'
+                artifact('conformance-tests/build/distributions/conformance-tests-0.0.0-SNAPSHOT.zip').builtBy(tasks.getByPath(':conformance-tests:conformanceTestsDistZip'))
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    url = 'https://github.com/jspecify/jspecify/'
+                }
+                developers {
+                    developer {
+                        id = 'netdpb'
+                        name = 'David P. Baker'
+                        email = 'dpb@google.com'
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -56,7 +84,7 @@ signing {
     sign publishing.publications.mavenJava
 }
 
-tasks.withType(Sign) {
+tasks.withType(Sign).configureEach {
     onlyIf {
         privateKey?.trim() && pgpPassword?.trim()
     }
