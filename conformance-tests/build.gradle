@@ -1,5 +1,6 @@
 plugins {
-    id 'java-library-distribution'
+    id 'java-library'
+    id 'distribution'
 }
 
 group 'org.jspecify.conformance'
@@ -30,8 +31,7 @@ java {
 }
 
 distributions {
-    conformanceTests {
-        distributionBaseName = 'conformance-tests'
+    main {
         contents {
             into('/assertions') {
                 from sourceSets.assertions.java
