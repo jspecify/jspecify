@@ -51,3 +51,36 @@ dependencies {
 
 // Make sure assertions compile.
 check.dependsOn(compileAssertionsJava)
+
+publishing {
+    publications {
+        conformanceTests(MavenPublication) {
+            pom {
+                groupId = 'org.jspecify.conformance'
+                artifactId = 'conformance-tests'
+                name = 'JSpecify Conformance Test Suite'
+                description = 'Assertions and dependencies representing a suite of conformance tests for JSpecify'
+                url = 'http://jspecify.org/'
+                artifact(tasks.named('distZip', Zip).map { it.archiveFile })
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    url = 'https://github.com/jspecify/jspecify/'
+                }
+                developers {
+                    developer {
+                        id = 'netdpb'
+                        name = 'David P. Baker'
+                        email = 'dpb@google.com'
+                    }
+                }
+            }
+        }
+    }
+}
