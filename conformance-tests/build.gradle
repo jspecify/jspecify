@@ -61,7 +61,7 @@ publishing {
                 name = 'JSpecify Conformance Test Suite'
                 description = 'Assertions and dependencies representing a suite of conformance tests for JSpecify'
                 url = 'http://jspecify.org/'
-                artifact(tasks.named('distZip', Zip).map { it.archiveFile })
+                artifact(distZip)
                 licenses {
                     license {
                         name = 'The Apache License, Version 2.0'
