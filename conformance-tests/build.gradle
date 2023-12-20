@@ -40,6 +40,9 @@ distributions {
                 from depsJar
                 from configurations.assertionsRuntimeClasspath
             }
+            into('/samples') {
+                from '../samples'
+            }
         }
     }
 }
