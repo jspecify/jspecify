@@ -189,14 +189,6 @@ msgstr ""
 msgid "`SonarSource <https://www.sonarsource.com/>`_"
 msgstr ""
 
-#: ../../index.rst:60
-msgid "`SpotBugs <http://spotbugs.rtfd.io/>`_"
-msgstr ""
-
-#: ../../index.rst:60
-msgid "`SpotBugs Team <https://github.com/spotbugs/>`_"
-msgstr ""
-
 #: ../../index.rst:62
 msgid "`Square <https://squareup.com>`_"
 msgstr ""

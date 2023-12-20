@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package conformance;
+package org.jspecify.conformance.tests;
 
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jspecify.conformance.deps.Dep;
 
-class Basic {
-  @NonNull Object cannotConvertNullableToNonNull(@Nullable Object nullable) {
-    // test:cannot-convert:Object? to Object!
-    return nullable;
+/** This is here only to prove that assertions can refer to classes in deps. */
+public class UsesDep {
+  public static Dep dep() {
+    // test:cannot-convert:null? to Dep*
+    return null;
   }
 }

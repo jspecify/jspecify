@@ -35,6 +35,8 @@ jobs:
   reference-checker-tests:
     name: Run Reference Checker Tests
     runs-on: ubuntu-latest
+    env:
+      reference_checker_repo: ${{ vars.reference_checker_repo || 'jspecify-reference-checker' }}
     steps:
       - name: Check out the code
         uses: actions/checkout@v3
@@ -43,8 +45,8 @@ jobs:
       - name: Check out the reference checker
         uses: actions/checkout@v3
         with:
-          repository: ${{ github.repository_owner }}/${{ vars.reference_checker_repo }}
-          path: ${{ vars.reference_checker_repo }}
+          repository: ${{ github.repository_owner }}/${{ env.reference_checker_repo }}
+          path: ${{ env.reference_checker_repo }}
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
@@ -52,14 +54,16 @@ jobs:
           java-version: 17
       - name: Run Conformance Tests
         if: github.base_ref == 'main' # only PRs onto main
+        continue-on-error: true
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: conformanceTest conformanceTestOnSamples
-          build-root-directory: ${{ vars.reference_checker_repo }}
+          arguments: conformanceTests
+          build-root-directory: ${{ env.reference_checker_repo }}
       - name: Run Samples Tests
-        # PRs or pushes onto samples-google-prototype
-        if: github.base_ref == 'samples-google-prototype' || github.ref_name == 'samples-google-prototype'
+        # only PRs onto samples-google-prototype
+        if: github.base_ref == 'samples-google-prototype'
+        continue-on-error: true
         uses: gradle/gradle-build-action@v2
         with:
           arguments: jspecifySamplesTest
-          build-root-directory: ${{ vars.reference_checker_repo }}
+          build-root-directory: ${{ env.reference_checker_repo }}

@@ -33,13 +33,6 @@ publishing {
                         name = 'Kevin Bourrillion'
                         email = 'kevinb@google.com'
                     }
-                    developer {
-                        id = 'KengoTODA'
-                        name = 'Kengo TODA'
-                        email = 'skypencil@gmail.com'
-                        url = 'https://github.com/KengoTODA/'
-                        timezone = '+8'
-                    }
                 }
             }
         }
