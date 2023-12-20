@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.jspecify.conformance'
-version '0.0.0-SNAPSHOT'
+version '0.1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -61,6 +61,7 @@ publishing {
             pom {
                 groupId = 'org.jspecify.conformance'
                 artifactId = 'conformance-tests'
+                version = project.version
                 name = 'JSpecify Conformance Test Suite'
                 description = 'Assertions and dependencies representing a suite of conformance tests for JSpecify'
                 url = 'http://jspecify.org/'
