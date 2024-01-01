@@ -41,9 +41,11 @@ publishing {
 
 nexusPublishing {
     repositories {
+        // TODO: the following line causes the `The Project.getConvention() method has been deprecated.` warning.
         sonatype {
-            // //only for users registered in Sonatype after 24 Feb 2021
+            // only for users registered in Sonatype after 24 Feb 2021
             nexusUrl = uri("https://s01.oss.sonatype.org/service/local/")
+            snapshotRepositoryUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         }
     }
 }
