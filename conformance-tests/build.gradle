@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'org.jspecify.conformance'
-version '0.1.0-SNAPSHOT'
+version '0.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -87,4 +87,19 @@ publishing {
             }
         }
     }
+}
+
+// For local builds to be able to depend on the conformance tests.
+configurations {
+    conformanceTestsZip {
+        canBeConsumed = true
+        canBeResolved = false
+        attributes {
+            attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category, 'conformance-tests'))
+        }
+    }
+}
+
+artifacts {
+    conformanceTestsZip distZip
 }
