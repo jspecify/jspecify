@@ -54,8 +54,6 @@ dependencies {
 
 // Make sure assertions compile.
 check.dependsOn(compileAssertionsJava)
-<<<<<<< HEAD
-=======
 
 publishing {
     publications {
@@ -105,4 +103,3 @@ configurations {
 artifacts {
     conformanceTestsZip distZip
 }
->>>>>>> 8f1c5091a1cc9cd6f2cc26a0f884394d430ae06f
