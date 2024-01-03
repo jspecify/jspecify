@@ -54,3 +54,55 @@ dependencies {
 
 // Make sure assertions compile.
 check.dependsOn(compileAssertionsJava)
+<<<<<<< HEAD
+=======
+
+publishing {
+    publications {
+        conformanceTests(MavenPublication) {
+            pom {
+                groupId = 'org.jspecify.conformance'
+                artifactId = 'conformance-tests'
+                version = project.version
+                name = 'JSpecify Conformance Test Suite'
+                description = 'Assertions and dependencies representing a suite of conformance tests for JSpecify'
+                url = 'http://jspecify.org/'
+                artifact distZip
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    url = 'https://github.com/jspecify/jspecify/'
+                }
+                developers {
+                    developer {
+                        id = 'netdpb'
+                        name = 'David P. Baker'
+                        email = 'dpb@google.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+// For local builds to be able to depend on the conformance tests.
+configurations {
+    conformanceTestsZip {
+        canBeConsumed = true
+        canBeResolved = false
+        attributes {
+            attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category, 'conformance-tests'))
+        }
+    }
+}
+
+artifacts {
+    conformanceTestsZip distZip
+}
+>>>>>>> 8f1c5091a1cc9cd6f2cc26a0f884394d430ae06f
