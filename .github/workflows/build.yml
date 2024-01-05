@@ -32,6 +32,27 @@ jobs:
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
 
+  publish-snapshot:
+    name: Publish Conformance Tests Snapshot
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.repository == 'jspecify/jspecify' && github.ref_name == 'main' && event.name == 'push'
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v4
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v2
+      - name: Publish conformance tests snapshot
+        run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository
+        env:
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.sonatype_username }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.sonatype_password }}
+
   reference-checker-tests:
     name: Run Reference Checker Tests
     runs-on: ubuntu-latest
