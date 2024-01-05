@@ -49,6 +49,9 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - name: Publish conformance tests snapshot
         run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository
+        env:
+          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.sonatype_username }}
+          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.sonatype_password }}
 
   reference-checker-tests:
     name: Run Reference Checker Tests
