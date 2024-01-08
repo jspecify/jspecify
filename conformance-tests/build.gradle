@@ -1,3 +1,5 @@
+import org.gradle.api.JavaVersion
+
 plugins {
     id 'java-library'
     id 'distribution'
@@ -24,6 +26,8 @@ sourceSets {
 }
 
 java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+
     // JAR artifact for dependencies required by the assertions
     registerFeature("deps") {
         usingSourceSet(sourceSets.deps)
