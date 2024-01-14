@@ -15,7 +15,9 @@
  */
 package org.jspecify.conformance.tests;
 
+import java.util.List;
 import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 class Basic {
@@ -39,5 +41,11 @@ class Basic {
     nullableObject = nonNullString;
     // test:sink-type:String!:testSinkType#nonNullString
     testSinkType("aString");
+  }
+
+  @NullMarked
+  Object testWildcard(List<? extends @Nullable String> nullableStrings) {
+    // test:expression-type:List!<capture of ? extends String?>:nullableStrings
+    return nullableStrings;
   }
 }

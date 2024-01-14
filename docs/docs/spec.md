@@ -975,6 +975,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#181]: https://github.com/jspecify/jspecify/issues/181
 [#19]: https://github.com/jspecify/jspecify/issues/19
 [#1]: https://github.com/jspecify/jspecify/issues/1
+[#260]: https://github.com/jspecify/jspecify/issues/260
 [#28]: https://github.com/jspecify/jspecify/issues/28
 [#31]: https://github.com/jspecify/jspecify/issues/31
 [#33]: https://github.com/jspecify/jspecify/issues/33
