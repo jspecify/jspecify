@@ -1,5 +1,5 @@
 Bundle-SymbolicName: org.jspecify.jspecify
-Bundle-Name: jspecify
+Bundle-Name: JSpecify annotations
 Bundle-Vendor: jspecify.dev
 Bundle-Description: An artifact of well-specified annotations to power static analysis checks and JVM language interop.
 Bundle-DocURL: https://jspecify.dev/docs/start-here
