@@ -32,49 +32,49 @@ public interface AnnotatedTypeParameters {
 
   // test:name:Nullable on simple type parameter on method
   // test:irrelevant-annotation:Nullable
-  <@Nullable N> void nParameter();
+  <@Nullable T> void nParameter();
 
   // test:name:NonNull on simple type parameter on method
   // test:irrelevant-annotation:NonNull
-  <@NonNull NN> void rParameter();
+  <@NonNull T> void rParameter();
 
   // test:name:Nullable on bounded type parameter on method
   // test:irrelevant-annotation:Nullable
-  <@Nullable N2 extends Object> void nParameterWithBound();
+  <@Nullable T extends Object> void nParameterWithBound();
 
   // test:name:NonNull on bounded type parameter on method
   // test:irrelevant-annotation:NonNull
-  <@NonNull NN2 extends Object> void rParameterWithBound();
+  <@NonNull T extends Object> void rParameterWithBound();
 
   // test:name:NonNull on annotated-bounded type parameter on method
   // test:irrelevant-annotation:NonNull
-  <@NonNull NN3 extends @Nullable Object> void rParameterWithNBound();
+  <@NonNull T extends @Nullable Object> void rParameterWithNBound();
 
   // test:name:Nullable on annotated-bounded type parameter on method
   // test:irrelevant-annotation:Nullable
-  <@Nullable N4 extends @NonNull Object> void nParameterWithRBound();
+  <@Nullable T extends @NonNull Object> void nParameterWithRBound();
 
   // test:name:Nullable on simple type parameter on class
   // test:irrelevant-annotation:Nullable
-  interface NParameter<@Nullable N> {}
+  interface NParameter<@Nullable T> {}
 
   // test:name:NonNull on simple type parameter on class
   // test:irrelevant-annotation:NonNull
-  interface RParameter<@NonNull NN> {}
+  interface RParameter<@NonNull T> {}
 
   // test:name:Nullable on bounded type parameter on class
   // test:irrelevant-annotation:Nullable
-  interface NParameterWithBound<@Nullable N2 extends Object> {}
+  interface NParameterWithBound<@Nullable T extends Object> {}
 
   // test:name:NonNull on bounded type parameter on class
   // test:irrelevant-annotation:NonNull
-  interface RParameterWithBound<@NonNull NN2 extends Object> {}
+  interface RParameterWithBound<@NonNull T extends Object> {}
 
   // test:name:NonNull on annotated-bounded type parameter on class
   // test:irrelevant-annotation:NonNull
-  interface RParameterWithNBound<@NonNull NN3 extends @Nullable Object> {}
+  interface RParameterWithNBound<@NonNull T extends @Nullable Object> {}
 
   // test:name:Nullable on annotated-bounded type parameter on class
   // test:irrelevant-annotation:Nullable
-  interface NParameterWithRBound<@Nullable N4 extends @NonNull Object> {}
+  interface NParameterWithRBound<@Nullable T extends @NonNull Object> {}
 }
