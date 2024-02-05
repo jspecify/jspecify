@@ -51,7 +51,7 @@ public class JSpecifyNullnessTaglet implements Taglet {
 
   public String toString(List<? extends DocTree> tags, Element element) {
     if (tags.isEmpty()) {
-      return "";
+      return formatTaglet(formatTagText(new String[0]));
     }
     StringJoiner sb = new StringJoiner(", ");
     for (DocTree t : tags) {
