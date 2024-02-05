@@ -1,0 +1,22 @@
+import org.gradle.api.JavaVersion
+
+plugins {
+    id 'java'
+}
+
+group 'org.jspecify.taglet'
+version '0.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    main {
+        java {}
+    }
+}
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_9
+}
