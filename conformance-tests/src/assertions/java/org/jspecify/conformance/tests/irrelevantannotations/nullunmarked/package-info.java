@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// Note that this is on the nullunmarked package so that individual classes can use @NullUnmarked.
 @NullMarked
 package org.jspecify.conformance.tests.irrelevantannotations.nullunmarked;
 
