@@ -32,25 +32,25 @@ public interface AnnotatedWildcards {
 
   // test:name:Nullable on unbounded wildcard
   // test:irrelevant-annotation:Nullable
-  NHolder<@Nullable ?> nParameter();
+  NHolder<@Nullable ?> nWildcard();
 
   // test:name:NonNull on unbounded wildcard
   // test:irrelevant-annotation:NonNull
-  NHolder<@NonNull ?> rParameter();
+  NHolder<@NonNull ?> rWildcard();
 
   // test:name:Nullable on bounded wildcard
   // test:irrelevant-annotation:Nullable
-  NHolder<@Nullable ? extends Object> nParameterWithBound();
+  NHolder<@Nullable ? extends Object> nWildcardWithBound();
 
   // test:name:NonNull on bounded wildcard
   // test:irrelevant-annotation:NonNull
-  NHolder<@NonNull ? extends Object> rParameterWithBound();
+  NHolder<@NonNull ? extends Object> rWildcardWithBound();
 
   // test:name:NonNull on annotated-bounded wildcard
   // test:irrelevant-annotation:NonNull
-  NHolder<@NonNull ? extends @Nullable Object> rParameterWithNBound();
+  NHolder<@NonNull ? extends @Nullable Object> rWildcardWithNBound();
 
   // test:name:Nullable on annotated-bounded wildcard
   // test:irrelevant-annotation:Nullable
-  NHolder<@Nullable ? extends @NonNull Object> nParameterWithRBound();
+  NHolder<@Nullable ? extends @NonNull Object> nWildcardWithRBound();
 }
