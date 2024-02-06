@@ -22,7 +22,7 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     steps:
       - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: gradle/wrapper-validation-action@v2
       - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
