@@ -21,7 +21,7 @@ jobs:
         experimental: [false]
     continue-on-error: ${{ matrix.experimental }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: gradle/wrapper-validation-action@v1
       - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v3
@@ -60,11 +60,11 @@ jobs:
       reference_checker_repo: ${{ vars.reference_checker_repo || 'jspecify-reference-checker' }}
     steps:
       - name: Check out the code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: jspecify
       - name: Check out the reference checker
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.repository_owner }}/${{ env.reference_checker_repo }}
           path: ${{ env.reference_checker_repo }}
