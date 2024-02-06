@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>JSpecify Blog</title>
         <link>http://jspecify.org/blog</link>
@@ -11,9 +11,10 @@
         <item>
             <title><![CDATA[Welcome to the JSpecify Blog]]></title>
             <link>http://jspecify.org/blog/welcome</link>
-            <guid>welcome</guid>
+            <guid>http://jspecify.org/blog/welcome</guid>
             <pubDate>Sun, 07 Aug 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[Welcome to JSpecify's blog and thank you for your interest in static analysis for Java! There's not much content in the blog at the moment but do stay tuned. We're planning to publish a series of posts about the project and its future very soon. In the meantime, make sure to check out the User Guide and the Specification.]]></description>
+            <content:encoded><![CDATA[<p>Welcome to JSpecify's blog and thank you for your interest in static analysis for Java! There's not much content in the blog at the moment but do stay tuned. We're planning to publish a series of posts about the project and its future very soon. In the meantime, make sure to check out the <a href="/docs/user-guide">User Guide</a> and the <a href="/blog/docs/spec">Specification</a>.</p>]]></content:encoded>
         </item>
     </channel>
 </rss>

@@ -9,10 +9,11 @@
     <icon>http://jspecify.org/img/jspecify-favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome to the JSpecify Blog]]></title>
-        <id>welcome</id>
+        <id>http://jspecify.org/blog/welcome</id>
         <link href="http://jspecify.org/blog/welcome"/>
         <updated>2022-08-07T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Welcome to JSpecify's blog and thank you for your interest in static analysis for Java! There's not much content in the blog at the moment but do stay tuned. We're planning to publish a series of posts about the project and its future very soon. In the meantime, make sure to check out the User Guide and the Specification.]]></summary>
+        <content type="html"><![CDATA[<p>Welcome to JSpecify's blog and thank you for your interest in static analysis for Java! There's not much content in the blog at the moment but do stay tuned. We're planning to publish a series of posts about the project and its future very soon. In the meantime, make sure to check out the <a href="/docs/user-guide">User Guide</a> and the <a href="/blog/docs/spec">Specification</a>.</p>]]></content>
         <author>
             <name>Artem Pianykh</name>
             <uri>https://github.com/artempyanykh</uri>
