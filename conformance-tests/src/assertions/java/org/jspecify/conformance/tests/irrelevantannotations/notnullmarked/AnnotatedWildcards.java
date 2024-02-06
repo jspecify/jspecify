@@ -27,7 +27,6 @@ import org.jspecify.conformance.deps.nullmarked.NHolder;
  *     href="https://jspecify.dev/docs/spec#recognized-locations-for-type-use-annotations">Recognized
  *     locations for type-use annotations</a> in the JSpecify specification.
  */
-// Covers test cases from samples/NotNullMarkedAnnotatedWildcard.java
 public interface AnnotatedWildcards {
 
   // test:name:Nullable on unbounded wildcard

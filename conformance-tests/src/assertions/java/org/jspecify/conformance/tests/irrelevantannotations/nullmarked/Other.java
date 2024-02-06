@@ -18,7 +18,6 @@ package org.jspecify.conformance.tests.irrelevantannotations.nullmarked;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
-// Covers test cases from samples/UnrecognizedLocationsMisc.java
 public class Other {
 
   /**

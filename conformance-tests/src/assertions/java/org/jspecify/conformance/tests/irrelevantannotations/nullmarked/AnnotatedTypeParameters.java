@@ -26,7 +26,6 @@ import org.jspecify.annotations.Nullable;
  *     href="https://jspecify.dev/docs/spec#recognized-locations-for-type-use-annotations">Recognized
  *     locations for type-use annotations</a> in the JSpecify specification.
  */
-// Covers test cases from samples/AnnotatedTypeParameter.java
 public interface AnnotatedTypeParameters {
 
   // test:name:Nullable on simple type parameter on method
