@@ -20,18 +20,18 @@ class NotNullMarkedAnnotatedWildcardUnspec {
   interface Lib<T extends @Nullable Object> {}
 
   void foo(
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@NullnessUnspecified ?> x1,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@NullnessUnspecified ? extends Object> x2,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@NullnessUnspecified ? super Object> x3,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
 }

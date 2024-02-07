@@ -19,7 +19,7 @@ import org.jspecify.annotations.Nullable;
 @NullMarked
 class ContainmentSuperVsExtendsSameType {
   void x() {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
     new Check<Lib<? extends Object>, Lib<? super Object>>();
   }
 

@@ -19,18 +19,18 @@ class NotNullMarkedAnnotatedWildcard {
   interface Lib<T extends @Nullable Object> {}
 
   void foo(
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@Nullable ?> x1,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@Nullable ? extends Object> x2,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@Nullable ? super Object> x3,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@Nullable ? extends @Nullable Object> x4,
 
-      // jspecify_unrecognized_location
+      // :: error: jspecify_unrecognized_location
       Lib<@Nullable ? super @Nullable Object> x5) {}
 }
