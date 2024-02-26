@@ -20,7 +20,7 @@ import org.jspecify.annotations.Nullable;
 class ContainmentSuperVsExtendsSameType {
   void x() {
     // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
-    new Check<Lib<? extends Object>, Lib<? super Object>>();
+    new Check<Lib<? extends Number>, Lib<? super Number>>();
   }
 
   interface Lib<T extends @Nullable Object> {}

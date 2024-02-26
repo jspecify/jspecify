@@ -25,14 +25,14 @@ class AnnotatedWildcard {
       Lib<@Nullable ?> x1,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@Nullable ? extends Object> x2,
+      Lib<@Nullable ? extends Number> x2,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@Nullable ? super Object> x3,
+      Lib<@Nullable ? super Number> x3,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@Nullable ? extends @Nullable Object> x4,
+      Lib<@Nullable ? extends @Nullable Number> x4,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@Nullable ? super @Nullable Object> x5) {}
+      Lib<@Nullable ? super @Nullable Number> x5) {}
 }

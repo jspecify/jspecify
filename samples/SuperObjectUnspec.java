@@ -20,6 +20,8 @@ import org.jspecify.annotations.NullnessUnspecified;
 @NullMarked
 class SuperObjectUnspec {
   void foo(
+      // See comment in SuperObject.
+      // :: error: jspecify_conflicting_annotations
       Lib<? super @NullnessUnspecified Object> lib,
       Object t,
       @NullnessUnspecified Object tUnspec,

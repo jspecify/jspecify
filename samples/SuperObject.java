@@ -20,6 +20,11 @@ import org.jspecify.annotations.NullnessUnspecified;
 @NullMarked
 class SuperObject {
   void foo(
+      // Wildcards with `? super Object` must have the same upper and lower bound. Here, the upper
+      // bound is @Nullable, whereas the lower bound is @NonNull.
+      // As javac doesn't allow us to keep track of the separate annotations, there is an error
+      // here.
+      // :: error: jspecify_conflicting_annotations
       Lib<? super Object> lib,
       Object t,
       @NullnessUnspecified Object tUnspec,
