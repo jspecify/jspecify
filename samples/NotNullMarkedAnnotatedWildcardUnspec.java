@@ -24,14 +24,14 @@ class NotNullMarkedAnnotatedWildcardUnspec {
       Lib<@NullnessUnspecified ?> x1,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends Object> x2,
+      Lib<@NullnessUnspecified ? extends Number> x2,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super Object> x3,
+      Lib<@NullnessUnspecified ? super Number> x3,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? extends @Nullable Object> x4,
+      Lib<@NullnessUnspecified ? extends @Nullable Number> x4,
 
       // :: error: jspecify_unrecognized_location
-      Lib<@NullnessUnspecified ? super @Nullable Object> x5) {}
+      Lib<@NullnessUnspecified ? super @Nullable Number> x5) {}
 }
