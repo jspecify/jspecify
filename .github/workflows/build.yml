@@ -46,7 +46,7 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Set up Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
       - name: Publish conformance tests snapshot
         run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository
         env:
@@ -76,7 +76,7 @@ jobs:
       - name: Run Conformance Tests
         if: github.base_ref == 'main' # only PRs onto main
         continue-on-error: true
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
         with:
           arguments: conformanceTests
           build-root-directory: ${{ env.reference_checker_repo }}
@@ -84,7 +84,7 @@ jobs:
         # only PRs onto samples-google-prototype
         if: github.base_ref == 'samples-google-prototype'
         continue-on-error: true
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/actions/setup-gradle@v3
         with:
           arguments: jspecifySamplesTest
           build-root-directory: ${{ env.reference_checker_repo }}
