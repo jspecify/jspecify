@@ -17,8 +17,17 @@ apply from: "gradle/integration-test.gradle"
 apply from: "gradle/format.gradle"
 apply from: "gradle/publish.gradle"
 
+sourceSets {
+    test {
+        java {
+            srcDirs = ['samples']
+        }
+    }
+}
+
 dependencies {
     errorprone "com.google.errorprone:error_prone_core:${errorproneVersion}"
+    testImplementation 'com.google.guava:guava:31.1-jre'
 }
 
 java {
@@ -32,8 +41,14 @@ java {
     // but compile against newer JDK libraries so that we can use @Target({..., MODULE})
 
     tasks.named('sourcesJar') {
-        exclude('**.class')
+        exclude('**.class', 'samples/**')
     }
+}
+
+compileTestJava {
+    options.errorprone.errorproneArgs = [
+        '-XepExcludedPaths:.*/samples/.*'
+    ]
 }
 
 javadoc {
