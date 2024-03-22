@@ -20,7 +20,8 @@ import org.jspecify.annotations.Nullable;
 class ContainmentSuperVsExtendsSameType {
   void x() {
     // `conflicting_annotations` b/c upper and lower bound of `? super Object` differ.
-    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing :: error: jspecify_conflicting_annotations
+    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_conflicting_annotations
     new Check<Lib<? extends Object>, Lib<? super Object>>();
   }
 
