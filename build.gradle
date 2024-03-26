@@ -41,7 +41,7 @@ java {
     // but compile against newer JDK libraries so that we can use @Target({..., MODULE})
 
     tasks.named('sourcesJar') {
-        exclude('**.class', 'samples/**')
+        exclude('**.class')
     }
 }
 
