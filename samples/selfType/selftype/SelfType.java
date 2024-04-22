@@ -32,7 +32,7 @@ class C<E extends C<E>> extends SelfType<E> {}
 // :: error: jspecify_nullness_not_enough_information
 class AK extends SelfType<AK> {}
 
-// test:cannot-convert:AK? to SelfType!<AK!>
+// :: error: test:cannot-convert:AK? to SelfType!<AK!>
 class AKN extends SelfType<@Nullable AK> {}
 
 class BK extends B {}
@@ -41,7 +41,7 @@ class BK extends B {}
 class CK extends C<CK> {}
 
 @NullMarked
-// test:cannot-convert:CK? to C!<CK!>
+// :: error: test:cannot-convert:CK? to C!<CK!>
 abstract class Super extends C<@Nullable CK> {
   abstract AK ak();
 
@@ -57,21 +57,21 @@ abstract class Super extends C<@Nullable CK> {
 abstract class CKN extends Super {
   public void main() {
     ak().foo(ak());
-    // test:cannot-convert:null? to AK!
+    // :: error: test:cannot-convert:null? to AK!
     ak().foo(null);
 
-    // test:cannot-convert:null? to AK!
+    // :: error: test:cannot-convert:null? to AK!
     akn().foo(null);
 
     bk().foo(bk());
-    // test:cannot-convert:null? to B!
+    // :: error: test:cannot-convert:null? to B!
     bk().foo(null);
 
     ck().foo(ck());
-    // test:cannot-convert:null? to CK!
+    // :: error: test:cannot-convert:null? to CK!
     ck().foo(null);
 
-    // test:cannot-convert:null? to CK!
+    // :: error: test:cannot-convert:null? to CK!
     ckn().foo(null);
   }
 }
