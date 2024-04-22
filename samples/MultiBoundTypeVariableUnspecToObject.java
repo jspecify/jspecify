@@ -61,7 +61,7 @@ class MultiBoundTypeVariableUnspecToObject {
   }
 
   <T extends @Nullable Object & @Nullable Lib> Object x8(@NullnessUnspecified T x) {
-    // :: error: jspecify_nullness_not_enough_information
+    // :: error: jspecify_nullness_mismatch
     return x;
   }
 
