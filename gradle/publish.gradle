@@ -47,7 +47,7 @@ publishing {
                     developer {
                         id = 'kevinb9n'
                         name = 'Kevin Bourrillion'
-                        email = 'kevinb@google.com'
+                        email = 'kevinb9n@gmail.com'
                     }
                 }
             }
