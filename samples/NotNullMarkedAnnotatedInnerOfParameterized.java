@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import org.jspecify.nullness.Nullable;
+import org.jspecify.annotations.Nullable;
 
 abstract class NotNullMarkedAnnotatedInnerOfParameterized<T> {
   interface Lib<T extends @Nullable Object> {}

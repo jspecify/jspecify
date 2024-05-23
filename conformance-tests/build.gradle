@@ -1,0 +1,125 @@
+/**
+ * Copyright 2023 The JSpecify Authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import org.gradle.api.JavaVersion
+
+plugins {
+    id 'java-library'
+    id 'distribution'
+}
+
+group 'org.jspecify.conformance'
+version '0.0.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    // Dependencies required by the assertions
+    deps {
+        java {}
+    }
+    // Java files with assertions
+    assertions {
+        java {
+            compileClasspath += sourceSets.deps.output
+        }
+    }
+}
+
+java {
+    sourceCompatibility JavaVersion.VERSION_1_8
+
+    // JAR artifact for dependencies required by the assertions
+    registerFeature("deps") {
+        usingSourceSet(sourceSets.deps)
+    }
+}
+
+distributions {
+    main {
+        contents {
+            into('/assertions') {
+                from sourceSets.assertions.java
+            }
+            into('/deps') {
+                from depsJar
+                from configurations.assertionsRuntimeClasspath
+            }
+            into('/samples') {
+                from '../samples'
+            }
+        }
+    }
+}
+
+dependencies {
+    assertionsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+    depsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+}
+
+// Make sure assertions compile.
+check.dependsOn(compileAssertionsJava)
+
+publishing {
+    publications {
+        conformanceTests(MavenPublication) {
+            pom {
+                groupId = 'org.jspecify.conformance'
+                artifactId = 'conformance-tests'
+                version = project.version
+                name = 'JSpecify Conformance Test Suite'
+                description = 'Assertions and dependencies representing a suite of conformance tests for JSpecify'
+                url = 'http://jspecify.org/'
+                artifact distZip
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
+                    url = 'https://github.com/jspecify/jspecify/'
+                }
+                developers {
+                    developer {
+                        id = 'netdpb'
+                        name = 'David P. Baker'
+                        email = 'dpb@google.com'
+                    }
+                }
+            }
+        }
+    }
+}
+
+// For local builds to be able to depend on the conformance tests.
+configurations {
+    conformanceTestsZip {
+        canBeConsumed = true
+        canBeResolved = false
+        attributes {
+            attribute(Category.CATEGORY_ATTRIBUTE, objects.named(Category, 'conformance-tests'))
+        }
+    }
+}
+
+artifacts {
+    conformanceTestsZip distZip
+}

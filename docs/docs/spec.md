@@ -1,37 +1,37 @@
 ---
-title: Specification
+title: Nullness Specification (draft)
 ---
 
-# Specification (draft)
+# Nullness Specification (draft)
 
-This document is our draft specification for the semantics of a set of nullness
-annotations.
+This document is a draft specification for the precise semantics of our set of
+annotations for nullness analysis.
+
+:::note Advice to readers (non-normative)
+
+The primary audience for this document is the authors of analysis tools. Some
+very advanced users might find it interesting. But it would make a very poor
+introduction for anyone else; instead see our **[Start Here](/docs/start-here) page**.
+:::
+
+:::note Status of this specification
+
+This document is current as of JSpecify **0.2.0**, but does not reflect several
+design changes between then and **0.3.0**.
+:::
 
 --------------------------------------------------------------------------------
 
-:::note Temporary advice to readers (non-normative)
-
-For someone new to our nullness annotations, this document does not make a good
-introduction. This document is targeted more at tool authors or advanced users.
-New users will prefer to start with our [User Guide]. We are working on further
-user documentation, including Javadoc.
-:::
-
 ### The word "nullable"
 
-In this doc, we aim not to refer to whether a type "is nullable." Instead, we draw
-some distinctions, creating roughly 3 kinds of "Is it nullable?" questions we
-can ask for any given type usage. Each kind is derived (at least in part) from
-the previous:
+In this doc, we aim not to refer to whether a type "is nullable." Instead, we
+draw some distinctions, creating at least four kinds of "Is it nullable?"
+questions we can ask for any given type usage:
 
 1.  Does `@Nullable` appear directly on that type usage?
 2.  What is the [nullness operator] of that type usage?
-3.  For that type usage...
-    -   Is it "reasonable" to assume that is not `null`?
-    -   Is it "reasonable" to put a `null` into it?
-    -   neither (what we sometimes call "parametric nullness")
-    -   both (as can happen with [nullness operator] `UNSPECIFIED` under lenient
-        tools)
+3.  Is it reasonable to assume that `null` won't come "out" of it?
+4.  Is it reasonable to assume that `null` can't be put "in" to it?
 
 ### The scope of this spec
 
@@ -40,8 +40,8 @@ spec. For example, it does not state when tools must check that the [subtyping]
 relation holds.
 
 We anticipate that tools will typically apply parts of this spec in the same
-cases that they apply the corresponding parts of the Java Language
-Specification. For example, if code contains the parameterized type
+cases that they (or `javac`) already apply the corresponding parts of the Java
+Language Specification. For example, if code contains the parameterized type
 `List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable Foo`
 is a subtype of the bound of the type parameter of `List`.
 
@@ -49,8 +49,8 @@ However, this is up to tool authors, who may have reasons to take a different
 approach. For example:
 
 -   Java [places some restrictions that aren't necessary for soundness][#49],
-    and it
-    [is lenient in at least one way that can lead to runtime errors][#65].
+    and it [is lenient in at least one way that can lead to runtime
+    errors][#65].
 
 -   JSpecify annotations can be used even by tools that are not "nullness
     checkers" at all. For example, a tool that lists the members of an API could
@@ -85,25 +85,26 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
-## References to concepts defined by this spec {#concept-references}
+## Relationship between this spec and JLS {#concept-references}
 
 When a rule in this spec refers to any concept that is defined in this spec (for
 example, [substitution] or [containment]), apply this spec's definition (as
-opposed to other definitions, such as the ones in the JLS).
+opposed to other definitions, such as the ones in the Java Language
+Specification (JLS)).
 
 Additionally, when a rule in this spec refers to a JLS rule that in turn refers
 to a concept that is defined in this spec, likewise apply this spec's
 definition.
 
 In particular, when a JLS rule refers to types, apply this spec's definition of
-[augmented types] \(as oppposed to [base types]).
+[augmented types] \(as opposed to [base types]).
 
 ## Base type
 
 A *base type* is a type as defined in [JLS 4].
 
-> JLS 4 does not consider type-use annotations to be part of types, so neither
-> does our concept of "base type."
+> JLS 4 does not consider a type-use annotation to be a part of the type it
+> annotates, so neither does our concept of "base type."
 
 ## Type components
 
@@ -150,12 +151,12 @@ A nullness operator is one of 4 values:
 >     a type usage *in code that is outside a [null-marked scope]*. Roughly, it
 >     is the operator assigned to "completely unannotated code."
 >     -   The type usage `String UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
->         etc., but the developer did not specify whether to include `null`.
+>         etc., but whether `null` should be included is not specified.
 >     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`.
->         But the developer did not specify whether to add `null` if it wasn't
->         already included.
+>         But whether `null` should be added to the set (if it isn't already)
+>         is not specified.
 > -   `MINUS_NULL`: This operator not only does not *add* `null` but also
->     actively *removes* it from a type-variable usage that would otherwise
+>     actively *removes* it from a type-variable usage that might otherwise
 >     include it.
 >     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
 >         etc., without including `null`. (This is equivalent to `String
@@ -191,15 +192,17 @@ refer to base types.
 
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
-type `T`, without reference to the nullness operator of any other type
-components of `T`.
+type `T`, without reference to the nullness operator of any other type that is
+a component of `T` or has `T` as a component.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
 
 ## Details common to all annotations
 
--   The package name is `org.jspecify.nullness`. \[[#1]\]
+For all named annotations referred to by this spec:
+
+-   The package name is `org.jspecify.nullness`. \[[#260]\]
 -   The Java module name is `org.jspecify`. \[[#181]\]
 -   The Maven artifact is `org.jspecify:jspecify`. \[[#181]\]
 
@@ -256,7 +259,7 @@ following cases: \[[#17]\]
 > We refer to these cases (and some other cases below) as "intrinsically
 > non-nullable."
 
--   a type usage of a primitive type
+-   a type usage of a value type (currently, the 8 predefined primitive types)
 
 -   the outer type that qualifies an inner type
 
@@ -281,8 +284,8 @@ Additionally, any location above is unrecognized if it makes up *any
 
 -   a local variable type
 -   an exception parameter
--   the type in a cast expression
--   an array or object creation expression
+-   the type in a cast or `instanceof` expression
+-   an array or object creation expression (including via a member reference)
 -   an explicit type argument supplied to a generic method or constructor
     (including via a member reference) or to an instance creation expression for
     a generic class
@@ -334,7 +337,7 @@ locations listed below:
 
 To determine whether a type usage appears in a null-marked scope:
 
-Look for an `@org.jspecify.nullness.NullMarked` annotation on any of the scopes
+Look for a `@NullMarked` annotation on any of the scopes
 enclosing the type usage.
 
 Class members are enclosed by classes, which may be enclosed by other class
@@ -347,7 +350,7 @@ enclosed by modules.
 > [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 
 If one of those scopes is directly annotated with
-`@org.jspecify.nullness.NullMarked`, then the type usage is in a null-marked
+`@NullMarked`, then the type usage is in a null-marked
 scope. Otherwise, it is not.
 
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
@@ -363,7 +366,7 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is annotated with `@org.jspecify.nullness.Nullable`, its
+-   If the type usage is annotated with `@Nullable`, its
     nullness operator is `UNION_NULL`.
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
@@ -972,6 +975,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#181]: https://github.com/jspecify/jspecify/issues/181
 [#19]: https://github.com/jspecify/jspecify/issues/19
 [#1]: https://github.com/jspecify/jspecify/issues/1
+[#260]: https://github.com/jspecify/jspecify/issues/260
 [#28]: https://github.com/jspecify/jspecify/issues/28
 [#31]: https://github.com/jspecify/jspecify/issues/31
 [#33]: https://github.com/jspecify/jspecify/issues/33
@@ -987,7 +991,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
-[`FluentIterable<E>`]: https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/FluentIterable.html
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10
@@ -1001,6 +1004,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.1
 [JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
+[`FluentIterable<E>`]: https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/FluentIterable.html
 [all worlds]: #multiple-worlds
 [all-worlds]: #multiple-worlds
 [applying operator]: #applying-operator
@@ -1014,6 +1018,9 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
+[javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
+[null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
+[null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
 [null-marked scope]: #null-marked-scope
 [nullness operator]: #nullness-operator
 [nullness subtype]: #nullness-subtyping
@@ -1033,8 +1040,5 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [substitution]: #substitution
 [subtype]: #subtyping
 [subtyping]: #subtyping
-[null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
-[null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
 [type component]: #type-components
 [type components]: #type-components
-[user guide]: user-guide

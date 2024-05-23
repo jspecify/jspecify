@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jspecify.annotations.Nullable;
 
-import org.jspecify.nullness.Nullable;
-
+// Covered by
+// conformance-tests/src/assertions/java/org/jspecify/conformance/tests/irrelevantannotations/notnullmarked/AnnotatedWildcards.java
 class NotNullMarkedAnnotatedWildcard {
   interface Lib<T extends @Nullable Object> {}
 

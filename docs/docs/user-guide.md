@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
-# User guide
+# Nullness User Guide (draft)
 
 In Java code, whether an expression may evaluate to null is often documented
 only in natural language, if at all. The goal of JSpecify is to permit
@@ -124,8 +124,10 @@ class Example {
 The `@NullMarked` annotation indicates that references can't be null in its
 scope, unless their types are explicitly marked `@Nullable`. If applied to a
 module then its scope is all the code in the module. If applied to a package
-then its scope is all the code in the package. If applied to a class or
-interface then its scope is all the code in that class or interface.
+then its scope is all the code in the package. (Note that packages are _not_
+hierarchical; applying `@NullMarked` to package `com.foo` does not make package
+`com.foo.bar` `@NullMarked`.)  If applied to a class or interface then its scope
+is all the code in that class or interface.
 
 Outside `@NullMarked`, `@Nullable String` still means a reference that can be
 null, but JSpecify doesn't have anything to say about whether plain `String` can
