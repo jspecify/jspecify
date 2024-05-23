@@ -21,10 +21,10 @@ jobs:
         experimental: [false]
     continue-on-error: ${{ matrix.experimental }}
     steps:
-      - uses: actions/checkout@v3
-      - uses: gradle/wrapper-validation-action@v1
+      - uses: actions/checkout@v4
+      - uses: gradle/wrapper-validation-action@v3
       - name: Set up JDK ${{ matrix.java_version }}
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: ${{ matrix.java_version }}
@@ -41,12 +41,12 @@ jobs:
       - name: Check out the code
         uses: actions/checkout@v4
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
       - name: Set up Gradle
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
       - name: Publish conformance tests snapshot
         run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository
         env:
@@ -60,23 +60,23 @@ jobs:
       reference_checker_repo: ${{ vars.reference_checker_repo || 'jspecify-reference-checker' }}
     steps:
       - name: Check out the code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           path: jspecify
       - name: Check out the reference checker
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           repository: ${{ github.repository_owner }}/${{ env.reference_checker_repo }}
           path: ${{ env.reference_checker_repo }}
       - name: Set up Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
       - name: Run Conformance Tests
         if: github.base_ref == 'main' # only PRs onto main
         continue-on-error: true
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: conformanceTests
           build-root-directory: ${{ env.reference_checker_repo }}
@@ -84,7 +84,7 @@ jobs:
         # only PRs onto samples-google-prototype
         if: github.base_ref == 'samples-google-prototype'
         continue-on-error: true
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           arguments: jspecifySamplesTest
           build-root-directory: ${{ env.reference_checker_repo }}

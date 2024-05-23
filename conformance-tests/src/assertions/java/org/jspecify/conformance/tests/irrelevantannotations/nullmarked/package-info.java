@@ -1,5 +1,5 @@
-/**
- * Copyright 2020 The JSpecify Authors.
+/*
+ * Copyright 2024 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,7 @@
  * limitations under the License.
  */
 
-// Project name is read-only in build scripts, and defaults to directory name.
-rootProject.name = "jspecify"
-include 'conformance-tests'
-include 'jspecify-taglet'
+@NullMarked
+package org.jspecify.conformance.tests.irrelevantannotations.nullmarked;
 
-// Lets projects within the build depend on each other by module name.
-// See https://docs.gradle.org/current/userguide/composite_builds.html#included_build_declaring_substitutions
-includeBuild('.')
+import org.jspecify.annotations.NullMarked;
