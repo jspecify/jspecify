@@ -42,8 +42,9 @@ publishing {
 nexusPublishing {
     repositories {
         sonatype {
-            // //only for users registered in Sonatype after 24 Feb 2021
+            // For users registered in Sonatype after 24 Feb 2021
             nexusUrl = uri("https://s01.oss.sonatype.org/service/local/")
+            snapshotRepositoryUrl = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
         }
     }
 }
@@ -56,7 +57,7 @@ signing {
     sign publishing.publications.mavenJava
 }
 
-tasks.withType(Sign) {
+tasks.withType(Sign).configureEach {
     onlyIf {
         privateKey?.trim() && pgpPassword?.trim()
     }
