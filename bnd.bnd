@@ -8,4 +8,3 @@ Bundle-License: https://www.apache.org/licenses/LICENSE-2.0
 -reproducible: true
 -noextraheaders: true
 -snapshot: SNAPSHOT
--fixupmessages: "Classes found in the wrong directory"; restrict:=error; is:=warning
