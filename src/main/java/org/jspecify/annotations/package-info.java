@@ -19,11 +19,6 @@
  *
  * <h2 id="unfrozen">Important warning</h2>
  *
- * <p>These annotations are under development, and <b>any</b> aspect of their naming, locations, or
- * design is subject to change until the JSpecify 1.0 release. Moreover, supporting analysis tools
- * will be tracking the changes on varying schedules. Releasing a library using these annotations in
- * its API is <b>strongly discouraged</b> at this time.
- *
  * <h2>What's here?</h2>
  *
  * This package will contain annotations supporting a variety of static analyses. For now it
