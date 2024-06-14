@@ -17,8 +17,6 @@
 /**
  * JSpecify annotations. See <a href="http://jspecify.org">jspecify.org</a> for general information.
  *
- * <h2 id="unfrozen">Important warning</h2>
- *
  * <h2>What's here?</h2>
  *
  * This package will contain annotations supporting a variety of static analyses. For now it
