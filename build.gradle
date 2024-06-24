@@ -54,6 +54,7 @@ java {
 
 javadoc {
     options.encoding = 'UTF-8'
+    options.windowTitle = 'jspecify 0.0.0-SNAPSHOT API'
 }
 
 defaultTasks 'spotlessApply', 'build'
