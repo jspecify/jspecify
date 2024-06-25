@@ -737,7 +737,7 @@ A type is null-exclusive under every parameterization if it has a
 ## Nullness-subtype-establishing path
 
 > Note that this definition is used both by the definition of
-> [null-inclusive under every parameterization] and by the third condition in
+> [null-exclusive under every parameterization] and by the third condition in
 > the definition [nullness subtyping] itself (the "type-variable case").
 
 `A` has a nullness-subtype-establishing path to `F` if both of the following

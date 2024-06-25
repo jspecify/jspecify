@@ -40,11 +40,6 @@ import java.lang.annotation.Target;
  * <p>For a comprehensive introduction to JSpecify, please see <a
  * href="http://jspecify.org">jspecify.org</a>.
  *
- * <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
- * naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,
- * supporting analysis tools will track with these changes on varying schedules. Releasing a library
- * using these annotations in its API is <b>strongly discouraged</b> at this time.
- *
  * <h2>Null-marked and null-unmarked code</h2>
  *
  * <p>{@link NullMarked} and this annotation work as a pair to include and exclude sections of code

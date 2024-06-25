@@ -1,1 +1,0 @@
-memberSearchIndex = [];updateSearchResults();
