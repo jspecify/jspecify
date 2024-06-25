@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java_version: [11, 17, 18, 19]
+        java_version: [11, 17, 21]
         experimental: [false]
     continue-on-error: ${{ matrix.experimental }}
     steps:

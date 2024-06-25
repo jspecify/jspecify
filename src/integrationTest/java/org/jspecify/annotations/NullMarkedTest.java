@@ -33,12 +33,12 @@ import org.junit.jupiter.api.Test;
 
 @DisplayName("@NullMarked")
 class NullMarkedTest {
-  boolean isJava8() {
+  static boolean isJava8() {
     String version = System.getProperty("java.version");
     return version.startsWith("1.8");
   }
 
-  Set<String> loadTargets() {
+  static Set<String> loadTargets() {
     return Arrays.stream(NullMarked.class.getAnnotation(Target.class).value())
         .map(ElementType::toString)
         .collect(Collectors.toSet());
@@ -46,14 +46,14 @@ class NullMarkedTest {
 
   @Nested
   @DisplayName("with Java 8")
-  class WithJava8 {
+  static class WithJava8 {
     @BeforeEach
     void assumeJava8() {
       assumeTrue(isJava8());
     }
 
     @Test
-    void basicReflectionDoesNotThrowException() {
+    void onlyBasicReflectionWorks() {
       Object unused = NullMarked.class.getMethods();
       /*
        * But reading the *annotations* on NullMarked would result in an exception: Those annotations
@@ -67,7 +67,7 @@ class NullMarkedTest {
 
   @Nested
   @DisplayName("with Java 9+")
-  class WithJava9OrLater {
+  static class WithJava9OrLater {
     @BeforeEach
     void assumeJava9OrLater() {
       assumeFalse(isJava8());
