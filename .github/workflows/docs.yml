@@ -12,12 +12,22 @@ jobs:
     name: Build Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out project
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 22
+
       - name: Set up Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
+
       - name: Build docs
         run: ./gradlew buildDocs
-      - name: Upload Artifact
+
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/build
