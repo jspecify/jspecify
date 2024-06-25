@@ -4,8 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   # Runs on PRs and push to ensure the documentation successfully builds.
@@ -13,23 +12,24 @@ jobs:
     name: Build Documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Check out project
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Set up Java
+        uses: actions/setup-java@v4
         with:
-          node-version: 18
+          distribution: temurin
+          java-version: 22
 
-      - name: Install Dependencies
-        run: npm install
-        working-directory: docs
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v3
 
-      - name: Build Documentation
-        run: npm run build
-        working-directory: docs
+      - name: Build docs
+        run: ./gradlew buildDocs
 
-      - uses: actions/upload-artifact@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: document
           path: docs/build
 
   # Deploys the documentation if this is a push to the main branch.
@@ -38,15 +38,18 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/download-artifact@v4
-        with:
-          name: document
-          path: docs/build
-
-      - uses: JamesIves/github-pages-deploy-action@v4.6.1
-        with:
-          branch: gh-pages
-          folder: docs/build
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
