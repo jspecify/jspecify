@@ -13,19 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install Dependencies
-        run: npm install
-        working-directory: docs
-
-      - name: Build Documentation
-        run: npm run build
-        working-directory: docs
-
+      - name: Set up Gradle
+        uses: gradle/gradle-build-action@v3
+      - name: Build docs
+        run: ./gradlew buildDocs
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
@@ -37,7 +28,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: build
     runs-on: ubuntu-latest
-    
+
     # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
     permissions:
       pages: write      # to deploy to Pages
