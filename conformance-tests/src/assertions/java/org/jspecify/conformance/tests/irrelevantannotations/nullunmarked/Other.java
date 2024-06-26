@@ -70,7 +70,7 @@ public class Other {
     try {
     } catch (RuntimeException e) {
       // test:name:Intrinsically NonNull exception parameter cannot be assigned null
-      // test:cannot-convert:null? to RuntimeException
+      // test:cannot-convert:null? to RuntimeException!
       e = null;
     }
   }
