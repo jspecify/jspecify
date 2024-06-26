@@ -42,11 +42,6 @@ import java.lang.annotation.Target;
  * <p>For a comprehensive introduction to JSpecify, please see <a
  * href="http://jspecify.org">jspecify.org</a>.
  *
- * <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
- * naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,
- * supporting analysis tools will be tracking the changes on varying schedules. Releasing a library
- * using these annotations in its API is <b>strongly discouraged</b> at this time.
- *
  * <h2>Meaning per each kind of type usage</h2>
  *
  * <p>The essential meaning of this annotation is always the same: the type it annotates is

@@ -25,6 +25,7 @@ spotless {
     }
     groovyGradle {
         target '**/*.gradle'
+        targetExclude 'docs/node_modules'
         greclipse()
         indentWithSpaces()
     }
