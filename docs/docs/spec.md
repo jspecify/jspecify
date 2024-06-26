@@ -283,7 +283,6 @@ Additionally, any location above is unrecognized if it makes up *any
 > for the exceptions defined by this section.
 
 -   a local variable type
--   an exception parameter
 -   the type in a cast or `instanceof` expression
 -   an array or object creation expression (including via a member reference)
 -   an explicit type argument supplied to a generic method or constructor
@@ -303,6 +302,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 > -   supertype in a class declaration
 > -   thrown exception type
+> -   exception parameter type
 > -   enum constant declaration
 > -   receiver parameter type
 >
