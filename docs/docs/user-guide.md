@@ -1,6 +1,6 @@
----
-sidebar_position: 2
----
+--------------------------------------------------------------------------------
+
+## sidebar_position: 2
 
 # Nullness User Guide (draft)
 
@@ -19,11 +19,11 @@ value `null`. Such annotations are useful to (for example):
 
 ## Java variables are references
 
-In Java, all non-primitive variables are references. We often think of a declaration like `String
-x` as meaning that `x` is a `String`, but it really means that `x` is *either* `null`
-*or* a reference to an actual `String` object. JSpecify gives you a way to make
-it clear whether you really mean that, or you mean that `x` is definitely a
-reference to a `String` object and not `null`.
+In Java, all non-primitive variables are references. We often think of a
+declaration like `String x` as meaning that `x` is a `String`, but it really
+means that `x` is *either* `null` *or* a reference to an actual `String` object.
+JSpecify gives you a way to make it clear whether you really mean that, or you
+mean that `x` is definitely a reference to a `String` object and not `null`.
 
 ## Types and nullness
 
@@ -46,18 +46,24 @@ whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 There are four JSpecify annotations that are used together to indicate the
 nullness of all symbols.
 
-*   `@Nullable` applied to a type means a value of that type can be `null`. `@Nullable String x` means that `x` might be `null`.
+*   `@Nullable` applied to a type means a value of that type can be `null`.
+    `@Nullable String x` means that `x` might be `null`.
 
-*   `@NonNull` applied to a type means a value of that type cannot be `null`. `@NonNull String x` means that `x` is never `null` (in correct programs).
+*   `@NonNull` applied to a type means a value of that type cannot be `null`.
+    `@NonNull String x` means that `x` is never `null` (in correct programs).
 
-*   `@NullMarked` applied to a module, package, class, or method means that a value
-    in that scope can't be `null` unless its type is explicitly marked
+*   `@NullMarked` applied to a module, package, class, or method means that a
+    value in that scope can't be `null` unless its type is explicitly marked
     `@Nullable`. (Below we will see that there are some exceptions to this for
     [local variables](#local-variables) and
     [type variables](#defining-generics).) In code covered by `@NullMarked`,
     `String x` means the same as `@NonNull String x`.
 
-*   `@NullUnmarked` applied to a package, class, or method undoes the effects of any surrounding `@NullMarked`. Values in its scope (unless counteracted by an enclosed `@NullMarked` generally have unspecified nullness unless they are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing `@NullMarked` at all.
+*   `@NullUnmarked` applied to a package, class, or method undoes the effects of
+    any surrounding `@NullMarked`. Values in its scope (unless counteracted by
+    an enclosed `@NullMarked` generally have unspecified nullness unless they
+    are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing
+    `@NullMarked` at all.
 
 The notion of "can't be `null`" should really be read with a footnote that says
 "if all the code in question is `@NullMarked`". For example, if you have some
@@ -67,9 +73,9 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 
 ## `@Nullable`
 
-The `@Nullable` annotation applied to a type means that that use of the type
-can include `null`. Code that deals with those values must
-be able to deal with the `null` case.
+The `@Nullable` annotation applied to a type means that that use of the type can
+include `null`. Code that deals with those values must be able to deal with the
+`null` case.
 
 ```java
 static void print(@Nullable String x) {
@@ -112,7 +118,8 @@ range of possible values. A `Number` variable can be assigned from an `Integer`
 but it can also be assigned from a `Long`. Meanwhile an `Integer` variable can't
 be assigned from a `Number` (since that `Number` might be a `Long` or some other
 subtype). Likewise, a `@Nullable String` can be assigned from a `String` but a
-`String` can't be assigned from a `@Nullable String` (since that might be `null`).
+`String` can't be assigned from a `@Nullable String` (since that might be
+`null`).
 
 ```java
 @NullMarked
@@ -128,9 +135,9 @@ class Example {
 
 ## `@NonNull`
 
-The `@NonNull` annotation applied to a type means that that use of the type
-does not include `null`. Code that assigns or passes values to variables or method parameters with those types must
-not pass `null`.
+The `@NonNull` annotation applied to a type means that that use of the type does
+not include `null`. Code that assigns or passes values to variables or method
+parameters with those types must not pass `null`.
 
 ```java
 static void print(@NonNull String x) { ... }
@@ -138,8 +145,10 @@ static void print(@NonNull String x) { ... }
 }
 ```
 
-In this example, the parameter `x` cannot be `null`, so `print(null)` is not a valid
-method call. The body of the `print` method would throw a `NullPointerException` if `x` were `null`, so the annotation correctly indicates the parameter's nullness.
+In this example, the parameter `x` cannot be `null`, so `print(null)` is not a
+valid method call. The body of the `print` method would throw a
+`NullPointerException` if `x` were `null`, so the annotation correctly indicates
+the parameter's nullness.
 
 ```java
 static @NonNull String nullToEmpty(@Nullable String x) {
@@ -172,7 +181,8 @@ range of possible values. A `Number` variable can be assigned from an `Integer`
 but it can also be assigned from a `Long`. Meanwhile an `Integer` variable can't
 be assigned from a `Number` (since that `Number` might be a `Long` or some other
 subtype). Likewise, a `@Nullable String` can be assigned from a `String` but a
-`String` can't be assigned from a `@Nullable String` (since that might be `null`).
+`String` can't be assigned from a `@Nullable String` (since that might be
+`null`).
 
 ```java
 @NullMarked
@@ -185,7 +195,6 @@ class Example {
   }
 }
 ```
-
 
 ## `@NullMarked`
 
