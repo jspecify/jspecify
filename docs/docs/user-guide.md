@@ -71,125 +71,56 @@ code that is not `@NullMarked` and that calls a `@NullMarked` method, then tools
 might allow it to pass a possibly-`null` value to a method that is expecting a
 "can't be `null`" parameter.
 
-## `@Nullable`
+## `@Nullable` and `@NonNull`
 
-The `@Nullable` annotation applied to a type means that that use of the type can
-include `null`. Code that deals with those values must be able to deal with the
-`null` case.
+The `@Nullable` annotation applied to a type means that a value of the type can
+be `null`. Code that uses those values must be able to deal with the
+`null` case, and it's okay to assign `null` to those values or pass `null` to those parameters.
 
 ```java
-static void print(@Nullable String x) {
-  System.out.println(String.valueOf(x));
+static @Nullable String emptyToNull(@NonNull String x) {
+  return x.isEmpty() ? null : x;
 }
-```
 
-In this example, the parameter `x` can be `null`, so `print(null)` is a valid
-method call. The body of the `print` method does not do anything with `x` that
-would provoke a `NullPointerException` so this method is safe.
-
-```java
-static @Nullable String emptyToNull(@Nullable String x) {
-  return (x == null || x.isEmpty()) ? null : x;
-}
-```
-
-In this example, the parameter `x` can still be `null`, but now the return value
-can be too. You might use this method like this:
-
-```java
-void doSomething(@Nullable String x) {
-  print(emptyToNull(x));
-  // OK: print accepts a @Nullable String
-
-  String z = emptyToNull(x).toString();
-  // Not OK: emptyToNull(x) can be null
-}
-```
-
-Tools could then use the `@Nullable` information to determine that the first use
-is safe but the second is not.
-
-As far as JSpecify is concerned, `String` and `@Nullable String` are *different*
-types. A variable of type `String` can reference any string object. A variable
-of type `@Nullable String` can too, but it can also be `null`. This means that
-`String` is a *subtype* of `@Nullable String`, in the same way that `Integer` is
-a subtype of `Number`. One way to look at this is that a subtype narrows the
-range of possible values. A `Number` variable can be assigned from an `Integer`
-but it can also be assigned from a `Long`. Meanwhile an `Integer` variable can't
-be assigned from a `Number` (since that `Number` might be a `Long` or some other
-subtype). Likewise, a `@Nullable String` can be assigned from a `String` but a
-`String` can't be assigned from a `@Nullable String` (since that might be
-`null`).
-
-```java
-@NullMarked
-class Example {
-  void useNullable(@Nullable String x) {...}
-  void useNonNull(String x) {...}
-  void example(@Nullable String nullable, String nonNull) {
-    useNullable(nonNull); // JSpecify allows this
-    useNonNull(nullable); // JSpecify doesn't allow this
-  }
-}
-```
-
-## `@NonNull`
-
-The `@NonNull` annotation applied to a type means that that use of the type does
-not include `null`. Code that assigns or passes values to variables or method
-parameters with those types must not pass `null`.
-
-```java
-static void print(@NonNull String x) { ... }
-  System.out.println(x);
-}
-```
-
-In this example, the parameter `x` cannot be `null`, so `print(null)` is not a
-valid method call. The body of the `print` method would throw a
-`NullPointerException` if `x` were `null`, so the annotation correctly indicates
-the parameter's nullness.
-
-```java
 static @NonNull String nullToEmpty(@Nullable String x) {
   return x == null ? "" : x;
 }
 ```
 
-In this example, the parameter `x` can still be `null`, but the return value
-definitely will not be. You might use this method like this:
+In this example, the parameter to `emptyToNull` is annotated with `@NonNull`, so it cannot be `null`; `emptyToNull(null)` is not a valid method call. The body of the `emptyToNull` method relies on that assumption and immediately calls `x.isEmpty()`, which would throw `NullPointerException` if `x` were actually `null`. Conversely, `emptyToNull` may return `null`, so its return type is annotated with `@Nullable`.
+
+On the other hand, `nullToEmpty` promises to handle `null` arguments, so its parameter is annotated with `@Nullable` to indicate that `nullToEmpty(null)` is a valid method call. Its body considers the case where the argument is `null` and won't throw `NullPointerException`. It also cannot return `null`, so its return type is annotated with `@NonNull`.
 
 ```java
 void doSomething(@Nullable String x) {
-  print(x);
-  // Not OK: print does not accept null, but x might be null
+  // OK: nullToEmpty accepts null but won't return it
+  String y = nullToEmpty(x).toString();
 
-  String z = nullToEmpty(x).toString();
-  // Not OK: emptyToNull(x) can be null
+  // Not OK: emptyToNull doesn't accept null; also, it might return null!
+  String z = emptyToNull(x).toString();
 }
 ```
 
-Tools could then use the `@Nullable` information to determine that the first use
-is safe but the second is not.
+Tools can use the `@Nullable` and `@NonNull` annotations to warn users about calls that are unsafe.
 
-As far as JSpecify is concerned, `String` and `@Nullable String` are *different*
-types. A variable of type `String` can reference any string object. A variable
+As far as JSpecify is concerned, `@NonNull String` and `@Nullable String` are *different
+types*. A variable of type `@NonNull String` can reference any `String` object. A variable
 of type `@Nullable String` can too, but it can also be `null`. This means that
-`String` is a *subtype* of `@Nullable String`, in the same way that `Integer` is
+`@NonNull String` is a *subtype* of `@Nullable String`, in the same way that `Integer` is
 a subtype of `Number`. One way to look at this is that a subtype narrows the
 range of possible values. A `Number` variable can be assigned from an `Integer`
 but it can also be assigned from a `Long`. Meanwhile an `Integer` variable can't
 be assigned from a `Number` (since that `Number` might be a `Long` or some other
-subtype). Likewise, a `@Nullable String` can be assigned from a `String` but a
-`String` can't be assigned from a `@Nullable String` (since that might be
+subtype). Likewise, a `@Nullable String` can be assigned from a `@NonNull String` but a
+`@NonNull String` can't be assigned from a `@Nullable String` (since that might be
 `null`).
 
 ```java
 @NullMarked
 class Example {
   void useNullable(@Nullable String x) {...}
-  void useNonNull(String x) {...}
-  void example(@Nullable String nullable, String nonNull) {
+  void useNonNull(@NonNull String x) {...}
+  void example(@Nullable String nullable, @NonNull String nonNull) {
     useNullable(nonNull); // JSpecify allows this
     useNonNull(nullable); // JSpecify doesn't allow this
   }
