@@ -183,8 +183,8 @@ variables (as we'll see next) and [type variables](#defining-generics).
 ## Local variables {#local-variables}
 
 Tools that understand JSpecify annotations typically *don't* require `@Nullable`
-to be applied to local variables. They may in fact not even allow that. The
-reason is that it should be possible to *infer* whether a variable can be null
+or `@NonNull` to be applied to local variables. They may in fact not even allow that. The
+reason is that it should be possible to *infer* whether a variable can be `null`
 based on the values that are assigned to the variable. For example:
 
 ```java
@@ -200,11 +200,11 @@ class MyClass {
 }
 ```
 
-Analysis can tell that all of these variables except `anotherTwo` can be null.
-`anotherTwo` can't be null since `two` can't be null: it is not `@Nullable` and
-it is inside the scope of `@NullMarked`. `anotherOne` can be null since it is
-assigned from a `@Nullable` parameter. `oneOrTwo` can be null because it may
-assigned from a `@Nullable` parameter. And `twoOrNull` can be null because its
+Analysis can tell that all of these variables except `anotherTwo` can be `null`.
+`anotherTwo` can't be `null` since `two` can't be `null`: it is not `@Nullable` and
+it is inside the scope of `@NullMarked`. `anotherOne` can be `null` since it is
+assigned from a `@Nullable` parameter. `oneOrTwo` can be `null` because it may
+assigned from a `@Nullable` parameter. And `twoOrNull` can be `null` because its
 value comes from a method that returns `@Nullable String`.
 
 ## Generics
