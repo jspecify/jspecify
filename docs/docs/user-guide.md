@@ -56,7 +56,7 @@ nullness of all symbols.
     value in that scope can't be `null` unless its type is explicitly marked
     `@Nullable`. (Below we will see that there are some exceptions to this for
     [local variables](#local-variables) and
-    [type variables](#defining-generics).) In code covered by `@NullMarked`,
+    [type variables](#declaring-generics).) In code covered by `@NullMarked`,
     `String x` means the same as `@NonNull String x`.
 
 *   `@NullUnmarked` applied to a package, class, or method undoes the effects of
@@ -175,10 +175,11 @@ annotated with `@NullMarked`. The nullness of the types is the same as before:
 `emptyToNull` does not accept `null` arguments, but it might return `null`;
 `nullToEmpty` does accept `null` arguments, but it won't return `null`. But we
 were able to do that with fewer annotations. In general, using `@NullMarked`
-will give you correct nullness semantics with fewer annotations.
+will give you correct nullness semantics with fewer annotations. In `@NullMarked` code, you'll get used to
+thinking about plain, unannotated types like `String` as meaning a real reference to a `String` object and never `null`.
 
 As mentioned above, there are some exceptions to this interpretation for local
-variables (as we'll see next) and [type variables](#defining-generics).
+variables (as we'll see next) and [type variables](#declaring-generics).
 
 ## Local variables {#local-variables}
 
@@ -209,16 +210,16 @@ value comes from a method that returns `@Nullable String`.
 
 ## Generics
 
-When you are referencing a generic type, the rules about `@Nullable` and
+When you are using a generic type, the rules about `@Nullable`, `@NonNull`, and
 `@NullMarked` are as you would expect from what we have seen. For example,
-`List<@Nullable String>` means a list where each element is either a reference
-to a string object or it is null. In a `@NullMarked` context, `List<String>`
-means a list where each element is a reference to a string object and *can't* be
-null.
+within a `@NullMarked` context, `List<@Nullable String>` means a reference to a `List` (not `null`) where each element is either a reference
+to a `String` object or `null`; but `List<String>`
+means a list (not `null`) where each element is a reference to a `String` object and *can't* be
+`null`.
 
-### Defining generic types {#defining-generics}
+### Declaring generic types {#declaring-generics}
 
-Things are a bit more complicated when you are *defining* a generic type.
+Things are a bit more complicated when you are *declaring* a generic type.
 Consider this:
 
 ```java
@@ -232,12 +233,15 @@ you can write `NumberList<Integer>`, since `Integer` can be assigned to
 assigned to `Number`. This is standard Java behavior.
 
 But now let's think about that bound as it relates to `@NullMarked`. Can we
-write `NumberList<@Nullable Integer>`? The answer is no, because we have `<E
-extends Number>` inside `@NullMarked`. Since it is `Number` and not `@Nullable
-Number`, that means it can't be null. `@Nullable Integer` can't be assigned to
-it, since that *can* be null. Inside `@NullMarked`, you must explicitly provide
-a `@Nullable` bound on your type variable if you want it to be able to represent
-a `@Nullable` type:
+write `NumberList<@Nullable Integer>`?
+
+Within `@NullMarked`, remember, unannotated types are the same as if they had `@NonNull`.
+Since the bound of `E` is the same as `@NonNull Number`, and not `@Nullable Number`, that means the type argument for `E`
+can't be a type that includes `null`. `@Nullable Integer` can't be the type argument, then, since that *can* include `null`.
+(In other words: `@Nullable Integer` _is not a subtype_ of `Number`.)
+
+Inside `@NullMarked`, if you want to be able to substitute nullable type arguments for a type parameter, you must explicitly provide
+a `@Nullable` bound on your type variable:
 
 ```java
 @NullMarked
@@ -247,11 +251,11 @@ public class NumberList<E extends @Nullable Number> implements List<E> {...}
 Now it *is* legal to write `NumberList<@Nullable Integer`>, since `@Nullable
 Integer` is assignable to the bound `@Nullable Number`. It's *also* legal to
 write `NumberList<Integer>`, since plain `Integer` is assignable to `@Nullable
-Number`. Inside `@NullMarked`, plain `Integer` means a reference to an actual
-`Integer` value, never null. That just means that the `@Nullable Number` can
-technically be null but in this case it never will be.
+Number`. Inside `@NullMarked`, plain `Integer` means the same thing as `@NonNull Integer`: a reference to an actual
+`Integer` value, never `null`. That just means that the values represented by `E` can
+be `null` on some other parameterization of `NumberList`, but not in an instance of `NumberList<Integer>`.
 
-Of course this assumes that `List` itself is written in a way that allows null:
+Of course this assumes that `List` itself is written in a way that allows nullable type arguments:
 
 ```java
 @NullMarked
@@ -262,12 +266,12 @@ If it were `interface List<E>` rather than `interface List<E extends @Nullable
 Object>` then `NumberList<E extends @Nullable Number> implements List<E>` would
 not be legal. That's because `interface List<E>` is short for `interface List<E
 extends Object>`. Inside `@NullMarked`, plain `Object` means "`Object` reference
-that can't be null". The `<E extends @Nullable Number>` from NumberList would
+that can't be `null`". The `<E extends @Nullable Number>` from `NumberList` would
 not be compatible with `<E extends Object>`.
 
 The implication of all this is that every time you define a type variable like
-`E` you need to decide whether it can represent a `@Nullable` type. If it can,
-then it must have a `@Nullable` bound. Most often this will be `<E extends
+`E` you need to decide whether it can be sustituted with a `@Nullable` type. If it can,
+then it must have a `@Nullable` bound. Often this will be `<E extends
 @Nullable Object>`. On the other hand, if it *can't* represent a `@Nullable`
 type, that is expressed by not having `@Nullable` in its bound (including the
 case of not having an explicit bound at all). Here's another example:
@@ -279,7 +283,7 @@ public class ImmutableList<E> implements List<E> {...}
 
 Here, because it is `ImmutableList<E>` and not `ImmutableList<E extends
 @Nullable Object>`, it is not legal to write `ImmutableList<@Nullable String>`.
-You can only write `ImmutableList<String>`, which is a list of non-null `String`
+You can only write `ImmutableList<String>`, which is a list of non-`null` `String`
 references.
 
 ### Using type variables in generic types
@@ -292,6 +296,7 @@ public interface List<E extends @Nullable Object> {
   boolean add(E element);
   E get(int index);
   @Nullable E getFirst();
+  Optional<@NonNull E> maybeFirst();
   ...
 }
 ```
@@ -309,22 +314,27 @@ then the reference is a `String`.
 On the other hand, the return type `@Nullable E` of the (fictitious) `getFirst`
 method is always `@Nullable`. It will be `@Nullable String` whether called on a
 `List<@Nullable String>` or a `List<String>`. The idea is that the method
-returns the first element of the list, or null if the list is empty. Similarly,
+returns the first element of the list, or `null` if the list is empty. Similarly,
 the real methods `@Nullable V get(Object key)` in `Map` and `@Nullable E peek()`
-in `Queue` can return null even when `V` and `E` can't be null.
+in `Queue` can return `null` even when `V` and `E` can't be `null`.
 
 The distinction here is an important one that is worth repeating. A use of a
 type variable like `E` should only be `@Nullable E` if it means a reference that
-can be null *even if* `E` itself can't be null. Otherwise, plain `E` means a
-reference that can only be null if `E` is a `@Nullable` type, like `@Nullable
+can be `null` *even if* `E` itself can't be `null`. Otherwise, plain `E` means a
+reference that can only be `null` if `E` is a `@Nullable` type, like `@Nullable
 String` in this example. (And, as we've seen, `E` can only be a `@Nullable` type
 if the definition of `E` has a `@Nullable` bound like `<E extends @Nullable
 Object>`.)
 
-We saw earlier that `@NullMarked` usually means "references can't be null unless
+Similarly, you can use `@NonNull E` to indicate a type that is non-nullable _even when `E` is nullable_.
+The fictitious `maybeFirst()` method returns a non-nullable `Optional`. `Optional`'s type bound is non-nullable
+because it holds only non-`null` values, so `maybeFirst()` should return `Optional<@NonNull String>` even when called
+on a `List<@Nullable String>`.
+
+We saw earlier that `@NullMarked` usually means "references can't be `null` unless
 they are marked `@Nullable`", and also that that doesn't apply to local
-variables. Here we see that it doesn't apply to type variable uses either. When
-not marked `@Nullable`, they can still be null if they have a `@Nullable` bound.
+variables. Here we see that it doesn't apply to type variable uses either, when they're not
+annotated with either `@Nullable` or `@NonNull`.
 
 ### Using type variables in generic methods
 
@@ -359,26 +369,27 @@ public class Methods {
 The `firstOrNull` method will accept a `List<String>` but not a `List<@Nullable
 String>`. When given an argument of type `List<String>`, `T` is `String`, so the
 return type `@Nullable T` is `@Nullable String`. The input list can't contain
-null elements, but the return value can be null.
+`null` elements, but the return value can be nu`ll.
 
 The `firstOrNonNullDefault` method again does not allow `T` to be a `@Nullable`
 type, so `List<@Nullable String>` is not allowed. Now the return value is not
-`@Nullable` either which means it will never be null.
+`@Nullable` either which means it will never be `null`.
 
 The `firstOrDefault` method will accept both `List<String>` and `List<@Nullable
 String>`. In the first case, `T` is `String`, so the type of the `defaultValue`
-parameter and of the return value is `String`, meaning neither can be null. In
+parameter and of the return value is `String`, meaning neither can be `null`. In
 the second case, `T` is `@Nullable String`, so the type of `defaultValue` and of
-the return value is `@Nullable String`, meaning both can be null.
+the return value is `@Nullable String`, meaning either can be `null`.
 
 The `firstOrNullableDefault` method again accepts both `List<String>` and
 `List<@Nullable String>`, but now the `defaultValue` parameter is marked
-`@Nullable` so it can be null even in the `List<String>` case. Likewise the
-return value is `@Nullable T` so it can be null even when `T` can't.
+`@Nullable` so it can be `null` even in the `List<String>` case. Likewise the
+return value is `@Nullable T` so it can be `null` even when `T` can't.
 
 Here's another example:
 
 ```java
+@NullMarked
 public static <T> List<@Nullable T> nullOutMatches(List<T> list, T toRemove) {
   List<@Nullable T> copy = new ArrayList<>(list);
   for (int i = 0; i < copy.size(); i++) {
@@ -390,10 +401,10 @@ public static <T> List<@Nullable T> nullOutMatches(List<T> list, T toRemove) {
 }
 ```
 
-This takes a `List<T>`, which by definition does not contain null elements, and
-produces a `List<@Nullable T>`, with null in place of every element that matched
-`toRemove`. The output is a `List<@Nullable T>` because it *can* contain null
-elements, even if `T` itself can't be null.
+This takes a `List<T>`, which by definition does not contain `null` elements, and
+produces a `List<@Nullable T>`, with `null` in place of every element that matched
+`toRemove`. The output is a `List<@Nullable T>` because it *can* contain `null`
+elements, even if `T` itself can't be `null`.
 
 ## Some subtler details
 
@@ -404,31 +415,31 @@ won't need to know.
 ### Type-use annotation syntax
 
 There are a couple of places where the syntax of type-use annotations like
-`@Nullable` may be surprising.
+`@Nullable` and `@NonNull` may be surprising.
 
 1.  For a nested static type like `Map.Entry`, if you want to say that the value
-    can be null then the syntax is `Map.@Nullable Entry`. You can often avoid
+    can be `null` then the syntax is `Map.@Nullable Entry`. You can often avoid
     dealing with this by importing the nested type directly, but in this case
     `import java.util.Map.Entry` might be undesirable because `Entry` is such a
     common type name.
 
 1.  For an array type, if you want to say that the *elements* of the array can
-    be null then the syntax is `@Nullable String[]`. If you want to say that the
-    *array itself* can be null then the syntax is `String @Nullable []`. And if
-    both the elements and the array itself can be null, the syntax is `@Nullable
+    be `null` then the syntax is `@Nullable String[]`. If you want to say that the
+    *array itself* can be `null` then the syntax is `String @Nullable []`. And if
+    both the elements and the array itself can be `null`, the syntax is `@Nullable
     String @Nullable []`.
 
 A good way to remember this is that it is the thing right after `@Nullable` that
-can be null. It is the `Entry` that can be null in `Map.@Nullable Entry`, not
-the `Map`. It is the `String` that can be null in `@Nullable String[]` and it is
-the `[]`, meaning the array, that can be null in `String @Nullable []`.
+can be `null`. It is the `Entry` that can be `null` in `Map.@Nullable Entry`, not
+the `Map`. It is the `String` that can be `null` in `@Nullable String[]` and it is
+the `[]`, meaning the array, that can be `null` in `String @Nullable []`.
 
 ### Wildcard bounds
 
 Inside `@NullMarked`, wildcard bounds work almost exactly the same as type
 variable bounds. We saw that `<E extends @Nullable Number>` means that E can be
 a `@Nullable` type and `<E extends Number>` means it can't. Likewise, `List<?
-extends @Nullable Number>` means a list where the elements can be null, and
+extends @Nullable Number>` means a list where the elements can be `null`, and
 `List<? extends Number>` means they can't.
 
 However, there's a difference when there is no explicit bound. We saw that a
