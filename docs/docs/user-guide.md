@@ -102,12 +102,12 @@ and won't throw `NullPointerException`. It also cannot return `null`, so its
 return type is annotated with `@NonNull`.
 
 ```java
-void doSomething(@Nullable String x) {
+void doSomething() {
   // OK: nullToEmpty accepts null but won't return it
-  String y = nullToEmpty(x).toString();
+  String y = nullToEmpty(Math.random() > 0.5 ? null : "x").toString();
 
   // Not OK: emptyToNull doesn't accept null; also, it might return null!
-  String z = emptyToNull(x).toString();
+  String z = emptyToNull(Math.random() > 0.5 ? null : "x").toString();
 }
 ```
 
@@ -140,37 +140,37 @@ class Example {
 
 ## `@NullMarked`
 
-The `@NullMarked` annotation indicates that references can't be null in its
-scope, unless their types are explicitly marked `@Nullable`. If applied to a
+It would be annoying to have to annotate each and every type usage in your Java code with either `@Nullable` or `@NonNull`
+(especially once you add [generics](#generics)!).
+
+So JSpecify gives you a `@NullMarked` annotation, which indicates that the types in its scope
+without either `@Nullable` or `@NonNull` can't be null, by default (with some exceptions). If applied to a
 module then its scope is all the code in the module. If applied to a package
 then its scope is all the code in the package. (Note that packages are *not*
 hierarchical; applying `@NullMarked` to package `com.foo` does not make package
-`com.foo.bar` `@NullMarked`.) If applied to a class or interface then its scope
-is all the code in that class or interface.
+`com.foo.bar` `@NullMarked`.) If applied to a class, interface, or method, then its scope
+is all the code in that class, interface, or method.
 
-Outside `@NullMarked`, `@Nullable String` still means a reference that can be
-null, but JSpecify doesn't have anything to say about whether plain `String` can
-be null.
+Outside `@NullMarked`, `String` without an annotation means what it always used to mean: a value that might
+be intended to allow `null`s or might not, depending on whatever documentation you can find.
 
 ```java
 @NullMarked
-public class Strings {
-  public static String nullToEmpty(@Nullable String x) {
-    return (x == null) ? "" : x;
+class Strings {
+  static @Nullable String emptyToNull(String x) {
+    return x.isEmpty() ? null : x;
   }
 
-  public static int spaceIndex(String x) {
-    return x.indexOf(' ');
+  static String nullToEmpty(@Nullable String x) {
+    return x == null ? "" : x;
   }
 }
 ```
 
-In this example, both methods are in the scope of `@NullMarked`, so plain
-`String` means "a reference to a string object, not null". `@Nullable String`
-continues to mean "a reference to a string object, or null". Tools should warn
-you if you try to pass a "reference to a string object, or null" to
-`spaceIndex`, since its argument can't be null, and indeed it will throw
-NullPointerException if given a null argument.
+Here's the example from above, where the class containing the methods is annotated with `@NullMarked`.
+The nullness of the types is the same as before: `emptyToNull` does not accept `null` arguments, but it
+might return `null`; `nullToEmpty` does accept `null` arguments, but it won't return `null`. But we were able to do
+that with fewer annotations. In general, using `@NullMarked` will give you correct nullness semantics with fewer annotations.
 
 As mentioned above, there are some exceptions to this interpretation for local
 variables (as we'll see next) and [type variables](#defining-generics).
