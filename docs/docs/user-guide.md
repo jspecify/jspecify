@@ -37,7 +37,7 @@ kinds of nullness it has:
 4.  It has "unspecified nullness: we don't know whether it can include `null`.
     This is equivalent to the state of the world without JSpecify annotations.
 
-For a given reference `x`, if `x` can be `null` then `x.getClass()` is unsafe
+For a given variable `x`, if `x` can be `null` then `x.getClass()` is unsafe
 because it could produce a `NullPointerException`. If `x` can't be `null`,
 `x.getClass()` can never produce a `NullPointerException`. If we don't know
 whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
@@ -46,31 +46,30 @@ whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 There are four JSpecify annotations that are used together to indicate the
 nullness of all symbols.
 
-*   `@Nullable` applied to a type means a reference of that type can be `null`. `@Nullable String x` means that `x` might be `null`.
+*   `@Nullable` applied to a type means a value of that type can be `null`. `@Nullable String x` means that `x` might be `null`.
 
-*   `@NonNull` applied to a type means a reference of that type cannot be `null`. `@NonNull String x` means that `x` is never `null` (in correct programs).
+*   `@NonNull` applied to a type means a value of that type cannot be `null`. `@NonNull String x` means that `x` is never `null` (in correct programs).
 
-*   `@NullMarked` applied to a module, package, class, or method means that a reference
-    in that scope can't be null unless its type is explicitly marked
+*   `@NullMarked` applied to a module, package, class, or method means that a value
+    in that scope can't be `null` unless its type is explicitly marked
     `@Nullable`. (Below we will see that there are some exceptions to this for
     [local variables](#local-variables) and
     [type variables](#defining-generics).) In code covered by `@NullMarked`,
     `String x` means the same as `@NonNull String x`.
 
-*   `@NullUnmarked` applied to a package, class, or method undoes the effects of any surrounding `@NullMarked`. References in its scope (unless counteracted by an enclosed `@NullMarked` generally have unspecified nullness unless they are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing `@NullMarked` at all.
+*   `@NullUnmarked` applied to a package, class, or method undoes the effects of any surrounding `@NullMarked`. Values in its scope (unless counteracted by an enclosed `@NullMarked` generally have unspecified nullness unless they are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing `@NullMarked` at all.
 
-
-The notion of "can't be null" should really be read with a footnote that says
+The notion of "can't be `null`" should really be read with a footnote that says
 "if all the code in question is `@NullMarked`". For example, if you have some
 code that is not `@NullMarked` and that calls a `@NullMarked` method, then tools
-might allow it to pass a possibly-null value to a method that is expecting a
-"can't be null" parameter.
+might allow it to pass a possibly-`null` value to a method that is expecting a
+"can't be `null`" parameter.
 
 ## `@Nullable`
 
 The `@Nullable` annotation applied to a type means that that use of the type
-includes references that can be null. Code that deals with those references must
-be able to deal with the null case.
+can include `null`. Code that deals with those values must
+be able to deal with the `null` case.
 
 ```java
 static void print(@Nullable String x) {
@@ -78,9 +77,9 @@ static void print(@Nullable String x) {
 }
 ```
 
-In this example, the parameter `x` can be null, so `print(null)` is a valid
+In this example, the parameter `x` can be `null`, so `print(null)` is a valid
 method call. The body of the `print` method does not do anything with `x` that
-would provoke a NullPointerException so this method is safe.
+would provoke a `NullPointerException` so this method is safe.
 
 ```java
 static @Nullable String emptyToNull(@Nullable String x) {
@@ -88,7 +87,7 @@ static @Nullable String emptyToNull(@Nullable String x) {
 }
 ```
 
-In this example, the parameter `x` can still be null, but now the return value
+In this example, the parameter `x` can still be `null`, but now the return value
 can be too. You might use this method like this:
 
 ```java
@@ -106,14 +105,14 @@ is safe but the second is not.
 
 As far as JSpecify is concerned, `String` and `@Nullable String` are *different*
 types. A variable of type `String` can reference any string object. A variable
-of type `@Nullable String` can too, but it can also be null. This means that
+of type `@Nullable String` can too, but it can also be `null`. This means that
 `String` is a *subtype* of `@Nullable String`, in the same way that `Integer` is
 a subtype of `Number`. One way to look at this is that a subtype narrows the
-range of possibilities. A `Number` variable can be assigned from an `Integer`
+range of possible values. A `Number` variable can be assigned from an `Integer`
 but it can also be assigned from a `Long`. Meanwhile an `Integer` variable can't
 be assigned from a `Number` (since that `Number` might be a `Long` or some other
 subtype). Likewise, a `@Nullable String` can be assigned from a `String` but a
-`String` can't be assigned from a `@Nullable String` (since that might be null).
+`String` can't be assigned from a `@Nullable String` (since that might be `null`).
 
 ```java
 @NullMarked
@@ -126,6 +125,67 @@ class Example {
   }
 }
 ```
+
+## `@NonNull`
+
+The `@NonNull` annotation applied to a type means that that use of the type
+does not include `null`. Code that assigns or passes values to variables or method parameters with those types must
+not pass `null`.
+
+```java
+static void print(@NonNull String x) { ... }
+  System.out.println(x);
+}
+```
+
+In this example, the parameter `x` cannot be `null`, so `print(null)` is not a valid
+method call. The body of the `print` method would throw a `NullPointerException` if `x` were `null`, so the annotation correctly indicates the parameter's nullness.
+
+```java
+static @NonNull String nullToEmpty(@Nullable String x) {
+  return x == null ? "" : x;
+}
+```
+
+In this example, the parameter `x` can still be `null`, but the return value
+definitely will not be. You might use this method like this:
+
+```java
+void doSomething(@Nullable String x) {
+  print(x);
+  // Not OK: print does not accept null, but x might be null
+
+  String z = nullToEmpty(x).toString();
+  // Not OK: emptyToNull(x) can be null
+}
+```
+
+Tools could then use the `@Nullable` information to determine that the first use
+is safe but the second is not.
+
+As far as JSpecify is concerned, `String` and `@Nullable String` are *different*
+types. A variable of type `String` can reference any string object. A variable
+of type `@Nullable String` can too, but it can also be `null`. This means that
+`String` is a *subtype* of `@Nullable String`, in the same way that `Integer` is
+a subtype of `Number`. One way to look at this is that a subtype narrows the
+range of possible values. A `Number` variable can be assigned from an `Integer`
+but it can also be assigned from a `Long`. Meanwhile an `Integer` variable can't
+be assigned from a `Number` (since that `Number` might be a `Long` or some other
+subtype). Likewise, a `@Nullable String` can be assigned from a `String` but a
+`String` can't be assigned from a `@Nullable String` (since that might be `null`).
+
+```java
+@NullMarked
+class Example {
+  void useNullable(@Nullable String x) {...}
+  void useNonNull(String x) {...}
+  void example(@Nullable String nullable, String nonNull) {
+    useNullable(nonNull); // JSpecify allows this
+    useNonNull(nullable); // JSpecify doesn't allow this
+  }
+}
+```
+
 
 ## `@NullMarked`
 
