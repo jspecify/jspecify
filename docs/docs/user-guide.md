@@ -19,16 +19,11 @@ value `null`. Such annotations are useful to (for example):
 
 ## Java variables are references
 
-In Java, all non-primitive variables are references. We often think of `String
-x` as meaning "`x` is a `String`", but it really means "`x` is *either* `null`
-*or* a reference to an actual `String` object". JSpecify gives you a way to make
-it clear whether you really mean that, or you mean that "`x` is definitely a
-reference to a `String` object, not `null`".
-
-JSpecify includes a `@NullMarked` annotation. In code covered by that
-annotation, `String x` means "`x` is a reference to a string object", and
-`@Nullable String x` means "`x` is either null or a reference to a string
-object"
+In Java, all non-primitive variables are references. We often think of a declaration like `String
+x` as meaning that `x` is a `String`, but it really means that `x` is *either* `null`
+*or* a reference to an actual `String` object. JSpecify gives you a way to make
+it clear whether you really mean that, or you mean that `x` is definitely a
+reference to a `String` object and not `null`.
 
 ## Types and nullness
 
@@ -51,13 +46,19 @@ whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 There are four JSpecify annotations that are used together to indicate the
 nullness of all symbols.
 
-*   `@Nullable` applied to a type means a reference of that type can be null.
+*   `@Nullable` applied to a type means a reference of that type can be `null`. `@Nullable String x` means that `x` might be `null`.
 
-*   `@NullMarked` applied to a module, package, or class means that a reference
+*   `@NonNull` applied to a type means a reference of that type cannot be `null`. `@NonNull String x` means that `x` is never `null` (in correct programs).
+
+*   `@NullMarked` applied to a module, package, class, or method means that a reference
     in that scope can't be null unless its type is explicitly marked
     `@Nullable`. (Below we will see that there are some exceptions to this for
     [local variables](#local-variables) and
-    [type variables](#defining-generics).)
+    [type variables](#defining-generics).) In code covered by `@NullMarked`,
+    `String x` means the same as `@NonNull String x`.
+
+*   `@NullUnmarked` applied to a package, class, or method undoes the effects of any surrounding `@NullMarked`. References in its scope (unless counteracted by an enclosed `@NullMarked` generally have unspecified nullness unless they are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing `@NullMarked` at all.
+
 
 The notion of "can't be null" should really be read with a footnote that says
 "if all the code in question is `@NullMarked`". For example, if you have some
