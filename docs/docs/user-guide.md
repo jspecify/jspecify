@@ -140,19 +140,22 @@ class Example {
 
 ## `@NullMarked`
 
-It would be annoying to have to annotate each and every type usage in your Java code with either `@Nullable` or `@NonNull`
-(especially once you add [generics](#generics)!).
+It would be annoying to have to annotate each and every type usage in your Java
+code with either `@Nullable` or `@NonNull` (especially once you add
+[generics](#generics)!).
 
-So JSpecify gives you a `@NullMarked` annotation, which indicates that the types in its scope
-without either `@Nullable` or `@NonNull` can't be null, by default (with some exceptions). If applied to a
-module then its scope is all the code in the module. If applied to a package
-then its scope is all the code in the package. (Note that packages are *not*
-hierarchical; applying `@NullMarked` to package `com.foo` does not make package
-`com.foo.bar` `@NullMarked`.) If applied to a class, interface, or method, then its scope
-is all the code in that class, interface, or method.
+So JSpecify gives you a `@NullMarked` annotation, which indicates that the types
+in its scope without either `@Nullable` or `@NonNull` can't be null, by default
+(with some exceptions). If applied to a module then its scope is all the code in
+the module. If applied to a package then its scope is all the code in the
+package. (Note that packages are *not* hierarchical; applying `@NullMarked` to
+package `com.foo` does not make package `com.foo.bar` `@NullMarked`.) If applied
+to a class, interface, or method, then its scope is all the code in that class,
+interface, or method.
 
-Outside `@NullMarked`, `String` without an annotation means what it always used to mean: a value that might
-be intended to allow `null`s or might not, depending on whatever documentation you can find.
+Outside `@NullMarked`, `String` without an annotation means what it always used
+to mean: a value that might be intended to allow `null`s or might not, depending
+on whatever documentation you can find.
 
 ```java
 @NullMarked
@@ -167,10 +170,12 @@ class Strings {
 }
 ```
 
-Here's the example from above, where the class containing the methods is annotated with `@NullMarked`.
-The nullness of the types is the same as before: `emptyToNull` does not accept `null` arguments, but it
-might return `null`; `nullToEmpty` does accept `null` arguments, but it won't return `null`. But we were able to do
-that with fewer annotations. In general, using `@NullMarked` will give you correct nullness semantics with fewer annotations.
+Here's the example from above, where the class containing the methods is
+annotated with `@NullMarked`. The nullness of the types is the same as before:
+`emptyToNull` does not accept `null` arguments, but it might return `null`;
+`nullToEmpty` does accept `null` arguments, but it won't return `null`. But we
+were able to do that with fewer annotations. In general, using `@NullMarked`
+will give you correct nullness semantics with fewer annotations.
 
 As mentioned above, there are some exceptions to this interpretation for local
 variables (as we'll see next) and [type variables](#defining-generics).
