@@ -1,27 +1,29 @@
----
-sidebar_position: 2
----
+--------------------------------------------------------------------------------
+
+## sidebar_position: 2
 
 # Nullness User Guide (draft)
 
-In Java code, whether an expression may evaluate to null is often documented
-only in natural language, if at all. The goal of JSpecify is to permit
-programmers to express specifications (initially, just nullness properties) in a
-machine-readable way.
+In Java code, whether an expression may evaluate to `null` is often documented
+only in natural language, if at all. JSpecify's nullness annotations let
+programmers express nullness of Java symbols in a consistent and well-defined
+way.
 
 JSpecify defines annotations that describe whether a Java type contains the
-value null. Such annotations are useful to (for example):
+value `null`. Such annotations are useful to (for example):
 
 *   programmers reading the code,
-*   tools that help developers avoid NullPointerExceptions,
+*   tools that help developers avoid `NullPointerException`s,
 *   tools that perform run-time checking and test generation, and
 *   documentation systems.
 
 ## Java variables are references
 
 In Java, all non-primitive variables are references. We often think of `String
-x` as meaning "`x` is a `String`", but actually it means "`x` is a *reference*,
-either null or a reference to a string object".
+x` as meaning "`x` is a `String`", but it really means "`x` is *either* `null`
+*or* a reference to an actual `String` object". JSpecify gives you a way to make
+it clear whether you really mean that, or you mean that "`x` is definitely a
+reference to a `String` object, not `null`".
 
 JSpecify includes a `@NullMarked` annotation. In code covered by that
 annotation, `String x` means "`x` is a reference to a string object", and
@@ -30,19 +32,24 @@ object"
 
 ## Types and nullness
 
-Each reference can have one of three possible properties regarding nullness:
+JSpecify gives you rules that determine, for each type usage, which of four
+kinds of nullness it has:
 
-1.  JSpecify annotations indicate that it can be null.
-2.  JSpecify annotations indicate that it can't be null.
-3.  JSpecify annotations don't indicate whether it can be null.
+1.  It is nullable: it includes `null`.
+2.  It is non-null: it does not include `null`.
+3.  For type variables only, it has "parametric nullness": it includes `null` if
+    the type argument that is substituted for it does.
+4.  It has "unspecified nullness: we don't know whether it can include `null`.
+    This is equivalent to the state of the world without JSpecify annotations.
 
-For a given reference `x`, if `x` can be null then `x.getClass()` is unsafe
-because it could produce a NullPointerException. If `x` can't be null,
-`x.getClass()` can never produce a NullPointerException. If JSpecify annotations
-haven't said whether `x` can be null or not, we don't know whether
-`x.getClass()` is safe (at least as far as JSpecify is concerned).
+For a given reference `x`, if `x` can be `null` then `x.getClass()` is unsafe
+because it could produce a `NullPointerException`. If `x` can't be `null`,
+`x.getClass()` can never produce a `NullPointerException`. If we don't know
+whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
+(at least as far as JSpecify is concerned).
 
-There are two JSpecify annotations that indicate these properties:
+There are four JSpecify annotations that are used together to indicate the
+nullness of all symbols.
 
 *   `@Nullable` applied to a type means a reference of that type can be null.
 
@@ -124,9 +131,9 @@ class Example {
 The `@NullMarked` annotation indicates that references can't be null in its
 scope, unless their types are explicitly marked `@Nullable`. If applied to a
 module then its scope is all the code in the module. If applied to a package
-then its scope is all the code in the package. (Note that packages are _not_
+then its scope is all the code in the package. (Note that packages are *not*
 hierarchical; applying `@NullMarked` to package `com.foo` does not make package
-`com.foo.bar` `@NullMarked`.)  If applied to a class or interface then its scope
+`com.foo.bar` `@NullMarked`.) If applied to a class or interface then its scope
 is all the code in that class or interface.
 
 Outside `@NullMarked`, `@Nullable String` still means a reference that can be
@@ -235,8 +242,8 @@ public interface List<E extends @Nullable Object> {...}
 ```
 
 If it were `interface List<E>` rather than `interface List<E extends @Nullable
-Object>` then `NumberList<E extends @Nullable Number> implements List<E>` would not
-be legal. That's because `interface List<E>` is short for `interface List<E
+Object>` then `NumberList<E extends @Nullable Number> implements List<E>` would
+not be legal. That's because `interface List<E>` is short for `interface List<E
 extends Object>`. Inside `@NullMarked`, plain `Object` means "`Object` reference
 that can't be null". The `<E extends @Nullable Number>` from NumberList would
 not be compatible with `<E extends Object>`.
