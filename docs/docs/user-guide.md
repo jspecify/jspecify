@@ -238,7 +238,7 @@ assigned to `Number`. This is standard Java behavior.
 But now let's think about that bound as it relates to `@NullMarked`. Can we
 write `NumberList<@Nullable Integer>`?
 
-Within `@NullMarked`, remember, unannotated types are the same as if they had
+Within `@NullMarked`, remember, unannotated types are the same as if they were annotated with
 `@NonNull`. Since the bound of `E` is the same as `@NonNull Number`, and not
 `@Nullable Number`, that means the type argument for `E` can't be a type that
 includes `null`. `@Nullable Integer` can't be the type argument, then, since
@@ -380,7 +380,7 @@ public class Methods {
 The `firstOrNull` method will accept a `List<String>` but not a `List<@Nullable
 String>`. When given an argument of type `List<String>`, `T` is `String`, so the
 return type `@Nullable T` is `@Nullable String`. The input list can't contain
-`null` elements, but the return value can be nu`ll.
+`null` elements, but the return value can be `null`.
 
 The `firstOrNonNullDefault` method again does not allow `T` to be a `@Nullable`
 type, so `List<@Nullable String>` is not allowed. Now the return value is not
