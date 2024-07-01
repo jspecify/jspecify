@@ -300,8 +300,8 @@ public class ImmutableList<E> implements List<E> {...}
 
 Here, because it is `ImmutableList<E>` and not `ImmutableList<E extends
 @Nullable Object>`, it is not legal to write `ImmutableList<@Nullable String>`.
-You can only write `ImmutableList<String>`, which is a list of non-null
-`String` references.
+You can only write `ImmutableList<String>`, which is a list of non-null `String`
+references.
 
 ### Using type variables in generic types
 
@@ -346,11 +346,11 @@ Object>`.)
 
 Similarly, you can use `@NonNull E` to indicate a type that is non-nullable
 *even when `E` is nullable*. The fictitious `maybeFirst()` method returns a
-non-nullable `Optional`. An `Optional` object can hold only non-null values,
-so it's reasonable to define it as `class Optional<T>`; that is, its type
-argument must not be nullable. So even for a `List<@Nullable String>`,
-`maybeFirst()` has to return `Optional<@NonNull String>`. The way to declare
-that is to declare the return type of `maybeFirst()` as `Optional<@NonNull E>`.
+non-nullable `Optional`. An `Optional` object can hold only non-null values, so
+it's reasonable to define it as `class Optional<T>`; that is, its type argument
+must not be nullable. So even for a `List<@Nullable String>`, `maybeFirst()` has
+to return `Optional<@NonNull String>`. The way to declare that is to declare the
+return type of `maybeFirst()` as `Optional<@NonNull E>`.
 
 We saw earlier that `@NullMarked` usually means "references can't be `null`
 unless they are marked `@Nullable`", and also that that doesn't apply to local
