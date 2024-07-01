@@ -62,9 +62,11 @@ nullness of all symbols.
     `String x` means the same as `@NonNull String x`.
 
 *   [`@NullUnmarked`] applied to a package, class, or method undoes the effects
-    of any surrounding `@NullMarked`. Values in its scope generally have unspecified nullness unless they
-    are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing
-    `@NullMarked` at all. A `@NullUnmarked` span may in turn contain nested `@NullMarked` spans to reapply those rules.
+    of any surrounding `@NullMarked`. Values in its scope generally have
+    unspecified nullness unless they are annotated with `@Nullable` or
+    `@NonNull`, as if there were no enclosing `@NullMarked` at all. A
+    `@NullUnmarked` span may in turn contain nested `@NullMarked` spans to
+    reapply those rules.
 
 The notion of "can't be `null`" should really be read with a footnote that says
 "if all the code in question is `@NullMarked`". For example, if you have some
@@ -74,9 +76,9 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 
 ## `@Nullable` and `@NonNull`
 
-A type annotated with [`@Nullable`] means that a value of the type
-can be `null`. Code that uses those values must be able to deal with the `null`
-case, and it's okay to assign `null` to such variables or pass `null` to those
+A type annotated with [`@Nullable`] means that a value of the type can be
+`null`. Code that uses those values must be able to deal with the `null` case,
+and it's okay to assign `null` to such variables or pass `null` to those
 parameters.
 
 The [`@NonNull`] annotation applied to a type means that no value of the type
@@ -104,8 +106,8 @@ annotated with `@Nullable`.
 On the other hand, `nullToEmpty` promises to handle `null` arguments, so its
 parameter is annotated with `@Nullable` to indicate that `nullToEmpty(null)` is
 a valid method call. Its body considers the case where the argument is `null`
-and won't throw `NullPointerException`. It cannot return `null`, so its
-return type is annotated with `@NonNull`.
+and won't throw `NullPointerException`. It cannot return `null`, so its return
+type is annotated with `@NonNull`.
 
 ```java
 void doSomething() {
@@ -160,10 +162,10 @@ applied to a class, interface, or method, then its scope is all the code in that
 class, interface, or method.
 
 Outside `@NullMarked`, `String` without an annotation means what it always used
-to mean: a value that might be intended to include `null`s or might not, depending
-on whatever documentation you can find. If a package, class, or method inside
-`@NullMarked` is annotated with [`@NullUnmarked`], it's treated the same way, as
-if it weren't inside a `@NullMarked` context.
+to mean: a value that might be intended to include `null`s or might not,
+depending on whatever documentation you can find. If a package, class, or method
+inside `@NullMarked` is annotated with [`@NullUnmarked`], it's treated the same
+way, as if it weren't inside a `@NullMarked` context.
 
 ```java
 @NullMarked
@@ -192,10 +194,10 @@ variables (as we'll see next) and [type variables](#declaring-generics).
 
 ## Local variables
 
-`@Nullable` and `@NonNull` aren't applied to local variables—at least not
-their root types. (They should be applied to type arguments and array
-components.) The reason is that it is possible to *infer* whether a variable can
-be `null` based on the values that are assigned to the variable. For example:
+`@Nullable` and `@NonNull` aren't applied to local variables—at least not their
+root types. (They should be applied to type arguments and array components.) The
+reason is that it is possible to *infer* whether a variable can be `null` based
+on the values that are assigned to the variable. For example:
 
 ```java
 @NullMarked
@@ -344,15 +346,17 @@ Object>`.)
 
 Similarly, you can use `@NonNull E` to indicate a type that is non-nullable
 *even when `E` is nullable*. The fictitious `maybeFirst()` method returns a
-non-nullable `Optional`. An `Optional` object can hold only non-`null` values, so it's reasonable to
-define it as `class Optional<T>`; that is, its type argument must not be nullable. So even
-for a `List<@Nullable String>`, `maybeFirst()` has to return `Optional<@NonNull String>`. The way to
-declare that is to declare the return type of `maybeFirst()` as `Optional<@NonNull E>`.
+non-nullable `Optional`. An `Optional` object can hold only non-`null` values,
+so it's reasonable to define it as `class Optional<T>`; that is, its type
+argument must not be nullable. So even for a `List<@Nullable String>`,
+`maybeFirst()` has to return `Optional<@NonNull String>`. The way to declare
+that is to declare the return type of `maybeFirst()` as `Optional<@NonNull E>`.
 
 We saw earlier that `@NullMarked` usually means "references can't be `null`
 unless they are marked `@Nullable`", and also that that doesn't apply to local
-variables. Here we see that it doesn't apply to unannotated type variable uses either, since an unannotated type variable usage
-whose bound is `@Nullable` may be substituted with a `@Nullable` type argument.
+variables. Here we see that it doesn't apply to unannotated type variable uses
+either, since an unannotated type variable usage whose bound is `@Nullable` may
+be substituted with a `@Nullable` type argument.
 
 ### Using type variables in generic methods
 
@@ -482,8 +486,8 @@ class ImmutableList<E extends Object> implements List<E>
 ```
 
 so `ImmutableList<?>` means the same as `ImmutableList<? extends Object>`. And
-here, `@NullMarked` means that `Object` excludes `null`. The `get(int)` method of
-`List<?>` can return `null` but the same method of `ImmutableList<?>` can't.
+here, `@NullMarked` means that `Object` excludes `null`. The `get(int)` method
+of `List<?>` can return `null` but the same method of `ImmutableList<?>` can't.
 
 [`@NonNull`]: https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html
 [`@Nullable`]: https://jspecify.dev/docs/api/org/jspecify/annotations/Nullable.html
