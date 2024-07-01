@@ -19,22 +19,22 @@ value `null`. Such annotations are useful to (for example):
 
 ## Java variables are references
 
-In Java, all non-primitive variables are references. We often think of a
+In Java, all non-primitive variables are either `null` or a reference to an object. We often think of a
 declaration like `String x` as meaning that `x` is a `String`, but it really
 means that `x` is *either* `null` *or* a reference to an actual `String` object.
 JSpecify gives you a way to make it clear whether you really mean that, or you
-mean that `x` is definitely a reference to a `String` object and not `null`.
+really mean that `x` is definitely a reference to a `String` object and not `null`.
 
 ## Types and nullness
 
 JSpecify gives you rules that determine, for each type usage, which of four
 kinds of nullness it has:
 
-1.  It is nullable: it includes `null`.
-2.  It is non-null: it does not include `null`.
-3.  For type variables only, it has "parametric nullness": it includes `null` if
-    the type argument that is substituted for it does.
-4.  It has "unspecified nullness: we don't know whether it can include `null`.
+1.  It can include `null` (it is "nullable").
+2.  It will not include `null` (it is "non-nullable").
+3.  For type variables only: it includes `null` if
+    the type argument that is substituted for it does (it has "parametric nullness").
+4.  We don't know whether it can include `null` (it has "unspecified nullness").
     This is equivalent to the state of the world without JSpecify annotations.
 
 For a given variable `x`, if `x` can be `null` then `x.getClass()` is unsafe
@@ -50,7 +50,7 @@ nullness of all symbols.
     `@Nullable String x` means that `x` might be `null`.
 
 *   `@NonNull` applied to a type means a value of that type cannot be `null`.
-    `@NonNull String x` means that `x` is never `null` (in correct programs).
+    `@NonNull String x` means that `x` is never `null` (or you have a bug in your code).
 
 *   `@NullMarked` applied to a module, package, class, or method means that a
     value in that scope can't be `null` unless its type is explicitly marked
@@ -73,10 +73,13 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 
 ## `@Nullable` and `@NonNull`
 
-The `@Nullable` annotation applied to a type means that a value of the type can
+The [`@Nullable`](https://jspecify.dev/docs/api/org/jspecify/annotations/Nullable.html) annotation applied to a type means that a value of the type can
 be `null`. Code that uses those values must be able to deal with the `null`
 case, and it's okay to assign `null` to those values or pass `null` to those
 parameters.
+
+The [`@NonNull`](https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html) annotation applied to a type means that no value of the type can be `null` (unless there's a bug in your code). Code that uses those values can assume they're not `null`, but it's a bad idea
+to assign `null` to those values or pass `null` to those parameters.
 
 ```java
 static @Nullable String emptyToNull(@NonNull String x) {
@@ -104,10 +107,10 @@ return type is annotated with `@NonNull`.
 ```java
 void doSomething() {
   // OK: nullToEmpty accepts null but won't return it
-  String y = nullToEmpty(Math.random() > 0.5 ? null : "x").toString();
+  String y = nullToEmpty(null).toString();
 
   // Not OK: emptyToNull doesn't accept null; also, it might return null!
-  String z = emptyToNull(Math.random() > 0.5 ? null : "x").toString();
+  String z = emptyToNull(null).toString();
 }
 ```
 
@@ -182,11 +185,10 @@ like `String` as meaning a real reference to a `String` object and never `null`.
 As mentioned above, there are some exceptions to this interpretation for local
 variables (as we'll see next) and [type variables](#declaring-generics).
 
-## Local variables {#local-variables}
+## Local variables
 
-Tools that understand JSpecify annotations typically *don't* require `@Nullable`
-or `@NonNull` to be applied to local variables. They may in fact not even allow
-that. The reason is that it should be possible to *infer* whether a variable can
+`@Nullable` and `@NonNull` aren't applied to local variables&mdash;at least not their root types. (They should be applied to type arguments and array components.)
+The reason is that it is possible to *infer* whether a variable can
 be `null` based on the values that are assigned to the variable. For example:
 
 ```java
