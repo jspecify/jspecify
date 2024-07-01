@@ -44,47 +44,30 @@ because it could produce a `NullPointerException`. If `x` can't be `null`,
 whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 (at least as far as JSpecify is concerned).
 
+The notion of "can't be `null`" should really be read with a footnote that says
+"if none of the code in question involves unspecified nullness. For example, if you have some
+code that passes types with unspecified nulless to a method that accepts only `@NonNull` arguments, then tools
+might allow it to pass a possibly-`null` value to a method that is expecting a
+"can't be `null`" parameter.
+
 There are four JSpecify annotations that are used together to indicate the
 nullness of all symbols.
 
-*   [`@Nullable`] applied to a type means a value of that type can be `null`.
-    `@Nullable String x` means that `x` might be `null`.
-
-*   [`@NonNull`] applied to a type means a value of that type cannot be `null`.
-    `@NonNull String x` means that `x` is never `null` (or you have a bug in
-    your code).
-
-*   [`@NullMarked`] applied to a module, package, class, or method means that a
-    value in that scope can't be `null` unless its type is explicitly marked
-    `@Nullable`. (Below we will see that there are some exceptions to this for
-    [local variables](#local-variables) and
-    [type variables](#declaring-generics).) In code covered by `@NullMarked`,
-    `String x` means the same as `@NonNull String x`.
-
-*   [`@NullUnmarked`] applied to a package, class, or method undoes the effects
-    of any surrounding `@NullMarked`. Values in its scope generally have
-    unspecified nullness unless they are annotated with `@Nullable` or
-    `@NonNull`, as if there were no enclosing `@NullMarked` at all. A
-    `@NullUnmarked` span may in turn contain nested `@NullMarked` spans to
-    reapply those rules.
-
-The notion of "can't be `null`" should really be read with a footnote that says
-"if all the code in question is `@NullMarked`". For example, if you have some
-code that is not `@NullMarked` and that calls a `@NullMarked` method, then tools
-might allow it to pass a possibly-`null` value to a method that is expecting a
-"can't be `null`" parameter.
+*   two type use annotations that indicate whether a specific type usage includes `null` or not: [`@Nullable` and `@NonNull`](#nullable-and-nonnull)
+*   a scope annotation that lets you avoid typing `@NonNull` most of the time: [`@NullMarked`](#nullmarked)
+*   another scope annotation that undoes the effects of `@NullMarked` so you can adopt annotations incrementally: [`@NullUnmarked`](#nullunmarked)
 
 ## `@Nullable` and `@NonNull`
 
 When a type is annotated with [`@Nullable`], it means that a value of the type
-can be `null`. Code that uses those values must be able to deal with the `null`
+can be `null`. `@Nullable String x` means that `x` might be `null`. Code that uses those values must be able to deal with the `null`
 case, and it's okay to assign `null` to such variables or pass `null` to those
 parameters.
 
 When a type is annotated with [`@NonNull`], it means that no value of the type
-can be `null` (unless there's a bug in your code). Code that uses those values
+can be `null` (unless there's a bug in your code). `@NonNull String x` means that `x` should never be `null`. Code that uses those values
 can assume they're not `null`, but it's a bad idea to assign `null` to those
-values or pass `null` to those parameters.
+values or pass `null` to those parameters. (See [below](#nullmarked) for how to avoid having to spell out `@NonNull` most of the time.)
 
 ```java
 static @Nullable String emptyToNull(@NonNull String x) {
@@ -135,10 +118,10 @@ String` can be assigned from a `@NonNull String` but a `@NonNull String` can't
 be assigned from a `@Nullable String` (since that might be `null`).
 
 ```java
-@NullMarked
 class Example {
   void useNullable(@Nullable String x) {...}
   void useNonNull(@NonNull String x) {...}
+
   void example(@Nullable String nullable, @NonNull String nonNull) {
     useNullable(nonNull); // JSpecify allows this
     useNonNull(nullable); // JSpecify doesn't allow this
@@ -146,26 +129,42 @@ class Example {
 }
 ```
 
+## What about unannotated types?
+
+A type like `String` that isn't annotated with either `@Nullable` or `@NonNull` means what it always used
+to mean: its values might be intended to include `null`s or might not,
+depending on whatever documentation you can find (but see [below](#nullmarked) for help!). JSpecify calls this "unspecified nullness".
+
+
+```java
+class Unannotated {
+  void whoKnows(String x) {...}
+
+  void example(@Nullable String ) {
+    whoKnows(nullable); // ¯\_(ツ)_/¯
+  }
+}
+```
+
 ## `@NullMarked`
 
 It would be annoying to have to annotate each and every type usage in your Java
-code with either `@Nullable` or `@NonNull` (especially once you add
+code with either `@Nullable` or `@NonNull` to avoid unspecified nullness (especially once you add
 [generics](#generics)!).
 
-So JSpecify gives you a [`@NullMarked`] annotation, which indicates that the
-types in its scope without either `@Nullable` or `@NonNull` can't be `null`, by
-default (with some exceptions). If applied to a module then its scope is all the
+So JSpecify gives you the [`@NullMarked`] annotation. When you apply `@NullMarked` to a module, package, class, or method, it means that
+unannotated types in that scope are treated as if they were annotated with `@NonNull`.
+(Below we will see that there are some exceptions to this for
+[local variables](#local-variables) and
+[type variables](#declaring-generics).) In code covered by `@NullMarked`,
+`String x` means the same as `@NonNull String x`.
+
+If applied to a module then its scope is all the
 code in the module. If applied to a package then its scope is all the code in
 the package. (Note that packages are *not* hierarchical; applying `@NullMarked`
 to package `com.foo` does not make package `com.foo.bar` `@NullMarked`.) If
 applied to a class, interface, or method, then its scope is all the code in that
 class, interface, or method.
-
-Outside `@NullMarked`, `String` without an annotation means what it always used
-to mean: a value that might be intended to include `null`s or might not,
-depending on whatever documentation you can find. If a package, class, or method
-inside `@NullMarked` is annotated with [`@NullUnmarked`], it's treated the same
-way, as if it weren't inside a `@NullMarked` context.
 
 ```java
 @NullMarked
@@ -191,6 +190,19 @@ like `String` as meaning a real reference to a `String` object and never `null`.
 
 As mentioned above, there are some exceptions to this interpretation for local
 variables (as we'll see next) and [type variables](#declaring-generics).
+
+### `@NullUnmarked`
+
+If you're applying JSpecify annotations to your code, you might not be able to annnotate it all at once.
+If you can apply `@NullMarked` to some of your code now, and do the rest later, that's better than waiting until you have time to annotate everything.
+But that means you may have to null-mark a module, package or class _except for some classes or methods_. To do that,
+apply [`@NullUnmarked`] to a package, class, or method that's already inside a `@NullMarked` span. `@NullUnmarked` simply undoes the effects
+of the surrounding `@NullMarked`, so that unannotated types have
+unspecified nullness unless they are annotated with `@Nullable` or
+`@NonNull`, as if there were no enclosing `@NullMarked` at all. A
+`@NullUnmarked` span may in turn contain nested `@NullMarked` spans to
+reapply those rules.
+
 
 ## Local variables
 
