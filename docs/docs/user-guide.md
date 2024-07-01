@@ -45,14 +45,14 @@ whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 (at least as far as JSpecify is concerned).
 
 The notion of "can't be `null`" should really be read with a footnote that says
-"if none of the code in question involves unspecified nullness. For example, if
+"if none of the code in question involves unspecified nullness". For example, if
 you have some code that passes types with unspecified nulless to a method that
 accepts only `@NonNull` arguments, then tools might allow it to pass a
 possibly-`null` value to a method that is expecting a "can't be `null`"
 parameter.
 
 There are four JSpecify annotations that are used together to indicate the
-nullness of all symbols.
+nullness of all symbols:
 
 *   two type use annotations that indicate whether a specific type usage
     includes `null` or not: [`@Nullable` and `@NonNull`](#nullable-and-nonnull)
@@ -139,7 +139,7 @@ class Example {
 
 A type like `String` that isn't annotated with either `@Nullable` or `@NonNull`
 means what it always used to mean: its values might be intended to include
-`null`s or might not, depending on whatever documentation you can find (but see
+`null` or might not, depending on whatever documentation you can find (but see
 [below](#nullmarked) for help!). JSpecify calls this "unspecified nullness".
 
 ```java
@@ -194,8 +194,8 @@ will give you correct nullness semantics with fewer annotations. In
 `@NullMarked` code, you'll get used to thinking about plain, unannotated types
 like `String` as meaning a real reference to a `String` object and never `null`.
 
-As mentioned above, there are some exceptions to this interpretation for local
-variables (as we'll see next) and [type variables](#declaring-generics).
+As mentioned above, there are some exceptions to this interpretation for [local
+variables](#local-variables) and [type variables](#declaring-generics).
 
 ### `@NullUnmarked`
 
