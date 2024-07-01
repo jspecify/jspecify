@@ -81,10 +81,10 @@ A type annotated with [`@Nullable`] means that a value of the type can be
 and it's okay to assign `null` to such variables or pass `null` to those
 parameters.
 
-A type annotated with [`@NonNull`] means that no value of the type
-can be `null` (unless there's a bug in your code). Code that uses those values
-can assume they're not `null`, but it's a bad idea to assign `null` to those
-values or pass `null` to those parameters.
+A type annotated with [`@NonNull`] means that no value of the type can be `null`
+(unless there's a bug in your code). Code that uses those values can assume
+they're not `null`, but it's a bad idea to assign `null` to those values or pass
+`null` to those parameters.
 
 ```java
 static @Nullable String emptyToNull(@NonNull String x) {
