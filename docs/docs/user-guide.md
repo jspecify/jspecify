@@ -76,12 +76,12 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 
 ## `@Nullable` and `@NonNull`
 
-A type annotated with [`@Nullable`] means that a value of the type can be
+When a type is annotated with [`@Nullable`], it means that a value of the type can be
 `null`. Code that uses those values must be able to deal with the `null` case,
 and it's okay to assign `null` to such variables or pass `null` to those
 parameters.
 
-A type annotated with [`@NonNull`] means that no value of the type can be `null`
+When a type is annotated with [`@NonNull`], it means that no value of the type can be `null`
 (unless there's a bug in your code). Code that uses those values can assume
 they're not `null`, but it's a bad idea to assign `null` to those values or pass
 `null` to those parameters.
