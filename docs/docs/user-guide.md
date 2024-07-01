@@ -47,21 +47,21 @@ whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 There are four JSpecify annotations that are used together to indicate the
 nullness of all symbols.
 
-*   `@Nullable` applied to a type means a value of that type can be `null`.
+*   [`@Nullable`] applied to a type means a value of that type can be `null`.
     `@Nullable String x` means that `x` might be `null`.
 
-*   `@NonNull` applied to a type means a value of that type cannot be `null`.
+*   [`@NonNull`] applied to a type means a value of that type cannot be `null`.
     `@NonNull String x` means that `x` is never `null` (or you have a bug in
     your code).
 
-*   `@NullMarked` applied to a module, package, class, or method means that a
+*   [`@NullMarked`] applied to a module, package, class, or method means that a
     value in that scope can't be `null` unless its type is explicitly marked
     `@Nullable`. (Below we will see that there are some exceptions to this for
     [local variables](#local-variables) and
     [type variables](#declaring-generics).) In code covered by `@NullMarked`,
     `String x` means the same as `@NonNull String x`.
 
-*   `@NullUnmarked` applied to a package, class, or method undoes the effects of
+*   [`@NullUnmarked`] applied to a package, class, or method undoes the effects of
     any surrounding `@NullMarked`. Values in its scope (unless counteracted by
     an enclosed `@NullMarked` generally have unspecified nullness unless they
     are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing
@@ -76,13 +76,13 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 ## `@Nullable` and `@NonNull`
 
 The
-[`@Nullable`](https://jspecify.dev/docs/api/org/jspecify/annotations/Nullable.html)
+[`@Nullable`]
 annotation applied to a type means that a value of the type can be `null`. Code
 that uses those values must be able to deal with the `null` case, and it's okay
 to assign `null` to those values or pass `null` to those parameters.
 
 The
-[`@NonNull`](https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html)
+[`@NonNull`]
 annotation applied to a type means that no value of the type can be `null`
 (unless there's a bug in your code). Code that uses those values can assume
 they're not `null`, but it's a bad idea to assign `null` to those values or pass
@@ -154,7 +154,7 @@ It would be annoying to have to annotate each and every type usage in your Java
 code with either `@Nullable` or `@NonNull` (especially once you add
 [generics](#generics)!).
 
-So JSpecify gives you a `@NullMarked` annotation, which indicates that the types
+So JSpecify gives you a [`@NullMarked`] annotation, which indicates that the types
 in its scope without either `@Nullable` or `@NonNull` can't be null, by default
 (with some exceptions). If applied to a module then its scope is all the code in
 the module. If applied to a package then its scope is all the code in the
@@ -165,7 +165,8 @@ interface, or method.
 
 Outside `@NullMarked`, `String` without an annotation means what it always used
 to mean: a value that might be intended to allow `null`s or might not, depending
-on whatever documentation you can find.
+on whatever documentation you can find. If a package, class, or method inside `@NullMarked` is annotated with [`@NullUnmarked`], it's
+treated the same way, as if it weren't inside a `@NullMarked` context.
 
 ```java
 @NullMarked
@@ -485,3 +486,8 @@ class ImmutableList<E extends Object> implements List<E>
 so `ImmutableList<?>` means the same as `ImmutableList<? extends Object>`. And
 here, `@NullMarked` means that `Object` excludes null. The `get(int)` method of
 `List<?>` can return null but the same method of `ImmutableList<?>` can't.
+
+[`@NonNull`]: https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html
+[`@Nullable`]: https://jspecify.dev/docs/api/org/jspecify/annotations/Nullable.html
+[`@NullMarked`]: https://jspecify.dev/docs/api/org/jspecify/annotations/NullMarked.html
+[`@NullUnmarked`]: https://jspecify.dev/docs/api/org/jspecify/annotations/NullUnmarked.html
