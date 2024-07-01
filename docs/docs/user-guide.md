@@ -19,11 +19,12 @@ value `null`. Such annotations are useful to (for example):
 
 ## Java variables are references
 
-In Java, all non-primitive variables are either `null` or a reference to an object. We often think of a
-declaration like `String x` as meaning that `x` is a `String`, but it really
-means that `x` is *either* `null` *or* a reference to an actual `String` object.
-JSpecify gives you a way to make it clear whether you really mean that, or you
-really mean that `x` is definitely a reference to a `String` object and not `null`.
+In Java, all non-primitive variables are either `null` or a reference to an
+object. We often think of a declaration like `String x` as meaning that `x` is a
+`String`, but it really means that `x` is *either* `null` *or* a reference to an
+actual `String` object. JSpecify gives you a way to make it clear whether you
+really mean that, or you really mean that `x` is definitely a reference to a
+`String` object and not `null`.
 
 ## Types and nullness
 
@@ -32,8 +33,8 @@ kinds of nullness it has:
 
 1.  It can include `null` (it is "nullable").
 2.  It will not include `null` (it is "non-nullable").
-3.  For type variables only: it includes `null` if
-    the type argument that is substituted for it does (it has "parametric nullness").
+3.  For type variables only: it includes `null` if the type argument that is
+    substituted for it does (it has "parametric nullness").
 4.  We don't know whether it can include `null` (it has "unspecified nullness").
     This is equivalent to the state of the world without JSpecify annotations.
 
@@ -50,7 +51,8 @@ nullness of all symbols.
     `@Nullable String x` means that `x` might be `null`.
 
 *   `@NonNull` applied to a type means a value of that type cannot be `null`.
-    `@NonNull String x` means that `x` is never `null` (or you have a bug in your code).
+    `@NonNull String x` means that `x` is never `null` (or you have a bug in
+    your code).
 
 *   `@NullMarked` applied to a module, package, class, or method means that a
     value in that scope can't be `null` unless its type is explicitly marked
@@ -73,13 +75,18 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 
 ## `@Nullable` and `@NonNull`
 
-The [`@Nullable`](https://jspecify.dev/docs/api/org/jspecify/annotations/Nullable.html) annotation applied to a type means that a value of the type can
-be `null`. Code that uses those values must be able to deal with the `null`
-case, and it's okay to assign `null` to those values or pass `null` to those
-parameters.
-
-The [`@NonNull`](https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html) annotation applied to a type means that no value of the type can be `null` (unless there's a bug in your code). Code that uses those values can assume they're not `null`, but it's a bad idea
+The
+[`@Nullable`](https://jspecify.dev/docs/api/org/jspecify/annotations/Nullable.html)
+annotation applied to a type means that a value of the type can be `null`. Code
+that uses those values must be able to deal with the `null` case, and it's okay
 to assign `null` to those values or pass `null` to those parameters.
+
+The
+[`@NonNull`](https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html)
+annotation applied to a type means that no value of the type can be `null`
+(unless there's a bug in your code). Code that uses those values can assume
+they're not `null`, but it's a bad idea to assign `null` to those values or pass
+`null` to those parameters.
 
 ```java
 static @Nullable String emptyToNull(@NonNull String x) {
@@ -187,8 +194,9 @@ variables (as we'll see next) and [type variables](#declaring-generics).
 
 ## Local variables
 
-`@Nullable` and `@NonNull` aren't applied to local variables&mdash;at least not their root types. (They should be applied to type arguments and array components.)
-The reason is that it is possible to *infer* whether a variable can
+`@Nullable` and `@NonNull` aren't applied to local variables&mdash;at least not
+their root types. (They should be applied to type arguments and array
+components.) The reason is that it is possible to *infer* whether a variable can
 be `null` based on the values that are assigned to the variable. For example:
 
 ```java
@@ -238,12 +246,12 @@ assigned to `Number`. This is standard Java behavior.
 But now let's think about that bound as it relates to `@NullMarked`. Can we
 write `NumberList<@Nullable Integer>`?
 
-Within `@NullMarked`, remember, unannotated types are the same as if they were annotated with
-`@NonNull`. Since the bound of `E` is the same as `@NonNull Number`, and not
-`@Nullable Number`, that means the type argument for `E` can't be a type that
-includes `null`. `@Nullable Integer` can't be the type argument, then, since
-that *can* include `null`. (In other words: `@Nullable Integer` *is not a
-subtype* of `Number`.)
+Within `@NullMarked`, remember, unannotated types are the same as if they were
+annotated with `@NonNull`. Since the bound of `E` is the same as `@NonNull
+Number`, and not `@Nullable Number`, that means the type argument for `E` can't
+be a type that includes `null`. `@Nullable Integer` can't be the type argument,
+then, since that *can* include `null`. (In other words: `@Nullable Integer` *is
+not a subtype* of `Number`.)
 
 Inside `@NullMarked`, if you want to be able to substitute nullable type
 arguments for a type parameter, you must explicitly provide a `@Nullable` bound
