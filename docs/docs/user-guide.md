@@ -61,9 +61,9 @@ nullness of all symbols.
     [type variables](#declaring-generics).) In code covered by `@NullMarked`,
     `String x` means the same as `@NonNull String x`.
 
-*   [`@NullUnmarked`] applied to a package, class, or method undoes the effects of
-    any surrounding `@NullMarked`. Values in its scope (unless counteracted by
-    an enclosed `@NullMarked` generally have unspecified nullness unless they
+*   [`@NullUnmarked`] applied to a package, class, or method undoes the effects
+    of any surrounding `@NullMarked`. Values in its scope (unless counteracted
+    by an enclosed `@NullMarked` generally have unspecified nullness unless they
     are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing
     `@NullMarked` at all.
 
@@ -75,18 +75,15 @@ might allow it to pass a possibly-`null` value to a method that is expecting a
 
 ## `@Nullable` and `@NonNull`
 
-The
-[`@Nullable`]
-annotation applied to a type means that a value of the type can be `null`. Code
-that uses those values must be able to deal with the `null` case, and it's okay
-to assign `null` to those values or pass `null` to those parameters.
+The [`@Nullable`] annotation applied to a type means that a value of the type
+can be `null`. Code that uses those values must be able to deal with the `null`
+case, and it's okay to assign `null` to those values or pass `null` to those
+parameters.
 
-The
-[`@NonNull`]
-annotation applied to a type means that no value of the type can be `null`
-(unless there's a bug in your code). Code that uses those values can assume
-they're not `null`, but it's a bad idea to assign `null` to those values or pass
-`null` to those parameters.
+The [`@NonNull`] annotation applied to a type means that no value of the type
+can be `null` (unless there's a bug in your code). Code that uses those values
+can assume they're not `null`, but it's a bad idea to assign `null` to those
+values or pass `null` to those parameters.
 
 ```java
 static @Nullable String emptyToNull(@NonNull String x) {
@@ -154,19 +151,20 @@ It would be annoying to have to annotate each and every type usage in your Java
 code with either `@Nullable` or `@NonNull` (especially once you add
 [generics](#generics)!).
 
-So JSpecify gives you a [`@NullMarked`] annotation, which indicates that the types
-in its scope without either `@Nullable` or `@NonNull` can't be null, by default
-(with some exceptions). If applied to a module then its scope is all the code in
-the module. If applied to a package then its scope is all the code in the
-package. (Note that packages are *not* hierarchical; applying `@NullMarked` to
-package `com.foo` does not make package `com.foo.bar` `@NullMarked`.) If applied
-to a class, interface, or method, then its scope is all the code in that class,
-interface, or method.
+So JSpecify gives you a [`@NullMarked`] annotation, which indicates that the
+types in its scope without either `@Nullable` or `@NonNull` can't be null, by
+default (with some exceptions). If applied to a module then its scope is all the
+code in the module. If applied to a package then its scope is all the code in
+the package. (Note that packages are *not* hierarchical; applying `@NullMarked`
+to package `com.foo` does not make package `com.foo.bar` `@NullMarked`.) If
+applied to a class, interface, or method, then its scope is all the code in that
+class, interface, or method.
 
 Outside `@NullMarked`, `String` without an annotation means what it always used
 to mean: a value that might be intended to allow `null`s or might not, depending
-on whatever documentation you can find. If a package, class, or method inside `@NullMarked` is annotated with [`@NullUnmarked`], it's
-treated the same way, as if it weren't inside a `@NullMarked` context.
+on whatever documentation you can find. If a package, class, or method inside
+`@NullMarked` is annotated with [`@NullUnmarked`], it's treated the same way, as
+if it weren't inside a `@NullMarked` context.
 
 ```java
 @NullMarked
