@@ -112,10 +112,10 @@ type is annotated with `@NonNull`.
 ```java
 void doSomething() {
   // OK: nullToEmpty accepts null but won't return it
-  int length = nullToEmpty(null).length();
+  int length1 = nullToEmpty(null).length();
 
   // Not OK: emptyToNull doesn't accept null; also, it might return null!
-  int z = emptyToNull(null).length();
+  int length2 = emptyToNull(null).length();
 }
 ```
 
