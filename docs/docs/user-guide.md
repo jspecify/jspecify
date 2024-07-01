@@ -194,8 +194,8 @@ will give you correct nullness semantics with fewer annotations. In
 `@NullMarked` code, you'll get used to thinking about plain, unannotated types
 like `String` as meaning a real reference to a `String` object and never `null`.
 
-As mentioned above, there are some exceptions to this interpretation for [local
-variables](#local-variables) and [type variables](#declaring-generics).
+As mentioned above, there are some exceptions to this interpretation for
+[local variables](#local-variables) and [type variables](#declaring-generics).
 
 ### `@NullUnmarked`
 
