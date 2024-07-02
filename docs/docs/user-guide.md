@@ -146,7 +146,7 @@ means what it always used to mean: its values might be intended to include
 class Unannotated {
   void whoKnows(String x) {...}
 
-  void example(@Nullable String ) {
+  void example(@Nullable String nullable) {
     whoKnows(nullable); // ¯\_(ツ)_/¯
   }
 }
@@ -205,11 +205,11 @@ now, and do the rest later, that's better than waiting until you have time to
 annotate everything. But that means you may have to null-mark a module, package
 or class *except for some classes or methods*. To do that, apply
 [`@NullUnmarked`] to a package, class, or method that's already inside a
-`@NullMarked` span. `@NullUnmarked` simply undoes the effects of the surrounding
+`@NullMarked` context. `@NullUnmarked` simply undoes the effects of the surrounding
 `@NullMarked`, so that unannotated types have unspecified nullness unless they
 are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing
-`@NullMarked` at all. A `@NullUnmarked` span may in turn contain nested
-`@NullMarked` spans to reapply those rules.
+`@NullMarked` at all. A `@NullUnmarked` scope may in turn contain a nested
+`@NullMarked` element to make most unannotated type usages non-null within that narrower scope.
 
 ## Local variables
 
