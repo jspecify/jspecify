@@ -43,13 +43,13 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
 ### Begin with one of
 
 *   The [User Guide].
-*   The [Javadoc], which is not a *tutorial* walkthrough, but is thorough,
-    specific, and current.
+*   The [Javadoc], which is not a *tutorial* walkthrough, but is thorough and
+    specific.
 
 ### Then if you're *really* interested
 
 *   The [specification], written to be understood by owners of compilers and
-    static analysis tools. Note that it currently matches JSpecify 0.2, not 0.3.
+    static analysis tools. Note that it's currently pretty old: it matches JSpecify 0.2, not 1.0. We're working on updating it.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
 *   Or try it out...
