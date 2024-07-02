@@ -105,6 +105,7 @@ to extend our support beyond nullness.
 [issues]: https://github.com/jspecify/jspecify/issues
 [release]: https://search.maven.org/artifact/org.jspecify/jspecify/0.3.0/jar
 [spec]: /docs/spec
+[specification]: /docs/spec
 [stackoverflow answer]: https://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use
 [user guide]: /docs/user-guide
 [wiki]: https://github.com/jspecify/jspecify/wiki
