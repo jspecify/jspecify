@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Nullness User Guide (draft)
+# Nullness User Guide
 
 In Java code, whether an expression may evaluate to `null` is often documented
 only in natural language, if at all. JSpecify's nullness annotations let
