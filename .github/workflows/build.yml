@@ -5,7 +5,13 @@ name: Build
 # * A repository variable named REFERENCE_CHECKER_REPO with the name of the reference checker repo
 #    within this fork of JSpecify.
 
-on: [push, pull_request]
+on:
+  push:
+    paths-ignore:
+      - 'docs/**'
+  pull_request:
+    paths-ignore:
+      - 'docs/**'
 
 defaults:
   run:
