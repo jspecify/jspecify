@@ -105,11 +105,11 @@ const config = {
                 to: '/docs/start-here',
               },
               {
-                label: 'Draft User Guide',
+                label: 'User Guide',
                 to: '/docs/user-guide',
               },
               {
-                label: 'Draft Javadoc',
+                label: 'Javadoc',
                 href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
               },
               {
