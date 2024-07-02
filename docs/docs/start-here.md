@@ -69,7 +69,7 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     know!). However, this tool is still a work in progress, and is not at *full*
     conformance with our own specification quite yet.
 
-*   We are getting ready to release **Version 1.0**, which will commit
+*   We are getting ready to release **version 1.0**, which will commit
     **permanently** to the annotation APIs, and they will be safe to depend on.
     From that point, no compile-breaking changes will ever happen, and future
     specification adjustments will affect only corner cases.
