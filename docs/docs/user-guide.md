@@ -69,11 +69,11 @@ uses those values must be able to deal with the `null` case, and it's okay to
 assign `null` to such variables or pass `null` to those parameters.
 
 When a type is annotated with [`@NonNull`], it means that no value of the type
-should be `null`. `@NonNull String x` means
-that `x` should never be `null`. Code that uses those values can assume they're
-not `null`, and it's a bad idea to assign `null` to those values or pass `null`
-to those parameters. (See [below](#nullmarked) for how to avoid having to spell
-out `@NonNull` most of the time.)
+should be `null`. `@NonNull String x` means that `x` should never be `null`.
+Code that uses those values can assume they're not `null`, and it's a bad idea
+to assign `null` to those values or pass `null` to those parameters. (See
+[below](#nullmarked) for how to avoid having to spell out `@NonNull` most of the
+time.)
 
 ```java
 static @Nullable String emptyToNull(@NonNull String x) {
@@ -205,11 +205,12 @@ now, and do the rest later, that's better than waiting until you have time to
 annotate everything. But that means you may have to null-mark a module, package
 or class *except for some classes or methods*. To do that, apply
 [`@NullUnmarked`] to a package, class, or method that's already inside a
-`@NullMarked` context. `@NullUnmarked` simply undoes the effects of the surrounding
-`@NullMarked`, so that unannotated types have unspecified nullness unless they
-are annotated with `@Nullable` or `@NonNull`, as if there were no enclosing
-`@NullMarked` at all. A `@NullUnmarked` scope may in turn contain a nested
-`@NullMarked` element to make most unannotated type usages non-null within that narrower scope.
+`@NullMarked` context. `@NullUnmarked` simply undoes the effects of the
+surrounding `@NullMarked`, so that unannotated types have unspecified nullness
+unless they are annotated with `@Nullable` or `@NonNull`, as if there were no
+enclosing `@NullMarked` at all. A `@NullUnmarked` scope may in turn contain a
+nested `@NullMarked` element to make most unannotated type usages non-null
+within that narrower scope.
 
 ## Local variables
 
