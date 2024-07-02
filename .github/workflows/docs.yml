@@ -3,8 +3,18 @@ name: Docs
 on:
   push:
     branches: [ main ]
+    paths:
+      - '.github/**'
+      - '*gradle*'
+      - 'docs/**'
+      - 'gradle/**'
   pull_request:
     branches: [ main ]
+    paths:
+      - '.github/**'
+      - '*gradle*'
+      - 'docs/**'
+      - 'gradle/**'
 
 jobs:
   # Runs on PRs and push to ensure the documentation successfully builds.
