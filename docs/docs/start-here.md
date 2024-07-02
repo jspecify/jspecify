@@ -60,6 +60,7 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     are almost identical to what we plan to release in 1.0; see the
     [adoption](https://github.com/jspecify/jspecify/wiki/adoption) wiki page for
     advice.
+
 *   Please experiment with our
     **[reference implementation](https://github.com/jspecify/jspecify-reference-checker)**.
     This lets you validate your usages of the annotations against our defined
