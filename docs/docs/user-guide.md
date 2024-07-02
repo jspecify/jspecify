@@ -69,7 +69,7 @@ uses those values must be able to deal with the `null` case, and it's okay to
 assign `null` to such variables or pass `null` to those parameters.
 
 When a type is annotated with [`@NonNull`], it means that no value of the type
-can be `null` (unless there's a bug in your code). `@NonNull String x` means
+should be `null`. `@NonNull String x` means
 that `x` should never be `null`. Code that uses those values can assume they're
 not `null`, but it's a bad idea to assign `null` to those values or pass `null`
 to those parameters. (See [below](#nullmarked) for how to avoid having to spell
