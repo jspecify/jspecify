@@ -6,7 +6,7 @@ sidebar_position: 2
 
 In Java code, whether an expression may evaluate to `null` is often documented
 only in natural language, if at all. JSpecify's nullness annotations let
-programmers express nullness of Java symbols in a consistent and well-defined
+programmers express the nullness of Java code in a consistent and well-defined
 way.
 
 JSpecify defines annotations that describe whether a Java type contains the
@@ -52,7 +52,7 @@ possibly-`null` value to a method that is expecting a "can't be `null`"
 parameter.
 
 There are four JSpecify annotations that are used together to indicate the
-nullness of all symbols:
+nullness of all type usages:
 
 *   two type use annotations that indicate whether a specific type usage
     includes `null` or not: [`@Nullable` and `@NonNull`](#nullable-and-nonnull)
