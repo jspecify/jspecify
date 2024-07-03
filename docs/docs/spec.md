@@ -202,7 +202,7 @@ a component of `T` or has `T` as a component.
 
 For all named annotations referred to by this spec:
 
--   The package name is `org.jspecify.annotations`.
+-   The Java package name is `org.jspecify.annotations`.
 -   The Java module name is `org.jspecify`.
 -   The Maven artifact is `org.jspecify:jspecify`.
 
