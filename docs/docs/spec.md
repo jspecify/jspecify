@@ -203,12 +203,12 @@ component of `T` or has `T` as a component.
 
 For all named annotations referred to by this spec:
 
--   The package name is `org.jspecify.nullness`. \[[#260]\]
--   The Java module name is `org.jspecify`. \[[#181]\]
--   The Maven artifact is `org.jspecify:jspecify`. \[[#181]\]
+-   The Java package name is `org.jspecify.annotations`.
+-   The Java module name is `org.jspecify`.
+-   The Maven artifact is `org.jspecify:jspecify`.
 
-All annotations have runtime retention. \[[#28]\] None of the annotations are
-marked [repeatable].
+All annotations have runtime retention. None of the annotations are marked
+[repeatable].
 
 ## The type-use annotation
 
