@@ -62,13 +62,12 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     [adoption](https://github.com/jspecify/jspecify/wiki/adoption) wiki page for
     advice.
 
-*   Please experiment with our
-    **[reference implementation](https://github.com/jspecify/jspecify-reference-checker)**.
-    This lets you validate your usages of the annotations against our defined
-    semantics, which is when you will really get to find out how helpful or
-    annoying our current design choices are for you (which you should let us
-    know!). However, this tool is still a work in progress, and is not at *full*
-    conformance with our own specification quite yet.
+*   Please experiment with our **[reference implementation]**. This lets you
+    validate your usages of the annotations against our defined semantics, which
+    is when you will really get to find out how helpful or annoying our current
+    design choices are for you (which you should let us know!). However, this
+    tool is still a work in progress, and is not at *full* conformance with our
+    own specification quite yet.
 
 *   We are getting ready to release **version 1.0**, which will commit
     **permanently** to the annotation APIs, and they will be safe to depend on.
@@ -92,7 +91,9 @@ to extend our support beyond nullness.
 *   Give some thought to what factors would make your own projects more or less
     likely to adopt JSpecify, and let us know.
 
-*   [File an issue] to request a feature or if something is wrong.
+*   [File an issue] to request a feature or if something is wrong. (If something
+    is wrong with the [reference implementation], [file an issue in its
+    repo](https://github.com/jspecify/jspecify-reference-checker/issues/new).)
 
 *   Star and Watch our [github] repo.
 
@@ -105,6 +106,7 @@ to extend our support beyond nullness.
 [nullness design faq]: https://github.com/jspecify/jspecify/wiki/nullness-design-FAQ
 [issues]: https://github.com/jspecify/jspecify/issues
 [release]: https://search.maven.org/artifact/org.jspecify/jspecify/0.3.0/jar
+[reference implementation]: https://github.com/jspecify/jspecify-reference-checker
 [spec]: /docs/spec
 [specification]: /docs/spec
 [stackoverflow answer]: https://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use
