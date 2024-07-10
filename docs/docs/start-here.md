@@ -62,13 +62,12 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     [adoption](https://github.com/jspecify/jspecify/wiki/adoption) wiki page for
     advice.
 
-*   Please experiment with our
-    **[reference implementation]**.
-    This lets you validate your usages of the annotations against our defined
-    semantics, which is when you will really get to find out how helpful or
-    annoying our current design choices are for you (which you should let us
-    know!). However, this tool is still a work in progress, and is not at *full*
-    conformance with our own specification quite yet.
+*   Please experiment with our **[reference implementation]**. This lets you
+    validate your usages of the annotations against our defined semantics, which
+    is when you will really get to find out how helpful or annoying our current
+    design choices are for you (which you should let us know!). However, this
+    tool is still a work in progress, and is not at *full* conformance with our
+    own specification quite yet.
 
 *   We are getting ready to release **version 1.0**, which will commit
     **permanently** to the annotation APIs, and they will be safe to depend on.
