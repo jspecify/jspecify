@@ -62,7 +62,7 @@ The annotations themselves are in the `org.jspecify.annotations` package.
 
 Below are snippets you can use to add a dependency in Maven, Gradle, or Bazel.
 
-NOtE: Regardless of the build system you use, avoid hiding annotations from
+Regardless of which build system you use, avoid hiding annotations from
 transitive dependencies. We recommend including the annotations at runtime, and
 we have kept the JSpecify jar small to reduce the cost of doing so. Each build
 tool supports different mechanisms that will hide the annotation declarations,
