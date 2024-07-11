@@ -53,14 +53,62 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     JSpecify 0.2, not 1.0. We're working on updating it.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
-*   Or try it out...
 
-### Trying it out?
+### Depending on the annotations
 
-*   You can try out **version 0.3** of the annotations in your projects, which
-    are almost identical to what we plan to release in 1.0; see the
-    [adoption](https://github.com/jspecify/jspecify/wiki/adoption) wiki page for
-    advice.
+The annotations are available from Maven Central as
+[`org.jspecify:jspecify:1.0.0`](https://repo1.maven.org/maven2/org/jspecify/jspecify/1.0.0/).
+The annotations themselves are in the `org.jspecify.annotations` package.
+
+Below are snippets you can use to add a dependency in Maven, Gradle, or Bazel.
+
+NOtE: Regardless of the build system you use, avoid hiding annotations from
+transitive dependencies. We recommend including the annotations at runtime, and
+we have kept the JSpecify jar small to reduce the cost of doing so. Each build
+tool supports different mechanisms that will hide the annotation declarations,
+and we recommend against them in the tool-specific guidance below.
+
+#### Maven
+
+```xml
+<dependency>
+  <groupId>org.jspecify</groupId>
+  <artifactId>jspecify</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+Avoid using
+[provided](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope)
+or
+[optional](https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html)
+scope.
+
+#### Gradle
+
+```groovy
+dependencies {
+  api("org.jspecify:jspecify:1.0.0")
+}
+```
+
+Avoid using
+[implementation](https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph)
+or
+[compileOnlyApi](https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph)
+configurations.
+
+#### Bazel
+
+```python
+maven_jar(
+    name = "jspecify",
+    artifact = "org.jspecify:jspecify:1.0.0",
+    sha256 = "TODO: fill this in after we build the jar",
+)
+```
+
+### Reference implementation
 
 *   Please experiment with our **[reference implementation]**. This lets you
     validate your usages of the annotations against our defined semantics, which
