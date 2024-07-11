@@ -139,11 +139,11 @@ Checker Framework annotations, then you may want to use them in addition to the
 JSpecify annotationswish to supplement with JSpecify so that you can use
 `@NullMarked`.
 
-[provided]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope
-[optional]: https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html
-[implementation]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
-[compileOnlyApi]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
-[Kotlin-caveats]: whether#kotlin
-[type-use annotations]: https://www.oracle.com/technical-resources/articles/java/ma14-architect-annotations.html#:~:text=Applying%20Type%20Annotations
 [`@ParametersAreNonnullByDefault`]: https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.1/javax/annotation/ParametersAreNonnullByDefault.html
 [`@TypeQualifierDefault`]: https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers.md#type-qualifier-default
+[compileOnlyApi]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+[implementation]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+[Kotlin-caveats]: whether#kotlin
+[optional]: https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html
+[provided]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope
+[type-use annotations]: https://www.oracle.com/technical-resources/articles/java/ma14-architect-annotations.html#:~:text=Applying%20Type%20Annotations
