@@ -8,11 +8,10 @@ However, there are other things to think about when deciding whether to start
 using JSpecify annotations in your code, including at least:
 
 *   If your Java code doesn’t use nullness annotations already, it should!
-*   If your code is internal (closed-source), how well does the current version
-    of your nullness checker support JSpecify annotations?
+*   How well does the current version of your nullness checker support JSpecify
+    annotations?
 *   Do you have Kotlin users? Which compiler version do they use?
-*   Do you use whole-program annotation processors, such as
-    [Dagger](http://dagger.dev)?
+*   Do you use whole-program annotation processors, such as [Dagger]?
 
 ## If your Java code doesn’t use nullness annotations yet
 
@@ -20,18 +19,17 @@ If your Java code doesn’t already use nullness annotations, we recommend that
 you [start using JSpecify annotations](using).
 
 Even if you are not currently using a nullness analyzer, applying JSpecify
-annotations can still provide benefits. The annotations are useful documentation
-to communicate your intent to users and future maintainers of your code.
-Additionally, projects that directly depend on your library will be able to run
-*their* nullness analyzers on it, and Kotlin code that imports your definitions
-will [also benefit](#kotlin). Finally, annotating your code will make the
-eventual process of applying nullness analysis to your codebase easier.
+annotations can still provide benefits. * The annotations are useful
+documentation to communicate your intent to users and future maintainers of your
+code. * Additionally, projects that directly depend on your library will be able
+to run *their* nullness analyzers on it. * Finally, annotating your code will
+make the eventual process of applying nullness analysis to your codebase easier.
 
-In particular, if your project includes [Kotlin](#kotlin) code, or Kotlin users
-depend on your code, JSpecify annotations will improve the null-safety of Kotlin
-code using your Java library. New versions of the Kotlin compiler recognize and
-correctly interpret the annotations, so JSpecify annotated Java code will have
-correct nullness typing in Kotlin.
+In particular, if your project includes Kotlin code, or Kotlin users depend on
+your code, JSpecify annotations will improve the null-safety of Kotlin code
+using your Java library. New versions of the Kotlin compiler
+[recognize and correctly interpret](#kotlin) the annotations, so JSpecify
+annotated Java code will have correct nullness typing in Kotlin.
 
 ## Nullness checker support for JSpecify
 
@@ -42,10 +40,13 @@ they claim about their current and planned JSpecify support.
 *   The [EISOP Framework](https://eisop.github.io/) has good conformance except
     for its interpretation of unspecified-nullness code (unannotated code
     outside of `@NullMarked` scope).
+
 *   [NullAway](https://github.com/uber/NullAway) supports JSpecify annotations
     but does not yet analyze generics.
+
 *   The [Checker Framework](https://checkerframework.org/) understands
     `@Nullable` and `@NonNull`, but not `@NullMarked` or `@NullUnmarked`.
+
 *   JSpecify’s
     [reference checker](https://github.com/jspecify/jspecify-reference-checker)
     is mostly correct except for a few edge cases. While you can try it out, it
@@ -64,8 +65,8 @@ Kotlin has a null-safe type system that’s similar to JSpecify’s model. But t
 Kotlin compiler interprets unannotated Java dependencies as having
 [platform types](https://kotlinlang.org/docs/java-interop.html#null-safety-and-platform-types),
 relaxing some of the nullness checks Kotlin otherwise performs. However, the
-compiler does understand JSpecify annotations and is able to use them to make
-Kotlin code see null-safe types when calling into Java code. The Kotlin compiler
+compiler understands JSpecify annotations and is able to use them to make Kotlin
+code see null-safe types when calling into Java code. The Kotlin compiler
 correctly interprets `@Nullable` and `@NullMarked` starting at version 1.8.20,
 `@NonNull` starting at 2.0.0, and `@NullUnmarked` coming in 2.0.20.
 
@@ -78,10 +79,10 @@ The Kotlin team plans to emit errors by default in Kotlin 2.1.0.
 
 ## Annotation processors
 
-If your project relies on annotation processors, like Dagger, that interpret
-nullness annotations on symbols in the classpath, then you may need to hold off
-on adopting JSpecify annotations until you can build with JDK 22. There was a
-bug in `javac` versions before JDK 22
+If your project relies on annotation processors, like [Dagger], that interpret
+nullness annotations on symbols in the classpath, then you may need to wait to
+adopt JSpecify annotations until you can build with JDK 22. There was a bug in
+`javac` versions before JDK 22
 ([JDK-8225377](https://bugs.openjdk.org/browse/JDK-8225377)) where
 [type-use](https://www.oracle.com/technical-resources/articles/java/ma14-architect-annotations.html)
 annotations (including JSpecify’s `@Nullable` and `@NonNull`) were not properly
@@ -92,10 +93,12 @@ generic or array types the way JSpecify’s can.
 
 The issue is fixed starting in JDK 22, but the fix has not yet been backported
 to older versions of `javac`. If you cannot
-[build with JDK 22+ javac](https://github.com/jspecify/jspecify/issues/537) and
-you rely on Dagger or other similar annotation processors, you may run into
+[build with JDK 22+ `javac`](https://github.com/jspecify/jspecify/issues/537)
+and you rely on Dagger or other similar annotation processors, you may run into
 issues switching to JSpecify’s annotations at the moment. Please check out
 [JSpecify issue 365](https://github.com/jspecify/jspecify/issues/365) for
 further discussion, and you can track the effort to backport this fix to older
 versions of `javac` in
 [JDK-8323093](https://bugs.openjdk.org/browse/JDK-8323093).
+
+[Dagger]: http://dagger.dev
