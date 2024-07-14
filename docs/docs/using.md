@@ -8,11 +8,12 @@ The annotations themselves are in the `org.jspecify.annotations` package.
 
 Below are snippets you can use to add a dependency in Maven, Gradle, or Bazel.
 
-Regardless of which build system you use, avoid hiding annotations from
-transitive dependencies. We recommend including the annotations at runtime, and
-we have kept the JSpecify jar small to reduce the cost of doing so. Each build
-tool supports different mechanisms that will hide the annotation declarations,
-and we recommend against them in the tool-specific guidance below.
+Regardless of the build system you use, avoid configuring your build to hide
+JSpecify annotations from your users. We also recommend including the
+annotations at runtime, and we have kept the JSpecify jar small to reduce the
+cost of doing so. Each build tool supports different mechanisms that will hide
+the annotation declarations, and we recommend against them in the tool-specific
+guidance below.
 
 #### Maven
 
@@ -34,7 +35,8 @@ dependencies {
 }
 ```
 
-Avoid using [implementation] or [compileOnlyApi] configurations.
+Avoid using [implementation] or (if your users might need the annotations at
+runtime) [compileOnlyApi] configurations.
 
 #### Bazel
 
@@ -60,13 +62,14 @@ the caveats about [Kotlin][Kotlin-caveats] or
 [annotation processors](whether#annotation-processors) apply to your situation.
 
 Migrating from JSR-305 annotations primarily entails changing imports, updating
-uses where annotation names and locations must change, and addressing build
-errors. JSpecify’s annotations are type-use annotations, which impose additional
-restrictions on where they are placed. In some cases, these restrictions can
-make their placement incompatible with the placement of existing JSR-305
-annotations. We recommend taking the following migration steps:
+annotation names and locations, and addressing build errors. JSpecify’s
+annotations are type-use annotations, which impose additional restrictions on
+where they are placed. In some cases, these restrictions can make their
+placement incompatible with the placement of existing JSR-305 annotations. We
+recommend taking the following migration steps:
 
 1.  Update imports to use JSpecify annotations.
+
 1.  Check *all* annotations on array types. Any code that currently has a type
     like `@Nullable Object[]` must change to `Object @Nullable []`. This change
     is required by the syntax of [type-use annotations]. If you do *not* make
@@ -88,11 +91,11 @@ annotations. We recommend taking the following migration steps:
 In addition to adopting JSpecify's `@Nullable` and `@NonNull` annotations, you
 may also wish to adopt `@NullMarked`. If your code already annotates all its
 `@Nullable` types, then you can (with rare
-[exceptions](api/org/jspecify/annotations/NonNull.html#projection)) remove any
-`@NonNull` annotations in favor of putting a `@NullMarked` annotation on the
+[exceptions](/docs/api/org/jspecify/annotations/NonNull.html#projection)) remove
+any `@NonNull` annotations in favor of putting a `@NullMarked` annotation on the
 whole class, package, or module.
 
-`@NullMarked` is similar to the JSR-305 [`@ParametersAreNonnullByDefault`] and
+`@NullMarked` is similar to JSR-305's [`@ParametersAreNonnullByDefault`] and
 custom [`@TypeQualifierDefault`] annotations. Still, `@NullMarked` differs from
 those, including in [its effect on generics](user-guide#generics), so you may
 need to take advantage of your new ability to annotate locations like type
@@ -115,7 +118,7 @@ on your project, then you may end up using a mix of annotations:
 *   The JSpecify annotations are designed to cover features that are commonly
     needed in public APIs and widely supported by tools. In particular, you can
     use the `@NullMarked` annotation to indicate to tools like Kotlin that
-    [most of your APIs' types are non-nullable](api/org/jspecify/annotations/NullMarked.html#effects),
+    [most of your APIs' types are non-nullable](/docs/api/org/jspecify/annotations/NullMarked.html#effects),
     with full support for generics and without needing to run the Checker
     Framework's bytecode rewriting during your build.
 
@@ -134,10 +137,9 @@ on your project, then you may end up using a mix of annotations:
     to call during object initialization.
 
 In short: If all you need is `@Nullable`, `@NonNull`, and `@NullMarked`, then
-you might prefer to switch entirely to JSpecify. If you use more advanced
-Checker Framework annotations, then you may want to use them in addition to the
-JSpecify annotationswish to supplement with JSpecify so that you can use
-`@NullMarked`.
+you might prefer to switch entirely to JSpecify. Otherwise, you might choose to
+use both the Checker Framework annotations (for annotations like
+`@MonotonicNonNull`) and JSpecify (for annotations like `@NullMarked`).
 
 [`@ParametersAreNonnullByDefault`]: https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.1/javax/annotation/ParametersAreNonnullByDefault.html
 [`@TypeQualifierDefault`]: https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers.md#type-qualifier-default
