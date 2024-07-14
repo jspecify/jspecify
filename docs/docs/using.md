@@ -52,7 +52,7 @@ maven_jar(
 
 ### If your code has no nullness annotations
 
-If your code doesn’t use nullness annotations yet, there’s no time like the
+If your code doesn't use nullness annotations yet, there's no time like the
 present! We have a high-level [strategy](applying) we recommend.
 
 ### If your code already uses JSR-305 annotations
@@ -62,7 +62,7 @@ the caveats about [Kotlin][Kotlin-caveats] or
 [annotation processors](whether#annotation-processors) apply to your situation.
 
 Migrating from JSR-305 annotations primarily entails changing imports, updating
-annotation names and locations, and addressing build errors. JSpecify’s
+annotation names and locations, and addressing build errors. JSpecify's
 annotations are type-use annotations, which impose additional restrictions on
 where they are placed. In some cases, these restrictions can make their
 placement incompatible with the placement of existing JSR-305 annotations. We
