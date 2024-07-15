@@ -72,9 +72,9 @@ tasks.withType(AbstractArchiveTask).configureEach {
 jar {
     manifest {
         attributes(
-            "Bundle-Version": version,
-            "Implementation-Version": version
-        )
+                "Bundle-Version": version,
+                "Implementation-Version": version
+                )
     }
 }
 
