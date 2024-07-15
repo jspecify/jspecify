@@ -21,6 +21,8 @@ jobs:
   build:
     name: Build Documentation
     runs-on: ubuntu-latest
+    env:
+      JAVA_VERSION: 22
     steps:
       - name: Check out project
         uses: actions/checkout@v4
@@ -29,7 +31,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 22
+          java-version: ${{ env.JAVA_VERSION }}
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v3
