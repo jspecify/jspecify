@@ -19,11 +19,14 @@ If your Java code doesn’t already use nullness annotations, we recommend that
 you [start using JSpecify annotations](using).
 
 Even if you are not currently using a nullness analyzer, applying JSpecify
-annotations can still provide benefits. * The annotations are useful
-documentation to communicate your intent to users and future maintainers of your
-code. * Additionally, projects that directly depend on your library will be able
-to run *their* nullness analyzers on it. * Finally, annotating your code will
-make the eventual process of applying nullness analysis to your codebase easier.
+annotations can still provide benefits.
+
+*   The annotations are useful documentation to communicate your intent to users
+    and future maintainers of your code.
+*   Additionally, projects that directly depend on your library will be able to
+    run *their* nullness analyzers on it.
+*   Finally, annotating your code will make the eventual process of applying
+    nullness analysis to your codebase easier.
 
 In particular, if your project includes Kotlin code, or Kotlin users depend on
 your code, JSpecify annotations will improve the null-safety of Kotlin code
@@ -43,6 +46,10 @@ they claim about their current and planned JSpecify support.
 
 *   [NullAway](https://github.com/uber/NullAway) supports JSpecify annotations
     but does not yet analyze generics.
+
+*   [IntelliJ IDEA](https://www.jetbrains.com/idea/) supports JSpecify
+    annotations but has incomplete support for generics and some trouble with
+    local variables.
 
 *   The [Checker Framework](https://checkerframework.org/) understands
     `@Nullable` and `@NonNull`, but not `@NullMarked` or `@NullUnmarked`.
@@ -81,21 +88,21 @@ The Kotlin team plans to emit errors by default in Kotlin 2.1.0.
 
 If your project relies on annotation processors, like [Dagger], that interpret
 nullness annotations on symbols in the classpath, then you may need to wait to
-adopt JSpecify annotations until you can build with JDK 22. There was a bug in
-`javac` versions before JDK 22
+adopt JSpecify annotations until you can
+[build with JDK 22](https://github.com/jspecify/jspecify/issues/537). There was
+a bug in `javac` versions before JDK 22
 ([JDK-8225377](https://bugs.openjdk.org/browse/JDK-8225377)) where
 [type-use](https://www.oracle.com/technical-resources/articles/java/ma14-architect-annotations.html)
 annotations (including JSpecify’s `@Nullable` and `@NonNull`) were not properly
-read from class files. JSR-305 and AndroidX nullness annotations are
-“declaration” annotations and hence are not impacted by this issue; however,
+read from class files. In contrast, JSR-305 and AndroidX nullness annotations
+are "declaration" annotations and hence are not impacted by this issue; however,
 because of that, they can’t be applied to type arguments or components of
 generic or array types the way JSpecify’s can.
 
 The issue is fixed starting in JDK 22, but the fix has not yet been backported
-to older versions of `javac`. If you cannot
-[build with JDK 22+ `javac`](https://github.com/jspecify/jspecify/issues/537)
-and you rely on Dagger or other similar annotation processors, you may run into
-issues switching to JSpecify’s annotations at the moment. Please check out
+to older versions of `javac`. If you cannot build with JDK 22+ `javac` and you
+rely on Dagger or other similar annotation processors, you may run into issues
+switching to JSpecify’s annotations at the moment. Please check out
 [JSpecify issue 365](https://github.com/jspecify/jspecify/issues/365) for
 further discussion, and you can track the effort to backport this fix to older
 versions of `javac` in

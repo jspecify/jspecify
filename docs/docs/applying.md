@@ -9,8 +9,8 @@ In the future, we'll have suggestions for
 
 ## 1. Look for nullable type usages
 
-Look for methods, parameters, and fields where some part of the type component
-might reasonably be `null` and add `@Nullable` there.
+Look for fields and method return types and parameter types where some part of
+the type component might reasonably be `null`, and add `@Nullable` there.
 
 Read the documentation of the method or field to see if it documents that `null`
 is valid.
@@ -90,8 +90,9 @@ it finds any nullness problems, resolve them and rerun:
     *   If you can't fix the bug right now, your nullness analysis tool should
         allow you to suppress the error with a `@SuppressWarnings` annotation,
         or some other mechanism that lets you keep track of these as TODOs.
-*   Maybe your nullness analyzer has a bug? (This is unlikely, but possible
-    especially before we've completed our conformance test suite.)
+*   Maybe your nullness analyzer has a bug? (This will eventually be unlikely,
+    but it's possible, especially before we've completed our conformance test
+    suite.)
     *   You should be able to suppress the error with a `@SuppressWarnings`
         annotation. Then file a bug with your nullness analyzer so they know
         about it.

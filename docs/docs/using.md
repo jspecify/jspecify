@@ -25,9 +25,13 @@ guidance below.
 </dependency>
 ```
 
-Avoid using [provided] or [optional] scope.
+Avoid using [`provided`] or [`optional`] scope.
 
 #### Gradle
+
+For projects that use the `java-library` plugin, avoid using [`implementation`]
+or (if your users might need the annotations at runtime) [`compileOnlyApi`]
+configurations:
 
 ```groovy
 dependencies {
@@ -35,8 +39,13 @@ dependencies {
 }
 ```
 
-Avoid using [implementation] or (if your users might need the annotations at
-runtime) [compileOnlyApi] configurations.
+Or, for projects that use the `java` plugin and don't publish libraries:
+
+```groovy
+dependencies {
+  implementation("org.jspecify:jspecify:1.0.0")
+}
+```
 
 #### Bazel
 
@@ -77,10 +86,10 @@ recommend taking the following migration steps:
     objects" to "an array of nullable objects."
 
 1.  Rebuild your project, making changes as needed to correct build errors.
-    Build errors can arise from restrictions on placing type-use annotations.
-    For example, if you see an error about an annotation on a "scoping
-    construct," you must change code like `@Nullable Map.Entry<K, V>` to
-    `Map.@Nullable Entry<K, V>`.
+    Build errors can arise from restrictions on placing type-use annotations. If
+    you see an error about an annotation on a "scoping construct," you must move
+    the annotation to be immediately before the simple type name. For example,
+    change code like `@Nullable Map.Entry<K, V>` to `Map.@Nullable Entry<K, V>`.
 
 1.  Optionally,
     [move other annotations to comply with style guidelines](https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations),
@@ -143,9 +152,9 @@ use both the Checker Framework annotations (for annotations like
 
 [`@ParametersAreNonnullByDefault`]: https://www.javadoc.io/doc/com.google.code.findbugs/jsr305/3.0.1/javax/annotation/ParametersAreNonnullByDefault.html
 [`@TypeQualifierDefault`]: https://github.com/Kotlin/KEEP/blob/master/proposals/jsr-305-custom-nullability-qualifiers.md#type-qualifier-default
-[compileOnlyApi]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
-[implementation]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+[`compileOnlyApi`]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+[`implementation`]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+[`optional`]: https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html
+[`provided`]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope
 [Kotlin-caveats]: whether#kotlin
-[optional]: https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html
-[provided]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope
 [type-use annotations]: https://www.oracle.com/technical-resources/articles/java/ma14-architect-annotations.html#:~:text=Applying%20Type%20Annotations
