@@ -53,14 +53,9 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     JSpecify 0.2, not 1.0. We're working on updating it.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
-*   Or try it out...
+*   [Try it out](using)
 
-### Trying it out?
-
-*   You can try out **version 0.3** of the annotations in your projects, which
-    are almost identical to what we plan to release in 1.0; see the
-    [adoption](https://github.com/jspecify/jspecify/wiki/adoption) wiki page for
-    advice.
+### Reference implementation
 
 *   Please experiment with our **[reference implementation]**. This lets you
     validate your usages of the annotations against our defined semantics, which
