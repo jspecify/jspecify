@@ -39,7 +39,7 @@ dependencies {
 }
 ```
 
-Or, if you're using a plugin that doesn't support the `api` configuration such
+Or, if you're using a plugin that doesn't support the `api` configuration, such
  as the `java` plugin:
 
 ```groovy
