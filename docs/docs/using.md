@@ -29,9 +29,8 @@ Avoid using [`provided`] or [`optional`] scope.
 
 #### Gradle
 
-For projects that use the `java-library` plugin, avoid using [`implementation`]
-or (if your users might need the annotations at runtime) [`compileOnlyApi`]
-configurations:
+For projects that use the `java-library` or `com.android.library` plugins, avoid
+using [`implementation`] or [`compileOnlyApi`] configurations:
 
 ```groovy
 dependencies {
@@ -39,7 +38,8 @@ dependencies {
 }
 ```
 
-Or, for projects that use the `java` plugin and don't publish libraries:
+Or, if you're using a plugin that doesn't support the `api` configuration such
+ as the `java` plugin:
 
 ```groovy
 dependencies {
