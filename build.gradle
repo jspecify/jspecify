@@ -20,6 +20,7 @@ plugins {
     id 'com.github.node-gradle.node' version '7.0.2'
     id 'io.github.gradle-nexus.publish-plugin' version '1.3.0' apply false
     id 'net.ltgt.errorprone' version '3.0.1'
+    id "biz.aQute.bnd.builder" version "7.0.0"
 }
 
 ext {
@@ -53,6 +54,27 @@ java {
 
     tasks.named('sourcesJar') {
         exclude('**.class')
+    }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    filePermissions {
+        unix('rw-r--r--')
+    }
+    dirPermissions {
+        unix('rwxr-xr-x')
+    }
+}
+
+
+jar {
+    manifest {
+        attributes(
+                "Bundle-Version": version,
+                "Implementation-Version": version
+                )
     }
 }
 
