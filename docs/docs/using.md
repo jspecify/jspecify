@@ -100,9 +100,9 @@ recommend taking the following migration steps:
 In addition to adopting JSpecify's `@Nullable` and `@NonNull` annotations, you
 may also wish to adopt `@NullMarked`. If your code already annotates all its
 `@Nullable` types, then you can (with rare
-[exceptions](/docs/api/org/jspecify/annotations/NonNull.html#projection)) remove
-any `@NonNull` annotations in favor of putting a `@NullMarked` annotation on the
-whole class, package, or module.
+[exceptions](https://jspecify.dev/docs/api/org/jspecify/annotations/NonNull.html#projection))
+remove any `@NonNull` annotations in favor of putting a `@NullMarked` annotation
+on the whole class, package, or module.
 
 `@NullMarked` is similar to JSR-305's [`@ParametersAreNonnullByDefault`] and
 custom [`@TypeQualifierDefault`] annotations. Still, `@NullMarked` differs from
@@ -127,7 +127,7 @@ on your project, then you may end up using a mix of annotations:
 *   The JSpecify annotations are designed to cover features that are commonly
     needed in public APIs and widely supported by tools. In particular, you can
     use the `@NullMarked` annotation to indicate to tools like Kotlin that
-    [most of your APIs' types are non-nullable](/docs/api/org/jspecify/annotations/NullMarked.html#effects),
+    [most of your APIs' types are non-nullable](https://jspecify.dev/docs/api/org/jspecify/annotations/NullMarked.html#effects),
     with full support for generics and without needing to run the Checker
     Framework's bytecode rewriting during your build.
 
