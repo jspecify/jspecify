@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # Using JSpecify Annotations
 
 ## Depending on the annotations
