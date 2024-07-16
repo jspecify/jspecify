@@ -28,9 +28,9 @@ specifications of their semantics.
     easily, right in the javadoc of the annotation classes themselves.
 
 JSpecify is developed by consensus of major stakeholders in Java static
-analysis. Our upcoming 1.0 release will be the first tool-neutral,
-library-neutral artifact for these annotations. (Note: `javax.annotation` was an
-attempt at this that never reached consensus and was never actually released.)
+analysis. Our 1.0.0 release is the first tool-neutral, library-neutral artifact
+for these annotations. (Note: `javax.annotation` was an attempt at this that
+never reached consensus and was never actually released.)
 
 Learn more about the JSpecify group and its goals in the JSpecify [FAQ].
 
@@ -50,7 +50,7 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
 
 *   The [specification], written to be understood by owners of compilers and
     static analysis tools. Note that it's currently pretty old: it matches
-    JSpecify 0.2, not 1.0. We're working on updating it.
+    JSpecify 0.2.0, not 1.0.0. We're working on updating it.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
 *   [Try it out](using)
@@ -64,17 +64,12 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     tool is still a work in progress, and is not at *full* conformance with our
     own specification quite yet.
 
-*   We are getting ready to release **version 1.0**, which will commit
-    **permanently** to the annotation APIs, and they will be safe to depend on.
-    From that point, no compile-breaking changes will ever happen, and future
-    specification adjustments will affect only corner cases.
-
 ## How can I get involved?
 
 Great question.
 
-It's not too late for your input to matter! After our 1.0 release, we have plans
-to extend our support beyond nullness.
+It's not too late for your input to matter! After our 1.0.0 release, we have
+plans to extend our support beyond nullness.
 
 *   Join our new [Google Group]. Introduce yourself! Ask questions, complain, or
     just tell us what you're hoping to see. If your organization should be a
@@ -87,8 +82,8 @@ to extend our support beyond nullness.
     likely to adopt JSpecify, and let us know.
 
 *   [File an issue] to request a feature or if something is wrong. (If something
-    is wrong with the [reference implementation], [file an issue in its
-    repo](https://github.com/jspecify/jspecify-reference-checker/issues/new).)
+    is wrong with the [reference implementation],
+    [file an issue in its repo](https://github.com/jspecify/jspecify-reference-checker/issues/new).)
 
 *   Star and Watch our [github] repo.
 
@@ -100,7 +95,7 @@ to extend our support beyond nullness.
 [faq]: http://github.com/jspecify/jspecify/wiki/jspecify-faq
 [nullness design faq]: https://github.com/jspecify/jspecify/wiki/nullness-design-FAQ
 [issues]: https://github.com/jspecify/jspecify/issues
-[release]: https://search.maven.org/artifact/org.jspecify/jspecify/0.3.0/jar
+[release]: https://search.maven.org/artifact/org.jspecify/jspecify/1.0.0/jar
 [reference implementation]: https://github.com/jspecify/jspecify-reference-checker
 [spec]: /docs/spec
 [specification]: /docs/spec
