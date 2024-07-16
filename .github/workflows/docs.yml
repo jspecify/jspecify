@@ -2,14 +2,20 @@ name: Docs
 
 on:
   push:
-    branches: [ main, specification-1.0, docs-1.0 ]
+    branches:
+      - main
+      - '*-1.0'
+      - 'dev-*'
     paths:
       - '.github/**'
       - '*gradle*'
       - 'docs/**'
       - 'gradle/**'
   pull_request:
-    branches: [ main, specification-1.0, docs-1.0 ]
+    branches:
+      - main
+      - '*-1.0'
+      - 'dev-*'
     paths:
       - '.github/**'
       - '*gradle*'
