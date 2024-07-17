@@ -1,8 +1,23 @@
+/*
+ * Copyright 2022 The JSpecify Authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -89,11 +104,11 @@ const config = {
                 to: '/docs/start-here',
               },
               {
-                label: 'Draft User Guide',
+                label: 'User Guide',
                 to: '/docs/user-guide',
               },
               {
-                label: 'Draft Javadoc',
+                label: 'Javadoc',
                 href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
               },
               {
@@ -132,11 +147,11 @@ const config = {
         copyright: `Copyright ${new Date().getFullYear()} The JSpecify Authors. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
         additionalLanguages: ['java'],
       },
     }),
 };
 
-module.exports = config;
+export default config;

@@ -9,8 +9,9 @@ name: Update Reference Checker Conformance Test Reports
 
 on:
   push:
-    branches:
-    - 'main'
+    branches: [ main ]
+    paths-ignore:
+      - 'docs/**'
 
 env:
   reference_checker_repo: ${{ github.repository_owner }}/${{ vars.reference_checker_repo }}
