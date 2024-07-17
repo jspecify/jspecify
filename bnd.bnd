@@ -1,4 +1,4 @@
-Bundle-SymbolicName: org.jspecify.jspecify
+Bundle-SymbolicName: org.jspecify.annotations
 Bundle-Name: JSpecify annotations
 Bundle-Vendor: The JSpecify Authors
 Bundle-Description: An artifact of well-specified annotations to power static analysis checks and JVM language interop.
