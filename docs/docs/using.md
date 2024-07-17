@@ -36,7 +36,7 @@ Avoid using [`provided`] or [`optional`] scope.
 For projects that use the `java-library` or
 [`com.android.library`](https://developer.android.com/studio/projects/android-library)
 plugins, use the `api` configuration rather than the [`implementation`] or
-[`compileOnlyApi`] configurations:
+[`compileOnlyApi`] configuration:
 
 ```groovy
 dependencies {
