@@ -1,5 +1,5 @@
 ---
-title: Nullness Specification (draft)
+sidebar_position: 6
 ---
 
 # Nullness Specification (draft)
