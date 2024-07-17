@@ -58,7 +58,7 @@ dependencies {
 maven_jar(
     name = "jspecify",
     artifact = "org.jspecify:jspecify:1.0.0",
-    sha256 = "TODO: fill this in after we build the jar",
+    sha256 = "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
 )
 ```
 
