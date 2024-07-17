@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Should you use JSpecify annotations in your Java code?
 
-With the release of JSpecify 1.0, we guarantee backwards compatibility: we will
+With the release of JSpecify 1.0.0, we guarantee backwards compatibility: we will
 not rename the annotations or move them or make other changes that would cause
 your compilation to fail when you update.
 
