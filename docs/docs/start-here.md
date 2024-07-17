@@ -71,7 +71,7 @@ Great question.
 It's not too late for your input to matter! After our 1.0.0 release, we have
 plans to extend our support beyond nullness.
 
-*   Join our new [Google Group]. Introduce yourself! Ask questions, complain, or
+*   Join our [Google Group]. Introduce yourself! Ask questions, complain, or
     just tell us what you're hoping to see. If your organization should be a
     member of our group, tell us about yourselves and self-nominate.
 
