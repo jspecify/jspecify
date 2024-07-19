@@ -19,13 +19,13 @@ information that JSpecify adds to code without forcing us to make judgments
 about whether that information represents problems or how that information
 should be communicated to users.
 
-JSpecify's [specification](spec) consists of an augmented type system including
-subtyping rules, as well as a set of rules for determining the augmented type of
-a type usage based on the annotations surrounding that type usage. The
-specification uses terms like "UNION_NULL", "null-marked scope", "multiple
-worlds", and "nullness-subtype-establishing paths"; it mostly doesn't talk
-explicitly about what that means for examples of Java code. However, the point
-of the specification is to imply things about real Java code.
+JSpecify's [specification](/docs/spec) consists of an augmented type system
+including subtyping rules, as well as a set of rules for determining the
+augmented type of a type usage based on the annotations surrounding that type
+usage. The specification uses terms like "UNION_NULL", "null-marked scope",
+"multiple worlds", and "nullness-subtype-establishing paths"; it mostly doesn't
+talk explicitly about what that means for examples of Java code. However, the
+point of the specification is to imply things about real Java code.
 
 Here is an example of the problem: Let's say that, according to JSpecify, the
 method `a(...)`'s parameter has a non-nullable type and the method `b()` has a
@@ -80,7 +80,7 @@ The questions are as follows:
         `Optional!<String!>`
 
 1.  Does a given expression represent a dereference of a nullable expression in
-    [some or all worlds](spec#multiple-worlds), as derived from the
+    [some or all worlds](/docs/spec#multiple-worlds), as derived from the
     null-augmented type of its reference, based only on JSpecify annotations on
     those symbols or surrounding scopes?
 
@@ -92,8 +92,8 @@ The questions are as follows:
         `returnsUnspecified()` returns `null`)
 
 1.  Is a given expression or type argument not a
-    [nullness subtype](spec#nullness-subtyping) of its context in some or all
-    worlds, as derived from the null-augmented types of their referenced
+    [nullness subtype](/docs/spec#nullness-subtyping) of its context in some or
+    all worlds, as derived from the null-augmented types of their referenced
     symbols, based only on JSpecify annotations on those symbols or surrounding
     scopes?
 
@@ -157,4 +157,4 @@ all without affecting its conformance to JSpecify.
 [expression context]: https://docs.google.com/document/d/1nbTnJ0-HubLnQPKSjK5CDZyoe6Al64vdlkoJxaYX9XY/preview?resourcekey=0-ADjPZnp8LN3dRX_ptjlagw&tab=t.0#bookmark=kix.w6xfjhkftb9r
 [expression]: https://docs.google.com/document/d/1nbTnJ0-HubLnQPKSjK5CDZyoe6Al64vdlkoJxaYX9XY/preview?resourcekey=0-ADjPZnp8LN3dRX_ptjlagw&tab=t.0#bookmark=kix.2r97mw74ac6r
 [Map.get]: https://github.com/jspecify/jdk/blob/b7435cff373c527aad82a062c5605f6f9c1bb0de/src/java.base/share/classes/java/util/Map.java#L255
-[spec-locations]: spec#recognized-locations-for-declaration-annotations
+[spec-locations]: /docs/spec#recognized-locations-for-declaration-annotations
