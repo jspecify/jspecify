@@ -99,7 +99,7 @@ recommend taking the following migration steps:
 
 1.  Optionally,
     [move other annotations to comply with style guidelines](https://google.github.io/styleguide/javaguide.html#s4.8.5-annotations),
-    but this is not required by the language.
+    but this is not required by the language.  (The [AnnotationPosition](https://errorprone.info/bugpattern/AnnotationPosition) Error Prone check can help with these changes when run with [patching enabled](https://errorprone.info/docs/patching).)
 
 #### Defaulting annotations
 
