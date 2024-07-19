@@ -53,7 +53,7 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
     JSpecify 0.2.0, not 1.0.0. We're working on updating it.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
-*   [Try it out](using)
+*   [Try it out](/docs/using)
 
 ### Reference implementation
 

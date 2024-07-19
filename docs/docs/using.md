@@ -68,13 +68,14 @@ maven_jar(
 ### If your code has no nullness annotations
 
 If your code doesn't use nullness annotations yet, there's no time like the
-present! We have a high-level [strategy](applying) we recommend.
+present! We have a high-level [strategy](/docs/applying) we recommend.
 
 ### If your code already uses JSR-305 annotations
 
 Before migrating from the JSR-305 annotations to JSpecify annotations, see if
 the caveats about [Kotlin][Kotlin-caveats] or
-[annotation processors](whether#annotation-processors) apply to your situation.
+[annotation processors](/docs/whether#annotation-processors) apply to your
+situation.
 
 Migrating from JSR-305 annotations primarily entails changing imports, updating
 annotation names and locations, and addressing build errors. JSpecify's
@@ -112,8 +113,8 @@ on the whole class, package, or module.
 
 `@NullMarked` is similar to JSR-305's [`@ParametersAreNonnullByDefault`] and
 custom [`@TypeQualifierDefault`] annotations. Still, `@NullMarked` differs from
-those, including in [its effect on generics](user-guide#generics), so you may
-need to take advantage of your new ability to annotate locations like type
+those, including in [its effect on generics](/docs/user-guide#generics), so you
+may need to take advantage of your new ability to annotate locations like type
 arguments (as in `Future<@Nullable Credentials>`). `@NullMarked` is likely to
 have an effect closer to what you want, but it may require additional work on
 your part.
@@ -162,5 +163,5 @@ use both the Checker Framework annotations (for annotations like
 [`implementation`]: https://docs.gradle.org/current/userguide/java_library_plugin.html#sec:java_library_configurations_graph
 [`optional`]: https://maven.apache.org/guides/introduction/introduction-to-optional-and-excludes-dependencies.html
 [`provided`]: https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#dependency-scope
-[Kotlin-caveats]: whether#kotlin
+[Kotlin-caveats]: /docs/whether#kotlin
 [type-use annotations]: https://www.oracle.com/technical-resources/articles/java/ma14-architect-annotations.html#:~:text=Applying%20Type%20Annotations

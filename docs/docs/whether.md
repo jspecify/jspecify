@@ -4,9 +4,9 @@ sidebar_position: 3
 
 # Should you use JSpecify annotations in your Java code?
 
-With the release of JSpecify 1.0.0, we guarantee backwards compatibility: we will
-not rename the annotations or move them or make other changes that would cause
-your compilation to fail when you update.
+With the release of JSpecify 1.0.0, we guarantee backwards compatibility: we
+will not rename the annotations or move them or make other changes that would
+cause your compilation to fail when you update.
 
 However, there are other things to think about when deciding whether to start
 using JSpecify annotations in your code, including at least:
@@ -20,7 +20,7 @@ using JSpecify annotations in your code, including at least:
 ## If your Java code doesn’t use nullness annotations yet
 
 If your Java code doesn’t already use nullness annotations, we recommend that
-you [start using JSpecify annotations](using).
+you [start using JSpecify annotations](/docs/using).
 
 Even if you are not currently using a nullness analyzer, applying JSpecify
 annotations can still provide benefits.
