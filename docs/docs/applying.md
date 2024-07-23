@@ -61,7 +61,7 @@ be nullable, so you would declare `bar` to return `Optional<@NonNull T>` to
 indicate that it returns `Optional<String>` even for `Foo<@Nullable String>`.
 
 (There are other edge cases, such as wildcards. Consult the
-[User Guide](/docs/user-guide) for more information.)
+[User Guide](user-guide) for more information.)
 
 ## 2. Add `@NullMarked`
 
