@@ -25,6 +25,7 @@ const config = {
   tagline: 'Standard Annotations for Java Static Analysis',
   url: 'http://jspecify.org/',
   baseUrl: '/',
+  trailingSlash: true,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/jspecify-favicon.ico',
