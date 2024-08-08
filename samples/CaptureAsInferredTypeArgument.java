@@ -37,11 +37,11 @@ interface CaptureAsInferredTypeArgument {
   }
 
   default void unspecBounded(Lib<? extends @NullnessUnspecified Object> l) {
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information 
     useImplicitlyObjectBounded(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information 
     useExplicitlyObjectBounded(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information 
     useUnspecBounded(l);
     useUnionNullBounded(l);
   }

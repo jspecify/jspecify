@@ -65,7 +65,7 @@ class UseOfTypeVariableAsTypeArgument {
     }
 
     Lib<? extends Object> x7(Super<? extends @NullnessUnspecified Object> s) {
-      // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+      // :: error: jspecify_nullness_not_enough_information 
       return s.get();
     }
 
