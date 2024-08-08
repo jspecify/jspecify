@@ -1,0 +1,10 @@
+Bundle-SymbolicName: org.jspecify.jspecify
+Bundle-Name: JSpecify annotations
+Bundle-Vendor: The JSpecify Authors
+Bundle-Description: An artifact of well-specified annotations to power static analysis checks and JVM language interop.
+Bundle-DocURL: https://jspecify.dev/docs/start-here
+Bundle-License: https://www.apache.org/licenses/LICENSE-2.0
+-exportcontents: org.jspecify.*
+-reproducible: true
+-noextraheaders: true
+-snapshot: SNAPSHOT
