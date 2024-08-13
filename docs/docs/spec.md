@@ -239,7 +239,7 @@ exceptions in the subsequent sections: \[[#17]\]
 
 -   formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
 
-    > This excludes the receiver parameter.
+    > This excludes the receiver parameter, but includes any variadic parameter.
 
 -   field type
 
@@ -251,9 +251,7 @@ exceptions in the subsequent sections: \[[#17]\]
 
 -   array component type
 
--   type used in a variadic parameter declaration
-
-However, any location above is unrecognized if it matches either of the
+However, any location above is unrecognized if it matches any of the
 following cases: \[[#17]\]
 
 > We refer to these cases (and some other cases below) as "intrinsically
@@ -274,25 +272,15 @@ following cases: \[[#17]\]
     > Every outer type is intrinsically non-nullable because every instance of
     > an inner class has an associated instance of the outer class.
 
-Additionally, any location above is unrecognized if it makes up *any
-[type component]* of a type in the following locations: \[[#17]\]
+-   the whole type (not a type component within it, such as a type argument or array component type) of any of the following:
 
-> These locations all fit under the umbrella of "implementation code."
-> Implementation code may use types that contain type arguments, wildcard
-> bounds, and array component types, which would be recognized locations if not
-> for the exceptions defined by this section.
+    - a local variable
+    - the type in a cast of `instanceof` expression
+    - an object creation expression
 
--   a local variable type
--   the type in a cast or `instanceof` expression
--   an array or object creation expression (including via a member reference)
--   an explicit type argument supplied to a generic method or constructor
-    (including via a member reference) or to an instance creation expression for
-    a generic class
+-   type arguments of a receiver parameter's type
 
-> In practice, we anticipate that tools will treat types (and their annotations)
-> in *most* of the above locations much like they treat types in other
-> locations. Still, this spec does not concern itself with implementation code:
-> We believe that the most important domain for us to focus on is that of APIs.
+> In practice, we anticipate that tools will be able to infer the nullness of these parts of implementation code without explicit annotation, and so we do not recognize nullness annotations at those locations in this specification.
 
 All locations that are not explicitly listed as recognized are unrecognized.
 
