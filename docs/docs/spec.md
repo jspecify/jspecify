@@ -233,7 +233,7 @@ annotations in other locations.
 > location).
 
 The following locations are recognized except when overruled by one of the
-exceptions in the subsequent sections: \[[#17]\]
+exceptions in the subsequent sections:
 
 -   return type of a method
 
@@ -243,7 +243,7 @@ exceptions in the subsequent sections: \[[#17]\]
 
 -   field type
 
--   type parameter upper bound \[[#60]\]
+-   type parameter upper bound
 
 -   non-wildcard type argument
 
@@ -251,8 +251,10 @@ exceptions in the subsequent sections: \[[#17]\]
 
 -   array component type
 
+-   array creation expression
+
 However, any location above is unrecognized if it matches any of the
-following cases: \[[#17]\]
+following cases:
 
 > We refer to these cases (and some other cases below) as "intrinsically
 > non-nullable."
@@ -268,39 +270,50 @@ following cases: \[[#17]\]
     > *static* type. If `Bar` is a non-static type, then Java permits the code.
     > So JSpecify tools have the oppotunity to reject it, given that the author
     > probably intended `Foo.@Nullable Bar`.)
-
+    >
     > Every outer type is intrinsically non-nullable because every instance of
     > an inner class has an associated instance of the outer class.
 
--   the whole type (not a type component within it, such as a type argument or array component type) of any of the following:
+-   the root type (that is, not any type argument or array component type) of
+    any of the following:
 
-    - a local variable
-    - the type in a cast of `instanceof` expression
-    - an object creation expression
+    -   a local variable
+
+    -   the type in a cast of `instanceof` expression
+
+    -   an object creation expression
+
+    > So the annotation is unrecognized in the following cases:
+    > -   `@Nullable List<String> strings = ...`
+    > -   `String @Nullable [] strings = ...`
+    > -   `(@Nullable List<String>) foo`
+    > -   `new @Nullable ArrayList<String>()`
+    >
+    > But the following are all recognized:
+    > -   `List<@Nullable String> strings = ...`
+    > -   `@Nullable String[] strings = ...`
+    > -   `(List<@Nullable String>) foo`
+    > -   `new ArrayList<@Nullable String>()`
 
 -   type arguments of a receiver parameter's type
 
-> In practice, we anticipate that tools will be able to infer the nullness of these parts of implementation code without explicit annotation, and so we do not recognize nullness annotations at those locations in this specification.
+> In practice, we anticipate that tools will be able to infer the nullness of
+> these parts of implementation code without explicit annotation, and so we do
+> not recognize nullness annotations at those locations in this specification.
 
 All locations that are not explicitly listed as recognized are unrecognized.
 
-> Other notable unrecognized annotations include: \[[#17]\]
->
-> Some additional intrinsically non-nullable locations:
+> Other notable unrecognized annotations include:
 >
 > -   supertype in a class declaration
 > -   thrown exception type
 > -   exception parameter type
 > -   enum constant declaration
 > -   receiver parameter type
->
-> Some other locations that individual tools are more likely to assign semantics
-> to:
->
-> -   a class declaration \[[#7]\]: For example, the annotation in `public
->     @Nullable class Foo {}` is in an unrecognized location.
-> -   a type-parameter declaration or a wildcard *itself* \[[#19], [#31]\]
-> -   any [type component] of a receiver parameter type \[[#157]\]
+> -   a class declaration: For example, the annotation in `public @Nullable
+>     class Foo {}` is in an unrecognized location.
+> -   a type-parameter declaration or a wildcard *itself*
+> -   any [type component] of a receiver parameter type
 >
 > But note that types "inside" some of these locations can still be recognized,
 > such as a *type argument* of a supertype.
@@ -316,10 +329,11 @@ Our declaration annotation is specified to be *recognized* when applied to the
 locations listed below:
 
 -   A *named* class.
--   A package. \[[#34]\]
--   A module. \[[#34]\]
+-   A package.
+-   A module.
+-   A method or constructor.
 
-> *Not* a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
+> *Not* a field.
 
 ## Null-marked scope
 
