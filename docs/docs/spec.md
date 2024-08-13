@@ -235,28 +235,28 @@ annotations in other locations.
 The following locations are recognized except when overruled by one of the
 exceptions in the subsequent sections:
 
--   return type of a method
+-   the return type of a method
 
--   formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
+-   a formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
 
     > This excludes the receiver parameter, but includes any variadic parameter.
 
--   field type
+-   a field type
 
--   type parameter upper bound
+-   a type parameter upper bound
 
--   non-wildcard type argument
+-   a non-wildcard type argument
 
--   wildcard bound
+-   a wildcard bound
 
--   array component type
+-   an array component type
 
--   array creation expression
+-   an array creation expression
 
 However, any location above is unrecognized if it matches any of the
 following cases:
 
-> We refer to these cases (and some other cases below) as "intrinsically
+> We refer to the first two cases (and some other cases below) as "intrinsically
 > non-nullable."
 
 -   a type usage of a value type (currently, the 8 predefined primitive types)
@@ -283,7 +283,11 @@ following cases:
 
     -   an object creation expression
 
-    > So the annotation is unrecognized in the following cases:
+    > In practice, we anticipate that tools will be able to infer the nullness of
+    > these parts of implementation code without explicit annotation, and so we do
+    > not recognize nullness annotations at those locations in this specification.
+    >
+    > For example, the annotation is unrecognized in the following cases:
     > -   `@Nullable List<String> strings = ...`
     > -   `String @Nullable [] strings = ...`
     > -   `(@Nullable List<String>) foo`
@@ -297,23 +301,19 @@ following cases:
 
 -   type arguments of a receiver parameter's type
 
-> In practice, we anticipate that tools will be able to infer the nullness of
-> these parts of implementation code without explicit annotation, and so we do
-> not recognize nullness annotations at those locations in this specification.
-
 All locations that are not explicitly listed as recognized are unrecognized.
 
 > Other notable unrecognized annotations include:
->
-> -   supertype in a class declaration
-> -   thrown exception type
-> -   exception parameter type
-> -   enum constant declaration
-> -   receiver parameter type
-> -   a class declaration: For example, the annotation in `public @Nullable
+> -   class declaration: For example, the annotation in `public @Nullable
 >     class Foo {}` is in an unrecognized location.
-> -   a type-parameter declaration or a wildcard *itself*
+> -   type-parameter declaration or a wildcard *itself*
 > -   any [type component] of a receiver parameter type
+> -   some additional intrinsically non-nullable locations:
+>     -   supertype in a class declaration
+>     -   thrown exception type
+>     -   exception parameter type
+>     -   enum constant declaration
+>     -   receiver parameter type
 >
 > But note that types "inside" some of these locations can still be recognized,
 > such as a *type argument* of a supertype.
