@@ -48,8 +48,8 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
 
 ### Then if you're *really* interested
 
-*   The [specification], written to be understood by owners of compilers and
-    static analysis tools. Note that it's currently pretty old: it matches
+*   The [specification][spec], written to be understood by owners of compilers
+    and static analysis tools. Note that it's currently pretty old: it matches
     JSpecify 0.2.0, not 1.0.0. We're working on updating it.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
@@ -87,6 +87,24 @@ plans to extend our support beyond nullness.
 
 *   Star and Watch our [github] repo.
 
+## Press
+
+Since we [released version 1.0.0](/blog/2024-0717-release-1.0.0) we've seen some
+positive reaction in the community. Here are some interesting posts, articles,
+and videos:
+
+*   [Moderne mass-migrated its nullness annotations](https://www.moderne.ai/blog/mass-migration-of-nullability-annotations-to-jspecify)
+    and published a guide explaining how they did it using their
+    [OpenRewrite](https://docs.openrewrite.org/) automated refactoring platform.
+
+*   Ben Evans at InfoQ
+    [wrote about the release](https://www.infoq.com/news/2024/08/jspecify-java-nullability/)
+    and interviewed Jurgen Hoeller, Spring Framework's cofounder and project
+    lead, about it.
+
+*   A Russian video overview of recent news in the Java/JDK world includes
+    [a discussion of JSpecify](https://www.youtube.com/watch?v=CkAywkCby58&t=429s).
+
 [discuss]: https://groups.google.com/g/jspecify-discuss
 [file an issue]: https://github.com/jspecify/jspecify/issues/new
 [github]: https://github.com/jspecify/jspecify
@@ -98,7 +116,6 @@ plans to extend our support beyond nullness.
 [release]: https://search.maven.org/artifact/org.jspecify/jspecify/1.0.0/jar
 [reference implementation]: https://github.com/jspecify/jspecify-reference-checker
 [spec]: /docs/spec
-[specification]: /docs/spec
 [stackoverflow answer]: https://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use
 [user guide]: /docs/user-guide
 [wiki]: https://github.com/jspecify/jspecify/wiki
