@@ -89,9 +89,9 @@ plans to extend our support beyond nullness.
 
 ## Press
 
-Since we [released version 1.0.0](/blog/2024-0717-release-1.0.0) we've seen some
-positive reaction in the community. Here are some interesting posts, articles,
-and videos:
+Since we [released version 1.0.0](/blog/2024-07-17-release-1.0.0) we've seen
+some positive reaction in the community. Here are some interesting posts,
+articles, and videos:
 
 *   [Moderne mass-migrated its nullness annotations](https://www.moderne.ai/blog/mass-migration-of-nullability-annotations-to-jspecify)
     and published a guide explaining how they did it using their
