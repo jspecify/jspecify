@@ -49,8 +49,8 @@ However, this is up to tool authors, who may have reasons to take a different
 approach. For example:
 
 -   Java [places some restrictions that aren't necessary for soundness][#49],
-    and it [is lenient in at least one way that can lead to runtime
-    errors][#65].
+    and it
+    [is lenient in at least one way that can lead to runtime errors][#65].
 
 -   JSpecify annotations can be used even by tools that are not "nullness
     checkers" at all. For example, a tool that lists the members of an API could
@@ -153,8 +153,8 @@ A nullness operator is one of 4 values:
 >     -   The type usage `String UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
 >         etc., but whether `null` should be included is not specified.
 >     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`.
->         But whether `null` should be added to the set (if it isn't already)
->         is not specified.
+>         But whether `null` should be added to the set (if it isn't already) is
+>         not specified.
 > -   `MINUS_NULL`: This operator not only does not *add* `null` but also
 >     actively *removes* it from a type-variable usage that might otherwise
 >     include it.
@@ -192,8 +192,8 @@ refer to base types.
 
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
-type `T`, without reference to the nullness operator of any other type that is
-a component of `T` or has `T` as a component.
+type `T`, without reference to the nullness operator of any other type that is a
+component of `T` or has `T` as a component.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
@@ -337,8 +337,8 @@ locations listed below:
 
 To determine whether a type usage appears in a null-marked scope:
 
-Look for a `@NullMarked` annotation on any of the scopes
-enclosing the type usage.
+Look for a `@NullMarked` annotation on any of the scopes enclosing the type
+usage.
 
 Class members are enclosed by classes, which may be enclosed by other class
 members or classes. and top-level classes are enclosed by packages, which may be
@@ -349,9 +349,8 @@ enclosed by modules.
 > This definition of "enclosing" likely matches
 > [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 
-If one of those scopes is directly annotated with
-`@NullMarked`, then the type usage is in a null-marked
-scope. Otherwise, it is not.
+If one of those scopes is directly annotated with `@NullMarked`, then the type
+usage is in a null-marked scope. Otherwise, it is not.
 
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
@@ -366,8 +365,8 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is annotated with `@Nullable`, its
-    nullness operator is `UNION_NULL`.
+-   If the type usage is annotated with `@Nullable`, its nullness operator is
+    `UNION_NULL`.
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
 -   Its nullness operator is `UNSPECIFIED`.
