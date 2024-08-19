@@ -866,10 +866,10 @@ To substitute each type argument `Aᵢ` for each corresponding type parameter
 `Pᵢ`:
 
 For every type-variable usage `V` whose [base type] is `Pᵢ`, replace `V` with
-the result of the following operation:
+the output of the following operation:
 
 -   If `V` is [null-exclusive under every parameterization] in [all worlds],
-    then replace it with the result of [applying][applying operator]
+    then replace it with the output of [applying][applying operator]
     `MINUS_NULL` to `Aᵢ`.
 
     > This is the one instance in which a rule specifically refers to the
@@ -877,6 +877,10 @@ the result of the following operation:
     > [a rule "propagates" its version to other rules](#propagating-multiple-worlds).
     > But in this instance, the null-exclusivity rule (and all rules that it in
     > turn applies) are the [all-worlds] versions.
+    >
+    > We may someday have another such rule for computing least upper bounds, as
+    > demonstrated in
+    > https://github.com/jspecify/jspecify-reference-checker/pull/197.
 
     > The purpose of this special case is to improve behavior in "the
     > `ImmutableList.Builder` case": Because `ImmutableList.Builder.add` always
@@ -909,7 +913,7 @@ the result of the following operation:
     > to return `E MINUS_NULL`: If we instead used `E NO_CHANGE`, then the
     > return type would look like it might include `null`.
 
--   Otherwise, replace `V` with the result of applying the nullness operator of
+-   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.
 
 ## Applying a nullness operator to an augmented type {#applying-operator}
@@ -920,7 +924,7 @@ The process of applying a [nullness operator] requires 2 inputs:
 -   the [augmented type] \(which, as always, includes a nullness operator for
     that type) to apply it to
 
-The result of the process is an augmented type.
+The output of the process is an augmented type.
 
 The process is as follows:
 
@@ -942,7 +946,7 @@ the same as the input but with its nullness operator replaced with the desired
 nullness operator.
 
 Otherwise, the output is an intersection type. For every element `Tᵢ` of the
-input type, the output type has an element that is the result of applying the
+input type, the output type has an element that is the output of applying the
 desired nullness operator to `Tᵢ`.
 
 > In this case, the desired nullness operator is always equal to the nullness
