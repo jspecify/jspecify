@@ -631,7 +631,7 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > having to cover that case.)
 
 > A further level of complexity in all this is `UNSPECIFIED`. For example, in
-> the [all-worlds] version of the following rules, a type with nullness operator
+> the [some-world] version of the following rules, a type with nullness operator
 > `UNSPECIFIED` can be both null-_inclusive_ under every parameterization and
 > null-_exclusive_ under every parameterization.
 
@@ -726,10 +726,10 @@ A type is null-exclusive under every parameterization if it has a
 [nullness-subtype-establishing path] to either of the following:
 
 -   any type whose [nullness operator] is `MINUS_NULL`
--   any augmented class or array type
+-   any augmented class or array type or the augmented null type
 
-    > This rule refers specifically to a "class or array type," as distinct from
-    > other types like type variables and [intersection types].
+    > This rule refers to particular kinds of types as distinct from other types
+    > like type variables and [intersection types].
 
 > When code dereferences an expression, we anticipate that tools will check
 > whether the expression is null-exclusive under every parameterization.
