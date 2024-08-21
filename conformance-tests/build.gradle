@@ -68,8 +68,8 @@ distributions {
 }
 
 dependencies {
-    assertionsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
-    depsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+    assertionsImplementation project(":")
+    depsImplementation project(":")
 }
 
 // Make sure assertions compile.
