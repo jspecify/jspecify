@@ -68,8 +68,11 @@ distributions {
 }
 
 dependencies {
-    assertionsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
-    depsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+    // `project(":")` refers to the root project.
+    // To make this clearer, we should move the actual annotations to a subproject.
+    // See https://github.com/jspecify/jspecify/pull/605#discussion_r1725297166
+    assertionsImplementation project(":")
+    depsImplementation project(":")
 }
 
 // Make sure assertions compile.
