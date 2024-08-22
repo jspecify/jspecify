@@ -68,6 +68,9 @@ distributions {
 }
 
 dependencies {
+    // `project(":")` refers to the root project.
+    // To make this clearer, we should move the actual annotations to a subproject.
+    // See https://github.com/jspecify/jspecify/pull/605#discussion_r1725297166
     assertionsImplementation project(":")
     depsImplementation project(":")
 }
