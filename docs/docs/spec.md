@@ -504,65 +504,37 @@ to all types, including the null type. This produces multiple null types:
 
 ## Multiple "worlds" {#multiple-worlds}
 
-Some of the rules in this spec come in 2 versions: One version requires a
-property to hold "in all worlds," and the other requires it to hold only "in
-some world."
+The rules in this spec determine whether a proposition is true, false, or *might be true*. We use Kleene logic to represent operations on these three values, so that *true AND maybe* and *false and maybe* are both *maybe*, while *true OR maybe* is *true* and *false OR maybe* is *maybe*.
 
-Tool authors may choose to implement neither, either, or both versions of the
-rules.
+If none of the augmented types involved in the rule evaluation has the `UNSPECIFIED` nullness operator, then the rule will evaluate to true or false.
+
+However, in the presence of the `UNSPECIFIED` nullness operator (which merely indicates that the nullness specification has not been made), the rule has to consider several possible "worlds":
+-   one in which the nullness operator is really `UNION_NULL`
+<!-- For 1.0: -   one in which the nullness operator is really `MINUS_NULL` -->
+-   for type-variable usages only: one in which the nullness operator is really `NO_CHANGE`
+
+If the rule would be true in all of those "worlds", then the rule evaluates to true. If the rule would be false in all worlds, then the rule evaluates to false. If the rule would be true in some worlds but not all, then the rule evaluates to *maybe*.
 
 > Our goal is to allow tools and their users to choose their desired level of
-> strictness in the presence of `UNSPECIFIED`. The basic idea is that, every
-> time a tool encounters a type component with the nullness operator
-> `UNSPECIFIED`, it has the option to fork off 2 "worlds": 1 in which the
-> operator is `UNION_NULL` and 1 in which it is `NO_CHANGE`.
+> strictness in the presence of `UNSPECIFIED`.
 >
 > In more detail: When tools lack a nullness specification for a type, they may
-> choose to assume that either of the resulting worlds may be the "correct"
-> specification. The all-worlds version of a rule, by requiring types to be
-> compatible in all possible worlds, holds that types are incompatible unless it
-> has enough information to prove they are compatible. The some-world version,
-> by requiring types to be compatible only in *some* world, holds that types are
-> compatible unless it has enough information to prove they are incompatible.
-> (By behaving "optimistically," the some-world version is much like Kotlin's
-> rules for "platform types.")
+> choose to be strict or pessimistic by reporting errors, for example, if a type *might not be* a nullness subtype when it should be. Or they could choose to be lenient or optimistic by reporting errors only if a type definitely is not a nullness subtype when it should be (as Kotlin does with platform types).
 >
-> Thus, a strict tool might choose to implement the all-worlds version of rules,
-> and a lenient tool might choose to implement the some-world version. Yet
-> another tool might implement both and let users select which rules to apply.
+> Or some tools might let users select whether to be strict or lenient.
 >
-> Still another possibility is for a tool to implement both versions and to use
-> that to distinguish between "errors" and "warnings." Such a tool might always
-> first process code with the all-worlds version and then with the some-world
-> version. If the tools detects, say, an out-of-bounds type argument in both
-> cases, the tool would produce an error. But, if the tool detects such a
-> problem with the all-worlds version but not with the some-world version, the
+> Still another possibility is for a tool report warnings if there *might be* a nullness problem.
+> If the tool detects, say, a definitely out-of-bounds type argument (nullness subtype is false), the tool would produce an error. But, if the tool detects a *maybe* out-of-bounds type argument (nullness subtype *might be true*), the
 > tool would produce a warning. Under this scheme, a warning means roughly that
 > "There is some way that the code could be annotated that would produce an
 > error here."
-
-The main body of each section of the spec describes the all-worlds rule. If the
-some-world rule differs, the differences are explained at the end.
-
-> A small warning: To implement the full some-world rules, a tool must also
-> implement at least part of the all-worlds rules. Those rules are required as
-> part of [substitution].
-
-### Propagating how many worlds a relation must hold in {#propagating-multiple-worlds}
-
-When one rule in this spec refers to another, it refers to the same version of
-the rule. For example, when the rules for [containment] refer to the rules for
-[subtyping], the some-world containment relation refers to the some-world
-subtyping relation, and the all-worlds containment relation refers to the
-all-worlds subtyping relation.
-
-This meta-rule applies except when a rule refers explicitly to a particular
-version of another rule.
 
 ## Same type
 
 `S` and `T` are the same type if `S` is a [subtype] of `T` and `T` is a subtype
 of `S`.
+
+> Note that because of the ternary logic, if `S` is a subtype of `T` and `T` *might be* a subtype of `S`, then `S` and `T` *might be* the same type.
 
 The same-type relation is *not* defined to be reflexive or transitive.
 
@@ -581,6 +553,9 @@ The same-type relation is *not* defined to be reflexive or transitive.
 > only for types that have subcomponents --- namely, parameterized types and
 > arrays. And it essentially says "Check the first condition on subcomponents as
 > appropriate."
+
+> Note that because of the ternary logic, if `A` *might be* a nullness subtype of `F` or `A` *might be* a subtype of `F` according to the nullness-delegating subtyping rules for Java, then `A` *might be* a subtype of `F`.
+
 
 ## Nullness subtyping
 
