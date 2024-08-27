@@ -11,7 +11,8 @@ annotations for nullness analysis.
 
 The primary audience for this document is the authors of analysis tools. Some
 very advanced users might find it interesting. But it would make a very poor
-introduction for anyone else; instead see our **[Start Here](/docs/start-here) page**.
+introduction for anyone else; instead see our **[Start Here](/docs/start-here)
+page**.
 :::
 
 :::note Status of this specification
@@ -120,7 +121,7 @@ of that type. Specifically, a type component is one of the following:
 
 ## Nullness operator
 
-A nullness operator is one of 4 values:
+A nullness operator is one of four values:
 
 -   `UNION_NULL`
 -   `NO_CHANGE`
@@ -259,7 +260,8 @@ following cases: \[[#17]\]
 > We refer to these cases (and some other cases below) as "intrinsically
 > non-nullable."
 
--   a type usage of a value type (currently, the 8 predefined primitive types)
+-   a type usage of a value type (currently, the eight predefined primitive
+    types)
 
 -   the outer type that qualifies an inner type
 
@@ -454,7 +456,8 @@ the nullness operator defined by this section.
 
 ## Bound of an `Object`-bounded type parameter {#object-bounded-type-parameter}
 
-In source, an `Object`-bounded type parameter can be writen in either of 2 ways:
+In source, an `Object`-bounded type parameter can be writen in either of two
+ways:
 
 -   `<T>`
 -   `<T extends Object>` with no JSpecify nullness type annotations on the bound
@@ -492,7 +495,7 @@ to all types, including the null type. This produces multiple null types:
 
 -   the null base type with nullness operator `MINUS_NULL`
 
-    > This is equivalent to the previous type. Tools may use the 2
+    > This is equivalent to the previous type. Tools may use the two
     > interchangeably.
 
 -   the null base type with nullness operator `UNION_NULL`: the type of the null
@@ -504,7 +507,7 @@ to all types, including the null type. This produces multiple null types:
 
 ## Multiple "worlds" {#multiple-worlds}
 
-Some of the rules in this spec come in 2 versions: One version requires a
+Some of the rules in this spec come in two versions: One version requires a
 property to hold "in all worlds," and the other requires it to hold only "in
 some world."
 
@@ -514,8 +517,8 @@ rules.
 > Our goal is to allow tools and their users to choose their desired level of
 > strictness in the presence of `UNSPECIFIED`. The basic idea is that, every
 > time a tool encounters a type component with the nullness operator
-> `UNSPECIFIED`, it has the option to fork off 2 "worlds": 1 in which the
-> operator is `UNION_NULL` and 1 in which it is `NO_CHANGE`.
+> `UNSPECIFIED`, it has the option to fork off two "worlds": one in which the
+> operator is `UNION_NULL` and one in which it is `NO_CHANGE`.
 >
 > In more detail: When tools lack a nullness specification for a type, they may
 > choose to assume that either of the resulting worlds may be the "correct"
@@ -587,7 +590,8 @@ The same-type relation is *not* defined to be reflexive or transitive.
 `A` is a nullness subtype of `F` if any of the following conditions are met:
 
 > Nullness subtyping asks the question: If `A` includes `null`, does `F` also
-> include `null`? There are 4 cases in which this is true, 2 easy and 2 hard:
+> include `null`? There are four cases in which this is true, two easy and two
+> hard:
 
 -   `F` is [null-inclusive under every parameterization].
 
@@ -666,9 +670,9 @@ or transitive.
 > Subtyping does end up being transitive when the relation is required to hold
 > in all worlds. And it does end up being reflexive when the relation is
 > required to hold only in [some world]. We don't state those properties as
-> rules for 2 reasons: First, they arise naturally from the definitions. Second,
-> we don't want to suggest that subtyping is reflexive and transitive under both
-> versions of the rule.
+> rules for two reasons: First, they arise naturally from the definitions.
+> Second, we don't want to suggest that subtyping is reflexive and transitive
+> under both versions of the rule.
 
 Contrast this with our [nullness-delegating subtyping] rules and [containment]
 rules: Each of those is defined as a transitive closure. However, this is
@@ -836,7 +840,7 @@ follows:
 
 The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
 
--   Disregard the 2 rules that refer to a bare `?`. Instead, treat `?` like `?
+-   Disregard the two rules that refer to a bare `?`. Instead, treat `?` like `?
     extends Object`, where the [nullness operator] of the `Object` bound is
     specified by ["Bound of an unbounded wildcard."](#unbounded-wildcard)
 
@@ -847,7 +851,8 @@ The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
     nullness operator of the `Object` bound is `UNION_NULL`.
 
 -   When the JLS refers to the same type `T` on both sides of a rule, the rule
-    applies if and only if this spec defines the 2 types to be the [same type].
+    applies if and only if this spec defines the two types to be the
+    [same type].
 
 **Some-world version:** The rules are the same except that the requirement for
 "`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
@@ -913,7 +918,7 @@ the result of the following operation:
 
 ## Applying a nullness operator to an augmented type {#applying-operator}
 
-The process of applying a [nullness operator] requires 2 inputs:
+The process of applying a [nullness operator] requires two inputs:
 
 -   the nullness operator to apply
 -   the [augmented type] \(which, as always, includes a nullness operator for
