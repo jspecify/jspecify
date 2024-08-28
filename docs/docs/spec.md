@@ -504,30 +504,48 @@ to all types, including the null type. This produces multiple null types:
 
 ## Multiple "worlds" {#multiple-worlds}
 
-The rules in this spec determine whether a proposition is true, false, or *might be true*. We use Kleene logic to represent operations on these three values, so that *true AND maybe* and *false and maybe* are both *maybe*, while *true OR maybe* is *true* and *false OR maybe* is *maybe*.
+The rules in this spec treat the nullness operator `UNSPECIFIED` as an indicator
+of the lack of knowledge of which one of the other nullness operators is truly
+intended for that augmented type. As such it represents two
+<!-- For 1.0: or three --> distinct possible worlds:
 
-If none of the augmented types involved in the rule evaluation has the `UNSPECIFIED` nullness operator, then the rule will evaluate to true or false.
+-   one in which the true nullness operator is `UNION_NULL`
 
-However, in the presence of the `UNSPECIFIED` nullness operator (which merely indicates that the nullness specification has not been made), the rule has to consider several possible "worlds":
--   one in which the nullness operator is really `UNION_NULL`
-<!-- For 1.0: -   one in which the nullness operator is really `MINUS_NULL` -->
--   for type-variable usages only: one in which the nullness operator is really `NO_CHANGE`
+<!-- For 1.0: - one in which the true nullness operator is `MINUS_NULL` -->
 
-If the rule would be true in all of those "worlds", then the rule evaluates to true. If the rule would be false in all worlds, then the rule evaluates to false. If the rule would be true in some worlds but not all, then the rule evaluates to *maybe*.
+-   for type-variable usages only: one in which the true nullness operator is
+    `NO_CHANGE`
+
+Each rule results in one of three values:
+
+-   true in all worlds
+-   true in some world
+-   false in all worlds
+
+If none of the augmented types involved in the rule evaluation has the
+`UNSPECIFIED` nullness operator, then the rule will evaluate to true in all
+worlds or false in all worlds, since there is only one world. Otherwise, the
+rule has to be evaluated for each possible world (two)
 
 > Our goal is to allow tools and their users to choose their desired level of
 > strictness in the presence of `UNSPECIFIED`.
 >
 > In more detail: When tools lack a nullness specification for a type, they may
-> choose to be strict or pessimistic by reporting errors, for example, if a type *might not be* a nullness subtype when it should be. Or they could choose to be lenient or optimistic by reporting errors only if a type definitely is not a nullness subtype when it should be (as Kotlin does with platform types).
+> choose to be strict or pessimistic by reporting errors, for example, if a type
+> is not a nullness subtype *in some world* when it should be. Or they could
+> choose to be lenient or optimistic by reporting errors only if a type is not a
+> nullness subtype *in all worlds* when it should be (as Kotlin does with
+> platform types).
 >
 > Or some tools might let users select whether to be strict or lenient.
 >
-> Still another possibility is for a tool report warnings if there *might be* a nullness problem.
-> If the tool detects, say, a definitely out-of-bounds type argument (nullness subtype is false), the tool would produce an error. But, if the tool detects a *maybe* out-of-bounds type argument (nullness subtype *might be true*), the
-> tool would produce a warning. Under this scheme, a warning means roughly that
-> "There is some way that the code could be annotated that would produce an
-> error here."
+> Still another possibility is for a tool report warnings if there is a nullness
+> problem *in some world* and errors if there is a problem *in all worlds*. If
+> the tool detects, say, an out-of-bounds type argument *in all worlds*, the
+> tool would produce an error. But, if the tool detects an out-of-bounds type
+> argument *in some world*, the tool would produce a warning. Under this scheme,
+> a warning means roughly that "There is some way that the code could be
+> annotated that would produce an error here."
 
 ## Same type
 
