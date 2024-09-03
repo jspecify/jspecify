@@ -593,11 +593,11 @@ The same-type relation is *not* defined to be reflexive or transitive.
 > include `null`? There are four cases in which this is true, two easy and two
 > hard:
 
--   `F` is [null-inclusive under every parameterization].
+-   `F` is [null-inclusive].
 
     > This is the first easy case: `F` always includes `null`.
 
--   `A` is [null-exclusive under every parameterization].
+-   `A` is [null-exclusive].
 
     > This is the second easy case: `A` never includes `null`.
 
@@ -629,14 +629,12 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > super @Nullable String>`, or unannotated code that doesn't specify the
     > nullness operator for the bound, you can always pass its `test` method a
     > `String`. (If you want to pass a `@Nullable String`, then you'll need for
-    > the bound to be [null-inclusive under every parameterization]. The
-    > existence of the null-inclusiveness rule frees this current rule from
-    > having to cover that case.)
+    > the bound to be [null-inclusive]. The existence of the null-inclusiveness
+    > rule frees this current rule from having to cover that case.)
 
 > A further level of complexity in all this is `UNSPECIFIED`. For example, in
 > the [all-worlds] version of the following rules, a type with nullness operator
-> `UNSPECIFIED` can be both null-_inclusive_ under every parameterization and
-> null-_exclusive_ under every parameterization.
+> `UNSPECIFIED` can be both null-_inclusive_ and null-_exclusive_.
 
 Nullness subtyping (and thus subtyping itself) is *not* defined to be reflexive
 or transitive.
@@ -685,30 +683,28 @@ code that "notices" this chain. So, in practice, users are likely to see the
 "mostly transitive" behavior that we intend, even if we haven't found a way to
 formally specify it yet.
 
-## Null-inclusive under every parameterization
+## Null-inclusive
 
-A type is null-inclusive under every parameterization if it meets any of the
-following conditions:
+A type is null-inclusive if it meets any of the following conditions:
 
 -   Its [nullness operator] is `UNION_NULL`.
 
     > This is the simplest part of the simplest case: A type usage always
     > includes `null` if it's annotated with `@Nullable`.
 
--   It is an [intersection type] whose elements all are null-inclusive under
-    every parameterization.
+-   It is an [intersection type] whose elements all are null-inclusive.
 
 -   It is a type variable that meets *both* of the following conditions:
 
     -   It does *not* have nullness operator `MINUS_NULL`.
 
-    -   Its lower bound is null-inclusive under every parameterization.
+    -   Its lower bound is null-inclusive.
 
     > This third case is probably irrelevant in practice: It covers `? super
     > @Nullable Foo`, which is already covered by the rules for
     > [nullness subtyping]. It's included here in case some tool has reason to
-    > check whether a type is null-inclusive under every parameterization
-    > *outside* of a check for nullness subtyping.
+    > check whether a type is null-inclusive *outside* of a check for nullness
+    > subtyping.
 
 **Some-world version:** The rule is the same except that the requirement for
 "`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
@@ -716,7 +712,7 @@ following conditions:
 > That is: It's possible that any type usage in unannotated code "ought to be"
 > annotated with `@Nullable`.
 
-## Null-exclusive under every parameterization
+## Null-exclusive
 
 > This is a straightforward concept ("never includes `null`"), but it's not as
 > simple to implement as the null-_inclusive_ rule was. This null-_exclusive_
@@ -725,8 +721,8 @@ following conditions:
 > check on the expression). The case of `<E extends Object>` is an example of
 > why the following rule requires looking for a "path."
 
-A type is null-exclusive under every parameterization if it has a
-[nullness-subtype-establishing path] to either of the following:
+A type is null-exclusive if it has a [nullness-subtype-establishing path] to
+either of the following:
 
 -   any type whose [nullness operator] is `MINUS_NULL`
 -   any augmented class or array type
@@ -735,13 +731,13 @@ A type is null-exclusive under every parameterization if it has a
     > other types like type variables and [intersection types].
 
 > When code dereferences an expression, we anticipate that tools will check
-> whether the expression is null-exclusive under every parameterization.
+> whether the expression is null-exclusive.
 
 ## Nullness-subtype-establishing path
 
-> Note that this definition is used both by the definition of
-> [null-exclusive under every parameterization] and by the third condition in
-> the definition [nullness subtyping] itself (the "type-variable case").
+> Note that this definition is used both by the definition of [null-exclusive]
+> and by the third condition in the definition [nullness subtyping] itself (the
+> "type-variable case").
 
 `A` has a nullness-subtype-establishing path to `F` if both of the following
 hold:
@@ -764,10 +760,9 @@ hold:
 > that fill the gaps in our nullness checking of "top-level" types. For example,
 > there's no need for the rules to reflect that `String NO_CHANGE` extends
 > `Object NO_CHANGE`: If we've established that a type has a path to `String
-> NO_CHANGE`, then we already know that it's
-> [null-exclusive under every parameterization], based on the rules above, and
-> that's enough to prove subtyping. And if we *haven't* established that, then
-> the `String`-`Object` edge isn't going to change that.
+> NO_CHANGE`, then we already know that it's [null-exclusive], based on the
+> rules above, and that's enough to prove subtyping. And if we *haven't*
+> established that, then the `String`-`Object` edge isn't going to change that.
 >
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
@@ -872,9 +867,8 @@ To substitute each type argument `Aᵢ` for each corresponding type parameter
 For every type-variable usage `V` whose [base type] is `Pᵢ`, replace `V` with
 the result of the following operation:
 
--   If `V` is [null-exclusive under every parameterization] in [all worlds],
-    then replace it with the result of [applying][applying operator]
-    `MINUS_NULL` to `Aᵢ`.
+-   If `V` is [null-exclusive] in [all worlds], then replace it with the result
+    of [applying][applying operator] `MINUS_NULL` to `Aᵢ`.
 
     > This is the one instance in which a rule specifically refers to the
     > [all-worlds] version of another rule. Normally,
@@ -1023,8 +1017,8 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
 [javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
-[null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
-[null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
+[null-exclusive]: #null-exclusive
+[null-inclusive]: #null-inclusive
 [null-marked scope]: #null-marked-scope
 [nullness operator]: #nullness-operator
 [nullness subtype]: #nullness-subtyping
