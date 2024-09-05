@@ -280,7 +280,7 @@ following cases:
 
     > In practice, we anticipate that tools will be able to infer the nullness of
     > these parts of implementation code without explicit annotation, and so we do
-    > not recognize nullness annotations at those locations in this specification.
+    > not recognize nullness annotations at those locations.
     >
     > For example, the annotation is unrecognized in the following cases:
     > -   `@Nullable List<String> strings = ...`
