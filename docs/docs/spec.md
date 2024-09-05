@@ -229,12 +229,13 @@ exceptions in the subsequent sections:
 
 -   the return type of a method
 
--   a formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
+-   a formal parameter type of a method or constructor, as defined in [JLS
+    8.4.1]
 
     > This excludes the receiver parameter but includes variadic parameters.
     > Specifically, you can add `@Nullable` before the `...` token to indicate
-    > that a variadic method accepts `null` arrays: `void foo(String
-    > @Nullable ... strings)`.
+    > that a variadic method accepts `null` arrays: `void foo(String @Nullable
+    > ... strings)`.
 
 -   a field type
 
@@ -248,67 +249,63 @@ exceptions in the subsequent sections:
 
 -   an array creation expression
 
-However, any location above is unrecognized if it matches any of the
-following cases:
+However, the type-use annotation is unrecognized in any of the following cases:
 
-> We refer to the first two cases (and some other cases below) as "intrinsically
-> non-nullable."
-
--   a type usage of a primitive type
-
--   the outer type that qualifies an inner type
-
-    > For example, the annotation in `@Nullable Foo.Bar` is in an unrecognized
-    > location: Java syntax attaches it to the outer type `Foo`.
-    >
-    > (Note that `@Nullable Foo.Bar` is a *Java* syntax error when `Bar` is a
-    > *static* type. If `Bar` is a non-static type, then Java permits the code.
-    > So JSpecify tools have the oppotunity to reject it, given that the author
-    > probably intended `Foo.@Nullable Bar`.)
-    >
-    > Every outer type is intrinsically non-nullable because every instance of
-    > an inner class has an associated instance of the outer class.
-
--   the root type (that is, not any type argument or array component type) of
-    any of the following:
-
-    -   a local variable
-
-    -   the type in a cast of `instanceof` expression
-
-    -   an object creation expression
-
-    > In practice, we anticipate that tools will be able to infer the nullness of
-    > these parts of implementation code without explicit annotation, and so we do
-    > not recognize nullness annotations at those locations.
-    >
-    > For example, the annotation is unrecognized in the following cases:
-    > -   `@Nullable List<String> strings = ...`
-    > -   `String @Nullable [] strings = ...`
-    > -   `(@Nullable List<String>) foo`
-    > -   `new @Nullable ArrayList<String>()`
-    >
-    > But the following are all recognized:
-    > -   `List<@Nullable String> strings = ...`
-    > -   `@Nullable String[] strings = ...`
-    > -   `(List<@Nullable String>) foo`
-    > -   `new ArrayList<@Nullable String>()`
+-   a type usage of a primitive type, since those are intrinsically non-nullable
 
 -   type arguments of a receiver parameter's type
 
 All locations that are not explicitly listed as recognized are unrecognized.
 
 > Other notable unrecognized annotations include:
-> -   class declaration: For example, the annotation in `public @Nullable
->     class Foo {}` is in an unrecognized location.
+>
+> -   class declaration
+>
+>     > For example, the annotation in `public @Nullable class Foo {}` is in an
+>     > unrecognized location.
+>
 > -   type-parameter declaration or a wildcard *itself*
-> -   any [type component] of a receiver parameter type
+>
+> -   a local variable's root type
+>
+>     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
+>     > [] strings = ...` have unrecognized annotations.
+>
+> -   the root type in a cast of `instanceof` expression
+>
+>     > For example, `(@Nullable List<String>) foo` has an unrecognized
+>     > annotation.
+>
 > -   some additional intrinsically non-nullable locations:
+>
 >     -   supertype in a class declaration
+>
 >     -   thrown exception type
+>
 >     -   exception parameter type
+>
 >     -   enum constant declaration
+>
 >     -   receiver parameter type
+>
+>     -   object creation expression
+>
+>         > For example, `new @Nullable ArrayList<String>()` has an unrecognized
+>         > annotation.
+>
+>     -   outer type qualifying an inner type
+>
+>         > For example, the annotation in `@Nullable Foo.Bar` is unrecognized
+>         > because it is attached to the outer type `Foo`.
+>         >
+>         > (Note that `@Nullable Foo.Bar` is a *Java* syntax error when `Bar`
+>         > is a *static* type. If `Bar` is a non-static type, then Java permits
+>         > the code. So JSpecify tools have the oppotunity to reject it, given
+>         > that the author probably intended `Foo.@Nullable Bar`.)
+>         >
+>         > Every outer type is intrinsically non-nullable because every
+>         > instance of an inner class has an associated instance of the outer
+>         > class.
 >
 > But note that types "inside" some of these locations can still be recognized,
 > such as a *type argument* of a supertype.
