@@ -570,12 +570,12 @@ target nullness operator `t`* if either of the following conditions holds:
     this check.
 
 > The purpose of "comfortable" is to let a checker determine whether it will
-> allow `null` to be assigned to a field of a given type by asking
-> whether the fields' nullness operator *might be*
-> `UNION_NULL`. The first bullet covers the simple case, in which the nullness
-> operator matches exactly. The second case treats
-> null-unmarked code optimistically; it's possible that a given unnanotated
-> type usage in that context "ought to be" annotated with `@Nullable`.
+> allow `null` to be assigned to a field of a given type by asking whether the
+> fields' nullness operator *might be* `UNION_NULL`. The first bullet covers the
+> simple case, in which the nullness operator matches exactly. The second case
+> treats null-unmarked code optimistically; it's possible that a given
+> unnanotated type usage in that context "ought to be" annotated with
+> `@Nullable`.
 
 ## Worried about a given nullness operator {#worried}
 
@@ -587,12 +587,12 @@ nullness operator `t`* if either of the following conditions holds:
 -   `g` is `UNSPECIFIED`, *and* we are performing the [all-worlds] version of
     this check.
 
-> "Worried" serves a similar purpose to
-> "[comfortable]" above, except to support strict checkers. For example, a value can be unsafe to
-> dereference if its type has nullness operator `UNION_NULL`, but a strict
-> checker might issue errors also for dereferences of values whose type has nullness
-> operator `UNSPECIFIED`; it would be "worried" that an `UNSPECIFIED` type
-> "ought to be" annotated with `@Nullable.`
+> "Worried" serves a similar purpose to "[comfortable]" above, except to support
+> strict checkers. For example, a value can be unsafe to dereference if its type
+> has nullness operator `UNION_NULL`, but a strict checker might issue errors
+> also for dereferences of values whose type has nullness operator
+> `UNSPECIFIED`; it would be "worried" that an `UNSPECIFIED` type "ought to be"
+> annotated with `@Nullable.`
 
 ## Same type
 
