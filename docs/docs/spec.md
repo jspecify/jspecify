@@ -317,14 +317,14 @@ All locations that are not explicitly listed as recognized are unrecognized.
 > But note that types "inside" some of these locations can still be recognized,
 > such as a *type argument* of a supertype.
 
-## The declaration annotation
+## The declaration annotations
 
-We provide a single parameterless declaration annotation called `@NullMarked`.
-\[[#5], [#87]\]
+We provide two parameterless declaration annotations, `@NullMarked` and
+`@NullUnmarked`.
 
 ### Recognized locations for declaration annotations
 
-Our declaration annotation is specified to be *recognized* when applied to the
+Our declaration annotations are specified to be *recognized* when applied to the
 locations listed below:
 
 -   A *named* class.
@@ -337,21 +337,31 @@ locations listed below:
 
 To determine whether a type usage appears in a null-marked scope:
 
-Look for a `@NullMarked` annotation on any of the scopes
-enclosing the type usage.
+Iterate over all the declarations that enclose the type usage, starting from the
+innermost.
 
-Class members are enclosed by classes, which may be enclosed by other class
-members or classes. and top-level classes are enclosed by packages, which may be
-enclosed by modules.
+"Enclosing" is defined as follows: Class members are enclosed by classes, which
+may be enclosed by other class members or classes. Top-level classes are
+enclosed by packages, which may be enclosed by modules.
 
 > Packages are *not* enclosed by "parent" packages.
 
-> This definition of "enclosing" likely matches
-> [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/14/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
+> This definition of "enclosing" largely matches
+> [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/22/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
+> The JSpecify definition differs slightly by skipping type-parameter
+> declarations (which cannot be annotated with declaration annotations) and by
+> defining that there exists a series of "enclosing" declarations for any type
+> usage, not just for a declaration.
 
-If one of those scopes is directly annotated with
-`@NullMarked`, then the type usage is in a null-marked
-scope. Otherwise, it is not.
+At each declaration, check two rules:
+
+-   If the declaration is annotated with `@NullMarked` and *not* with
+    `@NullUnmarked`, the type usage is in a null-marked scope.
+-   If the declaration is annotated with `@NullUnmarked` and *not* with
+    `@NullMarked`, the type usage is *not* in a null-marked scope.
+
+If none of the enclosing declarations meet either rule, then the type usage is
+*not* in a null-marked scope.
 
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
