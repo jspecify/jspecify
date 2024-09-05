@@ -726,7 +726,7 @@ A type is null-exclusive under every parameterization if it has a
 [nullness-subtype-establishing path] to either of the following:
 
 -   any type whose [nullness operator] is `MINUS_NULL`
--   any augmented class or array type or the augmented null type
+-   any augmented class, array, or null type
 
     > This rule refers to particular kinds of types as distinct from other types
     > like type variables and [intersection types].
