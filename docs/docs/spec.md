@@ -569,13 +569,13 @@ target nullness operator `t`* if either of the following conditions holds:
 -   `g` is `UNSPECIFIED`, *and* we are performing the [some-world] version of
     this check.
 
-> The purpose of this definition is that a checker may want to ask a question
-> like "Can I put `null` into a field of this type?" It would do so by asking
-> whether we are comfortable treating the fields' nullness operator like
+> The purpose of "comfortable" is to let a checker determine whether it will
+> allow `null` to be assigned to a field of a given type by asking
+> whether the fields' nullness operator *might be*
 > `UNION_NULL`. The first bullet covers the simple case, in which the nullness
-> operator matches exactly. The second case implements lenient treatment for
-> null-unmarked code: It's possible that any type usage in unannotated code
-> "ought to be" annotated with `@Nullable`.
+> operator matches exactly. The second case treats
+> null-unmarked code optimistically; it's possible that a given unnanotated
+> type usage in that context "ought to be" annotated with `@Nullable`.
 
 ## Worried about a given nullness operator {#worried}
 
@@ -587,11 +587,11 @@ nullness operator `t`* if either of the following conditions holds:
 -   `g` is `UNSPECIFIED`, *and* we are performing the [all-worlds] version of
     this check.
 
-> This definition serves a similar purpose to that of the definition of
-> "[comfortable]" above. For example, one reason that a value can be unsafe to
-> dereference is that its type has nullness operator `UNION_NULL`. A strict
-> checker could also wish to issue errors for dereferences if the nullness
-> operator is `UNSPECIFIED`: It would be "worried" that an `UNSPECIFIED` type
+> "Worried" serves a similar purpose to
+> "[comfortable]" above, except to support strict checkers. For example, a value can be unsafe to
+> dereference if its type has nullness operator `UNION_NULL`, but a strict
+> checker might issue errors also for dereferences of values whose type has nullness
+> operator `UNSPECIFIED`; it would be "worried" that an `UNSPECIFIED` type
 > "ought to be" annotated with `@Nullable.`
 
 ## Same type
