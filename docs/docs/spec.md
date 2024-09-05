@@ -569,13 +569,19 @@ target nullness operator `t`* if either of the following conditions holds:
 -   `g` is `UNSPECIFIED`, *and* we are performing the [some-world] version of
     this check.
 
-> The purpose of "comfortable" is to let a checker determine whether it will
-> allow `null` to be assigned to a field of a given type by asking whether the
-> fields' nullness operator *might be* `UNION_NULL`. The first bullet covers the
-> simple case, in which the nullness operator matches exactly. The second case
-> treats null-unmarked code optimistically; it's possible that a given
-> unnanotated type usage in that context "ought to be" annotated with
-> `@Nullable`.
+> The purpose of "comfortable" (and "[worried]") is to offer tools the option to
+> treat null-unmarked code either optimistically or pessimistically. Tool
+> authors make this choice by choosing how to handle "[multiple worlds]."
+>
+> Suppose that a tool wants to determine whether it will allow `null` to be
+> assigned to a field of a given type. To do so, it can ask whether it is
+> "comfortable" treating the field type's nullness operator like `UNION_NULL`.
+>
+> -   If the nullness operator *is* `UNION_NULL`, then the assignment should
+>     clearly be allowed.
+> -   If the nullness operator is `UNSPECIFIED`, then it's possible that the
+>     operator "ought to be" `UNION_NULL`. A lenient tool might allow the
+>     assignment anyway, while a strict tool might not.
 
 ## Worried about a given nullness operator {#worried}
 
@@ -587,12 +593,17 @@ nullness operator `t`* if either of the following conditions holds:
 -   `g` is `UNSPECIFIED`, *and* we are performing the [all-worlds] version of
     this check.
 
-> "Worried" serves a similar purpose to "[comfortable]" above, except to support
-> strict checkers. For example, a value can be unsafe to dereference if its type
-> has nullness operator `UNION_NULL`, but a strict checker might issue errors
-> also for dereferences of values whose type has nullness operator
-> `UNSPECIFIED`; it would be "worried" that an `UNSPECIFIED` type "ought to be"
-> annotated with `@Nullable.`
+> "Worried" is the complementary piece to "[comfortable]" above.
+>
+> Suppose that a tool wants to determine whether to allow an expression of a
+> given type to be dereferenced. To do so, it can ask whether it should be
+> "worried" that the type's nullness operator is `UNION_NULL`.
+>
+> -   If the nullness operator *is* `UNION_NULL`, then the dereference clearly
+>     should not be allowed.
+> -   If the nullness operator is `UNSPECIFIED`, then it's possible that the
+>     operator "ought to be" `UNION_NULL`. A lenient tool might allow the
+>     dereference anyway, while a strict tool might not.
 
 ## Same type
 
@@ -1036,6 +1047,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
 [javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
+[multiple worlds]: #multiple-worlds
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
 [null-marked scope]: #null-marked-scope
