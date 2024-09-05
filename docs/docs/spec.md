@@ -254,7 +254,7 @@ following cases:
 > We refer to the first two cases (and some other cases below) as "intrinsically
 > non-nullable."
 
--   a type usage of a value type (currently, the 8 predefined primitive types)
+-   a type usage of a primitive type
 
 -   the outer type that qualifies an inner type
 
