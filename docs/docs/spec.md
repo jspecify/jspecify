@@ -266,12 +266,12 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 > -   type-parameter declaration or a wildcard *itself*
 >
-> -   a local variable's root type
+> -   local variable's root type
 >
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
 >     > [] strings = ...` have unrecognized annotations.
 >
-> -   the root type in a cast of `instanceof` expression
+> -   root type in a cast of `instanceof` expression
 >
 >     > For example, `(@Nullable List<String>) foo` has an unrecognized
 >     > annotation.
