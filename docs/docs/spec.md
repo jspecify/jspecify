@@ -216,21 +216,13 @@ We provide a parameterless type-use annotation called `@Nullable`.
 ### Recognized locations for type-use annotations
 
 A location is a *recognized* location for our type-use annotation in the
-circumstances detailed below. This spec does not define semantics for
-annotations in other locations.
+circumstances detailed below. If our type-use annotation appears in any other
+location it has no meaning.
 
-> For now, we've chosen to restrict ourselves to API locations for which tools
-> mostly agree on what it means for a type in that location to be `@Nullable`.
->
 > When analyzing source code, tools are encouraged to offer an option to issue
-> an error for an annotation in an unrecognized location (unless they define
-> semantics for that location). Tools are especially encouraged to issue an
-> error for an annotation in a location that is "intrinsically non-nullable"
-> (defined below).
->
-> When reading *bytecode*, however, tools may be best off ignoring an annotation
-> in an unrecognized location (again, unless they define semantics for that
-> location).
+> an error for an annotation in an unrecognized location. When reading
+> *bytecode*, however, tools may be best off ignoring an annotation in an
+> unrecognized location.
 
 The following locations are recognized except when overruled by one of the
 exceptions in the subsequent sections:
