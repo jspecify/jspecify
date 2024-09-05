@@ -803,12 +803,13 @@ hold:
 
 `T` has nullness-subtype-establishing direct-supertype edges to the following:
 
--   if `T` is an augmented [intersection type]: each of the intersection type's
-    elements whose [nullness operator] we are not [worried] is `UNION_NULL`
-
--   if `T` is an augmented type variable: each of the corresponding type
-    parameter's upper bounds whose nullness operator we are not worried is
+-   if `T` is an augmented [intersection type]: all of the intersection type's
+    elements, except those whose [nullness operator] we are [worried] is
     `UNION_NULL`
+
+-   if `T` is an augmented type variable: all of the corresponding type
+    parameter's upper bounds, except those whose nullness operator we are
+    worried is `UNION_NULL`
 
 -   otherwise: no nodes
 
