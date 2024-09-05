@@ -242,7 +242,7 @@ exceptions in the subsequent sections:
     > This excludes the receiver parameter but includes variadic parameters.
     > Specifically, you can add `@Nullable` before the `...` token to indicate
     > that a variadic method accepts `null` arrays: `void foo(String
-    > @Nullable... strings)`.
+    > @Nullable ... strings)`.
 
 -   a field type
 
