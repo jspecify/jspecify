@@ -329,7 +329,7 @@ locations listed below:
 
 -   A *named* class.
 -   A package. \[[#34]\]
--   A module. \[[#34]\]
+-   A module (for `@NullMarked` only, not `@NullUnmarked`). \[[#34]\]
 
 > *Not* a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
 
