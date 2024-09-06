@@ -802,17 +802,19 @@ hold:
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
 
-`T` has nullness-subtype-establishing direct-supertype edges to the following:
+`T` has nullness-subtype-establishing direct-supertype edges to the all
+following types, subject to the exception given below:
 
--   if `T` is an augmented [intersection type]: all of the intersection type's
-    elements, except those whose [nullness operator] there is reason to be
-    [worried] is `UNION_NULL`
+-   if `T` is an augmented [intersection type]: all the intersection type's
+    elements
 
--   if `T` is an augmented type variable: all of the corresponding type
-    parameter's upper bounds, except those whose nullness operator there is
-    reason to be worried is `UNION_NULL`
+-   if `T` is an augmented type variable: all the corresponding type parameter's
+    upper bounds
 
 -   otherwise: no nodes
+
+Exception: `T` does *not* have edges to any types whose [nullness operator]
+there is reason to be [worried] is `UNION_NULL`.
 
 ## Nullness-delegating subtyping rules for Java {#nullness-delegating-subtyping}
 
