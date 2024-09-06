@@ -369,12 +369,18 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is annotated with `@Nullable` and *not* with
-    `@NonNull`, its nullness operator is `UNION_NULL`.
--   If the type usage is annotated with `@NonNull` and *not* with
-    `@Nullable`, its nullness operator is `MINUS_NULL`.
+-   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
+    its nullness operator is `UNION_NULL`.
+
+-   If the type usage is annotated with `@NonNull` and *not* with `@Nullable`,
+    its nullness operator is `MINUS_NULL`.
+
+    > If the type usage is annotated with both `@Nullable` and `@NonNull`, these
+    > rules behave as if neither annotation is present.
+
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
+
 -   Its nullness operator is `UNSPECIFIED`.
 
 > The choice of nullness operator is *not* affected by any nullness operator
