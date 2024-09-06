@@ -319,7 +319,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 
 ## The declaration annotations
 
-We provide two parameterless declaration annotations, `@NullMarked` and
+We provide two parameterless declaration annotations: `@NullMarked` and
 `@NullUnmarked`.
 
 ### Recognized locations for declaration annotations
