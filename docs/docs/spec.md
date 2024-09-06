@@ -561,13 +561,13 @@ version of another rule.
 
 ## Comfortable with a given nullness operator {#comfortable}
 
-We say that we are *comfortable treating a given [nullness operator] `g` like a
-target nullness operator `t`* if either of the following conditions holds:
+There is *reason to be comfortable treating a given [nullness operator] `g` like
+a target nullness operator `t`* if either of the following conditions holds:
 
 -   `g` is `t`.
 
--   `g` is `UNSPECIFIED`, *and* we are performing the [some-world] version of
-    this check.
+-   `g` is `UNSPECIFIED`, *and* the check is required to hold only in
+    [some world].
 
 > The purpose of "comfortable" (and "[worried]") is to offer tools the option to
 > treat null-unmarked code either optimistically or pessimistically. Tool
@@ -585,13 +585,12 @@ target nullness operator `t`* if either of the following conditions holds:
 
 ## Worried about a given nullness operator {#worried}
 
-We say that we are *worried that a given [nullness operator] `g` is a target
+There is *reason to be worried that a given [nullness operator] `g` is a target
 nullness operator `t`* if either of the following conditions holds:
 
 -   `g` is `t`.
 
--   `g` is `UNSPECIFIED`, *and* we are performing the [all-worlds] version of
-    this check.
+-   `g` is `UNSPECIFIED`, *and* the check is required to hold in [all worlds].
 
 > "Worried" is the complementary piece to "[comfortable]" above.
 >
@@ -732,7 +731,8 @@ formally specify it yet.
 A type is null-inclusive under every parameterization if it meets any of the
 following conditions:
 
--   We are [comfortable] treating its [nullness operator] like `UNION_NULL`.
+-   There is reason to be [comfortable] treating its [nullness operator] like
+    `UNION_NULL`.
 
 -   It is an [intersection type] whose elements all are null-inclusive under
     every parameterization.
@@ -779,7 +779,8 @@ A type is null-exclusive under every parameterization if it has a
 `A` has a nullness-subtype-establishing path to `F` if both of the following
 hold:
 
--   We are not [worried] that the nullness operator of `A` is `UNION_NULL`.
+-   There is *not* reason to be [worried] that the nullness operator of `A` is
+    `UNION_NULL`.
 -   There is a path from `A` to `F` through
     [nullness-subtype-establishing direct-supertype edges].
 
@@ -804,12 +805,12 @@ hold:
 `T` has nullness-subtype-establishing direct-supertype edges to the following:
 
 -   if `T` is an augmented [intersection type]: all of the intersection type's
-    elements, except those whose [nullness operator] we are [worried] is
-    `UNION_NULL`
+    elements, except those whose [nullness operator] there is reason to be
+    [worried] is `UNION_NULL`
 
 -   if `T` is an augmented type variable: all of the corresponding type
-    parameter's upper bounds, except those whose nullness operator we are
-    worried is `UNION_NULL`
+    parameter's upper bounds, except those whose nullness operator there is
+    reason to be worried is `UNION_NULL`
 
 -   otherwise: no nodes
 
@@ -874,9 +875,9 @@ The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
     > This is just a part of our universal rule to treat a bare `?` like `?
     > extends Object`.
 
--   The rule written specifically for `? extends Object` applies only if we are
-    [comfortable] treating the nullness operator of the `Object` bound as
-    `UNION_NULL`.
+-   The rule written specifically for `? extends Object` applies only if there
+    is reason to be [comfortable] treating the nullness operator of the `Object`
+    bound as `UNION_NULL`.
 
 -   When the JLS refers to the same type `T` on both sides of a rule, the rule
     applies if and only if this spec defines the 2 types to be the [same type].
