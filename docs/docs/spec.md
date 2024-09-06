@@ -340,9 +340,12 @@ To determine whether a type usage appears in a null-marked scope:
 Iterate over all the declarations that enclose the type usage, starting from the
 innermost.
 
-"Enclosing" is defined as follows: Class members are enclosed by classes, which
-may be enclosed by other class members or classes. Top-level classes are
-enclosed by packages, which may be enclosed by modules.
+"Enclosing" is defined as follows:
+
+-   Class members are enclosed by classes.
+-   Classes may be enclosed by other class members or classes.
+-   Top-level classes are enclosed by packages.
+-   Packages may be enclosed by modules.
 
 > Packages are *not* enclosed by "parent" packages.
 
