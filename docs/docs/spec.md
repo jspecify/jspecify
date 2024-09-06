@@ -360,8 +360,8 @@ At each declaration, check two rules:
 -   If the declaration is annotated with `@NullUnmarked` and *not* with
     `@NullMarked`, the type usage is *not* in a null-marked scope.
 
-> If a given declaration is annotated with both `@NullMarked` and `@NullUnmarked`, these                                                                                                                                   
-> rules behave as if neither annotation is present.                                                                                                                                                            
+> If a given declaration is annotated with both `@NullMarked` and
+> `@NullUnmarked`, these rules behave as if neither annotation is present.
 
 If none of the enclosing declarations meet either rule, then the type usage is
 *not* in a null-marked scope.
