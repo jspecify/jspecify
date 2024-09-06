@@ -119,7 +119,7 @@ import java.lang.annotation.Target;
  *       java.util.Objects#requireNonNull}. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       Subcomponents of the type (type arguments, array component types) are annotatable as usual.
  *   <li>On any part of a <b>receiver parameter</b> type (<a
- *       href="https://docs.oracle.com/javase/specs/jls/se18/html/jls-8.html#jls-8.4">JLS 8.4</a>).
+ *       href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4">JLS 8.4</a>).
  *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage,
  *       <i>neither</i> one is recognized.
  * </ul>

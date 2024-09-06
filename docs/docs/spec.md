@@ -999,18 +999,18 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
-[JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3
-[JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10.4
-[JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10
-[JLS 4.4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.4
-[JLS 4.5.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.1
-[JLS 4.5.2]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.2
-[JLS 4.5]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5
-[JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.9
-[JLS 4]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html
-[JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10
-[JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.1
-[JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se14/html/jls-8.html#jls-8.4.8.1
+[JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
+[JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
+[JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10
+[JLS 4.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.4
+[JLS 4.5.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.1
+[JLS 4.5.2]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.2
+[JLS 4.5]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5
+[JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.9
+[JLS 4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html
+[JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-5.html#jls-5.1.10
+[JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4.1
+[JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
 [`FluentIterable<E>`]: https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/FluentIterable.html
 [all worlds]: #multiple-worlds
