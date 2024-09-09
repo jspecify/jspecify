@@ -141,8 +141,8 @@ A nullness operator is one of 4 values:
 >     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
 >         etc., without including `null`.
 >     -   The type-variable usage `T MINUS_NULL` includes all members of the
->         type substituted in for `T` except that it does not include `null`
->         even when the type argument does.
+>         type argument substituted in for `T` except that it does not include
+>         `null` even when the type argument does.
 > -   `NO_CHANGE`: This operator is important on type-variable usages, where it
 >     means that the nullness of the type comes from the type argument.
 >     -   The type usage `String NO_CHANGE` includes `"a"`, `"b"`, `"ab"`, etc.,
