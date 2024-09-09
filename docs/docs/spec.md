@@ -592,7 +592,7 @@ nullness operator `t`* if either of the following conditions holds:
 
 -   `g` is `UNSPECIFIED`, *and* the check is required to hold in [all worlds].
 
-> "Worried" is the complementary piece to "[comfortable]" above.
+> "Worried" is the complementary attitude to "[comfortable]" above.
 >
 > Suppose that a tool wants to determine whether to allow an expression of a
 > given type to be dereferenced. To do so, it can ask whether it should be
