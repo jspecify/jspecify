@@ -344,9 +344,9 @@ innermost.
 
 -   Each class member is enclosed by a class.
 -   Each non-top-level class is enclosed by a class or class member.
--   Each top-level class is enclosed by a package.
+-   Each top-level class is enclosed by its package.
 -   Each package may be enclosed by a module.
--   Each module is enclosed by nothing.
+-   Modules are not enclosed by anything.
 
 > Packages are *not* enclosed by "parent" packages.
 
