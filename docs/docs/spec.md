@@ -392,7 +392,9 @@ condition is met, skip the remaining conditions.
 
 > If tool authors prefer, they can safely produce `MINUS_NULL` in any case in
 > which it is equivalent to `NO_CHANGE`. For example, there is no difference
-> between `String NO_CHANGE` and `String MINUS_NULL`.
+> between `Foo NO_CHANGE` and `Foo MINUS_NULL` for any class type `Foo` (nor for
+> any array type or the null type). The difference *is* significant for
+> intersection types, type variables, and probably union types.
 
 ## Augmented type of an intersection type {#intersection-types}
 
