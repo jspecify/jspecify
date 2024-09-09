@@ -388,7 +388,7 @@ condition is met, skip the remaining conditions.
 > which it is equivalent to `NO_CHANGE`. For example, there is no difference
 > between `Foo NO_CHANGE` and `Foo MINUS_NULL` for any class type `Foo` (nor for
 > any array type or the null type). The difference *is* significant for
-> intersection types, type variables, and probably union types.
+> intersection types, type variables, and union types.
 
 ## Augmented type of an intersection type {#intersection-types}
 
