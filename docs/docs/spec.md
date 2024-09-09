@@ -15,12 +15,6 @@ introduction for anyone else; instead see our **[Start Here](/docs/start-here)
 page**.
 :::
 
-:::note Status of this specification
-
-This document is current as of JSpecify **0.2.0**, but does not reflect several
-design changes between then and **1.0.0**.
-:::
-
 --------------------------------------------------------------------------------
 
 ### The word "nullable"
