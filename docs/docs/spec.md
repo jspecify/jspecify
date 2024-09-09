@@ -324,6 +324,9 @@ locations listed below:
 
 > *Not* a field.
 
+If our declaration annotations appear in any other location, they have no
+meaning.
+
 ## Null-marked scope
 
 To determine whether a type usage appears in a null-marked scope:
