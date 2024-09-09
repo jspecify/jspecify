@@ -566,8 +566,7 @@ a target nullness operator `t`* if either of the following conditions holds:
 
 -   `g` is `t`.
 
--   `g` is `UNSPECIFIED`, *and* the check is required to hold only in
-    [some world].
+-   `g` is `UNSPECIFIED`, *and* this is the [some-world] version of the rule.
 
 > The purpose of "comfortable" (and "[worried]") is to offer tools the option to
 > treat null-unmarked code either optimistically or pessimistically. Tool
@@ -590,7 +589,7 @@ nullness operator `t`* if either of the following conditions holds:
 
 -   `g` is `t`.
 
--   `g` is `UNSPECIFIED`, *and* the check is required to hold in [all worlds].
+-   `g` is `UNSPECIFIED`, *and* this is the [all-worlds] version of the rule.
 
 > "Worried" is the complementary attitude to "[comfortable]" above.
 >
