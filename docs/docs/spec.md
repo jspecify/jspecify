@@ -544,8 +544,7 @@ rules.
 > "There is some way that the code could be annotated that would produce an
 > error here."
 
-The main body of each section of the spec describes the all-worlds rule. If the
-some-world rule differs, the differences are explained at the end.
+Rules behave identically under both versions except where otherwise specified.
 
 > A small warning: To implement the full some-world rules, a tool must also
 > implement at least part of the all-worlds rules. Those rules are required as
@@ -561,6 +560,50 @@ all-worlds subtyping relation.
 
 This meta-rule applies except when a rule refers explicitly to a particular
 version of another rule.
+
+## Comfortable with a given nullness operator {#comfortable}
+
+There is *reason to be comfortable treating a given [nullness operator] `g` like
+a target nullness operator `t`* if either of the following conditions holds:
+
+-   `g` is `t`.
+
+-   `g` is `UNSPECIFIED`, *and* this is the [some-world] version of the rule.
+
+> The purpose of "comfortable" (and "[worried]") is to offer tools the option to
+> treat null-unmarked code either optimistically or pessimistically. Tool
+> authors make this choice by choosing how to handle "[multiple worlds]."
+>
+> Suppose that a tool wants to determine whether it will allow `null` to be
+> assigned to a field of a given type. To do so, it can ask whether it is
+> "comfortable" treating the field type's nullness operator like `UNION_NULL`.
+>
+> -   If the nullness operator *is* `UNION_NULL`, then the assignment should
+>     clearly be allowed.
+> -   If the nullness operator is `UNSPECIFIED`, then it's possible that the
+>     operator "ought to be" `UNION_NULL`. A lenient tool might allow the
+>     assignment anyway, while a strict tool might not.
+
+## Worried about a given nullness operator {#worried}
+
+There is *reason to be worried that a given [nullness operator] `g` is a target
+nullness operator `t`* if either of the following conditions holds:
+
+-   `g` is `t`.
+
+-   `g` is `UNSPECIFIED`, *and* this is the [all-worlds] version of the rule.
+
+> "Worried" is the complementary attitude to "[comfortable]" above.
+>
+> Suppose that a tool wants to determine whether to allow an expression of a
+> given type to be dereferenced. To do so, it can ask whether it should be
+> "worried" that the type's nullness operator is `UNION_NULL`.
+>
+> -   If the nullness operator *is* `UNION_NULL`, then the dereference clearly
+>     should not be allowed.
+> -   If the nullness operator is `UNSPECIFIED`, then it's possible that the
+>     operator "ought to be" `UNION_NULL`. A lenient tool might allow the
+>     dereference anyway, while a strict tool might not.
 
 ## Same type
 
@@ -690,10 +733,8 @@ formally specify it yet.
 A type is null-inclusive under every parameterization if it meets any of the
 following conditions:
 
--   Its [nullness operator] is `UNION_NULL`.
-
-    > This is the simplest part of the simplest case: A type usage always
-    > includes `null` if it's annotated with `@Nullable`.
+-   There is reason to be [comfortable] treating its [nullness operator] like
+    `UNION_NULL`.
 
 -   It is an [intersection type] whose elements all are null-inclusive under
     every parameterization.
@@ -709,12 +750,6 @@ following conditions:
     > [nullness subtyping]. It's included here in case some tool has reason to
     > check whether a type is null-inclusive under every parameterization
     > *outside* of a check for nullness subtyping.
-
-**Some-world version:** The rule is the same except that the requirement for
-"`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
-
-> That is: It's possible that any type usage in unannotated code "ought to be"
-> annotated with `@Nullable`.
 
 ## Null-exclusive under every parameterization
 
@@ -746,17 +781,14 @@ A type is null-exclusive under every parameterization if it has a
 `A` has a nullness-subtype-establishing path to `F` if both of the following
 hold:
 
--   `A` has [nullness operator] `NO_CHANGE` or `MINUS_NULL`.
+-   There is *not* reason to be [worried] that the nullness operator of `A` is
+    `UNION_NULL`.
 -   There is a path from `A` to `F` through
     [nullness-subtype-establishing direct-supertype edges].
 
     > The path may be empty. That is, `A` has a nullness-subtype-establishing
     > path to itself --- as long as it has one of the required nullness
     > operators.
-
-**Some-world version:** The rules are the same except that the requirement for
-"`NO_CHANGE` or `MINUS_NULL`" is loosened to "`NO_CHANGE`, `MINUS_NULL`, or
-`UNSPECIFIED`."
 
 ## Nullness-subtype-establishing direct-supertype edges
 
@@ -772,19 +804,19 @@ hold:
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
 
-`T` has nullness-subtype-establishing direct-supertype edges to the following:
+`T` has nullness-subtype-establishing direct-supertype edges to the all
+following types, subject to the exception given below:
 
 -   if `T` is an augmented [intersection type]: all the intersection type's
-    elements whose [nullness operator] is `NO_CHANGE` or `MINUS_NULL`
+    elements
 
 -   if `T` is an augmented type variable: all the corresponding type parameter's
-    upper bounds whose nullness operator is `NO_CHANGE` or `MINUS_NULL`
+    upper bounds
 
 -   otherwise: no nodes
 
-**Some-world version:** The rules are the same except that the requirements for
-"`NO_CHANGE` or `MINUS_NULL`" are loosened to "`NO_CHANGE`, `MINUS_NULL`, or
-`UNSPECIFIED`."
+Exception: `T` does *not* have edges to any types whose [nullness operator]
+there is reason to be [worried] is `UNION_NULL`.
 
 ## Nullness-delegating subtyping rules for Java {#nullness-delegating-subtyping}
 
@@ -847,15 +879,13 @@ The Java rules are defined in [JLS 4.5.1]. We add to them as follows:
     > This is just a part of our universal rule to treat a bare `?` like `?
     > extends Object`.
 
--   The rule written specifically for `? extends Object` applies only if the
-    nullness operator of the `Object` bound is `UNION_NULL`.
+-   The rule written specifically for `? extends Object` applies only if there
+    is reason to be [comfortable] treating the nullness operator of the `Object`
+    bound as `UNION_NULL`.
 
 -   When the JLS refers to the same type `T` on both sides of a rule, the rule
     applies if and only if this spec defines the two types to be the
     [same type].
-
-**Some-world version:** The rules are the same except that the requirement for
-"`UNION_NULL`" is loosened to "`UNION_NULL` or `UNSPECIFIED`."
 
 ## Substitution
 
@@ -1021,12 +1051,14 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [base type]: #base-type
 [base types]: #base-type
 [capture conversion]: #capture-conversion
+[comfortable]: #comfortable
 [containment]: #containment
 [in all worlds]: #multiple-worlds
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
 [javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
+[multiple worlds]: #multiple-worlds
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
 [null-marked scope]: #null-marked-scope
@@ -1050,3 +1082,4 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [subtyping]: #subtyping
 [type component]: #type-components
 [type components]: #type-components
+[worried]: #worried
