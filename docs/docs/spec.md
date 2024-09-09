@@ -213,103 +213,96 @@ We provide two parameterless type-use annotations: `@Nullable` and `@NonNull`.
 ### Recognized locations for type-use annotations
 
 A location is a *recognized* location for our type-use annotations in the
-circumstances detailed below. This spec does not define semantics for
-annotations in other locations.
+circumstances detailed below. If our type-use annotations appear in any other
+location, they have no meaning.
 
-> For now, we've chosen to restrict ourselves to API locations for which tools
-> mostly agree on what it means for a type in that location to be `@Nullable`.
->
 > When analyzing source code, tools are encouraged to offer an option to issue
-> an error for an annotation in an unrecognized location (unless they define
-> semantics for that location). Tools are especially encouraged to issue an
-> error for an annotation in a location that is "intrinsically non-nullable"
-> (defined below).
->
-> When reading *bytecode*, however, tools may be best off ignoring an annotation
-> in an unrecognized location (again, unless they define semantics for that
-> location).
+> an error for an annotation in an unrecognized location. When reading
+> *bytecode*, however, tools may be best off ignoring an annotation in an
+> unrecognized location.
 
 The following locations are recognized except when overruled by one of the
-exceptions in the subsequent sections: \[[#17]\]
+exceptions in the subsequent sections:
 
--   return type of a method
+-   the return type of a method
 
--   formal parameter type of a method or constructor, as defined in [JLS 8.4.1]
+-   a formal parameter type of a method or constructor, as defined in [JLS
+    8.4.1]
 
-    > This excludes the receiver parameter.
+    > This excludes the receiver parameter but includes variadic parameters.
+    > Specifically, you can add `@Nullable` before the `...` token to indicate
+    > that a variadic method accepts `null` arrays: `void foo(String @Nullable
+    > ... strings)`.
 
--   field type
+-   a field type
 
--   type parameter upper bound \[[#60]\]
+-   a type parameter upper bound
 
--   non-wildcard type argument
+-   a non-wildcard type argument
 
--   wildcard bound
+-   a wildcard bound
 
--   array component type
+-   an array component type
 
--   type used in a variadic parameter declaration
+-   an array creation expression
 
-However, any location above is unrecognized if it matches either of the
-following cases: \[[#17]\]
+However, the type-use annotation is unrecognized in any of the following cases:
 
-> We refer to these cases (and some other cases below) as "intrinsically
-> non-nullable."
+-   a type usage of a primitive type, since those are intrinsically non-nullable
 
--   a type usage of a value type (currently, the 8 predefined primitive types)
-
--   the outer type that qualifies an inner type
-
-    > For example, the annotation in `@Nullable Foo.Bar` is in an unrecognized
-    > location: Java syntax attaches it to the outer type `Foo`.
-    >
-    > (Note that `@Nullable Foo.Bar` is a *Java* syntax error when `Bar` is a
-    > *static* type. If `Bar` is a non-static type, then Java permits the code.
-    > So JSpecify tools have the oppotunity to reject it, given that the author
-    > probably intended `Foo.@Nullable Bar`.)
-
-    > Every outer type is intrinsically non-nullable because every instance of
-    > an inner class has an associated instance of the outer class.
-
-Additionally, any location above is unrecognized if it makes up *any
-[type component]* of a type in the following locations: \[[#17]\]
-
-> These locations all fit under the umbrella of "implementation code."
-> Implementation code may use types that contain type arguments, wildcard
-> bounds, and array component types, which would be recognized locations if not
-> for the exceptions defined by this section.
-
--   a local variable type
--   the type in a cast or `instanceof` expression
--   an array or object creation expression (including via a member reference)
--   an explicit type argument supplied to a generic method or constructor
-    (including via a member reference) or to an instance creation expression for
-    a generic class
-
-> In practice, we anticipate that tools will treat types (and their annotations)
-> in *most* of the above locations much like they treat types in other
-> locations. Still, this spec does not concern itself with implementation code:
-> We believe that the most important domain for us to focus on is that of APIs.
+-   type arguments of a receiver parameter's type
 
 All locations that are not explicitly listed as recognized are unrecognized.
 
-> Other notable unrecognized annotations include: \[[#17]\]
+> Other notable unrecognized annotations include:
 >
-> Some additional intrinsically non-nullable locations:
+> -   class declaration
 >
-> -   supertype in a class declaration
-> -   thrown exception type
-> -   exception parameter type
-> -   enum constant declaration
-> -   receiver parameter type
+>     > For example, the annotation in `public @Nullable class Foo {}` is in an
+>     > unrecognized location.
 >
-> Some other locations that individual tools are more likely to assign semantics
-> to:
+> -   type-parameter declaration or a wildcard *itself*
 >
-> -   a class declaration \[[#7]\]: For example, the annotation in `public
->     @Nullable class Foo {}` is in an unrecognized location.
-> -   a type-parameter declaration or a wildcard *itself* \[[#19], [#31]\]
-> -   any [type component] of a receiver parameter type \[[#157]\]
+> -   local variable's root type
+>
+>     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
+>     > [] strings = ...` have unrecognized annotations.
+>
+> -   root type in a cast of `instanceof` expression
+>
+>     > For example, `(@Nullable List<String>) foo` has an unrecognized
+>     > annotation.
+>
+> -   some additional intrinsically non-nullable locations:
+>
+>     -   supertype in a class declaration
+>
+>     -   thrown exception type
+>
+>     -   exception parameter type
+>
+>     -   enum constant declaration
+>
+>     -   receiver parameter type
+>
+>     -   object creation expression
+>
+>         > For example, `new @Nullable ArrayList<String>()` has an unrecognized
+>         > annotation.
+>
+>     -   outer type qualifying an inner type
+>
+>         > For example, the annotation in `@Nullable Foo.Bar` is unrecognized
+>         > because it is attached to the outer type `Foo`.
+>         >
+>         > (Note that `@Nullable Foo.Bar` is a *Java* syntax error when `Bar`
+>         > is a *static* type. If `Bar` is a non-static type, then Java permits
+>         > the code. So JSpecify tools have the oppotunity to reject it, given
+>         > that the author probably intended `Foo.@Nullable Bar`.)
+>         >
+>         > Every outer type is intrinsically non-nullable because every
+>         > instance of an inner class has an associated instance of the outer
+>         > class.
 >
 > But note that types "inside" some of these locations can still be recognized,
 > such as a *type argument* of a supertype.
@@ -325,10 +318,11 @@ Our declaration annotation is specified to be *recognized* when applied to the
 locations listed below:
 
 -   A *named* class.
--   A package. \[[#34]\]
--   A module. \[[#34]\]
+-   A package.
+-   A module.
+-   A method or constructor.
 
-> *Not* a method \[[#43]\], constructor \[[#43]\], or field \[[#50]\].
+> *Not* a field.
 
 ## Null-marked scope
 
