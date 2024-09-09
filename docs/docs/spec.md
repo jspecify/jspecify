@@ -342,10 +342,11 @@ innermost.
 
 "Enclosing" is defined as follows:
 
--   Class members are enclosed by classes.
--   Classes may be enclosed by other class members or classes.
--   Top-level classes are enclosed by packages.
--   Packages may be enclosed by modules.
+-   Each class member is enclosed by a class.
+-   Each non-top-level class is enclosed by a class or class member.
+-   Each top-level class is enclosed by a package.
+-   Each package may be enclosed by a module.
+-   Each module is enclosed by nothing.
 
 > Packages are *not* enclosed by "parent" packages.
 
