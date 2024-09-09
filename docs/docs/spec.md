@@ -134,37 +134,34 @@ A nullness operator is one of four values:
 >     type usage.
 >     -   The type usage `String UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
 >         etc., plus `null`.
->     -   The type-variable usage `T UNION_NULL` includes all members of `T`,
->         plus `null` if it wasn't already included.
-> -   `NO_CHANGE`: This is the operator produced by *not* putting `@Nullable` on
->     a type usage (aside from the exception discussed under `UNSPECIFIED`
->     below).
+>     -   The type-variable usage `T UNION_NULL` includes all members of the
+>         type argument substituted in for `T`, plus `null` if it wasn't already
+>         included.
+> -   `MINUS_NULL`: This is the operator produced by putting `@NonNull` on a
+>     type usage.
+>     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
+>         etc., without including `null`.
+>     -   The type-variable usage `T MINUS_NULL` includes all members of the
+>         type argument substituted in for `T` except that it does not include
+>         `null` even when the type argument does.
+> -   `NO_CHANGE`: This operator is important on type-variable usages, where it
+>     means that the nullness of the type comes from the type argument.
 >     -   The type usage `String NO_CHANGE` includes `"a"`, `"b"`, `"ab"`, etc.,
->         without including `null`.
+>         without including `null`. (This is equivalent to `String MINUS_NULL`.)
 >     -   The type-variable usage `T NO_CHANGE` includes exactly the members of
->         `T`: If `null` was a member of `T`, then it's a member of `T
->         NO_CHANGE`. If it was not a member of `T`, then it is not a member of
->         `T NO_CHANGE`.
->     -   One way to conceptualize this is that `String NO_CHANGE` means
->         "non-null `String`" but that `T NO_CHANGE` means "nullness comes from
->         the value of `T`."
-> -   `UNSPECIFIED`: This is the operator produced by not putting `@Nullable` on
->     a type usage *in code that is outside a [null-marked scope]*. Roughly, it
->     is the operator assigned to "completely unannotated code."
+>         the type argument substituted in for `T`: If `null` was a member of
+>         the type argument, then it's a member of `T NO_CHANGE`. If it was not
+>         a member of the type argument, then it is not a member of `T
+>         NO_CHANGE`.
+> -   `UNSPECIFIED`: This is the operator produced by "completely unannotated
+>     code"—outside a [null-marked scope] and with no annotation on the type.
 >     -   The type usage `String UNSPECIFIED` includes `"a"`, `"b"`, `"ab"`,
 >         etc., but whether `null` should be included is not specified.
->     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`.
->         But whether `null` should be added to the set (if it isn't already) is
->         not specified.
-> -   `MINUS_NULL`: This operator not only does not *add* `null` but also
->     actively *removes* it from a type-variable usage that might otherwise
->     include it.
->     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
->         etc., without including `null`. (This is equivalent to `String
->         NO_CHANGE`.)
->     -   The type-variable usage `T MINUS_NULL` includes all members of `T`
->         *except* for `null`. (This is equivalent to `T NO_CHANGE` unless
->         `null` was a member of `T`.)
+>     -   The type-variable usage `T UNSPECIFIED` includes all members of `T`,
+>         except that there is no specification of whether `null` should be
+>         added to the set (if it isn't already a member), removed (if it is
+>         already a member), or included only when the substituted type argument
+>         includes it.
 
 ## Augmented type
 
@@ -210,15 +207,15 @@ For all named annotations referred to by this spec:
 All annotations have runtime retention. None of the annotations are marked
 [repeatable].
 
-## The type-use annotation
+## The type-use annotations
 
-We provide a parameterless type-use annotation called `@Nullable`.
+We provide two parameterless type-use annotations: `@Nullable` and `@NonNull`.
 
 ### Recognized locations for type-use annotations
 
-A location is a *recognized* location for our type-use annotation in the
-circumstances detailed below. If our type-use annotation appears in any other
-location it has no meaning.
+A location is a *recognized* location for our type-use annotations in the
+circumstances detailed below. If our type-use annotations appear in any other
+location, they have no meaning.
 
 > When analyzing source code, tools are encouraged to offer an option to issue
 > an error for an annotation in an unrecognized location. When reading
@@ -360,10 +357,18 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is annotated with `@Nullable`, its nullness operator is
-    `UNION_NULL`.
+-   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
+    its nullness operator is `UNION_NULL`.
+
+-   If the type usage is annotated with `@NonNull` and *not* with `@Nullable`,
+    its nullness operator is `MINUS_NULL`.
+
+    > If the type usage is annotated with both `@Nullable` and `@NonNull`, these
+    > rules behave as if neither annotation is present.
+
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
+
 -   Its nullness operator is `UNSPECIFIED`.
 
 > The choice of nullness operator is *not* affected by any nullness operator
@@ -373,20 +378,11 @@ condition is met, skip the remaining conditions.
 > `@Nullable`, then the override's return type will *not* have nullness operator
 > `UNION_NULL`.
 
-> The rules here never produce the fourth nullness operator, `MINUS_NULL`.
-> However, if tool authors prefer, they can safely produce `MINUS_NULL` in any
-> case in which it is equivalent to `NO_CHANGE`. For example, there is no
-> difference between `String NO_CHANGE` and `String MINUS_NULL`.
-
-> So why does `MINUS_NULL` exist at all? It does appear later in this spec in
-> the section on [substitution]. However, its main purpose is to provide tools
-> with a way to represent the nullness of certain expressions in implementation
-> code: Consider `ArrayList<E>`. `ArrayList` supports null elements, so the
-> class has to handle the possibility that any expression of type `E` may be
-> null. However, if implementation code contains the statement `if (e != null) {
-> ... }`, then tools can assume that `e` is non-null inside. The purpose of
-> `MINUS_NULL` is to represent that such an expression is known not to be null,
-> even though its base type `E` suggests otherwise.
+> If tool authors prefer, they can safely produce `MINUS_NULL` in any case in
+> which it is equivalent to `NO_CHANGE`. For example, there is no difference
+> between `Foo NO_CHANGE` and `Foo MINUS_NULL` for any class type `Foo` (nor for
+> any array type or the null type). The difference *is* significant for
+> intersection types, type variables, and union types.
 
 ## Augmented type of an intersection type {#intersection-types}
 
@@ -769,6 +765,10 @@ A type is null-exclusive under every parameterization if it has a
 [nullness-subtype-establishing path] to either of the following:
 
 -   any type whose [nullness operator] is `MINUS_NULL`
+
+    > This covers an easy case: A type usage never includes `null` if it's
+    > annotated with `@NonNull`.
+
 -   any augmented class or array type
 
     > This rule refers specifically to a "class or array type," as distinct from
