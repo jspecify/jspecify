@@ -681,7 +681,7 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > having to cover that case.)
 
 > A further level of complexity in all this is `UNSPECIFIED`. For example, in
-> the [all-worlds] version of the following rules, a type with nullness operator
+> the [some-world] version of the following rules, a type with nullness operator
 > `UNSPECIFIED` can be both null-_inclusive_ under every parameterization and
 > null-_exclusive_ under every parameterization, albeit in different [worlds].
 
