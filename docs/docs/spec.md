@@ -984,18 +984,17 @@ The process of applying a [nullness operator] requires two inputs:
 
 The output of the process is an augmented type.
 
-To determine the output, apply the following rules in order. Once one condition
-is met, skip the remaining conditions.
+To determine the output, apply the following rules in order.
 
 -   If the nullness operator to apply is `NO_CHANGE`, then the output augmented
     type is the input augmented type.
 
--   If the input augmented type is an [intersection type], then the output is
+-   Otherwise, if the input augmented type is an [intersection type], then the output is
     also an intersection type. For every element `Tᵢ` of the input type, the
     output type has an element that is the output of applying the desired
     nullness operator to `Tᵢ`.
 
--   The output is a type that is the same as the input augmented type except
+-   Otherwise, the output is a type that is the same as the input augmented type except
     with its nullness operator set to the nullness operator to apply.
 
 ## Capture conversion
