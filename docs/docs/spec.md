@@ -672,10 +672,24 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > `ArrayList` may be instantiated as either an `ArrayList<@Nullable String>`
     > or an `ArrayList<String>`.)
     >
-    > Subtyping questions for type-variable usages are more complex: `E` is a
-    > nullness subtype of `E`; `@Nullable E` is not. Similarly, if `<F extends
-    > E>`, then `F` is a nullness subtype of `E`. But if `<F extends @Nullable
-    > E>`, it is not.
+    > Subtyping questions for type-variable usages are more complex. For
+    > example:
+    >
+    > -   `E` is a nullness subtype of `E`; `@Nullable E` is not.
+    > -   Similarly, if `<F extends E>` (in null-marked code), then `F` is a
+    >     nullness subtype of `E`. But if `<F extends @Nullable E>`, it is not.
+    > -   `E` is a nullness subtype of `E` but not of `@NonNull E`.
+    >
+    > When some types have unspecified nullness, the rules become more complex
+    > still:
+    >
+    > -   A declaration like `<F extends E>` might or might not be "intended" to
+    >     be `<F extends @Nullable E>`. Depending on what was indended, `E`
+    >     *might* be intended to be a nullness subtype of `F`.
+    > -   Or that declaration might be "intended" to be `<F extends @NonNull
+    >     E>`. In that [world], `F` would be not only a nullness subtype of `F`
+    >     but a nullness subtype of *all* types, since it would be
+    >     null-exclusive under every parameterization.
 
 -   `F` is a type-variable usage that meets *both* of the following conditions:
 
@@ -1092,5 +1106,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [subtyping]: #subtyping
 [type component]: #type-components
 [type components]: #type-components
+[world]: #multiple-worlds
 [worlds]: #multiple-worlds
 [worried]: #worried
