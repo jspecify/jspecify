@@ -352,7 +352,7 @@ At each declaration, check the following rules in order:
     `@NullUnmarked`, the type usage is in a null-marked scope.
 -   If the declaration is annotated with `@NullUnmarked` and *not* with
     `@NullMarked`, the type usage is *not* in a null-marked scope.
--   If the declaration is annotated with `@kotlin.Metadata`, then the type
+-   If the declaration is a top-level class annotated with `@kotlin.Metadata`, then the type
     usage is *not* in a null-marked scope.
 
 > If a given declaration is annotated with both `@NullMarked` and
