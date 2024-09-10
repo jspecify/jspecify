@@ -683,7 +683,7 @@ The same-type relation is *not* defined to be reflexive or transitive.
 > A further level of complexity in all this is `UNSPECIFIED`. For example, in
 > the [all-worlds] version of the following rules, a type with nullness operator
 > `UNSPECIFIED` can be both null-_inclusive_ under every parameterization and
-> null-_exclusive_ under every parameterization.
+> null-_exclusive_ under every parameterization, albeit in different [worlds].
 
 Nullness subtyping (and thus subtyping itself) is *not* defined to be reflexive
 or transitive.
@@ -1090,4 +1090,5 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [subtyping]: #subtyping
 [type component]: #type-components
 [type components]: #type-components
+[worlds]: #multiple-worlds
 [worried]: #worried
