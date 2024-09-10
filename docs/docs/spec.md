@@ -1003,13 +1003,13 @@ To determine the output, apply the following rules in order.
 -   If the nullness operator to apply is `NO_CHANGE`, then the output augmented
     type is the input augmented type.
 
--   Otherwise, if the input augmented type is an [intersection type], then the output is
-    also an intersection type. For every element `Tᵢ` of the input type, the
-    output type has an element that is the output of applying the desired
-    nullness operator to `Tᵢ`.
+-   Otherwise, if the input augmented type is an [intersection type], then the
+    output is also an intersection type. For every element `Tᵢ` of the input
+    type, the output type has an element that is the output of applying the
+    desired nullness operator to `Tᵢ`.
 
--   Otherwise, the output is a type that is the same as the input augmented type except
-    with its nullness operator set to the nullness operator to apply.
+-   Otherwise, the output is a type that is the same as the input augmented type
+    except with its nullness operator set to the nullness operator to apply.
 
 ## Capture conversion
 
