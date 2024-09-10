@@ -624,21 +624,21 @@ The same-type relation is *not* defined to be reflexive or transitive.
 
 -   The base type of `A` is a subtype of the base type of `F` according to
     Java's subtyping rules.
+
+    > This condition is rarely of direct interest to tools' JSpecify support: If
+    > code does not pass Java's subtyping rules, then most JSpecify tools will
+    > never see it.
+
 -   `A` is a [nullness subtype] of `F`.
+
+    > This condition suffices to establish subtyping for most cases.
+
 -   `A` is a subtype of `F` according to the
     [nullness-delegating subtyping rules for Java].
 
-> The first condition is rarely of direct interest to tools' JSpecify support:
-> If code does not pass Java's subtyping rules, then most JSpecify tools will
-> never see it.
->
-> As for the remaining conditions:
->
-> The nullness-subtype condition suffices for most cases.
->
-> The nullness-delegating condition is necessary only for types that have
-> subcomponents—namely, parameterized types and arrays. And it essentially says
-> "Check the nullness-subtype condition on subcomponents as appropriate."
+    > This condition is necessary only for types that have subcomponents—namely,
+    > parameterized types and arrays. And it essentially says "Check the
+    > nullness-subtype condition on subcomponents as appropriate."
 
 ## Nullness subtyping
 
