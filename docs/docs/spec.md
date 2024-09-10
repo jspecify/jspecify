@@ -221,8 +221,8 @@ exceptions in the subsequent sections:
 
 -   the return type of a method
 
--   a formal parameter type of a method or constructor, as defined in [JLS
-    8.4.1]
+-   a formal parameter type of a method or constructor, as defined in
+    [JLS 8.4.1]
 
     > This excludes the receiver parameter but includes variadic parameters.
     > Specifically, you can add `@Nullable` before the `...` token to indicate
