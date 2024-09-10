@@ -615,18 +615,28 @@ The same-type relation is *not* defined to be reflexive or transitive.
 > For more discussion of reflexive and transitive relations, see the comments
 > under [nullness subtyping].
 
+> Compare [JLS 4.3.4]. Note that our definition of "same type" applies to all
+> kinds of augmented types, including cases like the augmented null types.
+
 ## Subtyping
 
-`A` is a subtype of `F` if both of the following conditions are met:
+`A` is a subtype of `F` if all of the following conditions are met:
 
 -   `A` is a [nullness subtype] of `F`.
 -   `A` is a subtype of `F` according to the
     [nullness-delegating subtyping rules for Java].
+-   The base type of `A` is a subtype of the base type of `F` according to
+    Java's subtyping rules.
 
-> The first condition suffices for most cases. The second condition is necessary
-> only for types that have subcomponents --- namely, parameterized types and
-> arrays. And it essentially says "Check the first condition on subcomponents as
-> appropriate."
+> The first condition suffices for most cases.
+>
+> The second condition is necessary only for types that have
+> subcomponents—namely, parameterized types and arrays. And it essentially says
+> "Check the first condition on subcomponents as appropriate."
+>
+> The third condition is rarely of direct interest to tools' JSpecify support:
+> If code does not pass Java's subtyping rules, then most JSpecify tools will
+> never see it.
 
 ## Nullness subtyping
 
@@ -787,13 +797,12 @@ hold:
     [nullness-subtype-establishing direct-supertype edges].
 
     > The path may be empty. That is, `A` has a nullness-subtype-establishing
-    > path to itself --- as long as it has one of the required nullness
-    > operators.
+    > path to itself—as long as it has one of the required nullness operators.
 
 ## Nullness-subtype-establishing direct-supertype edges
 
-> This section defines the supertypes for a given type --- but limited to those
-> that fill the gaps in our nullness checking of "top-level" types. For example,
+> This section defines the supertypes for a given type—but limited to those that
+> fill the gaps in our nullness checking of "top-level" types. For example,
 > there's no need for the rules to reflect that `String NO_CHANGE` extends
 > `Object NO_CHANGE`: If we've established that a type has a path to `String
 > NO_CHANGE`, then we already know that it's
@@ -820,7 +829,7 @@ there is reason to be [worried] is `UNION_NULL`.
 
 ## Nullness-delegating subtyping rules for Java {#nullness-delegating-subtyping}
 
-> Recall that this rule exists to handle subcomponents of types --- namely, type
+> Recall that this rule exists to handle subcomponents of types—namely, type
 > arguments and array component types. It essentially says "Check nullness
 > subtyping for subcomponents as appropriate."
 
@@ -1032,6 +1041,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10
+[JLS 4.3.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.3.4
 [JLS 4.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.4
 [JLS 4.5.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.1
 [JLS 4.5.2]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.2
