@@ -823,7 +823,7 @@ hold:
 > Thus, the rules here are restricted to type variables and intersection types,
 > whose supertypes may have nullness annotations.
 
-`T` has nullness-subtype-establishing direct-supertype edges to the all
+`T` has nullness-subtype-establishing direct-supertype edges to all the
 following types, subject to the exception given below:
 
 -   if `T` is an augmented [intersection type]: all the intersection type's
