@@ -346,12 +346,14 @@ innermost.
 > defining that there exists a series of enclosing declarations for any type
 > usage, not just for a declaration.
 
-At each declaration, check two rules:
+At each declaration, check the following rules in order:
 
 -   If the declaration is annotated with `@NullMarked` and *not* with
     `@NullUnmarked`, the type usage is in a null-marked scope.
 -   If the declaration is annotated with `@NullUnmarked` and *not* with
     `@NullMarked`, the type usage is *not* in a null-marked scope.
+-   If the declaration is a top-level class annotated with `@kotlin.Metadata`,
+    then the type usage is *not* in a null-marked scope.
 
 > If a given declaration is annotated with both `@NullMarked` and
 > `@NullUnmarked`, these rules behave as if neither annotation is present.
