@@ -684,10 +684,10 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > still:
     >
     > -   A declaration like `<F extends E>` might or might not be "intended" to
-    >     be `<F extends @Nullable E>`. Depending on what was indended, `E`
-    >     *might* be intended to be a nullness subtype of `F`.
+    >     be `<F extends @Nullable E>`. Depending on what was indended, `F`
+    >     *might* be intended to be a nullness subtype of `E`.
     > -   Or that declaration might be "intended" to be `<F extends @NonNull
-    >     E>`. In that [world], `F` would be not only a nullness subtype of `F`
+    >     E>`. In that [world], `F` would be not only a nullness subtype of `E`
     >     but a nullness subtype of *all* types, since it would be
     >     null-exclusive under every parameterization.
 
