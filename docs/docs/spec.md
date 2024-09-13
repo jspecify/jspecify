@@ -663,8 +663,8 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > This is the second easy case: `A` never includes `null`.
 
 -   `A` has a [nullness-subtype-establishing path] to any type whose base type
-    is the same as the base type of `F`, and `F` does *not* have
-    [nullness operator] `MINUS_NULL`.
+    is the same as the base type of `F`, and there is *not* reason to be
+    [worried] that `F` has [nullness operator] `MINUS_NULL`.
 
     > This is the first hard case: A given type-variable usage does not
     > necessarily always include `null`, nor does it necessarily always exclude
@@ -672,14 +672,29 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > `ArrayList` may be instantiated as either an `ArrayList<@Nullable String>`
     > or an `ArrayList<String>`.)
     >
-    > Subtyping questions for type-variable usages are more complex: `E` is a
-    > nullness subtype of `E`; `@Nullable E` is not. Similarly, if `<F extends
-    > E>`, then `F` is a nullness subtype of `E`. But if `<F extends @Nullable
-    > E>`, it is not.
+    > Subtyping questions for type-variable usages are more complex. For
+    > example:
+    >
+    > -   `E` is a nullness subtype of `E`; `@Nullable E` is not.
+    > -   Similarly, if `<F extends E>` (in null-marked code), then `F` is a
+    >     nullness subtype of `E`. But if `<F extends @Nullable E>`, it is not.
+    > -   `E` is a nullness subtype of `E` but not of `@NonNull E`.
+    >
+    > When some types have unspecified nullness, the rules become more complex
+    > still:
+    >
+    > -   A declaration like `<F extends E>` might or might not be "intended" to
+    >     be `<F extends @Nullable E>`. Depending on what was indended, `F`
+    >     *might* be intended to be a nullness subtype of `E`.
+    > -   Or that declaration might be "intended" to be `<F extends @NonNull
+    >     E>`. In that [world], `F` would be not only a nullness subtype of `E`
+    >     but a nullness subtype of *all* types, since it would be
+    >     null-exclusive under every parameterization.
 
 -   `F` is a type-variable usage that meets *both* of the following conditions:
 
-    -   It does *not* have nullness operator `MINUS_NULL`.
+    -   There is *not* reason to be worried that it has nullness operator
+        `MINUS_NULL`.
 
     -   `A` is a nullness subtype of its lower bound.
 
@@ -759,7 +774,8 @@ following conditions:
 
 -   It is a type variable that meets *both* of the following conditions:
 
-    -   It does *not* have nullness operator `MINUS_NULL`.
+    -   There is *not* reason to be [worried] that it has nullness operator
+        `MINUS_NULL`.
 
     -   Its lower bound is null-inclusive under every parameterization.
 
@@ -781,7 +797,8 @@ following conditions:
 A type is null-exclusive under every parameterization if it has a
 [nullness-subtype-establishing path] to either of the following:
 
--   any type whose [nullness operator] is `MINUS_NULL`
+-   any type whose [nullness operator] there is reason to be [comfortable]
+    treating as `MINUS_NULL`
 
     > This covers an easy case: A type usage never includes `null` if it's
     > annotated with `@NonNull`.
@@ -981,33 +998,18 @@ The process of applying a [nullness operator] requires two inputs:
 
 The output of the process is an augmented type.
 
-The process is as follows:
+To determine the output, apply the following rules in order.
 
-First, based on the pair of nullness operators (the one to apply and the one
-from the augmented type), compute a "desired nullness operator." Do so by
-applying the following rules in order. Once one condition is met, skip the
-remaining conditions.
+-   If the nullness operator to apply is `NO_CHANGE`, then the output augmented
+    type is the input augmented type.
 
--   If the nullness operator to apply is `MINUS_NULL`, the desired nullness
-    operator is `MINUS_NULL`.
--   If either nullness operator is `UNION_NULL`, the desired nullness operator
-    is `UNION_NULL`.
--   If either nullness operator is `UNSPECIFIED`, the desired nullness operator
-    is `UNSPECIFIED`.
--   The desired nullness operator is `NO_CHANGE`.
+-   Otherwise, if the input augmented type is an [intersection type], then the
+    output is also an intersection type. For every element `Tᵢ` of the input
+    type, the output type has an element that is the output of applying the
+    desired nullness operator to `Tᵢ`.
 
-Then, if the input augmented type is *not* an [intersection type], the output is
-the same as the input but with its nullness operator replaced with the desired
-nullness operator.
-
-Otherwise, the output is an intersection type. For every element `Tᵢ` of the
-input type, the output type has an element that is the output of applying the
-desired nullness operator to `Tᵢ`.
-
-> In this case, the desired nullness operator is always equal to the nullness
-> operator to apply that was an input to this process. That's because the
-> nullness operator of the intersection type itself is defined to always be
-> `NO_CHANGE`.
+-   Otherwise, the output is a type that is the same as the input augmented type
+    except with its nullness operator set to the nullness operator to apply.
 
 ## Capture conversion
 
@@ -1104,5 +1106,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [subtyping]: #subtyping
 [type component]: #type-components
 [type components]: #type-components
+[world]: #multiple-worlds
 [worlds]: #multiple-worlds
 [worried]: #worried
