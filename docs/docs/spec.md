@@ -268,11 +268,6 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
 >     > [] strings = ...` have unrecognized annotations.
 >
-> -   root type in a cast of `instanceof` expression
->
->     > For example, `(@Nullable List<String>) foo` has an unrecognized
->     > annotation.
->
 > -   some additional intrinsically non-nullable locations:
 >
 >     -   supertype in a class declaration
