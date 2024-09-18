@@ -105,10 +105,10 @@ import java.lang.annotation.Target;
  * <ul>
  *   <li>On any<b> intrinsically non-null type usage</b>. Some type usages are incapable of
  *       including {@code null} by the rules of the Java language. Examples include any usage of a
- *       primitive type, the argument to {@code instanceof}, a method return type in an annotation
- *       interface, or the type following {@code throws} or {@code catch}. In such locations, a
- *       nullness annotation could only be contradictory ({@code @Nullable}) or redundant
- *       ({@code @NonNull}).
+ *       primitive type, the root type of the argument to {@code instanceof}, a method return type
+ *       in an annotation interface, or the type following {@code throws} or {@code catch}. In such
+ *       locations, a nullness annotation could only be contradictory ({@code @Nullable}) or
+ *       redundant ({@code @NonNull}).
  *   <li>On the root type of a <b>local variable</b> declaration. The nullness of a local variable
  *       itself is not a fixed declarative property of its <i>type</i>. Rather it should be inferred
  *       from the nullness of each expression assigned to the variable, possibly changing over time.
@@ -118,6 +118,8 @@ import java.lang.annotation.Target;
  *       sees as nullable is truly non-null, use an assertion or a method like {@link
  *       java.util.Objects#requireNonNull}. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       Subcomponents of the type (type arguments, array component types) are annotatable as usual.
+ *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
+ *       non-null, as discussed above, and nothing else about nullness is checked at runtime.
  *   <li>On any part of a <b>receiver parameter</b> type (<a
  *       href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4">JLS 8.4</a>).
  *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage,
