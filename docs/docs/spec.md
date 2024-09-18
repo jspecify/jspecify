@@ -383,6 +383,14 @@ condition is met, skip the remaining conditions.
     > If the type usage is annotated with both `@Nullable` and `@NonNull`, these
     > rules behave as if neither annotation is present.
 
+-   If the type usage is the parameter of `equals(Object)` in a subclass of
+    `java.lang.Record`, then its nullness operator is `UNSPECIFIED`.
+
+    > This special case handles the fact that the Java compiler automatically
+    > generates an implementation of `equals` in `Record` but does not include a
+    > `@Nullable` annotation on its parameter, even when the class is
+    > `@NullMarked`.
+
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
 
