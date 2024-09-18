@@ -247,6 +247,11 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
+-   any component of the type after the `instanceof` operator
+
+    > We may revisit this rule in the future in light of
+    > [Pattern Matching for instanceof][JEP 394].
+
 All locations that are not explicitly listed as recognized are unrecognized.
 
 > Other notable unrecognized annotations include:
@@ -262,11 +267,6 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
 >     > [] strings = ...` have unrecognized annotations.
->
-> -   root type in a cast of `instanceof` expression
->
->     > For example, `(@Nullable List<String>) foo` has an unrecognized
->     > annotation.
 >
 > -   some additional intrinsically non-nullable locations:
 >
@@ -1052,6 +1052,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [#80]: https://github.com/jspecify/jspecify/issues/80
 [#87]: https://github.com/jspecify/jspecify/issues/87
 [3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
+[JEP 394]: https://openjdk.org/jeps/394
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10
