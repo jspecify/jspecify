@@ -247,7 +247,7 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
--   any component of an `instanceof` expression
+-   any component of the type after the `instanceof` operator
 
     > We may revisit this rule in the future in light of
     > [Pattern Matching for instanceof][JEP 394].
