@@ -231,6 +231,8 @@ exceptions in the subsequent sections:
 
 -   a field type
 
+-   a record component type
+
 -   a type parameter upper bound
 
 -   a non-wildcard type argument
