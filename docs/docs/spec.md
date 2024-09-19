@@ -371,6 +371,14 @@ annotations are [recognized], this section defines how to determine their
 [augmented types]. Note, however, that rules for specific cases below take
 precedence over the general rule here.
 
+> The rules here should be sufficient for most tools that care about nullness
+> information, from build-time nullness checkers to runtime dependency-injection
+> tools. However, tools that wish to examine class files in greater detail, such
+> as to insert runtime null checks by rewriting bytecode, may encounter some edge
+> cases. For example, `synthetic` methods may not have accurate annotations in
+> their signatures. The same goes for information about implementation code,
+> such as local-variable types.
+
 Because the JLS already has rules for determining the [base type] for a type
 usage, this section covers only how to determine its [nullness operator].
 
