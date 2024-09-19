@@ -1031,6 +1031,9 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
     > This is just a part of our universal rule to treat a bare `?` like `?
     > extends Object`.
 
+-   Whenever the rules generate a usage of a fresh type variable, that usage has
+    nullness operator `NO_CHANGE`.
+
 -   When a rule generates a lower bound that is the null type, we specify that
     its nullness operator is `NO_CHANGE`.
 
