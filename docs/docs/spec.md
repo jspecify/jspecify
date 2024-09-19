@@ -245,6 +245,9 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   a type usage of a primitive type, since those are intrinsically non-nullable
 
+-   any component of a return type in an annnotation interface, since those are
+    intrinsically non-nullable
+
 -   type arguments of a receiver parameter's type
 
 -   any component of the type after the `instanceof` operator
@@ -373,6 +376,9 @@ usage, this section covers only how to determine its [nullness operator].
 
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
+
+-   If the type usage is a component of a return type in an annnotation
+    interface, its nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
