@@ -942,20 +942,10 @@ the output of the following operation:
     > `builder.add(null)`, it would find that it does.
     >
     > To solve this, we need a special case for substitution for null-exclusive
-    > type parameters like the one on `ImmutableList.Builder`. That special case
-    > needs to produce a type with a nullness operator other than `UNSPECIFIED`.
-    > One valid option is to produce `NO_CHANGE`; we happened to choose
-    > `MINUS_NULL`.
-    >
-    > The choice between `NO_CHANGE` and `MINUS_NULL` makes little difference
-    > for the `ImmutableList.Builder` case and for most other cases. It may
-    > matter only in unusual cases that involve misannotated code. For example,
-    > consider a `@NullMarked class Sequence<E extends @Nullable Object>` that
-    > declares a method `Optional<E> firstNonNull()`. That method *should* be
-    > declared with a return type of `Optional<@NonNull E>`. Still, this spec
-    > rule ensures that `Sequence` can call `firstNonNull().get().toString()`.
-    > That's possible because the rule makes the type of `firstNonNull().get()`
-    > be `E MINUS_NULL`, rather than `E NO_CHANGE`.
+    > type parameters like the one on `ImmutableList.Builder`, one that avoids
+    > producing a type with nullness operator `UNSPECIFIED`. Since the special
+    > case is applied to any null-exclusive type, including the type produced by
+    > `@NonNull T`, it has to produce `MINUS_NULL`.
 
 -   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.
