@@ -927,7 +927,7 @@ the output of the following operation:
     > demonstrated in
     > https://github.com/jspecify/jspecify-reference-checker/pull/197.
 
-    > The purpose of this special case is to improve behavior in "the
+    > The primary purpose of this special case is to improve behavior in "the
     > `ImmutableList.Builder` case": Because `ImmutableList.Builder.add` always
     > throws `NullPointerException` for a null argument, we would like for
     > `add(null)` to be a compile error, even under lenient tools.
@@ -948,15 +948,14 @@ the output of the following operation:
     > `MINUS_NULL`.
     >
     > The choice between `NO_CHANGE` and `MINUS_NULL` makes little difference
-    > for the parameter types of `ImmutableList.Builder`, but it can matter more
-    > for other APIs' *return types*. For example, consider `@NullMarked class
-    > Foo<E extends @Nullable Object>`, which somewhere uses the type
-    > [`FluentIterable<E>`]. `FluentIterable` has a method `Optional<E>
-    > first()`. Even when `E` is a type like `String UNION_NULL` (or `String
-    > UNSPECIFIED`), we know that `first().get()` will never return `null`. To
-    > surface that information to tools, we need to define our substitution rule
-    > to return `E MINUS_NULL`: If we instead used `E NO_CHANGE`, then the
-    > return type would look like it might include `null`.
+    > for the `ImmutableList.Builder` case and for most other cases. It may
+    > matter only in unusual cases that involve misannotated code. For example,
+    > consider a `@NullMarked class Sequence<E extends @Nullable Object>` that
+    > declares a method `Optional<E> firstNonNull()`. That method *should* be
+    > declared with a return type of `Optional<@NonNull E>`. Still, this spec
+    > rule ensures that `Sequence` can call `firstNonNull().get().toString()`.
+    > That's possible because the rule makes the type of `firstNonNull().get()`
+    > be `E MINUS_NULL`, rather than `E NO_CHANGE`.
 
 -   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.
