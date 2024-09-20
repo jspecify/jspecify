@@ -187,9 +187,9 @@ and interface types, array types, and type variables but also
 > for ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
 > specifies a bound of `Object` that the JLS does not specify.
 
-When this spec uses single capital letters, they refer to augmented types
-(unless otherwise noted). This is in contrast to the JLS, which typically uses
-them to refer to base types.
+When this spec uses single capital letters in `code font`, they refer to
+augmented types (unless otherwise noted). This is in contrast to the JLS, which
+typically uses them to refer to base types.
 
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
