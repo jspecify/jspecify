@@ -858,7 +858,7 @@ follows:
         So, when computing output types, tools may produce them with *any*
         nullness operator.
 
-        > Essentially, this rule says that the top-level types do no matter:
+        > Essentially, this rule says that the top-level types do not matter:
         > They have already been checked by the [nullness subtyping] check.
         >
         > For simplicity, we recommend producing a nullness operator of
