@@ -322,7 +322,7 @@ locations listed below:
 -   A module (for `@NullMarked` only, not `@NullUnmarked`).
 -   A method or constructor.
 
-> *Not* a field.
+> *Not* a field or a record component.
 
 If our declaration annotations appear in any other location, they have no
 meaning.
