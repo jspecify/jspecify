@@ -1040,7 +1040,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 
 ## Harmonizing annotations on special type usages {#harmoize-annotations}
 
-> Because of a special case [above][#augmented-type-of-usage] that makes record
+> Because of a special case [above](#augmented-type-of-usage) that makes record
 > `equals` parameters nullable, there is a mismatch between what `public boolean
 > equals(Object o)` means in a record class and what it would otherwise mean. To
 > harmonize this, we anticipate that tools will sometimes still produce errors
