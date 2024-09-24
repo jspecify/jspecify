@@ -384,7 +384,7 @@ condition is met, skip the remaining conditions.
     > rules behave as if neither annotation is present.
 
 -   If the type usage is the parameter of `equals(Object)` in a subclass of
-    `java.lang.Record`, then its nullness operator is `UNSPECIFIED`.
+    `java.lang.Record`, then its nullness operator is `UNION_NULL`.
 
     > This special case handles the fact that the Java compiler automatically
     > generates an implementation of `equals` in `Record` but does not include a
@@ -1037,6 +1037,21 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
     its nullness operator is `NO_CHANGE`.
 
     > See ["Augmented null types."](#null-types)
+
+## Harmonizing annotations on special type usages {#harmoize-annotations}
+
+> Because of a special case [above][#augmented-type-of-usage] that makes record
+> `equals` parameters nullable, there is a mismatch between what `public boolean
+> equals(Object o)` means in a record class and what it would otherwise mean. To
+> harmonize this, we anticipate that tools will sometimes still produce errors
+> unless authors include the usual `@Nullable` annotation on the parameter.
+
+If a type usage is the parameter of `equals(Object)` in a subclass of
+`java.lang.Record`, then:
+
+-   It is not expected to be annotated with `@NonNull`.
+-   If it appears in null-marked code, or if this rule is required to hold in
+    [all worlds], then it is expected to be annotated with `@Nullable`.
 
 [#100]: https://github.com/jspecify/jspecify/issues/100
 [#157]: https://github.com/jspecify/jspecify/issues/157
