@@ -227,7 +227,9 @@ exceptions in the subsequent sections:
     > This excludes the receiver parameter but includes variadic parameters.
     > Specifically, you can add `@Nullable` before the `...` token to indicate
     > that a variadic method accepts `null` arrays: `void foo(String @Nullable
-    > ... strings)`.
+    > ... strings)`. This syntax follows the syntax for normal arrays: A method
+    > that accepts a `null` array is written as `void foo(String @Nullable []
+    > strings)`.
 
 -   a field type
 
@@ -240,6 +242,11 @@ exceptions in the subsequent sections:
 -   a wildcard bound
 
 -   an array component type
+
+    > An array of nullable strings is written `@Nullable String[]`. A variadic
+    > parameter whose type is "array of nullable strings" is written `@Nullable
+    > String...`. Compare this to the syntax for a nullable array of strings,
+    > shown above in the discussion of variadic parameters.
 
 -   an array creation expression
 
