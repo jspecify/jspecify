@@ -375,9 +375,9 @@ in source code or bytecode where JSpecify nullness annotations are [recognized].
 > The rules here should be sufficient for most tools that care about nullness
 > information, from build-time nullness checkers to runtime dependency-injection
 > tools. However, tools that wish to examine class files in greater detail, such
-> as to insert runtime null checks by rewriting bytecode, may encounter some edge
-> cases. For example, `synthetic` methods may not have accurate annotations in
-> their signatures. The same goes for information about implementation code,
+> as to insert runtime null checks by rewriting bytecode, may encounter some
+> edge cases. For example, `synthetic` methods may not have accurate annotations
+> in their signatures. The same goes for information about implementation code,
 > such as local-variable types.
 
 Because the JLS already has rules for determining the [base type] for a type
@@ -385,6 +385,13 @@ usage, this section covers only how to determine its [nullness operator].
 
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
+
+-   If the type usage is the type of the field corresponding to an enum
+    constant, its nullness operator is `MINUS_NULL`.
+
+    > In source code, there is nowhere in the Java grammar for the type of an
+    > enum constant to be written. Still, enum constants have a type, which is
+    > made explicitly visible in the compiled class file.
 
 -   If the type usage is a component of a return type in an annnotation
     interface, its nullness operator is `MINUS_NULL`.
@@ -1048,28 +1055,8 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 
     > See ["Augmented null types."](#null-types)
 
-[#100]: https://github.com/jspecify/jspecify/issues/100
-[#157]: https://github.com/jspecify/jspecify/issues/157
-[#17]: https://github.com/jspecify/jspecify/issues/17
-[#181]: https://github.com/jspecify/jspecify/issues/181
-[#19]: https://github.com/jspecify/jspecify/issues/19
-[#1]: https://github.com/jspecify/jspecify/issues/1
-[#260]: https://github.com/jspecify/jspecify/issues/260
-[#28]: https://github.com/jspecify/jspecify/issues/28
-[#31]: https://github.com/jspecify/jspecify/issues/31
-[#33]: https://github.com/jspecify/jspecify/issues/33
-[#34]: https://github.com/jspecify/jspecify/issues/34
-[#43]: https://github.com/jspecify/jspecify/issues/43
 [#49]: https://github.com/jspecify/jspecify/issues/49
-[#50]: https://github.com/jspecify/jspecify/issues/50
-[#5]: https://github.com/jspecify/jspecify/issues/5
-[#60]: https://github.com/jspecify/jspecify/issues/60
 [#65]: https://github.com/jspecify/jspecify/issues/65
-[#69]: https://github.com/jspecify/jspecify/issues/69
-[#7]: https://github.com/jspecify/jspecify/issues/7
-[#80]: https://github.com/jspecify/jspecify/issues/80
-[#87]: https://github.com/jspecify/jspecify/issues/87
-[3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
 [JEP 394]: https://openjdk.org/jeps/394
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
@@ -1100,7 +1087,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
-[javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
 [multiple worlds]: #multiple-worlds
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
@@ -1112,11 +1098,10 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [nullness-delegating subtyping]: #nullness-delegating-subtyping
 [nullness-subtype-establishing direct-supertype edges]: #nullness-subtype-establishing-direct-supertype-edges
 [nullness-subtype-establishing path]: #nullness-subtype-establishing-path
-[repeatable]: https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html
+[repeatable]: https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/annotation/Repeatable.html
 [same type]: #same-type
 [same-type]: #same-type
 [semantics]: #semantics
-[shared folder]: https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN-
 [some world]: #multiple-worlds
 [some-world]: #multiple-worlds
 [substitution]: #substitution
