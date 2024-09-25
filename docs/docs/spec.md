@@ -405,6 +405,14 @@ condition is met, skip the remaining conditions.
     > If the type usage is annotated with both `@Nullable` and `@NonNull`, these
     > rules behave as if neither annotation is present.
 
+-   If the type usage is the parameter of `equals(Object)` in a subclass of
+    `java.lang.Record`, then its nullness operator is `UNION_NULL`.
+
+    > This special case handles the fact that the Java compiler automatically
+    > generates an implementation of `equals` in `Record` but does not include a
+    > `@Nullable` annotation on its parameter, even when the class is
+    > `@NullMarked`.
+
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
 
@@ -1054,6 +1062,20 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
     its nullness operator is `NO_CHANGE`.
 
     > See ["Augmented null types."](#null-types)
+
+## Expected annotations on record classes' `equals` methods
+
+> Because of the special case [above](#augmented-type-of-usage) that makes
+> parameters of record classes' `equals` methods always nullable, we include
+> this rule so that tools can produce expected errors in some cases when the
+> parameter is not annotated with `@Nullable`.
+
+If a type usage is the parameter of `equals(Object)` in a subclass of
+`java.lang.Record`, then:
+
+-   It is not expected to be annotated with `@NonNull`.
+-   If it appears in null-marked code, or if this rule is required to hold in
+    [all worlds], then it is expected to be annotated with `@Nullable`.
 
 [#49]: https://github.com/jspecify/jspecify/issues/49
 [#65]: https://github.com/jspecify/jspecify/issues/65
