@@ -387,8 +387,8 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is the type of an enum constant, its nullness operator is
-    `MINUS_NULL`.
+-   If the type usage is the type of the field corresponding to an enum
+    constant, its nullness operator is `MINUS_NULL`.
 
     > In source code, there is nowhere in the Java grammar for the type of an
     > enum constant to be written. Still, enum constants have an implicit type,
