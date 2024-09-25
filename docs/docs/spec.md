@@ -122,6 +122,14 @@ A nullness operator is one of four values:
 -   `UNSPECIFIED`
 -   `MINUS_NULL`
 
+TODO: This is the first appearance of "operator" and there is no formal definition
+of what they are used for and what they mean.
+
+The "values" is maybe also misleading - these are type operators, not runtime values.
+
+This would also be a good place to introduce the postfix notation and contrast it
+to the prefix notation used by annotations.
+
 > The informal meaning of the operators is:
 >
 > -   `UNION_NULL`: This is the operator produced by putting `@Nullable` on a
