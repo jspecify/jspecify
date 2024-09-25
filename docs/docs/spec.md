@@ -1038,7 +1038,7 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 
     > See ["Augmented null types."](#null-types)
 
-## Harmonizing annotations on special type usages {#harmoize-annotations}
+## Expected annotations on record `equals` methods
 
 > Because of the special case [above](#augmented-type-of-usage) that makes
 > record `equals` parameters always nullable, we include this rule so that tools
