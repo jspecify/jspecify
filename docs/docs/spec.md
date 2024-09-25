@@ -369,10 +369,8 @@ If none of the enclosing declarations meet either rule, then the type usage is
 
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
-For most type usages in source code or bytecode where JSpecify nullness
-annotations are [recognized](#recognized-type-use), this section defines how to
-determine their [augmented types]. Note, however, that rules for specific cases
-below take precedence over the general rule here.
+This section defines how to determine the [augmented types] of most type usages
+in source code or bytecode where JSpecify nullness annotations are [recognized].
 
 > The rules here should be sufficient for most tools that care about nullness
 > information, from build-time nullness checkers to runtime dependency-injection
