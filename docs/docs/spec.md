@@ -1049,28 +1049,8 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 
     > See ["Augmented null types."](#null-types)
 
-[#100]: https://github.com/jspecify/jspecify/issues/100
-[#157]: https://github.com/jspecify/jspecify/issues/157
-[#17]: https://github.com/jspecify/jspecify/issues/17
-[#181]: https://github.com/jspecify/jspecify/issues/181
-[#19]: https://github.com/jspecify/jspecify/issues/19
-[#1]: https://github.com/jspecify/jspecify/issues/1
-[#260]: https://github.com/jspecify/jspecify/issues/260
-[#28]: https://github.com/jspecify/jspecify/issues/28
-[#31]: https://github.com/jspecify/jspecify/issues/31
-[#33]: https://github.com/jspecify/jspecify/issues/33
-[#34]: https://github.com/jspecify/jspecify/issues/34
-[#43]: https://github.com/jspecify/jspecify/issues/43
 [#49]: https://github.com/jspecify/jspecify/issues/49
-[#50]: https://github.com/jspecify/jspecify/issues/50
-[#5]: https://github.com/jspecify/jspecify/issues/5
-[#60]: https://github.com/jspecify/jspecify/issues/60
 [#65]: https://github.com/jspecify/jspecify/issues/65
-[#69]: https://github.com/jspecify/jspecify/issues/69
-[#7]: https://github.com/jspecify/jspecify/issues/7
-[#80]: https://github.com/jspecify/jspecify/issues/80
-[#87]: https://github.com/jspecify/jspecify/issues/87
-[3-valued logic]: https://en.wikipedia.org/wiki/Three-valued_logic
 [JEP 394]: https://openjdk.org/jeps/394
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
@@ -1101,7 +1081,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [in some world]: #multiple-worlds
 [intersection type]: #intersection-types
 [intersection types]: #intersection-types
-[javadoc]: http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html
 [multiple worlds]: #multiple-worlds
 [null-exclusive under every parameterization]: #null-exclusive-under-every-parameterization
 [null-inclusive under every parameterization]: #null-inclusive-under-every-parameterization
@@ -1114,11 +1093,10 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [nullness-subtype-establishing direct-supertype edges]: #nullness-subtype-establishing-direct-supertype-edges
 [nullness-subtype-establishing path]: #nullness-subtype-establishing-path
 [recognized]: #recognized-locations-for-type-use-annotations
-[repeatable]: https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html
+[repeatable]: https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/annotation/Repeatable.html
 [same type]: #same-type
 [same-type]: #same-type
 [semantics]: #semantics
-[shared folder]: https://drive.google.com/drive/folders/1vZl1odNCBncVaN7EwlwfqI05T_CHIqN-
 [some world]: #multiple-worlds
 [some-world]: #multiple-worlds
 [substitution]: #substitution
