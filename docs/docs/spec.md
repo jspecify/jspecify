@@ -129,8 +129,8 @@ A nullness operator is one of four values:
 >     -   The type usage `String UNION_NULL` includes `"a"`, `"b"`, `"ab"`,
 >         etc., plus `null`.
 >     -   The type-variable usage `T UNION_NULL` includes all members of the
->         type argument substituted in for `T`, plus `null` if it was not already
->         included.
+>         type argument substituted in for `T`, plus `null` if it was not
+>         already included.
 > -   `MINUS_NULL`: This is the operator produced by putting `@NonNull` on a
 >     type usage.
 >     -   The type usage `String MINUS_NULL` includes `"a"`, `"b"`, `"ab"`,
@@ -720,8 +720,8 @@ The same-type relation is *not* defined to be reflexive or transitive.
     > In short, whether you have a `Predicate<? super String>`, a `Predicate<?
     > super @Nullable String>`, or unannotated code that does not specify the
     > nullness operator for the bound, you can always pass its `test` method a
-    > `String`. (If you want to pass a `@Nullable String`, then you will need for
-    > the bound to be [null-inclusive under every parameterization]. The
+    > `String`. (If you want to pass a `@Nullable String`, then you will need
+    > for the bound to be [null-inclusive under every parameterization]. The
     > existence of the null-inclusiveness rule frees this current rule from
     > having to cover that case.)
 
@@ -750,14 +750,14 @@ or transitive.
 >
 > Therefore, `String UNION_NULL` is a subtype of `String NO_CHANGE`.
 >
-> Yes, it is pretty terrible for something called "subtyping" not to be reflexive
-> or transitive. A more accurate name for this concept would be "consistent," a
-> term used in gradual typing. However, we use "subtyping" anyway. In our
-> defense, we need to name multiple concepts, including not just subtyping but
-> also the [same-type] relation and [containment]. If we were to coin a new term
-> for each, tool authors would need to mentally map between those terms and the
-> analogous Java terms. (Still, yes: Feel free to read terms like "subtyping" as
-> if they have scare quotes around them.)
+> Yes, it is pretty terrible for something called "subtyping" not to be
+> reflexive or transitive. A more accurate name for this concept would be
+> "consistent," a term used in gradual typing. However, we use "subtyping"
+> anyway. In our defense, we need to name multiple concepts, including not just
+> subtyping but also the [same-type] relation and [containment]. If we were to
+> coin a new term for each, tool authors would need to mentally map between
+> those terms and the analogous Java terms. (Still, yes: Feel free to read terms
+> like "subtyping" as if they have scare quotes around them.)
 >
 > Subtyping does end up being transitive when the relation is required to hold
 > in all worlds. And it does end up being reflexive when the relation is
