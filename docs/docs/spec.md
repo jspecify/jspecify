@@ -205,7 +205,7 @@ All annotations have runtime retention. None of the annotations are marked
 
 We provide two parameterless type-use annotations: `@Nullable` and `@NonNull`.
 
-### Recognized locations for type-use annotations
+### Recognized locations for type-use annotations {#recognized-type-use}
 
 A location is a *recognized* location for our type-use annotations in the
 circumstances detailed below. If our type-use annotations appear in any other
@@ -312,7 +312,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 We provide two parameterless declaration annotations: `@NullMarked` and
 `@NullUnmarked`.
 
-### Recognized locations for declaration annotations
+### Recognized locations for declaration annotations {#recognized-declaration}
 
 Our declaration annotations are specified to be *recognized* when applied to the
 locations listed below:
@@ -351,7 +351,8 @@ innermost.
 > defining that there exists a series of enclosing declarations for any type
 > usage, not just for a declaration.
 
-At each declaration, check the following rules in order:
+At each declaration that is a [recognized](#recognized-declaration) location,
+check the following rules in order:
 
 -   If the declaration is annotated with `@NullMarked` and *not* with
     `@NullUnmarked`, the type usage is in a null-marked scope.
@@ -369,9 +370,9 @@ If none of the enclosing declarations meet either rule, then the type usage is
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
 For most type usages in source code or bytecode on which JSpecify nullness
-annotations are [recognized], this section defines how to determine their
-[augmented types]. Note, however, that rules for specific cases below take
-precedence over the general rule here.
+annotations are [recognized](#recognized-type-use), this section defines how to
+determine their [augmented types]. Note, however, that rules for specific cases
+below take precedence over the general rule here.
 
 > The rules here should be sufficient for most tools that care about nullness
 > information, from build-time nullness checkers to runtime dependency-injection
@@ -1113,7 +1114,6 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 [nullness-delegating subtyping]: #nullness-delegating-subtyping
 [nullness-subtype-establishing direct-supertype edges]: #nullness-subtype-establishing-direct-supertype-edges
 [nullness-subtype-establishing path]: #nullness-subtype-establishing-path
-[recognized]: #recognized-locations-for-type-use-annotations
 [repeatable]: https://docs.oracle.com/en/java/javase/14/docs/api/java.base/java/lang/annotation/Repeatable.html
 [same type]: #same-type
 [same-type]: #same-type
