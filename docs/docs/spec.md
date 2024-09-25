@@ -26,7 +26,7 @@ questions we can ask for any given type usage:
 1.  Does `@Nullable` appear directly on that type usage?
 2.  What is the [nullness operator] of that type usage?
 3.  Is it reasonable to assume that `null` will not come "out" of it?
-4.  Is it reasonable to assume that `null` can not be put "in" to it?
+4.  Is it reasonable to assume that `null` cannot be put "in" to it?
 
 ### The scope of this spec
 
