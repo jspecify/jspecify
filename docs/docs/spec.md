@@ -391,8 +391,8 @@ condition is met, skip the remaining conditions.
     constant, its nullness operator is `MINUS_NULL`.
 
     > In source code, there is nowhere in the Java grammar for the type of an
-    > enum constant to be written. Still, enum constants have a type,
-    > which is made explicitly visible in the compiled class file.
+    > enum constant to be written. Still, enum constants have a type, which is
+    > made explicitly visible in the compiled class file.
 
 -   If the type usage is a component of a return type in an annnotation
     interface, its nullness operator is `MINUS_NULL`.
