@@ -369,7 +369,7 @@ If none of the enclosing declarations meet either rule, then the type usage is
 
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
-For most type usages in source code or bytecode on which JSpecify nullness
+For most type usages in source code or bytecode where JSpecify nullness
 annotations are [recognized](#recognized-type-use), this section defines how to
 determine their [augmented types]. Note, however, that rules for specific cases
 below take precedence over the general rule here.
