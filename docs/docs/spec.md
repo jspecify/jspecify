@@ -94,6 +94,8 @@ definition.
 In particular, when a JLS rule refers to types, apply this spec's definition of
 [augmented types] \(as opposed to [base types]).
 
+This specification covers all JLS constructs up to Java SE 22.
+
 ## Base type
 
 A *base type* is a type as defined in [JLS 4].
