@@ -94,7 +94,7 @@ definition.
 In particular, when a JLS rule refers to types, apply this spec's definition of
 [augmented types] \(as opposed to [base types]).
 
-This specification covers all JLS constructs up to Java SE 22.
+This specification covers all JLS constructs up to [Java SE 22].
 
 ## Base type
 
@@ -1081,6 +1081,7 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 
 [#49]: https://github.com/jspecify/jspecify/issues/49
 [#65]: https://github.com/jspecify/jspecify/issues/65
+[Java SE 22]: https://docs.oracle.com/javase/specs/jls/se22/html/index.html
 [JEP 394]: https://openjdk.org/jeps/394
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
