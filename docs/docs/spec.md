@@ -1038,10 +1038,10 @@ The Java rules are defined in [JLS 5.1.10]. We add to them as follows:
 
     > See ["Augmented null types."](#null-types)
 
-## Expected annotations on record `equals` methods
+## Expected annotations on record classes' `equals` methods
 
 > Because of the special case [above](#augmented-type-of-usage) that makes
-> record `equals` parameters always nullable, we include this rule so that tools
+> record classes' `equals` method parameter always nullable, we include this rule so that tools
 > can produce expected errors in some cases when the parameter is not annotated
 > with `@Nullable`.
 
