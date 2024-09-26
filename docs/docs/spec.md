@@ -224,12 +224,13 @@ exceptions in the subsequent sections:
 -   a formal parameter type of a method or constructor, as defined in
     [JLS 8.4.1]
 
-    > This excludes the receiver parameter but includes variadic parameters (in varargs methods).
-    > Specifically, you can add `@Nullable` before the `...` token to indicate
-    > that a variadic method accepts `null` arrays: `void foo(String @Nullable
-    > ... strings)`. This syntax follows the syntax for normal arrays: A method
-    > that accepts a `null` array is written as `void foo(String @Nullable []
-    > strings)`.
+    > This excludes the receiver parameter but includes variadic parameters (in
+    > varargs methods). Because *components* types are also a recognized
+    > location for annotations, variadic paramters (like arrays) can have
+    > annotations on multiple components. For example, `@NonNull String
+    > @Nullable [] strings` means non-null elements in a nullable array.
+    > Similarly, `void method(@Nullable String @NonNull ... strings) means
+    > nullable elements of a non-null array.
 
 -   a field type
 
