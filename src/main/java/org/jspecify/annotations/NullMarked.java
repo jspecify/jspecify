@@ -33,35 +33,30 @@ import java.lang.annotation.Target;
  * specified otherwise. Using this annotation avoids the need to write {@link NonNull @NonNull} many
  * times throughout your code.
  *
+ * <p>The effects of this annotation can be negated at a narrower scope using {@link NullUnmarked}.
+ *
  * <p>For a comprehensive introduction to JSpecify, please see <a
  * href="http://jspecify.org">jspecify.org</a>.
  *
  * <h2 id="effects">Effects of being null-marked</h2>
  *
- * <p>Within null-marked code, as a <i>general</i> rule, a type usage is considered non-null (to
- * exclude {@code null} as a value) unless explicitly annotated as {@link Nullable}. However, there
- * are several special cases to address.
+ * <p>Within null-marked code, a type usage is generally considered to be non-null unless explicitly
+ * annotated as {@link Nullable}. However, there are a few special cases to address.
  *
  * <h3 id="effects-special-cases">Special cases</h3>
  *
  * <p>Within null-marked code:
  *
  * <ul>
- *   <li>We might expect the type represented by a <b>wildcard</b> (like the {@code ?} in {@code
- *       List<?>}) to be non-null, but it isn't necessarily. It's non-null only if it {@code
- *       extends} a non-null type (like in {@code List<? extends String>}), or if the <i>class</i>
- *       in use accepts only non-null type arguments (such as if {@code List} were declared as
- *       {@code class List<E extends String>}). But if {@code List} does accept nullable type
- *       arguments, then the wildcards seen in {@code List<?>} and {@code List<? super String>} must
- *       include {@code null}, because they have no "upper bound". (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *   <li>In a <b>wildcard</b> type such as {@code List<?>} or {@code List<? super Integer>}, where
+ *       the corresponding type parameter accepts nullable type arguments, the type represented by
+ *       the wildcard is nullable. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       <ul>
  *         <li>Conversely, a <b>type parameter</b> is always considered to have an upper bound; when
  *             none is given explicitly, {@code Object} is filled in by the compiler. The example
  *             {@code class MyList<E>} is interpreted identically to {@code class MyList<E extends
- *             Object>}: in both cases the type argument in {@code MyList<@Nullable Foo>} is
- *             out-of-bounds, so the list elements are always non-null. (<a
- *             href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *             Object>}: in either case the type argument in {@code MyList<@Nullable Foo>} is
+ *             out-of-bounds. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       </ul>
  *   <li>Otherwise, being null-marked has no consequence for any type usage where {@code @Nullable}
  *       and {@code @NonNull} are <a href="Nullable.html#applicability"><b>not applicable</b></a>,
@@ -71,11 +66,7 @@ import java.lang.annotation.Target;
  *       considered nullable, non-null, or even of "unspecified" nullness. Rather it has
  *       <b>parametric nullness</b>. In order to support both nullable and non-null type arguments
  *       safely, the {@code E} type itself must be handled <i>strictly</i>: as if nullable when
- *       "read from", but as if non-null when "written to". (Contrast with {@code class Foo<E
- *       extends Bar>}, where usages of {@code E} are simply non-null, just like usages of {@code
- *       String} are.)
- *   <li>By using {@link NullUnmarked}, an element within null-marked code can be excluded and made
- *       null-unmarked, exactly as if there were no enclosing {@code @NullMarked} element at all.
+ *       "read from", but as if non-null when "written to".
  * </ul>
  *
  * <h2 id="where">Where it can be used</h2>
@@ -85,23 +76,21 @@ import java.lang.annotation.Target;
  * well. Special considerations:
  *
  * <ul>
- *   <li>To apply this annotation to an entire (single) <b>package</b>, create a <a
- *       href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-7.html#jls-7.4.1">{@code
- *       package-info.java}</a> file there. This is recommended so that newly-created classes will
- *       be null-marked by default. This annotation has no effect on "subpackages". <b>Warning</b>:
- *       if the package does not belong to a module, be very careful: it can easily happen that
- *       different versions of the package-info file are seen and used in different circumstances,
- *       causing the same classes to be interpreted inconsistently. For example, a package-info file
- *       from a {@code test} source path might hide the corresponding one from the {@code main}
- *       source path, or generated code might be compiled without seeing a package-info file at all.
- *   <li>Although Java permits it to be applied to a <b>record component</b> declaration (as in
- *       {@code record Foo(@NullMarked String bar) {...}}), this annotation has no meaning when used
- *       in that way.
- *   <li>Applying this annotation to an instance <b>method</b> of a <i>generic</i> class is
- *       acceptable, but is not recommended because it can lead to some confusing situations.
+ *   <li>To apply these annotations to an entire (single) <b>package</b>, create a <a
+ *       href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-7.html#jls-7.4.1">{@code
+ *       package-info.java}</a> file there. This annotation has no effect on "subpackages".
+ *       <b>Warning</b>: if the package does not belong to a module, be very careful: it can easily
+ *       happen that different versions of the package-info file are seen and used in different
+ *       circumstances, causing the same classes to be interpreted inconsistently.
  *   <li>An advantage of Java <b>modules</b> is that you can make a lot of code null-marked with
  *       just a single annotation (before the {@code module} keyword). {@link NullUnmarked} is not
- *       supported on modules, since it's already the default.
+ *       supported on modules, since it's already the default behavior.
+ *   <li>Applying this annotation to an annotation interface has the same meaning as any other class
+ *       declaration: that declaration and its members are in null-marked context. It does
+ *       <i>not</i> express that annotations of that type are synonymous with {@code @NullMarked}.
+ *   <li>These annotations have no meaning when applied to a <b>record component</b> declaration (as
+ *       in {@code record Foo(@NullMarked String bar) {}}). ({@link Nullable} and {@link NonNull} are
+ *       still meaningful for record components.)
  *   <li>If both {@code @NullMarked} and {@code @NullUnmarked} appear together on the same element,
  *       <i>neither</i> one is recognized.
  * </ul>
