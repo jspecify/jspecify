@@ -229,8 +229,8 @@ exceptions in the subsequent sections:
     > location for annotations, variadic paramters (like arrays) can have
     > annotations on multiple components. For example, `@NonNull String
     > @Nullable [] strings` means non-null elements in a nullable array.
-    > Similarly, `void method(@Nullable String @NonNull ... strings) means
-    > nullable elements of a non-null array.
+    > Similarly, `void method(@Nullable String @NonNull ... strings)` means
+    > nullable elements in a non-null array.
 
 -   a field type
 
