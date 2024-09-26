@@ -332,7 +332,7 @@ msgid ""
 "supports multiple types. Then the intersection type is derived from "
 "those. Intersection types can also arise from operations like `capture "
 "conversion <#capture-conversion>`__. See `JLS 4.9 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.9>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.9>`__."
 msgstr ""
 
 #: ../../tsttcpw.rst:199
@@ -381,7 +381,7 @@ msgid ""
 "In source, an unbounded wildcard is written as ``<?>``. This section does"
 " **not** apply to ``<? extends Object>``, even though that is often "
 "equivalent to ``<?>``. See `JLS 4.5.1 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.1>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.1>`__."
 msgstr ""
 
 #: ../../tsttcpw.rst:235
@@ -454,7 +454,7 @@ msgstr ""
 #: ../../tsttcpw.rst:277
 msgid ""
 "See `JLS 4.4 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.4>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.4>`__."
 msgstr ""
 
 #: ../../tsttcpw.rst:280
@@ -648,7 +648,7 @@ msgstr ""
 #: ../../tsttcpw.rst:402
 msgid ""
 "The Java subtyping rules are defined in `JLS 4.10 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.10>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10>`__."
 " We add to them as follows:"
 msgstr ""
 
@@ -907,7 +907,7 @@ msgstr ""
 #: ../../tsttcpw.rst:553
 msgid ""
 "The Java rules are defined in `JLS 4.5.1 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-4.html#jls-4.5.1>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.1>`__."
 " We add to them as follows:"
 msgstr ""
 
@@ -953,7 +953,7 @@ msgstr ""
 msgid ""
 "Substitution on Java base types barely requires an explanation: See `JLS "
 "1.3 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-1.html#jls-1.3>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3>`__."
 " Substitution on `augmented types <#augmented-type>`__, however, is "
 "trickier: If ``Map.get`` returns “``V`` with `nullness operator "
 "<#nullness-operator>`__ ``UNION_NULL``,” and if a user has a map whose "
@@ -1101,7 +1101,7 @@ msgstr ""
 #: ../../tsttcpw.rst:673
 msgid ""
 "The Java rules are defined in `JLS 5.1.10 "
-"<https://docs.oracle.com/javase/specs/jls/se14/html/jls-5.html#jls-5.1.10>`__."
+"<https://docs.oracle.com/javase/specs/jls/se22/html/jls-5.html#jls-5.1.10>`__."
 " We add to them as follows:"
 msgstr ""
 

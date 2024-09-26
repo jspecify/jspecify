@@ -86,7 +86,7 @@ import java.lang.annotation.Target;
  *
  * <ul>
  *   <li>To apply this annotation to an entire (single) <b>package</b>, create a <a
- *       href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-7.html#jls-7.4.1">{@code
+ *       href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-7.html#jls-7.4.1">{@code
  *       package-info.java}</a> file there. This is recommended so that newly-created classes will
  *       be null-marked by default. This annotation has no effect on "subpackages". <b>Warning</b>:
  *       if the package does not belong to a module, be very careful: it can easily happen that
