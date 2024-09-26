@@ -224,7 +224,7 @@ exceptions in the subsequent sections:
 -   a formal parameter type of a method or constructor, as defined in
     [JLS 8.4.1]
 
-    > This excludes the receiver parameter but includes variadic parameters.
+    > This excludes the receiver parameter but includes variadic parameters (in varargs methods).
     > Specifically, you can add `@Nullable` before the `...` token to indicate
     > that a variadic method accepts `null` arrays: `void foo(String @Nullable
     > ... strings)`. This syntax follows the syntax for normal arrays: A method
