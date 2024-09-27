@@ -186,9 +186,9 @@ and interface types, array types, and type variables but also
 > for ["Bound of an unbounded wildcard,"](#unbounded-wildcard) for which it
 > specifies a bound of `Object` that the JLS does not specify.
 
-When this spec uses capital letters, they refer to augmented types (unless
-otherwise noted). This is in contrast to the JLS, which typically uses them to
-refer to base types.
+When this spec uses single capital letters in `code font`, they refer to
+augmented types (unless otherwise noted). This is in contrast to the JLS, which
+typically uses them to refer to base types.
 
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
@@ -260,10 +260,12 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
--   any component of the type after the `instanceof` operator
+-   any component of the type after the `instanceof`
+    [type comparison operator][JLS 15.20.2]
 
-    > We may revisit this rule in the future in light of
-    > [Pattern Matching for instanceof][JEP 394].
+-   any component in a [pattern]
+
+    > We are likely to revisit this rule in the future.
 
 All locations that are not explicitly listed as recognized are unrecognized.
 
@@ -923,7 +925,7 @@ follows:
         So, when computing output types, tools may produce them with *any*
         nullness operator.
 
-        > Essentially, this rule says that the top-level types do no matter:
+        > Essentially, this rule says that the top-level types do not matter:
         > They have already been checked by the [nullness subtyping] check.
         >
         > For simplicity, we recommend producing a nullness operator of
@@ -1087,8 +1089,8 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 
 [#49]: https://github.com/jspecify/jspecify/issues/49
 [#65]: https://github.com/jspecify/jspecify/issues/65
-[JEP 394]: https://openjdk.org/jeps/394
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
+[JLS 15.20.2]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-15.html#jls-15.20.2
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10
 [JLS 4.3.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.3.4
@@ -1128,6 +1130,7 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 [nullness-delegating subtyping]: #nullness-delegating-subtyping
 [nullness-subtype-establishing direct-supertype edges]: #nullness-subtype-establishing-direct-supertype-edges
 [nullness-subtype-establishing path]: #nullness-subtype-establishing-path
+[pattern]: https://docs.oracle.com/en/java/javase/22/language/pattern-matching.html
 [repeatable]: https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/annotation/Repeatable.html
 [same type]: #same-type
 [same-type]: #same-type

@@ -11,6 +11,8 @@ on:
       - '*gradle*'
       - 'docs/**'
       - 'gradle/**'
+      - 'src/main/**'
+      - 'src/java9/**'
   pull_request:
     branches:
       - main
@@ -21,6 +23,8 @@ on:
       - '*gradle*'
       - 'docs/**'
       - 'gradle/**'
+      - 'src/main/**'
+      - 'src/java9/**'
 
 jobs:
   # Runs on PRs and push to ensure the documentation successfully builds.
