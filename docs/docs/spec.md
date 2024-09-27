@@ -115,20 +115,13 @@ of that type. Specifically, a type component is one of the following:
 
 ## Nullness operator
 
-A nullness operator is one of four values:
+A *nullness operator* specifies nullness information in an [augmented type].
+JSpecify defines four operators:
 
 -   `UNION_NULL`
 -   `NO_CHANGE`
 -   `UNSPECIFIED`
 -   `MINUS_NULL`
-
-TODO: This is the first appearance of "operator" and there is no formal definition
-of what they are used for and what they mean.
-
-The "values" is maybe also misleading - these are type operators, not runtime values.
-
-This would also be a good place to introduce the postfix notation and contrast it
-to the prefix notation used by annotations.
 
 > The informal meaning of the operators is:
 >
