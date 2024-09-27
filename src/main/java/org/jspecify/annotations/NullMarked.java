@@ -48,25 +48,23 @@ import java.lang.annotation.Target;
  * <p>Within null-marked code:
  *
  * <ul>
- *   <li>In a <b>wildcard</b> type such as {@code List<?>} or {@code List<? super Integer>}, where
- *       the corresponding type parameter accepts nullable type arguments, the type represented by
- *       the wildcard is nullable. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
- *       <ul>
- *         <li>Conversely, a <b>type parameter</b> is always considered to have an upper bound; when
- *             none is given explicitly, {@code Object} is filled in by the compiler. The example
- *             {@code class MyList<E>} is interpreted identically to {@code class MyList<E extends
- *             Object>}: in either case the type argument in {@code MyList<@Nullable Foo>} is
- *             out-of-bounds. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
- *       </ul>
- *   <li>Otherwise, being null-marked has no consequence for any type usage where {@code @Nullable}
- *       and {@code @NonNull} are <a href="Nullable.html#applicability"><b>not applicable</b></a>,
- *       such as the root type of a local variable declaration.
+ *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are <a
+ *       href="Nullable.html#applicability"><b>not applicable</b></a>, such as the root type of a
+ *       local variable declaration, is unaffected.
+ *   <li>A <b>wildcard</b> with no upper bound generally represents a nullable type (unless the
+ *       corresponding type parameter has a non-null upper bound itself). (<a
+ *       href="https://bit.ly/3ppb8ZC">Why?</a>) This refers to either an unbounded wildcard like in
+ *       {@code List<?>}, or a wildcard with a lower bound like in {@code List<? super Integer>}). 
+ *   <li>A <b>type parameter</b> itself is a different case. It is never really "unbounded"; if no
+ *       upper bound is given explicitly, then {@code Object} is filled in by the compiler. This
+ *       means the example {@code class MyList<E>} is interpreted identically to {@code class
+ *       MyList<E extends Object>}, making the upper bound <em>non-null</em> {@code Object}. (<a
+ *       href="https://bit.ly/3ppb8ZC">Why?</a>)
  *   <li>When a type variable has a nullable upper bound, such as the {@code E} in {@code class
- *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable is not
- *       considered nullable, non-null, or even of "unspecified" nullness. Rather it has
- *       <b>parametric nullness</b>. In order to support both nullable and non-null type arguments
- *       safely, the {@code E} type itself must be handled <i>strictly</i>: as if nullable when
- *       "read from", but as if non-null when "written to".
+ *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable within that
+ *       class has a special kind of nullness called <b>parametric nullness</b>. In order to support
+ *       both nullable and non-null type arguments safely, the {@code E} type itself must be handled
+ *       pessimistically: treated as if nullable when read from, but as if non-null when written to.
  * </ul>
  *
  * <h2 id="where">Where it can be used</h2>
@@ -77,11 +75,12 @@ import java.lang.annotation.Target;
  *
  * <ul>
  *   <li>To apply these annotations to an entire (single) <b>package</b>, create a <a
- *       href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-7.html#jls-7.4.1">{@code
- *       package-info.java}</a> file there. This annotation has no effect on "subpackages".
- *       <b>Warning</b>: if the package does not belong to a module, be very careful: it can easily
- *       happen that different versions of the package-info file are seen and used in different
- *       circumstances, causing the same classes to be interpreted inconsistently.
+ *       href="https://docs.oracle.com/javase/specs/jls/se23/html/jls-7.html#jls-7.4.1">{@code
+ *       package-info.java}</a> file and annotate the package declaration there. This annotation has
+ *       no effect on "subpackages". <b>Warning</b>: if the package does not belong to a module, be
+ *       very careful: it can easily happen that different versions of the package-info file are
+ *       seen and used in different circumstances, causing the same classes to be interpreted
+ *       inconsistently.
  *   <li>An advantage of Java <b>modules</b> is that you can make a lot of code null-marked with
  *       just a single annotation (before the {@code module} keyword). {@link NullUnmarked} is not
  *       supported on modules, since it's already the default behavior.
