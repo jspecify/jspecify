@@ -94,6 +94,8 @@ definition.
 In particular, when a JLS rule refers to types, apply this spec's definition of
 [augmented types] \(as opposed to [base types]).
 
+This specification covers all JLS constructs up to [Java SE 23].
+
 ## Base type
 
 A *base type* is a type as defined in [JLS 4].
@@ -347,7 +349,7 @@ innermost.
 > Packages are *not* enclosed by "parent" packages.
 
 > This definition of "enclosing" largely matches
-> [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/22/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
+> [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 > The JSpecify definition differs slightly by skipping type-parameter
 > declarations (which cannot be annotated with declaration annotations) and by
 > defining that there exists a series of enclosing declarations for any type
@@ -1081,20 +1083,21 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 
 [#49]: https://github.com/jspecify/jspecify/issues/49
 [#65]: https://github.com/jspecify/jspecify/issues/65
-[JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-1.html#jls-1.3
-[JLS 15.20.2]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-15.html#jls-15.20.2
-[JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10.4
-[JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.10
-[JLS 4.3.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.3.4
-[JLS 4.4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.4
-[JLS 4.5.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.1
-[JLS 4.5.2]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5.2
-[JLS 4.5]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.5
-[JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html#jls-4.9
-[JLS 4]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-4.html
-[JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-5.html#jls-5.1.10
-[JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4.1
-[JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4.8.1
+[Java SE 23]: https://docs.oracle.com/javase/specs/jls/se23/html/index.html
+[JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-1.html#jls-1.3
+[JLS 15.20.2]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-15.html#jls-15.20.2
+[JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.10.4
+[JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.10
+[JLS 4.3.4]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.3.4
+[JLS 4.4]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.4
+[JLS 4.5.1]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.5.1
+[JLS 4.5.2]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.5.2
+[JLS 4.5]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.5
+[JLS 4.9]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.9
+[JLS 4]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html
+[JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-5.html#jls-5.1.10
+[JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-8.html#jls-8.4.1
+[JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-8.html#jls-8.4.8.1
 [JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
 [`FluentIterable<E>`]: https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/FluentIterable.html
 [all worlds]: #multiple-worlds
@@ -1122,8 +1125,8 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 [nullness-delegating subtyping]: #nullness-delegating-subtyping
 [nullness-subtype-establishing direct-supertype edges]: #nullness-subtype-establishing-direct-supertype-edges
 [nullness-subtype-establishing path]: #nullness-subtype-establishing-path
-[pattern]: https://docs.oracle.com/en/java/javase/22/language/pattern-matching.html
-[repeatable]: https://docs.oracle.com/en/java/javase/22/docs/api/java.base/java/lang/annotation/Repeatable.html
+[pattern]: https://docs.oracle.com/en/java/javase/23/language/pattern-matching.html
+[repeatable]: https://docs.oracle.com/en/java/javase/23/docs/api/java.base/java/lang/annotation/Repeatable.html
 [same type]: #same-type
 [same-type]: #same-type
 [semantics]: #semantics
