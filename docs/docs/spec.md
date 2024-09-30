@@ -351,7 +351,7 @@ innermost.
 > This definition of "enclosing" largely matches
 > [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 > The JSpecify definition differs slightly by skipping type-parameter
-> declarations (which cannot be annotated with declaration annotations) and by
+> declarations (which cannot be annotated with our declaration annotations) and by
 > defining that there exists a series of enclosing declarations for any type
 > usage, not just for a declaration.
 
