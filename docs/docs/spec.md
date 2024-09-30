@@ -254,6 +254,9 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
+-   any component of the reference type(s) in a
+    [cast expression][JSL 15.16]
+
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
 
@@ -1085,6 +1088,7 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 [#65]: https://github.com/jspecify/jspecify/issues/65
 [Java SE 23]: https://docs.oracle.com/javase/specs/jls/se23/html/index.html
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-1.html#jls-1.3
+[JLS 15.16]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-15.html#jls-15.16
 [JLS 15.20.2]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-15.html#jls-15.20.2
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.10
