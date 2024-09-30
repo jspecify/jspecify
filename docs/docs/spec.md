@@ -326,8 +326,7 @@ locations listed below:
 -   A module (for `@NullMarked` only, not `@NullUnmarked`).
 -   A method or constructor.
 
-If our declaration annotations appear in any other location, they have no
-meaning.
+All locations that are not explicitly listed as recognized are unrecognized.
 
 > That is, they are *not* recognized on a field, a parameter, a local variable,
 > an annotation interface, a type parameter, or a record component declaration.
