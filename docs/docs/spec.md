@@ -321,15 +321,16 @@ We provide two parameterless declaration annotations: `@NullMarked` and
 Our declaration annotations are specified to be *recognized* when applied to the
 locations listed below:
 
--   A *named* class.
+-   A *named* type.
 -   A package.
 -   A module (for `@NullMarked` only, not `@NullUnmarked`).
 -   A method or constructor.
 
-> *Not* a field or a record component.
-
 If our declaration annotations appear in any other location, they have no
 meaning.
+
+> That is, they are *not* recognized on a field, a parameter, a local variable,
+> an annotation interface, a type parameter, or a record component declaration.
 
 ## Null-marked scope
 
