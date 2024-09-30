@@ -288,18 +288,16 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     -   object creation expression
 >
 >         > For example, `new @Nullable ArrayList<String>()` has an unrecognized
->         > annotation.
->         > However, note that type arguments in an object creation expression can
->         > be annotated.
->         > For example, `new ArrayList<@Nullable String>()` has a recognized
->         > annotation.
+>         > annotation. However, note that type arguments in an object creation
+>         > expression can be annotated. For example, `new ArrayList<@Nullable
+>         > String>()` has a recognized annotation.
 >
 >     -   array creation expression
 >
->         > For example, `new String @Nullable [5]` has an unrecognized annotation.
->         > However, note that the component type in an array creation expression
->         > can be annotated.
->         > For example, `new int [5] @Nullable []` has a recognized annotation.
+>         > For example, `new String @Nullable [5]` has an unrecognized
+>         > annotation. However, note that the component type in an array
+>         > creation expression can be annotated. For example, `new int [5]
+>         > @Nullable []` has a recognized annotation.
 >
 >     -   outer type qualifying an inner type
 >
