@@ -366,7 +366,7 @@ check the following rules in order:
 > If a given declaration is annotated with both `@NullMarked` and
 > `@NullUnmarked`, these rules behave as if neither annotation is present.
 
-If none of the enclosing declarations meet either rule, then the type usage is
+If none of the enclosing declarations meet any rule, then the type usage is
 *not* in a null-marked scope.
 
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
