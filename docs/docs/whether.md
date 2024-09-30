@@ -52,7 +52,8 @@ they claim about their current and planned JSpecify support.
     but does not yet analyze generics.
 
 *   [IntelliJ IDEA](https://www.jetbrains.com/idea/) supports JSpecify
-    annotations but has incomplete support for generics.
+    annotations but has incomplete support for generics
+    ([example](https://youtrack.jetbrains.com/issue/IDEA-356144)).
 
 *   The [Checker Framework](https://checkerframework.org/) understands
     `@Nullable` and `@NonNull`, but not `@NullMarked` or `@NullUnmarked`.
