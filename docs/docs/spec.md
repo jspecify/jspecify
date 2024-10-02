@@ -117,7 +117,8 @@ of that type. Specifically, a type component is one of the following:
 
 ## Nullness operator
 
-A nullness operator is one of four values:
+A *nullness operator* specifies nullness information in an [augmented type].
+JSpecify defines four nullness operators:
 
 -   `UNION_NULL`
 -   `NO_CHANGE`
