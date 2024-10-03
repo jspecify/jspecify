@@ -225,12 +225,12 @@ exceptions in the subsequent sections:
     [JLS 8.4.1]
 
     > This excludes the receiver parameter but includes variadic parameters (in
-    > varargs methods). Because *components* types are also a recognized
-    > location for annotations, variadic paramters (like arrays) can have
-    > annotations on multiple components. For example, `@NonNull String
-    > @Nullable [] strings` means non-null elements in a nullable array.
+    > varargs methods). Because *array component* types are also a recognized
+    > location for annotations, variadic parameters (which are arrays) can have
+    > annotations on the array itself and/or its component type. For example, `@NonNull String
+    > @Nullable [] strings` means `strings` is a nullable array containing non-null elements.
     > Similarly, `void method(@Nullable String @NonNull ... strings)` means
-    > nullable elements in a non-null array.
+    > `strings` is a non-null array containing nullable elements.
 
 -   a field type
 
