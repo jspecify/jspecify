@@ -225,7 +225,7 @@ exceptions in the subsequent sections:
     [JLS 8.4.1]
 
     > This excludes the receiver parameter but includes variadic parameters (in
-    > varargs methods). For examples of variadic paramters, see the comment
+    > varargs methods). For examples of variadic parameters, see the comment
     > about array components below.
 
 -   a field type
