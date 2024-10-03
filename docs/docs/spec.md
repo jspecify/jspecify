@@ -927,25 +927,28 @@ the output of the following operation:
     > demonstrated in
     > https://github.com/jspecify/jspecify-reference-checker/pull/197.
 
-    > The primary purpose of this special case is to improve behavior in "the
-    > `ImmutableList.Builder` case": Because `ImmutableList.Builder.add` always
-    > throws `NullPointerException` for a null argument, we would like for
-    > `add(null)` to be a compile error, even under lenient tools.
-    > Unfortunately, without this special case, lenient tools could permit
-    > `add(null)` in unannotated code. For an example, read on.
+    > The purpose of this part of the subsitution rules is ensure that non-null
+    > types stay non-null during substitution, even if they don't have an
+    > explicit `@NonNull` annotation on them.
     >
-    > Consider an unannotated user of `ImmutableList.Builder<Foo> builder`. Its
-    > type argument `Foo` will have a [nullness operator] of `UNSPECIFIED`.
-    > Without this special case, the parameter of `builder.add` would have a
-    > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool would
-    > check whether the [some-world] subtyping relation holds for
-    > `builder.add(null)`, it would find that it does.
+    > For an example of such a type, consider `Comparable`, a `@NullMarked`
+    > interface that declares a non-nullable type parameter `T` and a method
+    > `compare(T)`. By JSpecify rules, the method parameter has type `T
+    > NO_CHANGE`, and that type is null-exclusive under every parameterization
+    > in all worlds. Now consider a null-unmarked class that declares a method
+    > `Comparable<Foo> foo()`, which by JSpecify rules has a type argument `Foo
+    > UNSPECIFIED`. In this example, the question is what type
+    > `foo().compare(...)` accepts, and the answer changes as a result of this
+    > part of the subsitution rules:
     >
-    > To solve this, we need a special case for substitution for null-exclusive
-    > type parameters like the one on `ImmutableList.Builder`, one that avoids
-    > producing a type with nullness operator `UNSPECIFIED`. Since the special
-    > case is applied to any null-exclusive type, including the type produced by
-    > `@NonNull T`, it has to produce `MINUS_NULL`.
+    > -   If JSpecify were to directly subsitute `Foo UNSPECIFIED` in for `T`,
+    >     then the parameter type, which started out as non-null, would become
+    >     unspecified during subsitution. As a result, lenient checkers would
+    >     allow the call `foo().compare(null)`, since `Foo UNSPECIFIED` is
+    >     [null-inclusive under every parameterization] in [some world].
+    > -   To avoid that, JSpecify recognizes that the parameter is non-null, and
+    >     it performs substitution as if the parameter type were `T MINUS_NULL`
+    >     instead of `T NO_CHANGE`.
 
 -   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.
