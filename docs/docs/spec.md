@@ -225,13 +225,8 @@ exceptions in the subsequent sections:
     [JLS 8.4.1]
 
     > This excludes the receiver parameter but includes variadic parameters (in
-    > varargs methods). Because *array component* types are also a recognized
-    > location for annotations, variadic parameters (which are arrays) can have
-    > annotations on the array itself and/or its component type. For example,
-    > `@NonNull String @Nullable [] strings` means `strings` is a nullable array
-    > containing non-null elements. Similarly, `void method(@Nullable String
-    > @NonNull ... strings)` means `strings` is a non-null array containing
-    > nullable elements.
+    > varargs methods). For examples of variadic paramters, see the comment
+    > about array components below.
 
 -   a field type
 
@@ -245,10 +240,17 @@ exceptions in the subsequent sections:
 
 -   an array component type
 
-    > An array of nullable strings is written `@Nullable String[]`. A variadic
-    > parameter whose type is "array of nullable strings" is written `@Nullable
-    > String...`. Compare this to the syntax for a nullable array of strings,
-    > shown above in the discussion of variadic parameters.
+    > An array of nullable strings is written `@Nullable String[]`. Similarly, a
+    > variadic parameter whose type is "array of nullable strings" is written
+    > `@Nullable String...`.
+    >
+    > Additionally, whenever JSpecify recognizes an annotation at a given
+    > location, it also recognizes an annotation on *an array itself* at that
+    > location. For example, a method parameter could be annotated as `@NonNull
+    > String @Nullable [] strings`, which means `strings` is a nullable array
+    > containing non-null elements. Similarly, `void method(@Nullable String
+    > @NonNull ... strings)` means `strings` is a non-null array containing
+    > nullable elements.
 
 -   an array creation expression
 
