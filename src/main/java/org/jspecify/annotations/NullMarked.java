@@ -53,18 +53,19 @@ import java.lang.annotation.Target;
  *       local variable declaration, is unaffected.
  *   <li>A <b>wildcard</b> with no upper bound generally represents a nullable type (unless the
  *       corresponding type parameter has a non-null upper bound itself). (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>) This refers to either an unbounded wildcard like in
- *       {@code List<?>}, or a wildcard with a lower bound like in {@code List<? super Integer>}). 
+ *       href="https://bit.ly/3ppb8ZC">Why?</a>) This might be either an unbounded wildcard, as in
+ *       {@code List<?>}, or a wildcard with a lower bound, as in {@code List<? super Integer>}). 
  *   <li>A <b>type parameter</b> itself is a different case. It is never really "unbounded"; if no
  *       upper bound is given explicitly, then {@code Object} is filled in by the compiler. This
  *       means the example {@code class MyList<E>} is interpreted identically to {@code class
  *       MyList<E extends Object>}, making the upper bound <em>non-null</em> {@code Object}. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
- *   <li>When a type variable has a nullable upper bound, such as the {@code E} in {@code class
- *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable within that
- *       class has a special kind of nullness called <b>parametric nullness</b>. In order to support
- *       both nullable and non-null type arguments safely, the {@code E} type itself must be handled
- *       pessimistically: treated as if nullable when read from, but as if non-null when written to.
+ *   <li>When a type parameter has a nullable upper bound, such as the {@code E} in {@code class
+ *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable itself (within
+ *       that class) has a special kind of nullness called <b>parametric nullness</b>. In order to
+ *       support both nullable and non-null type arguments safely, the {@code E} type itself must be
+ *       handled pessimistically: treated as if nullable when read from, but as if non-null when
+ *       written to.
  * </ul>
  *
  * <h2 id="where">Where it can be used</h2>
