@@ -104,6 +104,7 @@ import java.lang.annotation.Target;
  * </ul>
  *
  * <!-- TODO: move up -->
+ *
  * <h2 id="applicability">Where it is not applicable</h2>
  *
  * <p>This annotation and {@link NonNull} are applicable to any <a
@@ -128,8 +129,8 @@ import java.lang.annotation.Target;
  *       Subcomponents of the type (type arguments, etc.) are annotatable as usual.
  *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
  *       non-null, and nothing else about nullness is checked at runtime.
- *   <li>On any part of a <b>receiver parameter</b> type. This parameter must specify the exact
- *       type of {@code this}; its nullness information cannot be altered in any way.
+ *   <li>On any part of a <b>receiver parameter</b> type. This parameter must specify the exact type
+ *       of {@code this}; its nullness information cannot be altered in any way.
  *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage, <i>both</i>
  *       are unrecognized.
  * </ul>
