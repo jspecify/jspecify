@@ -917,16 +917,6 @@ the output of the following operation:
     then replace it with the output of [applying][applying operator]
     `MINUS_NULL` to `Aᵢ`.
 
-    > This is the one instance in which a rule specifically refers to the
-    > [all-worlds] version of another rule. Normally,
-    > [a rule "propagates" its version to other rules](#propagating-multiple-worlds).
-    > But in this instance, the null-exclusivity rule (and all rules that it in
-    > turn applies) are the [all-worlds] versions.
-    >
-    > We may someday have another such rule for computing least upper bounds, as
-    > demonstrated in
-    > https://github.com/jspecify/jspecify-reference-checker/pull/197.
-
     > The purpose of this part of the subsitution rules is to ensure that non-null
     > types stay non-null during substitution, even if they don't have an
     > explicit `@NonNull` annotation on them.
@@ -949,6 +939,12 @@ the output of the following operation:
     > -   To avoid that, JSpecify uses this rule to recognize that the parameter is non-null, and
     >     it performs substitution as if the parameter type were `T MINUS_NULL`
     >     instead of `T NO_CHANGE`.
+    >
+    > Also, note that this is the one instance in which a rule specifically refers to the
+    > [all-worlds] version of another rule. Normally,
+    > [a rule "propagates" its version to other rules](#propagating-multiple-worlds).
+    > But in this instance, the null-exclusivity rule (and all rules that it in
+    > turn applies) are the [all-worlds] versions.
 
 -   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.
