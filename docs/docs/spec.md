@@ -928,7 +928,7 @@ the output of the following operation:
     > in all worlds. Now consider a null-unmarked class that declares a method
     > `Comparable<Foo> foo()`, which by JSpecify rules has a type argument `Foo
     > UNSPECIFIED`. In this example, the question is what type
-    > `foo().compare(...)` accepts, and the answer changes as a result of this
+    > `foo().compare(...)` accepts. That question demonstrates the effect of this
     > part of the subsitution rules:
     >
     > -   Without this part of the rule, JSpecify would directly subsitute `Foo UNSPECIFIED` in for `T`;
