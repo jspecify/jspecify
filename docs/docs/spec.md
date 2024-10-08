@@ -244,6 +244,12 @@ exceptions in the subsequent sections:
 
 -   an array component type
 
+    > Note that this rule recognizes the annotations in `@Nullable String []`
+    > and `String [] @Nullable []`.
+    > Whether the annotation in `String @Nullable []` is recognized depends on
+    > where that type is used - it would e.g. be recognized if that type is
+    > used as a field type.
+
 However, the type-use annotation is unrecognized in any of the following cases:
 
 -   a type usage of a primitive type, since those are intrinsically non-nullable
@@ -299,8 +305,8 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 >         > For example, `new String @Nullable [5]` has an unrecognized
 >         > annotation. However, note that the component type in an array
->         > creation expression can be annotated. For example, `new int [5]
->         > @Nullable []` has a recognized annotation.
+>         > creation expression can be annotated. For example, `new @Nullable
+>         > String [5]` has a recognized annotation.
 >
 >     -   outer type qualifying an inner type
 >
