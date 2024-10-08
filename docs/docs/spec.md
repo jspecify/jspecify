@@ -918,7 +918,7 @@ the output of the following operation:
     `MINUS_NULL` to `Aᵢ`.
 
     > The purpose of this part of the subsitution rules is to ensure that non-null
-    > types stay non-null during substitution, even if they don't have an
+    > type variables stay non-null during substitution, even if they don't have an
     > explicit `@NonNull` annotation on them.
     >
     > For an example of such a type, consider `Comparable`, a `@NullMarked`
