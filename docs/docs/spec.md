@@ -838,10 +838,10 @@ A type is null-exclusive under every parameterization if it has a
     > This covers an easy case: A type usage never includes `null` if it is
     > annotated with `@NonNull`.
 
--   any augmented class or array type
+-   any augmented class, array, or null type
 
-    > This rule refers specifically to a "class or array type," as distinct from
-    > other types like type variables and [intersection types].
+    > This rule refers to particular kinds of types as distinct from other types
+    > like type variables and [intersection types].
 
 > When code dereferences an expression, we anticipate that tools will check
 > whether the expression is null-exclusive under every parameterization.
