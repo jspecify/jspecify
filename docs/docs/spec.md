@@ -330,7 +330,7 @@ locations listed below:
 All locations that are not explicitly listed as recognized are unrecognized.
 
 > That is, they are *not* recognized on a field, a parameter, a local variable,
-> an annotation interface, a type parameter, or a record component declaration.
+> a type parameter, or a record component declaration.
 
 ## Null-marked scope
 
