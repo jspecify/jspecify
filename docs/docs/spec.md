@@ -917,7 +917,7 @@ the output of the following operation:
     then replace it with the output of [applying][applying operator]
     `MINUS_NULL` to `Aᵢ`.
 
-    > The purpose of this part of the subsitution rules is to ensure that non-null
+    > The purpose of this part of the subsitution rule is to ensure that non-null
     > type variables stay non-null during substitution, even if they don't have an
     > explicit `@NonNull` annotation on them.
     >
@@ -929,7 +929,7 @@ the output of the following operation:
     > `Comparable<Foo> foo()`, which by JSpecify rules has a type argument `Foo
     > UNSPECIFIED`. In this example, the question is what type
     > `foo().compare(...)` accepts. That question demonstrates the effect of this
-    > part of the subsitution rules:
+    > part of the subsitution rule:
     >
     > -   Without this part of the rule, JSpecify would directly subsitute `Foo UNSPECIFIED` in for `T`;
     >     then the parameter type, which started out as non-null, would become
