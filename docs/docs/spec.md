@@ -245,7 +245,7 @@ exceptions in the subsequent sections:
 -   an array component type
 
     > Note that this rule recognizes the annotations in `@Nullable String []`
-    > and `String [] @Nullable []`. Whether the annotation in `String @Nullable
+    > and `String[] @Nullable []`. Whether the annotation in `String @Nullable
     > []` is recognized depends on where that type is used. For example, it
     > would be recognized if that type were used as a field type.
 
