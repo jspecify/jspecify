@@ -938,7 +938,7 @@ the output of the following operation:
     >     [null-inclusive under every parameterization] in [some world].
     > -   To avoid that, JSpecify uses this rule to recognize that the parameter is non-null, and
     >     it performs substitution as if the parameter type were `T MINUS_NULL`
-    >     instead of `T NO_CHANGE`.
+    >     instead of `T NO_CHANGE`. As a result, the parameter type remains non-null after substitution: `String MINUS_NULL`.
     >
     > Also, note that this is the one instance in which a rule specifically refers to the
     > [all-worlds] version of another rule. Normally,
