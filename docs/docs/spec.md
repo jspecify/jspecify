@@ -917,9 +917,9 @@ the output of the following operation:
     then replace it with the output of [applying][applying operator]
     `MINUS_NULL` to `Aᵢ`.
 
-    > The purpose of this part of the subsitution rule is to ensure that non-null
-    > type variables stay non-null during substitution, even if they don't have an
-    > explicit `@NonNull` annotation on them.
+    > The purpose of this part of the subsitution rule is to ensure that
+    > non-null type variables stay non-null during substitution, even if they
+    > don't have an explicit `@NonNull` annotation on them.
     >
     > For an example of such a type, consider `Comparable`, a `@NullMarked`
     > interface that declares a non-nullable type parameter `T` and a method
@@ -928,20 +928,23 @@ the output of the following operation:
     > in all worlds. Now consider a null-unmarked class that declares a method
     > `Comparable<Foo> foo()`, which by JSpecify rules has a type argument `Foo
     > UNSPECIFIED`. In this example, the question is what type
-    > `foo().compare(...)` accepts. That question demonstrates the effect of this
-    > part of the subsitution rule:
+    > `foo().compare(...)` accepts. That question demonstrates the effect of
+    > this part of the subsitution rule:
     >
-    > -   Without this part of the rule, JSpecify would directly subsitute `Foo UNSPECIFIED` in for `T`.
-    >     Then the parameter type, which started out as non-null, would become
-    >     unspecified as a result of the subsitution. As a result, lenient checkers would
-    >     allow the call `foo().compare(null)`, since `Foo UNSPECIFIED` is
+    > -   Without this part of the rule, JSpecify would directly subsitute `Foo
+    >     UNSPECIFIED` in for `T`. Then the parameter type, which started out as
+    >     non-null, would become unspecified as a result of the subsitution. As
+    >     a result, lenient checkers would allow the call `foo().compare(null)`,
+    >     since `Foo UNSPECIFIED` is
     >     [null-inclusive under every parameterization] in [some world].
-    > -   To avoid that, JSpecify uses this rule to recognize that the parameter is non-null, and
-    >     it performs substitution as if the parameter type were `T MINUS_NULL`
-    >     instead of `T NO_CHANGE`. As a result, the parameter type remains non-null after substitution: `String MINUS_NULL`.
+    > -   To avoid that, JSpecify uses this rule to recognize that the parameter
+    >     is non-null, and it performs substitution as if the parameter type
+    >     were `T MINUS_NULL` instead of `T NO_CHANGE`. As a result, the
+    >     parameter type remains non-null after substitution: `String
+    >     MINUS_NULL`.
     >
-    > Also, note that this is the one instance in which a rule specifically refers to the
-    > [all-worlds] version of another rule. Normally,
+    > Also, note that this is the one instance in which a rule specifically
+    > refers to the [all-worlds] version of another rule. Normally,
     > [a rule "propagates" its version to other rules](#propagating-multiple-worlds).
     > But in this instance, the null-exclusivity rule (and all rules that it in
     > turn applies) are the [all-worlds] versions.
