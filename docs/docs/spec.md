@@ -306,7 +306,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >         > For example, `new String @Nullable [5]` has an unrecognized
 >         > annotation. However, note that the component type in an array
 >         > creation expression can be annotated. For example, `new @Nullable
->         > String [5]` has a recognized annotation.
+>         > String[5]` has a recognized annotation.
 >
 >     -   outer type qualifying an inner type
 >
