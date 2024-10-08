@@ -933,7 +933,7 @@ the output of the following operation:
     >
     > -   Without this part of the rule, JSpecify would directly subsitute `Foo UNSPECIFIED` in for `T`.
     >     Then the parameter type, which started out as non-null, would become
-    >     unspecified during subsitution. As a result, lenient checkers would
+    >     unspecified as a result of the subsitution. As a result, lenient checkers would
     >     allow the call `foo().compare(null)`, since `Foo UNSPECIFIED` is
     >     [null-inclusive under every parameterization] in [some world].
     > -   To avoid that, JSpecify uses this rule to recognize that the parameter is non-null, and
