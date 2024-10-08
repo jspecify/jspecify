@@ -927,7 +927,7 @@ the output of the following operation:
     > demonstrated in
     > https://github.com/jspecify/jspecify-reference-checker/pull/197.
 
-    > The purpose of this part of the subsitution rules is ensure that non-null
+    > The purpose of this part of the subsitution rules is to ensure that non-null
     > types stay non-null during substitution, even if they don't have an
     > explicit `@NonNull` annotation on them.
     >
@@ -941,12 +941,12 @@ the output of the following operation:
     > `foo().compare(...)` accepts, and the answer changes as a result of this
     > part of the subsitution rules:
     >
-    > -   If JSpecify were to directly subsitute `Foo UNSPECIFIED` in for `T`,
+    > -   Without this part of the rule, JSpecify would directly subsitute `Foo UNSPECIFIED` in for `T`;
     >     then the parameter type, which started out as non-null, would become
     >     unspecified during subsitution. As a result, lenient checkers would
     >     allow the call `foo().compare(null)`, since `Foo UNSPECIFIED` is
     >     [null-inclusive under every parameterization] in [some world].
-    > -   To avoid that, JSpecify recognizes that the parameter is non-null, and
+    > -   To avoid that, JSpecify uses this rule to recognize that the parameter is non-null, and
     >     it performs substitution as if the parameter type were `T MINUS_NULL`
     >     instead of `T NO_CHANGE`.
 
