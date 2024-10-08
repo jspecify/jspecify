@@ -117,7 +117,8 @@ of that type. Specifically, a type component is one of the following:
 
 ## Nullness operator
 
-A nullness operator is one of four values:
+A *nullness operator* specifies nullness information in an [augmented type].
+JSpecify defines four nullness operators:
 
 -   `UNION_NULL`
 -   `NO_CHANGE`
@@ -351,8 +352,8 @@ innermost.
 > This definition of "enclosing" largely matches
 > [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 > The JSpecify definition differs slightly by skipping type-parameter
-> declarations (which cannot be annotated with declaration annotations) and by
-> defining that there exists a series of enclosing declarations for any type
+> declarations (which cannot be annotated with our declaration annotations) and
+> by defining that there exists a series of enclosing declarations for any type
 > usage, not just for a declaration.
 
 At each declaration that is a [recognized](#recognized-declaration) location,
@@ -615,7 +616,7 @@ a target nullness operator `t`* if either of the following conditions holds:
 > authors make this choice by choosing how to handle "[multiple worlds]."
 >
 > Suppose that a tool wants to determine whether it will allow `null` to be
-> assigned to a field of a given type. To do so, it can ask whether it is
+> assigned to a field of base type `String`. To do so, it can ask whether it is
 > "comfortable" treating the field type's nullness operator like `UNION_NULL`.
 >
 > -   If the nullness operator *is* `UNION_NULL`, then the assignment should
@@ -635,8 +636,8 @@ nullness operator `t`* if either of the following conditions holds:
 
 > "Worried" is the complementary attitude to "[comfortable]" above.
 >
-> Suppose that a tool wants to determine whether to allow an expression of a
-> given type to be dereferenced. To do so, it can ask whether it should be
+> Suppose that a tool wants to determine whether to allow an expression of base
+> type `String` to be dereferenced. To do so, it can ask whether it should be
 > "worried" that the type's nullness operator is `UNION_NULL`.
 >
 > -   If the nullness operator *is* `UNION_NULL`, then the dereference clearly
