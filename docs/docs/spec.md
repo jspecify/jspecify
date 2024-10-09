@@ -240,18 +240,18 @@ exceptions in the subsequent sections:
 
 -   an array component type
 
-    > An array of nullable strings is written `@Nullable String[]`. Similarly, a
-    > variadic parameter whose type is "array of nullable strings" is written
+    > For an array of nullable strings, write `@Nullable String[]`. Similarly,
+    > for a variadic parameter whose type is "array of nullable strings," write
     > `@Nullable String...`.
     >
     > You can annotate array component types independently from the array
-    > itself. The array itself can be annotated in the same cases as any
-    > non-array type in the same position can, albeit with different syntax. For
-    > example, a method parameter could be annotated as `@NonNull String
-    > @Nullable [] strings`, which means `strings` is a nullable array
-    > containing non-null elements. Similarly for variadic parameters, `void
-    > method(@Nullable String @NonNull ... strings)` means `strings` is a
-    > non-null array containing nullable elements.
+    > itself. You can annotate the array itself in the same cases as any
+    > non-array type in the same position, albeit with different syntax. For
+    > example, you can annotate a method parameter as `@NonNull String @Nullable
+    > [] strings`, which means `strings` is a nullable array containing non-null
+    > elements. Similarly for variadic parameters, `void method(@Nullable String
+    > @NonNull ... strings)` means `strings` is a non-null array containing
+    > nullable elements.
 
 -   an array creation expression
 
