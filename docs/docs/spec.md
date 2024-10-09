@@ -244,7 +244,10 @@ exceptions in the subsequent sections:
 
 -   an array component type
 
--   an array creation expression
+    > Note that this rule recognizes the annotations in `@Nullable String[]`
+    > and `String[] @Nullable []`. Whether the annotation in `String @Nullable
+    > []` is recognized depends on where that type is used. For example, it
+    > would be recognized if that type were used as a field type.
 
 However, the type-use annotation is unrecognized in any of the following cases:
 
@@ -293,7 +296,16 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     -   object creation expression
 >
 >         > For example, `new @Nullable ArrayList<String>()` has an unrecognized
->         > annotation.
+>         > annotation. However, note that type arguments in an object creation
+>         > expression can be annotated. For example, `new ArrayList<@Nullable
+>         > String>()` has a recognized annotation.
+>
+>     -   array creation expression
+>
+>         > For example, `new String @Nullable [5]` has an unrecognized
+>         > annotation. However, note that the component type in an array
+>         > creation expression can be annotated. For example, `new @Nullable
+>         > String[5]` has a recognized annotation.
 >
 >     -   outer type qualifying an inner type
 >
