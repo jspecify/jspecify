@@ -244,12 +244,12 @@ exceptions in the subsequent sections:
     > variadic parameter whose type is "array of nullable strings" is written
     > `@Nullable String...`.
     >
-    > You can annotate array component types independently from
-    > the array itself. The array itself can be annotated in the
-    > same cases as any non-array type in the same position can, albeit with
-    > different syntax. For example, a method parameter could be annotated as
-    > `@NonNull String @Nullable [] strings`, which means `strings` is a
-    > nullable array containing non-null elements. Similarly for variadic parameters, `void
+    > You can annotate array component types independently from the array
+    > itself. The array itself can be annotated in the same cases as any
+    > non-array type in the same position can, albeit with different syntax. For
+    > example, a method parameter could be annotated as `@NonNull String
+    > @Nullable [] strings`, which means `strings` is a nullable array
+    > containing non-null elements. Similarly for variadic parameters, `void
     > method(@Nullable String @NonNull ... strings)` means `strings` is a
     > non-null array containing nullable elements.
 
