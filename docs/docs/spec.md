@@ -23,10 +23,10 @@ In this doc, we aim not to refer to whether a type "is nullable." Instead, we
 draw some distinctions, creating at least four kinds of "Is it nullable?"
 questions we can ask for any given type usage:
 
-1.  Does `@Nullable` appear directly on that type usage?
-2.  What is the [nullness operator] of that type usage?
-3.  Is it reasonable to assume that `null` will not come "out" of it?
-4.  Is it reasonable to assume that `null` cannot be put "in" to it?
+1. What is the [augmented type] of that type usage?
+2. Do I have to handle the case where `null` comes out of it?
+3. Do I have to prevent `null` from going into it?
+4. Is this type a subtype of that type with respect to nullness?
 
 ### The scope of this spec
 
