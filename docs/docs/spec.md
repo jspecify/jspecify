@@ -228,10 +228,9 @@ exceptions in the subsequent sections:
 -   a formal parameter type of a method or constructor, as defined in
     [JLS 8.4.1]
 
-    > This excludes the receiver parameter but includes variadic parameters.
-    > Specifically, you can add `@Nullable` before the `...` token to indicate
-    > that a variadic method accepts `null` arrays: `void foo(String @Nullable
-    > ... strings)`.
+    > This excludes the receiver parameter but includes variadic parameters (in
+    > varargs methods). For examples of variadic parameters, see the comment
+    > about array components below.
 
 -   a field type
 
@@ -245,10 +244,21 @@ exceptions in the subsequent sections:
 
 -   an array component type
 
-    > Note that this rule recognizes the annotations in `@Nullable String[]` and
-    > `String[] @Nullable []`. Whether the annotation in `String @Nullable []`
-    > is recognized depends on where that type is used. For example, it would be
-    > recognized if that type were used as a field type.
+    > For an array of nullable strings, write `@Nullable String[]`. Similarly,
+    > for a variadic parameter whose type is "array of nullable strings," write
+    > `@Nullable String...`. Annotations are also recognized in
+    > higher-dimensional arrays, such as in `String[] @Nullable []`.
+    >
+    > You can annotate array component types independently from the array
+    > itself. For the array itself, you can annotate in the same cases as for
+    > any non-array type in the same position, albeit with different syntax. For
+    > example, you can annotate a method parameter as `@NonNull String @Nullable
+    > [] strings`, which means `strings` is a nullable array containing non-null
+    > elements. Similarly for variadic parameters, `void method(@Nullable String
+    > @NonNull ... strings)` means `strings` is a non-null array containing
+    > nullable elements.
+
+-   an array creation expression
 
 However, the type-use annotation is unrecognized in any of the following cases:
 
