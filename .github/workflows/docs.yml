@@ -11,6 +11,8 @@ on:
       - '*gradle*'
       - 'docs/**'
       - 'gradle/**'
+      - 'src/main/**'
+      - 'src/java9/**'
   pull_request:
     branches:
       - main
@@ -21,6 +23,8 @@ on:
       - '*gradle*'
       - 'docs/**'
       - 'gradle/**'
+      - 'src/main/**'
+      - 'src/java9/**'
 
 jobs:
   # Runs on PRs and push to ensure the documentation successfully builds.
@@ -28,7 +32,7 @@ jobs:
     name: Build Documentation
     runs-on: ubuntu-latest
     env:
-      JAVA_VERSION: 22
+      JAVA_VERSION: 23
     steps:
       - name: Check out project
         uses: actions/checkout@v4
