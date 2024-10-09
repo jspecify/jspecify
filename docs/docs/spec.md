@@ -24,10 +24,10 @@ In this doc, we aim not to refer to whether a type "is nullable." Instead, we
 draw some distinctions, creating at least four kinds of "Is it nullable?"
 questions we can ask for any given type usage:
 
-1. What is the [augmented type] of that type usage?
-2. Do I have to handle the case where `null` comes out of it?
-3. Do I have to prevent `null` from going into it?
-4. Is this type a subtype of that type with respect to nullness?
+1.  What is the [augmented type] of that type usage?
+2.  Do I have to handle the case where `null` comes out of it?
+3.  Do I have to prevent `null` from going into it?
+4.  Is this type a subtype of that type with respect to nullness?
 
 ### The scope of this spec
 
@@ -245,10 +245,10 @@ exceptions in the subsequent sections:
 
 -   an array component type
 
-    > Note that this rule recognizes the annotations in `@Nullable String[]`
-    > and `String[] @Nullable []`. Whether the annotation in `String @Nullable
-    > []` is recognized depends on where that type is used. For example, it
-    > would be recognized if that type were used as a field type.
+    > Note that this rule recognizes the annotations in `@Nullable String[]` and
+    > `String[] @Nullable []`. Whether the annotation in `String @Nullable []`
+    > is recognized depends on where that type is used. For example, it would be
+    > recognized if that type were used as a field type.
 
 However, the type-use annotation is unrecognized in any of the following cases:
 
