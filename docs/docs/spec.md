@@ -2,10 +2,11 @@
 sidebar_position: 6
 ---
 
-# Nullness Specification (draft)
+# Nullness Specification
 
-This document is a draft specification for the precise semantics of our set of
-annotations for nullness analysis.
+<div style={{textAlign: 'right'}}>version 1.0.0-rc1</div>
+
+This document specifies the semantics of our set of nullness annotations.
 
 :::note Advice to readers (non-normative)
 
