@@ -386,9 +386,33 @@ check the following rules in order:
     `@NullUnmarked`, the type usage is in a null-marked scope.
 -   If the declaration is annotated with `@NullUnmarked` and *not* with
     `@NullMarked`, the type usage is *not* in a null-marked scope.
+-   If the declaration is a top-level class annotated with `@kotlin.Metadata`,
+    then the type usage is *not* in a null-marked scope.
 
 > If a given declaration is annotated with both `@NullMarked` and
 > `@NullUnmarked`, these rules behave as if neither annotation is present.
+
+> The Kotlin compiler emits nullness annotations (currently,
+> non-JSpecify annotations) on root types for method parameters,
+> method returns, and fields, but it does not emit annotations
+> elsewhere. In [some
+> cases](https://youtrack.jetbrains.com/issue/KT-13228), Kotlin allows
+> authors to add nullness annotations in those locations
+> manually. However, in general, Kotlin code is "missing" annotations,
+> so it should not be treated as null-marked. As a pragmatic way to
+> accommodate that, the spec has this rule to treat Kotlin code as
+> null-unmarked, even when the code is located in a null-marked
+> package or module.
+
+> In the future, Kotlin may [emit full nullness
+> information](https://youtrack.jetbrains.com/issue/KT-47417),
+> including a `@NullMarked` annotation at the class level. The spec rule
+> for `@kotlin.Metadata` is formulated so that such code will
+> automatically be treated as null-marked at that point. Additionally,
+> it is formulated so that Kotlin code can be explicitly annotated as
+> `@NullMarked` to override the `@kotlin.Metadata` rule for a class and
+> any nested classes. (Another possibility even today is for tools to
+> read the full Kotlin nullness information from `@kotlin.Metadata`.)
 
 If none of the enclosing declarations meet any rule, then the type usage is
 *not* in a null-marked scope.
