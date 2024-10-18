@@ -92,6 +92,10 @@ Since we [released version 1.0.0](/blog/release-1.0.0) we've seen some positive
 reaction in the community. Here are some interesting posts, articles, and
 videos:
 
+*   The November 2025 release of Spring Framework 7.0 was
+    [announced](https://spring.io/blog/2024/10/01/from-spring-framework-6-2-to-7-0),
+    and it promises that its "null-safety strategy is converging with the recently released JSpecify annotations".
+
 *   [Moderne mass-migrated its nullness annotations](https://www.moderne.ai/blog/mass-migration-of-nullability-annotations-to-jspecify)
     and published a guide explaining how they did it using their
     [OpenRewrite](https://docs.openrewrite.org/) automated refactoring platform.
