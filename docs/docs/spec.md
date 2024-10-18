@@ -104,6 +104,8 @@ A *base type* is a type as defined in [JLS 4].
 > JLS 4 does not consider a type-use annotation to be a part of the type it
 > annotates, so neither does our concept of "base type."
 
+We use *class* for classes, interfaces, enums, annotations, and records.
+
 ## Type components
 
 A *type component* of a given type is a type that transitively forms some part
@@ -171,7 +173,7 @@ corresponding to *each* of its [type components].
 > nullness portion of the type.
 
 For our purposes, base types (and thus augmented types) include not just class
-and interface types, array types, and type variables but also
+types, array types, and type variables but also
 [intersection types] and the null type.
 
 > This spec aims to define rules for augmented types compatible with those that
@@ -345,15 +347,17 @@ We provide two parameterless declaration annotations: `@NullMarked` and
 Our declaration annotations are specified to be *recognized* when applied to the
 locations listed below:
 
--   A *named* type.
--   A package.
--   A module (for `@NullMarked` only, not `@NullUnmarked`).
--   A method or constructor.
+-   A *named* class declaration.
+-   A package declaration.
+-   A module (for `@NullMarked` only, not `@NullUnmarked`) declaration.
+-   A method or constructor declaration.
 
 All locations that are not explicitly listed as recognized are unrecognized.
 
 > That is, they are *not* recognized on a field, a parameter, a local variable,
 > a type parameter, or a record component declaration.
+
+> An anonymous class declaration cannot be annotated with a declaration annotation.
 
 ## Null-marked scope
 
