@@ -294,7 +294,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
 >     > [] strings = ...` have unrecognized annotations.
 >
-> -   root types in the reference type(s) in a [cast expression][JSL 15.16]
+> -   root types in the reference type(s) in a [cast expression][JLS 15.16]
 >
 >     > For example, `String s = (@NonNull String) o;` has an unrecognized
 >     > annotation. However, note that type arguments in a cast expression can
