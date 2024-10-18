@@ -113,7 +113,7 @@ const config = {
                 href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
               },
               {
-                label: 'Draft Specification',
+                label: 'Specification',
                 to: '/docs/spec',
               },
             ],
