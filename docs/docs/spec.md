@@ -173,8 +173,8 @@ corresponding to *each* of its [type components].
 > nullness portion of the type.
 
 For our purposes, base types (and thus augmented types) include not just class
-types, array types, and type variables but also
-[intersection types] and the null type.
+types, array types, and type variables but also [intersection types] and the
+null type.
 
 > This spec aims to define rules for augmented types compatible with those that
 > the JLS defines for base types.
@@ -357,7 +357,8 @@ All locations that are not explicitly listed as recognized are unrecognized.
 > That is, they are *not* recognized on a field, a parameter, a local variable,
 > a type parameter, or a record component declaration.
 
-> An anonymous class declaration cannot be annotated with a declaration annotation.
+> An anonymous class declaration cannot be annotated with a declaration
+> annotation.
 
 ## Null-marked scope
 
