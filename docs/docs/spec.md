@@ -2,10 +2,11 @@
 sidebar_position: 6
 ---
 
-# Nullness Specification (draft)
+# Nullness Specification
 
-This document is a draft specification for the precise semantics of our set of
-annotations for nullness analysis.
+<div style={{textAlign: 'right'}}>version 1.0.0-rc1</div>
+
+This document specifies the semantics of our set of nullness annotations.
 
 :::note Advice to readers (non-normative)
 
@@ -23,10 +24,10 @@ In this doc, we aim not to refer to whether a type "is nullable." Instead, we
 draw some distinctions, creating at least four kinds of "Is it nullable?"
 questions we can ask for any given type usage:
 
-1.  Does `@Nullable` appear directly on that type usage?
-2.  What is the [nullness operator] of that type usage?
-3.  Is it reasonable to assume that `null` will not come "out" of it?
-4.  Is it reasonable to assume that `null` cannot be put "in" to it?
+1.  What is the [augmented type] of that type usage?
+2.  Do I have to handle the case where `null` comes out of it?
+3.  Do I have to prevent `null` from going into it?
+4.  Is this type a subtype of that type with respect to nullness?
 
 ### The scope of this spec
 
@@ -117,7 +118,8 @@ of that type. Specifically, a type component is one of the following:
 
 ## Nullness operator
 
-A nullness operator is one of four values:
+A *nullness operator* specifies nullness information in an [augmented type].
+JSpecify defines four nullness operators:
 
 -   `UNION_NULL`
 -   `NO_CHANGE`
@@ -226,10 +228,9 @@ exceptions in the subsequent sections:
 -   a formal parameter type of a method or constructor, as defined in
     [JLS 8.4.1]
 
-    > This excludes the receiver parameter but includes variadic parameters.
-    > Specifically, you can add `@Nullable` before the `...` token to indicate
-    > that a variadic method accepts `null` arrays: `void foo(String @Nullable
-    > ... strings)`.
+    > This excludes the receiver parameter but includes variadic parameters (in
+    > varargs methods). For examples of variadic parameters, see the comment
+    > about array components below.
 
 -   a field type
 
@@ -242,6 +243,20 @@ exceptions in the subsequent sections:
 -   a wildcard bound
 
 -   an array component type
+
+    > For an array of nullable strings, write `@Nullable String[]`. Similarly,
+    > for a variadic parameter whose type is "array of nullable strings," write
+    > `@Nullable String...`. Annotations are also recognized in
+    > higher-dimensional arrays, such as in `String[] @Nullable []`.
+    >
+    > You can annotate array component types independently from the array
+    > itself. For the array itself, you can annotate in the same cases as for
+    > any non-array type in the same position, albeit with different syntax. For
+    > example, you can annotate a method parameter as `@NonNull String @Nullable
+    > [] strings`, which means `strings` is a nullable array containing non-null
+    > elements. Similarly for variadic parameters, `void method(@Nullable String
+    > @NonNull ... strings)` means `strings` is a non-null array containing
+    > nullable elements.
 
 -   an array creation expression
 
@@ -292,7 +307,16 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     -   object creation expression
 >
 >         > For example, `new @Nullable ArrayList<String>()` has an unrecognized
->         > annotation.
+>         > annotation. However, note that type arguments in an object creation
+>         > expression can be annotated. For example, `new ArrayList<@Nullable
+>         > String>()` has a recognized annotation.
+>
+>     -   array creation expression
+>
+>         > For example, `new String @Nullable [5]` has an unrecognized
+>         > annotation. However, note that the component type in an array
+>         > creation expression can be annotated. For example, `new @Nullable
+>         > String[5]` has a recognized annotation.
 >
 >     -   outer type qualifying an inner type
 >
@@ -351,8 +375,8 @@ innermost.
 > This definition of "enclosing" largely matches
 > [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 > The JSpecify definition differs slightly by skipping type-parameter
-> declarations (which cannot be annotated with declaration annotations) and by
-> defining that there exists a series of enclosing declarations for any type
+> declarations (which cannot be annotated with our declaration annotations) and
+> by defining that there exists a series of enclosing declarations for any type
 > usage, not just for a declaration.
 
 At each declaration that is a [recognized](#recognized-declaration) location,
@@ -613,7 +637,7 @@ a target nullness operator `t`* if either of the following conditions holds:
 > authors make this choice by choosing how to handle "[multiple worlds]."
 >
 > Suppose that a tool wants to determine whether it will allow `null` to be
-> assigned to a field of a given type. To do so, it can ask whether it is
+> assigned to a field of base type `String`. To do so, it can ask whether it is
 > "comfortable" treating the field type's nullness operator like `UNION_NULL`.
 >
 > -   If the nullness operator *is* `UNION_NULL`, then the assignment should
@@ -633,8 +657,8 @@ nullness operator `t`* if either of the following conditions holds:
 
 > "Worried" is the complementary attitude to "[comfortable]" above.
 >
-> Suppose that a tool wants to determine whether to allow an expression of a
-> given type to be dereferenced. To do so, it can ask whether it should be
+> Suppose that a tool wants to determine whether to allow an expression of base
+> type `String` to be dereferenced. To do so, it can ask whether it should be
 > "worried" that the type's nullness operator is `UNION_NULL`.
 >
 > -   If the nullness operator *is* `UNION_NULL`, then the dereference clearly
@@ -835,10 +859,10 @@ A type is null-exclusive under every parameterization if it has a
     > This covers an easy case: A type usage never includes `null` if it is
     > annotated with `@NonNull`.
 
--   any augmented class or array type
+-   any augmented class, array, or null type
 
-    > This rule refers specifically to a "class or array type," as distinct from
-    > other types like type variables and [intersection types].
+    > This rule refers to particular kinds of types as distinct from other types
+    > like type variables and [intersection types].
 
 > When code dereferences an expression, we anticipate that tools will check
 > whether the expression is null-exclusive under every parameterization.
@@ -976,46 +1000,38 @@ the output of the following operation:
     then replace it with the output of [applying][applying operator]
     `MINUS_NULL` to `Aᵢ`.
 
-    > This is the one instance in which a rule specifically refers to the
-    > [all-worlds] version of another rule. Normally,
+    > The purpose of this part of the subsitution rule is to ensure that
+    > non-null type variables stay non-null during substitution, even if they
+    > don't have an explicit `@NonNull` annotation on them.
+    >
+    > For an example of such a type, consider `Comparable`, a `@NullMarked`
+    > interface that declares a non-nullable type parameter `T` and a method
+    > `compare(T)`. By JSpecify rules, the method parameter has type `T
+    > NO_CHANGE`, and that type is null-exclusive under every parameterization
+    > in all worlds. Now consider a null-unmarked class that declares a method
+    > `Comparable<Foo> foo()`, which by JSpecify rules has a type argument `Foo
+    > UNSPECIFIED`. In this example, the question is what type
+    > `foo().compare(...)` accepts. That question demonstrates the effect of
+    > this part of the subsitution rule:
+    >
+    > -   Without this part of the rule, JSpecify would directly subsitute `Foo
+    >     UNSPECIFIED` for `T`. Then the parameter type, which started out as
+    >     non-null, would become unspecified as a result of the subsitution. As
+    >     a result, lenient checkers would allow the call `foo().compare(null)`,
+    >     since `Foo UNSPECIFIED` is
+    >     [null-inclusive under every parameterization] in [some world].
+    > -   To avoid that, JSpecify uses this rule to recognize that the parameter
+    >     is non-null, and it performs substitution as if the parameter type
+    >     were `T MINUS_NULL` instead of `T NO_CHANGE`. As a result, the
+    >     parameter type remains non-null after substitution (`String
+    >     MINUS_NULL`), and even lenient checkers can produce an error for the
+    >     call `foo().compare(null)`.
+    >
+    > Also, note that this is the one instance in which a rule specifically
+    > refers to the [all-worlds] version of another rule. Normally,
     > [a rule "propagates" its version to other rules](#propagating-multiple-worlds).
     > But in this instance, the null-exclusivity rule (and all rules that it in
     > turn applies) are the [all-worlds] versions.
-    >
-    > We may someday have another such rule for computing least upper bounds, as
-    > demonstrated in
-    > https://github.com/jspecify/jspecify-reference-checker/pull/197.
-
-    > The purpose of this special case is to improve behavior in "the
-    > `ImmutableList.Builder` case": Because `ImmutableList.Builder.add` always
-    > throws `NullPointerException` for a null argument, we would like for
-    > `add(null)` to be a compile error, even under lenient tools.
-    > Unfortunately, without this special case, lenient tools could permit
-    > `add(null)` in unannotated code. For an example, read on.
-    >
-    > Consider an unannotated user of `ImmutableList.Builder<Foo> builder`. Its
-    > type argument `Foo` will have a [nullness operator] of `UNSPECIFIED`.
-    > Without this special case, the parameter of `builder.add` would have a
-    > nullness operator of `UNSPECIFIED`, too. Then, when a lenient tool would
-    > check whether the [some-world] subtyping relation holds for
-    > `builder.add(null)`, it would find that it does.
-    >
-    > To solve this, we need a special case for substitution for null-exclusive
-    > type parameters like the one on `ImmutableList.Builder`. That special case
-    > needs to produce a type with a nullness operator other than `UNSPECIFIED`.
-    > One valid option is to produce `NO_CHANGE`; we happened to choose
-    > `MINUS_NULL`.
-    >
-    > The choice between `NO_CHANGE` and `MINUS_NULL` makes little difference
-    > for the parameter types of `ImmutableList.Builder`, but it can matter more
-    > for other APIs' *return types*. For example, consider `@NullMarked class
-    > Foo<E extends @Nullable Object>`, which somewhere uses the type
-    > [`FluentIterable<E>`]. `FluentIterable` has a method `Optional<E>
-    > first()`. Even when `E` is a type like `String UNION_NULL` (or `String
-    > UNSPECIFIED`), we know that `first().get()` will never return `null`. To
-    > surface that information to tools, we need to define our substitution rule
-    > to return `E MINUS_NULL`: If we instead used `E NO_CHANGE`, then the
-    > return type would look like it might include `null`.
 
 -   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.

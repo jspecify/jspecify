@@ -49,8 +49,7 @@ questions, which you can look for in the [Nullness Design FAQ]. If you like,
 ### Then if you're *really* interested
 
 *   The [specification][spec], written to be understood by owners of compilers
-    and static analysis tools. Note that it's currently pretty old: it matches
-    JSpecify 0.2.0, not 1.0.0. We're working on updating it.
+    and static analysis tools.
 *   Our [wiki] has about 20 informal, non-normative articles on various topics
 *   Open [issues]
 *   [Try it out](/docs/using)
