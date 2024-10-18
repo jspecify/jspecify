@@ -269,11 +269,10 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
--   any component of the reference type(s) in a
-    [cast expression][JSL 15.16]
-
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
+
+    > We are likely to revisit this rule in the future.
 
 -   any component in a [pattern]
 
@@ -294,6 +293,14 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
 >     > [] strings = ...` have unrecognized annotations.
+>
+> -   root types in the reference type(s) in a [cast expression][JSL 15.16]
+>
+>     > For example, `String s = (@NonNull String) o;` has an unrecognized
+>     > annotation. However, note that type arguments in a cast expression
+>     > can be annotated. For example,
+>     > `ArrayList<@Nullable String> al = (ArrayList<@Nullable String>) o;`
+>     > has a recognized annotation.
 >
 > -   some additional intrinsically non-nullable locations:
 >
