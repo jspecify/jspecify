@@ -191,8 +191,8 @@ typically uses them to refer to base types.
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
 type `T`, without reference to the nullness operator of any other type that is a
-component of `T` or has `T` as a component.
-The entire type is also called the "root" type.
+component of `T` or has `T` as a component. The entire type is also called the
+"root" type.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
@@ -478,8 +478,8 @@ condition is met, skip the remaining conditions.
     > This special case handles the fact that the Java compiler automatically
     > generates an implementation of `equals` in `Record` but does not include a
     > `@Nullable` annotation on its parameter, even when the class is
-    > `@NullMarked`.
-    > Note that this special handling is not necessary for the return type of `String toString()`.
+    > `@NullMarked`. Note that this special handling is not necessary for the
+    > return type of `String toString()`.
 
     TODO: should this only apply if the method isn't manually declared in the record?
     As written now, it would also apply for a manually implemented `equals`, which I would find inconsistent.
