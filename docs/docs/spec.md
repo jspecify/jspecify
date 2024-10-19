@@ -266,7 +266,7 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   a type usage of a primitive type, since those are intrinsically non-nullable
 
--   any component of a return type in an annnotation interface, since those are
+-   any component of a return type in an annotation interface, since those are
     intrinsically non-nullable
 
 -   type arguments of a receiver parameter's type
@@ -449,7 +449,7 @@ condition is met, skip the remaining conditions.
     > enum constant to be written. Still, enum constants have a type, which is
     > made explicitly visible in the compiled class file.
 
--   If the type usage is a component of a return type in an annnotation
+-   If the type usage is a component of a return type in an annotation
     interface, its nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
