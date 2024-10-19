@@ -6,7 +6,7 @@ sidebar_position: 6
 
 <div style={{textAlign: 'right'}}>version 1.0.0-rc1</div>
 
-This document specifies the semantics of our set of nullness annotations.
+This document specifies the semantics of the JSpecify nullness annotations.
 
 :::note Advice to readers (non-normative)
 
@@ -81,7 +81,7 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
-## Relationship between this spec and JLS {#concept-references}
+## Relationship between this spec and the JLS {#concept-references}
 
 When a rule in this spec refers to any concept that is defined in this spec (for
 example, [substitution] or [containment]), apply this spec's definition (as
@@ -192,6 +192,7 @@ When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
 type `T`, without reference to the nullness operator of any other type that is a
 component of `T` or has `T` as a component.
+The entire type is also called the "root" type.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
@@ -271,6 +272,8 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
+    > Note that the receiver parameter root type is also unrecognized.
+
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
 
@@ -288,6 +291,9 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     > unrecognized location.
 >
 > -   type-parameter declaration or a wildcard *itself*
+>
+>     > For example, the annotations in `class Foo<@Nullable T>` and in
+>     > `Foo<@Nullable ?>` are in unrecognized locations.
 >
 > -   local variable's root type
 >
@@ -426,7 +432,8 @@ If none of the enclosing declarations meet any rule, then the type usage is
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
 This section defines how to determine the [augmented types] of most type usages
-in source code or bytecode where JSpecify nullness annotations are [recognized].
+in source code or bytecode where JSpecify nullness annotations are
+[recognized](#recognized-type-use).
 
 > The rules here should be sufficient for most tools that care about nullness
 > information, from build-time nullness checkers to runtime dependency-injection
@@ -452,6 +459,10 @@ condition is met, skip the remaining conditions.
 -   If the type usage is a component of a return type in an annnotation
     interface, its nullness operator is `MINUS_NULL`.
 
+-   TODO: Why does this only list two of the intrinsically non-null locations listed earlier?
+    E.g. the receiver parameter type was earlier (in the non-normative part) defined as a intrinsically non-nullable location, just like enum constants and return types in annotation interfaces.
+    Should this list here exhaustively list all those? Or unify this into one place for all intrinsically non-null locations, to avoid this duplication and cause for confusion?
+
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
 
@@ -468,6 +479,10 @@ condition is met, skip the remaining conditions.
     > generates an implementation of `equals` in `Record` but does not include a
     > `@Nullable` annotation on its parameter, even when the class is
     > `@NullMarked`.
+    > Note that this special handling is not necessary for the return type of `String toString()`.
+
+    TODO: should this only apply if the method isn't manually declared in the record?
+    As written now, it would also apply for a manually implemented `equals`, which I would find inconsistent.
 
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
