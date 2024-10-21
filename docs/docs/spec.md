@@ -4,7 +4,7 @@ sidebar_position: 6
 
 # Nullness Specification
 
-<div style={{textAlign: 'right'}}>version 1.0.0-rc1</div>
+<div style={{textAlign: 'right'}}>version 1.0.0</div>
 
 This document specifies the semantics of the JSpecify nullness annotations.
 
