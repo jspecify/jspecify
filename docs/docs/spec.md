@@ -272,6 +272,8 @@ However, the type-use annotation is unrecognized in any of the following cases:
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
 
+    > We are likely to revisit this rule in the future.
+
 -   any component in a [pattern]
 
     > We are likely to revisit this rule in the future.
@@ -291,6 +293,13 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
 >     > [] strings = ...` have unrecognized annotations.
+>
+> -   root type in a reference type in a [cast expression][JLS 15.16]
+>
+>     > For example, `String s = (@NonNull String) o;` has an unrecognized
+>     > annotation. However, note that type arguments in a cast expression can
+>     > be annotated. For example, `ArrayList<@Nullable String> al =
+>     > (ArrayList<@Nullable String>) o;` has a recognized annotation.
 >
 > -   some additional intrinsically non-nullable locations:
 >
@@ -1127,6 +1136,7 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 [#65]: https://github.com/jspecify/jspecify/issues/65
 [Java SE 23]: https://docs.oracle.com/javase/specs/jls/se23/html/index.html
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-1.html#jls-1.3
+[JLS 15.16]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-15.html#jls-15.16
 [JLS 15.20.2]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-15.html#jls-15.20.2
 [JLS 4.10.4]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.10.4
 [JLS 4.10]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-4.html#jls-4.10
