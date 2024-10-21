@@ -6,7 +6,7 @@ sidebar_position: 6
 
 <div style={{textAlign: 'right'}}>version 1.0.0-rc1</div>
 
-This document specifies the semantics of our set of nullness annotations.
+This document specifies the semantics of the JSpecify nullness annotations.
 
 :::note Advice to readers (non-normative)
 
@@ -81,7 +81,7 @@ This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
 
-## Relationship between this spec and JLS {#concept-references}
+## Relationship between this spec and the JLS {#concept-references}
 
 When a rule in this spec refers to any concept that is defined in this spec (for
 example, [substitution] or [containment]), apply this spec's definition (as
@@ -191,7 +191,8 @@ typically uses them to refer to base types.
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
 type `T`, without reference to the nullness operator of any other type that is a
-component of `T` or has `T` as a component.
+component of `T` or has `T` as a component. The entire type is also called the
+"root" type.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
@@ -269,6 +270,14 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   type arguments of a receiver parameter's type
 
+    > Note that the receiver parameter root type is also unrecognized.
+
+-   the type of the field corresponding to an enum constant
+
+    > In source code, there is nowhere in the Java grammar for the type of an
+    > enum constant to be written. Still, enum constants have a type, which is
+    > made explicitly visible in the compiled class file.
+
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
 
@@ -289,6 +298,9 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >
 > -   type-parameter declaration or a wildcard *itself*
 >
+>     > For example, the annotations in `class Foo<@Nullable T>` and in
+>     > `Foo<@Nullable ?>` are in unrecognized locations.
+>
 > -   local variable's root type
 >
 >     > For example, `@Nullable List<String> strings = ...` or `String @Nullable
@@ -308,8 +320,6 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     -   thrown exception type
 >
 >     -   exception parameter type
->
->     -   enum constant declaration
 >
 >     -   receiver parameter type
 >
@@ -433,7 +443,8 @@ If none of the enclosing declarations meet any rule, then the type usage is
 ## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
 
 This section defines how to determine the [augmented types] of most type usages
-in source code or bytecode where JSpecify nullness annotations are [recognized].
+in source code or bytecode where JSpecify nullness annotations are
+[recognized](#recognized-type-use).
 
 > The rules here should be sufficient for most tools that care about nullness
 > information, from build-time nullness checkers to runtime dependency-injection
@@ -446,18 +457,18 @@ in source code or bytecode where JSpecify nullness annotations are [recognized].
 Because the JLS already has rules for determining the [base type] for a type
 usage, this section covers only how to determine its [nullness operator].
 
-To determine the nullness operator, apply the following rules in order. Once one
-condition is met, skip the remaining conditions.
+To determine the nullness operator *in a recognized location*, apply the
+following rules in order. Once one condition is met, skip the remaining
+conditions.
 
--   If the type usage is the type of the field corresponding to an enum
-    constant, its nullness operator is `MINUS_NULL`.
-
-    > In source code, there is nowhere in the Java grammar for the type of an
-    > enum constant to be written. Still, enum constants have a type, which is
-    > made explicitly visible in the compiled class file.
-
--   If the type usage is a component of a return type in an annotation
-    interface, its nullness operator is `MINUS_NULL`.
+> If the type usage is in an intrinsically non-null location listed earlier, its
+> nullness operator is `MINUS_NULL`. For other unrecognized locations, no
+> nullness operator is applicable.
+>
+> For example, if the type usage is the type of the field corresponding to an
+> enum constant, its nullness operator is `MINUS_NULL`. As another example, if
+> the type usage is a component of a return type in an annotation interface, its
+> nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
@@ -474,7 +485,15 @@ condition is met, skip the remaining conditions.
     > This special case handles the fact that the Java compiler automatically
     > generates an implementation of `equals` in `Record` but does not include a
     > `@Nullable` annotation on its parameter, even when the class is
-    > `@NullMarked`.
+    > `@NullMarked`. It is (currently, see
+    > [JDK-8251375](https://bugs.openjdk.org/browse/JDK-8251375)) not possible
+    > to distinguish automatically generated `equals(Object)` methods from
+    > manually written ones in bytecode. See
+    > [further discussion](#expected-annotations-on-record-classes-equals-methods)
+    > below.
+    >
+    > Note that special handling is not necessary for the return type of `String
+    > toString()`.
 
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
