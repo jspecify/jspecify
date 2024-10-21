@@ -8,67 +8,10 @@ sidebar_position: 6
 
 This document specifies the semantics of the JSpecify nullness annotations.
 
-:::note Advice to readers (non-normative)
-
-The primary audience for this document is the authors of analysis tools. Some
-very advanced users might find it interesting. But it would make a very poor
-introduction for anyone else; instead see our **[Start Here](/docs/start-here)
-page**.
-:::
-
---------------------------------------------------------------------------------
-
-### The word "nullable"
-
-In this doc, we aim not to refer to whether a type "is nullable." Instead, we
-draw some distinctions, creating at least four kinds of "Is it nullable?"
-questions we can ask for any given type usage:
-
-1.  What is the [augmented type] of that type usage?
-2.  Do I have to handle the case where `null` comes out of it?
-3.  Do I have to prevent `null` from going into it?
-4.  Is this type a subtype of that type with respect to nullness?
-
-### The scope of this spec
-
-Currently, this spec does not address *when* tools must apply any part of the
-spec. For example, it does not state when tools must check that the [subtyping]
-relation holds.
-
-We anticipate that tools will typically apply parts of this spec in the same
-cases that they (or `javac`) already apply the corresponding parts of the Java
-Language Specification. For example, if code contains the parameterized type
-`List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable Foo`
-is a subtype of the bound of the type parameter of `List`.
-
-However, this is up to tool authors, who may have reasons to take a different
-approach. For example:
-
--   Java [places some restrictions that are not necessary for soundness][#49],
-    and it
-    [is lenient in at least one way that can lead to runtime errors][#65].
-
--   JSpecify annotations can be used even by tools that are not "nullness
-    checkers" at all. For example, a tool that lists the members of an API could
-    show the nullness of each type in the API, without any checking that those
-    types are "correct."
-
--   Even when a tool is a "nullness checker," it might be written for another
-    language, like Kotlin, with its own rules for when to perform type checks.
-    Or the tool might target a future version of Java whose language features
-    would not be covered by this version of this spec.
-
-Note also that this spec covers only nullness information *from JSpecify
-annotations*. Tools may have additional sources of information. For example, a
-tool may recognize additional annotations. Or a tool may omit the concept of
-`UNSPECIFIED` and apply a policy that type usages like `Object` are always
-non-nullable.
-
-### That's all!
-
-On to the spec.
-
---------------------------------------------------------------------------------
+> This document is mainly useful to authors of analysis tools. Some very
+> advanced users might find it interesting, but it would make a very poor
+> introduction for anyone else; instead see our **[Start Here](/docs/start-here)
+> page**.
 
 ## Normative and non-normative sections
 
@@ -80,6 +23,52 @@ anticipate likely questions. Those comments are set off as block quotes.
 This document also links to other documents. Those documents are non-normative,
 except for when we link to the Java Language Specification to defer to its
 rules.
+
+> ### The word "nullable"
+>
+> In this doc, we try not to refer to whether a type "is nullable." Instead, we
+> define four kinds of "Is it nullable?" questions we can ask for any given type
+> usage:
+>
+> 1.  What is the [augmented type] of that type usage?
+> 2.  Do I have to handle the case where `null` comes out of it?
+> 3.  Do I have to prevent `null` from going into it?
+> 4.  Is this type a subtype of that type with respect to nullness?
+>
+> ### The scope of this spec
+>
+> This spec does not address *when* tools must apply any part of the spec. For
+> example, it does not state when tools must check that the [subtyping] relation
+> holds.
+>
+> We anticipate that tools will typically apply each part of this spec in the
+> same cases that they (or `javac`) already apply the corresponding part of the
+> Java Language Specification. For example, if code contains the parameterized
+> type `List<@Nullable Foo>`, we anticipate that tools will check that
+> `@Nullable Foo` is a subtype of the bound of the type parameter of `List`.
+>
+> However, this is up to tool authors, who may have reasons to take a different
+> approach. For example:
+>
+> -   Java [places some restrictions that are not necessary for soundness][#49],
+>     and it
+>     [is lenient in at least one way that can lead to runtime errors][#65].
+>
+> -   JSpecify annotations can be used even by tools that are not "nullness
+>     checkers" at all. For example, a tool that lists the members of an API
+>     could show the nullness of each type in the API, without any checking that
+>     those types are "correct."
+>
+> -   Even when a tool is a "nullness checker," it might be written for another
+>     language, like Kotlin, with its own rules for when to perform type checks.
+>     Or the tool might target a future version of Java whose language features
+>     would not be covered by this version of this spec.
+>
+> Note also that this spec covers only nullness information *from JSpecify
+> annotations*. Tools may have additional sources of information. For example, a
+> tool may recognize additional annotations, or a tool may omit the concept of
+> `UNSPECIFIED` and apply a policy that type usages like `Object` are always
+> non-nullable.
 
 ## Relationship between this spec and the JLS {#concept-references}
 
@@ -373,7 +362,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 
 > That is, they are *not* recognized on a field, a parameter, a local variable,
 > a type parameter, or a record component declaration.
-
+>
 > An anonymous class declaration cannot be annotated with a declaration
 > annotation.
 
@@ -393,7 +382,7 @@ innermost.
 -   Modules are not enclosed by anything.
 
 > Packages are *not* enclosed by "parent" packages.
-
+>
 > This definition of "enclosing" largely matches
 > [the definition in the Java compiler API](https://docs.oracle.com/en/java/javase/23/docs/api/java.compiler/javax/lang/model/element/Element.html#getEnclosingElement\(\)).
 > The JSpecify definition differs slightly by skipping type-parameter
@@ -635,11 +624,12 @@ rules.
 > Our goal is to allow tools and their users to choose their desired level of
 > strictness in the presence of `UNSPECIFIED`. The basic idea is that, every
 > time a tool encounters a type component with the nullness operator
-> `UNSPECIFIED`, it has the option to fork off two "worlds": one in which the
-> operator is `UNION_NULL` and one in which it is `NO_CHANGE`.
+> `UNSPECIFIED`, it has the option to fork off three "worlds": one in which the
+> operator is `UNION_NULL`, one in which it is `MINUS_NULL`, and one in which it
+> is `NO_CHANGE`.
 >
 > In more detail: When tools lack a nullness specification for a type, they may
-> choose to assume that either of the resulting worlds may be the "correct"
+> choose to assume that any of the resulting worlds may be the "correct"
 > specification. The all-worlds version of a rule, by requiring types to be
 > compatible in all possible worlds, holds that types are incompatible unless it
 > has enough information to prove they are compatible. The some-world version,
@@ -732,9 +722,10 @@ The same-type relation is *not* defined to be reflexive or transitive.
 
 > For more discussion of reflexive and transitive relations, see the comments
 > under [nullness subtyping].
-
-> Compare [JLS 4.3.4]. Note that our definition of "same type" applies to all
-> kinds of augmented types, including cases like the augmented null types.
+>
+> For a definition of "same type" in the JLS, see [JLS 4.3.4]. Note that our
+> definition of "same type" applies to all kinds of augmented types, including
+> cases like the augmented null types.
 
 ## Subtyping
 
