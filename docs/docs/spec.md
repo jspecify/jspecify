@@ -8,8 +8,8 @@ sidebar_position: 6
 
 This document specifies the semantics of our set of nullness annotations.
 
-> This document is mainly useful to authors of analysis tools. Some
-> very advanced users might find it interesting, but it would make a very poor
+> This document is mainly useful to authors of analysis tools. Some very
+> advanced users might find it interesting, but it would make a very poor
 > introduction for anyone else; instead see our **[Start Here](/docs/start-here)
 > page**.
 
@@ -27,8 +27,8 @@ rules.
 > ### The word "nullable"
 >
 > In this doc, we try not to refer to whether a type "is nullable." Instead, we
-> define at least four kinds of "Is it nullable?"
-> questions we can ask for any given type usage:
+> define at least four kinds of "Is it nullable?" questions we can ask for any
+> given type usage:
 >
 > 1.  What is the [augmented type] of that type usage?
 > 2.  Do I have to handle the case where `null` comes out of it?
@@ -41,11 +41,11 @@ rules.
 > spec. For example, it does not state when tools must check that the
 > [subtyping] relation holds.
 >
-> We anticipate that tools will typically apply each part of this spec in the same
-> cases that they (or `javac`) already apply the corresponding part of the Java
-> Language Specification. For example, if code contains the parameterized type
-> `List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable
-> Foo` is a subtype of the bound of the type parameter of `List`.
+> We anticipate that tools will typically apply each part of this spec in the
+> same cases that they (or `javac`) already apply the corresponding part of the
+> Java Language Specification. For example, if code contains the parameterized
+> type `List<@Nullable Foo>`, we anticipate that tools will check that
+> `@Nullable Foo` is a subtype of the bound of the type parameter of `List`.
 >
 > However, this is up to tool authors, who may have reasons to take a different
 > approach. For example:
