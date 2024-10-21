@@ -603,7 +603,7 @@ rules.
 > is `NO_CHANGE`.
 >
 > In more detail: When tools lack a nullness specification for a type, they may
-> choose to assume that either of the resulting worlds may be the "correct"
+> choose to assume that any of the resulting worlds may be the "correct"
 > specification. The all-worlds version of a rule, by requiring types to be
 > compatible in all possible worlds, holds that types are incompatible unless it
 > has enough information to prove they are compatible. The some-world version,
