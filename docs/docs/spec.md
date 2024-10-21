@@ -27,8 +27,8 @@ rules.
 > ### The word "nullable"
 >
 > In this doc, we try not to refer to whether a type "is nullable." Instead, we
-> define at least four kinds of "Is it nullable?" questions we can ask for any
-> given type usage:
+> define four kinds of "Is it nullable?" questions we can ask for any given type
+> usage:
 >
 > 1.  What is the [augmented type] of that type usage?
 > 2.  Do I have to handle the case where `null` comes out of it?
@@ -37,9 +37,9 @@ rules.
 >
 > ### The scope of this spec
 >
-> Currently, this spec does not address *when* tools must apply any part of the
-> spec. For example, it does not state when tools must check that the
-> [subtyping] relation holds.
+> This spec does not address *when* tools must apply any part of the spec. For
+> example, it does not state when tools must check that the [subtyping] relation
+> holds.
 >
 > We anticipate that tools will typically apply each part of this spec in the
 > same cases that they (or `javac`) already apply the corresponding part of the
