@@ -265,7 +265,7 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   a type usage of a primitive type, since those are intrinsically non-nullable
 
--   any component of a return type in an annnotation interface, since those are
+-   any component of a return type in an annotation interface, since those are
     intrinsically non-nullable
 
 -   type arguments of a receiver parameter's type
@@ -457,7 +457,7 @@ condition is met, skip the remaining conditions.
     > visible in the compiled class file.
     >
     > As another example, if the type usage is a component of a return type in
-    > an annnotation interface, its nullness operator is `MINUS_NULL`.
+    > an annotation interface, its nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
