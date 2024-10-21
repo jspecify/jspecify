@@ -261,8 +261,6 @@ exceptions in the subsequent sections:
     > @NonNull ... strings)` means `strings` is a non-null array containing
     > nullable elements.
 
--   an array creation expression
-
 However, the type-use annotation is unrecognized in any of the following cases:
 
 -   a type usage of a primitive type, since those are intrinsically non-nullable
