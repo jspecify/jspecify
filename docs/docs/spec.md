@@ -274,7 +274,9 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
 -   the type of the field corresponding to an enum constant
 
-    > In source code, there is nowhere in the Java grammar for the type of an enum constant to be written. Still, enum constants have a type, which is made explicitly visible in the compiled class file.
+    > In source code, there is nowhere in the Java grammar for the type of an
+    > enum constant to be written. Still, enum constants have a type, which is
+    > made explicitly visible in the compiled class file.
 
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
@@ -446,17 +448,18 @@ in source code or bytecode where JSpecify nullness annotations are
 Because the JLS already has rules for determining the [base type] for a type
 usage, this section covers only how to determine its [nullness operator].
 
-To determine the nullness operator *in a recognized location*, apply the following rules in order. Once one
-condition is met, skip the remaining conditions.
+To determine the nullness operator *in a recognized location*, apply the
+following rules in order. Once one condition is met, skip the remaining
+conditions.
 
-> If the type usage is in an intrinsically non-null location listed earlier,
-> its nullness operator is `MINUS_NULL`.
-> For other unrecognized locations, no nullness operator is applicable.
+> If the type usage is in an intrinsically non-null location listed earlier, its
+> nullness operator is `MINUS_NULL`. For other unrecognized locations, no
+> nullness operator is applicable.
 >
-> For example, if the type usage is the type of the field corresponding to
-> an enum constant, its nullness operator is `MINUS_NULL`.
-> As another example, if the type usage is a component of a return type in
-> an annotation interface, its nullness operator is `MINUS_NULL`.
+> For example, if the type usage is the type of the field corresponding to an
+> enum constant, its nullness operator is `MINUS_NULL`. As another example, if
+> the type usage is a component of a return type in an annotation interface, its
+> nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
@@ -476,8 +479,9 @@ condition is met, skip the remaining conditions.
     > `@NullMarked`. It is (currently, see
     > [JDK-8251375](https://bugs.openjdk.org/browse/JDK-8251375)) not possible
     > to distinguish automatically generated `equals(Object)` methods from
-    > manually written ones in bytecode. See [further
-    > discussion](#expected-annotations-on-record-classes-equals-methods) below.
+    > manually written ones in bytecode. See
+    > [further discussion](#expected-annotations-on-record-classes-equals-methods)
+    > below.
     >
     > Note that special handling is not necessary for the return type of `String
     > toString()`.
