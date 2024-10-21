@@ -447,19 +447,16 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is the type of the field corresponding to an enum
-    constant, its nullness operator is `MINUS_NULL`.
+-   If the type usage is in an intrinsically non-null locations listed earlier, its nullness operator is `MINUS_NULL`.
 
+    > For example, if the type usage is the type of the field corresponding to an enum
+    > constant, its nullness operator is `MINUS_NULL`.
     > In source code, there is nowhere in the Java grammar for the type of an
     > enum constant to be written. Still, enum constants have a type, which is
     > made explicitly visible in the compiled class file.
-
--   If the type usage is a component of a return type in an annnotation
-    interface, its nullness operator is `MINUS_NULL`.
-
--   TODO: Why does this only list two of the intrinsically non-null locations listed earlier?
-    E.g. the receiver parameter type was earlier (in the non-normative part) defined as a intrinsically non-nullable location, just like enum constants and return types in annotation interfaces.
-    Should this list here exhaustively list all those? Or unify this into one place for all intrinsically non-null locations, to avoid this duplication and cause for confusion?
+    >
+    > As another example, if the type usage is a component of a return type in an annnotation
+    > interface, its nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
