@@ -8,8 +8,8 @@ sidebar_position: 6
 
 This document specifies the semantics of our set of nullness annotations.
 
-> The primary audience for this document is the authors of analysis tools. Some
-> very advanced users might find it interesting. But it would make a very poor
+> This document is mainly useful to authors of analysis tools. Some
+> very advanced users might find it interesting, but it would make a very poor
 > introduction for anyone else; instead see our **[Start Here](/docs/start-here)
 > page**.
 
@@ -26,8 +26,8 @@ rules.
 
 > ### The word "nullable"
 >
-> In this doc, we aim not to refer to whether a type "is nullable." Instead, we
-> draw some distinctions, creating at least four kinds of "Is it nullable?"
+> In this doc, we try not to refer to whether a type "is nullable." Instead, we
+> define at least four kinds of "Is it nullable?"
 > questions we can ask for any given type usage:
 >
 > 1.  What is the [augmented type] of that type usage?
@@ -41,8 +41,8 @@ rules.
 > spec. For example, it does not state when tools must check that the
 > [subtyping] relation holds.
 >
-> We anticipate that tools will typically apply parts of this spec in the same
-> cases that they (or `javac`) already apply the corresponding parts of the Java
+> We anticipate that tools will typically apply each part of this spec in the same
+> cases that they (or `javac`) already apply the corresponding part of the Java
 > Language Specification. For example, if code contains the parameterized type
 > `List<@Nullable Foo>`, we anticipate that tools will check that `@Nullable
 > Foo` is a subtype of the bound of the type parameter of `List`.
@@ -66,7 +66,7 @@ rules.
 >
 > Note also that this spec covers only nullness information *from JSpecify
 > annotations*. Tools may have additional sources of information. For example, a
-> tool may recognize additional annotations. Or a tool may omit the concept of
+> tool may recognize additional annotations, or a tool may omit the concept of
 > `UNSPECIFIED` and apply a policy that type usages like `Object` are always
 > non-nullable.
 
