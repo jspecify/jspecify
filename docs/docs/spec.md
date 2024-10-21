@@ -272,6 +272,10 @@ However, the type-use annotation is unrecognized in any of the following cases:
 
     > Note that the receiver parameter root type is also unrecognized.
 
+-   the type of the field corresponding to an enum constant
+
+    > In source code, there is nowhere in the Java grammar for the type of an enum constant to be written. Still, enum constants have a type, which is made explicitly visible in the compiled class file.
+
 -   any component of the type after the `instanceof`
     [type comparison operator][JLS 15.20.2]
 
@@ -305,8 +309,6 @@ All locations that are not explicitly listed as recognized are unrecognized.
 >     -   thrown exception type
 >
 >     -   exception parameter type
->
->     -   enum constant declaration
 >
 >     -   receiver parameter type
 >
@@ -444,20 +446,17 @@ in source code or bytecode where JSpecify nullness annotations are
 Because the JLS already has rules for determining the [base type] for a type
 usage, this section covers only how to determine its [nullness operator].
 
-To determine the nullness operator, apply the following rules in order. Once one
+To determine the nullness operator *in a recognized location*, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is in an intrinsically non-null locations listed earlier,
-    its nullness operator is `MINUS_NULL`.
-
-    > For example, if the type usage is the type of the field corresponding to
-    > an enum constant, its nullness operator is `MINUS_NULL`. In source code,
-    > there is nowhere in the Java grammar for the type of an enum constant to
-    > be written. Still, enum constants have a type, which is made explicitly
-    > visible in the compiled class file.
-    >
-    > As another example, if the type usage is a component of a return type in
-    > an annotation interface, its nullness operator is `MINUS_NULL`.
+> If the type usage is in an intrinsically non-null location listed earlier,
+> its nullness operator is `MINUS_NULL`.
+> For other unrecognized locations, no nullness operator is applicable.
+>
+> For example, if the type usage is the type of the field corresponding to
+> an enum constant, its nullness operator is `MINUS_NULL`.
+> As another example, if the type usage is a component of a return type in
+> an annotation interface, its nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
