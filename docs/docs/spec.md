@@ -447,16 +447,17 @@ usage, this section covers only how to determine its [nullness operator].
 To determine the nullness operator, apply the following rules in order. Once one
 condition is met, skip the remaining conditions.
 
--   If the type usage is in an intrinsically non-null locations listed earlier, its nullness operator is `MINUS_NULL`.
+-   If the type usage is in an intrinsically non-null locations listed earlier,
+    its nullness operator is `MINUS_NULL`.
 
-    > For example, if the type usage is the type of the field corresponding to an enum
-    > constant, its nullness operator is `MINUS_NULL`.
-    > In source code, there is nowhere in the Java grammar for the type of an
-    > enum constant to be written. Still, enum constants have a type, which is
-    > made explicitly visible in the compiled class file.
+    > For example, if the type usage is the type of the field corresponding to
+    > an enum constant, its nullness operator is `MINUS_NULL`. In source code,
+    > there is nowhere in the Java grammar for the type of an enum constant to
+    > be written. Still, enum constants have a type, which is made explicitly
+    > visible in the compiled class file.
     >
-    > As another example, if the type usage is a component of a return type in an annnotation
-    > interface, its nullness operator is `MINUS_NULL`.
+    > As another example, if the type usage is a component of a return type in
+    > an annnotation interface, its nullness operator is `MINUS_NULL`.
 
 -   If the type usage is annotated with `@Nullable` and *not* with `@NonNull`,
     its nullness operator is `UNION_NULL`.
@@ -473,10 +474,14 @@ condition is met, skip the remaining conditions.
     > This special case handles the fact that the Java compiler automatically
     > generates an implementation of `equals` in `Record` but does not include a
     > `@Nullable` annotation on its parameter, even when the class is
-    > `@NullMarked`.
-    > It is (currently, see [JDK-8251375](https://bugs.openjdk.org/browse/JDK-8251375)) not possible to distinguish automatically generated `equals(Object)` methods from manually written ones in bytecode. See (further discussion)[#expected-annotations-on-record-classes-equals-methods] below.
+    > `@NullMarked`. It is (currently, see
+    > [JDK-8251375](https://bugs.openjdk.org/browse/JDK-8251375)) not possible
+    > to distinguish automatically generated `equals(Object)` methods from
+    > manually written ones in bytecode. See (further
+    > discussion)[#expected-annotations-on-record-classes-equals-methods] below.
     >
-    > Note that special handling is not necessary for the return type of `String toString()`.
+    > Note that special handling is not necessary for the return type of `String
+    > toString()`.
 
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
