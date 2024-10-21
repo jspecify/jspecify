@@ -479,10 +479,9 @@ condition is met, skip the remaining conditions.
     > generates an implementation of `equals` in `Record` but does not include a
     > `@Nullable` annotation on its parameter, even when the class is
     > `@NullMarked`.
-    > Note that this special handling is not necessary for the return type of `String toString()`.
-
-    TODO: should this only apply if the method isn't manually declared in the record?
-    As written now, it would also apply for a manually implemented `equals`, which I would find inconsistent.
+    > It is (currently, see [JDK-8251375](https://bugs.openjdk.org/browse/JDK-8251375)) not possible to distinguish automatically generated `equals(Object)` methods from manually written ones in bytecode. See (further discussion)[#expected-annotations-on-record-classes-equals-methods] below.
+    >
+    > Note that special handling is not necessary for the return type of `String toString()`.
 
 -   If the type usage appears in a [null-marked scope], its nullness operator is
     `NO_CHANGE`.
