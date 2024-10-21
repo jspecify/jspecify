@@ -191,8 +191,8 @@ typically uses them to refer to base types.
 When this spec refers to "the nullness operator of" a type `T`, it refers
 specifically to the nullness operator of the type component that is the entire
 type `T`, without reference to the nullness operator of any other type that is a
-component of `T` or has `T` as a component.
-The entire type is also called the "root" type.
+component of `T` or has `T` as a component. The entire type is also called the
+"root" type.
 
 > For example, "the nullness operator of `List<Object>`" refers to whether the
 > list itself may be `null`, not whether its elements may be.
