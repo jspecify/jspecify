@@ -15,7 +15,8 @@
  */
 
 /**
- * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.org</a> for general information.
+ * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.org</a> for general
+ * information.
  *
  * <h2>What's here?</h2>
  *
