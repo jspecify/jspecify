@@ -84,7 +84,7 @@ correctly interprets `@Nullable` and `@NullMarked` starting at version 1.8.20,
 As of [version 2.1.0][kotlin-2.1.0], the Kotlin compiler emits errors by default
 for problems found using JSpecify nullness.
 To change those to warnings, pass the
-`-Xnullability-annotations=org.jspecify.annotations=warning` flag.
+`-Xnullability-annotations=@org.jspecify.annotations:warn` flag.
 
 [kotlin-2.1.0]: https://kotlinlang.org/docs/whatsnew21.html#change-of-jspecify-nullability-mismatch-diagnostics-severity-to-strict
 
