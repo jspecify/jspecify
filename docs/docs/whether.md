@@ -79,14 +79,14 @@ relaxing some of the nullness checks Kotlin otherwise performs. However, the
 compiler understands JSpecify annotations and is able to use them to make Kotlin
 code see null-safe types when calling into Java code. The Kotlin compiler
 correctly interprets `@Nullable` and `@NullMarked` starting at version 1.8.20,
-`@NonNull` starting at 2.0.0, and `@NullUnmarked` coming in 2.0.20.
+`@NonNull` starting at 2.0.0, and `@NullUnmarked` starting in 2.0.20.
 
-Note that the Kotlin compiler currently emits only warnings by default for
-problems found using JSpecify nullness. To change those to errors, pass the
-[`-Xjspecify-annotations=strict` and
-`-Xtype-enhancement-improvements-strict-mode`
-flags](https://kotlinlang.org/docs/whatsnew1520.html#support-for-jspecify-nullness-annotations).
-The Kotlin team plans to emit errors by default in Kotlin 2.1.0.
+As of [version 2.1.0][kotlin-2.1.0], the Kotlin compiler emits errors by default
+for problems found using JSpecify nullness.
+To change those to warnings, pass the
+`-Xnullability-annotations=org.jspecify.annotations=warning` flag.
+
+[kotlin-2.1.0]: https://kotlinlang.org/docs/whatsnew21.html#change-of-jspecify-nullability-mismatch-diagnostics-severity-to-strict
 
 ## Annotation processors
 
