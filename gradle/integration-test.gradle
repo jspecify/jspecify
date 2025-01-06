@@ -48,8 +48,8 @@ tasks.named('compileIntegrationTestJava', JavaCompile).configure {
 
 def integrationTestOnJava8 = tasks.register("integrationTestOnJava8", Test)
 integrationTestOnJava8.configure {
-    group 'Verification'
-    description 'Runs the integration tests with JDK8, to verify the support for Java without jigsaw.'
+    group = 'Verification'
+    description = 'Runs the integration tests with JDK8, to verify the support for Java without jigsaw.'
 
     classpath = sourceSets.integrationTest.runtimeClasspath
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
@@ -62,8 +62,8 @@ integrationTestOnJava8.configure {
 
 def integrationTest = tasks.register("integrationTest", Test)
 integrationTest.configure {
-    group 'Verification'
-    description 'Runs the integration tests with JDK9+, to verify the support for Java without jigsaw.'
+    group = 'Verification'
+    description = 'Runs the integration tests with JDK9+, to verify the support for Java without jigsaw.'
 
     classpath = sourceSets.integrationTest.runtimeClasspath
     testClassesDirs = sourceSets.integrationTest.output.classesDirs

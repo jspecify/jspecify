@@ -42,8 +42,8 @@ java {
     }
     withSourcesJar()
 
-    sourceCompatibility 8
-    targetCompatibility 8
+    sourceCompatibility = 8
+    targetCompatibility = 8
     // but compile against newer JDK libraries so that we can use @Target({..., MODULE})
 
     tasks.named('sourcesJar') {
