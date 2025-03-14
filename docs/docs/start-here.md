@@ -92,13 +92,12 @@ Since we [released version 1.0.0](/blog/release-1.0.0) we've seen some positive
 reaction in the community. Here are some interesting posts, articles, and
 videos:
 
-*   The November 2025 release of Spring Framework 7.0 was [announced][spring-announcement],
-    and the announcement mentions that its
-    "null-safety strategy is converging with the recently released JSpecify annotations".
-    This [GitHub issue comment][spring-migration-comment] lists some of the reasons for their migration effort.
-
-[spring-announcement]: https://spring.io/blog/2024/10/01/from-spring-framework-6-2-to-7-0
-[spring-migration-comment]: https://github.com/spring-projects/spring-framework/issues/28797#issuecomment-2387137015
+*   The November 2025 release of Spring Framework 7.0 was
+    [announced][spring-announcement], and the announcement mentions that its
+    "null-safety strategy is converging with the recently released JSpecify
+    annotations". This [GitHub issue comment][spring-migration-comment] lists
+    some of the reasons for their migration effort, and Spring later published
+    [a blog post][spring-blog-post] about the effort.
 
 *   [Moderne mass-migrated its nullness annotations](https://www.moderne.ai/blog/mass-migration-of-nullability-annotations-to-jspecify)
     and published a guide explaining how they did it using their
@@ -112,6 +111,9 @@ videos:
 *   A Russian video overview of recent news in the Java/JDK world includes
     [a discussion of JSpecify](https://www.youtube.com/watch?v=CkAywkCby58&t=429s).
 
+[spring-announcement]: https://spring.io/blog/2024/10/01/from-spring-framework-6-2-to-7-0
+[spring-migration-comment]: https://github.com/spring-projects/spring-framework/issues/28797#issuecomment-2387137015
+[spring-blog-post]: https://spring.io/blog/2025/03/10/null-safety-in-spring-apps-with-jspecify-and-null-away
 [discuss]: https://groups.google.com/g/jspecify-discuss
 [file an issue]: https://github.com/jspecify/jspecify/issues/new
 [github]: https://github.com/jspecify/jspecify
