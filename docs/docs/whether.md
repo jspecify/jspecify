@@ -52,8 +52,9 @@ they claim about their current and planned JSpecify support.
     but does not yet analyze generics.
 
 *   [IntelliJ IDEA](https://www.jetbrains.com/idea/) supports JSpecify
-    annotations but has incomplete support for generics
-    ([example](https://youtrack.jetbrains.com/issue/IDEA-356144)).
+    annotations, though it has some
+    [issues](https://youtrack.jetbrains.com/issues/IDEA?q=jspecify%20%23Open%20),
+    largely around generics.
 
 *   The [Checker Framework](https://checkerframework.org/) understands
     `@Nullable` and `@NonNull`, but not `@NullMarked` or `@NullUnmarked`.
@@ -82,9 +83,8 @@ correctly interprets `@Nullable` and `@NullMarked` starting at version 1.8.20,
 `@NonNull` starting at 2.0.0, and `@NullUnmarked` starting in 2.0.20.
 
 As of [version 2.1.0][kotlin-2.1.0], the Kotlin compiler emits errors by default
-for problems found using JSpecify nullness.
-To change those to warnings, pass the
-`-Xnullability-annotations=@org.jspecify.annotations:warn` flag.
+for problems found using JSpecify nullness. To change those to warnings, pass
+the `-Xnullability-annotations=@org.jspecify.annotations:warn` flag.
 
 [kotlin-2.1.0]: https://kotlinlang.org/docs/whatsnew21.html#change-of-jspecify-nullability-mismatch-diagnostics-severity-to-strict
 
