@@ -53,7 +53,7 @@ they claim about their current and planned JSpecify support.
 
 *   [IntelliJ IDEA](https://www.jetbrains.com/idea/) supports JSpecify
     annotations, though it has some
-    [issues](https://youtrack.jetbrains.com/issues/IDEA?q=%7Bjspecify%7D%20state:%20Backlog,%20%7BTo%20be%20discussed%7D,%20%7BIn%20Design%7D,%20Open,%20Submitted,%20%7BWait%20for%20Reply%7D,%20%7BIn%20Progress%7D,%20Reopened,%20Shelved,%20Unresolved),
+    [issues](https://youtrack.jetbrains.com/issues/IDEA?q=%7Bjspecify%7D%20%23Unresolved),
     largely around generics.
 
 *   The [Checker Framework](https://checkerframework.org/) understands
