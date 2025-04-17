@@ -32,13 +32,13 @@ jobs:
     continue-on-error: ${{ matrix.experimental }}
     steps:
       - uses: actions/checkout@v4
-      - uses: gradle/wrapper-validation-action@v3
       - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: ${{ matrix.java_version }}
-          cache: gradle
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
 
@@ -58,7 +58,7 @@ jobs:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
       - name: Set up Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
       - name: Publish conformance tests snapshot
         run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository
         env:
@@ -86,18 +86,16 @@ jobs:
         with:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Run Conformance Tests
         if: github.base_ref == 'main' # only PRs onto main
         continue-on-error: true
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: conformanceTests
-          build-root-directory: ${{ env.reference_checker_repo }}
+        working-directory: ${{ env.reference_checker_repo }}
+        run: ./gradlew conformanceTests
       - name: Run Samples Tests
         # only PRs onto samples-google-prototype
         if: github.base_ref == 'samples-google-prototype'
         continue-on-error: true
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: jspecifySamplesTest
-          build-root-directory: ${{ env.reference_checker_repo }}
+        working-directory: ${{ env.reference_checker_repo }}
+        run: ./gradlew jspecifySamplesTest
