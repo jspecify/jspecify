@@ -45,6 +45,10 @@ sourceSets {
 
 tasks.named('compileJava9Java', JavaCompile).configure {
     options.release = 9
+    options.compilerArgs.addAll([
+        '--module-version',
+        project.version.toString()
+    ])
 }
 
 jar {
