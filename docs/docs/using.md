@@ -73,9 +73,8 @@ present! We have a high-level [strategy](/docs/applying) we recommend.
 ### If your code already uses JSR-305 annotations
 
 Before migrating from the JSR-305 annotations to JSpecify annotations, see if
-the caveats about [Kotlin][Kotlin-caveats] or
-[annotation processors](/docs/whether#annotation-processors) apply to your
-situation.
+the caveat about [annotation processors](/docs/whether#annotation-processors)
+applies to your situation.
 
 Migrating from JSR-305 annotations primarily entails changing imports, updating
 annotation names and locations, and addressing build errors. JSpecify's
