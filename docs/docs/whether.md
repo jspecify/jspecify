@@ -103,8 +103,16 @@ are "declaration" annotations and hence are not impacted by this issue; however,
 because of that, they can’t be applied to type arguments or components of
 generic or array types the way JSpecify’s can.
 
-The issue is fixed starting in JDK 22, but the fix has not yet been backported
-to older versions of `javac`. If you cannot build with JDK 22+ `javac` and you
+The issue is fixed starting in JDK 22.
+
+Additionally, there is work underway to backport the fix to older versions of
+`javac`. As of July 2025, the backport has only been applied to JDK 21.0.8, and
+it is off by default, so you must pass `-XDaddTypeAnnotationsToSymbol=true` in
+addition to using that version of javac. The support was disabled by default
+because of some crashes with incomplete classpaths, so you should also be aware
+of that risk. We continue to work on making the backport more widely available.
+
+If you cannot build with a version of `javac` with the fix applied, and if you
 rely on Dagger or other similar annotation processors, you may run into issues
 switching to JSpecify’s annotations at the moment. Please check out
 [JSpecify issue 365](https://github.com/jspecify/jspecify/issues/365) for
