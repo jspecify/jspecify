@@ -111,13 +111,12 @@ it is off by default, so you must pass `-XDaddTypeAnnotationsToSymbol=true` in
 addition to using that version of javac. The support was disabled by default
 because of some crashes with incomplete classpaths, so you should also be aware
 of that risk. We continue to work on making the backport more widely available.
+You can track that effort in
+[JDK-8323093](https://bugs.openjdk.org/browse/JDK-8323093).
 
 If you cannot build with a version of `javac` with the fix applied, and if you
 rely on Dagger or other similar annotation processors, you may run into issues
-switching to JSpecify’s annotations at the moment. Please check out
-[JSpecify issue 365](https://github.com/jspecify/jspecify/issues/365) for
-further discussion, and you can track the effort to backport this fix to older
-versions of `javac` in
-[JDK-8323093](https://bugs.openjdk.org/browse/JDK-8323093).
+switching to JSpecify’s annotations at the moment. For further discussion, check
+out [JSpecify issue 365](https://github.com/jspecify/jspecify/issues/365).
 
 [Dagger]: http://dagger.dev
