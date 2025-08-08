@@ -27,6 +27,6 @@ spotless {
         target '**/*.gradle'
         targetExclude 'docs/node_modules'
         greclipse()
-        indentWithSpaces()
+        leadingTabsToSpaces()
     }
 }
