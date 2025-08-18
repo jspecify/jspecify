@@ -31,7 +31,7 @@ jobs:
       JAVA_VERSION: ${{ matrix.java_version }}
     continue-on-error: ${{ matrix.experimental }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up JDK ${{ matrix.java_version }}
         uses: actions/setup-java@v4
         with:
@@ -51,7 +51,7 @@ jobs:
       JAVA_VERSION: 17
     steps:
       - name: Check out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
@@ -73,11 +73,11 @@ jobs:
       JAVA_VERSION: 17
     steps:
       - name: Check out the code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           path: jspecify
       - name: Check out the reference checker
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           repository: ${{ github.repository_owner }}/${{ env.reference_checker_repo }}
           path: ${{ env.reference_checker_repo }}
