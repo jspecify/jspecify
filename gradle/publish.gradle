@@ -53,7 +53,14 @@ publishing {
                         id = 'netdpb'
                         name = 'David P. Baker'
                         email = 'dpb@google.com'
-                        organization = 'Google LLC'
+                        organization = 'Google'
+                        timezone = 'America/New_York'
+                    }
+                    developer {
+                        id = 'cpovirk'
+                        name = 'Chris Povirk'
+                        email = 'cpovirk@google.com'
+                        organization = 'Google'
                         timezone = 'America/New_York'
                     }
                 }
