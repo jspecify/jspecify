@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2020 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,6 +25,7 @@ spotless {
     }
     groovyGradle {
         target '**/*.gradle'
+        targetExclude 'docs/node_modules'
         greclipse()
         indentWithSpaces()
     }

@@ -1,4 +1,4 @@
-/**
+/*
  * Copyright 2023 The JSpecify Authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,8 +21,8 @@ plugins {
     id 'distribution'
 }
 
-group 'org.jspecify.conformance'
-version '0.0.0-SNAPSHOT'
+group = 'org.jspecify.conformance'
+version = '0.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -42,7 +42,7 @@ sourceSets {
 }
 
 java {
-    sourceCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
 
     // JAR artifact for dependencies required by the assertions
     registerFeature("deps") {
@@ -68,8 +68,11 @@ distributions {
 }
 
 dependencies {
-    assertionsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
-    depsImplementation "org.jspecify:jspecify:0.0.0-SNAPSHOT"
+    // `project(":")` refers to the root project.
+    // To make this clearer, we should move the actual annotations to a subproject.
+    // See https://github.com/jspecify/jspecify/pull/605#discussion_r1725297166
+    assertionsImplementation project(":")
+    depsImplementation project(":")
 }
 
 // Make sure assertions compile.
@@ -84,7 +87,7 @@ publishing {
                 version = project.version
                 name = 'JSpecify Conformance Test Suite'
                 description = 'Assertions and dependencies representing a suite of conformance tests for JSpecify'
-                url = 'http://jspecify.org/'
+                url = 'https://jspecify.dev/'
                 artifact distZip
                 licenses {
                     license {

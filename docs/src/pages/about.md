@@ -18,7 +18,7 @@ Our current members are
 | [Sonar](https://www.sonarsource.com/)         | [SonarQube](https://www.sonarqube.org/), [SonarCloud](https://www.sonarcloud.io/), [SonarLint](http://www.sonarlint.com/) |
 | [Square](https://squareup.com)                | (various)                                    |
 | [Uber](https://uber.com)                      | [NullAway](https://github.com/uber/NullAway) |
-| [VMware](https://www.vmware.com/)             | [Spring](https://tanzu.vmware.com/spring-app-framework) |
+| [Broadcom](https://www.broadcom.com/)         | [Spring](https://spring.io/)                 |
 
 ## What is our governance?
 

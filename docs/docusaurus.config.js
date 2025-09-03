@@ -1,15 +1,31 @@
+/*
+ * Copyright 2022 The JSpecify Authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'JSpecify',
   tagline: 'Standard Annotations for Java Static Analysis',
-  url: 'http://jspecify.org/',
+  url: 'https://jspecify.dev/',
   baseUrl: '/',
+  trailingSlash: true,
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   favicon: 'img/jspecify-favicon.ico',
@@ -66,7 +82,7 @@ const config = {
           {to: '/about', label: 'About Us', position: 'left'},
           {to: '/docs/start-here', label: 'Start Here', position: 'left'},
           {
-            href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
+            href: 'https://jspecify.dev/docs/api/org/jspecify/annotations/package-summary.html',
             label: 'Javadoc',
             position: 'left',
           },
@@ -89,15 +105,15 @@ const config = {
                 to: '/docs/start-here',
               },
               {
-                label: 'Draft User Guide',
+                label: 'User Guide',
                 to: '/docs/user-guide',
               },
               {
-                label: 'Draft Javadoc',
-                href: 'http://jspecify.org/docs/api/org/jspecify/annotations/package-summary.html',
+                label: 'Javadoc',
+                href: 'https://jspecify.dev/docs/api/org/jspecify/annotations/package-summary.html',
               },
               {
-                label: 'Draft Specification',
+                label: 'Specification',
                 to: '/docs/spec',
               },
             ],
@@ -132,11 +148,11 @@ const config = {
         copyright: `Copyright ${new Date().getFullYear()} The JSpecify Authors. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
         additionalLanguages: ['java'],
       },
     }),
 };
 
-module.exports = config;
+export default config;

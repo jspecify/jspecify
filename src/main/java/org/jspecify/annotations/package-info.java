@@ -15,14 +15,8 @@
  */
 
 /**
- * JSpecify annotations. See <a href="http://jspecify.org">jspecify.org</a> for general information.
- *
- * <h2 id="unfrozen">Important warning</h2>
- *
- * <p>These annotations are under development, and <b>any</b> aspect of their naming, locations, or
- * design is subject to change until the JSpecify 1.0 release. Moreover, supporting analysis tools
- * will be tracking the changes on varying schedules. Releasing a library using these annotations in
- * its API is <b>strongly discouraged</b> at this time.
+ * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.org</a> for general
+ * information.
  *
  * <h2>What's here?</h2>
  *
@@ -36,7 +30,7 @@
  * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
  *
  * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="http://jspecify.org">jspecify.org</a>.
+ * href="https://jspecify.dev">jspecify.org</a>.
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>
  *

@@ -34,12 +34,7 @@ import java.lang.annotation.Target;
  * times throughout your code.
  *
  * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="http://jspecify.org">jspecify.org</a>.
- *
- * <p><b>Warning:</b> These annotations are under development, and <b>any</b> aspect of their
- * naming, locations, or design is subject to change until the JSpecify 1.0 release. Moreover,
- * supporting analysis tools will be tracking the changes on varying schedules. Releasing a library
- * using these annotations in its API is <b>strongly discouraged</b> at this time.
+ * href="https://jspecify.dev">jspecify.org</a>.
  *
  * <h2 id="effects">Effects of being null-marked</h2>
  *
@@ -91,7 +86,7 @@ import java.lang.annotation.Target;
  *
  * <ul>
  *   <li>To apply this annotation to an entire (single) <b>package</b>, create a <a
- *       href="https://docs.oracle.com/javase/specs/jls/se19/html/jls-7.html#jls-7.4.1">{@code
+ *       href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-7.html#jls-7.4.1">{@code
  *       package-info.java}</a> file there. This is recommended so that newly-created classes will
  *       be null-marked by default. This annotation has no effect on "subpackages". <b>Warning</b>:
  *       if the package does not belong to a module, be very careful: it can easily happen that
