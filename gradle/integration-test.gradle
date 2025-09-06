@@ -38,7 +38,7 @@ configurations {
 dependencies {
     integrationTestImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
     integrationTestRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
-    integrationTestRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.7.0'
+    integrationTestRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.13.4'
 }
 
 tasks.named('compileIntegrationTestJava', JavaCompile).configure {
