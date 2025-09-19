@@ -70,6 +70,10 @@ jar {
                 "Implementation-Version": version
                 )
     }
+    // Work around http://github.com/bndtools/bnd/issues/6346
+    bundle {
+        properties.put("project.group", provider({project.group}))
+    }
 }
 
 javadoc {
@@ -82,16 +86,18 @@ node {
 }
 
 tasks.register('buildDocs') {
-    group 'Build'
-    description 'Builds the jspecify.org website.'
+    group = 'Build'
+    description = 'Builds the jspecify.org website.'
     dependsOn('npm_run_build')
     dependsOn('javadoc')
-    doLast {
-        copy {
-            from tasks.named('javadoc')
-            into "${project.projectDir}/docs/build/docs/api"
-        }
-    }
 }
+
+tasks.register('copyBuildDocs', Copy) {
+    dependsOn('buildDocs')
+    from tasks.named('javadoc')
+    into "${project.projectDir}/docs/build/docs/api"
+}
+
+tasks.named('buildDocs').get().finalizedBy('copyBuildDocs')
 
 defaultTasks 'spotlessApply', 'build'
