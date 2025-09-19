@@ -20,11 +20,11 @@ plugins {
     id 'com.github.node-gradle.node' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0' apply false
     id 'net.ltgt.errorprone' version '3.0.1'
-    id "biz.aQute.bnd.builder" version "7.1.0"
+    id 'biz.aQute.bnd.builder' version '7.1.0'
 }
 
 ext {
-    junitVersion = '5.9.3'
+    junitVersion = '5.13.4'
     errorproneVersion = '2.20.0'
 }
 
@@ -91,6 +91,10 @@ jar {
                 "Implementation-Version": version
                 )
     }
+    // Work around http://github.com/bndtools/bnd/issues/6346
+    bundle {
+        properties.put("project.group", provider({project.group}))
+    }
 }
 
 javadoc {
@@ -107,12 +111,14 @@ tasks.register('buildDocs') {
     description = 'Builds the jspecify.org website.'
     dependsOn('npm_run_build')
     dependsOn('javadoc')
-    doLast {
-        copy {
-            from tasks.named('javadoc')
-            into "${project.projectDir}/docs/build/docs/api"
-        }
-    }
 }
+
+tasks.register('copyDocs', Copy) {
+    dependsOn('buildDocs')
+    from tasks.named('javadoc')
+    into "${project.projectDir}/docs/build/docs/api"
+}
+
+tasks.named('buildDocs').get().finalizedBy('copyDocs')
 
 defaultTasks 'spotlessApply', 'build'
