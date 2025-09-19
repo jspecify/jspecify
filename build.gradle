@@ -92,12 +92,12 @@ tasks.register('buildDocs') {
     dependsOn('javadoc')
 }
 
-tasks.register('copyBuildDocs', Copy) {
+tasks.register('copyDocs', Copy) {
     dependsOn('buildDocs')
     from tasks.named('javadoc')
     into "${project.projectDir}/docs/build/docs/api"
 }
 
-tasks.named('buildDocs').get().finalizedBy('copyBuildDocs')
+tasks.named('buildDocs').get().finalizedBy('copyDocs')
 
 defaultTasks 'spotlessApply', 'build'
