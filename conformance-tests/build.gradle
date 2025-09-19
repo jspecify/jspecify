@@ -21,8 +21,8 @@ plugins {
     id 'distribution'
 }
 
-group 'org.jspecify.conformance'
-version '0.0.0-SNAPSHOT'
+group = 'org.jspecify.conformance'
+version = '0.0.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -42,7 +42,7 @@ sourceSets {
 }
 
 java {
-    sourceCompatibility JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
 
     // JAR artifact for dependencies required by the assertions
     registerFeature("deps") {
