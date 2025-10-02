@@ -32,7 +32,7 @@ jobs:
     name: Build Documentation
     runs-on: ubuntu-latest
     env:
-      JAVA_VERSION: 24
+      JAVA_VERSION: 25
     steps:
       - name: Check out project
         uses: actions/checkout@v5
