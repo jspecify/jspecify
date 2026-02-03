@@ -16,14 +16,14 @@
 
 plugins {
     id 'java-library'
-    id 'com.diffplug.spotless' version '7.2.1'
+    id 'com.diffplug.spotless' version '8.2.1'
     id 'com.github.node-gradle.node' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0' apply false
-    id 'biz.aQute.bnd.builder' version '7.1.0'
+    id 'biz.aQute.bnd.builder' version '7.2.1'
 }
 
 ext {
-    junitVersion = '5.13.4'
+    junitVersion = '5.14.2'
 }
 
 repositories { mavenCentral() }
