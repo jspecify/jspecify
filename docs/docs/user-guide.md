@@ -46,7 +46,7 @@ whether `x` can be `null` or not, we don't know whether `x.getClass()` is safe
 
 The notion of "can't be `null`" should really be read with a footnote that says
 "if none of the code in question involves unspecified nullness". For example, if
-you have some code that passes types with unspecified nulless to a method that
+you have some code that passes types with unspecified nullness to a method that
 accepts only `@NonNull` arguments, then tools might allow it to pass a
 possibly-`null` value to a method that is expecting a "can't be `null`"
 parameter.
