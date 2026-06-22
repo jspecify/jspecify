@@ -16,7 +16,7 @@
 
 plugins {
     id 'java-library'
-    id 'com.diffplug.spotless' version '8.6.0'
+    id 'com.diffplug.spotless' version '8.7.0'
     id 'com.github.node-gradle.node' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0' apply false
     id 'biz.aQute.bnd.builder' version '7.3.0'
@@ -66,9 +66,9 @@ tasks.withType(AbstractArchiveTask).configureEach {
 jar {
     manifest {
         attributes(
-                "Bundle-Version": version,
-                "Implementation-Version": version
-                )
+        "Bundle-Version": version,
+        "Implementation-Version": version
+        )
     }
     // Work around http://github.com/bndtools/bnd/issues/6346
     bundle {
