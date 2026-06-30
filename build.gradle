@@ -31,7 +31,7 @@ repositories { mavenCentral() }
 def javaVersion = JavaLanguageVersion.of(System.env.JAVA_VERSION ?: 11)
 java.toolchain.languageVersion = javaVersion
 
-apply from: "gradle/mrjar.gradle"
+apply from: "gradle/module-info.gradle"
 apply from: "gradle/integration-test.gradle"
 apply from: "gradle/format.gradle"
 apply from: "gradle/publish.gradle"
