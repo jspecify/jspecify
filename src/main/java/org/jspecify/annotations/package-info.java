@@ -14,43 +14,39 @@
  * limitations under the License.
  */
 
-/**
- * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.org</a> for general
- * information.
- *
- * <h2>What's here?</h2>
- *
- * This package will contain annotations supporting a variety of static analyses. For now it
- * supports just nullness analysis.
- *
- * <h3 id="nullness">Nullness</h3>
- *
- * The primary annotations of interest are {@link NullMarked} and {@link Nullable}. Together they
- * provide <b>declarative, use-site nullness</b> for Java types. Less frequently, their negations
- * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
- *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
- *
- * <h2 id="tool-behavior">Note on tool behavior</h2>
- *
- * <p>Each of these annotations defines a single meaning shared by all compatible tools (and
- * libraries). JSpecify documentation aims to provide unambiguous, tool-independent answers for how
- * to properly annotate your APIs in all circumstances. However, tools are permitted to
- * <i>respond</i> to the information you provide however they see fit (or not at all). JSpecify
- * compatibility does not require that any particular finding must or must not be issued to the
- * user, let alone its message or severity.
- *
- * <p>In fact, it's important to remember that declarative annotations are merely <i>one</i> source
- * of information an analyzer may consult in concluding an expression is safely non-null. Just like
- * one analyzer might determine that an {@code int} expression can take on only positive values,
- * another might likewise determine that a declaratively nullable expression can take on only
- * non-null values. In both cases the declarative knowledge is <i>correct</i>, but the inferred
- * knowledge is both correct and more specific.
- *
- * <p>On the other end, the tools might even enforce <i>nothing at all</i>. In particular, your
- * annotated code (or other code dependent on its annotated APIs) might be compiled and run without
- * any appropriate tool even in use. Therefore adopting JSpecify annotations is not a replacement
- * for <b>explicitly checking arguments</b> at runtime.
- */
+/// JSpecify annotations. See [jspecify.org](http://jspecify.dev) for general information.
+///
+/// ## What's here?
+///
+/// This package will contain annotations supporting a variety of static analyses. For now it
+/// supports just nullness analysis.
+///
+/// ### Nullness {#nullness}
+///
+/// The primary annotations of interest are [NullMarked] and [Nullable]. Together they
+/// provide **declarative, use-site nullness** for Java types. Less frequently, their negations
+/// may be useful: [NullUnmarked] and [NonNull], respectively.
+///
+/// For a comprehensive introduction to JSpecify, please see [jspecify.org](http://jspecify.dev).
+///
+/// ## Note on tool behavior {#tool-behavior}
+///
+/// Each of these annotations defines a single meaning shared by all compatible tools (and
+/// libraries). JSpecify documentation aims to provide unambiguous, tool-independent answers for how
+/// to properly annotate your APIs in all circumstances. However, tools are permitted to
+/// *respond* to the information you provide however they see fit (or not at all). JSpecify
+/// compatibility does not require that any particular finding must or must not be issued to the
+/// user, let alone its message or severity.
+///
+/// In fact, it's important to remember that declarative annotations are merely *one* source
+/// of information an analyzer may consult in concluding an expression is safely non-null. Just like
+/// one analyzer might determine that an `int` expression can take on only positive values,
+/// another might likewise determine that a declaratively nullable expression can take on only
+/// non-null values. In both cases the declarative knowledge is *correct*, but the inferred
+/// knowledge is both correct and more specific.
+///
+/// On the other end, the tools might even enforce *nothing at all*. In particular, your
+/// annotated code (or other code dependent on its annotated APIs) might be compiled and run without
+/// any appropriate tool even in use. Therefore adopting JSpecify annotations is not a replacement
+/// for **explicitly checking arguments** at runtime.
 package org.jspecify.annotations;

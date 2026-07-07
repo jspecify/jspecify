@@ -25,56 +25,53 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * Indicates that the annotated element and the code transitively {@linkplain
- * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it is <b>null-unmarked
- * code</b>: there, type usages generally have <b>unspecified nullness</b> unless explicitly
- * annotated otherwise.
- *
- * <p>This annotation's purpose is to ease migration of a large existing codebase to null-marked
- * status. It makes it possible to "flip the default" for new code added to a class or package even
- * before that class or package has been fully migrated. Since new code is the most important code
- * to analyze, this is strongly recommended as a temporary measure whenever necessary. However, once
- * a codebase has been fully migrated it would be appropriate to ban use of this annotation.
- *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
- *
- * <h2>Null-marked and null-unmarked code</h2>
- *
- * <p>{@link NullMarked} and this annotation work as a pair to include and exclude sections of code
- * from null-marked status (respectively). Specifically, code is considered null-marked if the most
- * narrowly enclosing element annotated with either of these two annotations exists and is annotated
- * with {@code @NullMarked}.
- *
- * <p>Otherwise it is considered null-unmarked. This can happen in two ways: either it is more
- * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any
- * {@code @NullMarked}-annotated element, or neither annotation is present on any enclosing element.
- * No distinction is made between these cases.
- *
- * <p>The effects of being null-marked are described in the <a
- * href="NullMarked.html#effects">Effects</a> section of {@code NullMarked}.
- *
- * <h2>Unspecified nullness</h2>
- *
- * <p>Within null-unmarked code, a type usage with no nullness annotation has <b>unspecified
- * nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means that, while there is always
- * <i>some</i> correct way to annotate it for nullness, that information is missing: we <i>do not
- * know</i> whether it includes or excludes {@code null} as a value. In such a case, tools can vary
- * widely in how strict or lenient their enforcement is, or might make it configurable.
- *
- * <p>For more, please see this more <a
- * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
- * discussion</a> of unspecified nullness.
- *
- * <p>There is no way for an individual type usage within null-marked code to have unspecified
- * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
- *
- * <h2>Where it can be used</h2>
- *
- * The information in the <a href="NullMarked.html#where">Where it can be used</a> section of {@code
- * NullMarked} applies as well to this annotation.
- */
+/// Indicates that the annotated element and the code transitively
+/// [enclosed][javax.lang.model.element.Element#getEnclosedElements()] within it is **null-unmarked
+/// code**: there, type usages generally have **unspecified nullness** unless explicitly annotated
+/// otherwise.
+///
+/// This annotation's purpose is to ease migration of a large existing codebase to null-marked
+/// status. It makes it possible to "flip the default" for new code added to a class or package even
+/// before that class or package has been fully migrated. Since new code is the most important code
+/// to analyze, this is strongly recommended as a temporary measure whenever necessary. However,
+/// once a codebase has been fully migrated it would be appropriate to ban use of this annotation.
+///
+/// For a comprehensive introduction to JSpecify, please see [jspecify.org](http://jspecify.dev).
+///
+/// # Null-marked and null-unmarked code
+///
+/// [NullMarked] and this annotation work as a pair to include and exclude sections of code from
+/// null-marked status (respectively). Specifically, code is considered null-marked if the most
+/// narrowly enclosing element annotated with either of these two annotations exists and is
+/// annotated with `@NullMarked`.
+///
+/// Otherwise it is considered null-unmarked. This can happen in two ways: either it is more
+/// narrowly enclosed by a `@NullUnmarked`-annotated element than by any `@NullMarked`-annotated
+/// element, or neither annotation is present on any enclosing element. No distinction is made
+/// between these cases.
+///
+/// The effects of being null-marked are described in the [Effects][NullMarked##effects] section of
+/// `NullMarked`.
+///
+/// # Unspecified nullness
+///
+/// Within null-unmarked code, a type usage with no nullness annotation has **unspecified nullness**
+/// ([Why?](https://bit.ly/3ppb8ZC)). This means that, while there is always *some* correct way to
+/// annotate it for nullness, that information is missing: we *do not know* whether it includes or
+/// excludes `null` as a value. In such a case, tools can vary widely in how strict or lenient their
+/// enforcement is, or might make it configurable.
+///
+/// For more, please see this more [comprehensive
+/// discussion](https://github.com/jspecify/jspecify/wiki/nullness-unspecified) of unspecified
+/// nullness.
+///
+/// There is no way for an individual type usage within null-marked code to have unspecified
+/// nullness. ([Why?](https://bit.ly/3ppb8ZC))
+///
+/// # Where it can be used
+///
+/// The information in the [Where it can be used][NullMarked##where] section of `NullMarked` applies
+/// as well to this annotation.
 // TODO(kevinb9n): word the middle section better with good words
 @Documented
 @Retention(RetentionPolicy.RUNTIME)

@@ -22,119 +22,102 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-/**
- * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
- * usage</a> (commonly a parameter type or return type) is considered to include {@code null} as a
- * value.
- *
- * <p>Example usages:
- *
- * <pre>{@code
- * @Nullable String field;
- *
- * @Nullable String getField() { return field; }
- *
- * void setField(@Nullable String value) { field = value; }
- *
- * List<@Nullable String> getList() { … }
- * }</pre>
- *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
- *
- * <h2>Meaning per each kind of type usage</h2>
- *
- * <p>The essential meaning of this annotation is always the same: the type it annotates is
- * considered to include {@code null} as a value. But this may affect your code a little differently
- * based on the kind of type usage involved.
- *
- * <ul>
- *   <li>On a <b>parameter type</b>: The {@code setField} method (at top) permissively accepts a
- *       "string-or-null", meaning that it is okay to pass an actual string, or to pass {@code
- *       null}. (This doesn't guarantee that passing {@code null} won't produce an exception at
- *       runtime, but it should be much less likely.) This also applies to the type of a lambda
- *       expression parameter, if that type is given explicitly (otherwise its nullness must be
- *       inferred from context).
- *   <li>On a <b>method return type</b>: The {@code getField} method returns a "string-or-null", so
- *       while the caller might get a string back, it should also address the possibility of getting
- *       {@code null} instead. (This doesn't guarantee there is any circumstance in which {@code
- *       null} <i>will</i> actually be returned.)
- *   <li>On a <b>field type</b>: The {@code field} field has the type "string-or-null", so at times
- *       it might hold a string, and at times it might hold {@code null}. (Of course, every field of
- *       a reference type <i>originally</i> holds {@code null}, but as long as the class ensures
- *       that its uninitialized states can't be observed, it's appropriate to overlook that fact.)
- *   <li>On a <b>type argument</b>: A type usage of "nullable string" appears <i>within</i> the
- *       compound type {@code List<@Nullable String>}. No matter how this type is used (return type,
- *       etc.), this means the same thing: every appearance of {@code E} in {@code List}'s member
- *       signatures will be considered nullable. For a list, this means it may contain null
- *       <i>elements</i>. If the list reference itself might be null as well, we can write
- *       {@code @Nullable List<@Nullable String>}, a "nullable list of nullable strings".
- *   <li>On the upper bound of a <b>type parameter</b>: For example, as seen in {@code class List<E
- *       extends @Nullable Object>}. This means that a <i>type argument</i> supplied for that type
- *       parameter is permitted to be nullable if desired: {@code List<@Nullable String>}. (A
- *       non-null type argument, as in {@code List<String>}, is permitted either way.)
- *   <li>On a usage of a <b>type variable</b>: A type parameter, like the {@code E} in {@code
- *       interface List<E>}, defines a "type variable" of the same name, usable only <i>within</i>
- *       the scope of the declaring API element. In any example using {@code String} above, a type
- *       variable like {@code E} might appear instead. {@code @Nullable} continues to mean "or null"
- *       as always, but notably, this works without regard to whether the type argument is
- *       <i>already</i> nullable. For example, suppose that {@code class Foo<E extends @Nullable
- *       Object>} has a method {@code @Nullable E eOrNull()}. Then, whether {@code foo} is of type
- *       {@code Foo<String>} or {@code Foo<@Nullable String>}, the expression {@code foo.eOrNull()}
- *       is nullable either way. Using {@code @Nullable E} in this way is called "nullable
- *       projection" (<a href="NonNull.html#projection">non-null projection</a> is likewise
- *       supported, but less commonly useful).
- *   <li>On a <b>nested type</b>: In most examples above, in place of {@code String} we might use a
- *       nested type such as {@code Map.Entry}. The Java syntax for annotating such a type as
- *       nullable looks like {@code Map.@Nullable Entry}.
- *   <li>On a <b>record component</b>: As expected, {@code @Nullable} here applies equally to the
- *       corresponding parameter type of the canonical constructor, and to the return type of a
- *       generated accessor method as well. If an explicit accessor method is provided for this
- *       record component, it must still be annotated explicitly. Any non-null components should be
- *       checked (for example using {@link java.util.Objects#requireNonNull}) in a <a
- *       href="https://docs.oracle.com/en/java/javase/19/language/records.html">compact
- *       constructor</a>.
- * </ul>
- *
- * <h2 id="applicability">Where it is applicable</h2>
- *
- * <p>This annotation and {@link NonNull} are applicable to any <a
- * href="https://github.com/jspecify/jspecify/wiki/type-usages">type usage</a> <b>except</b> the
- * following cases, where they have no defined meaning:
- *
- * <ul>
- *   <li>On any<b> intrinsically non-null type usage</b>. Some type usages are incapable of
- *       including {@code null} by the rules of the Java language. Examples include any usage of a
- *       primitive type, the root type of the argument to {@code instanceof}, a method return type
- *       in an annotation interface, or the type following {@code throws} or {@code catch}. In such
- *       locations, a nullness annotation could only be contradictory ({@code @Nullable}) or
- *       redundant ({@code @NonNull}).
- *   <li>On the root type of a <b>local variable</b> declaration. The nullness of a local variable
- *       itself is not a fixed declarative property of its <i>type</i>. Rather it should be inferred
- *       from the nullness of each expression assigned to the variable, possibly changing over time.
- *       (<a href="https://bit.ly/3ppb8ZC">Why?</a>). Subcomponents of the type (type arguments,
- *       array component types) are annotatable as usual.
- *   <li>On the root type in a <b>cast expression</b>. To inform an analyzer that an expression it
- *       sees as nullable is truly non-null, use an assertion or a method like {@link
- *       java.util.Objects#requireNonNull}. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
- *       Subcomponents of the type (type arguments, array component types) are annotatable as usual.
- *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
- *       non-null, as discussed above, and nothing else about nullness is checked at runtime.
- *   <li>On any part of a <b>receiver parameter</b> type (<a
- *       href="https://docs.oracle.com/javase/specs/jls/se22/html/jls-8.html#jls-8.4">JLS 8.4</a>).
- *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage,
- *       <i>neither</i> one is recognized.
- * </ul>
- *
- * Whether the code is {@link NullMarked} also has no consequence in the above locations.
- *
- * <h2>Unannotated type usages</h2>
- *
- * <p>For a type usage where nullness annotations are <a href="#applicability">applicable</a> but
- * not present, its nullness depends on whether it appears within {@linkplain NullMarked
- * null-marked} code; see that class for details. Note in particular that nullness information from
- * a superclass is never automatically "inherited".
- */
+/// Indicates that the annotated [type usage](https://github.com/jspecify/jspecify/wiki/type-usages)
+/// (commonly a parameter type or return type) is considered to include `null` as a value.
+///
+/// Example usages:
+///
+/// ```
+/// @Nullable String field;
+///
+/// @Nullable String getField() { return field; }
+///
+/// void setField(@Nullable String value) { field = value; }
+///
+/// List<@Nullable String> getList() { … }
+/// ```
+///
+/// For a comprehensive introduction to JSpecify, please see [jspecify.org](http://jspecify.dev).
+///
+/// # Meaning per each kind of type usage
+///
+/// The essential meaning of this annotation is always the same: the type it annotates is considered
+/// to include `null` as a value. But this may affect your code a little differently based on the
+/// kind of type usage involved.
+/// - On a **parameter type**: The `setField` method (at top) permissively accepts a
+///   "string-or-null", meaning that it is okay to pass an actual string, or to pass `null`. (This
+///   doesn't guarantee that passing `null` won't produce an exception at runtime, but it should be
+///   much less likely.) This also applies to the type of a lambda expression parameter, if that
+///   type is given explicitly (otherwise its nullness must be inferred from context).
+/// - On a **method return type**: The `getField` method returns a "string-or-null", so while the
+///   caller might get a string back, it should also address the possibility of getting `null`
+///   instead. (This doesn't guarantee there is any circumstance in which `null` *will* actually be
+///   returned.)
+/// - On a **field type**: The `field` field has the type "string-or-null", so at times it might
+///   hold a string, and at times it might hold `null`. (Of course, every field of a reference type
+///   *originally* holds `null`, but as long as the class ensures that its uninitialized states
+///   can't be observed, it's appropriate to overlook that fact.)
+/// - On a **type argument**: A type usage of "nullable string" appears *within* the compound type
+///   `List<@Nullable String>`. No matter how this type is used (return type, etc.), this means the
+///   same thing: every appearance of `E` in `List`'s member signatures will be considered nullable.
+///   For a list, this means it may contain null *elements*. If the list reference itself might be
+///   null as well, we can write `@Nullable List<@Nullable String>`, a "nullable list of nullable
+///   strings".
+/// - On the upper bound of a **type parameter**: For example, as seen in `class List<E
+///   extends @Nullable Object>`. This means that a *type argument* supplied for that type parameter
+///   is permitted to be nullable if desired: `List<@Nullable String>`. (A non-null type argument,
+///   as in `List<String>`, is permitted either way.)
+/// - <span id="projection">On a usage of a **type variable**:</span> A type parameter, like the `E`
+///   in `interface List<E>`, defines a "type variable" of the same name, usable only *within* the
+///   scope of the declaring API element. In any example using `String` above, a type variable like
+///   `E` might appear instead. `@Nullable` continues to mean "or null" as always, but notably, this
+///   works without regard to whether the type argument is *already* nullable. For example, suppose
+///   that `class Foo<E extends @Nullable Object>` has a method `@Nullable E eOrNull()`. Then,
+///   whether `foo` is of type `Foo<String>` or `Foo<@Nullable String>`, the expression
+///   `foo.eOrNull()` is nullable either way. Using `@Nullable E` in this way is called "nullable
+///   projection" ([non-null projection][NonNull##projection] is likewise supported, but less
+///   commonly useful).
+/// - On a **nested type**: In most examples above, in place of `String` we might use a nested type
+///   such as `Map.Entry`. The Java syntax for annotating such a type as nullable looks like
+///   `Map.@Nullable Entry`.
+/// - On a **record component**: As expected, `@Nullable` here applies equally to the corresponding
+///   parameter type of the canonical constructor, and to the return type of a generated accessor
+///   method as well. If an explicit accessor method is provided for this record component, it must
+///   still be annotated explicitly. Any non-null components should be checked (for example using
+///   [java.util.Objects#requireNonNull]) in a [compact
+///   constructor](https://docs.oracle.com/en/java/javase/19/language/records.html).
+///
+/// # Where it is applicable <span id="applicability"></span>
+///
+/// This annotation and [NonNull] are applicable to any [type
+/// usage](https://github.com/jspecify/jspecify/wiki/type-usages) **except** the following cases,
+/// where they have no defined meaning:
+/// - On any** intrinsically non-null type usage**. Some type usages are incapable of including
+///   `null` by the rules of the Java language. Examples include any usage of a primitive type, the
+///   argument to `instanceof`, a method return type in an annotation interface, or the type
+///   following `throws` or `catch`. In such locations, a nullness annotation could only be
+///   contradictory (`@Nullable`) or redundant (`@NonNull`).
+/// - On the root type of a **local variable** declaration. The nullness of a local variable itself
+///   is not a fixed declarative property of its *type*. Rather it should be inferred from the
+///   nullness of each expression assigned to the variable, possibly changing over time.
+///   ([Why?](https://bit.ly/3ppb8ZC)). Subcomponents of the type (type arguments, array component
+///   types) are annotatable as usual.
+/// - On the root type in a **cast expression**. To inform an analyzer that an expression it sees as
+///   nullable is truly non-null, use an assertion or a method like
+///   [java.util.Objects#requireNonNull]. ([Why?](https://bit.ly/3ppb8ZC)) Subcomponents of the type
+///   (type arguments, array component types) are annotatable as usual.
+/// - On any part of a **receiver parameter** type ([JLS
+///   8.4](https://docs.oracle.com/javase/specs/jls/se26/html/jls-8.html#jls-8.4)).
+/// - If both `@Nullable` and `@NonNull` appear on the same type usage, *neither* one is recognized.
+///
+/// Whether the code is [NullMarked] also has no consequence in the above locations.
+///
+/// # Unannotated type usages
+///
+/// For a type usage where nullness annotations are [applicable](#applicability) but not present,
+/// its nullness depends on whether it appears within [null-marked][NullMarked] code; see that class
+/// for details. Note in particular that nullness information from a superclass is never
+/// automatically "inherited".
 @Documented
 @Target(TYPE_USE)
 @Retention(RUNTIME)
