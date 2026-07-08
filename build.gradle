@@ -37,7 +37,7 @@ apply from: "gradle/format.gradle"
 apply from: "gradle/publish.gradle"
 
 java {
-    if (javaVersion.canCompileOrRun(15)) {
+    if (javaVersion.canCompileOrRun(21)) {
         withJavadocJar()
     }
     withSourcesJar()
