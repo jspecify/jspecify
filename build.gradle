@@ -28,7 +28,7 @@ ext {
 
 repositories { mavenCentral() }
 
-def javaVersion = JavaLanguageVersion.of(System.env.JAVA_VERSION ?: 11)
+def javaVersion = JavaLanguageVersion.of(providers.environmentVariable("JAVA_VERSION").getOrElse("11"))
 java.toolchain.languageVersion = javaVersion
 
 apply from: "gradle/mrjar.gradle"
