@@ -60,10 +60,24 @@ integrationTestOnJava8.configure {
     }
 }
 
+def integrationTestOnJava9 = tasks.register("integrationTestOnJava9", Test)
+integrationTestOnJava9.configure {
+    group = 'Verification'
+    description = 'Runs the integration tests with JDK9, to verify the support for Java 9.'
+
+    classpath = sourceSets.integrationTest.runtimeClasspath
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    useJUnitPlatform()
+
+    javaLauncher = javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(9)
+    }
+}
+
 def integrationTest = tasks.register("integrationTest", Test)
 integrationTest.configure {
     group = 'Verification'
-    description = 'Runs the integration tests with JDK9+, to verify the support for Java without jigsaw.'
+    description = "Runs the integration tests with our build's default JDK toolchain, which we keep close to the newest version, to verify support for that version."
 
     classpath = sourceSets.integrationTest.runtimeClasspath
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
@@ -73,4 +87,5 @@ integrationTest.configure {
 tasks.named('check').configure {
     dependsOn integrationTest
     dependsOn integrationTestOnJava8
+    dependsOn integrationTestOnJava9
 }
