@@ -103,7 +103,7 @@ import java.lang.annotation.Target;
  *   <li>An advantage of Java <b>modules</b> is that you can make a lot of code null-marked with
  *       just a single annotation (before the {@code module} keyword). <b>Warning</b>: Even if you
  *       annotate the module for a library as {@code @NullMarked}, this has no effect for users who
- *       place the library on the class path, only those who place the library on the <a
+ *       place the library on the class path; it affects only those who place the library on the <a
  *       href="https://openjdk.org/projects/jigsaw/quick-start">module path</a>, which is less
  *       commonly used.
  *   <li>If both {@code @NullMarked} and {@code @NullUnmarked} appear together on the same element,
