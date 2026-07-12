@@ -1144,7 +1144,7 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 
 [#49]: https://github.com/jspecify/jspecify/issues/49
 [#65]: https://github.com/jspecify/jspecify/issues/65
-[Java SE 23]: https://docs.oracle.com/javase/specs/jls/se26/html/index.html
+[Java SE 23]: https://docs.oracle.com/javase/specs/jls/se23/html/index.html
 [JLS 1.3]: https://docs.oracle.com/javase/specs/jls/se26/html/jls-1.html#jls-1.3
 [JLS 15.16]: https://docs.oracle.com/javase/specs/jls/se26/html/jls-15.html#jls-15.16
 [JLS 15.20.2]: https://docs.oracle.com/javase/specs/jls/se26/html/jls-15.html#jls-15.20.2
