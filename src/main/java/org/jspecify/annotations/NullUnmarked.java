@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 
 /**
  * Indicates that the annotated element and the code transitively {@linkplain
- * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it is <b>null-unmarked
+ * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are <b>null-unmarked
  * code</b>: there, type usages generally have <b>unspecified nullness</b> unless explicitly
  * annotated otherwise.
  *
@@ -58,15 +58,15 @@ import java.lang.annotation.Target;
  *
  * <h2>Unspecified nullness</h2>
  *
- * <p>Within null-unmarked code, a type usage with no nullness annotation has <b>unspecified
- * nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means that, while there is always
- * <i>some</i> correct way to annotate it for nullness, that information is missing: we <i>do not
- * know</i> whether it includes or excludes {@code null} as a value. In such a case, tools can vary
- * widely in how strict or lenient their enforcement is, or might make it configurable.
+ * <p>Within null-unmarked code, a type usage that is <a
+ * href="Nullable.html#applicability">nullness-applicable</a> but has no nullness annotation
+ * generally has <b>unspecified nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means
+ * we <i>do not know</i> whether it includes or excludes {@code null} as a value. In such a case,
+ * tools can vary widely in how strict or lenient their enforcement is, or might even be
+ * configurable.
  *
- * <p>For more, please see this more <a
- * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
- * discussion</a> of unspecified nullness.
+ * <p>For a comprehensive discussion, see <a
+ * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">Unspecified Nullness</a>.
  *
  * <p>There is no way for an individual type usage within null-marked code to have unspecified
  * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)

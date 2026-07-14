@@ -65,9 +65,9 @@ import java.lang.annotation.Target;
  *       MyList<E extends Object>}, making the upper bound <i>non-null</i> {@code Object}. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
  *   <li>When a type parameter has a nullable upper bound, such as the {@code E} in {@code class
- *       Foo<E extends @Nullable Bar>}), an unannotated usage of the associated type variable
- *       (within that class) must be handled conservatively: it is nullable when read, yet cannot
- *       have {@code null} assigned to it.
+ *       Foo<E extends @Nullable Bar>}, an unannotated usage of the associated type variable (within
+ *       that class) must be handled conservatively: it is nullable when read, yet cannot have
+ *       {@code null} assigned to it.
  * </ul>
  *
  * <h2 id="where">Where it can be used</h2>
@@ -91,9 +91,9 @@ import java.lang.annotation.Target;
  *       place the library on the class path; it affects only those who place the library on the <a
  *       href="https://openjdk.org/projects/jigsaw/quick-start">module path</a>, which is less
  *       commonly used.
- *   <li>Applying this annotation to an annotation interface has the same meaning as any other class
- *       declaration: that declaration and its members are in null-marked context. It does
- *       <i>not</i> express that annotations of that type are synonymous with {@code @NullMarked}.
+ *   <li>Applying this annotation to an annotation interface does <i>not</i> express that
+ *       annotations of that type are synonymous with {@code @NullMarked}. It has the same meaning
+ *       as it does anywhere else.
  *   <li>These annotations have no meaning when applied to a <b>record component</b> declaration (as
  *       in {@code record Foo(@NullMarked String bar) {}}). ({@link Nullable} and {@link NonNull}
  *       are still meaningful for record components.)

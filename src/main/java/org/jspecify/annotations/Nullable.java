@@ -65,9 +65,8 @@ import java.lang.annotation.Target;
  *       null} as well, and should be prepared for that possibility.
  *   <li>On a <b>field type</b>: See the {@code field} example above. It has the type
  *       "string-or-null", so at times it might hold a string, and at times it might intentionally
- *       hold {@code null}. (If the field will always be non-null <i>once initialized</i>, it's not
- *       necessarily mandatory to add {@code @Nullable} to cover initialization-time only, unless an
- *       object can actually be observed in its uninitialized state.)
+ *       hold {@code null}. (If you are confident the object can't be observed in its uninitialized
+ *       state, the field need not be annotated solely because it is null during initialization.)
  *   <li>On a <b>type argument</b>: Within the compound type {@code MyList<@Nullable String>} we can
  *       see a usage of the type "string-or-null". To understand what {@code @Nullable} means here,
  *       read the {@code MyList<E>} API; every appearance you see of the {@code E} type will be
@@ -75,7 +74,7 @@ import java.lang.annotation.Target;
  *       For a typical container type like this example, this means it can contain null
  *       <i>elements</i>; if your list itself might be null as well, we can write {@code @Nullable
  *       MyList<@Nullable String>}: a nullable list of nullable strings.
- *   <li>On the upper bound of a <b>type parameter</b>: For example, as seen in {@code interface
+ *   <li>On the upper bound of a <b>type parameter</b>: For example, consider {@code interface
  *       List<E extends @Nullable Object>}. This means that type arguments in that position
  *       <i>may</i> be nullable (as in {@code List<@Nullable String>}). A non-null type argument, as
  *       in {@code List<String>}, is permitted either way.
@@ -94,16 +93,16 @@ import java.lang.annotation.Target;
  *       indicated separately. For example, in null-marked code, {@code @Nullable String[]} is a
  *       non-null array of nullable strings, and {@code String @Nullable []} is a nullable array of
  *       non-null strings.
- *   <li>On a "varargs" parameter: Use {@code @Nullable String...} to indicate that the individual
- *       strings may be null. To let {@code null} be passed as the entire array, use {@code
- *       String @Nullable ...}.
+ *   <li>On a <b>varargs parameter</b>: Use {@code @Nullable String...} to indicate that the
+ *       individual strings may be null. To let {@code null} be passed as the entire array, use
+ *       {@code String @Nullable ...}.
  *   <li>On a <b>nested type</b>: In most examples above, in place of {@code String} we might use a
  *       nested type such as {@code Map.Entry}. The Java syntax for annotating such a type as
  *       nullable looks like {@code Map.@Nullable Entry}.
- *   <li>On a <b>record component</b>: As expected, {@code @Nullable} here applies equally to the
- *       corresponding parameter type of the canonical constructor, and to the return type of the
- *       corresponding accessor method, if these are actually generated. If the constructor argument
- *       list or the accessor method is written explicitly, it must still be annotated explicitly.
+ *   <li>On a <b>record component</b>: {@code @Nullable} here applies equally to the corresponding
+ *       parameter type of the canonical constructor and to the return type of the corresponding
+ *       accessor method, <i>if</i> these are generated. If the constructor parameter list or the
+ *       accessor method is provided explicitly, it must still be annotated explicitly.
  * </ul>
  *
  * <h2 id="applicability">Where it is not applicable</h2>
@@ -114,10 +113,10 @@ import java.lang.annotation.Target;
  *
  * <ul>
  *   <li>On a <b>local variable</b> declaration. While the cases listed above benefit from
- *       <i>declarative</i> nullness, the nullness of a local variable is better to determine
- *       through analysis (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This rule applies only to the
- *       <i>root type</i> of the variable; any type arguments, for example, can be annotated as
- *       usual.
+ *       <i>declarative</i> nullness, the nullness of a local variable is more properly determined
+ *       through flow analysis (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This rule applies only
+ *       to the <i>root type</i> of the variable; any type arguments, for example, can be annotated
+ *       as usual.
  *   <li>On any <b>intrinsically non-null type usage</b>. Some type usages are incapable of
  *       including {@code null} by the rules of the Java language. Examples include any usage of a
  *       primitive type, a method return type in an annotation interface, or the type following
@@ -130,8 +129,8 @@ import java.lang.annotation.Target;
  *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
  *       non-null, and nothing else about nullness is checked at runtime, so annotations would be
  *       misleading.
- *   <li>On any part of a <b>receiver parameter</b> type. This parameter must specify the exact type
- *       of {@code this}; its nullness information cannot be altered in any way.
+ *   <li>On any part of a <b>receiver parameter</b> type (<a
+ *       href="https://docs.oracle.com/javase/specs/jls/se26/html/jls-8.html#jls-8.4">JLS 8.4</a>).
  *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage, <i>both</i>
  *       are unrecognized.
  * </ul>

@@ -33,10 +33,11 @@
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>
  *
- * <p>The presence or absence of these annotations in your code has no direct effects, except on any
- * tools and libraries you've adopted that voluntarily read and use the information.
+ * <p>The presence of these annotations in your code has well-defined semantic meaning, but no
+ * <i>direct</i> consequences. It is up to your adopted tools and libraries to voluntarily read and
+ * act on the information they provide.
  *
- * <p>Each of these annotations defines a single meaning shared by all compatible tools and
+ * <p>Each annotation defines a single universal meaning shared by all compatible tools and
  * libraries. JSpecify documentation aims to provide unambiguous, tool-independent answers for how
  * to properly annotate your APIs in all circumstances. However, tools are permitted to
  * <i>respond</i> to the information you provide however they see fit (or not at all). JSpecify
