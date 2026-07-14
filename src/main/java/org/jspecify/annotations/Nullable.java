@@ -45,7 +45,7 @@ import java.lang.annotation.Target;
  * information common to all four nullness annotations. For a comprehensive introduction to
  * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
  *
- * <h2>Meaning for each kind of type context</h2>
+ * <h2>Meaning per each kind of type usage</h2>
  *
  * <p>Despite the itemized list here, the essential meaning of this annotation is always the same in
  * every case: the type it annotates is considered to include {@code null} as a value. A good way to
@@ -125,14 +125,13 @@ import java.lang.annotation.Target;
  *   <li>On the root type in a <b>cast expression</b>. To inform an analyzer that an expression it
  *       sees as nullable is truly non-null, use an assertion or a method like {@link
  *       java.util.Objects#requireNonNull}. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
- *       Subcomponents of the type (type arguments, etc.) are annotatable as usual.
+ *       Subcomponents of the type (type arguments, array component types) are annotatable as usual.
  *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
- *       non-null, and nothing else about nullness is checked at runtime, so annotations would be
- *       misleading.
+ *       non-null, as discussed above, and nothing else about nullness is checked at runtime.
  *   <li>On any part of a <b>receiver parameter</b> type (<a
  *       href="https://docs.oracle.com/javase/specs/jls/se26/html/jls-8.html#jls-8.4">JLS 8.4</a>).
- *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage, <i>both</i>
- *       are unrecognized.
+ *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage,
+ *       <i>neither</i> one is recognized.
  * </ul>
  *
  * Whether the code is {@link NullMarked} also has no consequence in the above locations.
@@ -142,7 +141,7 @@ import java.lang.annotation.Target;
  * <p>For a type usage where nullness annotations are <a href="#applicability">applicable</a> but
  * not present, its nullness depends on whether it appears within {@linkplain NullMarked
  * null-marked} code; see that class for details. Note in particular that nullness information from
- * a superclass is never automatically inherited.
+ * a superclass is never automatically "inherited".
  */
 @Documented
 @Target(TYPE_USE)

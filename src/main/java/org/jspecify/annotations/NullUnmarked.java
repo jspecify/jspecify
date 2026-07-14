@@ -65,8 +65,9 @@ import java.lang.annotation.Target;
  * tools can vary widely in how strict or lenient their enforcement is, or might even be
  * configurable.
  *
- * <p>For a comprehensive discussion, see <a
- * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">Unspecified Nullness</a>.
+ * <p>For more, please see this more <a
+ * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
+ * discussion</a> of unspecified nullness.
  *
  * <p>There is no way for an individual type usage within null-marked code to have unspecified
  * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)

@@ -46,12 +46,12 @@ import java.lang.annotation.Target;
  * nullable type argument.
  *
  * <pre>{@code
- * // Everything below is null-marked code
+ * // All the below is null-marked code
  *
  * class MyOptional<T> { … }
  *
  * interface MyList<E extends @Nullable Object> {
- *   // Returns the first non-null element, if such an element exists.
+ *   // Returns the first non-null element, if such element exists.
  *   MyOptional<E> firstNonNull() { … } // problem here!
  * }
  *
@@ -70,7 +70,7 @@ import java.lang.annotation.Target;
  * <p>The solution is to <b>project</b> the type argument to its non-null counterpart:
  *
  * <pre>{@code
- * // Returns the first non-null element, if such an element exists.
+ * // Returns the first non-null element, if such element exists.
  * MyOptional<@NonNull E> firstNonNull() { … } // problem fixed!
  * }</pre>
  *
@@ -83,9 +83,8 @@ import java.lang.annotation.Target;
  * <p><a href="Nullable.html#projection">Nullable projection</a> serves the equivalent purpose in
  * the opposite direction, and is far more commonly useful.
  *
- * <p>If <i>all</i> usages of a type variable are being projected in one direction or the other, the
- * type variable should be given a non-null upper bound, and any non-null projections can then be
- * removed.
+ * <p>If a type variable has <i>all</i> its usages being projected in one direction or the other, it
+ * should be given a non-null upper bound, and any non-null projections can then be removed.
  *
  * <h2>Where it is applicable</h2>
  *

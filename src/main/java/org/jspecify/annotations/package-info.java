@@ -25,11 +25,9 @@
  *
  * <h3 id="nullness">Nullness</h3>
  *
- * The primary annotations of interest are {@link org.jspecify.annotations.NullMarked} and {@link
- * org.jspecify.annotations.Nullable}. Together they provide <b>declarative, use-site nullness</b>
- * for Java types. Less frequently, their negations may be useful: {@link
- * org.jspecify.annotations.NullUnmarked} and {@link org.jspecify.annotations.NonNull},
- * respectively.
+ * The primary annotations of interest are {@link NullMarked} and {@link Nullable}. Together they
+ * provide <b>declarative, use-site nullness</b> for Java types. Less frequently, their negations
+ * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>
  *
@@ -37,8 +35,8 @@
  * <i>direct</i> consequences. It is up to your adopted tools and libraries to voluntarily read and
  * act on the information they provide.
  *
- * <p>Each annotation defines a single universal meaning shared by all compatible tools and
- * libraries. JSpecify documentation aims to provide unambiguous, tool-independent answers for how
+ * <p>Each of these annotations defines a single meaning shared by all compatible tools (and
+ * libraries). JSpecify documentation aims to provide unambiguous, tool-independent answers for how
  * to properly annotate your APIs in all circumstances. However, tools are permitted to
  * <i>respond</i> to the information you provide however they see fit (or not at all). JSpecify
  * compatibility does not require that any particular finding must or must not be issued to the
