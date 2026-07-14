@@ -248,7 +248,7 @@ within a `@NullMarked` context, `List<@Nullable String>` means a reference to a
 object or `null`; but `List<String>` means a list (not `null`) where each
 element is a reference to a `String` object and *can't* be `null`.
 
-### Declaring generic types {#declaring-generics}
+### Declaring generic types \{#declaring-generics}
 
 Things are a bit more complicated when you are *declaring* a generic type.
 Consider this:

@@ -70,7 +70,7 @@ rules.
 > `UNSPECIFIED` and apply a policy that type usages like `Object` are always
 > non-nullable.
 
-## Relationship between this spec and the JLS {#concept-references}
+## Relationship between this spec and the JLS \{#concept-references}
 
 When a rule in this spec refers to any concept that is defined in this spec (for
 example, [substitution] or [containment]), apply this spec's definition (as
@@ -201,7 +201,7 @@ All annotations have runtime retention. None of the annotations are marked
 
 We provide two parameterless type-use annotations: `@Nullable` and `@NonNull`.
 
-### Recognized locations for type-use annotations {#recognized-type-use}
+### Recognized locations for type-use annotations \{#recognized-type-use}
 
 A location is a *recognized* location for our type-use annotations in the
 circumstances detailed below. If our type-use annotations appear in any other
@@ -348,7 +348,7 @@ All locations that are not explicitly listed as recognized are unrecognized.
 We provide two parameterless declaration annotations: `@NullMarked` and
 `@NullUnmarked`.
 
-### Recognized locations for declaration annotations {#recognized-declaration}
+### Recognized locations for declaration annotations \{#recognized-declaration}
 
 Our declaration annotations are specified to be *recognized* when applied to the
 locations listed below:
@@ -429,7 +429,7 @@ check the following rules in order:
 If none of the enclosing declarations meet any rule, then the type usage is
 *not* in a null-marked scope.
 
-## Augmented type of a type usage appearing in code {#augmented-type-of-usage}
+## Augmented type of a type usage appearing in code \{#augmented-type-of-usage}
 
 This section defines how to determine the [augmented types] of most type usages
 in source code or bytecode where JSpecify nullness annotations are
@@ -502,7 +502,7 @@ conditions.
 > any array type or the null type). The difference *is* significant for
 > intersection types, type variables, and union types.
 
-## Augmented type of an intersection type {#intersection-types}
+## Augmented type of an intersection type \{#intersection-types}
 
 > Technically speaking, the JLS does not define syntax for an intersection type.
 > Instead, it defines a syntax for type parameters and casts that supports
@@ -528,7 +528,7 @@ the type as a whole is always `NO_CHANGE`.
 > than `NO_CHANGE`, we define special handling for intersection types under
 > ["Applying a nullness operator to an augmented type."][applying operator]
 
-## Bound of an "unbounded" wildcard {#unbounded-wildcard}
+## Bound of an "unbounded" wildcard \{#unbounded-wildcard}
 
 In source, an unbounded wildcard is written as `<?>`. This section does *not*
 apply to `<? extends Object>`, even though that is often equivalent to `<?>`.
@@ -561,7 +561,7 @@ Whenever a JLS rule refers specifically to `<?>`, disregard it, and instead
 apply the rules for `<? extends T>`, where `T` has a base type of `Object` and
 the nullness operator defined by this section.
 
-## Bound of an `Object`-bounded type parameter {#object-bounded-type-parameter}
+## Bound of an `Object`-bounded type parameter \{#object-bounded-type-parameter}
 
 In source, an `Object`-bounded type parameter can be writen in either of two
 ways:
@@ -590,7 +590,7 @@ its bound has a base type of `Object` and a nullness operator of `UNSPECIFIED`.
 > consider the source code `<T>` to have a bound of `Object`, just as it does
 > when compiled to bytecode.
 
-## Augmented null types {#null-types}
+## Augmented null types \{#null-types}
 
 The JLS refers to "the null type." In this spec, we assign a [nullness operator]
 to all types, including the null type. This produces multiple null types:
@@ -612,7 +612,7 @@ to all types, including the null type. This produces multiple null types:
 
     > This may be relevant only in implementation code.
 
-## Multiple "worlds" {#multiple-worlds}
+## Multiple "worlds" \{#multiple-worlds}
 
 Some of the rules in this spec come in two versions: One version requires a
 property to hold "in all worlds," and the other requires it to hold only "in
@@ -658,7 +658,7 @@ Rules behave identically under both versions except where otherwise specified.
 > implement at least part of the all-worlds rules. Those rules are required as
 > part of [substitution].
 
-### Propagating how many worlds a relation must hold in {#propagating-multiple-worlds}
+### Propagating how many worlds a relation must hold in \{#propagating-multiple-worlds}
 
 When one rule in this spec refers to another, it refers to the same version of
 the rule. For example, when the rules for [containment] refer to the rules for
@@ -669,7 +669,7 @@ all-worlds subtyping relation.
 This meta-rule applies except when a rule refers explicitly to a particular
 version of another rule.
 
-## Comfortable with a given nullness operator {#comfortable}
+## Comfortable with a given nullness operator \{#comfortable}
 
 There is *reason to be comfortable treating a given [nullness operator] `g` like
 a target nullness operator `t`* if either of the following conditions holds:
@@ -692,7 +692,7 @@ a target nullness operator `t`* if either of the following conditions holds:
 >     operator "ought to be" `UNION_NULL`. A lenient tool might allow the
 >     assignment anyway, while a strict tool might not.
 
-## Worried about a given nullness operator {#worried}
+## Worried about a given nullness operator \{#worried}
 
 There is *reason to be worried that a given [nullness operator] `g` is a target
 nullness operator `t`* if either of the following conditions holds:
@@ -959,7 +959,7 @@ following types, subject to the exception given below:
 Exception: `T` does *not* have edges to any types whose [nullness operator]
 there is reason to be [worried] is `UNION_NULL`.
 
-## Nullness-delegating subtyping rules for Java {#nullness-delegating-subtyping}
+## Nullness-delegating subtyping rules for Java \{#nullness-delegating-subtyping}
 
 > Recall that this rule exists to handle subcomponents of types—namely, type
 > arguments and array component types. It essentially says "Check nullness
@@ -1083,7 +1083,7 @@ the output of the following operation:
 -   Otherwise, replace `V` with the output of applying the nullness operator of
     `V` to `Aᵢ`.
 
-## Applying a nullness operator to an augmented type {#applying-operator}
+## Applying a nullness operator to an augmented type \{#applying-operator}
 
 The process of applying a [nullness operator] requires two inputs:
 
