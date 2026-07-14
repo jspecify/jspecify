@@ -224,6 +224,8 @@ exceptions in the subsequent sections:
     > varargs methods). For examples of variadic parameters, see the comment
     > about array components below.
 
+-   a formal parameter type of a lambda
+
 -   a field type
 
 -   a record component type
