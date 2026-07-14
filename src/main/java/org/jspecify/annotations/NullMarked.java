@@ -33,15 +33,19 @@ import java.lang.annotation.Target;
  * specified otherwise. Using this annotation avoids the need to write {@link NonNull @NonNull} many
  * times throughout your code.
  *
- * <p>The effects of this annotation can be negated at a narrower scope using {@link NullUnmarked}.
+ * <p>This meaning does not apply to any enclosed element annotated with {@link
+ * NullUnmarked @NullUnmarked}, nor any code enclosed within it. That is, the null-marked status of
+ * a span of code depends only on the <i>nearest enclosing</i> element having <i>either</i> of these
+ * two annotations.
  *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
+ * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
+ * information common to all four nullness annotations. For a comprehensive introduction to
+ * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2 id="effects">Effects of being null-marked</h2>
  *
  * <p>Within null-marked code, a type usage is generally considered to be non-null unless explicitly
- * annotated as {@link Nullable}. However, there are a few special cases to address.
+ * annotated as {@link Nullable Nullable}. However, there are a few special cases to address.
  *
  * <h3 id="effects-special-cases">Special cases</h3>
  *
@@ -53,19 +57,17 @@ import java.lang.annotation.Target;
  *       local variable declaration, is unaffected.
  *   <li>A <b>wildcard</b> with no upper bound generally represents a nullable type (unless the
  *       corresponding type parameter has a non-null upper bound itself). (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>) This might be either an unbounded wildcard, as in
- *       {@code List<?>}, or a wildcard with a lower bound, as in {@code List<? super Integer>}).
+ *       href="https://bit.ly/3ppb8ZC">Why?</a>) This wildcard might be either unbounded, as in
+ *       {@code List<?>}, or with only a lower bound, as in {@code List<? super Integer>}.
  *   <li>A <b>type parameter</b> itself is a different case. It is never really "unbounded"; if no
  *       upper bound is given explicitly, then {@code Object} is filled in by the compiler. This
  *       means the example {@code class MyList<E>} is interpreted identically to {@code class
- *       MyList<E extends Object>}, making the upper bound <em>non-null</em> {@code Object}. (<a
+ *       MyList<E extends Object>}, making the upper bound <i>non-null</i> {@code Object}. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
  *   <li>When a type parameter has a nullable upper bound, such as the {@code E} in {@code class
- *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable itself (within
- *       that class) has a special kind of nullness called <b>parametric nullness</b>. In order to
- *       support both nullable and non-null type arguments safely, the {@code E} type itself must be
- *       handled pessimistically: treated as if nullable when read from, but as if non-null when
- *       written to.
+ *       Foo<E extends @Nullable Bar>}), an unannotated usage of the associated type variable
+ *       (within that class) must be handled conservatively: it is nullable when read, yet cannot
+ *       have {@code null} assigned to it.
  * </ul>
  *
  * <h2 id="where">Where it can be used</h2>
@@ -77,7 +79,7 @@ import java.lang.annotation.Target;
  *
  * <ul>
  *   <li>To apply these annotations to an entire (single) <b>package</b>, create a <a
- *       href="https://docs.oracle.com/javase/specs/jls/se23/html/jls-7.html#jls-7.4.1">{@code
+ *       href="https://docs.oracle.com/javase/specs/jls/se26/html/jls-7.html#jls-7.4.1">{@code
  *       package-info.java}</a> file and annotate the package declaration there. This annotation has
  *       no effect on "subpackages". <b>Warning</b>: if the package does not belong to a module, be
  *       very careful: it can easily happen that different versions of the package-info file are

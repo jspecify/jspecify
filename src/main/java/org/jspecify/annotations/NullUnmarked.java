@@ -37,8 +37,9 @@ import java.lang.annotation.Target;
  * to analyze, this is strongly recommended as a temporary measure whenever necessary. However, once
  * a codebase has been fully migrated it would be appropriate to ban use of this annotation.
  *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
+ * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
+ * information common to all four nullness annotations. For a comprehensive introduction to
+ * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2>Null-marked and null-unmarked code</h2>
  *

@@ -31,12 +31,13 @@ import java.lang.annotation.Target;
  *
  * <ul>
  *   <li>To mark any sporadic non-null type usages inside a scope that is not ready to be fully
- *       {@link NullMarked} yet.
+ *       {@linkplain NullMarked null-marked} yet.
  *   <li>To perform a <i>non-null projection</i> of a type variable, explained below.
  * </ul>
  *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
+ * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
+ * information common to all four nullness annotations. For a comprehensive introduction to
+ * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2 id="projection">Non-null projection</h2>
  *

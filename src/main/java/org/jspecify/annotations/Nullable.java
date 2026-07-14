@@ -25,56 +25,60 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
  * usage</a> (commonly a parameter type or return type) is considered to include {@code null} as a
- * value.
+ * value. This annotation has the same meaning in both {@linkplain NullMarked null-marked} and
+ * null-unmarked code (it is the meaning of <i>unannotated</i> type usages that differs between
+ * them).
  *
  * <p>Example usages:
  *
- * <pre>{@code
- * @Nullable String field;
+ * <pre>
+ * {@literal @}Nullable String field;
  *
- * @Nullable String getField() { return field; }
+ * {@literal @}Nullable String getField() { return field; }
  *
- * void setField(@Nullable String value) { field = value; }
+ * void setField({@literal @}Nullable String value) { field = value; }
  *
- * List<@Nullable String> getList() { … }
- * }</pre>
+ * List&lt;{@literal @}Nullable String&gt; getList() { … }
+ * </pre>
  *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
+ * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
+ * information common to all four nullness annotations. For a comprehensive introduction to
+ * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2>Meaning for each kind of type context</h2>
  *
- * <p>The essential meaning of this annotation is always the same: the type it annotates is
- * considered to include {@code null} as a value. That's really the whole story, but this section
- * offers some additional details for each kind of type context.
+ * <p>Despite the itemized list here, the essential meaning of this annotation is always the same in
+ * every case: the type it annotates is considered to include {@code null} as a value. A good way to
+ * read {@code @Nullable String} in any context is <b>"string-or-null"</b>. That's usually all you
+ * need to think about, but this section offers some additional explanation for each kind of
+ * context.
  *
  * <ul>
- *   <li>On a <b>parameter type</b>: The {@code setField} method (at top) permissively accepts a
- *       "string-or-null", meaning that it is okay to pass an actual string, or to pass {@code
- *       null}. (This doesn't guarantee that passing {@code null} won't produce an exception at
- *       runtime, but it should be much less likely.) This also applies to the type of a lambda
- *       expression parameter, if that type is given explicitly (rather than using {@code var} or
- *       the concise lambda parameter syntax).
- *   <li>On a <b>method return type</b>: The {@code getField} method returns a "string-or-null", so
- *       while the caller might get a string back, it should also address the possibility of getting
- *       {@code null} instead. (This doesn't necessarily mean that {@code null} will ever actually
- *       be returned.)
- *   <li>On a <b>field type</b>: The {@code field} field has the type "string-or-null", so at times
- *       it might hold a string, and at times it might intentionally hold {@code null}. (Of course,
- *       any field of a reference type might <i>originally</i> have held {@code null} before it was
- *       initialized, but as long as the class ensures that its uninitialized states can't be
- *       observed, it's generally okay to overlook that fact.)
- *   <li>On a <b>type argument</b>: A type usage of "string-or-null" appears within the compound
- *       type {@code List<@Nullable String>}. However this type is used (return type, etc.), this
- *       means the same thing: every appearance of {@code E} in {@code List}'s member signatures
- *       will be considered nullable (unless it is itself annotated otherwise). For a list, this
- *       means it may contain null <i>elements</i>. If the list reference itself might be null as
- *       well, we can write {@code @Nullable List<@Nullable String>}, a "nullable list of nullable
- *       strings".
+ *   <li>On a <b>parameter type</b>: See the {@code setField} example above. It permissively accepts
+ *       a "string-or-null", meaning that it is okay to pass an actual string, or to pass {@code
+ *       null}. (This does not guarantee that passing {@code null} won't produce an exception at
+ *       runtime.) This also applies to a lambda parameter, but only if its type is provided
+ *       explicitly (the annotations in {@code @Nullable var s} and {@code @Nullable s} have no
+ *       defined meaning).
+ *   <li>On a <b>method return type</b>: See the {@code getField} example above. It returns a
+ *       "string-or-null", so while the caller might get a real string back, it might get {@code
+ *       null} as well, and should be prepared for that possibility.
+ *   <li>On a <b>field type</b>: See the {@code field} example above. It has the type
+ *       "string-or-null", so at times it might hold a string, and at times it might intentionally
+ *       hold {@code null}. (If the field will always be non-null <i>once initialized</i>, it's not
+ *       necessarily mandatory to add {@code @Nullable} to cover initialization-time only, unless an
+ *       object can actually be observed in its uninitialized state.)
+ *   <li>On a <b>type argument</b>: Within the compound type {@code MyList<@Nullable String>} we can
+ *       see a usage of the type "string-or-null". To understand what {@code @Nullable} means here,
+ *       read the {@code MyList<E>} API; every appearance you see of the {@code E} type will be
+ *       treated as nullable (unless it has its own nullness annotation, which takes precedence).
+ *       For a typical container type like this example, this means it can contain null
+ *       <i>elements</i>; if your list itself might be null as well, we can write {@code @Nullable
+ *       MyList<@Nullable String>}: a nullable list of nullable strings.
  *   <li>On the upper bound of a <b>type parameter</b>: For example, as seen in {@code interface
- *       List<E extends @Nullable Object>}. This means that a type argument supplied for that type
- *       parameter has the <i>option</i> of being nullable: {@code List<@Nullable String>}. (A
- *       non-null type argument, as in {@code List<String>}, is permitted either way.)
+ *       List<E extends @Nullable Object>}. This means that type arguments in that position
+ *       <i>may</i> be nullable (as in {@code List<@Nullable String>}). A non-null type argument, as
+ *       in {@code List<String>}, is permitted either way.
  *   <li>On a usage of a <b>type variable</b>: A type parameter, like the {@code E} declared in
  *       {@code interface List<E>}, introduces a <i>type variable</i> of the same name, usable only
  *       within the scope of the declaring API element. All the preceding examples using {@code
@@ -88,47 +92,44 @@ import java.lang.annotation.Target;
  *       projection</a> is also supported.)
  *   <li>On an <b>array type</b>: The nullness of the array and of its components can each be
  *       indicated separately. For example, in null-marked code, {@code @Nullable String[]} is a
- *       non-null array of nullable strings, whereas {@code String @Nullable []} is a nullable array
- *       of non-null strings. Note that arrays are treated as covariant: {@code String[]} (array of
- *       non-null strings) is assignable to {@code @Nullable String[]} (array of nullable strings).
- *   <li>On a parameter declaration of variable arity ("varargs"): Use {@code @Nullable String...}
- *       to indicate that the individual strings may be null. In contrast, {@code String @Nullable
- *       ...} would instead allow null to be passed as the entire array.
+ *       non-null array of nullable strings, and {@code String @Nullable []} is a nullable array of
+ *       non-null strings.
+ *   <li>On a "varargs" parameter: Use {@code @Nullable String...} to indicate that the individual
+ *       strings may be null. To let {@code null} be passed as the entire array, use {@code
+ *       String @Nullable ...}.
  *   <li>On a <b>nested type</b>: In most examples above, in place of {@code String} we might use a
  *       nested type such as {@code Map.Entry}. The Java syntax for annotating such a type as
  *       nullable looks like {@code Map.@Nullable Entry}.
  *   <li>On a <b>record component</b>: As expected, {@code @Nullable} here applies equally to the
  *       corresponding parameter type of the canonical constructor, and to the return type of the
- *       corresponding accessor method, if these are actually generated. If the constructor
- *       signature or accessor method is written explicitly, it must still be annotated explicitly.
+ *       corresponding accessor method, if these are actually generated. If the constructor argument
+ *       list or the accessor method is written explicitly, it must still be annotated explicitly.
  * </ul>
- *
- * <!-- TODO: move up -->
  *
  * <h2 id="applicability">Where it is not applicable</h2>
  *
  * <p>This annotation and {@link NonNull} are applicable to any <a
  * href="https://github.com/jspecify/jspecify/wiki/type-usages">type usage</a> <b>except</b> the
- * following cases, where they have no defined meaning:
+ * following cases, where they have no defined meaning and should not be used:
  *
  * <ul>
- *   <li>On a <b>local variable</b> declaration. JSpecify treats the nullness of a local variable as
- *       being a purely dynamic property, not being a fixed declarative property of its type. (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>). An analyzer should infer its nullness from how it
- *       is used, and that nullness can change over time. Note that this rule applies only to the
- *       <i>root type</i> of the variable; a type argument or array component type <em>of</em> that
- *       type is annotatable as usual.
- *   <li>On any<b> intrinsically non-null type usage</b>. Some type usages are incapable of
+ *   <li>On a <b>local variable</b> declaration. While the cases listed above benefit from
+ *       <i>declarative</i> nullness, the nullness of a local variable is better to determine
+ *       through analysis (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This rule applies only to the
+ *       <i>root type</i> of the variable; any type arguments, for example, can be annotated as
+ *       usual.
+ *   <li>On any <b>intrinsically non-null type usage</b>. Some type usages are incapable of
  *       including {@code null} by the rules of the Java language. Examples include any usage of a
  *       primitive type, a method return type in an annotation interface, or the type following
  *       {@code throws} or {@code catch}. In such locations, a nullness annotation could only be
- *       contradictory ({@code @Nullable}) or redundant ({@code @NonNull}).
+ *       either contradictory ({@code @Nullable}) or redundant ({@code @NonNull}).
  *   <li>On the root type in a <b>cast expression</b>. To inform an analyzer that an expression it
  *       sees as nullable is truly non-null, use an assertion or a method like {@link
  *       java.util.Objects#requireNonNull}. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       Subcomponents of the type (type arguments, etc.) are annotatable as usual.
  *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
- *       non-null, and nothing else about nullness is checked at runtime.
+ *       non-null, and nothing else about nullness is checked at runtime, so annotations would be
+ *       misleading.
  *   <li>On any part of a <b>receiver parameter</b> type. This parameter must specify the exact type
  *       of {@code this}; its nullness information cannot be altered in any way.
  *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage, <i>both</i>

@@ -15,7 +15,7 @@
  */
 
 /**
- * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.org</a> for general
+ * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.dev</a> for general
  * information.
  *
  * <h2>What's here?</h2>
@@ -25,17 +25,19 @@
  *
  * <h3 id="nullness">Nullness</h3>
  *
- * The primary annotations of interest are {@link NullMarked} and {@link Nullable}. Together they
- * provide <b>declarative, use-site nullness</b> for Java types. Less frequently, their negations
- * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
- *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
+ * The primary annotations of interest are {@link org.jspecify.annotations.NullMarked} and {@link
+ * org.jspecify.annotations.Nullable}. Together they provide <b>declarative, use-site nullness</b>
+ * for Java types. Less frequently, their negations may be useful: {@link
+ * org.jspecify.annotations.NullUnmarked} and {@link org.jspecify.annotations.NonNull},
+ * respectively.
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>
  *
- * <p>Each of these annotations defines a single meaning shared by all compatible tools (and
- * libraries). JSpecify documentation aims to provide unambiguous, tool-independent answers for how
+ * <p>The presence or absence of these annotations in your code has no direct effects, except on any
+ * tools and libraries you've adopted that voluntarily read and use the information.
+ *
+ * <p>Each of these annotations defines a single meaning shared by all compatible tools and
+ * libraries. JSpecify documentation aims to provide unambiguous, tool-independent answers for how
  * to properly annotate your APIs in all circumstances. However, tools are permitted to
  * <i>respond</i> to the information you provide however they see fit (or not at all). JSpecify
  * compatibility does not require that any particular finding must or must not be issued to the
