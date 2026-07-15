@@ -53,17 +53,16 @@ import java.lang.annotation.Target;
  * {@code @NullMarked}-annotated element, or neither annotation is present on any enclosing element.
  * No distinction is made between these cases.
  *
- * <p>The effects of being null-marked are described in the <a
- * href="NullMarked.html#effects">Effects</a> section of {@code NullMarked}.
+ * <p>The effects of being null-marked are described in the {@linkplain NullMarked##effects Effects}
+ * section of {@code NullMarked}.
  *
  * <h2 id="unspecified">Unspecified nullness</h2>
  *
- * <p>Within null-unmarked context, a type usage that is <a
- * href="Nullable.html#applicability">nullness-applicable</a> but has no nullness annotation
- * generally has <b>unspecified nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means
- * we <i>do not know</i> whether it includes or excludes {@code null} as a value. In such a case,
- * tools can vary widely in how strict or lenient their enforcement is, or might even be
- * configurable.
+ * <p>Within null-unmarked context, a type usage that is {@linkplain Nullable##applicability
+ * nullness-applicable} but has no nullness annotation generally has <b>unspecified nullness</b> (<a
+ * href="https://bit.ly/3ppb8ZC">Why?</a>). This means we <i>do not know</i> whether it includes or
+ * excludes {@code null} as a value. In such a case, tools can vary widely in how strict or lenient
+ * their enforcement is, or might even be configurable.
  *
  * <p>For more, please see this more <a
  * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
@@ -74,7 +73,7 @@ import java.lang.annotation.Target;
  *
  * <h2>Where it can be used</h2>
  *
- * The information in the <a href="NullMarked.html#where">Where it can be used</a> section of {@code
+ * The information in the {@linkplain NullMarked##where Where it can be used} section of {@code
  * NullMarked} applies as well to this annotation.
  */
 @Documented

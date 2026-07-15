@@ -77,16 +77,16 @@ import java.lang.annotation.Target;
  *       List<E extends @Nullable Object>}. This means that type arguments in that position
  *       <i>may</i> be nullable (as in {@code List<@Nullable String>}). A non-null type argument, as
  *       in {@code List<String>}, is permitted either way.
- *   <li>On a usage of a <b>type variable</b>: A type parameter, like the {@code T} declared in
- *       {@code interface Optional<T>}, introduces a <i>type variable</i> of the same name, usable
- *       only within the scope of the declaring API element. All the preceding examples using {@code
- *       String} are equally valid for a type variable like {@code E}. {@code @Nullable} continues
- *       to mean "or null" as always, regardless of whether the type argument "already" includes
- *       {@code null}. For example, suppose that {@code class Foo<E extends @Nullable Object>} has a
- *       method {@code @Nullable E eOrNull()}. Then, whether a variable {@code foo} is of type
- *       {@code Foo<String>} or {@code Foo<@Nullable String>}, the expression {@code foo.eOrNull()}
- *       is nullable either way. Using {@code @Nullable E} in this way is called <i>nullable
- *       projection</i>.
+ *   <li><span id="projection">On a usage of a <b>type variable</b>:</span> A type parameter, like
+ *       the {@code T} declared in {@code interface Optional<T>}, introduces a <i>type variable</i>
+ *       of the same name, usable only within the scope of the declaring API element. All the
+ *       preceding examples using {@code String} are equally valid for a type variable like {@code
+ *       E}. {@code @Nullable} continues to mean "or null" as always, regardless of whether the type
+ *       argument "already" includes {@code null}. For example, suppose that {@code class Foo<E
+ *       extends @Nullable Object>} has a method {@code @Nullable E eOrNull()}. Then, whether a
+ *       variable {@code foo} is of type {@code Foo<String>} or {@code Foo<@Nullable String>}, the
+ *       expression {@code foo.eOrNull()} is nullable either way. Using {@code @Nullable E} in this
+ *       way is called <i>nullable projection</i>.
  *   <li>On an <b>array type</b>: The nullness of the array and of its components can each be
  *       indicated separately. For example, in {@linkplain NullMarked null-marked} context,
  *       {@code @Nullable String[]} is a non-null array of nullable strings, and {@code

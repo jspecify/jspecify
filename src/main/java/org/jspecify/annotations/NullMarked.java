@@ -52,9 +52,9 @@ import java.lang.annotation.Target;
  * <p>Within null-marked context:
  *
  * <ul>
- *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are <a
- *       href="Nullable.html#applicability"><b>not applicable</b></a>, such as the root type in a
- *       local variable declaration, is unaffected.
+ *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are {@linkplain
+ *       Nullable##applicability <b>not applicable</b>}, such as the root type in a local variable
+ *       declaration, is unaffected.
  *   <li>A <b>wildcard</b> (as seen in {@code List<?>}) generally represents a nullable type, unless
  *       either it or its corresponding type parameter has a non-null upper bound. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)

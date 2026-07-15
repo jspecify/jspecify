@@ -80,16 +80,16 @@ import java.lang.annotation.Target;
  * <p>If {@code E} has a non-null upper bound, then the apparent projection {@code @NonNull E} is
  * redundant but harmless.
  *
- * <p><a href="Nullable.html#projection">Nullable projection</a> serves the equivalent purpose in
- * the opposite direction, and is far more commonly useful.
+ * <p>{@linkplain Nullable##projection Nullable projection} serves the equivalent purpose in the
+ * opposite direction, and is far more commonly useful.
  *
  * <p>If a type variable has <i>all</i> its usages being projected in one direction or the other, it
  * should be given a non-null upper bound, and any non-null projections can then be removed.
  *
  * <h2>Where it is applicable</h2>
  *
- * <p>This annotation type is applicable in all the <a href="Nullable.html#applicability">same
- * locations</a> as {@code Nullable}.
+ * <p>This annotation type is applicable in all the {@linkplain Nullable##applicability same
+ * locations} as {@code Nullable}.
  */
 @Documented
 @Target(TYPE_USE)
