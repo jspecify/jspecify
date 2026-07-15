@@ -26,6 +26,7 @@ const config = {
   url: 'https://jspecify.dev/',
   baseUrl: '/',
   trailingSlash: true,
+  onBrokenAnchors: 'throw',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
   onDuplicateRoutes: 'throw',
