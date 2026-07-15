@@ -57,8 +57,9 @@ The questions are as follows:
     *   Unrecognized: `class Foo<@NonNull T extends Foo>`
     *   Recognized: `void foo(@Nullable Bar bar)`
 
-1.  What is the [null-augmented type][spec-augmented-type] of a given type
-    usage, based only on JSpecify annotations on it or surrounding scopes?
+1.  What is the [null-augmented type][spec-augmented-type] of a
+    [given type usage][spec-augmented-type-of-usage], based only on JSpecify
+    annotations on it or surrounding scopes?
 
     ```java
     @NullMarked
@@ -159,5 +160,6 @@ all without affecting its conformance to JSpecify.
 [expression]: https://docs.google.com/document/d/1nbTnJ0-HubLnQPKSjK5CDZyoe6Al64vdlkoJxaYX9XY/preview?resourcekey=0-ADjPZnp8LN3dRX_ptjlagw&tab=t.0#bookmark=kix.2r97mw74ac6r
 [Map.get]: https://github.com/jspecify/jdk/blob/b7435cff373c527aad82a062c5605f6f9c1bb0de/src/java.base/share/classes/java/util/Map.java#L255
 [spec-augmented-type]: /docs/spec#augmented-type
+[spec-augmented-type-of-usage]: /docs/spec#augmented-type-of-usage
 [spec-declaration-locations]: /docs/spec#recognized-declaration
 [spec-type-use-location]: /docs/spec#recognized-type-use
