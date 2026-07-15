@@ -73,17 +73,17 @@ import java.lang.annotation.Target;
  *       extends @Nullable Object>}. This means that a <i>type argument</i> supplied for that type
  *       parameter is permitted to be nullable if desired: {@code List<@Nullable String>}. (A
  *       non-null type argument, as in {@code List<String>}, is permitted either way.)
- *   <li>On a usage of a <b>type variable</b>: A type parameter, like the {@code E} in {@code
- *       interface List<E>}, defines a "type variable" of the same name, usable only <i>within</i>
- *       the scope of the declaring API element. In any example using {@code String} above, a type
- *       variable like {@code E} might appear instead. {@code @Nullable} continues to mean "or null"
- *       as always, but notably, this works without regard to whether the type argument is
- *       <i>already</i> nullable. For example, suppose that {@code class Foo<E extends @Nullable
- *       Object>} has a method {@code @Nullable E eOrNull()}. Then, whether {@code foo} is of type
- *       {@code Foo<String>} or {@code Foo<@Nullable String>}, the expression {@code foo.eOrNull()}
- *       is nullable either way. Using {@code @Nullable E} in this way is called "nullable
- *       projection" (<a href="NonNull.html#projection">non-null projection</a> is likewise
- *       supported, but less commonly useful).
+ *   <li><span id="projection">On a usage of a <b>type variable</b>:</span> A type parameter, like
+ *       the {@code E} in {@code interface List<E>}, defines a "type variable" of the same name,
+ *       usable only <i>within</i> the scope of the declaring API element. In any example using
+ *       {@code String} above, a type variable like {@code E} might appear instead.
+ *       {@code @Nullable} continues to mean "or null" as always, but notably, this works without
+ *       regard to whether the type argument is <i>already</i> nullable. For example, suppose that
+ *       {@code class Foo<E extends @Nullable Object>} has a method {@code @Nullable E eOrNull()}.
+ *       Then, whether {@code foo} is of type {@code Foo<String>} or {@code Foo<@Nullable String>},
+ *       the expression {@code foo.eOrNull()} is nullable either way. Using {@code @Nullable E} in
+ *       this way is called "nullable projection" ({@linkplain NonNull##projection non-null
+ *       projection} is likewise supported, but less commonly useful).
  *   <li>On a <b>nested type</b>: In most examples above, in place of {@code String} we might use a
  *       nested type such as {@code Map.Entry}. The Java syntax for annotating such a type as
  *       nullable looks like {@code Map.@Nullable Entry}.

@@ -64,8 +64,8 @@ import java.lang.annotation.Target;
  *             href="https://bit.ly/3ppb8ZC">Why?</a>)
  *       </ul>
  *   <li>Otherwise, being null-marked has no consequence for any type usage where {@code @Nullable}
- *       and {@code @NonNull} are <a href="Nullable.html#applicability"><b>not applicable</b></a>,
- *       such as the root type of a local variable declaration.
+ *       and {@code @NonNull} are {@linkplain Nullable##applicability <b>not applicable</b>}, such
+ *       as the root type of a local variable declaration.
  *   <li>When a type variable has a nullable upper bound, such as the {@code E} in {@code class
  *       Foo<E extends @Nullable Bar>}), an unannotated usage of this type variable is not
  *       considered nullable, non-null, or even of "unspecified" nullness. Rather it has
