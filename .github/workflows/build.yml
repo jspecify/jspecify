@@ -21,22 +21,15 @@ defaults:
 
 jobs:
   build:
-    name: JDK ${{ matrix.java_version }}
+    name: Build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        java_version: [11, 17, 21]
-        experimental: [false]
-    env:
-      JAVA_VERSION: ${{ matrix.java_version }}
-    continue-on-error: ${{ matrix.experimental }}
     steps:
       - uses: actions/checkout@v7
-      - name: Set up JDK ${{ matrix.java_version }}
+      - name: Set up JDK
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: ${{ matrix.java_version }}
+          java-version: 26
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
       - run: |
