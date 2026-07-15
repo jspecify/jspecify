@@ -25,19 +25,19 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated <a href="https://github.com/jspecify/jspecify/wiki/type-usages">type
  * usage</a> (commonly a parameter type or return type) is considered to <i>exclude</i> {@code null}
- * as a value; rarely needed within {@linkplain NullMarked null-marked} code.
+ * as a value; rarely needed within {@linkplain NullMarked null-marked} context.
  *
  * <p>This annotation serves two primary purposes:
  *
  * <ul>
  *   <li>To mark any sporadic non-null type usages inside a scope that is not ready to be fully
- *       {@linkplain NullMarked null-marked} yet.
+ *       null-marked yet.
  *   <li>To perform a <i>non-null projection</i> of a type variable, explained below.
  * </ul>
  *
- * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
- * information common to all four nullness annotations. For a comprehensive introduction to
- * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
+ * <p>For important information common to all four nullness annotations, see {@link
+ * org.jspecify.annotations}. To learn more about JSpecify, see <a
+ * href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2 id="projection">Non-null projection</h2>
  *
@@ -46,7 +46,7 @@ import java.lang.annotation.Target;
  * nullable type argument.
  *
  * <pre>{@code
- * // All the below is null-marked code
+ * // Everything below is in null-marked context
  *
  * class MyOptional<T> { … }
  *
@@ -88,8 +88,8 @@ import java.lang.annotation.Target;
  *
  * <h2>Where it is applicable</h2>
  *
- * <p>{@code @NonNull} is applicable in all the <a href="Nullable.html#applicability">same
- * locations</a> as {@link Nullable}.
+ * <p>This annotation type is applicable in all the <a href="Nullable.html#applicability">same
+ * locations</a> as {@code Nullable}.
  */
 @Documented
 @Target(TYPE_USE)

@@ -27,9 +27,9 @@ import java.lang.annotation.Target;
 
 /**
  * Indicates that the annotated element and the code transitively {@linkplain
- * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are <b>null-unmarked
- * code</b>: there, type usages generally have <b>unspecified nullness</b> unless explicitly
- * annotated otherwise.
+ * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are in
+ * <b>null-unmarked context</b>: there, type usages generally have <a
+ * href="#unspecified">unspecified nullness</a> unless explicitly annotated otherwise.
  *
  * <p>This annotation's purpose is to ease migration of a large existing codebase to null-marked
  * status. It makes it possible to "flip the default" for new code added to a class or package even
@@ -41,14 +41,14 @@ import java.lang.annotation.Target;
  * information common to all four nullness annotations. For a comprehensive introduction to
  * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
  *
- * <h2>Null-marked and null-unmarked code</h2>
+ * <h2>Null-marked and null-unmarked contexts</h2>
  *
- * <p>{@link NullMarked} and this annotation work as a pair to include and exclude sections of code
- * from null-marked status (respectively). Specifically, code is considered null-marked if the most
- * narrowly enclosing element annotated with either of these two annotations exists and is annotated
- * with {@code @NullMarked}.
+ * <p>{@link NullMarked} puts enclosed code in null-marked context; this annotation puts it in
+ * null-unmarked context instead. Specifically, code is in null-marked context if the most narrowly
+ * enclosing element annotated with either of these two annotations exists and is annotated with
+ * {@code @NullMarked}.
  *
- * <p>Otherwise it is considered null-unmarked. This can happen in two ways: either it is more
+ * <p>Otherwise code is in null-unmarked context. This can happen in two ways: either it is more
  * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any
  * {@code @NullMarked}-annotated element, or neither annotation is present on any enclosing element.
  * No distinction is made between these cases.
@@ -56,9 +56,9 @@ import java.lang.annotation.Target;
  * <p>The effects of being null-marked are described in the <a
  * href="NullMarked.html#effects">Effects</a> section of {@code NullMarked}.
  *
- * <h2>Unspecified nullness</h2>
+ * <h2 id="unspecified">Unspecified nullness</h2>
  *
- * <p>Within null-unmarked code, a type usage that is <a
+ * <p>Within null-unmarked context, a type usage that is <a
  * href="Nullable.html#applicability">nullness-applicable</a> but has no nullness annotation
  * generally has <b>unspecified nullness</b> (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This means
  * we <i>do not know</i> whether it includes or excludes {@code null} as a value. In such a case,
@@ -69,7 +69,7 @@ import java.lang.annotation.Target;
  * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
  * discussion</a> of unspecified nullness.
  *
- * <p>There is no way for an individual type usage within null-marked code to have unspecified
+ * <p>There is no way for an individual type usage within null-marked context to have unspecified
  * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
  *
  * <h2>Where it can be used</h2>

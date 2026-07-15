@@ -28,15 +28,15 @@ import java.lang.annotation.Target;
 
 /**
  * Indicates that the annotated element and the code transitively {@linkplain
- * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are <b>null-marked
- * code</b>: there, type usages are generally considered to exclude {@code null} as a value unless
- * specified otherwise. Using this annotation avoids the need to write {@link NonNull @NonNull} many
- * times throughout your code.
+ * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are in <b>null-marked
+ * context</b>: there, type usages are generally considered to exclude {@code null} as a value
+ * unless specified otherwise. Using this annotation avoids the need to write {@link
+ * NonNull @NonNull} many times throughout your code.
  *
  * <p>This meaning does not apply to any enclosed element annotated with {@link
- * NullUnmarked @NullUnmarked}, nor any code enclosed within it. That is, the null-marked status of
- * a span of code depends only on the <i>nearest enclosing</i> element having <i>either</i> of these
- * two annotations.
+ * NullUnmarked @NullUnmarked}, nor any code enclosed within it. That is, whether a span of code is
+ * in null-marked context depends only on the <i>nearest enclosing</i> element having <i>either</i>
+ * of these two annotations.
  *
  * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
  * information common to all four nullness annotations. For a comprehensive introduction to
@@ -44,21 +44,20 @@ import java.lang.annotation.Target;
  *
  * <h2 id="effects">Effects of being null-marked</h2>
  *
- * <p>Within null-marked code, a type usage is generally considered to be non-null unless explicitly
- * annotated as {@link Nullable Nullable}. However, there are a few special cases to address.
+ * <p>In null-marked context, a type usage is generally considered to be non-null unless explicitly
+ * annotated with {@link Nullable @Nullable}. However, there are a few special cases to address.
  *
  * <h3 id="effects-special-cases">Special cases</h3>
  *
- * <p>Within null-marked code:
+ * <p>Within null-marked context:
  *
  * <ul>
  *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are <a
- *       href="Nullable.html#applicability"><b>not applicable</b></a>, such as the root type of a
+ *       href="Nullable.html#applicability"><b>not applicable</b></a>, such as the root type in a
  *       local variable declaration, is unaffected.
- *   <li>A <b>wildcard</b> with no upper bound generally represents a nullable type (unless the
- *       corresponding type parameter has a non-null upper bound itself). (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>) This wildcard might be either unbounded, as in
- *       {@code List<?>}, or with only a lower bound, as in {@code List<? super Integer>}.
+ *   <li>A <b>wildcard</b> (as seen in {@code List<?>}) generally represents a nullable type, unless
+ *       either it or its corresponding type parameter has a non-null upper bound. (<a
+ *       href="https://bit.ly/3ppb8ZC">Why?</a>)
  *   <li>A <b>type parameter</b> itself is a different case. It is never really "unbounded"; if no
  *       upper bound is given explicitly, then {@code Object} is filled in by the compiler. This
  *       means the example {@code class MyList<E>} is interpreted identically to {@code class
@@ -74,8 +73,8 @@ import java.lang.annotation.Target;
  *
  * {@code @NullMarked} and {@link NullUnmarked @NullUnmarked} can be used on any package, class,
  * method, or constructor declaration; {@code @NullMarked} can be used on a module declaration as
- * well. ({@link NullUnmarked @NullUnmarked} is not supported on modules, since it's already the
- * default.) Special considerations:
+ * well. ({@code @NullUnmarked} is not supported on modules, since it's already the default.)
+ * Special considerations:
  *
  * <ul>
  *   <li>To apply these annotations to an entire (single) <b>package</b>, create a <a
@@ -85,13 +84,13 @@ import java.lang.annotation.Target;
  *       very careful: it can easily happen that different versions of the package-info file are
  *       seen and used in different circumstances, causing the same classes to be interpreted
  *       inconsistently.
- *   <li>An advantage of Java <b>modules</b> is that you can make a lot of code null-marked with
- *       just a single annotation (before the {@code module} keyword). <b>Warning</b>: Even if you
- *       annotate the module for a library as {@code @NullMarked}, this has no effect for users who
- *       place the library on the class path; it affects only those who place the library on the <a
- *       href="https://openjdk.org/projects/jigsaw/quick-start">module path</a>, which is less
- *       commonly used.
- *   <li>Applying this annotation to an annotation interface does <i>not</i> express that
+ *   <li>An advantage of Java <b>modules</b> is that you can put a lot of code in null-marked
+ *       context with just a single annotation (before the {@code module} keyword). <b>Warning</b>:
+ *       Even if you annotate the module for a library as {@code @NullMarked}, this has no effect
+ *       for users who place the library on the class path; it affects only those who place the
+ *       library on the <a href="https://openjdk.org/projects/jigsaw/quick-start">module path</a>,
+ *       which is less commonly used.
+ *   <li>Applying this annotation to an <b>annotation interface</b> does <i>not</i> express that
  *       annotations of that type are synonymous with {@code @NullMarked}. It has the same meaning
  *       as it does anywhere else.
  *   <li>These annotations have no meaning when applied to a <b>record component</b> declaration (as
