@@ -28,8 +28,8 @@ import java.lang.annotation.Target;
 /**
  * Indicates that the annotated element and the code transitively {@linkplain
  * javax.lang.model.element.Element#getEnclosedElements() enclosed} within it are in
- * <b>null-unmarked context</b>: there, type usages generally have <a
- * href="#unspecified">unspecified nullness</a> unless explicitly annotated otherwise.
+ * <b>null-unmarked context</b>: there, type usages generally have {@linkplain ##unspecified
+ * unspecified nullness} unless explicitly annotated otherwise.
  *
  * <p>This annotation's purpose is to ease migration of a large existing codebase to null-marked
  * status. It makes it possible to "flip the default" for new code added to a class or package even

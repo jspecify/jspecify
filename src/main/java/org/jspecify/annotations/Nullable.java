@@ -137,7 +137,7 @@ import java.lang.annotation.Target;
  *
  * <h2>Unannotated type usages</h2>
  *
- * <p>For a type usage where nullness annotations are <a href="#applicability">applicable</a> but
+ * <p>For a type usage where nullness annotations are {@linkplain ##applicability applicable} but
  * not present, its nullness depends on whether it appears within null-marked context; see {@link
  * NullMarked} for details. Note in particular that nullness information from a superclass is never
  * automatically "inherited".
