@@ -1162,7 +1162,6 @@ If a type usage is the parameter of `equals(Object)` in a subclass of
 [JLS 5.1.10]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-5.html#jls-5.1.10
 [JLS 8.4.1]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-8.html#jls-8.4.1
 [JLS 8.4.8.1]: https://docs.oracle.com/javase/specs/jls/se23/html/jls-8.html#jls-8.4.8.1
-[JVMS 5.4.5]: https://docs.oracle.com/javase/specs/jvms/se14/html/jvms-5.html#jvms-5.4.5
 [`FluentIterable<E>`]: https://guava.dev/releases/snapshot-jre/api/docs/com/google/common/collect/FluentIterable.html
 [all worlds]: #multiple-worlds
 [all-worlds]: #multiple-worlds
