@@ -46,7 +46,7 @@ import java.lang.annotation.Target;
  * nullable type argument.
  *
  * <pre>{@code
- * // Everything below is in null-marked context
+ * // Everything below is in null-marked context:
  *
  * class MyOptional<T> { … }
  *
@@ -88,8 +88,8 @@ import java.lang.annotation.Target;
  *
  * <h2>Where it is applicable</h2>
  *
- * <p>This annotation type is applicable in all the {@linkplain Nullable##applicability same
- * locations} as {@code Nullable}.
+ * <p>This annotation is applicable in all the {@linkplain Nullable##applicability same locations}
+ * as {@code Nullable}.
  */
 @Documented
 @Target(TYPE_USE)

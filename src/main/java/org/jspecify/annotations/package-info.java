@@ -25,8 +25,8 @@
  *
  * <h3 id="nullness">Nullness</h3>
  *
- * The primary annotation types of interest are {@link NullMarked} and {@link Nullable}. Together
- * they provide <b>declarative, use-site nullness</b> for Java type usages. Less frequently, their
+ * The primary annotations of interest are {@link NullMarked} and {@link Nullable}. Together they
+ * provide <b>declarative, use-site nullness</b> for Java type usages. Less frequently, their
  * negations may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>

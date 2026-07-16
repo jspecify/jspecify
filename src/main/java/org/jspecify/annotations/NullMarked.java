@@ -93,9 +93,6 @@ import java.lang.annotation.Target;
  *   <li>Applying this annotation to an <b>annotation interface</b> does <i>not</i> express that
  *       annotations of that type are synonymous with {@code @NullMarked}. It has the same meaning
  *       as it does anywhere else.
- *   <li>These annotations have no meaning when applied to a <b>record component</b> declaration (as
- *       in {@code record Foo(@NullMarked String bar) {}}). ({@link Nullable} and {@link NonNull}
- *       are still meaningful for record components.)
  *   <li>If both {@code @NullMarked} and {@code @NullUnmarked} appear together on the same element,
  *       <i>neither</i> one is recognized.
  * </ul>
