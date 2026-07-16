@@ -18,6 +18,7 @@
 // Note: type annotations allow type checking and IDEs autocompletion
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import remarkSmartypants from 'remark-smartypants';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -60,6 +61,7 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          remarkPlugins: [remarkSmartypants],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -67,6 +69,7 @@ const config = {
         },
         blog: {
           showReadingTime: true,
+          remarkPlugins: [remarkSmartypants],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
