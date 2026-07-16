@@ -1,3 +1,7 @@
+---
+sidebar_position: 8
+---
+
 # Tool Conformance
 
 This document is an attempt to clarify how to describe what the JSpecify
