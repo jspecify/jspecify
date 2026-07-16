@@ -214,7 +214,7 @@ JSpecify design stands, it feels like we *so nearly* have that, but then
 These are fair criticisms, but:
 
 *   Note that `List<? super Foo>` is a "hole" like that too. It can hold a list
-    with nullable elements, and for good reason[^1] So we aren’t creating a hole
+    with nullable elements, and for good reason.[^1] So we aren’t creating a hole
     where *none* would otherwise exist. And it would be strange if you couldn’t
     assign a `List<? super Foo>` to `List<?>`.
 
