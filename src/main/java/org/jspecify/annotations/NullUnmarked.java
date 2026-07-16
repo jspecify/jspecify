@@ -31,11 +31,12 @@ import java.lang.annotation.Target;
  * <b>null-unmarked context</b>: there, type usages generally have {@linkplain ##unspecified
  * unspecified nullness} unless explicitly annotated otherwise.
  *
- * <p>This annotation's purpose is to ease migration of a large existing codebase to null-marked
- * status. It makes it possible to "flip the default" for new code added to a class or package even
- * before that class or package has been fully migrated. Since new code is the most important code
- * to analyze, this is strongly recommended as a temporary measure whenever necessary. However, once
- * a codebase has been fully migrated it would be appropriate to ban use of this annotation.
+ * <p>This annotation's purpose is to ease progressive migration of a large codebase. If some class
+ * or package can't be fully migrated yet, you can still make it {@linkplain NullMarked null-marked}
+ * by using this annotation on the portions that still need work. This practice is useful because it
+ * flips the default for <i>new</i> code added later, which is the most important code to analyze.
+ *
+ * <p>Once a codebase has been fully migrated it would be reasonable to ban use of this annotation.
  *
  * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
  * information common to all four nullness annotations. For a comprehensive introduction to
@@ -44,11 +45,11 @@ import java.lang.annotation.Target;
  * <h2>Null-marked and null-unmarked contexts</h2>
  *
  * <p>{@link NullMarked} puts enclosed code in null-marked context; this annotation puts it in
- * null-unmarked context instead. Specifically, code is in null-marked context if the most narrowly
- * enclosing element annotated with either of these two annotations exists and is annotated with
- * {@code @NullMarked}.
+ * null-unmarked context instead. These annotations work as an inclusion-exclusion pair: of the
+ * annotations of <i>either</i> type on all enclosing elements (methods, classes, etc.), only the
+ * <i>nearest</i> (most narrowly enclosing) one is in effect.
  *
- * <p>Otherwise code is in null-unmarked context. This can happen in two ways: either it is more
+ * <p>Otherwise, code is in null-unmarked context. This can happen in two ways: either it is more
  * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any
  * {@code @NullMarked}-annotated element, or neither annotation is present on any enclosing element.
  * No distinction is made between these cases.

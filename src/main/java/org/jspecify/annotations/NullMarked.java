@@ -33,10 +33,10 @@ import java.lang.annotation.Target;
  * unless specified otherwise. Using this annotation avoids the need to write {@link
  * NonNull @NonNull} many times throughout your code.
  *
- * <p>This meaning does not apply to any enclosed element annotated with {@link
- * NullUnmarked @NullUnmarked}, nor any code enclosed within it. That is, whether a span of code is
- * in null-marked context depends only on the <i>nearest enclosing</i> element having <i>either</i>
- * of these two annotations.
+ * <p>Conversely, {@link NullUnmarked} puts its enclosed code in null-unmarked context, the same as
+ * unannotated code. These annotations work as an inclusion-exclusion pair: of the annotations of
+ * <i>either</i> type on all enclosing elements (methods, classes, etc.), only the <i>nearest</i>
+ * (most narrowly enclosing) one is in effect.
  *
  * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
  * information common to all four nullness annotations. For a comprehensive introduction to
@@ -54,7 +54,7 @@ import java.lang.annotation.Target;
  * <ul>
  *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are {@linkplain
  *       Nullable##applicability <b>not applicable</b>}, such as the root type in a local variable
- *       declaration, is unaffected.
+ *       declaration, is unaffected by being in null-marked context.
  *   <li>A <b>wildcard</b> (as seen in {@code List<?>}) generally represents a nullable type, unless
  *       either it or its corresponding type parameter has a non-null upper bound. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
