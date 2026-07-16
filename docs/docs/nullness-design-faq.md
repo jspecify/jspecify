@@ -116,7 +116,7 @@ notation so we can do that.
 Brevity is one reason. It really helps in complex discussions involving such
 types, especially since `@Nullable` and `@NonNull` look so similar visually.
 
-Another important benefit is that it eliminates the _superficial_ difference
+Another important benefit is that it eliminates the *superficial* difference
 between our example type and `@NonNull Foo<@Nullable Bar, @NonNull Qux>`, which
 also helps communication.
 
@@ -214,9 +214,9 @@ JSpecify design stands, it feels like we *so nearly* have that, but then
 These are fair criticisms, but:
 
 *   Note that `List<? super Foo>` is a "hole" like that too. It can hold a list
-    with nullable elements, and for good reason.[^1] So we aren’t creating a hole
-    where *none* would otherwise exist. And it would be strange if you couldn’t
-    assign a `List<? super Foo>` to `List<?>`.
+    with nullable elements, and for good reason.[^1] So we aren’t creating a
+    hole where *none* would otherwise exist. And it would be strange if you
+    couldn’t assign a `List<? super Foo>` to `List<?>`.
 
 *   When we say "unbounded wildcard" we might mean either (a) there is no bound
     provided, or (b) no (possibly-implicit) bound actually *exists* in effect.
