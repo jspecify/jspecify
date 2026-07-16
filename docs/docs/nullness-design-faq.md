@@ -116,7 +116,7 @@ notation so we can do that.
 Brevity is one reason. It really helps in complex discussions involving such
 types, especially since `@Nullable` and `@NonNull` look so similar visually.
 
-Another important benefit is that it eliminates the_ superficial_ difference
+Another important benefit is that it eliminates the _superficial_ difference
 between our example type and `@NonNull Foo<@Nullable Bar, @NonNull Qux>`, which
 also helps communication.
 
