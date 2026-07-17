@@ -55,8 +55,9 @@ import java.lang.annotation.Target;
  *   <li>On a <b>parameter type</b>: See the {@code setField} example above. It permissively accepts
  *       a "string-or-null", meaning that it is okay to pass an actual string, or to pass {@code
  *       null}. (This does not guarantee that passing {@code null} won't produce an exception at
- *       runtime.) Lambda expression parameters work in the same way <i>if</i> their types are
- *       written explicitly.
+ *       runtime. <a
+ *       href="https://jspecify.dev/docs/nullness-design-faq/#runtime-guarantees">Why?</a>) Lambda
+ *       expression parameters work in the same way <i>if</i> their types are written explicitly.
  *   <li>On a <b>method return type</b>: See the {@code getField} example above. It returns a
  *       "string-or-null", so while the caller might get a real string back, it might get {@code
  *       null} as well, and should be prepared for that possibility.
@@ -138,7 +139,8 @@ import java.lang.annotation.Target;
  * <p>For a type usage where nullness annotations are {@linkplain ##applicability applicable} but
  * not present, its nullness depends on whether it appears within null-marked context; see {@link
  * NullMarked} for details. Note in particular that nullness information from a superclass is never
- * automatically "inherited".
+ * automatically "inherited." (<a
+ * href="https://jspecify.dev/docs/nullness-design-faq/#nullable-equals">Why?</a>)
  */
 @Documented
 @Target(TYPE_USE)
