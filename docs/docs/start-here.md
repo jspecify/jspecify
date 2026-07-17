@@ -120,7 +120,7 @@ videos:
 [google group]: https://groups.google.com/g/jspecify-discuss
 [javadoc]: https://jspecify.dev/docs/api/org/jspecify/annotations/package-summary.html
 [faq]: http://github.com/jspecify/jspecify/wiki/jspecify-faq
-[nullness design faq]: https://github.com/jspecify/jspecify/wiki/nullness-design-FAQ
+[nullness design faq]: /docs/nullness-design-faq
 [issues]: https://github.com/jspecify/jspecify/issues
 [release]: https://search.maven.org/artifact/org.jspecify/jspecify/1.0.0/jar
 [reference implementation]: https://github.com/jspecify/jspecify-reference-checker
