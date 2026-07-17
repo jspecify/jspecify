@@ -113,13 +113,15 @@ import java.lang.annotation.Target;
  *       annotation in this location could only be either contradictory or redundant.
  *   <li>On a <b>local variable</b> declaration (root type only). While the cases listed above
  *       benefit from <i>declarative</i> nullness, the nullness of a local variable is more properly
- *       determined through flow analysis (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This rule
+ *       determined through flow analysis (<a
+ *       href="https://jspecify.dev/docs/nullness-design-faq/#local-variables">Why?</a>). This rule
  *       applies only to the <i>root type</i> of the variable; type components, such as type
  *       arguments, follow the usual rules.
  *   <li>In a <b>cast expression</b> (root type only). To inform an analyzer that an expression it
  *       sees as nullable is truly non-null, use an assertion or a method like {@link
- *       java.util.Objects#requireNonNull}. (<a href="https://bit.ly/3ppb8ZC">Why?</a>) Type
- *       components, such as type arguments, follow the usual rules.
+ *       java.util.Objects#requireNonNull}. (<a
+ *       href="https://jspecify.dev/docs/nullness-design-faq/#casts">Why?</a>) Type components, such
+ *       as type arguments, follow the usual rules.
  *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
  *       non-null, as discussed above, and nothing else about nullness is checked at runtime.
  *   <li>On any part of a <b>receiver parameter</b> type (<a
