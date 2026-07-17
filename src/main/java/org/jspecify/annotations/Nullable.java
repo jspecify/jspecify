@@ -108,9 +108,9 @@ import java.lang.annotation.Target;
  * following cases, where they have no defined meaning and should not be used:
  *
  * <ul>
- *   <li>On any <b>intrinsically non-null type usage</b>: one that is incapable of
- *       including {@code null} by the rules of the Java language, like the type following {@code throws}.
- *       A nullness annotation in this location could only be either contradictory or redundant.
+ *   <li>On any <b>intrinsically non-null type usage</b>: one that is incapable of including {@code
+ *       null} by the rules of the Java language, like the type following {@code throws}. A nullness
+ *       annotation in this location could only be either contradictory or redundant.
  *   <li>On a <b>local variable</b> declaration (root type only). While the cases listed above
  *       benefit from <i>declarative</i> nullness, the nullness of a local variable is more properly
  *       determined through flow analysis (<a href="https://bit.ly/3ppb8ZC">Why?</a>). This rule

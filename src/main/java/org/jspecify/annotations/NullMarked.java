@@ -52,9 +52,6 @@ import java.lang.annotation.Target;
  * <p>Within null-marked context:
  *
  * <ul>
- *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are {@linkplain
- *       Nullable##applicability <b>not applicable</b>}, such as the root type in a local variable
- *       declaration, is unaffected by being in null-marked context.
  *   <li>A <b>wildcard</b> (as seen in {@code List<?>}) generally represents a nullable type, unless
  *       either it or its corresponding type parameter has a non-null upper bound. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
@@ -64,9 +61,12 @@ import java.lang.annotation.Target;
  *       MyList<E extends Object>}, making the upper bound <i>non-null</i> {@code Object}. (<a
  *       href="https://bit.ly/3ppb8ZC">Why?</a>)
  *   <li>When a type parameter has a nullable upper bound, such as the {@code E} in {@code class
- *       Foo<E extends @Nullable Bar>}, an unannotated usage of the associated type variable (within
- *       that class) must be handled conservatively: it is nullable when read, yet cannot have
- *       {@code null} assigned to it.
+ *       Foo<E extends @Nullable Bar>}, an unannotated usage of the associated <b>type variable</b>
+ *       (within that class) must be handled conservatively: it is nullable when read, yet cannot
+ *       have {@code null} assigned to it.
+ *   <li>Any type usage where {@code @Nullable} and {@code @NonNull} are {@linkplain
+ *       Nullable##applicability <b>not applicable</b>}, such as the root type in a local variable
+ *       declaration, is unaffected by being in null-marked context.
  * </ul>
  *
  * <h2 id="where">Where it can be used</h2>
