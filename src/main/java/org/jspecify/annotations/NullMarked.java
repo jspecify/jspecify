@@ -54,12 +54,12 @@ import java.lang.annotation.Target;
  * <ul>
  *   <li>A <b>wildcard</b> (as seen in {@code List<?>}) generally represents a nullable type, unless
  *       either it or its corresponding type parameter has a non-null upper bound. (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *       href="https://jspecify.dev/docs/nullness-design-faq/#wildcards-and-bounds">Why?</a>)
  *   <li>A <b>type parameter</b> itself is a different case. It is never really "unbounded"; if no
  *       upper bound is given explicitly, then {@code Object} is filled in by the compiler. This
  *       means the example {@code class MyList<E>} is interpreted identically to {@code class
  *       MyList<E extends Object>}, making the upper bound <i>non-null</i> {@code Object}. (<a
- *       href="https://bit.ly/3ppb8ZC">Why?</a>)
+ *       href="https://jspecify.dev/docs/nullness-design-faq/#type-parameters-and-bounds">Why?</a>)
  *   <li>When a type parameter has a nullable upper bound, such as the {@code E} in {@code class
  *       Foo<E extends @Nullable Bar>}, an unannotated usage of the associated <b>type variable</b>
  *       (within that class) must be handled conservatively: it is nullable when read, yet cannot

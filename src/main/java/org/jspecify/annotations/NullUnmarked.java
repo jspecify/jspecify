@@ -61,16 +61,18 @@ import java.lang.annotation.Target;
  *
  * <p>Within null-unmarked context, a type usage that is {@linkplain Nullable##applicability
  * nullness-applicable} but has no nullness annotation generally has <b>unspecified nullness</b> (<a
- * href="https://bit.ly/3ppb8ZC">Why?</a>). This means we <i>do not know</i> whether it includes or
- * excludes {@code null} as a value. In such a case, tools can vary widely in how strict or lenient
- * their enforcement is, or might even be configurable.
+ * href="https://jspecify.dev/docs/nullness-design-faq/#unspecified-nullness">Why?</a>). This means
+ * we <i>do not know</i> whether it includes or excludes {@code null} as a value. In such a case,
+ * tools can vary widely in how strict or lenient their enforcement is, or might even be
+ * configurable.
  *
  * <p>For more, please see this more <a
  * href="https://github.com/jspecify/jspecify/wiki/nullness-unspecified">comprehensive
  * discussion</a> of unspecified nullness.
  *
  * <p>There is no way for an individual type usage within null-marked context to have unspecified
- * nullness. (<a href="https://bit.ly/3ppb8ZC">Why?</a>)
+ * nullness. (<a
+ * href="https://jspecify.dev/docs/nullness-design-faq/#type-use-unspecified-nullness">Why?</a>)
  *
  * <h2>Where it can be used</h2>
  *
