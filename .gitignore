@@ -77,6 +77,10 @@ local.properties
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.idea/**/*.iml
+.gradle-user/
+.idea/codeStyles/
+.idea/inspectionProfiles/
 
 # AWS User-specific
 .idea/**/aws.xml

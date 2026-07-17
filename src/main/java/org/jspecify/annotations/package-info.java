@@ -15,24 +15,25 @@
  */
 
 /**
- * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.org</a> for general
+ * JSpecify annotations. See <a href="https://jspecify.dev">jspecify.dev</a> for general
  * information.
  *
  * <h2>What's here?</h2>
  *
- * This package will contain annotations supporting a variety of static analyses. For now it
- * supports just nullness analysis.
+ * This package contains annotations supporting nullness analysis; in the future it might cover
+ * other kinds of static analysis as well.
  *
  * <h3 id="nullness">Nullness</h3>
  *
  * The primary annotations of interest are {@link NullMarked} and {@link Nullable}. Together they
- * provide <b>declarative, use-site nullness</b> for Java types. Less frequently, their negations
- * may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
- *
- * <p>For a comprehensive introduction to JSpecify, please see <a
- * href="https://jspecify.dev">jspecify.org</a>.
+ * provide <b>declarative, use-site nullness</b> for Java type usages. Less frequently, their
+ * negations may be useful: {@link NullUnmarked} and {@link NonNull}, respectively.
  *
  * <h2 id="tool-behavior">Note on tool behavior</h2>
+ *
+ * <p>The presence of these annotations in your code has well-defined semantic meaning, but no
+ * <i>direct</i> consequences. It is up to your adopted tools and libraries to voluntarily read and
+ * act on the information they provide.
  *
  * <p>Each of these annotations defines a single meaning shared by all compatible tools (and
  * libraries). JSpecify documentation aims to provide unambiguous, tool-independent answers for how
