@@ -38,9 +38,9 @@ import java.lang.annotation.Target;
  * <i>either</i> type on all enclosing elements (methods, classes, etc.), only the <i>nearest</i>
  * (most narrowly enclosing) one is in effect.
  *
- * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
- * information common to all four nullness annotations. For a comprehensive introduction to
- * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
+ * <p>For important information common to all four nullness annotations, see {@link
+ * org.jspecify.annotations}. To learn more about JSpecify, see <a
+ * href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2 id="effects">Effects of being null-marked</h2>
  *

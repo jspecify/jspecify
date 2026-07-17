@@ -39,9 +39,9 @@ import java.lang.annotation.Target;
  * List<@Nullable String> getList() { … }
  * }</pre>
  *
- * <p>The {@linkplain org.jspecify.annotations package documentation} has some important general
- * information common to all four nullness annotations. For a comprehensive introduction to
- * JSpecify, please see <a href="https://jspecify.dev">jspecify.dev</a>.
+ * <p>For important information common to all four nullness annotations, see {@link
+ * org.jspecify.annotations}. To learn more about JSpecify, see <a
+ * href="https://jspecify.dev">jspecify.dev</a>.
  *
  * <h2>Meaning for each kind of type usage</h2>
  *
