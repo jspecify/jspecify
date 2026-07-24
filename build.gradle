@@ -87,7 +87,7 @@ node {
 
 tasks.register('buildDocs') {
     group = 'Build'
-    description = 'Builds the jspecify.org website.'
+    description = 'Builds the jspecify.dev website.'
     dependsOn('npm_run_build')
     dependsOn('javadoc')
 }
