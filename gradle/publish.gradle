@@ -18,63 +18,49 @@
 
 apply plugin: 'maven-publish'
 apply plugin: 'signing'
-apply plugin: 'io.github.gradle-nexus.publish-plugin'
+apply plugin: 'com.vanniktech.maven.publish'
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            pom {
-                groupId = 'org.jspecify'
-                artifactId = 'jspecify'
-                name = 'JSpecify annotations'
-                description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
-                url = 'https://jspecify.dev/'
-                from components.java
-                licenses {
-                    license {
-                        name = 'The Apache License, Version 2.0'
-                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                scm {
-                    connection = 'scm:git:git@github.com:jspecify/jspecify.git'
-                    developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
-                    url = 'https://github.com/jspecify/jspecify/'
-                }
-                developers {
-                    // These are here only because Sonatype requires us to list someone.
-                    // Any project member is welcome to add themselves if they want to.
-                    developer {
-                        id = 'kevinb9n'
-                        name = 'Kevin Bourrillion'
-                        email = 'kevinb9n@gmail.com'
-                    }
-                    developer {
-                        id = 'netdpb'
-                        name = 'David P. Baker'
-                        email = 'dpb@google.com'
-                        organization = 'Google'
-                        timezone = 'America/New_York'
-                    }
-                    developer {
-                        id = 'cpovirk'
-                        name = 'Chris Povirk'
-                        email = 'cpovirk@google.com'
-                        organization = 'Google'
-                        timezone = 'America/New_York'
-                    }
-                }
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
+
+    pom {
+        name = 'JSpecify annotations'
+        description = 'An artifact of well-named and well-specified annotations to power static analysis checks'
+        url = 'https://jspecify.dev/'
+        licenses {
+            license {
+                name = 'The Apache License, Version 2.0'
+                url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
             }
         }
-    }
-}
-
-nexusPublishing {
-    repositories {
-        // see https://central.sonatype.org/publish/publish-portal-ossrh-staging-api/#configuration
-        sonatype {
-            nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
+        scm {
+            connection = 'scm:git:git@github.com:jspecify/jspecify.git'
+            developerConnection = 'scm:git:git@github.com:jspecify/jspecify.git'
+            url = 'https://github.com/jspecify/jspecify/'
+        }
+        developers {
+            // These are here only because Sonatype requires us to list someone.
+            // Any project member is welcome to add themselves if they want to.
+            developer {
+                id = 'kevinb9n'
+                name = 'Kevin Bourrillion'
+                email = 'kevinb9n@gmail.com'
+            }
+            developer {
+                id = 'netdpb'
+                name = 'David P. Baker'
+                email = 'dpb@google.com'
+                organization = 'Google'
+                timezone = 'America/New_York'
+            }
+            developer {
+                id = 'cpovirk'
+                name = 'Chris Povirk'
+                email = 'cpovirk@google.com'
+                organization = 'Google'
+                timezone = 'America/New_York'
+            }
         }
     }
 }
@@ -84,7 +70,6 @@ def pgpPassword = findProperty('pgpPassword')
 
 signing {
     useInMemoryPgpKeys(privateKey, pgpPassword)
-    sign publishing.publications.mavenJava
 }
 
 tasks.withType(Sign).configureEach {
