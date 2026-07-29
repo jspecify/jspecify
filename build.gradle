@@ -18,7 +18,7 @@ plugins {
     id 'java-library'
     id 'com.diffplug.spotless' version '8.8.0'
     id 'com.github.node-gradle.node' version '7.1.0'
-    id 'io.github.gradle-nexus.publish-plugin' version '2.0.0' apply false
+    id 'com.vanniktech.maven.publish' version '0.37.0'
     id 'biz.aQute.bnd.builder' version '7.3.0'
 }
 
@@ -37,16 +37,11 @@ apply from: "gradle/format.gradle"
 apply from: "gradle/publish.gradle"
 
 java {
-    if (javaVersion.canCompileOrRun(21)) {
-        withJavadocJar()
-    }
-    withSourcesJar()
-
     sourceCompatibility = 8
     targetCompatibility = 8
     // but compile against newer JDK libraries so that we can use @Target({..., MODULE})
 
-    tasks.named('sourcesJar') {
+    tasks.matching { it.name == 'sourcesJar' }.configureEach {
         exclude('**.class')
     }
 }
