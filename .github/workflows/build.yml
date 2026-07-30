@@ -19,6 +19,9 @@ defaults:
   run:
     shell: bash --noprofile --norc -e -o pipefail -x {0}
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build

@@ -26,6 +26,9 @@ on:
       - 'src/main/**'
       - 'src/java9/**'
 
+permissions:
+  contents: read
+
 jobs:
   # Runs on PRs and push to ensure the documentation successfully builds.
   build:
