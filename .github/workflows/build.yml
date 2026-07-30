@@ -25,6 +25,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
       - name: Set up JDK
         uses: actions/setup-java@e498d2a66a953492f322542257b22125c989b422
         with:
@@ -45,6 +47,8 @@ jobs:
     steps:
       - name: Check out the code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
       - name: Set up Java
         uses: actions/setup-java@e498d2a66a953492f322542257b22125c989b422
         with:
@@ -69,11 +73,13 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           path: jspecify
+          persist-credentials: false
       - name: Check out the reference checker
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           repository: ${{ github.repository_owner }}/${{ env.reference_checker_repo }}
           path: ${{ env.reference_checker_repo }}
+          persist-credentials: false
       - name: Set up Java
         uses: actions/setup-java@e498d2a66a953492f322542257b22125c989b422
         with:

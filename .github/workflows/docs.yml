@@ -36,6 +36,8 @@ jobs:
     steps:
       - name: Check out project
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
 
       - name: Set up Java
         uses: actions/setup-java@e498d2a66a953492f322542257b22125c989b422
