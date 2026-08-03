@@ -31,7 +31,7 @@ jobs:
           distribution: temurin
           java-version: 26
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
       - run: |
           ./gradlew spotlessCheck build publishToMavenLocal --no-daemon
 
@@ -51,7 +51,7 @@ jobs:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
       - name: Publish conformance tests snapshot
         run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository --no-configuration-cache
         env:
@@ -80,7 +80,7 @@ jobs:
           distribution: temurin
           java-version: ${{ env.JAVA_VERSION }}
       - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v6
+        uses: gradle/actions/setup-gradle@v6.2.0
       - name: Run Conformance Tests
         if: github.base_ref == 'main' # only PRs onto main
         continue-on-error: true
