@@ -53,10 +53,10 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
       - name: Publish conformance tests snapshot
-        run: ./gradlew publishConformanceTestsPublicationToSonatypeRepository --no-configuration-cache
+        run: ./gradlew publishConformanceTestsPublicationToMavenCentralRepository --no-configuration-cache
         env:
-          ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.sonatype_username }}
-          ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.sonatype_password }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.sonatype_username }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.sonatype_password }}
 
   reference-checker-tests:
     name: Run Reference Checker Tests
