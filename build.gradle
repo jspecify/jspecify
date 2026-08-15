@@ -20,7 +20,7 @@ plugins {
     id 'com.github.node-gradle.node' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0' apply false
     id 'net.ltgt.errorprone' version '3.0.1'
-    id 'biz.aQute.bnd.builder' version '7.1.0'
+    id 'biz.aQute.bnd.builder' version '7.3.0'
 }
 
 ext {
