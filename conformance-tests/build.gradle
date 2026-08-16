@@ -19,6 +19,7 @@ import org.gradle.api.JavaVersion
 plugins {
     id 'java-library'
     id 'distribution'
+    id 'maven-publish'
 }
 
 group = 'org.jspecify.conformance'
