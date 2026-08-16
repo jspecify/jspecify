@@ -39,7 +39,7 @@ class NullExclusiveThreadLocal {
 
     ThreadLocal<Object> x5 = ThreadLocal.withInitial(() -> "");
 
-    // :: error: jspecify_nullness_mismatch
+    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
     ThreadLocal.withInitial(() -> null);
   }
 
