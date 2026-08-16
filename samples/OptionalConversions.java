@@ -17,31 +17,29 @@ import com.google.common.base.Optional;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
-// The warnings below will go away once Optional is @NullMarked.
+// Because Optional isn't @NullMarked, the conversions below have unspecified nullness, and no
+// tool is obligated to report anything about them. This checker doesn't.
 @NullMarked
 class OptionalConversions {
   java.util.Optional<Foo> to0(Optional<Foo> p) {
-    // jspecify_but_expect_warning
     return Optional.toJavaUtil(p);
   }
 
   java.util.Optional<Foo> to1(@Nullable Optional<Foo> p) {
-    // jspecify_nullness_mismatch
+    // :: error: jspecify_nullness_mismatch
     return Optional.toJavaUtil(p);
   }
 
   Optional<Foo> from0(java.util.Optional<Foo> p) {
-    // jspecify_but_expect_warning
     return Optional.fromJavaUtil(p);
   }
 
   Optional<Foo> from1(java.util.@Nullable Optional<Foo> p) {
-    // jspecify_nullness_mismatch
+    // :: error: jspecify_nullness_mismatch
     return Optional.fromJavaUtil(p);
   }
 
   java.util.Optional<Foo> toUsingInstanceMethod(Optional<Foo> p) {
-    // jspecify_but_expect_warning
     return p.toJavaUtil();
   }
 
