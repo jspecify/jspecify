@@ -51,17 +51,24 @@ java {
     }
 }
 
-tasks.withType(AbstractArchiveTask).configureEach {
-    preserveFileTimestamps = false
-    reproducibleFileOrder = true
-    filePermissions {
-        unix('rw-r--r--')
+allprojects {
+    tasks.withType(AbstractArchiveTask).configureEach {
+        preserveFileTimestamps = false
+        reproducibleFileOrder = true
+        filePermissions {
+            unix('rw-r--r--')
+        }
+        dirPermissions {
+            unix('rwxr-xr-x')
+        }
     }
-    dirPermissions {
-        unix('rwxr-xr-x')
+
+    tasks.withType(Jar).configureEach {
+        metaInf {
+            from(rootProject.file('LICENSE'))
+        }
     }
 }
-
 
 jar {
     manifest {
