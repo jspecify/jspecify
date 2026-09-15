@@ -54,6 +54,9 @@ java {
 distributions {
     main {
         contents {
+            into('/') {
+                from '../LICENSE'
+            }
             into('/assertions') {
                 from sourceSets.assertions.java
             }
