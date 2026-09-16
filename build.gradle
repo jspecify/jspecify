@@ -68,6 +68,13 @@ allprojects {
             from(rootProject.file('LICENSE'))
         }
     }
+
+    tasks.withType(Test).configureEach {
+        testLogging {
+            showStandardStreams = true
+            exceptionFormat "full"
+        }
+    }
 }
 
 jar {
