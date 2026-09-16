@@ -33,10 +33,11 @@ import java.lang.annotation.Target;
  *
  * <p>This annotation's purpose is to ease progressive migration of a large codebase. If some class
  * or package can't be fully migrated yet, you can still make it {@linkplain NullMarked null-marked}
- * by using this annotation on the portions that still need work. This practice is useful because it
- * flips the default for <i>new</i> code added later, which is the most important code to analyze.
+ * as long as you use this annotation on the portions that still need work. This practice is useful
+ * because it flips the default for <i>new</i> code added later, which is the most important code to
+ * analyze.
  *
- * <p>Once a codebase has been fully migrated it would be reasonable to ban use of this annotation.
+ * <p>Once a codebase has been fully migrated, it would be reasonable to ban use of this annotation.
  *
  * <p>For important information common to all four nullness annotations, see {@link
  * org.jspecify.annotations}. To learn more about JSpecify, see <a
@@ -49,10 +50,8 @@ import java.lang.annotation.Target;
  * annotations of <i>either</i> type on all enclosing elements (methods, classes, etc.), only the
  * <i>nearest</i> (most narrowly enclosing) one is in effect.
  *
- * <p>Otherwise, code is in null-unmarked context. This can happen in two ways: either it is more
- * narrowly enclosed by a {@code @NullUnmarked}-annotated element than by any
- * {@code @NullMarked}-annotated element, or neither annotation is present on any enclosing element.
- * No distinction is made between these cases.
+ * <p>Code is also in null-unmarked context if <i>neither</i> annotation is present on any enclosing
+ * element.
  *
  * <p>The effects of being null-marked are described in the {@linkplain NullMarked##effects Effects}
  * section of {@code NullMarked}.
