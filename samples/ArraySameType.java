@@ -29,25 +29,25 @@ abstract class ArraySameType {
 
   void client(Lib<Object[]> l) {
     useArray(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useArrayOfUnspec(l);
-    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch
     useArrayOfUnionNull(l);
   }
 
   void clientUnspec(Lib<@NullnessUnspecified Object[]> l) {
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useArray(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useArrayOfUnspec(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useArrayOfUnionNull(l);
   }
 
   void clientUnionNull(Lib<@Nullable Object[]> l) {
-    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch
     useArray(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useArrayOfUnspec(l);
     useArrayOfUnionNull(l);
   }
