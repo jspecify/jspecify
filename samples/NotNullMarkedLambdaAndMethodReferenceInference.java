@@ -61,12 +61,6 @@ class NotNullMarkedLambdaAndMethodReferenceInference {
   abstract class User extends Super {
     void go() {
       useResult(foos().collect(collectors().partitioningBy(Foo::isBar)));
-      /*
-       * The way to fix the warning might be to make getFnInterfaceFromTree overwrite any
-       * parameters' default additional nullnesses with those from the corresponding interface's
-       * parameters. Maybe use TreeUtils.findFunction?
-       */
-      // jspecify_but_expect_warning
       useResult(foos().collect(collectors().partitioningBy(foo -> foo.isBar())));
     }
   }

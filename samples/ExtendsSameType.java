@@ -33,25 +33,25 @@ abstract class ExtendsSameType {
 
   void client(Lib<Supplier<? extends Foo>> l) {
     use(l);
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnspec(l);
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch
     useUnionNull(l);
   }
 
   void clientUnspec(Lib<Supplier<? extends @NullnessUnspecified Foo>> l) {
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     use(l);
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnspec(l);
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnionNull(l);
   }
 
   void clientUnionNull(Lib<Supplier<? extends @Nullable Foo>> l) {
-    // jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch
     use(l);
-    // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnspec(l);
     useUnionNull(l);
   }

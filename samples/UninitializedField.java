@@ -19,18 +19,18 @@ import org.jspecify.annotations.NullnessUnspecified;
 
 @NullMarked
 class UninitializedField<T extends @Nullable Object> {
-  // jspecify_nullness_mismatch jspecify_but_expect_nothing
+  // :: error: jspecify_nullness_mismatch
   Object object;
 
-  // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+  // :: error: jspecify_nullness_not_enough_information
   @NullnessUnspecified Object objectUnspec;
 
   @Nullable Object objectUnionNull;
 
-  // jspecify_nullness_mismatch jspecify_but_expect_nothing
+  // :: error: jspecify_nullness_mismatch
   T t;
 
-  // jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+  // :: error: jspecify_nullness_not_enough_information
   @NullnessUnspecified T tUnspec;
 
   @Nullable T tUnionNull;
