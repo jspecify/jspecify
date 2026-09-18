@@ -23,11 +23,11 @@ abstract class UnrecognizedLocationsMisc {
   interface Super {}
 
   static class Sub
-      // :: error: jspecify_nullness_intrinsically_not_nullable jspecify_but_expect_nothing
+      // :: error: jspecify_nullness_intrinsically_not_nullable
       extends @Nullable Object
-      // :: error: jspecify_nullness_intrinsically_not_nullable jspecify_but_expect_nothing
+      // :: error: jspecify_nullness_intrinsically_not_nullable
       implements @Nullable Super {
-    // :: error: jspecify_nullness_intrinsically_not_nullable jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_intrinsically_not_nullable
     @Nullable Sub() {}
   }
 

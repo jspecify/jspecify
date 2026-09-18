@@ -33,25 +33,25 @@ abstract class SuperSameType {
 
   void client(Lib<Receiver<? super Foo>> l) {
     use(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnspec(l);
-    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch
     useUnionNull(l);
   }
 
   void clientUnspec(Lib<Receiver<? super @NullnessUnspecified Foo>> l) {
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     use(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnspec(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnionNull(l);
   }
 
   void clientUnionNull(Lib<Receiver<? super @Nullable Foo>> l) {
-    // :: error: jspecify_nullness_mismatch jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_mismatch
     use(l);
-    // :: error: jspecify_nullness_not_enough_information jspecify_but_expect_nothing
+    // :: error: jspecify_nullness_not_enough_information
     useUnspec(l);
     useUnionNull(l);
   }
