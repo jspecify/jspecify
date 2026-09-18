@@ -70,6 +70,7 @@ allprojects {
     }
 
     tasks.withType(Test).configureEach {
+        systemProperty('junit.platform.discovery.issue.severity.critical', 'warning')
         testLogging {
             showStandardStreams = true
             exceptionFormat "full"
