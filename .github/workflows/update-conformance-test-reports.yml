@@ -20,6 +20,8 @@ defaults:
   run:
     shell: bash --noprofile --norc -e -o pipefail -x {0}
 
+permissions: {}
+
 jobs:
   udpate-reference-checker-reports:
     name: Update reference checker conformance test reports if necessary
