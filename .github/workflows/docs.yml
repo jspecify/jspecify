@@ -31,8 +31,6 @@ jobs:
   build:
     name: Build Documentation
     runs-on: ubuntu-latest
-    env:
-      JAVA_VERSION: 26
     steps:
       - name: Check out project
         uses: actions/checkout@v7
