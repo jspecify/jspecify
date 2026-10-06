@@ -39,7 +39,7 @@ jobs:
         uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: ${{ env.JAVA_VERSION }}
+          java-version: 27
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v6
