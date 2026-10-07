@@ -84,6 +84,7 @@ jar {
 }
 
 javadoc {
+    title = 'JSpecify API'
     options.encoding = 'UTF-8'
 }
 
