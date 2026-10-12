@@ -45,7 +45,7 @@ import java.lang.annotation.Target;
  * type arguments, but {@code MyList}'s type parameter {@code E} will accept either a non-null or
  * nullable type argument.
  *
- * <pre>{@code
+ * {@snippet :
  * // Everything below is in null-marked context:
  *
  * class MyOptional<T> { … }
@@ -57,7 +57,7 @@ import java.lang.annotation.Target;
  *
  * MyList<@Nullable String> maybeNulls = …
  * MyList<String> nonNulls = …
- * }</pre>
+ * }
  *
  * <p>Because {@code MyOptional} accepts only non-null type arguments, we need both {@code
  * maybeNulls.firstNonNull()} and {@code nonNulls.firstNonNull()} to produce the same return type:
@@ -69,10 +69,10 @@ import java.lang.annotation.Target;
  *
  * <p>The solution is to <b>project</b> the type argument to its non-null counterpart:
  *
- * <pre>{@code
+ * {@snippet :
  * // Returns the first non-null element, if such element exists.
  * MyOptional<@NonNull E> firstNonNull() { … } // problem fixed!
- * }</pre>
+ * }
  *
  * <p>Here, {@code @NonNull E} selects the non-null form of the type argument, whether it was
  * already non-null or not, which is just what we need in this scenario.
