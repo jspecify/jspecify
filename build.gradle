@@ -73,8 +73,8 @@ allprojects {
 jar {
     manifest {
         attributes(
-        "Bundle-Version": version,
-        "Implementation-Version": version
+                "Bundle-Version": version,
+                "Implementation-Version": version
         )
     }
     // Work around http://github.com/bndtools/bnd/issues/6346
