@@ -16,7 +16,7 @@
 
 plugins {
     id 'java-library'
-    id 'com.diffplug.spotless' version '8.10.3'
+    id 'com.diffplug.spotless' version '8.10.4'
     id 'com.github.node-gradle.node' version '7.1.0'
     id 'io.github.gradle-nexus.publish-plugin' version '2.0.0' apply false
     id 'biz.aQute.bnd.builder' version '7.4.0'
@@ -73,8 +73,8 @@ allprojects {
 jar {
     manifest {
         attributes(
-        "Bundle-Version": version,
-        "Implementation-Version": version
+                "Bundle-Version": version,
+                "Implementation-Version": version
         )
     }
     // Work around http://github.com/bndtools/bnd/issues/6346
