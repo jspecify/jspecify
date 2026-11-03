@@ -29,7 +29,7 @@ import java.lang.annotation.Target;
  *
  * <p>Example usages:
  *
- * <pre>{@code
+ * {@snippet :
  * @Nullable String field;
  *
  * @Nullable String getField() { return field; }
@@ -37,7 +37,7 @@ import java.lang.annotation.Target;
  * void setField(@Nullable String value) { field = value; }
  *
  * List<@Nullable String> getList() { … }
- * }</pre>
+ * }
  *
  * <p>For important information common to all four nullness annotations, see {@link
  * org.jspecify.annotations}. To learn more about JSpecify, see <a
