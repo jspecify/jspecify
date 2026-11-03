@@ -7,7 +7,7 @@ sidebar_position: 4
 ## Depending on the annotations
 
 The annotations are available from Maven Central as
-[`org.jspecify:jspecify:1.0.0`](https://repo1.maven.org/maven2/org/jspecify/jspecify/1.0.0/).
+[`org.jspecify:jspecify:1.0.1`](https://repo1.maven.org/maven2/org/jspecify/jspecify/1.0.1/).
 The annotations themselves are in the `org.jspecify.annotations` package.
 
 Below are snippets you can use to add a dependency in Maven, Gradle, or Bazel.
@@ -25,7 +25,7 @@ guidance below.
 <dependency>
   <groupId>org.jspecify</groupId>
   <artifactId>jspecify</artifactId>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
 </dependency>
 ```
 
@@ -40,7 +40,7 @@ plugins, use the `api` configuration rather than the [`implementation`] or
 
 ```groovy
 dependencies {
-  api("org.jspecify:jspecify:1.0.0")
+  api("org.jspecify:jspecify:1.0.1")
 }
 ```
 
@@ -49,7 +49,7 @@ as the `java` plugin:
 
 ```groovy
 dependencies {
-  implementation("org.jspecify:jspecify:1.0.0")
+  implementation("org.jspecify:jspecify:1.0.1")
 }
 ```
 
@@ -58,7 +58,7 @@ dependencies {
 ```python
 maven_jar(
     name = "jspecify",
-    artifact = "org.jspecify:jspecify:1.0.0",
+    artifact = "org.jspecify:jspecify:1.0.1",
     sha256 = "1fad6e6be7557781e4d33729d49ae1cdc8fdda6fe477bb0cc68ce351eafdfbab",
 )
 ```
