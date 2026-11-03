@@ -4,6 +4,8 @@ updates:
   directory: "/"
   schedule:
     interval: "weekly"
+  cooldown:
+    default-days: 7
   groups:
     dependencies:
       applies-to: version-updates
@@ -14,6 +16,8 @@ updates:
   directory: "/"
   schedule:
     interval: "weekly"
+  cooldown:
+    default-days: 7
   groups:
     dependencies:
       applies-to: version-updates
@@ -24,6 +28,8 @@ updates:
   directory: "/docs"
   schedule:
     interval: "weekly"
+  cooldown:
+    default-days: 7
   groups:
     dependencies:
       applies-to: version-updates
