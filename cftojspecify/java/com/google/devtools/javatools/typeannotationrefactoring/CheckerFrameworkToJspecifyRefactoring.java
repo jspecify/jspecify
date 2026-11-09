@@ -170,11 +170,10 @@ public final class CheckerFrameworkToJspecifyRefactoring {
         } else if (simpleName.equals("AnnotatedFor")) {
           sawAnnotatedForNullness[0] =
               node.getArguments().stream()
-                  .flatMap(
-                      a ->
-                          a instanceof NewArrayTree
-                              ? ((NewArrayTree) a).getInitializers().stream()
-                              : Stream.of(a))
+                  .flatMap(a ->
+                      a instanceof NewArrayTree
+                          ? ((NewArrayTree) a).getInitializers().stream()
+                          : Stream.of(a))
                   .anyMatch(a -> ((LiteralTree) a).getValue().equals("nullness"));
           definiteReplacements.put(inPlaceOf(node, unit), "");
           possibleReplacements.put(inPlaceOf(node, unit), "@NullMarked");
