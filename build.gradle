@@ -28,7 +28,7 @@ ext {
 
 repositories { mavenCentral() }
 
-def javaVersion = JavaLanguageVersion.of(26)
+def javaVersion = JavaLanguageVersion.of(27)
 java.toolchain.languageVersion = javaVersion
 
 apply from: "gradle/module-info.gradle"

@@ -126,7 +126,7 @@ import java.lang.annotation.Target;
  *   <li>On any part of the argument to <b>{@code instanceof}</b>. The root type is intrinsically
  *       non-null, as discussed above, and nothing else about nullness is checked at runtime.
  *   <li>On any part of a <b>receiver parameter</b> type (<a
- *       href="https://docs.oracle.com/javase/specs/jls/se26/html/jls-8.html#jls-8.4">JLS 8.4</a>).
+ *       href="https://docs.oracle.com/javase/specs/jls/se27/html/jls-8.html#jls-8.4">JLS 8.4</a>).
  *   <li>If both {@code @Nullable} and {@code @NonNull} appear on the same type usage,
  *       <i>neither</i> one is recognized.
  * </ul>
