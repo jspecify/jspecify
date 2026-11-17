@@ -68,6 +68,14 @@ allprojects {
             from(rootProject.file('LICENSE'))
         }
     }
+
+    tasks.withType(Test).configureEach {
+        systemProperty('junit.platform.discovery.issue.severity.critical', 'warning')
+        testLogging {
+            showStandardStreams = true
+            exceptionFormat "full"
+        }
+    }
 }
 
 jar {
