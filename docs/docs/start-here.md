@@ -122,7 +122,7 @@ videos:
 [faq]: http://github.com/jspecify/jspecify/wiki/jspecify-faq
 [nullness design faq]: https://github.com/jspecify/jspecify/wiki/nullness-design-FAQ
 [issues]: https://github.com/jspecify/jspecify/issues
-[release]: https://search.maven.org/artifact/org.jspecify/jspecify/1.0.0/jar
+[release]: https://central.sonatype.com/artifact/org.jspecify/jspecify/1.0.1
 [reference implementation]: https://github.com/jspecify/jspecify-reference-checker
 [spec]: /docs/spec
 [stackoverflow answer]: https://stackoverflow.com/questions/4963300/which-notnull-java-annotation-should-i-use
