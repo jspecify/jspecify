@@ -35,8 +35,9 @@ kinds of nullness it has:
 2.  It will not include `null` (it is "non-nullable").
 3.  For type variables only: it includes `null` if the type argument that is
     substituted for it does (it has "parametric nullness").
-4.  We don't know whether it can include `null` (it has "unspecified nullness").
-    This is equivalent to the state of the world without JSpecify annotations.
+4.  We don't know whether it can include `null` (it has "unspecified nullness"
+    ([Why?](nullness-design-faq.md#unspecified-nullness))). This is equivalent
+    to the state of the world without JSpecify annotations.
 
 For a given variable `x`, if `x` can be `null` then `x.getClass()` is unsafe
 because it could produce a `NullPointerException`. If `x` can't be `null`,
@@ -140,7 +141,8 @@ class Example {
 A type like `String` that isn't annotated with either `@Nullable` or `@NonNull`
 means what it always used to mean: its values might be intended to include
 `null` or might not, depending on whatever documentation you can find (but see
-[below](#nullmarked) for help!). JSpecify calls this "unspecified nullness".
+[below](#nullmarked) for help!). JSpecify calls this "unspecified nullness"
+([Why?](nullness-design-faq.md#unspecified-nullness)).
 
 ```java
 class Unannotated {
@@ -215,9 +217,10 @@ within that narrower scope.
 ## Local variables
 
 `@Nullable` and `@NonNull` aren't applied to local variables—at least not their
-root types. (They should be applied to type arguments and array components.) The
-reason is that it is possible to *infer* whether a variable can be `null` based
-on the values that are assigned to the variable. For example:
+root types ([Why?](nullness-design-faq.md#local-variables)). (They should be
+applied to type arguments and array components.) The reason is that it is
+possible to *infer* whether a variable can be `null` based on the values that
+are assigned to the variable. For example:
 
 ```java
 @NullMarked
@@ -487,7 +490,8 @@ extends @Nullable Number>` means a list where the elements can be `null`, and
 However, there's a difference when there is no explicit bound. We saw that a
 type variable definition like `<E>` means `<E extends Object>` and that means it
 is not `@Nullable`. But `<?>` actually means `<? extends B>`, where `B` is the
-bound of the corresponding type variable. So if we have
+bound of the corresponding type variable
+([Why?](nullness-design-faq.md#wildcards-and-bounds)). So if we have
 
 ```java
 interface List<E extends @Nullable Object> {...}
