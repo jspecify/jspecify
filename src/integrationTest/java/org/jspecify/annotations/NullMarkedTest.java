@@ -15,70 +15,47 @@
  */
 package org.jspecify.annotations;
 
+import static java.util.Arrays.asList;
+import static java.util.Arrays.stream;
+import static java.util.stream.Collectors.toSet;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assumptions.assumeFalse;
-import static org.junit.jupiter.api.Assumptions.assumeTrue;
+import static org.junit.jupiter.api.condition.JRE.JAVA_8;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnJre;
+import org.junit.jupiter.api.condition.EnabledOnJre;
 
 @DisplayName("@NullMarked")
 class NullMarkedTest {
-  static boolean isJava8() {
-    String version = System.getProperty("java.version");
-    return version.startsWith("1.8");
-  }
-
   static Set<String> loadTargets() {
-    return Arrays.stream(NullMarked.class.getAnnotation(Target.class).value())
+    return stream(NullMarked.class.getAnnotation(Target.class).value())
         .map(ElementType::toString)
-        .collect(Collectors.toSet());
+        .collect(toSet());
   }
 
-  @Nested
-  @DisplayName("with Java 8")
-  static class WithJava8 {
-    @BeforeEach
-    void assumeJava8() {
-      assumeTrue(isJava8());
-    }
-
-    @Test
-    void onlyBasicReflectionWorks() {
-      Object unused = NullMarked.class.getMethods();
-      /*
-       * But reading the *annotations* on NullMarked would result in an exception: Those annotations
-       * include @Target, which refers to MODULE, which doesn't exist under Java 8.
-       *
-       * (It happens to fail with ArrayStoreException.)
-       */
-      assertThrows(ArrayStoreException.class, NullMarked.class::getAnnotations);
-    }
+  @Test
+  @EnabledOnJre(JAVA_8)
+  void onlyBasicReflectionWorksUnderJava8() {
+    Object unused = NullMarked.class.getMethods();
+    /*
+     * But reading the *annotations* on NullMarked would result in an exception: Those annotations
+     * include @Target, which refers to MODULE, which doesn't exist under Java 8.
+     *
+     * (It happens to fail with ArrayStoreException.)
+     */
+    assertThrows(ArrayStoreException.class, NullMarked.class::getAnnotations);
   }
 
-  @Nested
-  @DisplayName("with Java 9+")
-  static class WithJava9OrLater {
-    @BeforeEach
-    void assumeJava9OrLater() {
-      assumeFalse(isJava8());
-    }
-
-    @Test
-    void annotationIncludesModuleAsTarget() {
-      Set<String> targets = loadTargets();
-      assertEquals(
-          new HashSet<String>(Arrays.asList("TYPE", "METHOD", "CONSTRUCTOR", "PACKAGE", "MODULE")),
-          targets);
-    }
+  @Test
+  @DisabledOnJre(JAVA_8)
+  void includesModuleTarget() {
+    assertEquals(
+        new HashSet<>(asList("TYPE", "METHOD", "CONSTRUCTOR", "PACKAGE", "MODULE")), loadTargets());
   }
 }
