@@ -8,9 +8,9 @@ Our current focus is on annotations for nullness analysis.
 
 ## Status
 
-We've released
-[Version 1.0.0](https://github.com/jspecify/jspecify/releases/tag/v1.0.0), which
-finalizes our initial nullness annotations.
+We have finalized and released our initial nullness annotations. Our latest
+release is
+[Version 1.0.1](https://github.com/jspecify/jspecify/releases/tag/v1.0.1).
 
 ## Things to read
 
